@@ -11,7 +11,7 @@ Check for more [examples](examples) organized by raylib modules.
 ## Usage
 
 ``` bash
-npm i --save node-raylib
+npm install --save robloach/node-raylib
 ```
 
 ``` javascript
