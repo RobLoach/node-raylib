@@ -1,7 +1,6 @@
 {
-  "name": "raylib",
+  "name": "node-raylib",
   "version": "0.0.1",
-  "private": true,
   "description": "raylib bindings for Node.js",
   "main": "index.js",
   "scripts": {
@@ -12,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RobLoach/raylib-nodejs.git"
+    "url": "git+https://github.com/RobLoach/node-raylib.git"
   },
   "engines": {
     "node": ">=10"
@@ -23,9 +22,9 @@
   "author": "Rob Loach",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RobLoach/raylib-nodejs/issues"
+    "url": "https://github.com/RobLoach/node-raylib/issues"
   },
-  "homepage": "https://github.com/RobLoach/raylib-nodejs",
+  "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
     "bindings": "^1.3.1",
     "cmake-js": "^4.0.1",

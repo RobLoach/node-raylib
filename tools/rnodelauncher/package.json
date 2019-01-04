@@ -1,0 +1,16 @@
+{
+  "name": "rnodelauncher",
+  "version": "0.0.1",
+  "description": "Launch raylib .js files",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "bin": "bin/rnodelauncher",
+  "author": "Rob Loach",
+  "license": "MIT",
+  "dependencies": {
+    "raylib": "file:../..",
+    "meow": "^5.0.0"
+  }
+}

@@ -19,7 +19,7 @@
 *
 ********************************************************************************************/
 
-const raylib = require('..')
+const raylib = require('../../..')
 
 // Initialization
 //--------------------------------------------------------------------------------------
@@ -32,25 +32,6 @@ raylib.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic wind
 raylib.SetTargetFPS(60)  // Set target frames-per-second
 //--------------------------------------------------------------------------------------
 
-// Main game loop
-while (!raylib.WindowShouldClose())    // Detect window close button or ESC key
-{
-  // Update
-  //----------------------------------------------------------------------------------
-  // TODO: Update your variables here
-  //----------------------------------------------------------------------------------
-
-  // Draw
-  //----------------------------------------------------------------------------------
-  raylib.BeginDrawing()
-
-    raylib.ClearBackground(/*RAYWHITE*/)
-
-    raylib.DrawText("Congrats! You created your first window!", 190, 200, 20/*, LIGHTGRAY*/)
-
-  raylib.EndDrawing()
-  //----------------------------------------------------------------------------------
-}
 
 // De-Initialization
 //--------------------------------------------------------------------------------------

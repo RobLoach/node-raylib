@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const meow = require('meow');
+const fs = require('fs')
+
+const cli = meow(`
+    Usage
+      $ rnodelauncher <file>
+
+    Examples
+      $ rnodelauncher something.js
+`, {
+});
+
+if (cli.input.length == 0) {
+  cli.showHelp()
+}
+
+const realpath = fs.realpathSync(cli.input[0])
+require(realpath)
