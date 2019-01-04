@@ -4,13 +4,23 @@
   "description": "Launch raylib .js files",
   "main": "index.js",
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "pkg": "pkg ."
   },
   "bin": "bin/rnodelauncher",
   "author": "Rob Loach",
   "license": "MIT",
   "dependencies": {
-    "raylib": "file:../..",
-    "meow": "^5.0.0"
+    "any-eval": "^1.0.0",
+    "meow": "^5.0.0",
+    "raylib": "file:../.."
+  },
+  "devDependencies": {
+    "pkg": "^4.3.5"
+  },
+  "pkg": {
+    "targets": [
+      "node10-linux-x64"
+    ]
   }
 }

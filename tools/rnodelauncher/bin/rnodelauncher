@@ -5,6 +5,8 @@
  */
 const meow = require('meow');
 const fs = require('fs')
+const raylib = require('../../..')
+const anyEval = require('any-eval')
 
 const cli = meow(`
     Usage
@@ -20,4 +22,6 @@ if (cli.input.length == 0) {
 }
 
 const realpath = fs.realpathSync(cli.input[0])
-require(realpath)
+const contents = fs.readFileSync(realpath, 'utf8')
+const context = { require }
+anyEval(contents, realpath, context)
