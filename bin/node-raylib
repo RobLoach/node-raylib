@@ -1,19 +1,16 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
 const meow = require('meow');
 const fs = require('fs')
-const raylib = require('../../..')
+const raylib = require('..')
 const anyEval = require('any-eval')
 
 const cli = meow(`
     Usage
-      $ rnodelauncher <file>
+      $ node-raylib <file>
 
     Examples
-      $ rnodelauncher something.js
+      $ rnodelauncher example.js
 `, {
 });
 
@@ -23,5 +20,5 @@ if (cli.input.length == 0) {
 
 const realpath = fs.realpathSync(cli.input[0])
 const contents = fs.readFileSync(realpath, 'utf8')
-const context = { require }
+const context = { require, raylib }
 anyEval(contents, realpath, context)
