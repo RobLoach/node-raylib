@@ -7,7 +7,8 @@
   "scripts": {
     "test": "node test",
     "install": "cmake-js compile",
-    "clean": "rm -rf build"
+    "clean": "rm -rf build",
+    "compile": "cmake-js compile"
   },
   "repository": {
     "type": "git",

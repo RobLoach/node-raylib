@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.11)
 project (raylibnodejs)
 
+set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS}")
+
 find_package(raylib 2.0 QUIET)
 if (NOT raylib_FOUND)
     include(FetchContent)
