@@ -3,14 +3,14 @@
 const meow = require('meow');
 const fs = require('fs')
 const raylib = require('..')
-const anyEval = require('any-eval')
+const anyeval = require('any-eval')
 
 const cli = meow(`
     Usage
       $ node-raylib <file>
 
     Examples
-      $ rnodelauncher example.js
+      $ node-raylib example.js
 `, {
 });
 
@@ -21,4 +21,4 @@ if (cli.input.length == 0) {
 const realpath = fs.realpathSync(cli.input[0])
 const contents = fs.readFileSync(realpath, 'utf8')
 const context = { require, raylib }
-anyEval(contents, realpath, context)
+anyeval(contents, realpath, context)
