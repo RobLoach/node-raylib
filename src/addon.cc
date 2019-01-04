@@ -1,5 +1,6 @@
 #include <node.h>
 #include <nan.h>
+#include <raylib.h>
 
 using v8::FunctionTemplate;
 using v8::Handle;
@@ -8,6 +9,10 @@ using v8::String;
 using Nan::GetFunction;
 using Nan::New;
 using Nan::Set;
+
+NAN_METHOD(IsWindowReady) {
+	info.GetReturnValue().Set(IsWindowReady());
+}
 
 NAN_METHOD(Add) {
   double value = info[0]->NumberValue() + info[1]->NumberValue();
