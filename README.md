@@ -1,4 +1,4 @@
-# node-raylib
+# node-raylib (Proof of Concept)
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
