@@ -2,33 +2,52 @@
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
-## Example
+## Dependencies
 
-The following is an example of what raylib looks like through ChaiScript:
+- [Node.js](https://nodejs.org) >= 10
+- [npm](https://www.npmjs.com)
 
-Check for more [examples](examples) organized by raylib modules.
 
 ## Usage
 
+1. Add `robloach/node-raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
+    ``` bash
+    npm init
+    npm install --save robloach/node-raylib
+    ```
+
+2. Create a JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
+    ``` javascript
+    const raylib = require('node-raylib')
+    
+    var screenWidth = 800
+    var screenHeight = 450
+    raylib.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window")
+    raylib.SetTargetFPS(60)
+    
+    while (!raylib.WindowShouldClose()) {
+        raylib.BeginDrawing();
+        raylib.ClearBackground(RAYWHITE)
+        raylib.DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY)
+        raylib.EndDrawing()
+    }
+    raylib.CloseWindow()        // Close window and OpenGL context
+    ```
+
+3. Run it through Node.js:
+    ``` bash
+    node core_basic_window.js
+    ```
+
+Check for more [examples](examples) organized by raylib modules.
+
+## CLI
+
+The project also comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly.
+
 ``` bash
-npm install --save robloach/node-raylib
-```
-
-``` javascript
-const raylib = require('node-raylib')
-
-var screenWidth = 800
-var screenHeight = 450
-raylib.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window")
-raylib.SetTargetFPS(60)
-
-while (!raylib.WindowShouldClose()) {
-    raylib.BeginDrawing();
-    raylib.ClearBackground(RAYWHITE)
-    raylib.DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY)
-    raylib.EndDrawing()
-}
-raylib.CloseWindow()        // Close window and OpenGL context
+npm install robloach/node-raylib --save --global
+node-raylib core_basic_window.js
 ```
 
 ## License
