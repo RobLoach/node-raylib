@@ -44,7 +44,7 @@ while (!raylib.WindowShouldClose())    // Detect window close button or ESC key
     //----------------------------------------------------------------------------------
     raylib.BeginDrawing();
 
-        raylib.ClearBackground(raylib.RAYWHITE*/);
+        raylib.ClearBackground(raylib.RAYWHITE);
 
         raylib.DrawText("Congrats! You created your first window!", 190, 200, 20, raylib.LIGHTGRAY);
 
