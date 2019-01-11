@@ -22,6 +22,11 @@
   ],
   "author": "Rob Loach",
   "license": "MIT",
+  "files": [
+    "bin/node-raylib",
+    "src/*",
+    "CMakeLists.txt"
+  ],
   "bugs": {
     "url": "https://github.com/RobLoach/node-raylib/issues"
   },
