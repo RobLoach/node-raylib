@@ -1,3 +1,3 @@
-const raylib = require('bindings')('node-raylib.node');
+const raylib = require('bindings')('node-raylib');
 
 module.exports = raylib;

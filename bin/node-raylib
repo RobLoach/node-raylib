@@ -3,22 +3,25 @@
 const meow = require('meow');
 const fs = require('fs')
 const raylib = require('..')
-const anyeval = require('any-eval')
 
 const cli = meow(`
     Usage
       $ node-raylib <file>
 
     Examples
-      $ node-raylib example.js
+      $ node-raylib core_basic_window.js
 `, {
-});
+})
 
 if (cli.input.length == 0) {
-  cli.showHelp()
+  cli.showHelp(0)
 }
 
-const realpath = fs.realpathSync(cli.input[0])
-const contents = fs.readFileSync(realpath, 'utf8')
-const context = { require, raylib }
-anyeval(contents, realpath, context)
+const filename = cli.input[0]
+if (!raylib.FileExists(filename)) {
+  console.error("Given file does not exist.")
+  return
+}
+
+const realpath = fs.realpathSync(filename)
+require(realpath)

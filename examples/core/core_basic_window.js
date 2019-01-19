@@ -19,7 +19,9 @@
 *
 ********************************************************************************************/
 
-// Only needed if not defined globally.
+const raylib = require('../..')
+
+// ... or
 //const raylib = require('node-raylib')
 
 // Initialization

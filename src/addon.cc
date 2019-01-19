@@ -33,6 +33,10 @@ NAN_METHOD(WindowShouldClose) {
 NAN_METHOD(IsWindowMinimized) {
   info.GetReturnValue().Set(IsWindowMinimized());
 }
+NAN_METHOD(FileExists) {
+  string fileName(*Utf8String(info[0]));
+  info.GetReturnValue().Set(FileExists(fileName.c_str()));
+}
 
 NAN_METHOD(ToggleFullscreen) {
   ToggleFullscreen();
@@ -67,8 +71,6 @@ NAN_METHOD(GetScreenHeight) {
   info.GetReturnValue().Set(GetScreenHeight());
 }
 
-// --------------------------------------------------
-
 NAN_METHOD(SetTargetFPS) {
   SetTargetFPS(info[0]->IntegerValue());
 }
@@ -100,12 +102,11 @@ NAN_MODULE_INIT(Init) {
   NAN_EXPORT(target, SetWindowTitle);
   NAN_EXPORT(target, SetWindowPosition);
   NAN_EXPORT(target, SetWindowMonitor);
+  NAN_EXPORT(target, FileExists);
   NAN_EXPORT(target, SetWindowMinSize);
   NAN_EXPORT(target, SetWindowSize);
   NAN_EXPORT(target, GetScreenWidth);
   NAN_EXPORT(target, GetScreenHeight);
-
-  // ----------------------
   NAN_EXPORT(target, SetTargetFPS);
   NAN_EXPORT(target, BeginDrawing);
   NAN_EXPORT(target, EndDrawing);
