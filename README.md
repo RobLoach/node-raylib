@@ -41,6 +41,13 @@
 
 Check for more [examples](examples) organized by raylib modules.
 
+## What's Missing?
+
+- [Structs](https://github.com/RobLoach/node-raylib/issues/5)
+- [Enums](https://github.com/RobLoach/node-raylib/issues/3)
+- [Colors](https://github.com/RobLoach/node-raylib/issues/2)
+- [Remaining Functions](https://github.com/RobLoach/node-raylib/issues/1)
+
 ## CLI
 
 The project also comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly.
