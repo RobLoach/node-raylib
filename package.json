@@ -8,7 +8,9 @@
     "test": "mocha",
     "install": "cmake-js compile",
     "clean": "rm -rf build",
-    "compile": "cmake-js compile"
+    "compile": "cmake-js compile",
+    "prepkg": "npm run compile",
+    "pkg": "node src/pkg.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,7 @@
   "license": "MIT",
   "files": [
     "bin/node-raylib",
-    "src/*",
+    "src/addon.cc",
     "CMakeLists.txt"
   ],
   "bugs": {
@@ -39,6 +41,8 @@
     "nan": "^2.12.1"
   },
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "pkg": "^4.3.7",
+    "tar": "^4.4.8"
   }
 }
