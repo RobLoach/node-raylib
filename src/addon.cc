@@ -1,17 +1,22 @@
-#include <node.h>
-#include <nan.h>
+#include <napi.h>
 #include <raylib.h>
 
-using v8::FunctionTemplate;
-using v8::Handle;
-using v8::Object;
-using v8::String;
-using Nan::Utf8String;
-using Nan::GetFunction;
-using Nan::New;
-using Nan::Set;
-using std::string;
+Napi::Value IsWindowReady_binding(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  //int number = info[0].ToNumber().Int32Value();
+  bool res = IsWindowReady();
+  return Napi::Boolean::New(env, res);
+}
 
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  exports.Set(Napi::String::New(env, "IsWindowReady"), Napi::Function::New(env, IsWindowReady_binding));
+  return exports;
+}
+
+NODE_API_MODULE(NODE_GYP_MODULE_NAME, Init)
+
+
+/*
 NAN_METHOD(InitWindow) {
   string title(*Utf8String(info[2]));
   InitWindow(info[0]->IntegerValue(), info[1]->IntegerValue(), title.c_str());
@@ -19,10 +24,6 @@ NAN_METHOD(InitWindow) {
 
 NAN_METHOD(CloseWindow) {
   CloseWindow();
-}
-
-NAN_METHOD(IsWindowReady) {
-  info.GetReturnValue().Set(IsWindowReady());
 }
 
 NAN_METHOD(WindowShouldClose) {
@@ -84,7 +85,22 @@ NAN_METHOD(EndDrawing) {
 }
 
 NAN_METHOD(ClearBackground) {
-  ClearBackground(RAYWHITE);
+  // Get the color
+  Local<Object> input = info[0]->ToObject();
+
+  Local<Number> r_prop = Nan::New<Number>("r").;
+  Local<Number> g_prop = Nan::New<Number>("g");
+  Local<Number> b_prop = Nan::New<Number>("b");
+  Local<Number> a_prop = Nan::New<Number>("a");
+
+  unsigned char r = Nan::Get(input, r_prop).ToLocalChecked()->NumberValue();
+  unsigned char g = Nan::Get(input, g_prop).ToLocalChecked()->NumberValue();
+  unsigned char b = Nan::Get(input, b_prop).ToLocalChecked()->NumberValue();
+  unsigned char a = Nan::Get(input, a_prop).ToLocalChecked()->NumberValue();
+
+  Color col{r, g, b, a};
+
+  ClearBackground(col);
 }
 
 NAN_METHOD(DrawText) {
@@ -115,3 +131,4 @@ NAN_MODULE_INIT(Init) {
 }
 
 NODE_MODULE(addon, Init)
+*/

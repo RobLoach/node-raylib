@@ -21,7 +21,10 @@ if (NOT raylib_FOUND)
   endif()
 endif()
 
-include_directories(${CMAKE_JS_INC})
+target_include_directories(${PROJECT_NAME} PRIVATE
+  "${CMAKE_JS_INC}"
+  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api"
+)
 add_library(${PROJECT_NAME} SHARED
   src/addon.cc
 )
