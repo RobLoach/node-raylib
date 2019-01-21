@@ -1,4 +1,4 @@
-# node-raylib (Proof of Concept)
+# node-raylib
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
@@ -40,7 +40,7 @@
 
 Check for more [examples](examples) organized by raylib modules.
 
-## What's Missing?
+### What's Missing?
 
 - [Structs](https://github.com/RobLoach/node-raylib/issues/5)
 - [Enums](https://github.com/RobLoach/node-raylib/issues/3)
