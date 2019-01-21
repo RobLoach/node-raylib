@@ -4,7 +4,6 @@ const fs = require('fs')
 const package = require('../package.json')
 
 // Options
-const assets = ['README.md', 'LICENSE']
 var binaryFilename = package.name
 var packageName = `${binaryFilename}-${process.platform}-${process.arch}`
 var compression = 'tar'
@@ -18,7 +17,10 @@ if (process.platform == 'win32') {
 }
 else {
   packageName += '.tar.gz'
-  compressOptions = {store: true, gzip: true}
+  compressOptions = {
+    store: true,
+    gzip: true
+  }
 }
 
 // Create the package.
@@ -28,9 +30,6 @@ pkg()
  * Build the binary with pkg.
  */
 async function pkg() {
-  for (const asset of assets) {
-    fs.copyFileSync(asset, `build/Release/${asset}`)
-  }
   await exec(['.', '--target', 'host', '--out-path', 'build/Release'])
   await compress()
 }
@@ -47,5 +46,7 @@ async function compress() {
   archive.pipe(output);
   archive.directory('build/Release', false)
   archive.directory('examples')
+  archive.file('README.md')
+  archive.file('LICENSE')
   archive.finalize();
 }
