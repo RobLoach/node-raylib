@@ -7,7 +7,6 @@
 - [Node.js](https://nodejs.org) >= 10
 - [npm](https://www.npmjs.com)
 
-
 ## Usage
 
 1. Add `robloach/node-raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
@@ -19,12 +18,12 @@
 2. Create a JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
     ``` javascript
     const raylib = require('node-raylib')
-    
+
     var screenWidth = 800
     var screenHeight = 450
     raylib.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window")
     raylib.SetTargetFPS(60)
-    
+
     while (!raylib.WindowShouldClose()) {
         raylib.BeginDrawing();
         raylib.ClearBackground(raylib.RAYWHITE)
@@ -50,11 +49,36 @@ Check for more [examples](examples) organized by raylib modules.
 
 ## CLI
 
-The project also comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly.
+The project also comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly:
 
 ``` bash
-npm install robloach/node-raylib --save --global
-node-raylib core_basic_window.js
+# Linux
+./node-raylib core_basic_window.js
+
+# Windows
+node-raylib.exe core_basic_window.js
+```
+
+The CLI can be installed with the [packaged releases](https://github.com/RobLoach/node-raylib/releases), or globally through `npm`:
+
+``` bash
+npm install robloach/node-raylib --global
+```
+
+## Development
+
+The following are a few notes and resources when developing `node-raylib`...
+
+### Node.js Bindings
+
+[Native Abstractions for Node.js](https://github.com/nodejs/nan#readme) is used to construct the bindings. Feel free to read through [`src/addons.cc`](src/addons.cc) for an understanding on how methods are defined. A lot is missing from the project, so feel free to get involved in the issue queue and submit pull requests.
+
+### Package
+
+To build the packaged releases, use the following command:
+
+```
+npm run pkg
 ```
 
 ## License

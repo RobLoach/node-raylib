@@ -2,13 +2,15 @@
   "name": "node-raylib",
   "private": true,
   "version": "0.0.1",
-  "description": "raylib bindings for Node.js",
+  "description": "Node.js bindings for raylib.",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
     "install": "cmake-js compile",
     "clean": "rm -rf build",
-    "compile": "cmake-js compile"
+    "compile": "cmake-js compile",
+    "prepkg": "npm run compile",
+    "pkg": "node src/pkg.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,7 @@
   "license": "MIT",
   "files": [
     "bin/node-raylib",
-    "src/*",
+    "src/addon.cc",
     "CMakeLists.txt"
   ],
   "bugs": {
@@ -36,9 +38,12 @@
     "bindings": "^1.3.1",
     "cmake-js": "^4.0.1",
     "meow": "^5.0.0",
+    "module-alias": "^2.1.0",
     "nan": "^2.12.1"
   },
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "archiver": "^3.0.0",
+    "mocha": "^5.2.0",
+    "pkg": "^4.3.7"
   }
 }
