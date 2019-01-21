@@ -4,7 +4,6 @@ const meow = require('meow');
 const fs = require('fs')
 const path = require('path')
 const raylib = require('..')
-const anyeval = require('any-eval')
 
 // Build the command line utility.
 const cli = meow(`

@@ -2,6 +2,7 @@ const assert = require('assert')
 const child_process = require('child_process')
 const path = require('path')
 const raylib = require('..')
+const package = require('../package.json')
 
 describe('raylib', function() {
   describe('.IsWindowReady()', function() {
@@ -21,7 +22,7 @@ describe('raylib', function() {
 
     it('should display the help', () => {
       var output = child_process.execFileSync(nodeRaylib)
-      assert(output.includes('raylib bindings for Node.js'))
+      assert(output.includes(package.description))
     })
   })
 })
