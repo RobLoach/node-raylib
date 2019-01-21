@@ -2,8 +2,7 @@
  * Tests for the node-raylib CLI tool.
  */
 
-// Load raylib if needed.
-const raylib = require('../..')
+const raylib = require('node-raylib')
 
 // Assertions
 const assert = require('assert')

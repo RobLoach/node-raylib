@@ -2,8 +2,11 @@
 
 const meow = require('meow');
 const fs = require('fs')
+const path = require('path')
 const raylib = require('..')
+const anyeval = require('any-eval')
 
+// Build the command line utility.
 const cli = meow(`
     Usage
       $ node-raylib <file>
@@ -13,15 +16,30 @@ const cli = meow(`
 `, {
 })
 
+// Display help if needed.
 if (cli.input.length == 0) {
   cli.showHelp(0)
 }
 
+// Load input.
 const filename = cli.input[0]
 if (!raylib.FileExists(filename)) {
   console.error("Given file does not exist.")
   return
 }
 
+// Add a "node-raylib" module alias for when it's not found.
+const moduleAlias = require('module-alias')
+moduleAlias.addAlias('node-raylib', __dirname + '/..')
+
+// Retrieve the context of the file.
 const realpath = fs.realpathSync(filename)
+
+// Switch to the file's directory so that file loading works.
+process.chdir(path.dirname(realpath))
+
+// Inject raylib as a global variable.
+global.raylib = raylib
+
+// Load up the module's path.
 require(realpath)
