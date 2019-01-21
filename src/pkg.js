@@ -46,5 +46,6 @@ async function compress() {
   });
   archive.pipe(output);
   archive.directory('build/Release', false)
+  archive.directory('examples')
   archive.finalize();
 }
