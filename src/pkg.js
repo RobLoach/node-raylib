@@ -1,29 +1,50 @@
 const { exec } = require('pkg')
-const tar = require('tar')
+const archiver = require('archiver')
 const fs = require('fs')
+const package = require('../package.json')
 
+// Options
 const assets = ['README.md', 'LICENSE']
-const outFileName = 'node-raylib'
+var binaryFilename = package.name
+var packageName = `${binaryFilename}-${process.platform}-${process.arch}`
+var compression = 'tar'
+var compressOptions = {}
+
+// Platform overrides
 if (process.platform == 'win32') {
-  outFileName += '.exe'
+  binaryFilename += '.exe'
+  packageName += '.zip'
+  compression = 'zip'
+}
+else {
+  packageName += '.tar.gz'
+  compressOptions = {store: true, gzip: true}
 }
 
+// Create the package.
+pkg()
+
+/**
+ * Build the binary with pkg.
+ */
 async function pkg() {
   for (const asset of assets) {
     fs.copyFileSync(asset, `build/Release/${asset}`)
   }
   await exec(['.', '--target', 'host', '--out-path', 'build/Release'])
-
-  const opts = {
-    gzip: true,
-    file: `node-raylib-${process.platform}-${process.arch}.tar.gz`,
-    cwd: 'build/Release',
-  }
-  const files = [
-    outFileName,
-    'node-raylib.node'
-  ].concat(assets)
-  await tar.c(opts, files)
+  await compress()
 }
 
-pkg()
+/**
+ * Compress the files into the archive.
+ */
+async function compress() {
+  var output = fs.createWriteStream(packageName);
+  var archive = archiver(compression, compressOptions);
+  archive.on('error', err =>{
+      throw err;
+  });
+  archive.pipe(output);
+  archive.directory('build/Release', false)
+  archive.finalize();
+}
