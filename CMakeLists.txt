@@ -35,6 +35,8 @@ add_library(${PROJECT_NAME} SHARED
   src/drawing.h
   src/files.h
   src/helper.h
+  src/keyboard.h
+  src/misc.h
   src/text.h
   src/timing.h
   src/window.h

@@ -2,6 +2,8 @@
 #include "color.h"
 #include "drawing.h"
 #include "files.h"
+#include "keyboard.h"
+#include "misc.h"
 #include "text.h"
 #include "timing.h"
 #include "window.h"
@@ -13,6 +15,8 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   node_raylib_init_color(env, exports);
   node_raylib_init_drawing(env, exports);
   node_raylib_init_files(env, exports);
+  node_raylib_init_keyboard(env, exports);
+  node_raylib_init_misc(env, exports);
   node_raylib_init_text(env, exports);
   node_raylib_init_timing(env, exports);
   node_raylib_init_window(env, exports);

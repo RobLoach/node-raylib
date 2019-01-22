@@ -16,6 +16,7 @@ raylib.Color = function (red, green, blue, alpha) {
     a: alpha
   }
 }
+
 raylib.LIGHTGRAY  = raylib.Color(200, 200, 200, 255 )   // Light Gray
 raylib.GRAY       = raylib.Color(130, 130, 130, 255 )   // Gray
 raylib.DARKGRAY   = raylib.Color(80, 80, 80, 255 )      // Dark Gray
