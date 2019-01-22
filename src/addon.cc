@@ -1,4 +1,5 @@
 #include <napi.h>
+#include "color.h"
 #include "drawing.h"
 #include "files.h"
 #include "text.h"
@@ -9,6 +10,7 @@
  * Initialize all the node-raylib modules.
  */
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  node_raylib_init_color(env, exports);
   node_raylib_init_drawing(env, exports);
   node_raylib_init_files(env, exports);
   node_raylib_init_text(env, exports);

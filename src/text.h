@@ -15,11 +15,9 @@ Napi::Value DrawText_binding(const Napi::CallbackInfo& info) {
   int arg1 = info[1].As<Napi::Number>().Int32Value();
   int arg2 = info[2].As<Napi::Number>().Int32Value();
   int arg3 = info[3].As<Napi::Number>().Int32Value();
+  Color arg4 = node_raylib_helper_value_to_color(env, info[4]);
 
-  // TODO: Add Color support.
-  //int arg4 = info[4].As<Napi::Number>().Int32Value();
-
-  DrawText(arg0.c_str(), arg1, arg2, arg3, LIGHTGRAY);
+  DrawText(arg0.c_str(), arg1, arg2, arg3, arg4);
 
   return env.Null();
 }

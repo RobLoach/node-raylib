@@ -31,6 +31,7 @@ include_directories(${PROJECT_NAME}
 # This is hardcoded so that updates force a re-compile.
 add_library(${PROJECT_NAME} SHARED
   src/addon.cc
+  src/color.h
   src/drawing.h
   src/files.h
   src/helper.h
