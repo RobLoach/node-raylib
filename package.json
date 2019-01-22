@@ -10,7 +10,7 @@
     "clean": "rm -rf build",
     "compile": "cmake-js compile",
     "prepkg": "npm run compile",
-    "pkg": "node src/pkg.js"
+    "pkg": "node scripts/pkg.js"
   },
   "repository": {
     "type": "git",
@@ -26,9 +26,13 @@
   "author": "Rob Loach",
   "license": "MIT",
   "files": [
-    "bin/node-raylib",
-    "src/addon.cc",
-    "CMakeLists.txt"
+    "bin/*",
+    "src/*",
+    "CMakeLists.txt",
+    "index.js",
+    "package.json",
+    "README.md",
+    "LICENSE"
   ],
   "bugs": {
     "url": "https://github.com/RobLoach/node-raylib/issues"
