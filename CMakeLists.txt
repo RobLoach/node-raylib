@@ -25,7 +25,9 @@ endif()
 # Add all the include directories.
 include_directories(${PROJECT_NAME}
   "${CMAKE_JS_INC}"
+  "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api"
   "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api"
+  "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api/src"
   "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api/src"
 )
 
