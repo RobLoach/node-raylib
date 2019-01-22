@@ -43,7 +43,6 @@
     "cmake-js": "^4.0.1",
     "meow": "^5.0.0",
     "module-alias": "^2.1.0",
-    "nan": "^2.12.1",
     "node-addon-api": "^1.6.2"
   },
   "devDependencies": {
