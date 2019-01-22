@@ -8,7 +8,7 @@
 
 Napi::Value SetConfigFlags_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 1)) {
+  if (!ValidArgs(env, info, 1)) {
     return env.Null();
   }
   unsigned char arg0 = info[0].As<Napi::Number>().Int32Value();
@@ -20,7 +20,7 @@ Napi::Value SetConfigFlags_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value GetRandomValue_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 2)) {
+  if (!ValidArgs(env, info, 2)) {
     return env.Null();
   }
   int arg0 = info[0].As<Napi::Number>().Int32Value();

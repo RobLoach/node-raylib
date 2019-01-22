@@ -8,7 +8,7 @@
 
 Napi::Value SetTargetFPS_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 1)) {
+  if (!ValidArgs(env, info, 1)) {
     return env.Null();
   }
   int arg0 = info[0].As<Napi::Number>().Int32Value();
@@ -20,7 +20,7 @@ Napi::Value SetTargetFPS_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value GetFPS_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
   return Napi::Number::New(env, GetFPS());
@@ -28,7 +28,7 @@ Napi::Value GetFPS_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value GetFrameTime_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
   return Napi::Number::New(env, GetFrameTime());
@@ -36,7 +36,7 @@ Napi::Value GetFrameTime_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value GetTime_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
   return Napi::Number::New(env, GetTime());

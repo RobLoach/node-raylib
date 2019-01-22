@@ -26,6 +26,7 @@ endif()
 include_directories(${PROJECT_NAME}
   "${CMAKE_JS_INC}"
   "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api"
+  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api/src"
 )
 
 # This is hardcoded so that updates force a re-compile.
@@ -37,7 +38,10 @@ add_library(${PROJECT_NAME} SHARED
   src/helper.h
   src/keyboard.h
   src/misc.h
+  src/mouse.h
+  src/shapes.h
   src/text.h
+  src/textures.h
   src/timing.h
   src/window.h
 )

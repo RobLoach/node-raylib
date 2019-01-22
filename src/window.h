@@ -8,7 +8,7 @@
 
 Napi::Value InitWindow_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 3)) {
+  if (!ValidArgs(env, info, 3)) {
     return env.Null();
   }
   int arg0 = info[0].As<Napi::Number>().Int32Value();
@@ -22,7 +22,7 @@ Napi::Value InitWindow_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value CloseWindow_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
 
@@ -33,7 +33,7 @@ Napi::Value CloseWindow_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value IsWindowReady_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
   return Napi::Boolean::New(env, IsWindowReady());
@@ -41,7 +41,7 @@ Napi::Value IsWindowReady_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value WindowShouldClose_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
   return Napi::Boolean::New(env, WindowShouldClose());
@@ -49,7 +49,7 @@ Napi::Value WindowShouldClose_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value IsWindowMinimized_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
   return Napi::Boolean::New(env, IsWindowMinimized());
@@ -57,7 +57,7 @@ Napi::Value IsWindowMinimized_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value ToggleFullscreen_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
   ToggleFullscreen();
@@ -66,7 +66,7 @@ Napi::Value ToggleFullscreen_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value SetWindowTitle_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 1)) {
+  if (!ValidArgs(env, info, 1)) {
     return env.Null();
   }
   std::string arg0 = info[0].As<Napi::String>().Utf8Value();

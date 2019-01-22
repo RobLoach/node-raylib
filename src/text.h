@@ -8,14 +8,14 @@
 
 Napi::Value DrawText_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 5)) {
+  if (!ValidArgs(env, info, 5)) {
     return env.Null();
   }
   std::string arg0 = info[0].As<Napi::String>().Utf8Value();
   int arg1 = info[1].As<Napi::Number>().Int32Value();
   int arg2 = info[2].As<Napi::Number>().Int32Value();
   int arg3 = info[3].As<Napi::Number>().Int32Value();
-  Color arg4 = node_raylib_helper_value_to_color(env, info[4]);
+  Color arg4 = ToColor(env, info[4]);
 
   DrawText(arg0.c_str(), arg1, arg2, arg3, arg4);
 
@@ -24,7 +24,7 @@ Napi::Value DrawText_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value DrawFPS_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 2)) {
+  if (!ValidArgs(env, info, 2)) {
     return env.Null();
   }
   int arg0 = info[0].As<Napi::Number>().Int32Value();

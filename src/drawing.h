@@ -6,15 +6,13 @@
 #include <raylib.h>
 #include "helper.h"
 
-#include <iostream>
-
 Napi::Value ClearBackground_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 1)) {
+  if (!ValidArgs(env, info, 1)) {
     return env.Null();
   }
 
-  Color arg = node_raylib_helper_value_to_color(env, info[0]);
+  Color arg = ToColor(env, info[0]);
   ClearBackground(arg);
 
   return env.Null();
@@ -22,7 +20,7 @@ Napi::Value ClearBackground_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value BeginDrawing_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
   BeginDrawing();
@@ -32,16 +30,10 @@ Napi::Value BeginDrawing_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value EndDrawing_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 0)) {
+  if (!ValidArgs(env, info, 0)) {
     return env.Null();
   }
-  //int arg0 = info[0].As<Napi::Number>().Int32Value();
-  //int arg1 = info[1].As<Napi::Number>().Int32Value();
-  //std::string arg2 = info[2].As<Napi::String>().Utf8Value();
-
-  // TODO: Add Color support.
   EndDrawing();
-
   return env.Null();
 }
 

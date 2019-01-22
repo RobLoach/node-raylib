@@ -8,22 +8,22 @@
 
 Napi::Value ColorToInt_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 1)) {
+  if (!ValidArgs(env, info, 1)) {
     return env.Null();
   }
-  Color arg0 = node_raylib_helper_value_to_color(env, info[0]);
+  Color arg0 = ToColor(env, info[0]);
 
   return Napi::Number::New(env, ColorToInt(arg0));
 }
 
 Napi::Value GetColor_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 1)) {
+  if (!ValidArgs(env, info, 1)) {
     return env.Null();
   }
   int arg0 = info[0].As<Napi::Number>().Int32Value();
   Color color = GetColor(arg0);
-  return node_raylib_helper_color_to_object(env, color);
+  return ToObject(env, color);
 }
 
 void node_raylib_init_color(Napi::Env& env, Napi::Object& exports) {

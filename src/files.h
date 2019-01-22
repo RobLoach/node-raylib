@@ -8,7 +8,7 @@
 
 Napi::Value FileExists_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 1)) {
+  if (!ValidArgs(env, info, 1)) {
     return env.Null();
   }
   std::string arg0 = info[0].As<Napi::String>().Utf8Value();
@@ -18,11 +18,11 @@ Napi::Value FileExists_binding(const Napi::CallbackInfo& info) {
 
 Napi::Value IsFileExtension_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  if (!checkNumberOfArguments(env, info, 2)) {
+  if (!ValidArgs(env, info, 2)) {
     return env.Null();
   }
   std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-  std::string arg1 = info[0].As<Napi::String>().Utf8Value();
+  std::string arg1 = info[1].As<Napi::String>().Utf8Value();
 
   return Napi::Boolean::New(env, IsFileExtension(arg0.c_str(), arg1.c_str()));
 }

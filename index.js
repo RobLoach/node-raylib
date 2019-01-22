@@ -44,5 +44,19 @@ raylib.BLANK      = raylib.Color(0, 0, 0, 0 )           // Blank (Transparent)
 raylib.MAGENTA    = raylib.Color(255, 0, 255, 255 )     // Magenta
 raylib.RAYWHITE   = raylib.Color(245, 245, 245, 255 )   // My own White (raylib logo)
 
+// Structs
+raylib.Vector2 = function (x, y) {
+  return {x: x, y: y}
+}
+raylib.Vector3 = function (x, y, z) {
+  return {x: x, y: y, z:z}
+}
+raylib.Vector4 = function (x, y, z, w) {
+  return {x: x, y: y, z:z, w:w}
+}
+raylib.Rectangle = function (x, y, width, height) {
+  return {x: x, y: y, width:width, height:height}
+}
+
 // Export the bindings for the module.
 module.exports = raylib;
