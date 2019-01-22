@@ -3,9 +3,9 @@
  */
 
 const raylib = require('node-raylib')
-
-// Assertions
 const assert = require('assert')
+
+console.log('node-raylib-test: Test runner for node-raylib CLI')
 
 // Tests
 assert(!raylib.IsWindowReady(), 'raylib.IsWindowReady')

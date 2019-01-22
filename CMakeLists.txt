@@ -3,6 +3,7 @@ project (node-raylib)
 
 set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS}")
 
+# TODO: Move this to cmake/FindRaylib.cmake?
 find_package(raylib 2.0 QUIET)
 if (NOT raylib_FOUND)
   include(FetchContent)
@@ -21,14 +22,33 @@ if (NOT raylib_FOUND)
   endif()
 endif()
 
-include_directories(${CMAKE_JS_INC})
+# Add all the include directories.
+include_directories(${PROJECT_NAME}
+  "${CMAKE_JS_INC}"
+  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api"
+)
+
+# This is hardcoded so that updates force a re-compile.
 add_library(${PROJECT_NAME} SHARED
   src/addon.cc
+  src/color.h
+  src/drawing.h
+  src/files.h
+  src/helper.h
+  src/keyboard.h
+  src/misc.h
+  src/text.h
+  src/timing.h
+  src/window.h
 )
+
+## Suffix the node module with .node.
 set_target_properties(${PROJECT_NAME} PROPERTIES
   PREFIX ""
   SUFFIX ".node"
 )
+
+# Link raylib.
 target_link_libraries(${PROJECT_NAME}
   ${CMAKE_JS_LIB}
   raylib
