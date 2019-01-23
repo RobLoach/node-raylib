@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "description": "JavaScript bindings for raylib.",
-  "main": "index.js",
+  "main": "build/native/raylib.js",
   "scripts": {
     "test": "mocha",
     "pkg": "node src/pkg.js",
@@ -25,7 +25,6 @@
   "files": [
     "build/*",
     "bin/*",
-    "src/*",
     "index.js",
     "package.json",
     "README.md",

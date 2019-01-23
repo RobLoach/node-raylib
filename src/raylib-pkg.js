@@ -44,7 +44,7 @@ async function compress() {
       throw err;
   });
   archive.pipe(output);
-  archive.directory('build/Release', false)
+  archive.directory('build/native', false)
   archive.directory('examples')
   archive.file('README.md')
   archive.file('LICENSE')

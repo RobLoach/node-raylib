@@ -1,4 +1,4 @@
-// raylib-js: Expose the raylib.h enums.
+// Module-js: Expose the Module.h enums.
 const enums = {
   FLAG_SHOW_LOGO: 1,
   FLAG_FULLSCREEN_MODE: 2,
@@ -302,6 +302,34 @@ const enums = {
 for (const enumName in enums) {
   Module[enumName] = enums[enumName]
 }
+
+// Register the colors.
+Module.LIGHTGRAY  = Module.Color(200, 200, 200, 255 )   // Light Gray
+Module.GRAY       = Module.Color(130, 130, 130, 255 )   // Gray
+Module.DARKGRAY   = Module.Color(80, 80, 80, 255 )      // Dark Gray
+Module.YELLOW     = Module.Color(253, 249, 0, 255 )     // Yellow
+Module.GOLD       = Module.Color(255, 203, 0, 255 )     // Gold
+Module.ORANGE     = Module.Color(255, 161, 0, 255 )     // Orange
+Module.PINK       = Module.Color(255, 109, 194, 255 )   // Pink
+Module.RED        = Module.Color(230, 41, 55, 255 )     // Red
+Module.MAROON     = Module.Color(190, 33, 55, 255 )     // Maroon
+Module.GREEN      = Module.Color(0, 228, 48, 255 )      // Green
+Module.LIME       = Module.Color(0, 158, 47, 255 )      // Lime
+Module.DARKGREEN  = Module.Color(0, 117, 44, 255 )      // Dark Green
+Module.SKYBLUE    = Module.Color(102, 191, 255, 255 )   // Sky Blue
+Module.BLUE       = Module.Color(0, 121, 241, 255 )     // Blue
+Module.DARKBLUE   = Module.Color(0, 82, 172, 255 )      // Dark Blue
+Module.PURPLE     = Module.Color(200, 122, 255, 255 )   // Purple
+Module.VIOLET     = Module.Color(135, 60, 190, 255 )    // Violet
+Module.DARKPURPLE = Module.Color(112, 31, 126, 255 )    // Dark Purple
+Module.BEIGE      = Module.Color(211, 176, 131, 255 )   // Beige
+Module.BROWN      = Module.Color(127, 106, 79, 255 )    // Brown
+Module.DARKBROWN  = Module.Color(76, 63, 47, 255 )      // Dark Brown
+Module.WHITE      = Module.Color(255, 255, 255, 255 )   // White
+Module.BLACK      = Module.Color(0, 0, 0, 255 )         // Black
+Module.BLANK      = Module.Color(0, 0, 0, 0)
+Module.MAGENTA    = Module.Color(255, 0, 255, 255)
+Module.RAYWHITE   = Module.Color(245, 245, 245, 255 )
 
 // Export the module for CommonJS support.
 if (typeof module !== 'undefined') {
