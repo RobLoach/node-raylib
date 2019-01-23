@@ -1,4 +1,5 @@
-module.exports = {
+// raylib-js: Expose the raylib.h enums.
+const enums = {
   FLAG_SHOW_LOGO: 1,
   FLAG_FULLSCREEN_MODE: 2,
   FLAG_WINDOW_RESIZABLE: 4,
@@ -297,4 +298,16 @@ module.exports = {
   NPT_9PATCH: 0,
   NPT_3PATCH_VERTICAL: 1,
   NPT_3PATCH_HORIZONTAL: 2
+}
+for (const enumName in enums) {
+  Module[enumName] = enums[enumName]
+}
+
+// Export the module for CommonJS support.
+if (typeof module !== 'undefined') {
+  module.exports = Module
+}
+// Otherwise, export the module as a global.
+else if (typeof this !== 'undefined') {
+  this.raylib = Module
 }

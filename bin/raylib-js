@@ -8,10 +8,10 @@ const raylib = require('..')
 // Build the command line utility.
 const cli = meow(`
     Usage
-      $ node-raylib <file>
+      $ raylib-js <file>
 
     Examples
-      $ node-raylib core_basic_window.js
+      $ raylib-js core_basic_window.js
 `, {
 })
 
@@ -29,7 +29,7 @@ if (!raylib.FileExists(filename)) {
 
 // Add a "node-raylib" module alias for when it's not found.
 const moduleAlias = require('module-alias')
-moduleAlias.addAlias('node-raylib', __dirname + '/..')
+moduleAlias.addAlias('raylib-js', __dirname + '/..')
 
 // Retrieve the context of the file.
 const realpath = fs.realpathSync(filename)

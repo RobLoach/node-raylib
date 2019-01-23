@@ -5,7 +5,7 @@
  */
 
 // Find the bindings.
-const raylib = require('bindings')('node-raylib');
+const raylib = require('./build/native/raylib.js')
 const enums = require('./src/enums')
 
 // Inject the enums.

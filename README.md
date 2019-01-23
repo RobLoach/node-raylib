@@ -1,23 +1,25 @@
-# node-raylib
+# raylib-js
 
-[Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
+JavaScript bindings to [raylib](https://www.raylib.com), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
 ## Dependencies
 
-- [Node.js](https://nodejs.org) >= 10
-- [npm](https://www.npmjs.com)
+The following are required in order to develop raylib-js...
+
+- [Emscripten](https://kripken.github.io/emscripten-site/) (or [Docker-Compose](https://docs.docker.com/compose/))
+- [Node.js](https://nodejs.org/en/)
 
 ## Usage
 
-1. Add `robloach/node-raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
+1. Add `robloach/raylib-js` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
     ``` bash
     npm init
-    npm install --save robloach/node-raylib
+    npm install --save robloach/raylib-js
     ```
 
 2. Create a JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
     ``` javascript
-    const raylib = require('node-raylib')
+    const raylib = require('raylib')
 
     var screenWidth = 800
     var screenHeight = 450

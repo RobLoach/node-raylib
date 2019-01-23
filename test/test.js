@@ -53,7 +53,7 @@ describe('raylib', function() {
 
     it('should execute on a script', () => {
       const out = child_process.execFileSync(cliPath, [
-        path.join(__dirname, '.resources', 'node-raylib-test.js')
+        path.join(__dirname, '.resources', 'cli-test.js')
       ])
       assert.include(out.toString(), 'Test runner')
     })

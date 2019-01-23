@@ -1,0 +1,27 @@
+# raylib-js Docker Compose
+# https://docs.docker.com/compose/
+#
+# This contains docker-compose configuration to build raylib-js.
+#
+#     docker-compose run emscripten
+#     docker-compose run node
+
+version: "3"
+services:
+  emscripten:
+    image: trzeci/emscripten:sdk-tag-1.38.24-64bit
+    command: make emscripten
+    volumes:
+      - ./:/code
+    working_dir: /code
+    user: "1000:1000"
+
+  node:
+    image: node:10.15.0-alpine
+    command: npm it
+    volumes:
+      - ./:/code
+    working_dir: /code
+    user: "1000:1000"
+    depends_on:
+      - emscripten
