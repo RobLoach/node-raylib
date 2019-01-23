@@ -3,6 +3,13 @@ project (node-raylib)
 
 set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS}")
 
+add_definitions(-DBUILDING_NODE_EXTENSION)
+add_definitions(-DUSING_V8_SHARED)
+add_definitions(-DUSING_UV_SHARED)
+add_definitions(-DV8_DEPRECATION_WARNINGS)
+#add_definitions(-DPLATFORM_WEB)
+
+
 # TODO: Move this to cmake/FindRaylib.cmake?
 find_package(raylib 2.0 QUIET)
 if (NOT raylib_FOUND)
@@ -23,29 +30,23 @@ if (NOT raylib_FOUND)
 endif()
 
 # Add all the include directories.
-include_directories(${PROJECT_NAME}
+include_directories(
   "${CMAKE_JS_INC}"
-  "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api"
-  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api"
-  "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api/src"
-  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api/src"
+  "${CMAKE_SOURCE_DIR}/node_modules/nbind/include"
+  "${CMAKE_SOURCE_DIR}/node_modules/nan"
 )
+
+file(GLOB NBIND_SOURCE_FILES
+  "${CMAKE_SOURCE_DIR}/node_modules/nbind/src/*.cc"
+  "${CMAKE_SOURCE_DIR}/node_modules/nbind/src/v8/*.cc"
+)
+
+list(APPEND SOURCE src/raylib.cc)
 
 # This is hardcoded so that updates force a re-compile.
 add_library(${PROJECT_NAME} SHARED
-  src/addon.cc
-  src/color.h
-  src/drawing.h
-  src/files.h
-  src/helper.h
-  src/keyboard.h
-  src/misc.h
-  src/mouse.h
-  src/shapes.h
-  src/text.h
-  src/textures.h
-  src/timing.h
-  src/window.h
+  ${SOURCE}
+  ${NBIND_SOURCE_FILES}
 )
 
 ## Suffix the node module with .node.
