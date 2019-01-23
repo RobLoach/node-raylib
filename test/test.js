@@ -29,6 +29,12 @@ describe('raylib', function() {
 
   })
 
+  describe('enums', function() {
+    it('KEY_A', function() {
+      assert.equal(raylib.KEY_A, 65)
+    })
+  })
+
   describe('color', function() {
     it('GetColor()', function () {
       const colorInt = raylib.ColorToInt(raylib.DARKPURPLE)
