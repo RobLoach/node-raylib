@@ -6,6 +6,12 @@
 
 // Find the bindings.
 const raylib = require('bindings')('node-raylib');
+const enums = require('./src/enums')
+
+// Inject the enums.
+for (var enumName in enums) {
+  raylib[enumName] = enums[enumName]
+}
 
 // Colors
 raylib.Color = function (red, green, blue, alpha) {

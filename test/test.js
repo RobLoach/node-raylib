@@ -29,6 +29,15 @@ describe('raylib', function() {
 
   })
 
+  describe('enums', function() {
+    it('KEY_A', function() {
+      assert.equal(raylib.KEY_A, 65)
+    })
+    it ('COMPRESSED_ASTC_4x4_RGBA', function() {
+      assert.equal(raylib.COMPRESSED_ASTC_4x4_RGBA, 20)
+    })
+  })
+
   describe('color', function() {
     it('GetColor()', function () {
       const colorInt = raylib.ColorToInt(raylib.DARKPURPLE)
