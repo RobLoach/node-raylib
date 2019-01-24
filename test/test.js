@@ -56,7 +56,6 @@ describe('raylib', function() {
     const testPath = path.join('test', '.resources', 'cli-test.js')
 
     it('should execute on a script', () => {
-      console.log(testPath)
       const out = child_process.execFileSync(cliPath, [
         testPath
       ])
