@@ -1,14 +1,16 @@
-#include <iostream>
+#include <string>
 
+// Raylib
+extern "C" {
+  #include "../node_modules/raylib-src/src/raylib.h"
+}
+
+// Emscripten
+#include <emscripten/val.h>
 #include <emscripten/bind.h>
-
 using namespace emscripten;
 
-struct Color {
-  unsigned char r, g, b, a;
-};
-
-
+// Structs
 Color newColorRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a) {
   return Color{r,g,b,a};
 }
@@ -19,60 +21,31 @@ Color newColor() {
   return Color{0,0,0,255};
 }
 
-
-void sayHi() {
-  std::cout << "OUTOTULTIN!" << std::endl;
+bool IsFileExtension_binding(const std::string& arg0, const std::string& arg1) {
+  return IsFileExtension(arg0.c_str(), arg1.c_str());
 }
 
-Color printColor(Color col) {
-  std::cout << "The color" << std::endl;
-  std::cout << "    R:" << (int)col.r << std::endl;
-  std::cout << "    G:" << (int)col.g << std::endl;
-  std::cout << "    B:" << (int)col.b << std::endl;
-  std::cout << "    A:" << (int)col.a << std::endl;
-
-  Color newColor = col;
-  newColor.r = 100;
-  return newColor;
-}
-
-
+// Function bindings.
 EMSCRIPTEN_BINDINGS(raylib) {
-  function("sayHi", &sayHi);
   function("Color", &newColorRGBA);
   function("Color", &newColorRGB);
   function("Color", &newColor);
 
   value_object<Color>("Color")
-        .field("r", &Color::r)
-        .field("g", &Color::g)
-        .field("b", &Color::b)
-        .field("a", &Color::a)
-        ;
+    .field("r", &Color::r)
+    .field("g", &Color::g)
+    .field("b", &Color::b)
+    .field("a", &Color::a)
+  ;
 
-
-  function("printColor", &printColor);
+  function("IsWindowReady", &IsWindowReady);
+  function("IsFileExtension", &IsFileExtension_binding);
+  function("GetColor", &GetColor);
+  function("ColorToInt", &ColorToInt);
 }
-
-
-int main(int argc, char ** argv) {
-  std::cout << "Hello World" << std::endl;
-}
-
 
 /*
-EMSCRIPTEN_KEEPALIVE
-void sayHi() {
-  printf("Hi!\n");
-}
-
-EMSCRIPTEN_KEEPALIVE
-int daysInWeek() {
-  return 7;
-}
-
 int main(int argc, char ** argv) {
-  printf("Hello World\n");
+  std::cout << "raylib.js initialized." << std::endl;
 }
-
 */

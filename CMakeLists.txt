@@ -1,15 +1,47 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.11)
+project (raylib-js)
 
-project(static_library)
+#set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS}")
 
-# Test mode that checks that it's possible to override the file suffix (independent of whether ar archive or LLVM bitcode file is created)
-# Note that "-DCMAKE_STATIC_LIBRARY_SUFFIX=foo" cannot be passed to CMake from command line to override the suffix, but changing it needs
-# to happen in the CMakeLists.txt file itself. (this is likely due to CMake internal script evaluation order(?))
-#if (SET_FAKE_SUFFIX_IN_PROJECT)
-  set(CMAKE_STATIC_LIBRARY_SUFFIX ".js")
+# TODO: Move this to cmake/FindRaylib.cmake?
+find_package(raylib 2.0 QUIET)
+if (NOT raylib_FOUND)
+  include(FetchContent)
+  FetchContent_Declare(
+    raylib
+    GIT_REPOSITORY https://github.com/raysan5/raylib.git
+    GIT_TAG 214aa0c1b0d5c766d22bbb1069ecfb3a78373577
+  )
+  FetchContent_GetProperties(raylib)
+  if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
+    set(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(raylib)
+    set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+    set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
+    add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
+  endif()
+endif()
 
-  # Also check that we can control the prefix. Setting this to an empty string can be useful to get rid of the "lib" prefix that gets added by default.
-#  set(CMAKE_STATIC_LIBRARY_PREFIX "myprefix_")
-#endif()
+# Add all the include directories.
+#include_directories(${PROJECT_NAME}
+#  "${CMAKE_JS_INC}"
+#  "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api"
+#  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api"
+#  "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api/src"
+#  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api/src"
+#)
 
-add_library(static_lib STATIC src/raylib.cc)
+
+LIST(APPEND SOURCES
+  src/raylib.cc
+)
+LIST(APPEND LIBS
+  raylib
+)
+
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
+target_set_properties(${PROJECT_NAME}
+  CMAKE_STATIC_LIBRARY_SUFFIX ".js"
+  CMAKE_STATIC_LIBRARY_PREFIX "myprefix_"
+)
+target_link_libraries(${PROJECT_NAME} ${LIBS})

@@ -7,7 +7,8 @@
   "scripts": {
     "test": "mocha",
     "pkg": "node src/pkg.js",
-    "start": "http-server build/wasm"
+    "start": "http-server build/wasm",
+    "install": "napa"
   },
   "repository": {
     "type": "git",
@@ -41,8 +42,12 @@
   "devDependencies": {
     "archiver": "^3.0.0",
     "chai": "^4.2.0",
+    "http-server": "^0.11.1",
     "mocha": "^5.2.0",
-    "pkg": "^4.3.7",
-    "http-server": "^0.11.1"
+    "napa": "^3.0.0",
+    "pkg": "^4.3.7"
+  },
+  "napa": {
+    "raylib-src": "raysan5/raylib#68db3a894a9344b5bd30d1eb8a746ade2cfb9b8f"
   }
 }
