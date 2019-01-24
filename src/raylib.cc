@@ -265,12 +265,14 @@ int main(int argc, char ** argv) {
       raylibColors(Module);
     );
 
-    // // File System.
+    // Node.js File System.
     EM_ASM({
-      var directory = '/' + UTF8ToString($0);
-      FS.mkdir(directory);
-      FS.mount(NODEFS, {root : '.'}, directory);
-      FS.currentPath = '/fs';
+      if (Object.prototype.toString.call(typeof process !== 'undefined' ? process : 0) === '[object process]') {
+        var directory = '/' + UTF8ToString($0);
+        FS.mkdir(directory);
+        FS.mount(NODEFS, {root : '.'}, directory);
+        FS.currentPath = '/fs';
+      }
     }, "fs");
   #endif
 
