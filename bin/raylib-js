@@ -22,14 +22,16 @@ if (cli.input.length == 0) {
 
 // Load input.
 const filename = cli.input[0]
+
+// Ensure the file exists.
 if (!raylib.FileExists(filename)) {
-  console.error("Given file does not exist.")
+  console.error("Error: Given file does not exist.")
   return
 }
 
 // Add a "node-raylib" module alias for when it's not found.
 const moduleAlias = require('module-alias')
-moduleAlias.addAlias('raylib-js', __dirname + '/..')
+moduleAlias.addAlias('raylib', path.join(__dirname, '..'))
 
 // Retrieve the context of the file.
 const realpath = fs.realpathSync(filename)

@@ -8,7 +8,7 @@
 *
 ********************************************************************************************/
 
-const r = require('node-raylib')
+const r = require('raylib')
 
 // Initialization
 //--------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ var screenHeight = 450;
 
 r.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
-r.SetTargetFPS(60);
+//r.SetTargetFPS(60);
 //--------------------------------------------------------------------------------------
 
 // Main game loop

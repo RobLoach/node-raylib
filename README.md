@@ -9,6 +9,16 @@ The following are required in order to develop raylib-js...
 - [Emscripten](https://kripken.github.io/emscripten-site/) (or [Docker-Compose](https://docs.docker.com/compose/))
 - [Node.js](https://nodejs.org/en/)
 
+## Development
+
+```
+git clone https://github.com/RobLoach/node-raylib.git
+cd node-raylib
+git submodule update -init
+make native
+make test
+```
+
 ## Usage
 
 1. Add `robloach/raylib-js` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):

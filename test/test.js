@@ -27,14 +27,17 @@ describe('raylib', function() {
       assert.isFalse(raylib.IsFileExtension("something.txt", ".md"))
     })
 
+    it('FileExists()', function() {
+      assert.isTrue(raylib.FileExists('examples/core/core_basic_window.js'))
+    })
   })
 
   describe('enums', function() {
     it('KEY_A', function() {
       assert.equal(raylib.KEY_A, 65)
     })
-    it ('COMPRESSED_ASTC_4x4_RGBA', function() {
-      assert.equal(raylib.COMPRESSED_ASTC_4x4_RGBA, 20)
+    it ('GAMEPAD_XBOX_BUTTON_START', function() {
+      assert.equal(raylib['GAMEPAD_XBOX_BUTTON_START'], 7)
     })
   })
 
@@ -49,11 +52,13 @@ describe('raylib', function() {
   })
 
   describe('cli', () => {
-    const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
+    const cliPath = path.join('bin', 'raylib-js')
+    const testPath = path.join('test', '.resources', 'cli-test.js')
 
     it('should execute on a script', () => {
+      console.log(testPath)
       const out = child_process.execFileSync(cliPath, [
-        path.join(__dirname, '.resources', 'cli-test.js')
+        testPath
       ])
       assert.include(out.toString(), 'Test runner')
     })
