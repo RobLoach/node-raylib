@@ -1,17 +1,14 @@
-RAYLIB_DIR := node_modules/raylib-src/src
-SOURCES = $(wildcard \
-	src/*.cc \
+RAYLIB_DIR := vendor/raylib/src
+SOURCES = src/raylib.cc
+
+SOURCES_C = \
 	$(RAYLIB_DIR)/core.c \
-	$(RAYLIB_DIR)/raymath.c \
-	$(RAYLIB_DIR)/camera.c \
-	$(RAYLIB_DIR)/gestures.c \
 	$(RAYLIB_DIR)/shapes.c \
 	$(RAYLIB_DIR)/text.c \
 	$(RAYLIB_DIR)/models.c \
 	$(RAYLIB_DIR)/external/mini_al.c \
 	$(RAYLIB_DIR)/textures.c \
-	$(RAYLIB_DIR)/utils.c \
-)
+	$(RAYLIB_DIR)/utils.c
 
 DEFINES = -s GL_UNSAFE_OPTS=0 \
 	-Wno-c++11-narrowing \
@@ -35,7 +32,10 @@ WASM_DEFINES = -DPLATFORM_WEB \
 	-DUSE_EXTERNAL_GLFW \
 	-s FULL_ES2=1
 
-default: emscripten test
+OBJECTS += $(SOURCES_C:.c=.o)
+
+
+default: native test
 
 emscripten: native wasm
 
@@ -47,8 +47,11 @@ docker:
 docker-start: docker
 	docker-compose run node npm start
 
-native: build/native
-	em++ $(SOURCES) $(NATIVE_SOURCES) $(DEFINES) $(NATIVE_DEFINES) $(NATIVE_LIBRARIES) --bind -s WASM=0 -o build/native/raylib.js --pre-js src/raylib-pre.js --post-js src/raylib-post.js
+%.o: %.c
+	emcc $(NATIVE_SOURCES) $(DEFINES) $(NATIVE_DEFINES) $(NATIVE_LIBRARIES) --bind -c -s WASM=0 -o $@ $^
+
+native: build/native $(OBJECTS)
+	em++ $(SOURCES) $(NATIVE_SOURCES) $(OBJECTS) $(DEFINES) $(NATIVE_DEFINES) $(NATIVE_LIBRARIES) --bind -s WASM=0 -o build/native/raylib.js --pre-js src/raylib-pre.js --post-js src/raylib-post.js
 
 wasm: build/wasm
 	em++ $(SOURCES) $(WASM_SOURCES) $(DEFINES) $(WASM_DEFINES) --bind -s WASM=1 -o build/wasm/index.html --pre-js src/raylib-pre.js --post-js src/raylib-post.js
@@ -72,4 +75,4 @@ start: test
 	npm start
 
 clean:
-	rm -rf build node_modules
+	rm -rf build node_modules $(OBJECTS)
