@@ -1,5 +1,6 @@
 #include <napi.h>
 #include "color.h"
+#include "cursor.h"
 #include "drawing.h"
 #include "files.h"
 #include "keyboard.h"
@@ -16,6 +17,7 @@
  */
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
   node_raylib_init_color(env, exports);
+  node_raylib_init_cursor(env, exports);
   node_raylib_init_drawing(env, exports);
   node_raylib_init_files(env, exports);
   node_raylib_init_keyboard(env, exports);

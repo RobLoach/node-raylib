@@ -55,13 +55,21 @@ raylib.Vector2 = function (x, y) {
   return {x: x, y: y}
 }
 raylib.Vector3 = function (x, y, z) {
-  return {x: x, y: y, z:z}
+  return {x: x, y: y, z: z}
 }
 raylib.Vector4 = function (x, y, z, w) {
-  return {x: x, y: y, z:z, w:w}
+  return {x: x, y: y, z: z, w: w}
 }
 raylib.Rectangle = function (x, y, width, height) {
-  return {x: x, y: y, width:width, height:height}
+  return {x: x, y: y, width: width, height: height}
+}
+raylib.Camera2D = function (offset, target, rotation, zoom) {
+  return {
+    offset: offset,
+    target: target,
+    rotation: rotation,
+    zoom: zoom
+  }
 }
 
 // Export the bindings for the module.
