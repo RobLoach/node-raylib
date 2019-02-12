@@ -40,8 +40,8 @@
   },
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
-    "bindings": "^1.3.1",
-    "cmake-js": "^4.0.1",
+    "bindings": "^1.4.0",
+    "cmake-js": "^5.0.1",
     "meow": "^5.0.0",
     "module-alias": "^2.1.0",
     "node-addon-api": "^1.6.2"
