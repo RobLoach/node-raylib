@@ -28,6 +28,7 @@
   "files": [
     "bin/*",
     "src/*",
+    "src/lib/*",
     "CMakeLists.txt",
     "index.js",
     "package.json",

@@ -37,7 +37,9 @@ add_library(${PROJECT_NAME} SHARED
   src/color.h
   src/drawing.h
   src/files.h
-  src/helper.h
+  src/lib/AddFunction.h
+  src/lib/index.h
+  src/lib/ToObject.h
   src/keyboard.h
   src/misc.h
   src/mouse.h
@@ -53,6 +55,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
   PREFIX ""
   SUFFIX ".node"
 )
+
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
 # Link raylib.
 target_link_libraries(${PROJECT_NAME}
