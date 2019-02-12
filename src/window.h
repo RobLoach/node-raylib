@@ -134,7 +134,10 @@ Napi::Value GetScreenHeight_binding(const Napi::CallbackInfo& info) {
 }
 
 void node_raylib_init_window(Napi::Env& env, Napi::Object& exports) {
-  exports.Set(Napi::String::New(env, "IsWindowReady"), Napi::Function::New(env, IsWindowReady_binding));
+  //exports.Set(Napi::String::New(env, "IsWindowReady"), Napi::Function::New(env, IsWindowReady_binding));
+  AddFunction(env, exports, "IsWindowReady", IsWindowReady);
+
+
   exports.Set(Napi::String::New(env, "InitWindow"), Napi::Function::New(env, InitWindow_binding));
   exports.Set(Napi::String::New(env, "CloseWindow"), Napi::Function::New(env, CloseWindow_binding));
   exports.Set(Napi::String::New(env, "WindowShouldClose"), Napi::Function::New(env, WindowShouldClose_binding));

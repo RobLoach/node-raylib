@@ -33,9 +33,24 @@ Napi::Value DrawRectangleRec_binding(const Napi::CallbackInfo& info) {
   return env.Null();
 }
 
+Napi::Value DrawCircleV_binding(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+  if (!ValidArgs(env, info, 3)) {
+    return env.Null();
+  }
+
+  Vector2 arg0 = ToVector2(env, info[0]);
+  float arg1 = info[1].As<Napi::Number>().FloatValue();
+  Color arg2 = ToColor(env, info[2]);
+
+  DrawCircleV(arg0, arg1, arg2);
+  return env.Null();
+}
+
 void node_raylib_init_shapes(Napi::Env& env, Napi::Object& exports) {
   exports.Set(Napi::String::New(env, "DrawRectangleV"), Napi::Function::New(env, DrawRectangleV_binding));
   exports.Set(Napi::String::New(env, "DrawRectangleRec"), Napi::Function::New(env, DrawRectangleRec_binding));
+  exports.Set(Napi::String::New(env, "DrawCircleV"), Napi::Function::New(env, DrawCircleV_binding));
   // TODO: Add remaining shapes functions.
 }
 

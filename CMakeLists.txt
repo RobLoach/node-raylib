@@ -54,6 +54,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
   SUFFIX ".node"
 )
 
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
+
 # Link raylib.
 target_link_libraries(${PROJECT_NAME}
   ${CMAKE_JS_LIB}
