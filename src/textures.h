@@ -4,7 +4,7 @@
 #include <string>
 #include <napi.h>
 #include <raylib.h>
-#include "helper.h"
+#include "lib/index.h"
 
 Napi::Value LoadTexture_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();

@@ -4,7 +4,7 @@
 #include <string>
 #include <napi.h>
 #include <raylib.h>
-#include "helper.h"
+#include "lib/index.h"
 
 void node_raylib_init_mouse(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetMousePosition", GetMousePosition);

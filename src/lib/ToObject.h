@@ -1,5 +1,5 @@
-#ifndef NODE_RAYLIB_HELPER_H
-#define NODE_RAYLIB_HELPER_H
+#ifndef NODE_RAYLIB_TOOBJECT_H_
+#define NODE_RAYLIB_TOOBJECT_H_
 
 #include <napi.h>
 
@@ -191,56 +191,6 @@ Napi::Object ToObject(Napi::Env& env, Texture input) {
   out.Set("mipmaps", input.mipmaps);
   out.Set("format", input.format);
   return out;
-}
-
-/**
- * Ensures the number of arguments matches what's expected.
- */
-bool ValidArgs(const Napi::Env& env, const Napi::CallbackInfo& info, int numberOfArgs) {
-  if (info.Length() != numberOfArgs) {
-    std::string output("Invalid number of arguments. Expected ");
-    output.append(std::to_string(numberOfArgs));
-    output.append(".");
-    Napi::TypeError::New(env, output).ThrowAsJavaScriptException();
-    return false;
-  }
-  return true;
-}
-
-
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, bool (*f)()) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 0)) {
-      return env.Null();
-    }
-    bool output = (*f)();
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, bool (*f)(int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    bool output = (*f)(arg0);
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Vector2 (*f)()) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 0)) {
-      return env.Null();
-    }
-    Vector2 output = (*f)();
-    return ToObject(env, output);
-  }));
 }
 
 #endif
