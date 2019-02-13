@@ -29,7 +29,7 @@ if (!raylib.FileExists(filename)) {
 
 // Add a "node-raylib" module alias for when it's not found.
 const moduleAlias = require('module-alias')
-moduleAlias.addAlias('node-raylib', __dirname + '/..')
+moduleAlias.addAlias('raylib', __dirname + '/..')
 
 // Retrieve the context of the file.
 const realpath = fs.realpathSync(filename)

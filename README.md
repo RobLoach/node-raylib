@@ -17,7 +17,7 @@
 
 2. Create a JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
     ``` javascript
-    const raylib = require('node-raylib')
+    const raylib = require('raylib')
 
     var screenWidth = 800
     var screenHeight = 450
