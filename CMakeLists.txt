@@ -58,6 +58,13 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
+target_include_directories(${PROJECT_NAME} PUBLIC
+  "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api"
+  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api"
+  "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api/src"
+  "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api/src"
+)
+
 # Link raylib.
 target_link_libraries(${PROJECT_NAME}
   ${CMAKE_JS_LIB}
