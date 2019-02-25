@@ -1,0 +1,14 @@
+{
+  "name": "raylib-simple-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "simple_game.js",
+  "scripts": {
+    "test": "node simple_game.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "raylib": "github:robloach/node-raylib"
+  }
+}
