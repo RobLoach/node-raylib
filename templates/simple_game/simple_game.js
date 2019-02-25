@@ -63,7 +63,7 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
             // TODO: Update GAMEPLAY screen variables here!
 
             // Press enter to change to ENDING screen
-            if (r.IsKeyPressed(r.KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+            if (r.IsKeyPressed(r.KEY_ENTER) || r.IsGestureDetected(r.GESTURE_TAP))
             {
                 currentScreen = 'ENDING';
             }
@@ -73,7 +73,7 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
             // TODO: Update ENDING screen variables here!
 
             // Press enter to return to TITLE screen
-            if (r.IsKeyPressed(r.KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+            if (r.IsKeyPressed(r.KEY_ENTER) || r.IsGestureDetected(r.GESTURE_TAP))
             {
                 currentScreen = 'TITLE';
             }
