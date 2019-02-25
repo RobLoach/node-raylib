@@ -1,7 +1,7 @@
 const { exec } = require('pkg')
 const archiver = require('archiver')
 const fs = require('fs')
-const package = require('../package.json')
+const package = require('../../package.json')
 
 // Options
 var binaryFilename = package.name
@@ -47,6 +47,6 @@ async function compress() {
   archive.directory('build/Release', false)
   archive.directory('examples')
   archive.file('README.md')
-  archive.file('LICENSE')
+  archive.file('LICENSE.md')
   archive.finalize();
 }

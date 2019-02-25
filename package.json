@@ -1,7 +1,7 @@
 {
   "name": "raylib",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node.js bindings for raylib.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "clean": "rm -rf build",
     "compile": "cmake-js compile",
     "prepkg": "npm run compile",
-    "pkg": "node scripts/pkg.js"
+    "pkg": "node src/scripts/pkg.js"
   },
   "repository": {
     "type": "git",
