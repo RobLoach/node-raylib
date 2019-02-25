@@ -51,6 +51,14 @@ void node_raylib_init_shapes(Napi::Env& env, Napi::Object& exports) {
   exports.Set(Napi::String::New(env, "DrawRectangleV"), Napi::Function::New(env, DrawRectangleV_binding));
   exports.Set(Napi::String::New(env, "DrawRectangleRec"), Napi::Function::New(env, DrawRectangleRec_binding));
   exports.Set(Napi::String::New(env, "DrawCircleV"), Napi::Function::New(env, DrawCircleV_binding));
+
+  AddFunction(env, exports, "DrawPixel", DrawPixel);
+  AddFunction(env, exports, "DrawLine", DrawLine);
+  AddFunction(env, exports, "DrawRectangle", DrawRectangle);
+  AddFunction(env, exports, "DrawRectangleGradientV", DrawRectangleGradientV);
+  AddFunction(env, exports, "DrawRectangleGradientH", DrawRectangleGradientH);
+  AddFunction(env, exports, "DrawRectangleLines", DrawRectangleLines);
+
   // TODO: Add remaining shapes functions.
 }
 
