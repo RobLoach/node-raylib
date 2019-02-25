@@ -84,7 +84,7 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
 void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, int, int, Color)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 3)) {
+    if (!ValidArgs(env, info, 5)) {
       return env.Null();
     }
     int arg0 = info[0].As<Napi::Number>().Int32Value();
@@ -100,7 +100,7 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
 void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, int, int, Color, Color)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 3)) {
+    if (!ValidArgs(env, info, 6)) {
       return env.Null();
     }
     int arg0 = info[0].As<Napi::Number>().Int32Value();
