@@ -1,5 +1,6 @@
 {
   "name": "raylib-simple-game",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "simple_game.js",

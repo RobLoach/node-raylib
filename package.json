@@ -24,7 +24,7 @@
     "raylib"
   ],
   "author": "Rob Loach",
-  "license": "MIT",
+  "license": "Zlib",
   "files": [
     "bin/*",
     "src/*",
