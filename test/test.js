@@ -1,50 +1,63 @@
 const child_process = require('child_process')
 const path = require('path')
-const raylib = require('..')
+const r = require('..')
 const package = require('../package.json')
 const {expect, assert} = require('chai')
 
 describe('raylib', function() {
   describe('window', function() {
     it('IsWindowReady()', function() {
-      assert.isFalse(raylib.IsWindowReady())
+      assert.isFalse(r.IsWindowReady())
     })
 
     it('IsWindowReady("incorrect", "number", "of", "args")', function() {
       const shouldThrowOnIncorrectArgs = function() {
-        raylib.IsWindowReady('incorrect', 'number', 'of', 'args')
+        r.IsWindowReady('incorrect', 'number', 'of', 'args')
       }
       expect(shouldThrowOnIncorrectArgs).to.throw()
     })
   })
 
+  describe('audio', function() {
+    it('IsAudioDeviceReady()', function() {
+      assert.isNotOk(r.IsAudioDeviceReady(), 'IsAudioDeviceReady')
+    })
+  })
+
   describe('file', function() {
     it('IsFileExtension("something.txt", ".txt")', function() {
-      assert(raylib.IsFileExtension("something.txt", ".txt"))
+      assert(r.IsFileExtension("something.txt", ".txt"))
     })
 
     it('IsFileExtension("something.txt", ".md")', function() {
-      assert.isFalse(raylib.IsFileExtension("something.txt", ".md"))
+      assert.isFalse(r.IsFileExtension("something.txt", ".md"))
     })
+  })
 
+  describe('rlgl', function() {
+    it('LoadText()', function() {
+      var output = r.LoadText('package.json')
+      assert.isNotEmpty(output)
+      assert.include(output, '"raylib"', 'package.json contains "raylib"')
+    })
   })
 
   describe('enums', function() {
     it('KEY_A', function() {
-      assert.equal(raylib.KEY_A, 65)
+      assert.equal(r.KEY_A, 65)
     })
     it ('COMPRESSED_ASTC_4x4_RGBA', function() {
-      assert.equal(raylib.COMPRESSED_ASTC_4x4_RGBA, 20)
+      assert.equal(r.COMPRESSED_ASTC_4x4_RGBA, 20)
     })
   })
 
   describe('color', function() {
     it('GetColor()', function () {
-      const colorInt = raylib.ColorToInt(raylib.DARKPURPLE)
+      const colorInt = r.ColorToInt(r.DARKPURPLE)
       expect(colorInt).to.be.a('number')
-      const colorPurple = raylib.GetColor(colorInt)
+      const colorPurple = r.GetColor(colorInt)
       assert.containsAllKeys(colorPurple, ['r', 'g', 'b', 'a'])
-      assert.equal(colorPurple.g, raylib.DARKPURPLE.g)
+      assert.equal(colorPurple.g, r.DARKPURPLE.g)
     })
   })
 

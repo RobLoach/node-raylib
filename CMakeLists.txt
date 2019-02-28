@@ -39,6 +39,7 @@ add_library(${PROJECT_NAME} SHARED
   src/lib/index.h
   src/lib/ToObject.h
   src/addon.cc
+  src/audio.h
   src/color.h
   src/cursor.h
   src/drawing.h
@@ -47,6 +48,7 @@ add_library(${PROJECT_NAME} SHARED
   src/keyboard.h
   src/misc.h
   src/mouse.h
+  src/rlgl.h
   src/shapes.h
   src/text.h
   src/textures.h

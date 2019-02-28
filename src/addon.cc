@@ -1,4 +1,5 @@
 #include <napi.h>
+#include "audio.h"
 #include "color.h"
 #include "cursor.h"
 #include "drawing.h"
@@ -7,6 +8,7 @@
 #include "gestures.h"
 #include "misc.h"
 #include "mouse.h"
+#include "rlgl.h"
 #include "shapes.h"
 #include "text.h"
 #include "textures.h"
@@ -17,6 +19,7 @@
  * Initialize all the node-raylib modules.
  */
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  node_raylib_init_audio(env, exports);
   node_raylib_init_color(env, exports);
   node_raylib_init_cursor(env, exports);
   node_raylib_init_drawing(env, exports);
@@ -25,6 +28,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   node_raylib_init_keyboard(env, exports);
   node_raylib_init_misc(env, exports);
   node_raylib_init_mouse(env, exports);
+  node_raylib_init_rlgl(env, exports);
   node_raylib_init_shapes(env, exports);
   node_raylib_init_text(env, exports);
   node_raylib_init_textures(env, exports);

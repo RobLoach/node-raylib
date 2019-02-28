@@ -28,6 +28,30 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
   }));
 }
 
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(float)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 1)) {
+      return env.Null();
+    }
+    float arg0 = info[0].As<Napi::Number>().FloatValue();
+    (*f)(arg0);
+    return env.Null();
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(unsigned char)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 1)) {
+      return env.Null();
+    }
+    unsigned char arg0 = info[0].As<Napi::Number>().Int32Value();
+    (*f)(arg0);
+    return env.Null();
+  }));
+}
+
 void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(unsigned int)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
@@ -123,6 +147,18 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
     std::string arg0 = info[0].As<Napi::String>().Utf8Value();
     (*f)(arg0.c_str());
     return env.Null();
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, char* (*f)(const char*)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 1)) {
+      return env.Null();
+    }
+    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
+    char* output = (*f)(arg0.c_str());
+    return Napi::String::New(env, output);
   }));
 }
 
