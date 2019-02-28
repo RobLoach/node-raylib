@@ -17,20 +17,20 @@
 
 2. Create a JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
     ``` javascript
-    const raylib = require('raylib')
+    const r = require('raylib')
 
-    var screenWidth = 800
-    var screenHeight = 450
-    raylib.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window")
-    raylib.SetTargetFPS(60)
+    const screenWidth = 800
+    const screenHeight = 450
+    r.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window")
+    r.SetTargetFPS(60)
 
-    while (!raylib.WindowShouldClose()) {
-        raylib.BeginDrawing();
-        raylib.ClearBackground(raylib.RAYWHITE)
-        raylib.DrawText("Congrats! You created your first window!", 190, 200, 20, raylib.LIGHTGRAY)
-        raylib.EndDrawing()
+    while (!r.WindowShouldClose()) {
+        r.BeginDrawing();
+        r.ClearBackground(r.RAYWHITE)
+        r.DrawText("Congrats! You created your first window!", 190, 200, 20, r.LIGHTGRAY)
+        r.EndDrawing()
     }
-    raylib.CloseWindow()        // Close window and OpenGL context
+    r.CloseWindow()        // Close window and OpenGL context
     ```
 
 3. Run it through Node.js:
@@ -43,9 +43,7 @@ Check for more [examples](examples) organized by raylib modules.
 ### What's Missing?
 
 - [Structs](https://github.com/RobLoach/node-raylib/issues/5)
-- [Enums](https://github.com/RobLoach/node-raylib/issues/3)
-- [Colors](https://github.com/RobLoach/node-raylib/issues/2)
-- [Remaining Functions](https://github.com/RobLoach/node-raylib/issues/1)
+- [Extended Functions](https://github.com/RobLoach/node-raylib/issues/1)
 
 ## CLI
 

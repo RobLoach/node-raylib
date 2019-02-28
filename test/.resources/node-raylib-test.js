@@ -2,10 +2,10 @@
  * Tests for the node-raylib CLI tool.
  */
 
-const raylib = require('raylib')
+const r = require('raylib')
 const assert = require('assert')
 
 console.log('node-raylib-test: Test runner for node-raylib CLI')
 
 // Tests
-assert(!raylib.IsWindowReady(), 'raylib.IsWindowReady')
+assert(!r.IsWindowReady(), 'r.IsWindowReady')

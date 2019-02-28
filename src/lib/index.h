@@ -5,5 +5,4 @@
 #include "ToObject.h"
 #include "ValidArgs.h"
 
-
 #endif

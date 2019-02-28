@@ -9,7 +9,7 @@
 *
 ********************************************************************************************/
 
-const r = require('raylib')
+const r = require('raylib');
 
 // Initialization
 //--------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
 
         r.ClearBackground(r.RAYWHITE);
 
-        r.DrawTexture(texture, screenWidth/2 - texture.width/2, screenHeight/2 - texture.height/2, r.WHITE);
+        r.DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, r.WHITE);
 
         r.DrawText("this IS a texture!", 360, 370, 10, r.GRAY);
 
