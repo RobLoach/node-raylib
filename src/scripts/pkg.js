@@ -4,7 +4,7 @@ const fs = require('fs')
 const package = require('../../package.json')
 
 // Options
-var binaryFilename = package.name
+var binaryFilename = 'node-raylib'
 var packageName = `${binaryFilename}-${process.platform}-${process.arch}`
 var compression = 'tar'
 var compressOptions = {}
