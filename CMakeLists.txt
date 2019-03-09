@@ -53,6 +53,7 @@ add_library(${PROJECT_NAME} SHARED
   src/text.h
   src/textures.h
   src/timing.h
+  src/touch.h
   src/window.h
 )
 

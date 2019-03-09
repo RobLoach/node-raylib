@@ -13,6 +13,7 @@
 #include "text.h"
 #include "textures.h"
 #include "timing.h"
+#include "touch.h"
 #include "window.h"
 
 /**
@@ -33,6 +34,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   node_raylib_init_text(env, exports);
   node_raylib_init_textures(env, exports);
   node_raylib_init_timing(env, exports);
+  node_raylib_init_touch(env, exports);
   node_raylib_init_window(env, exports);
 
   return exports;

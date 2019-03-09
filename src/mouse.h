@@ -7,10 +7,17 @@
 #include "lib/index.h"
 
 void node_raylib_init_mouse(Napi::Env& env, Napi::Object& exports) {
-  AddFunction(env, exports, "GetMousePosition", GetMousePosition);
   AddFunction(env, exports, "IsMouseButtonPressed", IsMouseButtonPressed);
   AddFunction(env, exports, "IsMouseButtonDown", IsMouseButtonDown);
-  // TODO: Add remaining mouse functions.
+  AddFunction(env, exports, "IsMouseButtonReleased", IsMouseButtonReleased);
+  AddFunction(env, exports, "IsMouseButtonUp", IsMouseButtonUp);
+  AddFunction(env, exports, "GetMouseX", GetMouseX);
+  AddFunction(env, exports, "GetMouseY", GetMouseY);
+  AddFunction(env, exports, "GetMousePosition", GetMousePosition);
+  AddFunction(env, exports, "SetMousePosition", SetMousePosition);
+  AddFunction(env, exports, "SetMouseOffset", SetMouseOffset);
+  AddFunction(env, exports, "SetMouseScale", SetMouseScale);
+  AddFunction(env, exports, "GetMouseWheelMove", GetMouseWheelMove);
 }
 
 #endif

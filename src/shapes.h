@@ -6,60 +6,42 @@
 #include <raylib.h>
 #include "lib/index.h"
 
-Napi::Value DrawRectangleV_binding(const Napi::CallbackInfo& info) {
-  Napi::Env env = info.Env();
-  if (!ValidArgs(env, info, 3)) {
-    return env.Null();
-  }
-
-  Vector2 arg0 = ToVector2(env, info[0]);
-  Vector2 arg1 = ToVector2(env, info[1]);
-  Color arg2 = ToColor(env, info[2]);
-
-  DrawRectangleV(arg0, arg1, arg2);
-  return env.Null();
-}
-
-Napi::Value DrawRectangleRec_binding(const Napi::CallbackInfo& info) {
-  Napi::Env env = info.Env();
-  if (!ValidArgs(env, info, 2)) {
-    return env.Null();
-  }
-
-  Rectangle arg0 = ToRectangle(env, info[0]);
-  Color arg1 = ToColor(env, info[1]);
-
-  DrawRectangleRec(arg0, arg1);
-  return env.Null();
-}
-
-Napi::Value DrawCircleV_binding(const Napi::CallbackInfo& info) {
-  Napi::Env env = info.Env();
-  if (!ValidArgs(env, info, 3)) {
-    return env.Null();
-  }
-
-  Vector2 arg0 = ToVector2(env, info[0]);
-  float arg1 = info[1].As<Napi::Number>().FloatValue();
-  Color arg2 = ToColor(env, info[2]);
-
-  DrawCircleV(arg0, arg1, arg2);
-  return env.Null();
-}
-
 void node_raylib_init_shapes(Napi::Env& env, Napi::Object& exports) {
-  exports.Set(Napi::String::New(env, "DrawRectangleV"), Napi::Function::New(env, DrawRectangleV_binding));
-  exports.Set(Napi::String::New(env, "DrawRectangleRec"), Napi::Function::New(env, DrawRectangleRec_binding));
-  exports.Set(Napi::String::New(env, "DrawCircleV"), Napi::Function::New(env, DrawCircleV_binding));
-
   AddFunction(env, exports, "DrawPixel", DrawPixel);
+  AddFunction(env, exports, "DrawPixelV", DrawPixelV);
   AddFunction(env, exports, "DrawLine", DrawLine);
+  AddFunction(env, exports, "DrawLineV", DrawLineV);
+  //RLAPI void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color);                       // Draw a line defining thickness
+  //RLAPI void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color);                   // Draw a line using cubic-bezier curves in-out
+  AddFunction(env, exports, "DrawCircle", DrawCircle);
+  //RLAPI void DrawCircleGradient(int centerX, int centerY, float radius, Color color1, Color color2);       // Draw a gradient-filled circle
+  AddFunction(env, exports, "DrawCircleV", DrawCircleV);
+  AddFunction(env, exports, "DrawCircleLines", DrawCircleLines);
   AddFunction(env, exports, "DrawRectangle", DrawRectangle);
-  AddFunction(env, exports, "DrawRectangleGradientV", DrawRectangleGradientV);
-  AddFunction(env, exports, "DrawRectangleGradientH", DrawRectangleGradientH);
+  AddFunction(env, exports, "DrawRectangleV", DrawRectangleV);
+  AddFunction(env, exports, "DrawRectangleRec", DrawRectangleRec);
+  //RLAPI void DrawRectanglePro(Rectangle rec, Vector2 origin, float rotation, Color color);                 // Draw a color-filled rectangle with pro parameters
+  //RLAPI void DrawRectangleGradientV(int posX, int posY, int width, int height, Color color1, Color color2);// Draw a vertical-gradient-filled rectangle
+  //RLAPI void DrawRectangleGradientH(int posX, int posY, int width, int height, Color color1, Color color2);// Draw a horizontal-gradient-filled rectangle
+  //RLAPI void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, Color col4);       // Draw a gradient-filled rectangle with custom vertex colors
   AddFunction(env, exports, "DrawRectangleLines", DrawRectangleLines);
+  //RLAPI void DrawRectangleLinesEx(Rectangle rec, int lineThick, Color color);                              // Draw rectangle outline with extended parameters
+  AddFunction(env, exports, "DrawTriangle", DrawTriangle);
+  AddFunction(env, exports, "DrawTriangleLines", DrawTriangleLines);
+  //RLAPI void DrawPoly(Vector2 center, int sides, float radius, float rotation, Color color);               // Draw a regular polygon (Vector version)
+  //RLAPI void DrawPolyEx(Vector2 *points, int numPoints, Color color);                                      // Draw a closed polygon defined by points
+  //RLAPI void DrawPolyExLines(Vector2 *points, int numPoints, Color color);                                 // Draw polygon lines
 
-  // TODO: Add remaining shapes functions.
+  //RLAPI void SetShapesTexture(Texture2D texture, Rectangle source);                                        // Define default texture used to draw shapes
+
+  // Basic shapes collision detection functions
+  AddFunction(env, exports, "CheckCollisionRecs", CheckCollisionRecs);
+  //RLAPI bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2);        // Check collision between two circles
+  //RLAPI bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec);                         // Check collision between circle and rectangle
+  //RLAPI Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2);                                         // Get collision rectangle for two rectangles collision
+  //RLAPI bool CheckCollisionPointRec(Vector2 point, Rectangle rec);                                         // Check if point is inside rectangle
+  //RLAPI bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius);                       // Check if point is inside circle
+  //RLAPI bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3);               // Check if point is inside a triangle
 }
 
 #endif
