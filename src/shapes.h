@@ -14,9 +14,13 @@ void node_raylib_init_shapes(Napi::Env& env, Napi::Object& exports) {
   //RLAPI void DrawLineEx(Vector2 startPos, Vector2 endPos, float thick, Color color);                       // Draw a line defining thickness
   //RLAPI void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color);                   // Draw a line using cubic-bezier curves in-out
   AddFunction(env, exports, "DrawCircle", DrawCircle);
-  //RLAPI void DrawCircleGradient(int centerX, int centerY, float radius, Color color1, Color color2);       // Draw a gradient-filled circle
+  AddFunction(env, exports, "DrawCircleSector", DrawCircleSector);
+  AddFunction(env, exports, "DrawCircleSectorLines", DrawCircleSector);
+  AddFunction(env, exports, "DrawCircleGradient", DrawCircleGradient);
   AddFunction(env, exports, "DrawCircleV", DrawCircleV);
   AddFunction(env, exports, "DrawCircleLines", DrawCircleLines);
+  AddFunction(env, exports, "DrawRing", DrawRectangle);
+  AddFunction(env, exports, "DrawRingLines", DrawRingLines);
   AddFunction(env, exports, "DrawRectangle", DrawRectangle);
   AddFunction(env, exports, "DrawRectangleV", DrawRectangleV);
   AddFunction(env, exports, "DrawRectangleRec", DrawRectangleRec);

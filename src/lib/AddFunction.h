@@ -53,6 +53,57 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
   }));
 }
 
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Vector2, float, float, int, int, int, Color)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 7)) {
+      return env.Null();
+    }
+    Vector2 arg0 = ToVector2(env, info[0]);
+    float arg1 = info[1].As<Napi::Number>().FloatValue();
+    float arg2 = info[2].As<Napi::Number>().FloatValue();
+    int arg3 = info[3].As<Napi::Number>().Int32Value();
+    int arg4 = info[4].As<Napi::Number>().Int32Value();
+    int arg5 = info[5].As<Napi::Number>().Int32Value();
+    Color arg6 = ToColor(env, info[6]);
+    (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    return env.Null();
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Vector2, float, int, int, int, Color)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 6)) {
+      return env.Null();
+    }
+    Vector2 arg0 = ToVector2(env, info[0]);
+    float arg1 = info[1].As<Napi::Number>().FloatValue();
+    int arg2 = info[2].As<Napi::Number>().Int32Value();
+    int arg3 = info[3].As<Napi::Number>().Int32Value();
+    int arg4 = info[4].As<Napi::Number>().Int32Value();
+    Color arg5 = ToColor(env, info[5]);
+    (*f)(arg0, arg1, arg2, arg3, arg4, arg5);
+    return env.Null();
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, float, Color, Color)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 5)) {
+      return env.Null();
+    }
+    int arg0 = info[0].As<Napi::Number>().Int32Value();
+    int arg1 = info[1].As<Napi::Number>().Int32Value();
+    float arg2 = info[2].As<Napi::Number>().FloatValue();
+    Color arg3 = ToColor(env, info[3]);
+    Color arg4 = ToColor(env, info[4]);
+    (*f)(arg0, arg1, arg2, arg3, arg4);
+    return env.Null();
+  }));
+}
+
 void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(unsigned char)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
@@ -100,6 +151,37 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
     int arg1 = info[1].As<Napi::Number>().Int32Value();
     std::string arg2 = info[2].As<Napi::String>().Utf8Value();
     (*f)(arg0, arg1, arg2.c_str());
+    return env.Null();
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(const char*, int)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 2)) {
+      return env.Null();
+    }
+    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
+    int arg1 = info[1].As<Napi::Number>().Int32Value();
+    (*f)(arg0.c_str(), arg1);
+    return env.Null();
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(const char*, int, int, int, Color)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 5)) {
+      return env.Null();
+    }
+    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
+    int arg1 = info[1].As<Napi::Number>().Int32Value();
+    int arg2 = info[2].As<Napi::Number>().Int32Value();
+    int arg3 = info[3].As<Napi::Number>().Int32Value();
+    Color arg4 = ToColor(env, info[4]);
+
+    (*f)(arg0.c_str(), arg1, arg2, arg3, arg4);
+
     return env.Null();
   }));
 }
@@ -385,6 +467,46 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
     }
     Color arg0 = ToColor(env, info[0]);
     int output = (*f)(arg0);
+
+    return Napi::Number::New(env, output);
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, unsigned int (*f)(const char *)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 1)) {
+      return env.Null();
+    }
+    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
+    unsigned int output = (*f)(arg0.c_str());
+
+    return Napi::Number::New(env, output);
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, int (*f)(const char *)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 1)) {
+      return env.Null();
+    }
+    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
+    int output = (*f)(arg0.c_str());
+
+    return Napi::Number::New(env, output);
+  }));
+}
+
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, int (*f)(const char *, int)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 2)) {
+      return env.Null();
+    }
+    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
+    int arg1 = info[1].As<Napi::Number>().Int32Value();
+    int output = (*f)(arg0.c_str(), arg1);
 
     return Napi::Number::New(env, output);
   }));
