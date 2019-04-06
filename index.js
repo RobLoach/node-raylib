@@ -13,6 +13,13 @@ for (var enumName in enums) {
   raylib[enumName] = enums[enumName]
 }
 
+raylib.PI = 3.14159265358979323846
+raylib.DEG2RAD = (raylib.PI / 180.0)
+raylib.RAD2DEG = (180.0 / raylib.PI)
+raylib.MAX_TOUCH_POINTS = 10
+raylib.MAX_SHADER_LOCATIONS = 32
+raylib.MAX_MATERIAL_MAPS = 12
+
 // Colors
 raylib.Color = function (red, green, blue, alpha) {
   return {
@@ -69,6 +76,13 @@ raylib.Camera2D = function (offset, target, rotation, zoom) {
     target: target,
     rotation: rotation,
     zoom: zoom
+  }
+}
+
+raylib.Shader = function (id, locs) {
+  return {
+    id: id,
+    locs: locs
   }
 }
 
