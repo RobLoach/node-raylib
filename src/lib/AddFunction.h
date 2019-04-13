@@ -664,6 +664,18 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
   }));
 }
 
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Image (*f)(Image)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 1)) {
+      return env.Null();
+    }
+    Image arg0 = ToImage(env, info[0]);
+    Image output = (*f)(arg0);
+    return ToObject(env, output);
+  }));
+}
+
 void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Texture (*f)(Image)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();

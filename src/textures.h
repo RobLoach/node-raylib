@@ -26,7 +26,7 @@ void node_raylib_init_textures(Napi::Env& env, Napi::Object& exports) {
   // RLAPI void UpdateTexture(Texture2D texture, const void *pixels);                                         // Update GPU texture with new data
 
   // // Image manipulation functions
-  // RLAPI Image ImageCopy(Image image);                                                                      // Create an image duplicate (useful for transformations)
+  AddFunction(env, exports, "ImageCopy", ImageCopy);
   // RLAPI void ImageToPOT(Image *image, Color fillColor);                                                    // Convert image to POT (power-of-two)
   // RLAPI void ImageFormat(Image *image, int newFormat);                                                     // Convert image data to desired format
   // RLAPI void ImageAlphaMask(Image *image, Image alphaMask);                                                // Apply alpha mask to image
