@@ -7,8 +7,8 @@
 #include "lib/index.h"
 
 void node_raylib_init_timing(Napi::Env& env, Napi::Object& exports) {
-  AddFunction(env, exports, "SetTargetFPS", SetTargetFPS);
-  AddFunction(env, exports, "GetFPS", GetFPS);
+  AddMethod(env, exports, "SetTargetFPS", SetTargetFPS);
+  AddMethod(env, exports, "GetFPS", GetFPS);
   AddFunction(env, exports, "GetFrameTime", GetFrameTime);
   AddFunction(env, exports, "GetTime", GetTime);
 }

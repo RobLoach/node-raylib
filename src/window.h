@@ -8,7 +8,7 @@
 
 void node_raylib_init_window(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "InitWindow", InitWindow);
-  AddFunction(env, exports, "IsWindowReady", IsWindowReady);
+  AddMethod(env, exports, "IsWindowReady", IsWindowReady);
   AddFunction(env, exports, "CloseWindow", CloseWindow);
   AddFunction(env, exports, "WindowShouldClose", WindowShouldClose);
   AddFunction(env, exports, "IsWindowMinimized", IsWindowMinimized);

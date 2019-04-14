@@ -59,6 +59,8 @@ add_library(${PROJECT_NAME} SHARED
 
 ## Suffix the node module with .node.
 set_target_properties(${PROJECT_NAME} PROPERTIES
+  CXX_STANDARD 17
+  CXX_EXTENSIONS OFF
   PREFIX ""
   SUFFIX ".node"
 )

@@ -8,9 +8,15 @@
 
 void node_raylib_init_drawing(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "ClearBackground", ClearBackground);
-  AddFunction(env, exports, "BeginDrawing", BeginDrawing);
-  AddFunction(env, exports, "EndDrawing", EndDrawing);
+  //AddFunction(env, exports, "BeginDrawing", BeginDrawing);
+
+  AddMethod(env, exports, "EndDrawing", EndDrawing);
   // TODO: Add remaining drawing functions.
+
+
+
+
+  AddMethod(env, exports, "BeginDrawing", BeginDrawing);
 }
 
 #endif

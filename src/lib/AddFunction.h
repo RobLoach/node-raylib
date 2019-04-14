@@ -5,6 +5,162 @@
 #include "./ValidArgs.h"
 #include "./ToObject.h"
 
+
+#include <type_traits>
+#include <typeinfo>
+#include <iostream>
+#include <tuple>
+
+#include <initializer_list>
+
+/**
+ * Returns the amount of arguments in the given function.
+ */
+template <typename R, typename ... Types>
+constexpr std::integral_constant<unsigned, sizeof ...(Types)> getArgumentCount( R(*f)(Types ...))
+{
+   return std::integral_constant<unsigned, sizeof ...(Types)>{};
+}
+
+Napi::Value ToObject(Napi::Env& env, int val) {
+  return Napi::Number::New(env, val);
+}
+Napi::Value ToObject(Napi::Env& env, double val) {
+  return Napi::Number::New(env, val);
+}
+Napi::Value ToObject(Napi::Env& env, long val) {
+  return Napi::Number::New(env, val);
+}
+Napi::Value ToObject(Napi::Env& env, float val) {
+  return Napi::Number::New(env, val);
+}
+Napi::Value ToObject(Napi::Env& env, const char* val) {
+  return Napi::String::New(env, val);
+}
+Napi::Value ToObject(Napi::Env& env, bool val) {
+  return Napi::Boolean::New(env, val);
+}
+
+// template <typename ... Types>
+// std::vector getArgs(Napi::Env& env, Napi::Object& exports, int count) {
+//   std::vector output = std::vector();
+//   for (int argNumber = 0; argNumber < count; argNumber++) {
+//     auto argument = info[argNumber];
+//   }
+
+//   return output;
+// }
+
+
+void SetArgument(Napi::Value v, int& result) {
+  result = v.ToNumber().Int32Value();
+}
+
+void SetArgument(Napi::Value v, long& result) {
+  result = v.ToNumber().Int64Value();
+}
+
+void SetArgument(Napi::Value v, double& result) {
+  result = v.ToNumber().DoubleValue();
+}
+
+void SetArgument(Napi::Value v, float& result) {
+  result = v.ToNumber().FloatValue();
+}
+
+void SetArgument(Napi::Value v, bool& result) {
+  result = v.ToBoolean().Value();
+}
+
+
+
+// template <class... Args>
+// struct type_list
+// {
+//    template <std::size_t N>
+//    using type = typename std::tuple_element<N, std::tuple<Args...>>::type;
+// };
+
+
+template<int N, typename... Ts>
+using NthTypeOf = typename std::tuple_element<N, std::tuple<Ts...>>::type;
+
+/**
+ * Adds a function with void return to Node.js.
+ */
+template <typename ... Types>
+void AddMethod(Napi::Env& env, Napi::Object& exports, std::string name, void(*f)(Types ... types)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+
+    // Check argument list.
+    size_t count = decltype(getArgumentCount(f))::value;
+    if (!ValidArgs(env, info, count)) {
+      return env.Null();
+    }
+
+    // Invoke.
+
+    if (count == 0) {
+      (*f)();
+      return env.Null();
+    }
+
+
+
+    std::tuple<Types...> args;
+    if (count > 0) {
+      NthTypeOf<0, Types...> arg0;
+      SetArgument(info[0], arg0);
+      std::tuple_cat(args, std::make_tuple(arg0));
+    }
+    // if (count > 1) {
+    //   type_list<Types...>::type<1> arg1;
+    //   SetArgument(info[1], arg1);
+    //   std::tuple_cat(args, std::make_tuple(arg1));
+    // }
+    // if (count > 2) {
+    //   type_list<Types...>::type<2> arg2;
+    //   SetArgument(info[2], arg2);
+    //   std::tuple_cat(args, std::make_tuple(arg2));
+    // }
+    // if (count > 3) {
+    //   type_list<Types...>::type<3> arg3;
+    //   SetArgument(info[3], arg3);
+    //   std::tuple_cat(args, std::make_tuple(arg3));
+    // }
+    // if (count > 4) {
+    //   type_list<Types...>::type<4> arg4;
+    //   SetArgument(info[4], arg4);
+    //   std::tuple_cat(args, std::make_tuple(arg4));
+    // }
+    std::apply(*f, args);
+
+    return env.Null();
+  }));
+}
+
+/**
+ * Adds a function with a return to Node.js.
+ */
+template <typename R, typename ... Types>
+void AddMethod(Napi::Env& env, Napi::Object& exports, std::string name, R(*f)(Types ...)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+
+    // Check argument list.
+    size_t count = decltype(getArgumentCount(f))::value;
+    if (!ValidArgs(env, info, count)) {
+      return env.Null();
+    }
+
+    // Invoke.
+    R output = (*f)();
+
+    return ToObject(env, output);
+  }));
+}
+
 void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)()) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
