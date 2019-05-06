@@ -23,7 +23,7 @@ if (cli.input.length == 0) {
 // Load input.
 const filename = cli.input[0]
 if (!raylib.FileExists(filename)) {
-  console.error("Given file does not exist.")
+  console.error("Provided file does not exist.")
   return
 }
 
