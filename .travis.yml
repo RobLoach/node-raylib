@@ -10,3 +10,9 @@ notifications:
 cache:
   directories:
   - node_modules
+
+addons:
+  apt:
+    packages:
+      - cmake-data
+      - cmake
