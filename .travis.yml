@@ -1,6 +1,8 @@
 language: node_js
 sudo: false
 
+dist: xenial
+
 node_js:
   - "11"
 
