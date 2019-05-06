@@ -36,7 +36,8 @@ describe('raylib', function() {
 
   describe('rlgl', function() {
     it('LoadText()', function() {
-      var output = r.LoadText('package.json')
+      var filename = path.join(__dirname, '..', 'package.json')
+      var output = r.LoadText(filename)
       assert.isNotEmpty(output)
       assert.include(output, '"raylib"', 'package.json contains "raylib"')
     })

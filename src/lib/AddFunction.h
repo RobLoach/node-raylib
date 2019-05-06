@@ -2,6 +2,7 @@
 #define NODE_RAYLIB_ADDFUNCTION_H_
 
 #include <napi.h>
+#include <iostream>
 #include "./ValidArgs.h"
 #include "./ToObject.h"
 
@@ -16,756 +17,460 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
   }));
 }
 
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int)) {
+template <typename P1>
+inline void CleanUp(P1 val) {
+  // Do nothing.
+}
+
+inline void CleanUp(const char* val) {
+    free((char*)val);
+}
+
+template <typename ReturnType>
+inline ReturnType GetArgFromParam(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  throw "GetArgFromParam not defined for this type!";
+}
+
+template <>
+unsigned char GetArgFromParam<unsigned char>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return info[paramNum].As<Napi::Number>().Int32Value();
+}
+template <>
+unsigned int GetArgFromParam<unsigned int>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return info[paramNum].As<Napi::Number>().Uint32Value();
+}
+
+template <>
+const char* GetArgFromParam<const char*>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  std::string val = info[paramNum].As<Napi::String>().Utf8Value();
+  const std::string::size_type size = val.size();
+  char *buffer = new char[size + 1];   //we need extra char for NUL
+  memcpy(buffer, val.c_str(), size + 1);
+  return buffer;
+}
+
+template <>
+int GetArgFromParam<int>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return info[paramNum].As<Napi::Number>().Int32Value();
+}
+template <>
+Color GetArgFromParam<Color>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToColor(env, info[paramNum]);
+}
+template <>
+Texture GetArgFromParam<Texture>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToTexture(env, info[paramNum]);
+}
+template <>
+Rectangle GetArgFromParam<Rectangle>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToRectangle(env, info[paramNum]);
+}
+template <>
+float GetArgFromParam<float>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return info[paramNum].As<Napi::Number>().FloatValue();
+}
+
+template <>
+Vector2 GetArgFromParam<Vector2>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    Vector2 arg0 = ToVector2(env, info[paramNum]);
+}
+
+template <typename P1>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
     if (!ValidArgs(env, info, 1)) {
       return env.Null();
     }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
     (*f)(arg0);
+    CleanUp(arg0);
     return env.Null();
   }));
 }
 
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(float)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    float arg0 = info[0].As<Napi::Number>().FloatValue();
-    (*f)(arg0);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(float, float)) {
+template <typename P1, typename P2>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
     if (!ValidArgs(env, info, 2)) {
       return env.Null();
     }
-    float arg0 = info[0].As<Napi::Number>().FloatValue();
-    float arg1 = info[1].As<Napi::Number>().FloatValue();
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
     (*f)(arg0, arg1);
+    CleanUp(arg0);
+    CleanUp(arg1);
     return env.Null();
   }));
 }
 
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Vector2, float, float, int, int, int, Color)) {
+template <typename P1, typename P2, typename P3>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 3)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    (*f)(arg0, arg1, arg2);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    return env.Null();
+  }));
+}
+
+template <typename P1, typename P2, typename P3, typename P4>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 4)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    (*f)(arg0, arg1, arg2, arg3);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    return env.Null();
+  }));
+}
+
+template <typename P1, typename P2, typename P3, typename P4, typename P5>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4, P5)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 5)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    (*f)(arg0, arg1, arg2, arg3, arg4);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    return env.Null();
+  }));
+}
+
+template <typename P1, typename P2, typename P3, typename P4, typename P5, typename P6>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4, P5, P6)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 6)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    (*f)(arg0, arg1, arg2, arg3, arg4, arg5);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    return env.Null();
+  }));
+}
+
+template <typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4, P5, P6, P7)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
     if (!ValidArgs(env, info, 7)) {
       return env.Null();
     }
-    Vector2 arg0 = ToVector2(env, info[0]);
-    float arg1 = info[1].As<Napi::Number>().FloatValue();
-    float arg2 = info[2].As<Napi::Number>().FloatValue();
-    int arg3 = info[3].As<Napi::Number>().Int32Value();
-    int arg4 = info[4].As<Napi::Number>().Int32Value();
-    int arg5 = info[5].As<Napi::Number>().Int32Value();
-    Color arg6 = ToColor(env, info[6]);
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    auto arg6 = GetArgFromParam<P7>(env, info, 6);
     (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    CleanUp(arg6);
     return env.Null();
   }));
 }
 
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Vector2, float, int, int, int, Color)) {
+template <typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4, P5, P6, P7, P8)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 8)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    auto arg6 = GetArgFromParam<P7>(env, info, 6);
+    auto arg7 = GetArgFromParam<P8>(env, info, 7);
+    (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    CleanUp(arg6);
+    CleanUp(arg7);
+    return env.Null();
+  }));
+}
+
+inline Napi::Value ToValue(Napi::Env& env, bool value) {
+  return Napi::Boolean::New(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, const char* value) {
+  return Napi::String::New(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, const std::string& value) {
+  return Napi::String::New(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, char* value) {
+  return Napi::String::New(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, int value) {
+  return Napi::Number::New(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, unsigned int value) {
+  return Napi::Number::New(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, double value) {
+  return Napi::Number::New(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Vector2 value) {
+  return ToObject(env, value);
+}
+inline Napi::Value ToValue(Napi::Env& env, Vector3 value) {
+  return ToObject(env, value);
+}
+inline Napi::Value ToValue(Napi::Env& env, Vector4 value) {
+  return ToObject(env, value);
+}
+inline Napi::Value ToValue(Napi::Env& env, Color value) {
+  return ToObject(env, value);
+}
+inline Napi::Value ToValue(Napi::Env& env, Image value) {
+  return ToObject(env, value);
+}
+inline Napi::Value ToValue(Napi::Env& env, Rectangle value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Texture value) {
+  return ToObject(env, value);
+}
+
+template <typename ReturnType>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)()) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 0)) {
+      return env.Null();
+    }
+    ReturnType output = (*f)();
+    return ToValue(env, output);
+  }));
+}
+
+template <typename ReturnType, typename P1>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)(P1)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 1)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    ReturnType output = (*f)(arg0);
+    CleanUp(arg0);
+    return ToValue(env, output);
+  }));
+}
+
+template <typename ReturnType, typename P1, typename P2>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)(P1, P2)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 2)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    ReturnType output = (*f)(arg0, arg1);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    return ToValue(env, output);
+  }));
+}
+
+template <typename ReturnType, typename P1, typename P2, typename P3>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)(P1, P2, P3)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 3)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    ReturnType output = (*f)(arg0, arg1, arg2);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    return ToValue(env, output);
+  }));
+}
+
+template <typename ReturnType, typename P1, typename P2, typename P3, typename P4>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)(P1, P2, P3, P4)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 4)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    ReturnType output = (*f)(arg0, arg1, arg2, arg3);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    return ToValue(env, output);
+  }));
+}
+
+template <typename ReturnType, typename P1, typename P2, typename P3, typename P4, typename P5>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)(P1, P2, P3, P4, P5)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 5)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    ReturnType output = (*f)(arg0, arg1, arg2, arg3, arg4);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    return ToValue(env, output);
+  }));
+}
+
+template <typename ReturnType, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)(P1, P2, P3, P4, P5, P6)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
     if (!ValidArgs(env, info, 6)) {
       return env.Null();
     }
-    Vector2 arg0 = ToVector2(env, info[0]);
-    float arg1 = info[1].As<Napi::Number>().FloatValue();
-    int arg2 = info[2].As<Napi::Number>().Int32Value();
-    int arg3 = info[3].As<Napi::Number>().Int32Value();
-    int arg4 = info[4].As<Napi::Number>().Int32Value();
-    Color arg5 = ToColor(env, info[5]);
-    (*f)(arg0, arg1, arg2, arg3, arg4, arg5);
-    return env.Null();
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    ReturnType output = (*f)(arg0, arg1, arg2, arg3, arg4, arg5);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    return ToValue(env, output);
   }));
 }
 
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, float, Color, Color)) {
+template <typename ReturnType, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)(P1, P2, P3, P4, P5, P6, P7)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 5)) {
+    if (!ValidArgs(env, info, 7)) {
       return env.Null();
     }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    float arg2 = info[2].As<Napi::Number>().FloatValue();
-    Color arg3 = ToColor(env, info[3]);
-    Color arg4 = ToColor(env, info[4]);
-    (*f)(arg0, arg1, arg2, arg3, arg4);
-    return env.Null();
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    auto arg6 = GetArgFromParam<P7>(env, info, 6);
+    ReturnType output = (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    CleanUp(arg6);
+    return ToValue(env, output);
   }));
 }
 
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(unsigned char)) {
+template <typename ReturnType, typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)(P1, P2, P3, P4, P5, P6, P7, P8)) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
     Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
+    if (!ValidArgs(env, info, 8)) {
       return env.Null();
     }
-    unsigned char arg0 = info[0].As<Napi::Number>().Int32Value();
-    (*f)(arg0);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(unsigned int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    unsigned int arg0 = info[0].As<Napi::Number>().Uint32Value();
-    (*f)(arg0);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    (*f)(arg0, arg1);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, const char*)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 3)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    std::string arg2 = info[2].As<Napi::String>().Utf8Value();
-    (*f)(arg0, arg1, arg2.c_str());
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(const char*, int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    (*f)(arg0.c_str(), arg1);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(const char*, int, int, int, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 5)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    int arg2 = info[2].As<Napi::Number>().Int32Value();
-    int arg3 = info[3].As<Napi::Number>().Int32Value();
-    Color arg4 = ToColor(env, info[4]);
-
-    (*f)(arg0.c_str(), arg1, arg2, arg3, arg4);
-
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 3)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    Color arg2 = ToColor(env, info[2]);
-    (*f)(arg0, arg1, arg2);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, int, int, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 5)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    int arg2 = info[2].As<Napi::Number>().Int32Value();
-    int arg3 = info[3].As<Napi::Number>().Int32Value();
-    Color arg4 = ToColor(env, info[4]);
-    (*f)(arg0, arg1, arg2, arg3, arg4);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, int, int, Color, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 6)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    int arg2 = info[2].As<Napi::Number>().Int32Value();
-    int arg3 = info[3].As<Napi::Number>().Int32Value();
-    Color arg4 = ToColor(env, info[4]);
-    Color arg5 = ToColor(env, info[5]);
-    (*f)(arg0, arg1, arg2, arg3, arg4, arg5);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(const char*)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    (*f)(arg0.c_str());
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Vector2, float, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 3)) {
-      return env.Null();
-    }
-    Vector2 arg0 = ToVector2(env, info[0]);
-    float arg1 = info[1].As<Napi::Number>().FloatValue();
-    Color arg2 = ToColor(env, info[2]);
-    (*f)(arg0, arg1, arg2);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Vector2, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    Vector2 arg0 = ToVector2(env, info[0]);
-    Color arg1 = ToColor(env, info[1]);
-    (*f)(arg0, arg1);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Vector2, Vector2, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 3)) {
-      return env.Null();
-    }
-    Vector2 arg0 = ToVector2(env, info[0]);
-    Vector2 arg1 = ToVector2(env, info[1]);
-    Color arg2 = ToColor(env, info[2]);
-    (*f)(arg0, arg1, arg2);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Vector2, Vector2, Vector2, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 4)) {
-      return env.Null();
-    }
-    Vector2 arg0 = ToVector2(env, info[0]);
-    Vector2 arg1 = ToVector2(env, info[1]);
-    Vector2 arg2 = ToVector2(env, info[2]);
-    Color arg3 = ToColor(env, info[3]);
-    (*f)(arg0, arg1, arg2, arg3);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, const char* (*f)()) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    const char* output = (*f)();
-    return Napi::String::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, char* (*f)(const char*)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    char* output = (*f)(arg0.c_str());
-    return Napi::String::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, const char* (*f)(const char*)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    const char* output = (*f)(arg0.c_str());
-    return Napi::String::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, bool (*f)()) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 0)) {
-      return env.Null();
-    }
-    bool output = (*f)();
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, float (*f)()) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 0)) {
-      return env.Null();
-    }
-    float output = (*f)();
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, double (*f)()) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 0)) {
-      return env.Null();
-    }
-    double output = (*f)();
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, bool (*f)(int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    bool output = (*f)(arg0);
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Vector2 (*f)()) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 0)) {
-      return env.Null();
-    }
-    Vector2 output = (*f)();
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Vector2 (*f)(int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    Vector2 output = (*f)(arg0);
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Color arg0 = ToColor(env, info[0]);
-    (*f)(arg0);
-
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Rectangle, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    Rectangle arg0 = ToRectangle(env, info[0]);
-    Color arg1 = ToColor(env, info[1]);
-    (*f)(arg0, arg1);
-
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Rectangle, Rectangle)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    Rectangle arg0 = ToRectangle(env, info[0]);
-    Rectangle arg1 = ToRectangle(env, info[1]);
-    (*f)(arg0, arg1);
-
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, bool (*f)(Rectangle, Rectangle)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    Rectangle arg0 = ToRectangle(env, info[0]);
-    Rectangle arg1 = ToRectangle(env, info[1]);
-    bool output = (*f)(arg0, arg1);
-
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, int (*f)(Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Color arg0 = ToColor(env, info[0]);
-    int output = (*f)(arg0);
-
-    return Napi::Number::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, unsigned int (*f)(const char *)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    unsigned int output = (*f)(arg0.c_str());
-
-    return Napi::Number::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, int (*f)(const char *)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    int output = (*f)(arg0.c_str());
-
-    return Napi::Number::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, int (*f)(const char *, int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    int output = (*f)(arg0.c_str(), arg1);
-
-    return Napi::Number::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, int (*f)()) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 0)) {
-      return env.Null();
-    }
-    int output = (*f)();
-
-    return Napi::Number::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Vector4 (*f)(Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Color arg0 = ToColor(env, info[0]);
-    Vector4 output = (*f)(arg0);
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Vector3 (*f)(Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Color arg0 = ToColor(env, info[0]);
-    Vector3 output = (*f)(arg0);
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Color (*f)(int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    Color output = (*f)(arg0);
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Color (*f)(Color, float)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    Color arg0 = ToColor(env, info[0]);
-    float arg1 = info[1].As<Napi::Number>().FloatValue();
-    Color output = (*f)(arg0, arg1);
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, bool (*f)(const char*)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    bool output = (*f)(arg0.c_str());
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, bool (*f)(const char*, const char*)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    std::string arg1 = info[1].As<Napi::String>().Utf8Value();
-    bool output = (*f)(arg0.c_str(), arg1.c_str());
-    return Napi::Boolean::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, int (*f)(int, int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 2)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    int output = (*f)(arg0, arg1);
-    return Napi::Number::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, int (*f)(int, int, int)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 3)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    int arg2 = info[2].As<Napi::Number>().Int32Value();
-    int output = (*f)(arg0, arg1, arg2);
-    return Napi::Number::New(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(int, int, float, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 4)) {
-      return env.Null();
-    }
-    int arg0 = info[0].As<Napi::Number>().Int32Value();
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    float arg2 = info[2].As<Napi::Number>().FloatValue();
-    Color arg3 = ToColor(env, info[3]);
-    (*f)(arg0, arg1, arg2, arg3);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Image (*f)(const char*)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    Image output = (*f)(arg0.c_str());
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Image (*f)(Texture)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Texture arg0 = ToTexture(env, info[0]);
-    Image output = (*f)(arg0);
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Image (*f)(Image)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Image arg0 = ToImage(env, info[0]);
-    Image output = (*f)(arg0);
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Texture (*f)(Image)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Image arg0 = ToImage(env, info[0]);
-    Texture output = (*f)(arg0);
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, Texture (*f)(const char*)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    std::string arg0 = info[0].As<Napi::String>().Utf8Value();
-    Texture output = (*f)(arg0.c_str());
-    return ToObject(env, output);
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Image)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Image arg0 = ToImage(env, info[0]);
-    (*f)(arg0);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Texture)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-    Texture arg0 = ToTexture(env, info[0]);
-    (*f)(arg0);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Texture, int, int, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 4)) {
-      return env.Null();
-    }
-    Texture arg0 = ToTexture(env, info[0]);
-    int arg1 = info[1].As<Napi::Number>().Int32Value();
-    int arg2 = info[2].As<Napi::Number>().Int32Value();
-    Color arg3 = ToColor(env, info[3]);
-    (*f)(arg0, arg1, arg2, arg3);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Texture, Vector2, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 3)) {
-      return env.Null();
-    }
-    Texture arg0 = ToTexture(env, info[0]);
-    Vector2 arg1 = ToVector2(env, info[1]);
-    Color arg2 = ToColor(env, info[2]);
-    (*f)(arg0, arg1, arg2);
-    return env.Null();
-  }));
-}
-
-void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(Texture, Vector2, float, float, Color)) {
-  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 5)) {
-      return env.Null();
-    }
-    Texture arg0 = ToTexture(env, info[0]);
-    Vector2 arg1 = ToVector2(env, info[1]);
-    float arg2 = info[2].As<Napi::Number>().FloatValue();
-    float arg3 = info[3].As<Napi::Number>().FloatValue();
-    Color arg4 = ToColor(env, info[4]);
-    (*f)(arg0, arg1, arg2, arg3, arg4);
-    return env.Null();
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    auto arg6 = GetArgFromParam<P7>(env, info, 6);
+    auto arg7 = GetArgFromParam<P8>(env, info, 7);
+    ReturnType output = (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    CleanUp(arg6);
+    CleanUp(arg7);
+    return ToValue(env, output);
   }));
 }
 
