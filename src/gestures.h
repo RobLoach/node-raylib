@@ -16,7 +16,6 @@ void node_raylib_init_gestures(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetGestureDragAngle", GetGestureDragAngle);
   AddFunction(env, exports, "GetGesturePinchVector", GetGesturePinchVector);
   AddFunction(env, exports, "GetGesturePinchAngle", GetGesturePinchAngle);
-  // TODO: Add remaining gestures functions.
 }
 
 #endif

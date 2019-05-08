@@ -79,6 +79,32 @@ raylib.Camera2D = function (offset, target, rotation, zoom) {
   }
 }
 
+raylib.Camera3D = function (position, target, up, fovy, type) {
+  return {
+    position: position,
+    target: target,
+    up: up,
+    fovy: fovy,
+    type: type
+  }
+}
+
+raylib.Ray = function (position, direction) {
+  return {
+    position: position,
+    direction: direction
+  }
+}
+
+raylib.RayHitInfo = function (hit, distance, position, normal) {
+  return {
+    hit: hit,
+    distance,
+    position: position,
+    normal: normal
+  }
+}
+
 raylib.Shader = function (id, locs) {
   return {
     id: id,

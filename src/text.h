@@ -48,12 +48,27 @@ void node_raylib_init_text(Napi::Env& env, Napi::Object& exports) {
   exports.Set(Napi::String::New(env, "FormatText"), Napi::Function::New(env, TextFormat_binding));
   AddFunction(env, exports, "DrawText", DrawText);
   AddFunction(env, exports, "DrawFPS", DrawFPS);
+
   AddFunction(env, exports, "MeasureText", MeasureText);
+
+  // // Text strings management functions
+  AddFunction(env, exports, "TextIsEqual", TextIsEqual);
   AddFunction(env, exports, "TextLength", TextLength);
   AddFunction(env, exports, "TextToUpper", TextToUpper);
   AddFunction(env, exports, "TextToLower", TextToLower);
   AddFunction(env, exports, "TextToPascal", TextToPascal);
   AddFunction(env, exports, "TextToInteger", TextToInteger);
+
+  // NOTE: Some strings allocate memory internally for returned strings, just be careful!
+  // RLAPI const char *TextFormat(const char *text, ...);                                        // Text formatting with variables (sprintf style)
+  // RLAPI const char *TextSubtext(const char *text, int position, int length);                  // Get a piece of a text string
+  // RLAPI const char *TextReplace(char *text, const char *replace, const char *by);             // Replace text string (memory should be freed!)
+  // RLAPI const char *TextInsert(const char *text, const char *insert, int position);           // Insert text in a position (memory should be freed!)
+  // RLAPI const char *TextJoin(const char **textList, int count, const char *delimiter);        // Join text strings with delimiter
+  // RLAPI const char **TextSplit(const char *text, char delimiter, int *count);                 // Split text into multiple strings
+  // RLAPI void TextAppend(char *text, const char *append, int *position);                       // Append text at specific position and move cursor!
+  // RLAPI int TextFindIndex(const char *text, const char *find);                                // Find first text occurrence within a string
+
   // TODO: Add remaining text functions.
 
   // RLAPI Font GetFontDefault(void);                                                            // Get the default Font
@@ -74,18 +89,6 @@ void node_raylib_init_text(Napi::Env& env, Napi::Object& exports) {
   // RLAPI Vector2 MeasureTextEx(Font font, const char *text, float fontSize, float spacing);    // Measure string size for Font
   // RLAPI int GetGlyphIndex(Font font, int character);                                          // Get index position for a unicode character on font
 
-  // // Text strings management functions
-  // // NOTE: Some strings allocate memory internally for returned strings, just be careful!
-  // RLAPI bool TextIsEqual(const char *text1, const char *text2);                               // Check if two text string are equal
-  // RLAPI unsigned int TextLength(const char *text);                                            // Get text length, checks for '\0' ending
-  // RLAPI const char *TextFormat(const char *text, ...);                                        // Text formatting with variables (sprintf style)
-  // RLAPI const char *TextSubtext(const char *text, int position, int length);                  // Get a piece of a text string
-  // RLAPI const char *TextReplace(char *text, const char *replace, const char *by);             // Replace text string (memory should be freed!)
-  // RLAPI const char *TextInsert(const char *text, const char *insert, int position);           // Insert text in a position (memory should be freed!)
-  // RLAPI const char *TextJoin(const char **textList, int count, const char *delimiter);        // Join text strings with delimiter
-  // RLAPI const char **TextSplit(const char *text, char delimiter, int *count);                 // Split text into multiple strings
-  // RLAPI void TextAppend(char *text, const char *append, int *position);                       // Append text at specific position and move cursor!
-  // RLAPI int TextFindIndex(const char *text, const char *find);                                // Find first text occurrence within a string
 }
 
 #endif
