@@ -11,8 +11,8 @@ void node_raylib_init_textures(Napi::Env& env, Napi::Object& exports) {
   // RLAPI Image LoadImageEx(Color *pixels, int width, int height);                                           // Load image from Color array data (RGBA - 32bit)
   // RLAPI Image LoadImagePro(void *data, int width, int height, int format);                                 // Load image from raw data with parameters
   // RLAPI Image LoadImageRaw(const char *fileName, int width, int height, int format, int headerSize);       // Load image from RAW file data
-  // RLAPI void ExportImage(Image image, const char *fileName);                                               // Export image data to file
-  // RLAPI void ExportImageAsCode(Image image, const char *fileName);                                         // Export image as code file defining an array of bytes
+  AddFunction(env, exports, "ExportImage", ExportImage);
+  AddFunction(env, exports, "ExportImageAsCode", ExportImageAsCode);
   AddFunction(env, exports, "LoadTexture", LoadTexture);
   AddFunction(env, exports, "LoadTextureFromImage", LoadTextureFromImage);
   // RLAPI RenderTexture2D LoadRenderTexture(int width, int height);                                          // Load texture for rendering (framebuffer)
@@ -77,9 +77,9 @@ void node_raylib_init_textures(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "DrawTexture", DrawTexture);
   AddFunction(env, exports, "DrawTextureV", DrawTextureV);
   AddFunction(env, exports, "DrawTextureEx", DrawTextureEx);
-  // RLAPI void DrawTextureRec(Texture2D texture, Rectangle sourceRec, Vector2 position, Color tint);         // Draw a part of a texture defined by a rectangle
-  // RLAPI void DrawTextureQuad(Texture2D texture, Vector2 tiling, Vector2 offset, Rectangle quad, Color tint);  // Draw texture quad with tiling and offset parameters
-  // RLAPI void DrawTexturePro(Texture2D texture, Rectangle sourceRec, Rectangle destRec, Vector2 origin, float rotation, Color tint);       // Draw a part of a texture defined by a rectangle with 'pro' parameters
+  AddFunction(env, exports, "DrawTextureRec", DrawTextureRec);
+  AddFunction(env, exports, "DrawTextureQuad", DrawTextureQuad);
+  AddFunction(env, exports, "DrawTexturePro", DrawTexturePro);
   // RLAPI void DrawTextureNPatch(Texture2D texture, NPatchInfo nPatchInfo, Rectangle destRec, Vector2 origin, float rotation, Color tint);  // Draws a texture (or part of it) that stretches or shrinks nicely
 
 }

@@ -54,6 +54,10 @@ int GetArgFromParam<int>(Napi::Env& env, const Napi::CallbackInfo& info, int par
   return info[paramNum].As<Napi::Number>().Int32Value();
 }
 template <>
+long GetArgFromParam<long>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return info[paramNum].As<Napi::Number>().Int64Value();
+}
+template <>
 Color GetArgFromParam<Color>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   return ToColor(env, info[paramNum]);
 }
@@ -246,31 +250,27 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
 inline Napi::Value ToValue(Napi::Env& env, bool value) {
   return Napi::Boolean::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, const char* value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, const std::string& value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, char* value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, int value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, unsigned int value) {
   return Napi::Number::New(env, value);
 }
-
+inline Napi::Value ToValue(Napi::Env& env, long value) {
+  return Napi::Number::New(env, value);
+}
 inline Napi::Value ToValue(Napi::Env& env, double value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, Vector2 value) {
   return ToObject(env, value);
 }
@@ -289,7 +289,6 @@ inline Napi::Value ToValue(Napi::Env& env, Image value) {
 inline Napi::Value ToValue(Napi::Env& env, Rectangle value) {
   return ToObject(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, Texture value) {
   return ToObject(env, value);
 }

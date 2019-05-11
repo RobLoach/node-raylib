@@ -29,23 +29,23 @@ void node_raylib_init_shapes(Napi::Env& env, Napi::Object& exports) {
   //RLAPI void DrawRectangleGradientH(int posX, int posY, int width, int height, Color color1, Color color2);// Draw a horizontal-gradient-filled rectangle
   //RLAPI void DrawRectangleGradientEx(Rectangle rec, Color col1, Color col2, Color col3, Color col4);       // Draw a gradient-filled rectangle with custom vertex colors
   AddFunction(env, exports, "DrawRectangleLines", DrawRectangleLines);
-  //RLAPI void DrawRectangleLinesEx(Rectangle rec, int lineThick, Color color);                              // Draw rectangle outline with extended parameters
+  AddFunction(env, exports, "DrawRectangleLinesEx", DrawRectangleLinesEx);
   AddFunction(env, exports, "DrawTriangle", DrawTriangle);
   AddFunction(env, exports, "DrawTriangleLines", DrawTriangleLines);
-  //RLAPI void DrawPoly(Vector2 center, int sides, float radius, float rotation, Color color);               // Draw a regular polygon (Vector version)
+  AddFunction(env, exports, "DrawPoly", DrawPoly);
   //RLAPI void DrawPolyEx(Vector2 *points, int numPoints, Color color);                                      // Draw a closed polygon defined by points
   //RLAPI void DrawPolyExLines(Vector2 *points, int numPoints, Color color);                                 // Draw polygon lines
 
-  //RLAPI void SetShapesTexture(Texture2D texture, Rectangle source);                                        // Define default texture used to draw shapes
+  AddFunction(env, exports, "SetShapesTexture", SetShapesTexture);                                       // Define default texture used to draw shapes
 
   // Basic shapes collision detection functions
   AddFunction(env, exports, "CheckCollisionRecs", CheckCollisionRecs);
-  //RLAPI bool CheckCollisionCircles(Vector2 center1, float radius1, Vector2 center2, float radius2);        // Check collision between two circles
-  //RLAPI bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec);                         // Check collision between circle and rectangle
-  //RLAPI Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2);                                         // Get collision rectangle for two rectangles collision
-  //RLAPI bool CheckCollisionPointRec(Vector2 point, Rectangle rec);                                         // Check if point is inside rectangle
-  //RLAPI bool CheckCollisionPointCircle(Vector2 point, Vector2 center, float radius);                       // Check if point is inside circle
-  //RLAPI bool CheckCollisionPointTriangle(Vector2 point, Vector2 p1, Vector2 p2, Vector2 p3);               // Check if point is inside a triangle
+  AddFunction(env, exports, "CheckCollisionCircles", CheckCollisionCircles);
+  AddFunction(env, exports, "CheckCollisionCircleRec", CheckCollisionCircleRec);
+  AddFunction(env, exports, "GetCollisionRec", GetCollisionRec);
+  AddFunction(env, exports, "CheckCollisionPointRec", CheckCollisionPointRec);
+  AddFunction(env, exports, "CheckCollisionPointCircle", CheckCollisionPointCircle);
+  AddFunction(env, exports, "CheckCollisionPointTriangle", CheckCollisionPointTriangle);
 }
 
 #endif
