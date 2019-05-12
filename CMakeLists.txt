@@ -10,7 +10,7 @@ if (NOT raylib_FOUND)
   FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
-    GIT_TAG d690e734f9d6968f9ef38a6ccdf8a26f26208489
+    GIT_TAG 561c486ceb2d1563fbcd0bec60a1f1d9e94cb7c0
   )
   FetchContent_GetProperties(raylib)
   if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
@@ -40,6 +40,7 @@ add_library(${PROJECT_NAME} SHARED
   src/lib/ToObject.h
   src/addon.cc
   src/audio.h
+  src/camera.h
   src/color.h
   src/cursor.h
   src/drawing.h

@@ -73,7 +73,7 @@ void node_raylib_init_models(Napi::Env& env, Napi::Object& exports) {
   // RLAPI void DrawModelWires(Model model, Vector3 position, float scale, Color tint);                      // Draw a model wires (with texture if set)
   // RLAPI void DrawModelWiresEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint); // Draw a model wires (with texture if set) with extended parameters
   // RLAPI void DrawBoundingBox(BoundingBox box, Color color);                                               // Draw bounding box (wires)
-  // RLAPI void DrawBillboard(Camera camera, Texture2D texture, Vector3 center, float size, Color tint);     // Draw a billboard texture
+  AddFunction(env, exports, "DrawBillboard", DrawBillboard);
   // RLAPI void DrawBillboardRec(Camera camera, Texture2D texture, Rectangle sourceRec, Vector3 center, float size, Color tint); // Draw a billboard texture defined by sourceRec
 
   // // Collision detection functions

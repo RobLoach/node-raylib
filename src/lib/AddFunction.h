@@ -73,6 +73,18 @@ template <>
 float GetArgFromParam<float>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   return info[paramNum].As<Napi::Number>().FloatValue();
 }
+template <>
+Camera GetArgFromParam<Camera>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToCamera(env, info[paramNum]);
+}
+template <>
+Matrix GetArgFromParam<Matrix>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToMatrix(env, info[paramNum]);
+}
+template <>
+Ray GetArgFromParam<Ray>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToRay(env, info[paramNum]);
+}
 
 template <>
 Vector2 GetArgFromParam<Vector2>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
@@ -290,6 +302,15 @@ inline Napi::Value ToValue(Napi::Env& env, Rectangle value) {
   return ToObject(env, value);
 }
 inline Napi::Value ToValue(Napi::Env& env, Texture value) {
+  return ToObject(env, value);
+}
+inline Napi::Value ToValue(Napi::Env& env, Matrix value) {
+  return ToObject(env, value);
+}
+inline Napi::Value ToValue(Napi::Env& env, Camera value) {
+  return ToObject(env, value);
+}
+inline Napi::Value ToValue(Napi::Env& env, Ray value) {
   return ToObject(env, value);
 }
 

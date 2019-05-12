@@ -193,4 +193,140 @@ Napi::Object ToObject(Napi::Env& env, Texture input) {
   return out;
 }
 
+
+Matrix ToMatrix(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Matrix out;
+  if (argObject.Has("m0")) {
+    out.m0 = argObject.Get("m0").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m1")) {
+    out.m1 = argObject.Get("m1").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m2")) {
+    out.m2 = argObject.Get("m2").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m3")) {
+    out.m3 = argObject.Get("m3").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m4")) {
+    out.m4 = argObject.Get("m4").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m5")) {
+    out.m5 = argObject.Get("m5").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m6")) {
+    out.m6 = argObject.Get("m6").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m7")) {
+    out.m7 = argObject.Get("m7").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m8")) {
+    out.m8 = argObject.Get("m8").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m9")) {
+    out.m9 = argObject.Get("m9").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m10")) {
+    out.m10 = argObject.Get("m10").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m11")) {
+    out.m11 = argObject.Get("m11").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m12")) {
+    out.m12 = argObject.Get("m12").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m13")) {
+    out.m13 = argObject.Get("m13").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m14")) {
+    out.m14 = argObject.Get("m14").ToNumber().FloatValue();
+  }
+  if (argObject.Has("m15")) {
+    out.m15 = argObject.Get("m15").ToNumber().FloatValue();
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, Matrix input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("m0", input.m0);
+  out.Set("m1", input.m1);
+  out.Set("m2", input.m2);
+  out.Set("m3", input.m3);
+  out.Set("m4", input.m4);
+  out.Set("m5", input.m5);
+  out.Set("m6", input.m6);
+  out.Set("m7", input.m7);
+  out.Set("m8", input.m8);
+  out.Set("m9", input.m9);
+  out.Set("m10", input.m10);
+  out.Set("m11", input.m11);
+  out.Set("m12", input.m12);
+  out.Set("m13", input.m13);
+  out.Set("m14", input.m14);
+  out.Set("m15", input.m15);
+  return out;
+}
+/**
+ * Convert the given argument value to a Color.
+ */
+Ray ToRay(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+
+  Ray output;
+  if (argObject.Has("position")) {
+    output.position = ToVector3(env, argObject.Get("position"));
+  }
+  if (argObject.Has("direction")) {
+    output.position = ToVector3(env, argObject.Get("direction"));
+  }
+
+  return output;
+}
+
+Napi::Object ToObject(Napi::Env& env, Ray input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("position", ToObject(env, input.position));
+  out.Set("direction", ToObject(env, input.direction));
+  return out;
+}
+
+/**
+ * Convert the given argument value to a Color.
+ */
+Camera ToCamera(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+
+  Camera output;
+  if (argObject.Has("position")) {
+    output.position = ToVector3(env, argObject.Get("position"));
+  }
+  if (argObject.Has("target")) {
+    output.target = ToVector3(env, argObject.Get("target"));
+  }
+  if (argObject.Has("up")) {
+    output.up = ToVector3(env, argObject.Get("up"));
+  }
+  if (argObject.Has("fovy")) {
+    output.fovy = argObject.Get("fovy").ToNumber().FloatValue();
+  }
+  if (argObject.Has("type")) {
+    output.type = argObject.Get("type").ToNumber().Int32Value();
+  }
+
+  return output;
+}
+
+Napi::Object ToObject(Napi::Env& env, Camera camera) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("position", ToObject(env, camera.position));
+  out.Set("target", ToObject(env, camera.target));
+  out.Set("up", ToObject(env, camera.up));
+  out.Set("fovy", camera.fovy);
+  out.Set("type", camera.type);
+  return out;
+}
+
+
 #endif

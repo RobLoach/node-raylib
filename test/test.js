@@ -62,6 +62,22 @@ describe('raylib', function() {
     })
   })
 
+  describe('camera', function() {
+    it('Camera()', function () {
+      const camera = r.Camera(
+        r.Vector3(5, 4, 5),
+        r.Vector3(0, 2, 0),
+        r.Vector3(0, 1, 0),
+        45,
+        r.CAMERA_PERSPECTIVE)
+      expect(camera.position.x).to.equal(5)
+
+      const matrix = r.GetCameraMatrix(camera)
+      expect(matrix.m2).to.greaterThan(0.6)
+      expect(matrix.m2).to.lessThan(0.8)
+    })
+  })
+
   describe('cli', () => {
     const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
 
