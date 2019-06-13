@@ -1,6 +1,7 @@
 const { exec } = require('pkg')
 const archiver = require('archiver')
 const fs = require('fs')
+const path = require('path')
 const package = require('../../package.json')
 
 // Options
@@ -30,7 +31,7 @@ pkg()
  * Build the binary with pkg.
  */
 async function pkg() {
-  await exec(['.', '--target', 'host', '--out-path', 'build/Release'])
+  await exec(['.', '--target', 'host', '--output', path.join('build', 'Release', binaryFilename)])
   await compress()
 }
 
