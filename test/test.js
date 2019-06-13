@@ -25,6 +25,10 @@ describe('raylib', function() {
   })
 
   describe('file', function() {
+    it('FileExists("package.json")', function() {
+      assert(r.FileExists(path.join(__dirname, '..', 'package.json')))
+    })
+
     it('IsFileExtension("something.txt", ".txt")', function() {
       assert(r.IsFileExtension("something.txt", ".txt"))
     })

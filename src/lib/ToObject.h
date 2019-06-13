@@ -166,7 +166,7 @@ Texture ToTexture(Napi::Env& env, const Napi::Value& arg) {
   Napi::Object argObject(env, arg.As<Napi::Object>());
   Texture out;
   if (argObject.Has("id")) {
-    out.id = argObject.Get("id").ToNumber().Int32Value();
+    out.id = argObject.Get("id").ToNumber().Uint32Value();
   }
   if (argObject.Has("width")) {
     out.width = argObject.Get("width").ToNumber().Int32Value();
@@ -193,6 +193,32 @@ Napi::Object ToObject(Napi::Env& env, Texture input) {
   return out;
 }
 
+RenderTexture2D ToRenderTexture2D(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  RenderTexture2D out;
+  if (argObject.Has("id")) {
+    out.id = argObject.Get("id").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("texture")) {
+    out.texture = ToTexture(env, argObject.Get("texture"));
+  }
+  if (argObject.Has("depth")) {
+    out.depth = ToTexture(env, argObject.Get("depth"));
+  }
+  if (argObject.Has("depthTexture")) {
+    out.depthTexture = argObject.Get("depthTexture").ToBoolean();
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, RenderTexture2D input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("id", input.id);
+  out.Set("texture", ToObject(env, input.texture));
+  out.Set("depth", ToObject(env, input.depth));
+  out.Set("depthTexture", input.depthTexture);
+  return out;
+}
 
 Matrix ToMatrix(Napi::Env& env, const Napi::Value& arg) {
   Napi::Object argObject(env, arg.As<Napi::Object>());
@@ -293,7 +319,7 @@ Napi::Object ToObject(Napi::Env& env, Ray input) {
 }
 
 /**
- * Convert the given argument value to a Color.
+ * Convert the given argument value to a Camera.
  */
 Camera ToCamera(Napi::Env& env, const Napi::Value& arg) {
   Napi::Object argObject(env, arg.As<Napi::Object>());
@@ -318,6 +344,9 @@ Camera ToCamera(Napi::Env& env, const Napi::Value& arg) {
   return output;
 }
 
+/**
+ * Convert the given Camera to a Napi object.
+ */
 Napi::Object ToObject(Napi::Env& env, Camera camera) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("position", ToObject(env, camera.position));
@@ -328,5 +357,39 @@ Napi::Object ToObject(Napi::Env& env, Camera camera) {
   return out;
 }
 
+/**
+ * Convert the given argument value to a Camera.
+ */
+Camera2D ToCamera2D(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+
+  Camera2D output;
+  if (argObject.Has("offset")) {
+    output.offset = ToVector2(env, argObject.Get("offset"));
+  }
+  if (argObject.Has("target")) {
+    output.target = ToVector2(env, argObject.Get("target"));
+  }
+  if (argObject.Has("rotation")) {
+    output.rotation = argObject.Get("rotation").ToNumber().FloatValue();
+  }
+  if (argObject.Has("zoom")) {
+    output.zoom = argObject.Get("zoom").ToNumber().FloatValue();
+  }
+
+  return output;
+}
+
+/**
+ * Convert the given Camera2D to a Napi object.
+ */
+Napi::Object ToObject(Napi::Env& env, Camera2D camera) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("offset", ToObject(env, camera.offset));
+  out.Set("target", ToObject(env, camera.target));
+  out.Set("rotation", camera.rotation);
+  out.Set("zoom", camera.zoom);
+  return out;
+}
 
 #endif
