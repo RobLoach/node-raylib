@@ -40,11 +40,6 @@
 
 Check for more [examples](examples) organized by raylib modules.
 
-### What's Missing?
-
-- [Structs](https://github.com/RobLoach/node-raylib/issues/5)
-- [Extended Functions](https://github.com/RobLoach/node-raylib/issues/1)
-
 ## CLI
 
 The project also comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly:
@@ -86,7 +81,7 @@ npm run pkg
 
 ## License
 
-*raylib-nodejs* is licensed under an unmodified zlib/libpng license, which is an OSI-certified,
+*node-raylib* is licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 BSD-like license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
 
 *Copyright (c) 2018 Rob Loach ([@RobLoach](https://twitter.com/RobLoach))*
