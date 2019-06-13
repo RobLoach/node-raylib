@@ -16,17 +16,17 @@ const r = require('raylib')
 
 // Initialization (Note windowTitle is unused on Android)
 //--------------------------------------------------------------------------------------
-const screenWidth = 800;
-const screenHeight = 450;
+const screenWidth = 800
+const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib template - simple game");
-var currentScreen = 'LOGO';
+r.InitWindow(screenWidth, screenHeight, "raylib template - simple game")
+var currentScreen = 'LOGO'
 
 // TODO: Initialize all required variables and load all required data here!
 
-var framesCounter = 0;          // Useful to count frames
+var framesCounter = 0          // Useful to count frames
 
-r.SetTargetFPS(60);               // Set desired framerate (frames-per-second)
+r.SetTargetFPS(60)               // Set desired framerate (frames-per-second)
 //--------------------------------------------------------------------------------------
 
 // Main game loop
@@ -40,12 +40,12 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
         {
             // TODO: Update LOGO screen variables here!
 
-            framesCounter++;    // Count frames
+            framesCounter++    // Count frames
 
             // Wait for 2 seconds (120 frames) before jumping to TITLE screen
             if (framesCounter > 120)
             {
-                currentScreen = 'TITLE';
+                currentScreen = 'TITLE'
             }
         } break;
         case 'TITLE':
@@ -55,7 +55,7 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
             // Press enter to change to GAMEPLAY screen
             if (r.IsKeyPressed(r.KEY_ENTER) || r.IsGestureDetected(r.GESTURE_TAP))
             {
-                currentScreen = 'GAMEPLAY';
+                currentScreen = 'GAMEPLAY'
             }
         } break;
         case 'GAMEPLAY':
@@ -65,7 +65,7 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
             // Press enter to change to ENDING screen
             if (r.IsKeyPressed(r.KEY_ENTER) || r.IsGestureDetected(r.GESTURE_TAP))
             {
-                currentScreen = 'ENDING';
+                currentScreen = 'ENDING'
             }
         } break;
         case 'ENDING':
@@ -75,7 +75,7 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
             // Press enter to return to TITLE screen
             if (r.IsKeyPressed(r.KEY_ENTER) || r.IsGestureDetected(r.GESTURE_TAP))
             {
-                currentScreen = 'TITLE';
+                currentScreen = 'TITLE'
             }
         } break;
         default: break;
@@ -84,35 +84,35 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
 
     // Draw
     //----------------------------------------------------------------------------------
-    r.BeginDrawing();
+    r.BeginDrawing()
 
-        r.ClearBackground(r.RAYWHITE);
+        r.ClearBackground(r.RAYWHITE)
 
         switch(currentScreen)
         {
             case 'LOGO':
             {
                 // TODO: Draw LOGO screen here!
-                r.DrawText("LOGO SCREEN", 20, 20, 40, r.LIGHTGRAY);
-                r.DrawText("WAIT for 2 SECONDS...", 290, 220, 20, r.GRAY);
+                r.DrawText("LOGO SCREEN", 20, 20, 40, r.LIGHTGRAY)
+                r.DrawText("WAIT for 2 SECONDS...", 290, 220, 20, r.GRAY)
 
-            } break;
+            } break
             case 'TITLE':
             {
                 // TODO: Draw TITLE screen here!
-                r.DrawRectangle(0, 0, screenWidth, screenHeight, r.GREEN);
-                r.DrawText("TITLE SCREEN", 20, 20, 40, r.DARKGREEN);
-                r.DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, r.DARKGREEN);
+                r.DrawRectangle(0, 0, screenWidth, screenHeight, r.GREEN)
+                r.DrawText("TITLE SCREEN", 20, 20, 40, r.DARKGREEN)
+                r.DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, r.DARKGREEN)
 
-            } break;
+            } break
             case 'GAMEPLAY':
             {
                 // TODO: Draw GAMEPLAY screen here!
-                r.DrawRectangle(0, 0, screenWidth, screenHeight, r.PURPLE);
-                r.DrawText("GAMEPLAY SCREEN", 20, 20, 40, r.MAROON);
-                r.DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, r.MAROON);
+                r.DrawRectangle(0, 0, screenWidth, screenHeight, r.PURPLE)
+                r.DrawText("GAMEPLAY SCREEN", 20, 20, 40, r.MAROON)
+                r.DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, r.MAROON)
 
-            } break;
+            } break
             case 'ENDING':
             {
                 // TODO: Draw ENDING screen here!
@@ -120,11 +120,10 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
                 r.DrawText("ENDING SCREEN", 20, 20, 40, r.DARKBLUE);
                 r.DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, r.DARKBLUE);
 
-            } break;
-            default: break;
+            } break
         }
 
-    r.EndDrawing();
+    r.EndDrawing()
     //----------------------------------------------------------------------------------
 }
 
@@ -133,5 +132,5 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
 
 // TODO: Unload all loaded data (textures, fonts, audio) here!
 
-r.CloseWindow();        // Close window and OpenGL context
+r.CloseWindow()        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------
