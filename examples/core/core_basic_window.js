@@ -12,12 +12,12 @@ const r = require('raylib')
 
 // Initialization
 //--------------------------------------------------------------------------------------
-var screenWidth = 800;
-var screenHeight = 450;
+var screenWidth = 800
+var screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+r.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window")
 
-r.SetTargetFPS(60);
+r.SetTargetFPS(60)
 //--------------------------------------------------------------------------------------
 
 // Main game loop
@@ -30,17 +30,17 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
 
     // Draw
     //----------------------------------------------------------------------------------
-    r.BeginDrawing();
+    r.BeginDrawing()
 
-        r.ClearBackground(r.RAYWHITE);
+        r.ClearBackground(r.RAYWHITE)
 
-        r.DrawText("Congrats! You created your first window!", 190, 200, 20, r.LIGHTGRAY);
+        r.DrawText("Congrats! You created your first window!", 190, 200, 20, r.LIGHTGRAY)
 
-    r.EndDrawing();
+    r.EndDrawing()
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-r.CloseWindow();        // Close window and OpenGL context
+r.CloseWindow()        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

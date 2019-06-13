@@ -12,7 +12,7 @@
 1. Add `robloach/node-raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
     ``` bash
     npm init
-    npm install --save robloach/node-raylib
+    npm install raylib --save
     ```
 
 2. Create a JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
@@ -60,7 +60,8 @@ node-raylib.exe core_basic_window.js
 The CLI can be installed with the [packaged releases](https://github.com/RobLoach/node-raylib/releases), or globally through `npm`:
 
 ``` bash
-npm install robloach/node-raylib --global
+npm install raylib --global
+node-raylib --version
 ```
 
 ## Development

@@ -78,7 +78,6 @@ raylib.Camera2D = function (offset, target, rotation, zoom) {
     zoom: zoom
   }
 }
-
 raylib.Camera = raylib.Camera3D = function (position, target, up, fovy, type) {
   return {
     position: position,

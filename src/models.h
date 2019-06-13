@@ -21,7 +21,7 @@ void node_raylib_init_models(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "DrawCylinder", DrawCylinder);
   AddFunction(env, exports, "DrawCylinderWires", DrawCylinderWires);
   AddFunction(env, exports, "DrawPlane", DrawPlane);
-  //AddFunction(env, exports, DrawRay(Ray ray, Color color);                                                                // Draw a ray line
+  AddFunction(env, exports, "DrawRay", DrawRay);
   AddFunction(env, exports, "DrawGrid", DrawGrid);
   AddFunction(env, exports, "DrawGizmo", DrawGizmo);
   //DrawTorus(), DrawTeapot() could be useful?

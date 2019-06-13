@@ -8,9 +8,9 @@
 
 void node_raylib_init_textures(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "LoadImage", LoadImage);
-  // RLAPI Image LoadImageEx(Color *pixels, int width, int height);                                           // Load image from Color array data (RGBA - 32bit)
-  // RLAPI Image LoadImagePro(void *data, int width, int height, int format);                                 // Load image from raw data with parameters
-  // RLAPI Image LoadImageRaw(const char *fileName, int width, int height, int format, int headerSize);       // Load image from RAW file data
+  AddFunction(env, exports, "LoadImageEx", LoadImageEx);
+  AddFunction(env, exports, "LoadImagePro", LoadImagePro);
+  AddFunction(env, exports, "LoadImageRaw", LoadImageRaw);
   AddFunction(env, exports, "ExportImage", ExportImage);
   AddFunction(env, exports, "ExportImageAsCode", ExportImageAsCode);
   AddFunction(env, exports, "LoadTexture", LoadTexture);

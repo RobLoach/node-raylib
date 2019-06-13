@@ -66,6 +66,10 @@ Texture GetArgFromParam<Texture>(Napi::Env& env, const Napi::CallbackInfo& info,
   return ToTexture(env, info[paramNum]);
 }
 template <>
+RenderTexture2D GetArgFromParam<RenderTexture2D>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToRenderTexture2D(env, info[paramNum]);
+}
+template <>
 Rectangle GetArgFromParam<Rectangle>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   return ToRectangle(env, info[paramNum]);
 }
@@ -76,6 +80,10 @@ float GetArgFromParam<float>(Napi::Env& env, const Napi::CallbackInfo& info, int
 template <>
 Camera GetArgFromParam<Camera>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   return ToCamera(env, info[paramNum]);
+}
+template <>
+Camera2D GetArgFromParam<Camera2D>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToCamera2D(env, info[paramNum]);
 }
 template <>
 Matrix GetArgFromParam<Matrix>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
