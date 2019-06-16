@@ -110,4 +110,9 @@ Vector3 GetArgFromParam<Vector3>(Napi::Env& env, const Napi::CallbackInfo& info,
     return ToVector3(env, info[paramNum]);
 }
 
+template <>
+Vector4 GetArgFromParam<Vector4>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToVector4(env, info[paramNum]);
+}
+
 #endif

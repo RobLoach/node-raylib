@@ -20,20 +20,17 @@ describe('raylib', function() {
 
   describe('audio', function() {
     it('IsAudioDeviceReady()', function() {
-      assert.isNotOk(r.IsAudioDeviceReady(), 'IsAudioDeviceReady')
+      assert.isFalse(r.IsAudioDeviceReady(), 'IsAudioDeviceReady')
     })
   })
 
   describe('file', function() {
-    it('FileExists("package.json")', function() {
+    it('FileExists()', function() {
       assert(r.FileExists(path.join(__dirname, '..', 'package.json')))
     })
 
-    it('IsFileExtension("something.txt", ".txt")', function() {
+    it('IsFileExtension()', function() {
       assert(r.IsFileExtension("something.txt", ".txt"))
-    })
-
-    it('IsFileExtension("something.txt", ".md")', function() {
       assert.isFalse(r.IsFileExtension("something.txt", ".md"))
     })
   })
