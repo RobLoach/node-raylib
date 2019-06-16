@@ -4,7 +4,7 @@
 #include <string>
 #include <napi.h>
 #include <raylib.h>
-#include "lib/index.h"
+#include "lib/AddFunction.h"
 
 void node_raylib_init_models(Napi::Env& env, Napi::Object& exports) {
   // Basic geometric 3D shapes drawing functions

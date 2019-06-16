@@ -4,7 +4,7 @@
 #include <string>
 #include <napi.h>
 #include <raylib.h>
-#include "lib/index.h"
+#include "lib/AddFunction.h"
 
 void node_raylib_init_touch(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetTouchX", GetTouchX);

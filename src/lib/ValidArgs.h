@@ -17,5 +17,4 @@ bool ValidArgs(const Napi::Env& env, const Napi::CallbackInfo& info, int numberO
   return true;
 }
 
-
 #endif

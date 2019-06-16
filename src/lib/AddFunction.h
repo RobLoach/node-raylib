@@ -2,9 +2,11 @@
 #define NODE_RAYLIB_ADDFUNCTION_H_
 
 #include <napi.h>
-#include <iostream>
-#include "./ValidArgs.h"
-#include "./ToObject.h"
+#include "ValidArgs.h"
+#include "ToObject.h"
+#include "ToValue.h"
+#include "GetArgFromParam.h"
+#include "CleanUp.h"
 
 void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)()) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
@@ -15,89 +17,6 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
     (*f)();
     return env.Null();
   }));
-}
-
-template <typename P1>
-inline void CleanUp(P1 val) {
-  // Do nothing.
-}
-
-inline void CleanUp(const char* val) {
-    free((char*)val);
-}
-
-template <typename ReturnType>
-inline ReturnType GetArgFromParam(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  throw "GetArgFromParam not defined for this type!";
-}
-
-template <>
-unsigned char GetArgFromParam<unsigned char>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return info[paramNum].As<Napi::Number>().Int32Value();
-}
-template <>
-unsigned int GetArgFromParam<unsigned int>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return info[paramNum].As<Napi::Number>().Uint32Value();
-}
-
-template <>
-const char* GetArgFromParam<const char*>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  std::string val = info[paramNum].As<Napi::String>().Utf8Value();
-  const std::string::size_type size = val.size();
-  char *buffer = new char[size + 1];   //we need extra char for NUL
-  memcpy(buffer, val.c_str(), size + 1);
-  return buffer;
-}
-
-template <>
-int GetArgFromParam<int>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return info[paramNum].As<Napi::Number>().Int32Value();
-}
-template <>
-long GetArgFromParam<long>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return info[paramNum].As<Napi::Number>().Int64Value();
-}
-template <>
-Color GetArgFromParam<Color>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToColor(env, info[paramNum]);
-}
-template <>
-Texture GetArgFromParam<Texture>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToTexture(env, info[paramNum]);
-}
-template <>
-RenderTexture2D GetArgFromParam<RenderTexture2D>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToRenderTexture2D(env, info[paramNum]);
-}
-template <>
-Rectangle GetArgFromParam<Rectangle>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToRectangle(env, info[paramNum]);
-}
-template <>
-float GetArgFromParam<float>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return info[paramNum].As<Napi::Number>().FloatValue();
-}
-template <>
-Camera GetArgFromParam<Camera>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToCamera(env, info[paramNum]);
-}
-template <>
-Camera2D GetArgFromParam<Camera2D>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToCamera2D(env, info[paramNum]);
-}
-template <>
-Matrix GetArgFromParam<Matrix>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToMatrix(env, info[paramNum]);
-}
-template <>
-Ray GetArgFromParam<Ray>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToRay(env, info[paramNum]);
-}
-
-template <>
-Vector2 GetArgFromParam<Vector2>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-    Vector2 arg0 = ToVector2(env, info[paramNum]); //Why?
-    return arg0; //Does not compile because it needs to return
 }
 
 template <typename P1>
@@ -266,61 +185,6 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
     CleanUp(arg7);
     return env.Null();
   }));
-}
-
-inline Napi::Value ToValue(Napi::Env& env, bool value) {
-  return Napi::Boolean::New(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, const char* value) {
-  return Napi::String::New(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, const std::string& value) {
-  return Napi::String::New(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, char* value) {
-  return Napi::String::New(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, int value) {
-  return Napi::Number::New(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, unsigned int value) {
-  return Napi::Number::New(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, long value) {
-  return Napi::Number::New(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, double value) {
-  return Napi::Number::New(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Vector2 value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Vector3 value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Vector4 value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Color value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Image value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Rectangle value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Texture value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Matrix value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Camera value) {
-  return ToObject(env, value);
-}
-inline Napi::Value ToValue(Napi::Env& env, Ray value) {
-  return ToObject(env, value);
 }
 
 template <typename ReturnType>

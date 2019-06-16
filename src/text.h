@@ -4,7 +4,7 @@
 #include <string>
 #include <napi.h>
 #include <raylib.h>
-#include "lib/index.h"
+#include "lib/AddFunction.h"
 
 Napi::Value TextFormat_binding(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();

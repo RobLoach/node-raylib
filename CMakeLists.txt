@@ -36,8 +36,11 @@ include_directories(${PROJECT_NAME}
 # This is hardcoded so that updates force a re-compile.
 add_library(${PROJECT_NAME} SHARED
   src/lib/AddFunction.h
-  src/lib/index.h
+  src/lib/CleanUp.h
+  src/lib/GetArgFromParam.h
   src/lib/ToObject.h
+  src/lib/ToValue.h
+  src/lib/ValidArgs.h
   src/addon.cc
   src/audio.h
   src/camera.h

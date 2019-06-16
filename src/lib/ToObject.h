@@ -294,8 +294,9 @@ Napi::Object ToObject(Napi::Env& env, Matrix input) {
   out.Set("m15", input.m15);
   return out;
 }
+
 /**
- * Convert the given argument value to a Color.
+ * Convert the given argument value to a Ray.
  */
 Ray ToRay(Napi::Env& env, const Napi::Value& arg) {
   Napi::Object argObject(env, arg.As<Napi::Object>());
@@ -305,7 +306,7 @@ Ray ToRay(Napi::Env& env, const Napi::Value& arg) {
     output.position = ToVector3(env, argObject.Get("position"));
   }
   if (argObject.Has("direction")) {
-    output.position = ToVector3(env, argObject.Get("direction"));
+    output.direction = ToVector3(env, argObject.Get("direction"));
   }
 
   return output;
@@ -315,6 +316,30 @@ Napi::Object ToObject(Napi::Env& env, Ray input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("position", ToObject(env, input.position));
   out.Set("direction", ToObject(env, input.direction));
+  return out;
+}
+
+/**
+ * Convert the given argument value to a BoundingBox.
+ */
+BoundingBox ToBoundingBox(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+
+  BoundingBox output;
+  if (argObject.Has("min")) {
+    output.min = ToVector3(env, argObject.Get("min"));
+  }
+  if (argObject.Has("max")) {
+    output.max = ToVector3(env, argObject.Get("max"));
+  }
+
+  return output;
+}
+
+Napi::Object ToObject(Napi::Env& env, BoundingBox input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("min", ToObject(env, input.min));
+  out.Set("max", ToObject(env, input.max));
   return out;
 }
 
@@ -347,13 +372,13 @@ Camera ToCamera(Napi::Env& env, const Napi::Value& arg) {
 /**
  * Convert the given Camera to a Napi object.
  */
-Napi::Object ToObject(Napi::Env& env, Camera camera) {
+Napi::Object ToObject(Napi::Env& env, Camera input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("position", ToObject(env, camera.position));
-  out.Set("target", ToObject(env, camera.target));
-  out.Set("up", ToObject(env, camera.up));
-  out.Set("fovy", camera.fovy);
-  out.Set("type", camera.type);
+  out.Set("position", ToObject(env, input.position));
+  out.Set("target", ToObject(env, input.target));
+  out.Set("up", ToObject(env, input.up));
+  out.Set("fovy", input.fovy);
+  out.Set("type", input.type);
   return out;
 }
 
@@ -383,12 +408,55 @@ Camera2D ToCamera2D(Napi::Env& env, const Napi::Value& arg) {
 /**
  * Convert the given Camera2D to a Napi object.
  */
-Napi::Object ToObject(Napi::Env& env, Camera2D camera) {
+Napi::Object ToObject(Napi::Env& env, Camera2D input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("offset", ToObject(env, camera.offset));
-  out.Set("target", ToObject(env, camera.target));
-  out.Set("rotation", camera.rotation);
-  out.Set("zoom", camera.zoom);
+  out.Set("offset", ToObject(env, input.offset));
+  out.Set("target", ToObject(env, input.target));
+  out.Set("rotation", input.rotation);
+  out.Set("zoom", input.zoom);
+  return out;
+}
+
+/**
+ * Convert the given argument value to a NPatchInfo.
+ */
+NPatchInfo ToNPatchInfo(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+
+  NPatchInfo output;
+  if (argObject.Has("sourceRec")) {
+    output.sourceRec = ToRectangle(env, argObject.Get("sourceRec"));
+  }
+  if (argObject.Has("left")) {
+    output.left = argObject.Get("left").ToNumber().Int32Value();
+  }
+  if (argObject.Has("top")) {
+    output.top = argObject.Get("top").ToNumber().Int32Value();
+  }
+  if (argObject.Has("right")) {
+    output.right = argObject.Get("right").ToNumber().Int32Value();
+  }
+  if (argObject.Has("bottom")) {
+    output.bottom = argObject.Get("bottom").ToNumber().Int32Value();
+  }
+  if (argObject.Has("type")) {
+    output.type = argObject.Get("type").ToNumber().Int32Value();
+  }
+
+  return output;
+}
+
+/**
+ * Convert the given NPatchInfo to a Napi object.
+ */
+Napi::Object ToObject(Napi::Env& env, NPatchInfo input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("sourceRec", ToObject(env, input.sourceRec));
+  out.Set("left", input.left);
+  out.Set("top", input.top);
+  out.Set("right", input.right);
+  out.Set("bottom", input.bottom);
+  out.Set("type", input.type);
   return out;
 }
 

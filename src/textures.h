@@ -4,7 +4,7 @@
 #include <string>
 #include <napi.h>
 #include <raylib.h>
-#include "lib/index.h"
+#include "lib/AddFunction.h"
 
 void node_raylib_init_textures(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "LoadImage", LoadImage);
@@ -15,11 +15,11 @@ void node_raylib_init_textures(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "ExportImageAsCode", ExportImageAsCode);
   AddFunction(env, exports, "LoadTexture", LoadTexture);
   AddFunction(env, exports, "LoadTextureFromImage", LoadTextureFromImage);
-  // RLAPI RenderTexture2D LoadRenderTexture(int width, int height);                                          // Load texture for rendering (framebuffer)
+  AddFunction(env, exports, "LoadRenderTexture", LoadRenderTexture);
   AddFunction(env, exports, "UnloadImage", UnloadImage);
   AddFunction(env, exports, "UnloadTexture", UnloadTexture);
-  // RLAPI void UnloadRenderTexture(RenderTexture2D target);                                                  // Unload render texture from GPU memory (VRAM)
-  // RLAPI Color *GetImageData(Image image);                                                                  // Get pixel data from image as a Color struct array
+  AddFunction(env, exports, "UnloadRenderTexture", UnloadRenderTexture);
+    // RLAPI Color *GetImageData(Image image);                                                                  // Get pixel data from image as a Color struct array
   // RLAPI Vector4 *GetImageDataNormalized(Image image);                                                      // Get pixel data from image as Vector4 array (float normalized)
   AddFunction(env, exports, "GetPixelDataSize", GetPixelDataSize);
   // RLAPI Image GetTextureData(Texture2D texture);                                                           // Get pixel data from GPU texture and return an Image
