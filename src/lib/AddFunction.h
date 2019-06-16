@@ -96,7 +96,8 @@ Ray GetArgFromParam<Ray>(Napi::Env& env, const Napi::CallbackInfo& info, int par
 
 template <>
 Vector2 GetArgFromParam<Vector2>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-    Vector2 arg0 = ToVector2(env, info[paramNum]);
+    Vector2 arg0 = ToVector2(env, info[paramNum]); //Why?
+    return arg0; //Does not compile because it needs to return
 }
 
 template <typename P1>
