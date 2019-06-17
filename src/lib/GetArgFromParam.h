@@ -4,6 +4,7 @@
 #include <napi.h>
 // cstring is used for memcpy()
 #include <cstring>
+#include <iostream>
 #include "ToObject.h"
 
 template <typename ReturnType>
@@ -82,7 +83,9 @@ Camera GetArgFromParam<Camera>(Napi::Env& env, const Napi::CallbackInfo& info, i
 
 template <>
 Camera* GetArgFromParam<Camera*>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  std::cout << "Camera* GetArgFromParam" << std::endl;
   Camera params = ToCamera(env, info[paramNum]);
+  std::cout << "Fovy: " << params.fovy << std::endl;
   Camera* output = new Camera();
   output->position = params.position;
   output->target = params.target;

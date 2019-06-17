@@ -2,6 +2,7 @@
 #define NODE_RAYLIB_TOOBJECT_H_
 
 #include <napi.h>
+#include <iostream>
 
 /**
  * Convert the given argument value to a Color.
@@ -347,6 +348,7 @@ Napi::Object ToObject(Napi::Env& env, BoundingBox input) {
  * Convert the given argument value to a Camera.
  */
 Camera ToCamera(Napi::Env& env, const Napi::Value& arg) {
+  std::cout << "ToCamera(arg)" << std::endl;
   Napi::Object argObject(env, arg.As<Napi::Object>());
 
   Camera output;
@@ -373,6 +375,7 @@ Camera ToCamera(Napi::Env& env, const Napi::Value& arg) {
  * Convert the given Camera to a Napi object.
  */
 Napi::Object ToObject(Napi::Env& env, Camera input) {
+  std::cout << "ToObject(Camera)" << std::endl;
   Napi::Object out = Napi::Object::New(env);
   out.Set("position", ToObject(env, input.position));
   out.Set("target", ToObject(env, input.target));

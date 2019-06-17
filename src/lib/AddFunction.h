@@ -2,6 +2,7 @@
 #define NODE_RAYLIB_ADDFUNCTION_H_
 
 #include <napi.h>
+#include <iostream>
 #include "ValidArgs.h"
 #include "ToObject.h"
 #include "ToValue.h"
