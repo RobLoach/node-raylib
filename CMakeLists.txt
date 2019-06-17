@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 3.11)
 project (node-raylib)
 
-set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS} -Wno-unused-result")
+if ( CMAKE_COMPILER_IS_GNUCC )
+    set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS} -Wno-unused-result")
+endif()
+if ( MSVC )
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /w")
+endif()
 
 # TODO: Move this to cmake/FindRaylib.cmake?
 find_package(raylib 2.0 QUIET)
