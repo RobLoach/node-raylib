@@ -81,6 +81,18 @@ Camera GetArgFromParam<Camera>(Napi::Env& env, const Napi::CallbackInfo& info, i
 }
 
 template <>
+Camera* GetArgFromParam<Camera*>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  Camera params = ToCamera(env, info[paramNum]);
+  Camera* output = new Camera();
+  output->position = params.position;
+  output->target = params.target;
+  output->up = params.up;
+  output->fovy = params.fovy;
+  output->type = params.type;
+  return output;
+}
+
+template <>
 Camera2D GetArgFromParam<Camera2D>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   return ToCamera2D(env, info[paramNum]);
 }
