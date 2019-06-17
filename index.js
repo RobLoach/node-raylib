@@ -78,7 +78,25 @@ raylib.Camera2D = function (offset, target, rotation, zoom) {
     zoom: zoom
   }
 }
-raylib.Camera3D = raylib.Camera
+
+//raylib.Camera3D = raylib.Camera
+/*
+const ref = require('ref')
+const StructType = require('ref-struct')
+raylib.Vector3 = StructType({
+  x: ref.types.float,
+  y: ref.types.float,
+  z: ref.types.float
+})
+
+raylib.Camera = raylib.Camera3D = Struct({
+  position: raylib.Vector3,
+  target: raylib.Vector3,
+  up: raylib.Vector3,
+  fovy: ref.types.float,
+  type: ref.types.int
+})*/
+
 
 raylib.Ray = function (position, direction) {
   return {
