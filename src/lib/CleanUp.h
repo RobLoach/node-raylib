@@ -19,7 +19,14 @@ inline void CleanUp(P1 val) {
  * Clean up the memory for a string.
  */
 inline void CleanUp(const char* val) {
-    free((char*)val);
+  free((char*)val);
+}
+
+/**
+ * Clean up the memory for a string.
+ */
+inline void CleanUp(Camera* val) {
+  delete val;
 }
 
 #endif

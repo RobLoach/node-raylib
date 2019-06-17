@@ -28,7 +28,7 @@ const camera = r.Camera(
 )
 
 const cubePosition = r.Vector3()
-const cubeScreenPosition = r.Vector2()
+let cubeScreenPosition = r.Vector2()
 
 r.SetCameraMode(camera, r.CAMERA_FREE); // Set a free camera mode
 
