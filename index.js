@@ -58,17 +58,34 @@ raylib.MAGENTA    = raylib.Color(255, 0, 255, 255 )     // Magenta
 raylib.RAYWHITE   = raylib.Color(245, 245, 245, 255 )   // My own White (raylib logo)
 
 // Structs
-raylib.Vector2 = function (x, y) {
-  return {x: x, y: y}
+raylib.Vector2 = function (x = 0, y = 0) {
+  return {
+    x: x,
+    y: y
+  }
 }
-raylib.Vector3 = function (x, y, z) {
-  return {x: x, y: y, z: z}
+raylib.Vector3 = function (x = 0, y = 0, z = 0) {
+  return {
+    x: x,
+    y: y,
+    z: z
+  }
 }
-raylib.Vector4 = function (x, y, z, w) {
-  return {x: x, y: y, z: z, w: w}
+raylib.Vector4 = function (x = 0, y = 0, z = 0, w = 0) {
+  return {
+    x: x,
+    y: y,
+    z: z,
+    w: w
+  }
 }
-raylib.Rectangle = function (x, y, width, height) {
-  return {x: x, y: y, width: width, height: height}
+raylib.Rectangle = function (x = 0, y = 0, width = 0, height = 0) {
+  return {
+    x: x,
+    y: y,
+    width: width,
+    height: height
+  }
 }
 raylib.Camera2D = function (offset, target, rotation, zoom) {
   return {
