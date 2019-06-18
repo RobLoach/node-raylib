@@ -96,6 +96,32 @@ raylib.Camera2D = function (offset, target, rotation, zoom) {
   }
 }
 
+raylib.Camera = raylib.Camera3D = function (position, target, up, fovy, type) {
+  return {
+    position: position,
+    target: target,
+    up: up,
+    fovy: fovy,
+    type: type
+  }
+}
+
+/**
+ * UpdateCamera is wrapped to allow object reference.
+ *
+ * @see node_raylib_init_camera_updatecamera()
+ */
+raylib.UpdateCamera = function(camera) {
+  const newCamera = raylib.UpdateCameraWrap(camera)
+  if (newCamera) {
+    camera.position = newCamera.position
+    camera.target = newCamera.target
+    camera.up = newCamera.up
+    camera.fovy = newCamera.fovy
+    camera.type = newCamera.type
+  }
+}
+
 raylib.Ray = function (position, direction) {
   return {
     position: position,
