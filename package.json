@@ -2,7 +2,8 @@
   "name": "raylib",
   "version": "0.1.1",
   "description": "Node.js bindings for raylib.",
-  "main": "index.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "test": "mocha",
     "postinstall": "cmake-js compile",
@@ -27,9 +28,9 @@
   "files": [
     "bin/*",
     "src/*",
+    "lib/*",
     "src/lib/*",
     "CMakeLists.txt",
-    "index.js",
     "package.json",
     "README.md",
     "LICENSE"
@@ -49,6 +50,7 @@
     "archiver": "^3.0.0",
     "chai": "^4.2.0",
     "mocha": "^6.0.2",
-    "pkg": "^4.3.7"
+    "pkg": "^4.3.7",
+    "typescript": "^3.5.3"
   }
 }
