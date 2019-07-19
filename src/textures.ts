@@ -1,10 +1,11 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
-import { Vector2, Rectangle } from "./types/maths"
+import { Vector2, Vector4, Rectangle, NPatchInfo } from "./types/maths"
+import { Image, Texture2D, TextureCubemap } from "./types/texture"
 
 export const LoadImage: (fileName: string) => Image = r.LoadImage //Load image from file into CPU memory (RAM) 
 export const LoadImageEx: (pixels: Color, width: number, height: number) => Image = r.LoadImageEx //Load image from Color array data (RGBA - 32bit) 
-export const LoadImagePro: (data: void, width: number, height: number, format: number) => Image = r.LoadImagePro //Load image from raw data with parameters 
+export const LoadImagePro: (data: any, width: number, height: number, format: number) => Image = r.LoadImagePro //Load image from raw data with parameters 
 export const LoadImageRaw: (fileName: string, width: number, height: number, format: number, headerSize: number) => Image = r.LoadImageRaw //Load image from RAW file data 
 export const ExportImage: (image: Image, fileName: string) => void = r.ExportImage //Export image data to file 
 export const ExportImageAsCode: (image: Image, fileName: string) => void = r.ExportImageAsCode //Export image as code file defining an array of bytes 
@@ -20,7 +21,7 @@ export const GetImageDataNormalized: (image: Image) => Vector4 = r.GetImageDataN
 export const GetPixelDataSize: (width: number, height: number, format: number) => number = r.GetPixelDataSize //Get pixel data size in bytes (image or texture) 
 export const GetTextureData: (texture: Texture2D) => Image = r.GetTextureData //Get pixel data from GPU texture and return an Image 
 export const GetScreenData: () => Image = r.GetScreenData //Get pixel data from screen buffer and return an Image (screenshot) 
-export const UpdateTexture: (texture: Texture2D, pixels: const void) => void = r.UpdateTexture //Update GPU texture with new data 
+export const UpdateTexture: (texture: Texture2D, pixels: any) => void = r.UpdateTexture //Update GPU texture with new data 
 export const ImageCopy: (image: Image) => Image = r.ImageCopy //Create an image duplicate (useful for transformations) 
 export const ImageToPOT: (image: Image, fillColor: Color) => void = r.ImageToPOT //Convert image to POT (power-of-two) 
 export const ImageFormat: (image: Image, newFormat: number) => void = r.ImageFormat //Convert image data to desired format 
@@ -30,7 +31,7 @@ export const ImageAlphaCrop: (image: Image, threshold: number) => void = r.Image
 export const ImageAlphaPremultiply: (image: Image) => void = r.ImageAlphaPremultiply //Premultiply alpha channel 
 export const ImageCrop: (image: Image, crop: Rectangle) => void = r.ImageCrop //Crop an image to a defined rectangle 
 export const ImageResize: (image: Image, newWidth: number, newHeight: number) => void = r.ImageResize //Resize image (Bicubic scaling algorithm) 
-export const ImageResizeNN: (image: Image, newHeight: int newWidth,int) => void = r.ImageResizeNN //Resize image (Nearest-Neighbor scaling algorithm) 
+export const ImageResizeNN: (image: Image, newHeight: number, newWidth: number) => void = r.ImageResizeNN //Resize image (Nearest-Neighbor scaling algorithm) 
 export const ImageResizeCanvas: (image: Image, newWidth: number, newHeight: number, offsetX: number, offsetY: number, color: Color) => void = r.ImageResizeCanvas //Resize canvas and fill with color 
 export const ImageMipmaps: (image: Image) => void = r.ImageMipmaps //Generate all mipmap levels for a provided image 
 export const ImageDither: (image: Image, rBpp: number, gBpp: number, bBpp: number, aBpp: number) => void = r.ImageDither //Dither image data to 16bpp or lower (Floyd-Steinberg dithering) 

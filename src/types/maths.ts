@@ -48,6 +48,24 @@ export class Rectangle {
   }
 }
 
+export class NPatchInfo {
+  sourceRect: Rectangle
+  left: number
+  top: number
+  right: number
+  bottom: number
+  type: number // once again this should prob be an enum
+
+  constructor(rect: Rectangle, type: number, l?: number, t?: number, r?: number, b?: number) {
+    this.sourceRect = rect
+    this.type = type
+    this.left = l
+    this.top = t
+    this.right = r
+    this.bottom = b
+  }
+}
+
 export class Ray {
   position: Vector3
   direction: Vector3
