@@ -5,7 +5,8 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "tsc test/test.ts && mocha",
+    "pretest": "tsc test/test.ts",
+    "test": "mocha",
     "postinstall": "cmake-js compile",
     "clean": "rm -rf build",
     "compile": "cmake-js compile",

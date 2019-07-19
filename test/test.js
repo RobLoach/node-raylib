@@ -1,6 +1,5 @@
 "use strict";
 exports.__esModule = true;
-//TODO: update these to imports
 var child_process = require("child_process");
 var path = require("path");
 var index_1 = require("../lib/index");
