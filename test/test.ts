@@ -1,9 +1,8 @@
-//TODO: update these to imports
-const child_process = require('child_process')
-const path = require('path')
-const r = require('../lib/index.js').default // this is not an es5 module so in order to use it here we have to do this for now
-const package = require('../package.json')
-const {expect, assert} = require('chai')
+import * as child_process from "child_process"
+import * as path from "path"
+import r from "../lib/index"
+const pkg = require('../package.json')
+import { expect, assert } from "chai"
 
 describe('raylib', function() {
   describe('window', function() {
@@ -11,12 +10,13 @@ describe('raylib', function() {
       assert.isFalse(r.IsWindowReady())
     })
 
-    it('IsWindowReady("incorrect", "number", "of", "args")', function() {
-      const shouldThrowOnIncorrectArgs = function() {
-        r.IsWindowReady('incorrect', 'number', 'of', 'args')
-      }
-      expect(shouldThrowOnIncorrectArgs).to.throw()
-    })
+    // this is unneeded because typescript
+    // it('IsWindowReady("incorrect", "number", "of", "args")', function() {
+    //   const shouldThrowOnIncorrectArgs = function() {
+    //     r.IsWindowReady('incorrect', 'number', 'of', 'args')
+    //   }
+    //   expect(shouldThrowOnIncorrectArgs).to.throw()
+    // })
   })
 
   describe('audio', function() {
@@ -92,7 +92,7 @@ describe('raylib', function() {
 
     it('should display the help', () => {
       var output = child_process.execFileSync(cliPath)
-      assert(output.includes(package.description))
+      assert(output.includes(pkg.description))
     })
 
   })
