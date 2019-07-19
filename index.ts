@@ -15,6 +15,12 @@ import r from "./src/bindings/raylib"
 
 import * as colors from "./src/colors"
 import * as core from "./src/core"
+import * as shapes from "./src/shapes"
+import * as textures from "./src/textures"
+import * as text from "./src/text"
+import * as models from "./src/models"
+import * as shaders from "./src/shaders"
+import * as audio from "./src/audio"
 
 const PI = 3.14159265358979323846
 
@@ -28,8 +34,12 @@ const raylib = {
 
   ...colors,
   ...core,
-  // functions  
-  DrawText: r.DrawText as (msg: string, x: number, y: number, fontsize: number, color: colors.Color) => void ,
+  ...shapes,
+  ...textures,
+  ...text,
+  ...models,
+  ...shaders,
+  ...audio,
 }
 
 

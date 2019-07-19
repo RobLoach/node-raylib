@@ -50,7 +50,7 @@ function gen(name) {
   fs.readFile(`./_${name}.txt`, "utf8", (err, data) => {
     if(err) console.error(err)
     else {
-      let output = `import r from "./bindings/raylib"\n`
+      let output = `import r from "./bindings/raylib"\n\n\n`
       let fns = data.split("\n")
       fns.forEach(str => {
         if(!str) return

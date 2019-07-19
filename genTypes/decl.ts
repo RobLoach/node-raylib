@@ -1,7 +1,3 @@
-import r from "./bindings/raylib"
-import { Color } from "./colors"
-
-
 export const InitWindow: (title: string) => void = r.InitWindow //Initialize window and OpenGL context 
 export const WindowShouldClose: () => boolean = r.WindowShouldClose //Check if KEY_ESCAPE pressed or Close icon pressed 
 export const CloseWindow: () => void = r.CloseWindow //Close window and unload OpenGL context 
@@ -60,7 +56,7 @@ export const SetConfigFlags: (flags: number) => void = r.SetConfigFlags //Setup 
 export const SetTraceLogLevel: (logType: number) => void = r.SetTraceLogLevel //Set the current threshold (minimum) log level 
 export const SetTraceLogExit: (logType: number) => void = r.SetTraceLogExit //Set the exit threshold (minimum) log level 
 export const SetTraceLogCallback: (callback: TraceLogCallback) => void = r.SetTraceLogCallback //Set a trace log callback to enable custom logging 
-export const TraceLog: (...msg: any) => void = r.TraceLog //Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR) 
+export const TraceLog: (...: any) => void = r.TraceLog //Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR) 
 export const TakeScreenshot: (fileName: string) => void = r.TakeScreenshot //Takes a screenshot of current screen (saved a .png) 
 export const GetRandomValue: (max: number) => number = r.GetRandomValue //Returns a random value between min and max (both included) 
 export const FileExists: (fileName: string) => boolean = r.FileExists //Check if file exists 
