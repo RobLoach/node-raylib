@@ -1,5 +1,43 @@
 import r from "./bindings/raylib"
 
+export interface Wave {
+  sampleCount: number
+  sampleRate: number
+  sampleSize: number
+  channels: number
+  data: any
+}
+
+export interface Sound {
+  audioBuffer: any
+  source: number
+  buffer: number
+  format: number
+}
+
+export interface AudioStream {
+  sampleRate: number
+  sampleSize: number
+  channels: number
+  AudioBuffer: any
+  source: number
+  buffers: number[]
+}
+
+export interface MusicData {
+  ctxType: any //TODO: make enum
+  ctxOgg: any
+  ctxFlac: any
+  ctxMp3: any
+  ctxXm: any
+  ctxMod: any
+  stream: AudioStream
+  loopCount: number
+  totalSamples: number
+  samplesLeft: number
+}
+
+export type Music = MusicData
 
 export const InitAudioDevice: () => void = r.InitAudioDevice //Initialize audio device and context 
 export const CloseAudioDevice: () => void = r.CloseAudioDevice //Close the audio device and context (and music stream) 
@@ -9,7 +47,7 @@ export const LoadWave: (fileName: string) => Wave = r.LoadWave //Load wave data 
 export const LoadWaveEx: (data: void, sampleCount: number, sampleRate: number, sampleSize: number, channels: number) => Wave = r.LoadWaveEx //Load wave data from raw array data 
 export const LoadSound: (fileName: string) => Sound = r.LoadSound //Load sound from file 
 export const LoadSoundFromWave: (wave: Wave) => Sound = r.LoadSoundFromWave //Load sound from wave data 
-export const UpdateSound: (sound: Sound, data: const void, samplesCount: number) => void = r.UpdateSound //Update sound buffer with new data 
+export const UpdateSound: (sound: Sound, data: any, samplesCount: number) => void = r.UpdateSound //Update sound buffer with new data 
 export const UnloadWave: (wave: Wave) => void = r.UnloadWave //Unload wave data 
 export const UnloadSound: (sound: Sound) => void = r.UnloadSound //Unload sound 
 export const ExportWave: (wave: Wave, fileName: string) => void = r.ExportWave //Export wave data to file 
@@ -24,7 +62,7 @@ export const SetSoundPitch: (sound: Sound, pitch: number) => void = r.SetSoundPi
 export const WaveFormat: (wave: Wave, sampleRate: number, sampleSize: number, channels: number) => void = r.WaveFormat //Convert wave data to desired format 
 export const WaveCopy: (wave: Wave) => Wave = r.WaveCopy //Copy a wave to a new wave 
 export const WaveCrop: (wave: Wave, initSample: number, finalSample: number) => void = r.WaveCrop //Crop a wave to defined samples range 
-export const GetWaveData: (wave: Wave) => float = r.GetWaveData //Get samples data from wave as a floats array 
+export const GetWaveData: (wave: Wave) => number = r.GetWaveData //Get samples data from wave as a floats array 
 export const LoadMusicStream: (fileName: string) => Music = r.LoadMusicStream //Load music stream from file 
 export const UnloadMusicStream: (music: Music) => void = r.UnloadMusicStream //Unload music stream 
 export const PlayMusicStream: (music: Music) => void = r.PlayMusicStream //Start music playing 
@@ -39,7 +77,7 @@ export const SetMusicLoopCount: (music: Music, count: number) => void = r.SetMus
 export const GetMusicTimeLength: (music: Music) => number = r.GetMusicTimeLength //Get music time length (in seconds) 
 export const GetMusicTimePlayed: (music: Music) => number = r.GetMusicTimePlayed //Get current music time played (in seconds) 
 export const InitAudioStream: (sampleRate: number, sampleSize: number, channels: number) => AudioStream = r.InitAudioStream //Init audio stream (to stream raw audio pcm data) 
-export const UpdateAudioStream: (stream: AudioStream, data: const void, samplesCount: number) => void = r.UpdateAudioStream //Update audio stream buffers with data 
+export const UpdateAudioStream: (stream: AudioStream, data: any, samplesCount: number) => void = r.UpdateAudioStream //Update audio stream buffers with data 
 export const CloseAudioStream: (stream: AudioStream) => void = r.CloseAudioStream //Close audio stream and free memory 
 export const IsAudioBufferProcessed: (stream: AudioStream) => boolean = r.IsAudioBufferProcessed //Check if any audio stream buffers requires refill 
 export const PlayAudioStream: (stream: AudioStream) => void = r.PlayAudioStream //Play audio stream 

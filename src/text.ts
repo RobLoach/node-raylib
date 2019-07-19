@@ -1,6 +1,7 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
-import { Vector2 } from "./types/maths"
+import { Vector2, Rectangle } from "./types/maths"
+import { Font, Image, CharInfo } from "./types/texture"
 
 export const GetFontDefault: () => Font = r.GetFontDefault //Get the default Font 
 export const LoadFont: (fileName: string) => Font = r.LoadFont //Load font from file into GPU memory (VRAM) 
@@ -19,12 +20,12 @@ export const MeasureTextEx: (font: Font, text: string, fontSize: number, spacing
 export const GetGlyphIndex: (font: Font, character: number) => number = r.GetGlyphIndex //Get index position for a unicode character on font 
 export const TextIsEqual: (text1: string, text2: string) => boolean = r.TextIsEqual //Check if two text string are equal 
 export const TextLength: (text: string) => number = r.TextLength //Get text length, checks for '\0' ending 
-export const TextFormat: (text: string, ...: any) => string = r.TextFormat //Text formatting with variables (sprintf style) 
+export const TextFormat: (text: string, ...args: any) => string = r.TextFormat //Text formatting with variables (sprintf style) 
 export const TextSubtext: (text: string, position: number, length: number) => string = r.TextSubtext //Get a piece of a text string 
 export const TextReplace: (text: string, replace: string, by: string) => string = r.TextReplace //Replace text string (memory should be freed!) 
 export const TextInsert: (text: string, insert: string, position: number) => string = r.TextInsert //Insert text in a position (memory should be freed!) 
-export const TextJoin: (textList: const char *, count: number, delimiter: string) => string = r.TextJoin //Join text strings with delimiter 
-export const TextSplit: (text: string, delimiter: string, count: number) => const char * = r.TextSplit //Split text into multiple strings 
+export const TextJoin: (textList: string, count: number, delimiter: string) => string = r.TextJoin //Join text strings with delimiter 
+export const TextSplit: (text: string, delimiter: string, count: number) => string = r.TextSplit //Split text into multiple strings 
 export const TextAppend: (text: string, append: string, position: number) => void = r.TextAppend //Append text at specific position and move cursor! 
 export const TextFindIndex: (text: string, find: string) => number = r.TextFindIndex //Find first text occurrence within a string 
 export const TextToUpper: (text: string) => string = r.TextToUpper //Get upper case version of provided string 

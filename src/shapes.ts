@@ -1,7 +1,7 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
-import { Vector2 } from "./types/maths"
-
+import { Vector2, Rectangle } from "./types/maths"
+import { Texture2D } from "./types/texture"
 
 export const DrawPixel: (posX: number, posY: number, color: Color) => void = r.DrawPixel //Draw a pixel 
 export const DrawPixelV: (position: Vector2, color: Color) => void = r.DrawPixelV //Draw a pixel (Vector version) 

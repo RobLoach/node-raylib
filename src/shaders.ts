@@ -1,5 +1,8 @@
 import r from "./bindings/raylib"
 import { Camera } from "./types/camera"
+import { Texture2D } from "./types/texture"
+import { Matrix } from "./types/maths"
+import { VrDeviceInfo } from "./types/misc"
 
 export class Shader {
   id: number
@@ -18,13 +21,13 @@ export const UnloadShader: (shader: Shader) => void = r.UnloadShader //Unload sh
 export const GetShaderDefault: () => Shader = r.GetShaderDefault //Get default shader 
 export const GetTextureDefault: () => Texture2D = r.GetTextureDefault //Get default texture 
 export const GetShaderLocation: (shader: Shader, uniformName: string) => number = r.GetShaderLocation //Get shader uniform location 
-export const SetShaderValue: (shader: Shader, uniformLoc: number, value: const void, uniformType: number) => void = r.SetShaderValue //Set shader uniform value 
-export const SetShaderValueV: (shader: Shader, uniformLoc: number, value: const void, uniformType: number, count: number) => void = r.SetShaderValueV //Set shader uniform value vector 
+export const SetShaderValue: (shader: Shader, uniformLoc: number, value: any, uniformType: number) => void = r.SetShaderValue //Set shader uniform value 
+export const SetShaderValueV: (shader: Shader, uniformLoc: number, value: any, uniformType: number, count: number) => void = r.SetShaderValueV //Set shader uniform value vector 
 export const SetShaderValueMatrix: (shader: Shader, uniformLoc: number, mat: Matrix) => void = r.SetShaderValueMatrix //Set shader uniform value (matrix 4x4) 
 export const SetShaderValueTexture: (shader: Shader, uniformLoc: number, texture: Texture2D) => void = r.SetShaderValueTexture //Set shader uniform value for texture 
 export const SetMatrixProjection: (proj: Matrix) => void = r.SetMatrixProjection //Set a custom projection matrix (replaces internal projection matrix) 
 export const SetMatrixModelview: (view: Matrix) => void = r.SetMatrixModelview //Set a custom modelview matrix (replaces internal modelview matrix) 
-export const GetMatrixModelview: (: ) => Matrix = r.GetMatrixModelview //Get internal modelview matrix 
+export const GetMatrixModelview: () => Matrix = r.GetMatrixModelview //Get internal modelview matrix 
 export const BeginShaderMode: (shader: Shader) => void = r.BeginShaderMode //Begin custom shader drawing 
 export const EndShaderMode: () => void = r.EndShaderMode //End custom shader drawing (use default shader) 
 export const BeginBlendMode: (mode: number) => void = r.BeginBlendMode //Begin blending mode (alpha, additive, multiplied) 
