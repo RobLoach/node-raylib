@@ -1,6 +1,7 @@
+//TODO: make this ts
 const child_process = require('child_process')
 const path = require('path')
-const r = require('..')
+const r = require('../lib/index.js').default // this is not an es5 module so in order to use it here we have to do this
 const package = require('../package.json')
 const {expect, assert} = require('chai')
 
