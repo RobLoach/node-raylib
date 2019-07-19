@@ -24,7 +24,7 @@ export const SetSoundPitch: (pitch: number) => void = r.SetSoundPitch //Set pitc
 export const WaveFormat: (channels: number) => void = r.WaveFormat //Convert wave data to desired format 
 export const WaveCopy: (wave: Wave) => Wave = r.WaveCopy //Copy a wave to a new wave 
 export const WaveCrop: (finalSample: number) => void = r.WaveCrop //Crop a wave to defined samples range 
-export const GetWaveData: (wave: Wave) => float = r.GetWaveData //Get samples data from wave as a floats array 
+export const GetWaveData: (wave: Wave) => number = r.GetWaveData //Get samples data from wave as a floats array 
 export const LoadMusicStream: (fileName: string) => Music = r.LoadMusicStream //Load music stream from file 
 export const UnloadMusicStream: (music: Music) => void = r.UnloadMusicStream //Unload music stream 
 export const PlayMusicStream: (music: Music) => void = r.PlayMusicStream //Start music playing 

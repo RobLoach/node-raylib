@@ -1,6 +1,6 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
-import { Vector2 } from "./types/vectors"
+import { Vector2 } from "./types/vector"
 
 export const DrawPixel: (color: Color) => void = r.DrawPixel //Draw a pixel 
 export const DrawPixelV: (color: Color) => void = r.DrawPixelV //Draw a pixel (Vector version) 

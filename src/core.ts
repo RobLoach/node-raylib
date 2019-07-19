@@ -1,6 +1,7 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
-import { Vector2, Vector3, Vector4 } from "./types/vectors"
+import { Vector2, Vector3, Vector4 } from "./types/vector"
+import { Camera, Camera2D, Camera3D } from "./types/camera"
 
 export const InitWindow: (title: string) => void = r.InitWindow //Initialize window and OpenGL context 
 export const WindowShouldClose: () => boolean = r.WindowShouldClose //Check if KEY_ESCAPE pressed or Close icon pressed 

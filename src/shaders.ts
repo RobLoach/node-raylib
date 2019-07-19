@@ -1,4 +1,5 @@
 import r from "./bindings/raylib"
+import { Camera } from "./types/camera"
 
 
 export const LoadText: (fileName: string) => string = r.LoadText //Load chars array from text file 
