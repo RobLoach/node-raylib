@@ -57,3 +57,17 @@ export class Ray {
     this.direction = dir || new Vector3(0, 0, 0)
   }
 }
+
+export class RayHitInfo {
+  hit: boolean
+  distance: number
+  position: Vector3
+  normal: Vector3
+
+  constructor(hit?: boolean, distance?: number, position?: Vector3, normal?: Vector3) {
+    this.hit = hit
+    this.distance = distance
+    this.position = position
+    this.normal = normal
+  }
+}
