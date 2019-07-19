@@ -1,0 +1,1 @@
+export type TraceLogCallback = (logType: number, text: string, ...vaArgs: any) => void

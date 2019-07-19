@@ -1,7 +1,9 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
-import { Vector2, Vector3, Vector4 } from "./types/maths"
+import { Vector2, Vector3, Vector4, Ray, Matrix } from "./types/maths"
 import { Camera, Camera2D, Camera3D } from "./types/camera"
+import { Image, RenderTexture2D } from "./types/texture"
+import { TraceLogCallback } from "./types/misc"
 
 
 export const InitWindow: (width: number, height: number, title: string) => void = r.InitWindow //Initialize window and OpenGL context 
@@ -62,7 +64,7 @@ export const SetConfigFlags: (flags: number) => void = r.SetConfigFlags //Setup 
 export const SetTraceLogLevel: (logType: number) => void = r.SetTraceLogLevel //Set the current threshold (minimum) log level 
 export const SetTraceLogExit: (logType: number) => void = r.SetTraceLogExit //Set the exit threshold (minimum) log level 
 export const SetTraceLogCallback: (callback: TraceLogCallback) => void = r.SetTraceLogCallback //Set a trace log callback to enable custom logging 
-export const TraceLog: (logType: number, text: string, ...: any) => void = r.TraceLog //Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR) 
+export const TraceLog: (logType: number, text: string, ...args: any) => void = r.TraceLog //Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR) 
 export const TakeScreenshot: (fileName: string) => void = r.TakeScreenshot //Takes a screenshot of current screen (saved a .png) 
 export const GetRandomValue: (min: number, max: number) => number = r.GetRandomValue //Returns a random value between min and max (both included) 
 export const FileExists: (fileName: string) => boolean = r.FileExists //Check if file exists 
