@@ -13,7 +13,7 @@
 
 import r from "./src/bindings/raylib"
 
-import * as colors from "./src/colors"
+import * as colors from "./src/types/colors"
 import * as core from "./src/core"
 import * as shapes from "./src/shapes"
 import * as textures from "./src/textures"
@@ -42,30 +42,6 @@ const raylib = {
   ...audio,
 }
 
-
-
-// Structs
-// raylib.Vector2 = function (x = 0, y = 0) {
-//   return {
-//     x: x,
-//     y: y
-//   }
-// }
-// raylib.Vector3 = function (x = 0, y = 0, z = 0) {
-//   return {
-//     x: x,
-//     y: y,
-//     z: z
-//   }
-// }
-// raylib.Vector4 = function (x = 0, y = 0, z = 0, w = 0) {
-//   return {
-//     x: x,
-//     y: y,
-//     z: z,
-//     w: w
-//   }
-// }
 // raylib.Rectangle = function (x = 0, y = 0, width = 0, height = 0) {
 //   return {
 //     x: x,

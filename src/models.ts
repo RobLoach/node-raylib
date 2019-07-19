@@ -1,5 +1,6 @@
 import r from "./bindings/raylib"
-import { Color } from "./colors"
+import { Color } from "./types/colors"
+import { Vector3 } from "./types/vectors"
 
 
 export const DrawLine3D: (color: Color) => void = r.DrawLine3D //Draw a line in 3D world space 

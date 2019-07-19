@@ -1,4 +1,4 @@
-import r from "./bindings/raylib"
+import r from "../bindings/raylib"
 
 export class Color {
   r: number

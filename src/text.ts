@@ -23,7 +23,7 @@ export const TextSubtext: (length: number) => string = r.TextSubtext //Get a pie
 export const TextReplace: (by: string) => string = r.TextReplace //Replace text string (memory should be freed!) 
 export const TextInsert: (position: number) => string = r.TextInsert //Insert text in a position (memory should be freed!) 
 export const TextJoin: (delimiter: string) => string = r.TextJoin //Join text strings with delimiter 
-export const TextSplit: (count: number) => const char * = r.TextSplit //Split text into multiple strings 
+export const TextSplit: (count: number) => string = r.TextSplit //Split text into multiple strings 
 export const TextAppend: (position: number) => void = r.TextAppend //Append text at specific position and move cursor! 
 export const TextFindIndex: (find: string) => number = r.TextFindIndex //Find first text occurrence within a string 
 export const TextToUpper: (text: string) => string = r.TextToUpper //Get upper case version of provided string 

@@ -1,5 +1,5 @@
 import r from "./bindings/raylib"
-import { Color } from "./colors"
+import { Color } from "./types/colors"
 
 
 export const LoadImage: (fileName: string) => Image = r.LoadImage //Load image from file into CPU memory (RAM) 
