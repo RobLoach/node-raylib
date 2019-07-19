@@ -3,51 +3,49 @@
  *
  * https://github.com/robloach/node-raylib
  */
-declare const r: any;
-declare namespace raylib {
-    const PI = 3.141592653589793;
-    const MAX_TOUCH_POINTS = 10;
-    const MAX_SHADER_LOCATIONS = 32;
-    const MAX_MATERIAL_MAPS = 12;
-    const DEG2RAD: number;
-    const RAD2DEG: number;
-    class Color {
-        r: number;
-        g: number;
-        b: number;
-        a: number;
-        constructor(red: number, green: number, blue: number, alpha: number);
-    }
-    const LIGHTGRAY: Color;
-    const GRAY: Color;
-    const DARKGRAY: Color;
-    const YELLOW: Color;
-    const GOLD: Color;
-    const ORANGE: Color;
-    const PINK: Color;
-    const RED: Color;
-    const MAROON: Color;
-    const GREEN: Color;
-    const LIME: Color;
-    const DARKGREEN: Color;
-    const SKYBLUE: Color;
-    const BLUE: Color;
-    const DARKBLUE: Color;
-    const PURPLE: Color;
-    const VIOLET: Color;
-    const DARKPURPLE: Color;
-    const BEIGE: Color;
-    const BROWN: Color;
-    const DARKBROWN: Color;
-    const WHITE: Color;
-    const BLACK: Color;
-    const BLANK: Color;
-    const MAGENTA: Color;
-    const RAYWHITE: Color;
-    const BeginDrawing: () => void;
-    const EndDrawing: () => void;
-    const ClearBackground: (color: Color) => void;
-    const DrawText: (msg: string, x: number, y: number, fontsize: number, color: Color) => void;
-}
+import r from "./src/bindings/raylib";
+import * as colors from "./src/colors";
+declare const raylib: {
+    DrawText: (msg: string, x: number, y: number, fontsize: number, color: colors.Color) => void;
+    InitWindow: (width: number, height: number, title: string) => void;
+    WindowShouldClose: () => boolean;
+    SetTargetFPS: (fps: number) => void;
+    BeginDrawing: () => void;
+    EndDrawing: () => void;
+    ClearBackground: (color: colors.Color) => void;
+    Color: typeof colors.Color;
+    LIGHTGRAY: colors.Color;
+    GRAY: colors.Color;
+    DARKGRAY: colors.Color;
+    YELLOW: colors.Color;
+    GOLD: colors.Color;
+    ORANGE: colors.Color;
+    PINK: colors.Color;
+    RED: colors.Color;
+    MAROON: colors.Color;
+    GREEN: colors.Color;
+    LIME: colors.Color;
+    DARKGREEN: colors.Color;
+    SKYBLUE: colors.Color;
+    BLUE: colors.Color;
+    DARKBLUE: colors.Color;
+    PURPLE: colors.Color;
+    VIOLET: colors.Color;
+    DARKPURPLE: colors.Color;
+    BEIGE: colors.Color;
+    BROWN: colors.Color;
+    DARKBROWN: colors.Color;
+    WHITE: colors.Color;
+    BLACK: colors.Color;
+    BLANK: colors.Color;
+    MAGENTA: colors.Color;
+    RAYWHITE: colors.Color;
+    PI: number;
+    MAX_TOUCH_POINTS: number;
+    MAX_SHADER_LOCATIONS: number;
+    MAX_MATERIAL_MAPS: number;
+    DEG2RAD: number;
+    RAD2DEG: number;
+};
 export default raylib;
 export { r };
