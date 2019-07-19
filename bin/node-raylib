@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const meow = require('meow');
+const meow = require('meow')
 const fs = require('fs')
 const path = require('path')
-const raylib = require('..')
+const raylib = require('..').default //TODO: convert this to js
 
 // Build the command line utility.
 const cli = meow(`

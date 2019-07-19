@@ -84,14 +84,12 @@ describe('raylib', function() {
     const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
 
     it('should execute on a script', () => {
-      const out = child_process.execFileSync(cliPath, [
-        path.join(__dirname, '.resources', 'node-raylib-test.js')
-      ])
+      const out = child_process.execSync(`node ${cliPath} ${path.join(__dirname, ".resources", "node-raylib-test.js")}`)
       assert.include(out.toString(), 'Test runner')
     })
 
     it('should display the help', () => {
-      var output = child_process.execFileSync(cliPath)
+      var output = child_process.execSync("node " + cliPath)
       assert(output.includes(pkg.description))
     })
 

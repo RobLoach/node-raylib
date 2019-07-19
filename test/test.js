@@ -70,13 +70,11 @@ describe('raylib', function () {
     describe('cli', function () {
         var cliPath = path.join(__dirname, '..', 'bin', 'node-raylib');
         it('should execute on a script', function () {
-            var out = child_process.execFileSync(cliPath, [
-                path.join(__dirname, '.resources', 'node-raylib-test.js')
-            ]);
+            var out = child_process.execSync("node " + cliPath + " " + path.join(__dirname, ".resources", "node-raylib-test.js"));
             chai_1.assert.include(out.toString(), 'Test runner');
         });
         it('should display the help', function () {
-            var output = child_process.execFileSync(cliPath);
+            var output = child_process.execSync("node " + cliPath);
             chai_1.assert(output.includes(pkg.description));
         });
     });
