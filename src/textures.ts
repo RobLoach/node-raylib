@@ -1,7 +1,7 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
 import { Vector2, Vector4, Rectangle, NPatchInfo } from "./types/maths"
-import { Image, Texture2D, TextureCubemap } from "./types/texture"
+import { Image, Texture2D, TextureCubemap, Font, RenderTexture2D } from "./types/texture"
 
 export const LoadImage: (fileName: string) => Image = r.LoadImage //Load image from file into CPU memory (RAM) 
 export const LoadImageEx: (pixels: Color, width: number, height: number) => Image = r.LoadImageEx //Load image from Color array data (RGBA - 32bit) 

@@ -1,3 +1,5 @@
+import { Rectangle } from "./maths"
+
 export interface Image {
   data: any
   width: number
@@ -7,7 +9,7 @@ export interface Image {
 }
 
 export interface Texture2D {
-  id: number,
+  id: number
   width: number
   height: number
   mipmaps: number
@@ -17,3 +19,25 @@ export interface Texture2D {
 export type Texture = Texture2D
 export type TextureCubemap = Texture2D
 
+export interface RenderTexture2D {
+  id: number
+  texture: Texture2D
+  depth: Texture2D
+  depthTexture: boolean
+}
+
+export interface CharInfo {
+  value: number
+  rec: Rectangle
+  offsetX: number
+  offsetY: number
+  advanceX: number
+  data: any
+}
+
+export interface Font {
+  texture: Texture2D
+  baseSize: number
+  charsCount: number
+  chars: CharInfo
+}
