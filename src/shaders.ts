@@ -1,6 +1,15 @@
 import r from "./bindings/raylib"
 import { Camera } from "./types/camera"
 
+export class Shader {
+  id: number
+  locs: number[]
+
+  constructor(id: number, locs: number[]) {
+    this.id = id
+    this.locs = locs
+  }
+}
 
 export const LoadText: (fileName: string) => string = r.LoadText //Load chars array from text file 
 export const LoadShader: (fsFileName: string) => Shader = r.LoadShader //Load shader from files and bind default locations 

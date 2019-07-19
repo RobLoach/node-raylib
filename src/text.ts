@@ -1,7 +1,7 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
 import { Vector2 } from "./types/maths"
-
+//TODO: most of the type declarations here are wrong idk why just fix them
 
 export const GetFontDefault: () => Font = r.GetFontDefault //Get the default Font 
 export const LoadFont: (fileName: string) => Font = r.LoadFont //Load font from file into GPU memory (VRAM) 
@@ -11,7 +11,7 @@ export const LoadFontData: (type: number) => CharInfo = r.LoadFontData //Load fo
 export const GenImageFontAtlas: (packMethod: number) => Image = r.GenImageFontAtlas //Generate image font atlas using chars info 
 export const UnloadFont: (font: Font) => void = r.UnloadFont //Unload Font from GPU memory (VRAM) 
 export const DrawFPS: (posY: number) => void = r.DrawFPS //Shows current FPS 
-export const DrawText: (color: Color) => void = r.DrawText //Draw text (using default font) 
+export const DrawText: (stringcolor: Color) => void = r.DrawText //Draw text (using default font) 
 export const DrawTextEx: (tint: Color) => void = r.DrawTextEx //Draw text using font and additional parameters 
 export const DrawTextRec: (tint: Color) => void = r.DrawTextRec //Draw text using font inside rectangle limits 
 export const DrawTextRecEx: (selectBack: Color) => void = r.DrawTextRecEx //Draw text using font inside rectangle limits with support for text selection 

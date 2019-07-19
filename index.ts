@@ -14,6 +14,9 @@
 import r from "./src/bindings/raylib"
 
 import * as colors from "./src/types/colors"
+import * as camera from "./src/types/camera"
+import * as maths from "./src/types/maths"
+
 import * as core from "./src/core"
 import * as shapes from "./src/shapes"
 import * as textures from "./src/textures"
@@ -33,6 +36,9 @@ const raylib = {
   RAD2DEG: (180.0 / PI),
 
   ...colors,
+  ...camera,
+  ...maths,
+
   ...core,
   ...shapes,
   ...textures,
@@ -41,22 +47,6 @@ const raylib = {
   ...shaders,
   ...audio,
 }
-
-// raylib.RayHitInfo = function (hit, distance, position, normal) {
-//   return {
-//     hit: hit,
-//     distance,
-//     position: position,
-//     normal: normal
-//   }
-// }
-
-// raylib.Shader = function (id, locs) {
-//   return {
-//     id: id,
-//     locs: locs
-//   }
-// }
 
 export default raylib
 export { r }
