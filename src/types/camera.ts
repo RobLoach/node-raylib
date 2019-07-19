@@ -1,18 +1,18 @@
 import { Vector2, Vector3 } from "./maths"
-
+import { CameraType } from "./enums";
 export class Camera3D {
   position: Vector3
   target: Vector3
   up: Vector3
   fovy: number
-  type: number //TODO: make this an enum
+  type: CameraType //TODO: make this an enum
 
-  constructor(pos?: Vector3, trg?: Vector3, up?:Vector3, fovy?: number, type?: number) {
+  constructor(pos?: Vector3, trg?: Vector3, up?:Vector3, fovy?: number, type?: CameraType) {
     this.position = pos || new Vector3(0, 0, 0)
     this.target = trg || new Vector3(0, 0, 0)
     this.up = up || new Vector3(0, 0, 0)
     this.fovy = fovy || 0
-    this.type = type || 0
+    this.type = type || CameraType.CAMERA_PERSPECTIVE
   }
 }
 
