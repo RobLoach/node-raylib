@@ -1,11 +1,12 @@
 import { Vector2, Vector3 } from "./maths";
+import { CameraType } from "./enums";
 export declare class Camera3D {
     position: Vector3;
     target: Vector3;
     up: Vector3;
     fovy: number;
-    type: number;
-    constructor(pos?: Vector3, trg?: Vector3, up?: Vector3, fovy?: number, type?: number);
+    type: CameraType;
+    constructor(pos?: Vector3, trg?: Vector3, up?: Vector3, fovy?: number, type?: CameraType);
 }
 export declare type Camera = Camera3D;
 export declare class Camera2D {

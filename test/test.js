@@ -1,7 +1,7 @@
 //TODO: make this ts
 const child_process = require('child_process')
 const path = require('path')
-const r = require('../lib/index.js').default // this is not an es5 module so in order to use it here we have to do this
+const r = require('../lib/index.js').default // this is not an es5 module so in order to use it here we have to do this for now
 const package = require('../package.json')
 const {expect, assert} = require('chai')
 
@@ -47,10 +47,10 @@ describe('raylib', function() {
 
   describe('enums', function() {
     it('KEY_A', function() {
-      assert.equal(r.KEY_A, 65)
+      assert.equal(r.KeyboardKey.KEY_A, 65)
     })
     it ('COMPRESSED_ASTC_4x4_RGBA', function() {
-      assert.equal(r.COMPRESSED_ASTC_4x4_RGBA, 20)
+      assert.equal(r.PixelFormat.COMPRESSED_ASTC_4x4_RGBA, 20)
     })
   })
 
@@ -66,12 +66,12 @@ describe('raylib', function() {
 
   describe('camera', function() {
     it('Camera()', function () {
-      const camera = r.Camera(
-        r.Vector3(5, 4, 5),
-        r.Vector3(0, 2, 0),
-        r.Vector3(0, 1, 0),
+      const camera = new r.Camera3D( // change these to be constructors
+        new r.Vector3(5, 4, 5),
+        new r.Vector3(0, 2, 0),
+        new r.Vector3(0, 1, 0),
         45,
-        r.CAMERA_PERSPECTIVE)
+        r.CameraType.CAMERA_PERSPECTIVE)
       expect(camera.position.x).to.equal(5)
 
       const matrix = r.GetCameraMatrix(camera)
