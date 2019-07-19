@@ -42,39 +42,6 @@ const raylib = {
   ...audio,
 }
 
-// raylib.Rectangle = function (x = 0, y = 0, width = 0, height = 0) {
-//   return {
-//     x: x,
-//     y: y,
-//     width: width,
-//     height: height
-//   }
-// }
-// raylib.Camera2D = function (offset, target, rotation, zoom) {
-//   return {
-//     offset: offset,
-//     target: target,
-//     rotation: rotation,
-//     zoom: zoom
-//   }
-// }
-// raylib.Camera = raylib.Camera3D = function (position, target, up, fovy, type) {
-//   return {
-//     position: position,
-//     target: target,
-//     up: up,
-//     fovy: fovy,
-//     type: type
-//   }
-// }
-
-// raylib.Ray = function (position, direction) {
-//   return {
-//     position: position,
-//     direction: direction
-//   }
-// }
-
 // raylib.RayHitInfo = function (hit, distance, position, normal) {
 //   return {
 //     hit: hit,

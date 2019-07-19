@@ -1,4 +1,4 @@
-import { Vector2, Vector3 } from "./vector"
+import { Vector2, Vector3 } from "./maths"
 
 export class Camera3D {
   position: Vector3

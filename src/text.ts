@@ -1,6 +1,6 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
-import { Vector2 } from "./types/vector"
+import { Vector2 } from "./types/maths"
 
 
 export const GetFontDefault: () => Font = r.GetFontDefault //Get the default Font 

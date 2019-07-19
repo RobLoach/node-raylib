@@ -1,6 +1,6 @@
 import r from "./bindings/raylib"
 import { Color } from "./types/colors"
-import { Vector2, Vector3, Vector4 } from "./types/vector"
+import { Vector2, Vector3, Vector4 } from "./types/maths"
 import { Camera, Camera2D, Camera3D } from "./types/camera"
 
 export const InitWindow: (title: string) => void = r.InitWindow //Initialize window and OpenGL context 
