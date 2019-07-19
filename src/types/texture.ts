@@ -1,11 +1,12 @@
 import { Rectangle } from "./maths"
+import { PixelFormat } from "./enums"
 
 export interface Image {
   data: any
   width: number
   height: number
   mipmaps: number
-  format: number
+  format: PixelFormat
 }
 
 export interface Texture2D {
@@ -13,7 +14,7 @@ export interface Texture2D {
   width: number
   height: number
   mipmaps: number
-  format: number
+  format: PixelFormat
 }
 
 export type Texture = Texture2D

@@ -44,7 +44,7 @@ export const CloseAudioDevice: () => void = r.CloseAudioDevice //Close the audio
 export const IsAudioDeviceReady: () => boolean = r.IsAudioDeviceReady //Check if audio device is ready 
 export const SetMasterVolume: (volume: number) => void = r.SetMasterVolume //Set master volume (listener) 
 // export const LoadWave: (fileName: string) => Wave = r.LoadWave //Load wave data from file 
-// export const LoadWaveEx: (data: void, sampleCount: number, sampleRate: number, sampleSize: number, channels: number) => Wave = r.LoadWaveEx //Load wave data from raw array data 
+// export const LoadWaveEx: (data: any, sampleCount: number, sampleRate: number, sampleSize: number, channels: number) => Wave = r.LoadWaveEx //Load wave data from raw array data 
 // export const LoadSound: (fileName: string) => Sound = r.LoadSound //Load sound from file 
 // export const LoadSoundFromWave: (wave: Wave) => Sound = r.LoadSoundFromWave //Load sound from wave data 
 // export const UpdateSound: (sound: Sound, data: any, samplesCount: number) => void = r.UpdateSound //Update sound buffer with new data 

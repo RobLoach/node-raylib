@@ -5,7 +5,7 @@ export class Camera3D {
   target: Vector3
   up: Vector3
   fovy: number
-  type: CameraType //TODO: make this an enum
+  type: CameraType
 
   constructor(pos?: Vector3, trg?: Vector3, up?:Vector3, fovy?: number, type?: CameraType) {
     this.position = pos || new Vector3(0, 0, 0)
