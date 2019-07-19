@@ -52,6 +52,9 @@ const raylib = {
   ...models,
   ...shaders,
   ...audio,
+
+  // aliases
+  Camera: camera.Camera3D
 }
 
 export default raylib

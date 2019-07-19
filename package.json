@@ -5,12 +5,13 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "test": "mocha",
+    "test": "tsc test/test.ts && mocha",
     "postinstall": "cmake-js compile",
     "clean": "rm -rf build",
     "compile": "cmake-js compile",
-    "prepkg": "npm run compile",
-    "pkg": "node src/scripts/pkg.js"
+    "prepkg": "npm run compile && tsc",
+    "pkg": "node src/scripts/pkg.js",
+    "dev": "tsc -w"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,8 @@
     "node-addon-api": "^1.6.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
     "archiver": "^3.0.0",
     "chai": "^4.2.0",
     "mocha": "^6.0.2",

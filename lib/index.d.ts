@@ -12,6 +12,7 @@ import * as misc from "./src/types/misc";
 import * as texture from "./src/types/texture";
 import * as shaders from "./src/shaders";
 declare const raylib: {
+    Camera: typeof camera.Camera3D;
     InitAudioDevice: () => void;
     CloseAudioDevice: () => void;
     IsAudioDeviceReady: () => boolean;
