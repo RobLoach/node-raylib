@@ -16,6 +16,9 @@ import r from "./src/bindings/raylib"
 import * as colors from "./src/types/colors"
 import * as camera from "./src/types/camera"
 import * as maths from "./src/types/maths"
+import * as enums from "./src/types/enums"
+import * as misc from "./src/types/misc"
+import * as texture from "./src/types/texture"
 
 import * as core from "./src/core"
 import * as shapes from "./src/shapes"
@@ -38,7 +41,10 @@ const raylib = {
   ...colors,
   ...camera,
   ...maths,
-
+  ...misc,
+  ...texture,
+  ...enums,
+  
   ...core,
   ...shapes,
   ...textures,
