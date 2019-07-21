@@ -3,7 +3,6 @@
  *
  * https://github.com/robloach/node-raylib
  */
-import r from "./src/bindings/raylib";
 import * as colors from "./src/types/colors";
 import * as camera from "./src/types/camera";
 import * as maths from "./src/types/maths";
@@ -320,11 +319,6 @@ declare const raylib: {
     SetCameraAltControl: (altKey: number) => void;
     SetCameraSmoothZoomControl: (szKey: number) => void;
     SetCameraMoveControls: (frontKey: number, backKey: number, rightKey: number, leftKey: number, upKey: number, downKey: number) => void;
-    /**
-     * node-raylib
-     *
-     * https://github.com/robloach/node-raylib
-     */
     ConfigFlag: typeof enums.ConfigFlag;
     TraceLogType: typeof enums.TraceLogType;
     KeyboardKey: typeof enums.KeyboardKey;
@@ -398,5 +392,4 @@ declare const raylib: {
     DEG2RAD: number;
     RAD2DEG: number;
 };
-export default raylib;
-export { r };
+export = raylib;

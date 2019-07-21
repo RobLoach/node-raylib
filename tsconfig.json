@@ -4,7 +4,6 @@
     "module": "commonjs",
     "outDir": "./lib",
     "declaration": true,
-    "esModuleInterop": true
   },
   "include": [ "index.ts", "src" ],
   "exclude": [ "node_modules" ]

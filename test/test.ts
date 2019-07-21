@@ -1,6 +1,6 @@
 import * as child_process from "child_process"
 import * as path from "path"
-import r from "../lib/index"
+import * as r from "../lib/index"
 const pkg = require('../package.json')
 import { expect, assert } from "chai"
 

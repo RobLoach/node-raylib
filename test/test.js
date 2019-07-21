@@ -2,13 +2,13 @@
 exports.__esModule = true;
 var child_process = require("child_process");
 var path = require("path");
-var index_1 = require("../lib/index");
+var r = require("../lib/index");
 var pkg = require('../package.json');
 var chai_1 = require("chai");
 describe('raylib', function () {
     describe('window', function () {
         it('IsWindowReady()', function () {
-            chai_1.assert.isFalse(index_1["default"].IsWindowReady());
+            chai_1.assert.isFalse(r.IsWindowReady());
         });
         // this is unneeded because typescript
         // it('IsWindowReady("incorrect", "number", "of", "args")', function() {
@@ -20,49 +20,49 @@ describe('raylib', function () {
     });
     describe('audio', function () {
         it('IsAudioDeviceReady()', function () {
-            chai_1.assert.isFalse(index_1["default"].IsAudioDeviceReady(), 'IsAudioDeviceReady');
+            chai_1.assert.isFalse(r.IsAudioDeviceReady(), 'IsAudioDeviceReady');
         });
     });
     describe('file', function () {
         it('FileExists()', function () {
-            chai_1.assert(index_1["default"].FileExists(path.join(__dirname, '..', 'package.json')));
+            chai_1.assert(r.FileExists(path.join(__dirname, '..', 'package.json')));
         });
         it('IsFileExtension()', function () {
-            chai_1.assert(index_1["default"].IsFileExtension("something.txt", ".txt"));
-            chai_1.assert.isFalse(index_1["default"].IsFileExtension("something.txt", ".md"));
+            chai_1.assert(r.IsFileExtension("something.txt", ".txt"));
+            chai_1.assert.isFalse(r.IsFileExtension("something.txt", ".md"));
         });
     });
     describe('rlgl', function () {
         it('LoadText()', function () {
             var filename = path.join(__dirname, '..', 'package.json');
-            var output = index_1["default"].LoadText(filename);
+            var output = r.LoadText(filename);
             chai_1.assert.isNotEmpty(output);
             chai_1.assert.include(output, '"raylib"', 'package.json contains "raylib"');
         });
     });
     describe('enums', function () {
         it('KEY_A', function () {
-            chai_1.assert.equal(index_1["default"].KeyboardKey.KEY_A, 65);
+            chai_1.assert.equal(r.KeyboardKey.KEY_A, 65);
         });
         it('COMPRESSED_ASTC_4x4_RGBA', function () {
-            chai_1.assert.equal(index_1["default"].PixelFormat.COMPRESSED_ASTC_4x4_RGBA, 20);
+            chai_1.assert.equal(r.PixelFormat.COMPRESSED_ASTC_4x4_RGBA, 20);
         });
     });
     describe('color', function () {
         it('GetColor()', function () {
-            var colorInt = index_1["default"].ColorToInt(index_1["default"].DARKPURPLE);
+            var colorInt = r.ColorToInt(r.DARKPURPLE);
             chai_1.expect(colorInt).to.be.a('number');
-            var colorPurple = index_1["default"].GetColor(colorInt);
+            var colorPurple = r.GetColor(colorInt);
             chai_1.assert.containsAllKeys(colorPurple, ['r', 'g', 'b', 'a']);
-            chai_1.assert.equal(colorPurple.g, index_1["default"].DARKPURPLE.g);
+            chai_1.assert.equal(colorPurple.g, r.DARKPURPLE.g);
         });
     });
     describe('camera', function () {
         it('Camera()', function () {
-            var camera = new index_1["default"].Camera(// change these to be constructors
-            new index_1["default"].Vector3(5, 4, 5), new index_1["default"].Vector3(0, 2, 0), new index_1["default"].Vector3(0, 1, 0), 45, index_1["default"].CameraType.CAMERA_PERSPECTIVE);
+            var camera = new r.Camera(// change these to be constructors
+            new r.Vector3(5, 4, 5), new r.Vector3(0, 2, 0), new r.Vector3(0, 1, 0), 45, r.CameraType.CAMERA_PERSPECTIVE);
             chai_1.expect(camera.position.x).to.equal(5);
-            var matrix = index_1["default"].GetCameraMatrix(camera);
+            var matrix = r.GetCameraMatrix(camera);
             chai_1.expect(matrix.m2).to.greaterThan(0.6);
             chai_1.expect(matrix.m2).to.lessThan(0.8);
         });

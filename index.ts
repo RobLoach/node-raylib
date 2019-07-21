@@ -57,5 +57,4 @@ const raylib = {
   Camera: camera.Camera3D
 }
 
-export default raylib
-export { r }
+export = raylib
