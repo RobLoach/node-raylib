@@ -62,3 +62,4 @@ export interface Matrix {
     m11: number;
     m15: number;
 }
+export declare type Quaternion = Vector4;

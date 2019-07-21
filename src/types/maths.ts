@@ -96,3 +96,5 @@ export interface Matrix {
   m2: number, m6: number, m10: number, m14: number, 
   m3: number, m7: number, m11: number, m15: number
 }
+
+export type Quaternion = Vector4
