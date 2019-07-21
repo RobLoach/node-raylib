@@ -18,7 +18,7 @@ const screenHeight = 450
 
 r.InitWindow(screenWidth, screenHeight, "raylib [core] example - mouse input")
 
-var ballPosition = r.Vector2(-100, -100)
+var ballPosition = new r.Vector2(-100, -100)
 var ballColor = r.DARKBLUE
 
 r.SetTargetFPS(60)
