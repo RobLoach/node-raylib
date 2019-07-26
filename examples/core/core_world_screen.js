@@ -19,16 +19,16 @@ const screenHeight = 450;
 r.InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d camera free")
 
 // Define the camera to look into our 3d world
-const camera = r.Camera(
-  r.Vector3(10, 10, 10),
-  r.Vector3(0, 0, 0),
-  r.Vector3(0, 1, 0),
+const camera = new r.Camera(
+  new r.Vector3(10, 10, 10),
+  new r.Vector3(0, 0, 0),
+  new r.Vector3(0, 1, 0),
   45,
-  r.CAMERA_PERSPECTIVE
+  r.CameraType.CAMERA_PERSPECTIVE
 )
 
-const cubePosition = r.Vector3()
-let cubeScreenPosition = r.Vector2()
+const cubePosition = new r.Vector3()
+let cubeScreenPosition = new r.Vector2()
 
 r.SetCameraMode(camera, r.CAMERA_FREE); // Set a free camera mode
 
@@ -43,8 +43,8 @@ while (!r.WindowShouldClose())        // Detect window close button or ESC key
     r.UpdateCamera(camera);          // Update camera
 
     // Calculate cube screen space position (with a little offset to be in top)
-    const cubePositionVector = r.Vector3(cubePosition.x, cubePosition.y + 2.5, cubePosition.z)
-    cubeScreenPosition = r.GetWorldToScreen(cubePositionVector, camera)
+    const cubePositionVector = new r.Vector3(cubePosition.x, cubePosition.y + 2.5, cubePosition.z)
+    cubeScreenPosition = new r.GetWorldToScreen(cubePositionVector, camera)
     //----------------------------------------------------------------------------------
 
     // Draw

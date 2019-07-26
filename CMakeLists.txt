@@ -30,6 +30,7 @@ endif()
 # Add all the include directories.
 include_directories(${PROJECT_NAME}
   "${CMAKE_JS_INC}"
+  "${CMAKE_SOURCE_DIR}/src"
   "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api"
   "${CMAKE_CURRENT_SOURCE_DIR}/node_modules/node-addon-api"
   "${CMAKE_SOURCE_DIR}/node_modules/node-addon-api/src"
@@ -47,23 +48,23 @@ add_library(${PROJECT_NAME} SHARED
   src/lib/ToValue.h
   src/lib/ValidArgs.h
   src/addon.cc
-  src/audio.h
-  src/camera.h
-  src/color.h
-  src/cursor.h
-  src/drawing.h
-  src/files.h
-  src/gestures.h
-  src/keyboard.h
-  src/misc.h
-  src/mouse.h
-  src/rlgl.h
-  src/shapes.h
-  src/text.h
-  src/textures.h
-  src/timing.h
-  src/touch.h
-  src/window.h
+  src/bindings/audio.h
+  src/bindings/camera.h
+  src/bindings/color.h
+  src/bindings/cursor.h
+  src/bindings/drawing.h
+  src/bindings/files.h
+  src/bindings/gestures.h
+  src/bindings/keyboard.h
+  src/bindings/misc.h
+  src/bindings/mouse.h
+  src/bindings/rlgl.h
+  src/bindings/shapes.h
+  src/bindings/text.h
+  src/bindings/textures.h
+  src/bindings/timing.h
+  src/bindings/touch.h
+  src/bindings/window.h
 )
 
 ## Suffix the node module with .node.

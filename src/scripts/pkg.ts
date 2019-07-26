@@ -2,7 +2,7 @@ const { exec } = require('pkg')
 const archiver = require('archiver')
 const fs = require('fs')
 const path = require('path')
-const package = require('../../package.json')
+const package = require('../../../package.json') // extra ../ because of the compile dir
 
 // Options
 var binaryFilename = 'node-raylib'

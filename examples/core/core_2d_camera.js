@@ -20,7 +20,7 @@ const screenHeight = 450
 
 r.InitWindow(screenWidth, screenHeight, "raylib [core] example - 2d camera")
 
-const player = r.Rectangle(400, 280, 40, 40)
+const player = new r.Rectangle(400, 280, 40, 40)
 const buildings = []
 const buildColors = []
 
@@ -29,7 +29,7 @@ let spacing = 0;
 for (let i = 0; i < MAX_BUILDINGS; i++)
 {
   let height = r.GetRandomValue(100, 800)
-  let newBuilding = r.Rectangle(
+  let newBuilding = new r.Rectangle(
     -6000 + spacing,
     screenHeight - 130 - height,
     r.GetRandomValue(50, 200),
@@ -37,12 +37,12 @@ for (let i = 0; i < MAX_BUILDINGS; i++)
   )
   spacing += newBuilding.width;
   buildings.push(newBuilding)
-  buildColors.push(r.Color(r.GetRandomValue(200, 240), r.GetRandomValue(200, 240), r.GetRandomValue(200, 250), 255))
+  buildColors.push(new r.Color(r.GetRandomValue(200, 240), r.GetRandomValue(200, 240), r.GetRandomValue(200, 250), 255))
 }
 
-const camera = r.Camera2D(
-  r.Vector2(),
-  r.Vector2(player.x + 20, player.y + 20),
+const camera = new r.Camera2D(
+  new r.Vector2(),
+  new r.Vector2(player.x + 20, player.y + 20),
   0, 1)
 
 r.SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
@@ -53,25 +53,25 @@ while (!r.WindowShouldClose())        // Detect window close button or ESC key
 {
   // Update
   //----------------------------------------------------------------------------------
-  if (r.IsKeyDown(r.KEY_RIGHT))
+  if (r.IsKeyDown(r.KeyboardKey.KEY_RIGHT))
   {
       player.x += 2;              // Player movement
       camera.offset.x -= 2;       // Camera displacement with player movement
   }
-  else if (r.IsKeyDown(r.KEY_LEFT))
+  else if (r.IsKeyDown(r.KeyboardKey.KEY_LEFT))
   {
       player.x -= 2;              // Player movement
       camera.offset.x += 2;       // Camera displacement with player movement
   }
 
   // Camera target follows player
-  camera.target = r.Vector2(player.x + 20, player.y + 20)
+  camera.target = new r.Vector2(player.x + 20, player.y + 20)
 
   // Camera rotation controls
-  if (r.IsKeyDown(r.KEY_A)) {
+  if (r.IsKeyDown(r.KeyboardKey.KEY_A)) {
     camera.rotation--;
   }
-  else if (r.IsKeyDown(r.KEY_S)) {
+  else if (r.IsKeyDown(r.KeyboardKey.KEY_S)) {
     camera.rotation++;
   }
 
@@ -90,7 +90,7 @@ while (!r.WindowShouldClose())        // Detect window close button or ESC key
   else if (camera.zoom < 0.1) camera.zoom = 0.1
 
   // Camera reset (zoom and rotation)
-  if (r.IsKeyPressed(r.KEY_R))
+  if (r.IsKeyPressed(r.KeyboardKey.KEY_R))
   {
       camera.zoom = 1.0
       camera.rotation = 0

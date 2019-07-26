@@ -1,0 +1,37 @@
+import { Camera } from "./types/camera";
+import { Texture2D } from "./types/texture";
+import { Matrix } from "./types/maths";
+import { VrDeviceInfo } from "./types/misc";
+export declare class Shader {
+    id: number;
+    locs: number[];
+    constructor(id: number, locs: number[]);
+}
+export declare const LoadText: (fileName: string) => string;
+export declare const LoadShader: (vsFileName: string, fsFileName: string) => Shader;
+export declare const LoadShaderCode: (vsCode: string, fsCode: string) => Shader;
+export declare const UnloadShader: (shader: Shader) => void;
+export declare const GetShaderDefault: () => Shader;
+export declare const GetTextureDefault: () => Texture2D;
+export declare const GetShaderLocation: (shader: Shader, uniformName: string) => number;
+export declare const SetShaderValue: (shader: Shader, uniformLoc: number, value: any, uniformType: number) => void;
+export declare const SetShaderValueV: (shader: Shader, uniformLoc: number, value: any, uniformType: number, count: number) => void;
+export declare const SetShaderValueMatrix: (shader: Shader, uniformLoc: number, mat: Matrix) => void;
+export declare const SetShaderValueTexture: (shader: Shader, uniformLoc: number, texture: Texture2D) => void;
+export declare const SetMatrixProjection: (proj: Matrix) => void;
+export declare const SetMatrixModelview: (view: Matrix) => void;
+export declare const GetMatrixModelview: () => Matrix;
+export declare const BeginShaderMode: (shader: Shader) => void;
+export declare const EndShaderMode: () => void;
+export declare const BeginBlendMode: (mode: number) => void;
+export declare const EndBlendMode: () => void;
+export declare const BeginScissorMode: (x: number, y: number, width: number, height: number) => void;
+export declare const EndScissorMode: () => void;
+export declare const InitVrSimulator: () => void;
+export declare const CloseVrSimulator: () => void;
+export declare const UpdateVrTracking: (camera: Camera) => void;
+export declare const SetVrConfiguration: (info: VrDeviceInfo, distortion: Shader) => void;
+export declare const IsVrSimulatorReady: () => boolean;
+export declare const ToggleVrMode: () => void;
+export declare const BeginVrDrawing: () => void;
+export declare const EndVrDrawing: () => void;
