@@ -23,7 +23,7 @@ inline void CleanUp(const char* val) {
 }
 
 /**
- * Clean up the memory for a string.
+ * Clean up the memory for a Camera.
  */
 inline void CleanUp(Camera* val) {
   delete val;
