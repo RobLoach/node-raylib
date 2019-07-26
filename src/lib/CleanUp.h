@@ -4,7 +4,6 @@
 // cstdlib is used for free()
 // http://www.cplusplus.com/reference/cstdlib/free/
 #include <cstdlib>
-#include <iostream>
 
 /**
  * Clean up the given value.

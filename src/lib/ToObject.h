@@ -2,7 +2,6 @@
 #define NODE_RAYLIB_TOOBJECT_H_
 
 #include <napi.h>
-#include <iostream>
 
 /**
  * Convert the given argument value to a Color.
