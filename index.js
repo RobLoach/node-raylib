@@ -109,7 +109,7 @@ raylib.Camera = raylib.Camera3D = function (position, target, up, fovy, type) {
 /**
  * UpdateCamera is wrapped to allow object reference.
  *
- * @see node_raylib_init_camera_updatecamera()
+ * @see UpdateCameraWrap()
  */
 raylib.UpdateCamera = function(camera) {
   const newCamera = raylib.UpdateCameraWrap(camera)

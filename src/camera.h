@@ -8,16 +8,12 @@
 
 /**
  * Wrapper function around UpdateCamera().
+ *
+ * @see raylib.UpdateCamera
  */
-Napi::Value node_raylib_init_camera_updatecamera(const Napi::CallbackInfo& info) {
-    Napi::Env env = info.Env();
-    if (!ValidArgs(env, info, 1)) {
-      return env.Null();
-    }
-
-    Camera input = ToCamera(env, info[0]);
-    UpdateCamera(&input);
-    return ToValue(env, input);
+Camera UpdateCameraWrap(Camera camera) {
+  UpdateCamera(&camera);
+  return camera;
 }
 
 void node_raylib_init_camera(Napi::Env& env, Napi::Object& exports) {
@@ -27,9 +23,8 @@ void node_raylib_init_camera(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "SetCameraSmoothZoomControl", SetCameraSmoothZoomControl);
   AddFunction(env, exports, "SetCameraMoveControls", SetCameraMoveControls);
 
-  // TODO: Find a clean solution around allowing object references.
-  // AddFunction(env, exports, "UpdateCamera", UpdateCamera);
-  exports.Set(Napi::String::New(env, "UpdateCameraWrap"), Napi::Function::New(env, node_raylib_init_camera_updatecamera));
+  // Wrapped functions.
+  AddFunction(env, exports, "UpdateCameraWrap", UpdateCameraWrap);
 }
 
 #endif

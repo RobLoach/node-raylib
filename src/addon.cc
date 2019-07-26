@@ -44,7 +44,6 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   node_raylib_init_timing(env, exports);
   node_raylib_init_touch(env, exports);
   node_raylib_init_window(env, exports);
-  //node_raylib_init_structs(env, exports);
 
   return exports;
 }
