@@ -59,8 +59,7 @@ describe('raylib', function () {
     });
     describe('camera', function () {
         it('Camera()', function () {
-            var camera = new r.Camera(// change these to be constructors
-            new r.Vector3(5, 4, 5), new r.Vector3(0, 2, 0), new r.Vector3(0, 1, 0), 45, r.CameraType.CAMERA_PERSPECTIVE);
+            var camera = new r.Camera(new r.Vector3(5, 4, 5), new r.Vector3(0, 2, 0), new r.Vector3(0, 1, 0), 45, r.CameraType.CAMERA_PERSPECTIVE);
             chai_1.expect(camera.position.x).to.equal(5);
             var matrix = r.GetCameraMatrix(camera);
             chai_1.expect(matrix.m2).to.greaterThan(0.6);
