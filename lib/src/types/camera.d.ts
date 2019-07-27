@@ -16,9 +16,3 @@ export declare class Camera2D {
     zoom: number;
     constructor(offset?: Vector3, trg?: Vector3, rotation?: number, zoom?: number);
 }
-/**
- * UpdateCamera is wrapped to allow object reference.
- *
- * @see UpdateCameraWrap()
- */
-export declare function UpdateCamera(camera: any): void;
