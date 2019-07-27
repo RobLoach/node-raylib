@@ -2,11 +2,7 @@ import { Camera } from "./types/camera";
 import { Texture2D } from "./types/texture";
 import { Matrix } from "./types/maths";
 import { VrDeviceInfo } from "./types/misc";
-export declare class Shader {
-    id: number;
-    locs: number[];
-    constructor(id: number, locs: number[]);
-}
+import { Shader } from "./types/shaders";
 export default interface Shaders {
     LoadText: (fileName: string) => string;
     LoadShader: (vsFileName: string, fsFileName: string) => Shader;

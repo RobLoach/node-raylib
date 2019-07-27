@@ -1,76 +1,9 @@
 import { Color } from "./types/colors"
-import { Vector2, Vector3, Ray, RayHitInfo, Rectangle, Matrix, Quaternion } from "./types/maths"
+import { Vector2, Vector3, Ray, RayHitInfo, Rectangle } from "./types/maths"
 import { Texture2D, Image } from "./types/texture"
-import { Shader } from "./shaders";
 import { Camera } from "./types/camera"
+import { Model, Mesh, Material, ModelAnimation, BoundingBox,  } from "./types/models"
 
-export interface Mesh {
-    vertexCount: number
-    triangleCount: number
-
-    vertices: number[]
-    texcoords: number[]
-    texcoords2: number[]
-    normals: number[]
-    tangents: number[]
-    colors: number[]
-    indices: number[]
-
-    animVertices: number[]
-    animNormals: number[]
-    boneIds: number[]
-    boneWeights: number[]
-    vaoId: number
-    vboId: number[]
-}
-
-export interface BoneInfo {
-  name: string
-  parent: number
-}
-
-export interface Transform {
-  translation: Vector3
-  roation: Quaternion
-  scale: Vector3
-}
-
-export interface Model {
-  transform: Matrix       
-  meshCount: number          
-  meshes: number[]
-  materialCount: number      
-  materials: Material
-  meshMaterial: number      
-
-  boneCount: number
-  bones: BoneInfo
-  bindPose: Transform
-}
-
-export interface MaterialMaps {
-  texture: Texture2D
-  color: Color
-  value: number
-}
-
-export interface Material {
-  shader: Shader
-  maps: MaterialMaps[]
-  params: number[]
-}
-
-export interface ModelAnimation {
-  boneCount: number
-  bones: BoneInfo
-  frameCount: number
-  framePoses: Transform
-}
-
-export interface BoundingBox {
-  min: Vector3
-  max: Vector3
-}
 
 export default interface Models {
   DrawLine3D: (startPos: Vector3, endPos: Vector3, color: Color) => void //Draw a line in 3D world space 

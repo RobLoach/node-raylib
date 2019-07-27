@@ -2,16 +2,7 @@ import { Camera } from "./types/camera"
 import { Texture2D } from "./types/texture"
 import { Matrix } from "./types/maths"
 import { VrDeviceInfo } from "./types/misc"
-
-export class Shader {
-  id: number
-  locs: number[]
-
-  constructor(id: number, locs: number[]) {
-    this.id = id
-    this.locs = locs
-  }
-}
+import { Shader } from "./types/shaders"
 
 export default interface Shaders {
   LoadText: (fileName: string) => string //Load chars array from text file 
