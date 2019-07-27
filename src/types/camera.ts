@@ -1,5 +1,6 @@
 import { Vector2, Vector3 } from "./maths"
-import { CameraType } from "./enums";
+import { CameraType } from "./enums"
+
 export class Camera3D {
   position: Vector3
   target: Vector3
@@ -15,8 +16,6 @@ export class Camera3D {
     this.type = type || CameraType.CAMERA_PERSPECTIVE
   }
 }
-
-export type Camera = Camera3D
 
 export class Camera2D {
   offset: Vector2

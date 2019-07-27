@@ -8,7 +8,6 @@ export declare class Camera3D {
     type: CameraType;
     constructor(pos?: Vector3, trg?: Vector3, up?: Vector3, fovy?: number, type?: CameraType);
 }
-export declare type Camera = Camera3D;
 export declare class Camera2D {
     offset: Vector2;
     target: Vector2;

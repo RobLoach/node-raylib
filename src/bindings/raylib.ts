@@ -1,6 +1,6 @@
 // Find the bindings.
-// put in this single file for instancing glitches
 const r = require('bindings')('node-raylib')
+
 const PI = 3.14159265358979323846
 
 r.PI = PI

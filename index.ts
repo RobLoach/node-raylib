@@ -29,6 +29,7 @@ import Text from "./src/text"
 import Models from "./src/models"
 import Shaders from "./src/shaders"
 
+
 interface Raylib extends Core, Audio, Shapes, Textures, Text, Models, Shaders {
   PI: number
   MAX_TOUCH_POINTS: number
@@ -38,27 +39,15 @@ interface Raylib extends Core, Audio, Shapes, Textures, Text, Models, Shaders {
   RAD2DEG: number
 }
 
-
-
-//   ...colors,
-//   ...camera,
-//   ...maths,
-//   ...misc,
-//   ...texture,
-//   ...enums,
-  
-//   ...core,
-//   ...shapes,
-//   ...textures,
-//   ...text,
-//   ...models,
-//   ...shaders,
-//   ...audio,
-
-//   // aliases
-//   Camera: camera.Camera3D
-// }
-
-const raylib: Raylib = r
+const raylib: Raylib = {
+  ...r,
+  ...colors,
+  ...camera,
+  ...enums,
+  ...maths,
+  ...misc,
+  ...texture,
+  Camera: camera.Camera3D
+}
 
 export = raylib
