@@ -1,4 +1,3 @@
-import r from "./bindings/raylib"
 import { Camera } from "./types/camera"
 import { Texture2D } from "./types/texture"
 import { Matrix } from "./types/maths"
@@ -14,31 +13,34 @@ export class Shader {
   }
 }
 
-export const LoadText: (fileName: string) => string = r.LoadText //Load chars array from text file 
-export const LoadShader: (vsFileName: string, fsFileName: string) => Shader = r.LoadShader //Load shader from files and bind default locations 
-export const LoadShaderCode: (vsCode: string, fsCode: string) => Shader = r.LoadShaderCode //Load shader from code strings and bind default locations 
-export const UnloadShader: (shader: Shader) => void = r.UnloadShader //Unload shader from GPU memory (VRAM) 
-export const GetShaderDefault: () => Shader = r.GetShaderDefault //Get default shader 
-export const GetTextureDefault: () => Texture2D = r.GetTextureDefault //Get default texture 
-export const GetShaderLocation: (shader: Shader, uniformName: string) => number = r.GetShaderLocation //Get shader uniform location 
-export const SetShaderValue: (shader: Shader, uniformLoc: number, value: any, uniformType: number) => void = r.SetShaderValue //Set shader uniform value 
-export const SetShaderValueV: (shader: Shader, uniformLoc: number, value: any, uniformType: number, count: number) => void = r.SetShaderValueV //Set shader uniform value vector 
-export const SetShaderValueMatrix: (shader: Shader, uniformLoc: number, mat: Matrix) => void = r.SetShaderValueMatrix //Set shader uniform value (matrix 4x4) 
-export const SetShaderValueTexture: (shader: Shader, uniformLoc: number, texture: Texture2D) => void = r.SetShaderValueTexture //Set shader uniform value for texture 
-export const SetMatrixProjection: (proj: Matrix) => void = r.SetMatrixProjection //Set a custom projection matrix (replaces internal projection matrix) 
-export const SetMatrixModelview: (view: Matrix) => void = r.SetMatrixModelview //Set a custom modelview matrix (replaces internal modelview matrix) 
-export const GetMatrixModelview: () => Matrix = r.GetMatrixModelview //Get internal modelview matrix 
-export const BeginShaderMode: (shader: Shader) => void = r.BeginShaderMode //Begin custom shader drawing 
-export const EndShaderMode: () => void = r.EndShaderMode //End custom shader drawing (use default shader) 
-export const BeginBlendMode: (mode: number) => void = r.BeginBlendMode //Begin blending mode (alpha, additive, multiplied) 
-export const EndBlendMode: () => void = r.EndBlendMode //End blending mode (reset to default: alpha blending) 
-export const BeginScissorMode: (x: number, y: number, width: number, height: number) => void = r.BeginScissorMode //Begin scissor mode (define screen area for following drawing) 
-export const EndScissorMode: () => void = r.EndScissorMode //End scissor mode 
-export const InitVrSimulator: () => void = r.InitVrSimulator //Init VR simulator for selected device parameters 
-export const CloseVrSimulator: () => void = r.CloseVrSimulator //Close VR simulator for current device 
-export const UpdateVrTracking: (camera: Camera) => void = r.UpdateVrTracking //Update VR tracking (position and orientation) and camera 
-export const SetVrConfiguration: (info: VrDeviceInfo, distortion: Shader) => void = r.SetVrConfiguration //Set stereo rendering configuration parameters 
-export const IsVrSimulatorReady: () => boolean = r.IsVrSimulatorReady //Detect if VR simulator is ready 
-export const ToggleVrMode: () => void = r.ToggleVrMode //Enable/Disable VR experience 
-export const BeginVrDrawing: () => void = r.BeginVrDrawing //Begin VR simulator stereo rendering 
-export const EndVrDrawing: () => void = r.EndVrDrawing //End VR simulator stereo rendering 
+export default interface Shaders {
+  LoadText: (fileName: string) => string //Load chars array from text file 
+  LoadShader: (vsFileName: string, fsFileName: string) => Shader //Load shader from files and bind default locations 
+  LoadShaderCode: (vsCode: string, fsCode: string) => Shader //Load shader from code strings and bind default locations 
+  UnloadShader: (shader: Shader) => void //Unload shader from GPU memory (VRAM) 
+  GetShaderDefault: () => Shader //Get default shader 
+  GetTextureDefault: () => Texture2D //Get default texture 
+  GetShaderLocation: (shader: Shader, uniformName: string) => number //Get shader uniform location 
+  SetShaderValue: (shader: Shader, uniformLoc: number, value: any, uniformType: number) => void //Set shader uniform value 
+  SetShaderValueV: (shader: Shader, uniformLoc: number, value: any, uniformType: number, count: number) => void //Set shader uniform value vector 
+  SetShaderValueMatrix: (shader: Shader, uniformLoc: number, mat: Matrix) => void //Set shader uniform value (matrix 4x4) 
+  SetShaderValueTexture: (shader: Shader, uniformLoc: number, texture: Texture2D) => void //Set shader uniform value for texture 
+  SetMatrixProjection: (proj: Matrix) => void //Set a custom projection matrix (replaces internal projection matrix) 
+  SetMatrixModelview: (view: Matrix) => void //Set a custom modelview matrix (replaces internal modelview matrix) 
+  GetMatrixModelview: () => Matrix //Get internal modelview matrix 
+  BeginShaderMode: (shader: Shader) => void //Begin custom shader drawing 
+  EndShaderMode: () => void //End custom shader drawing (use default shader) 
+  BeginBlendMode: (mode: number) => void //Begin blending mode (alpha, additive, multiplied) 
+  EndBlendMode: () => void //End blending mode (reset to default: alpha blending) 
+  BeginScissorMode: (x: number, y: number, width: number, height: number) => void //Begin scissor mode (define screen area for following drawing) 
+  EndScissorMode: () => void //End scissor mode 
+  InitVrSimulator: () => void //Init VR simulator for selected device parameters 
+  CloseVrSimulator: () => void //Close VR simulator for current device 
+  UpdateVrTracking: (camera: Camera) => void //Update VR tracking (position and orientation) and camera 
+  SetVrConfiguration: (info: VrDeviceInfo, distortion: Shader) => void //Set stereo rendering configuration parameters 
+  IsVrSimulatorReady: () => boolean //Detect if VR simulator is ready 
+  ToggleVrMode: () => void //Enable/Disable VR experience 
+  BeginVrDrawing: () => void //Begin VR simulator stereo rendering 
+  EndVrDrawing: () => void //End VR simulator stereo rendering 
+}
+

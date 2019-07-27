@@ -1,48 +1,12 @@
-import r from "./bindings/raylib"
+import { Wave, Sound, AudioStream, MusicData, Music } from "./types/audio"
 
-export interface Wave {
-  sampleCount: number
-  sampleRate: number
-  sampleSize: number
-  channels: number
-  data: any
+export default interface Audio {
+  InitAudioDevice: () => void //Initialize audio device and context 
+  CloseAudioDevice: () => void //Close the audio device and context (and music stream) 
+  IsAudioDeviceReady: () => boolean //Check if audio device is ready 
+  SetMasterVolume: (volume: number) => void //Set master volume (listener) 
 }
 
-export interface Sound {
-  audioBuffer: any
-  source: number
-  buffer: number
-  format: number
-}
-
-export interface AudioStream {
-  sampleRate: number
-  sampleSize: number
-  channels: number
-  AudioBuffer: any
-  source: number
-  buffers: number[]
-}
-
-export interface MusicData {
-  ctxType: any //TODO: make enum
-  ctxOgg: any
-  ctxFlac: any
-  ctxMp3: any
-  ctxXm: any
-  ctxMod: any
-  stream: AudioStream
-  loopCount: number
-  totalSamples: number
-  samplesLeft: number
-}
-
-export type Music = MusicData
-
-export const InitAudioDevice: () => void = r.InitAudioDevice //Initialize audio device and context 
-export const CloseAudioDevice: () => void = r.CloseAudioDevice //Close the audio device and context (and music stream) 
-export const IsAudioDeviceReady: () => boolean = r.IsAudioDeviceReady //Check if audio device is ready 
-export const SetMasterVolume: (volume: number) => void = r.SetMasterVolume //Set master volume (listener) 
 // export const LoadWave: (fileName: string) => Wave = r.LoadWave //Load wave data from file 
 // export const LoadWaveEx: (data: any, sampleCount: number, sampleRate: number, sampleSize: number, channels: number) => Wave = r.LoadWaveEx //Load wave data from raw array data 
 // export const LoadSound: (fileName: string) => Sound = r.LoadSound //Load sound from file 

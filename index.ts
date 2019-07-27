@@ -20,41 +20,48 @@ import * as enums from "./src/types/enums"
 import * as misc from "./src/types/misc"
 import * as texture from "./src/types/texture"
 
-import * as core from "./src/core"
-import * as shapes from "./src/shapes"
-import * as textures from "./src/textures"
-import * as text from "./src/text"
-import * as models from "./src/models"
-import * as shaders from "./src/shaders"
-import * as audio from "./src/audio"
 
-const PI = 3.14159265358979323846
+import Core from "./src/core"
+import Audio from "./src/audio"
+import Shapes from "./src/shapes"
+import Textures from "./src/textures"
+import Text from "./src/text"
+import Models from "./src/models"
+import Shaders from "./src/shaders"
 
-const raylib = {
-  PI,
-  MAX_TOUCH_POINTS: 10,
-  MAX_SHADER_LOCATIONS: 32,
-  MAX_MATERIAL_MAPS: 12,
-  DEG2RAD: (PI / 180.0),
-  RAD2DEG: (180.0 / PI),
+interface Raylib {
+  Core, 
+  Audio,
 
-  ...colors,
-  ...camera,
-  ...maths,
-  ...misc,
-  ...texture,
-  ...enums,
-  
-  ...core,
-  ...shapes,
-  ...textures,
-  ...text,
-  ...models,
-  ...shaders,
-  ...audio,
-
-  // aliases
-  Camera: camera.Camera3D
+  PI: number,
+  MAX_TOUCH_POINTS: number,
+  MAX_SHADER_LOCATIONS: number,
+  MAX_MATERIAL_MAPS: number,
+  DEG2RAD: number,
+  RAD2DEG: number,
 }
+
+
+
+//   ...colors,
+//   ...camera,
+//   ...maths,
+//   ...misc,
+//   ...texture,
+//   ...enums,
+  
+//   ...core,
+//   ...shapes,
+//   ...textures,
+//   ...text,
+//   ...models,
+//   ...shaders,
+//   ...audio,
+
+//   // aliases
+//   Camera: camera.Camera3D
+// }
+
+const raylib: Raylib = r
 
 export = raylib
