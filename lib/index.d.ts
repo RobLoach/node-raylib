@@ -17,110 +17,110 @@ import Models from "./src/models";
 import Shaders from "./src/shaders";
 import Misc from "./src/misc";
 interface Raylib extends Core, Audio, Shapes, Textures, Text, Models, Shaders, Misc {
-    PI: number;
-    MAX_TOUCH_POINTS: number;
-    MAX_SHADER_LOCATIONS: number;
-    MAX_MATERIAL_MAPS: number;
-    DEG2RAD: number;
-    RAD2DEG: number;
-    Vector2: typeof maths.Vector2;
-    Vector3: typeof maths.Vector3;
-    Vector4: typeof maths.Vector4;
-    Rectangle: typeof maths.Rectangle;
-    Ray: typeof maths.Ray;
-    RayHitInfo: typeof maths.RayHitInfo;
-    Quaternion: typeof maths.Vector4;
-    Color: typeof colors.Color;
-    Camera2D: typeof camera.Camera2D;
-    Camera3D: typeof camera.Camera3D;
-    Camera: typeof camera.Camera3D;
-    Shader: typeof shaders.Shader;
-    KeyboardKey: {
+    readonly PI: number;
+    readonly MAX_TOUCH_POINTS: number;
+    readonly MAX_SHADER_LOCATIONS: number;
+    readonly MAX_MATERIAL_MAPS: number;
+    readonly DEG2RAD: number;
+    readonly RAD2DEG: number;
+    readonly Vector2: typeof maths.Vector2;
+    readonly Vector3: typeof maths.Vector3;
+    readonly Vector4: typeof maths.Vector4;
+    readonly Rectangle: typeof maths.Rectangle;
+    readonly Ray: typeof maths.Ray;
+    readonly RayHitInfo: typeof maths.RayHitInfo;
+    readonly Quaternion: typeof maths.Vector4;
+    readonly Color: typeof colors.Color;
+    readonly Camera2D: typeof camera.Camera2D;
+    readonly Camera3D: typeof camera.Camera3D;
+    readonly Camera: typeof camera.Camera3D;
+    readonly Shader: typeof shaders.Shader;
+    readonly KeyboardKey: {
         [key: string]: enums.KeyboardKey;
     };
-    ConfigFlag: {
+    readonly ConfigFlag: {
         [key: string]: enums.ConfigFlag;
     };
-    TraceLogType: {
+    readonly TraceLogType: {
         [key: string]: enums.TraceLogType;
     };
-    AndroidButton: {
+    readonly AndroidButton: {
         [key: string]: enums.AndroidButton;
     };
-    MouseButton: {
+    readonly MouseButton: {
         [key: string]: enums.MouseButton;
     };
-    GamepadNumber: {
+    readonly GamepadNumber: {
         [key: string]: enums.GamepadNumber;
     };
-    GamepadButton: {
+    readonly GamepadButton: {
         [key: string]: enums.GamepadButton;
     };
-    GamepadAxis: {
+    readonly GamepadAxis: {
         [key: string]: enums.GamepadAxis;
     };
-    ShaderLocationIndex: {
+    readonly ShaderLocationIndex: {
         [key: string]: enums.ShaderLocationIndex;
     };
-    ShaderUniformDataType: {
+    readonly ShaderUniformDataType: {
         [key: string]: enums.ShaderUniformDataType;
     };
-    MaterialMapType: {
+    readonly MaterialMapType: {
         [key: string]: enums.MaterialMapType;
     };
-    PixelFormat: {
+    readonly PixelFormat: {
         [key: string]: enums.PixelFormat;
     };
-    TextureFilterMode: {
+    readonly TextureFilterMode: {
         [key: string]: enums.TextureFilterMode;
     };
-    CubemapLayoutType: {
+    readonly CubemapLayoutType: {
         [key: string]: enums.CubemapLayoutType;
     };
-    TextureWrapMode: {
+    readonly TextureWrapMode: {
         [key: string]: enums.TextureWrapMode;
     };
-    FontType: {
+    readonly FontType: {
         [key: string]: enums.FontType;
     };
-    BlendMode: {
+    readonly BlendMode: {
         [key: string]: enums.BlendMode;
     };
-    GestureType: {
+    readonly GestureType: {
         [key: string]: enums.GestureType;
     };
-    CameraMode: {
+    readonly CameraMode: {
         [key: string]: enums.CameraMode;
     };
-    CameraType: {
+    readonly CameraType: {
         [key: string]: enums.CameraType;
     };
-    LIGHTGRAY: colors.Color;
-    GRAY: colors.Color;
-    DARKGRAY: colors.Color;
-    YELLOW: colors.Color;
-    GOLD: colors.Color;
-    ORANGE: colors.Color;
-    PINK: colors.Color;
-    RED: colors.Color;
-    MAROON: colors.Color;
-    GREEN: colors.Color;
-    LIME: colors.Color;
-    DARKGREEN: colors.Color;
-    SKYBLUE: colors.Color;
-    BLUE: colors.Color;
-    DARKBLUE: colors.Color;
-    PURPLE: colors.Color;
-    VIOLET: colors.Color;
-    DARKPURPLE: colors.Color;
-    BEIGE: colors.Color;
-    BROWN: colors.Color;
-    DARKBROWN: colors.Color;
-    WHITE: colors.Color;
-    BLACK: colors.Color;
-    BLANK: colors.Color;
-    MAGENTA: colors.Color;
-    RAYWHITE: colors.Color;
+    readonly LIGHTGRAY: colors.Color;
+    readonly GRAY: colors.Color;
+    readonly DARKGRAY: colors.Color;
+    readonly YELLOW: colors.Color;
+    readonly GOLD: colors.Color;
+    readonly ORANGE: colors.Color;
+    readonly PINK: colors.Color;
+    readonly RED: colors.Color;
+    readonly MAROON: colors.Color;
+    readonly GREEN: colors.Color;
+    readonly LIME: colors.Color;
+    readonly DARKGREEN: colors.Color;
+    readonly SKYBLUE: colors.Color;
+    readonly BLUE: colors.Color;
+    readonly DARKBLUE: colors.Color;
+    readonly PURPLE: colors.Color;
+    readonly VIOLET: colors.Color;
+    readonly DARKPURPLE: colors.Color;
+    readonly BEIGE: colors.Color;
+    readonly BROWN: colors.Color;
+    readonly DARKBROWN: colors.Color;
+    readonly WHITE: colors.Color;
+    readonly BLACK: colors.Color;
+    readonly BLANK: colors.Color;
+    readonly MAGENTA: colors.Color;
+    readonly RAYWHITE: colors.Color;
 }
 declare const raylib: Raylib;
 export = raylib;

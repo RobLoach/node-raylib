@@ -30,77 +30,78 @@ import * as wrappers from "./src/wrappers"
 
 interface Raylib extends Core, Audio, Shapes, Textures, Text, Models, Shaders, Misc {
   // constants
-  PI: number
-  MAX_TOUCH_POINTS: number
-  MAX_SHADER_LOCATIONS: number
-  MAX_MATERIAL_MAPS: number
-  DEG2RAD: number
-  RAD2DEG: number
+  readonly PI: number
+  readonly MAX_TOUCH_POINTS: number
+  readonly MAX_SHADER_LOCATIONS: number
+  readonly MAX_MATERIAL_MAPS: number
+  readonly DEG2RAD: number
+  readonly RAD2DEG: number
 
-  //TODO: find a better way of getting these. Right now they are only here so typescript doesn't complain about classes not existing
-  Vector2: typeof maths.Vector2
-  Vector3: typeof maths.Vector3
-  Vector4: typeof maths.Vector4
-  Rectangle: typeof maths.Rectangle
-  Ray: typeof maths.Ray
-  RayHitInfo: typeof maths.RayHitInfo
-  Quaternion: typeof maths.Vector4
+  //TODO: find a better way of getting these. Right now they are only here to make the library readonly
+  // and allow for some linters to understand
+  readonly Vector2: typeof maths.Vector2
+  readonly Vector3: typeof maths.Vector3
+  readonly Vector4: typeof maths.Vector4
+  readonly Rectangle: typeof maths.Rectangle
+  readonly Ray: typeof maths.Ray
+  readonly RayHitInfo: typeof maths.RayHitInfo
+  readonly Quaternion: typeof maths.Vector4
 
-  Color: typeof colors.Color
-  Camera2D: typeof camera.Camera2D
-  Camera3D: typeof camera.Camera3D
-  Camera: typeof camera.Camera3D
-  Shader: typeof shaders.Shader
+  readonly Color: typeof colors.Color
+  readonly Camera2D: typeof camera.Camera2D
+  readonly Camera3D: typeof camera.Camera3D
+  readonly Camera: typeof camera.Camera3D
+  readonly Shader: typeof shaders.Shader
 
-  
-  KeyboardKey: { [key: string]: enums.KeyboardKey }
-  ConfigFlag: { [key: string]: enums.ConfigFlag }
-  TraceLogType: { [key: string]: enums.TraceLogType }
-  AndroidButton: { [key: string]: enums.AndroidButton }
-  MouseButton: { [key: string]: enums.MouseButton }
-  GamepadNumber: { [key: string]: enums.GamepadNumber }
-  GamepadButton: { [key: string]: enums.GamepadButton }
-  GamepadAxis: { [key: string]: enums.GamepadAxis }
-  ShaderLocationIndex: { [key: string]: enums.ShaderLocationIndex }
-  ShaderUniformDataType: { [key: string]: enums.ShaderUniformDataType }
-  MaterialMapType: { [key: string]: enums.MaterialMapType }
-  PixelFormat: { [key: string]: enums.PixelFormat }
-  TextureFilterMode: { [key: string]: enums.TextureFilterMode }
-  CubemapLayoutType: { [key: string]: enums.CubemapLayoutType }
-  TextureWrapMode: { [key: string]: enums.TextureWrapMode }
-  FontType: { [key: string]: enums.FontType }
-  BlendMode: { [key: string]: enums.BlendMode }
-  GestureType: { [key: string]: enums.GestureType }
-  CameraMode: { [key: string]: enums.CameraMode }
-  CameraType: { [key: string]: enums.CameraType }
+  // enums: same as above  
+  readonly KeyboardKey: { [key: string]: enums.KeyboardKey }
+  readonly ConfigFlag: { [key: string]: enums.ConfigFlag }
+  readonly TraceLogType: { [key: string]: enums.TraceLogType }
+  readonly AndroidButton: { [key: string]: enums.AndroidButton }
+  readonly MouseButton: { [key: string]: enums.MouseButton }
+  readonly GamepadNumber: { [key: string]: enums.GamepadNumber }
+  readonly GamepadButton: { [key: string]: enums.GamepadButton }
+  readonly GamepadAxis: { [key: string]: enums.GamepadAxis }
+  readonly ShaderLocationIndex: { [key: string]: enums.ShaderLocationIndex }
+  readonly ShaderUniformDataType: { [key: string]: enums.ShaderUniformDataType }
+  readonly MaterialMapType: { [key: string]: enums.MaterialMapType }
+  readonly PixelFormat: { [key: string]: enums.PixelFormat }
+  readonly TextureFilterMode: { [key: string]: enums.TextureFilterMode }
+  readonly CubemapLayoutType: { [key: string]: enums.CubemapLayoutType }
+  readonly TextureWrapMode: { [key: string]: enums.TextureWrapMode }
+  readonly FontType: { [key: string]: enums.FontType }
+  readonly BlendMode: { [key: string]: enums.BlendMode }
+  readonly GestureType: { [key: string]: enums.GestureType }
+  readonly CameraMode: { [key: string]: enums.CameraMode }
+  readonly CameraType: { [key: string]: enums.CameraType }
 
-  // colors
-  LIGHTGRAY : colors.Color
-  GRAY      : colors.Color
-  DARKGRAY  : colors.Color
-  YELLOW    : colors.Color
-  GOLD      : colors.Color
-  ORANGE    : colors.Color
-  PINK      : colors.Color
-  RED       : colors.Color
-  MAROON    : colors.Color
-  GREEN     : colors.Color
-  LIME      : colors.Color
-  DARKGREEN : colors.Color
-  SKYBLUE   : colors.Color
-  BLUE      : colors.Color
-  DARKBLUE  : colors.Color
-  PURPLE    : colors.Color
-  VIOLET    : colors.Color
-  DARKPURPLE: colors.Color
-  BEIGE     : colors.Color
-  BROWN     : colors.Color
-  DARKBROWN : colors.Color
-  WHITE     : colors.Color
-  BLACK     : colors.Color
-  BLANK     : colors.Color
-  MAGENTA   : colors.Color
-  RAYWHITE  : colors.Color
+  // colors: same as above
+  readonly LIGHTGRAY : colors.Color
+  readonly GRAY      : colors.Color
+  readonly DARKGRAY  : colors.Color
+  readonly YELLOW    : colors.Color
+  readonly GOLD      : colors.Color
+  readonly ORANGE    : colors.Color
+  readonly PINK      : colors.Color
+  readonly RED       : colors.Color
+  readonly MAROON    : colors.Color
+  readonly GREEN     : colors.Color
+  readonly LIME      : colors.Color
+  readonly DARKGREEN : colors.Color
+  readonly SKYBLUE   : colors.Color
+  readonly BLUE      : colors.Color
+  readonly DARKBLUE  : colors.Color
+  readonly PURPLE    : colors.Color
+  readonly VIOLET    : colors.Color
+  readonly DARKPURPLE: colors.Color
+  readonly BEIGE     : colors.Color
+  readonly BROWN     : colors.Color
+  readonly DARKBROWN : colors.Color
+  readonly WHITE     : colors.Color
+  readonly BLACK     : colors.Color
+  readonly BLANK     : colors.Color
+  readonly MAGENTA   : colors.Color
+  readonly RAYWHITE  : colors.Color
 }
 
 const raylib: Raylib = {
@@ -118,6 +119,7 @@ const raylib: Raylib = {
   ...texture,
   ...models,
   ...shaders,
+  Camera: camera.Camera3D
 }
 
 export = raylib
