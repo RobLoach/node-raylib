@@ -29,16 +29,13 @@ import Text from "./src/text"
 import Models from "./src/models"
 import Shaders from "./src/shaders"
 
-interface Raylib {
-  Core, 
-  Audio,
-
-  PI: number,
-  MAX_TOUCH_POINTS: number,
-  MAX_SHADER_LOCATIONS: number,
-  MAX_MATERIAL_MAPS: number,
-  DEG2RAD: number,
-  RAD2DEG: number,
+interface Raylib extends Core, Audio, Shapes, Textures, Text, Models, Shaders {
+  PI: number
+  MAX_TOUCH_POINTS: number
+  MAX_SHADER_LOCATIONS: number
+  MAX_MATERIAL_MAPS: number
+  DEG2RAD: number
+  RAD2DEG: number
 }
 
 
