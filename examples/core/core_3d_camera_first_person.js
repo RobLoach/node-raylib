@@ -39,7 +39,7 @@ for (let i = 0; i < MAX_COLUMNS; i++)
   let newHeight = r.GetRandomValue(1, 12)
   heights.push(newHeight)
   positions.push(new r.Vector3(r.GetRandomValue(-15, 15), newHeight / 2, r.GetRandomValue(-15, 15)))
-  colors.push(new r.Color(r.GetRandomValue(20, 255), r.GetRandomValue(10, 55), 30, 25))
+  colors.push(new r.Color(r.GetRandomValue(20, 255), r.GetRandomValue(10, 55), 30, 255))
 }
 
 r.SetCameraMode(camera, r.CameraMode.CAMERA_FIRST_PERSON); // Set a first person camera mode

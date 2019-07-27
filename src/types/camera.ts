@@ -1,3 +1,4 @@
+import r from "../bindings/raylib"
 import { Vector2, Vector3 } from "./maths"
 import { CameraType } from "./enums"
 
@@ -28,5 +29,21 @@ export class Camera2D {
     this.target = trg || new Vector3(0, 0, 0)
     this.rotation = rotation || 0
     this.zoom = zoom || 0
+  }
+}
+
+/**
+ * UpdateCamera is wrapped to allow object reference.
+ *
+ * @see UpdateCameraWrap()
+ */
+export function UpdateCamera(camera) {
+  const newCamera = r.UpdateCameraWrap(camera)
+  if (newCamera) {
+    camera.position = newCamera.position
+    camera.target = newCamera.target
+    camera.up = newCamera.up
+    camera.fovy = newCamera.fovy
+    camera.type = newCamera.type
   }
 }
