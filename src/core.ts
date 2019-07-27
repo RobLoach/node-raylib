@@ -129,3 +129,4 @@ export default interface Core {
   SetCameraSmoothZoomControl: (szKey: number) => void  //Set camera smooth zoom key to combine with mouse (free camera) 
   SetCameraMoveControls: (frontKey: number, backKey: number, rightKey: number, leftKey: number, upKey: number, downKey: number) => void  //Set camera move controls (1st person and 3rd person cameras) 
 }
+

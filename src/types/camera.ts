@@ -32,18 +32,4 @@ export class Camera2D {
   }
 }
 
-/**
- * UpdateCamera is wrapped to allow object reference.
- *
- * @see UpdateCameraWrap()
- */
-export function UpdateCamera(camera) {
-  const newCamera = r.UpdateCameraWrap(camera)
-  if (newCamera) {
-    camera.position = newCamera.position
-    camera.target = newCamera.target
-    camera.up = newCamera.up
-    camera.fovy = newCamera.fovy
-    camera.type = newCamera.type
-  }
-}
+export type Camera = Camera3D

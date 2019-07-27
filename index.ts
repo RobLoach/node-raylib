@@ -4,13 +4,6 @@
  * https://github.com/robloach/node-raylib
  */
 
-// const enums = require('./src/enums')
-
-// Inject the enums.
-// for (var enumName in enums) {
-//   raylib[enumName] = enums[enumName]
-// }
-
 import r from "./src/bindings/raylib"
 
 import * as colors from "./src/types/colors"
@@ -36,18 +29,38 @@ interface Raylib extends Core, Audio, Shapes, Textures, Text, Models, Shaders {
   MAX_SHADER_LOCATIONS: number
   MAX_MATERIAL_MAPS: number
   DEG2RAD: number
-  RAD2DEG: number
+  RAD2DEG: number,
+  UpdateCameraWrap: string
 }
 
 const raylib: Raylib = {
+  // raylib bindings
   ...r,
+  // wrapper fixes
+  /**
+   * UpdateCamera is wrapped to allow object reference.
+   *
+   * @see UpdateCameraWrap()
+   */
+  UpdateCamera(camera: camera.Camera): void {
+    const newCamera = r.UpdateCameraWrap(camera)
+    if (newCamera) {
+      camera.position = newCamera.position
+      camera.target = newCamera.target
+      camera.up = newCamera.up
+      camera.fovy = newCamera.fovy
+      camera.type = newCamera.type
+    }
+  },
+  // types
   ...colors,
   ...camera,
   ...enums,
   ...maths,
   ...misc,
   ...texture,
-  Camera: camera.Camera3D
+  // aliases
+  Camera: camera.Camera3D,
 }
 
 export = raylib

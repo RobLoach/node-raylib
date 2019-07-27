@@ -17,6 +17,7 @@ interface Raylib extends Core, Audio, Shapes, Textures, Text, Models, Shaders {
     MAX_MATERIAL_MAPS: number;
     DEG2RAD: number;
     RAD2DEG: number;
+    UpdateCameraWrap: string;
 }
 declare const raylib: Raylib;
 export = raylib;
