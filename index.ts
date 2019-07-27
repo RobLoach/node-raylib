@@ -9,6 +9,8 @@ import r from "./src/bindings/raylib"
 import * as colors from "./src/types/colors"
 import * as camera from "./src/types/camera"
 import * as maths from "./src/types/maths"
+import * as models from "./src/types/models"
+import * as shaders from "./src/types/shaders"
 import * as enums from "./src/types/enums"
 import * as misc from "./src/types/misc"
 import * as texture from "./src/types/texture"
@@ -37,21 +39,7 @@ const raylib: Raylib = {
   // raylib bindings
   ...r,
   // wrapper fixes
-  /**
-   * UpdateCamera is wrapped to allow object reference.
-   *
-   * @see UpdateCameraWrap()
-   */
-  UpdateCamera(camera: camera.Camera): void {
-    const newCamera = r.UpdateCameraWrap(camera)
-    if (newCamera) {
-      camera.position = newCamera.position
-      camera.target = newCamera.target
-      camera.up = newCamera.up
-      camera.fovy = newCamera.fovy
-      camera.type = newCamera.type
-    }
-  },
+  
   // types
   ...colors,
   ...camera,
@@ -59,6 +47,8 @@ const raylib: Raylib = {
   ...maths,
   ...misc,
   ...texture,
+  ...models,
+  ...shaders,
   // aliases
   Camera: camera.Camera3D,
 }
