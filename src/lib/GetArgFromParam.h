@@ -142,4 +142,9 @@ Sound GetArgFromParam<Sound>(Napi::Env& env, const Napi::CallbackInfo& info, int
     return ToSound(env, info[paramNum]);
 }
 
+template <>
+Music GetArgFromParam<Music>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToMusic(env, info[paramNum]);
+}
+
 #endif

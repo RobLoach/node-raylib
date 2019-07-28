@@ -1,11 +1,13 @@
 /*******************************************************************************************
 *
-*   raylib [audio] example - Sound loading and playing
+*   raylib [audio] example - Multichannel sound playing
 *
-*   This example has been created using raylib 1.0 (www.raylib.com)
+*   This example has been created using raylib 2.6 (www.raylib.com)
 *   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
 *
-*   Copyright (c) 2014 Ramon Santamaria (@raysan5)
+*   Example contributed by Chris Camacho (@codifies) and reviewed by Ramon Santamaria (@raysan5)
+*
+*   Copyright (c) 2019 Chris Camacho (@codifies) and Ramon Santamaria (@raysan5)
 *
 ********************************************************************************************/
 
@@ -16,14 +18,25 @@ const r = require('raylib')
 const screenWidth = 800
 const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [audio] example - sound loading and playing")
+r.InitWindow(screenWidth, screenHeight, "raylib [audio] example - Multichannel sound playing")
 
 r.InitAudioDevice()      // Initialize audio device
 
 const fxWav = r.LoadSound(__dirname + "/resources/sound.wav")         // Load WAV audio file
 const fxOgg = r.LoadSound(__dirname + "/resources/tanatana.ogg")      // Load OGG audio file
 
-r.SetTargetFPS(60)               // Set our game to run at 60 frames-per-second
+let frame = 0
+
+r.SetSoundVolume(fxWav, 0.2)
+r.PlaySound(fxOgg);
+
+let inhibitWav = false
+let inhibitOgg = false
+let maxFrame = 60
+
+let soundsCounter = 0
+
+r.SetTargetFPS(60)       // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
@@ -31,8 +44,26 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
 {
     // Update
     //----------------------------------------------------------------------------------
-    if (r.IsKeyPressed(r.KEY_SPACE)) r.PlaySound(fxWav)      // Play WAV sound
-    if (r.IsKeyPressed(r.KEY_ENTER)) r.PlaySound(fxOgg)      // Play OGG sound
+    frame++
+
+    if (r.IsKeyDown(r.KEY_ENTER)) inhibitWav = !inhibitWav
+    if (r.IsKeyDown(r.KEY_SPACE)) inhibitOgg = !inhibitOgg
+
+    // Deliberatly hammer the play pool to see what dropping old pool entries sounds like....
+    if ((frame%5) == 0)
+    {
+       if (!inhibitWav) r.PlaySoundMulti(fxWav)
+    }
+
+    if (frame == maxFrame)
+    {
+        if (!inhibitOgg) r.PlaySoundMulti(fxOgg)
+
+        frame = 0;
+        maxFrame = r.GetRandomValue(6,12)
+    }
+
+    soundsCounter = r.GetSoundsPlaying()
     //----------------------------------------------------------------------------------
 
     // Draw
@@ -41,15 +72,20 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
 
         r.ClearBackground(r.RAYWHITE)
 
-        r.DrawText("Press SPACE to PLAY the WAV sound!", 200, 180, 20, r.LIGHTGRAY)
-        r.DrawText("Press ENTER to PLAY the OGG sound!", 200, 220, 20, r.LIGHTGRAY)
+        r.DrawText("Multichannel sound abuse!", 200, 180, 20, r.LIGHTGRAY)
+        r.DrawText("Space to inhibit new ogg triggering", 200, 200, 20, r.LIGHTGRAY)
+        r.DrawText("Enter to inhibit new wav triggering", 200, 220, 20, r.LIGHTGRAY)
 
-    r.EndDrawing()
+        r.DrawText(r.FormatText("Number of concurrentsounds: %i", soundsCounter), 200, 280, 20, r.LIGHTGRAY)
+
+    r.EndDrawing();
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
+r.StopSoundMulti()       // We must stop the buffer pool before unloading
+
 r.UnloadSound(fxWav)     // Unload sound data
 r.UnloadSound(fxOgg)     // Unload sound data
 

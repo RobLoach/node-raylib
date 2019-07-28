@@ -537,4 +537,41 @@ Napi::Object ToObject(Napi::Env& env, Sound input) {
   return out;
 }
 
+
+
+Music ToMusic(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Music out;
+  if (argObject.Has("ctxType")) {
+    out.ctxType = argObject.Get("ctxType").ToNumber().Int32Value();
+  }
+  if (argObject.Has("ctxData")) {
+    out.ctxData = (void*)argObject.Get("ctxData").ToNumber().Int64Value();
+  }
+  if (argObject.Has("sampleCount")) {
+    out.sampleCount = argObject.Get("sampleCount").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("sampleLeft")) {
+    out.sampleLeft = argObject.Get("sampleLeft").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("loopCount")) {
+    out.loopCount = argObject.Get("loopCount").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("stream")) {
+    out.stream = ToAudioStream(env, argObject.Get("stream"));
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, Music input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("ctxType", input.ctxType);
+  out.Set("ctxData", (int64_t)input.ctxData);
+  out.Set("sampleCount", input.sampleCount);
+  out.Set("sampleLeft", input.sampleLeft);
+  out.Set("loopCount", input.loopCount);
+  out.Set("stream", ToObject(env, input.stream));
+  return out;
+}
+
 #endif
