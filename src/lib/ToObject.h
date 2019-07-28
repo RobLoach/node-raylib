@@ -460,4 +460,81 @@ Napi::Object ToObject(Napi::Env& env, NPatchInfo input) {
   return out;
 }
 
+Wave ToWave(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Wave out;
+  if (argObject.Has("sampleCount")) {
+    out.sampleCount = argObject.Get("sampleCount").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("sampleRate")) {
+    out.sampleRate = argObject.Get("sampleRate").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("sampleSize")) {
+    out.sampleSize = argObject.Get("sampleSize").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("channels")) {
+    out.channels = argObject.Get("channels").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("data")) {
+    out.data = (void*)argObject.Get("data").ToNumber().Int64Value();
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, Wave input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("sampleCount", input.sampleCount);
+  out.Set("sampleRate", input.sampleRate);
+  out.Set("sampleSize", input.sampleSize);
+  out.Set("channels", input.channels);
+  out.Set("data", (int64_t)input.data);
+  return out;
+}
+
+AudioStream ToAudioStream(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  AudioStream out;
+  if (argObject.Has("sampleRate")) {
+    out.sampleRate = argObject.Get("sampleRate").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("sampleSize")) {
+    out.sampleSize = argObject.Get("sampleSize").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("channels")) {
+    out.channels = argObject.Get("channels").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("buffer")) {
+    out.buffer = (rAudioBuffer*)argObject.Get("buffer").ToNumber().Int64Value();
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, AudioStream input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("sampleRate", input.sampleRate);
+  out.Set("sampleSize", input.sampleSize);
+  out.Set("channels", input.channels);
+  out.Set("buffer", (int64_t)input.buffer);
+  return out;
+}
+
+Sound ToSound(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Sound out;
+  if (argObject.Has("sampleCount")) {
+    out.sampleCount = argObject.Get("sampleCount").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("stream")) {
+    out.stream = ToAudioStream(env, argObject.Get("stream"));
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, Sound input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("sampleCount", input.sampleCount);
+  out.Set("stream", ToObject(env, input.stream));
+  return out;
+}
+
 #endif
