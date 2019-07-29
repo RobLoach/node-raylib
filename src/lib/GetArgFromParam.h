@@ -127,4 +127,24 @@ Vector4 GetArgFromParam<Vector4>(Napi::Env& env, const Napi::CallbackInfo& info,
     return ToVector4(env, info[paramNum]);
 }
 
+template <>
+Wave GetArgFromParam<Wave>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToWave(env, info[paramNum]);
+}
+
+template <>
+AudioStream GetArgFromParam<AudioStream>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToAudioStream(env, info[paramNum]);
+}
+
+template <>
+Sound GetArgFromParam<Sound>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToSound(env, info[paramNum]);
+}
+
+template <>
+Music GetArgFromParam<Music>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToMusic(env, info[paramNum]);
+}
+
 #endif

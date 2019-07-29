@@ -92,4 +92,20 @@ inline Napi::Value ToValue(Napi::Env& env, NPatchInfo value) {
   return ToObject(env, value);
 }
 
+inline Napi::Value ToValue(Napi::Env& env, Wave value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, AudioStream value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Sound value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Music value) {
+  return ToObject(env, value);
+}
+
 #endif
