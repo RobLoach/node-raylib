@@ -57,7 +57,12 @@ raylib.BLANK      = raylib.Color(0, 0, 0, 0 )           // Blank (Transparent)
 raylib.MAGENTA    = raylib.Color(255, 0, 255, 255 )     // Magenta
 raylib.RAYWHITE   = raylib.Color(245, 245, 245, 255 )   // My own White (raylib logo)
 
-// Structs
+/**
+ * Create a Vector2 object.
+ *
+ * @param {number} x The x parameter.
+ * @param {number} y The y parameter.
+ */
 raylib.Vector2 = function (x = 0, y = 0) {
   return {
     x: x,
