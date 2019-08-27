@@ -77,6 +77,18 @@ export const COMPRESSED_PVRT_RGB: number;
 
 export const COMPRESSED_PVRT_RGBA: number;
 
+export const CUBEMAP_AUTO_DETECT: number;
+
+export const CUBEMAP_CROSS_FOUR_BY_THREE: number;
+
+export const CUBEMAP_CROSS_THREE_BY_FOUR: number;
+
+export const CUBEMAP_LINE_HORIZONTAL: number;
+
+export const CUBEMAP_LINE_VERTICAL: number;
+
+export const CUBEMAP_PANORAMA: number;
+
 export const DARKBLUE: {
     a: number;
     b: number;
@@ -130,9 +142,11 @@ export const FLAG_FULLSCREEN_MODE: number;
 
 export const FLAG_MSAA_4X_HINT: number;
 
-export const FLAG_SHOW_LOGO: number;
+export const FLAG_RESERVED: number;
 
 export const FLAG_VSYNC_HINT: number;
+
+export const FLAG_WINDOW_ALWAYS_RUN: number;
 
 export const FLAG_WINDOW_HIDDEN: number;
 
@@ -148,35 +162,55 @@ export const FONT_DEFAULT: number;
 
 export const FONT_SDF: number;
 
-export const GAMEPAD_ANDROID_BUTTON_A: number;
+export const GAMEPAD_AXIS_LEFT_TRIGGER: number;
 
-export const GAMEPAD_ANDROID_BUTTON_B: number;
+export const GAMEPAD_AXIS_LEFT_X: number;
 
-export const GAMEPAD_ANDROID_BUTTON_C: number;
+export const GAMEPAD_AXIS_LEFT_Y: number;
 
-export const GAMEPAD_ANDROID_BUTTON_L1: number;
+export const GAMEPAD_AXIS_RIGHT_TRIGGER: number;
 
-export const GAMEPAD_ANDROID_BUTTON_L2: number;
+export const GAMEPAD_AXIS_RIGHT_X: number;
 
-export const GAMEPAD_ANDROID_BUTTON_R1: number;
+export const GAMEPAD_AXIS_RIGHT_Y: number;
 
-export const GAMEPAD_ANDROID_BUTTON_R2: number;
+export const GAMEPAD_AXIS_UNKNOWN: number;
 
-export const GAMEPAD_ANDROID_BUTTON_X: number;
+export const GAMEPAD_BUTTON_LEFT_FACE_DOWN: number;
 
-export const GAMEPAD_ANDROID_BUTTON_Y: number;
+export const GAMEPAD_BUTTON_LEFT_FACE_LEFT: number;
 
-export const GAMEPAD_ANDROID_BUTTON_Z: number;
+export const GAMEPAD_BUTTON_LEFT_FACE_RIGHT: number;
 
-export const GAMEPAD_ANDROID_DPAD_CENTER: number;
+export const GAMEPAD_BUTTON_LEFT_FACE_UP: number;
 
-export const GAMEPAD_ANDROID_DPAD_DOWN: number;
+export const GAMEPAD_BUTTON_LEFT_THUMB: number;
 
-export const GAMEPAD_ANDROID_DPAD_LEFT: number;
+export const GAMEPAD_BUTTON_LEFT_TRIGGER_1: number;
 
-export const GAMEPAD_ANDROID_DPAD_RIGHT: number;
+export const GAMEPAD_BUTTON_LEFT_TRIGGER_2: number;
 
-export const GAMEPAD_ANDROID_DPAD_UP: number;
+export const GAMEPAD_BUTTON_MIDDLE: number;
+
+export const GAMEPAD_BUTTON_MIDDLE_LEFT: number;
+
+export const GAMEPAD_BUTTON_MIDDLE_RIGHT: number;
+
+export const GAMEPAD_BUTTON_RIGHT_FACE_DOWN: number;
+
+export const GAMEPAD_BUTTON_RIGHT_FACE_LEFT: number;
+
+export const GAMEPAD_BUTTON_RIGHT_FACE_RIGHT: number;
+
+export const GAMEPAD_BUTTON_RIGHT_FACE_UP: number;
+
+export const GAMEPAD_BUTTON_RIGHT_THUMB: number;
+
+export const GAMEPAD_BUTTON_RIGHT_TRIGGER_1: number;
+
+export const GAMEPAD_BUTTON_RIGHT_TRIGGER_2: number;
+
+export const GAMEPAD_BUTTON_UNKNOWN: number;
 
 export const GAMEPAD_PLAYER1: number;
 
@@ -185,86 +219,6 @@ export const GAMEPAD_PLAYER2: number;
 export const GAMEPAD_PLAYER3: number;
 
 export const GAMEPAD_PLAYER4: number;
-
-export const GAMEPAD_PS3_AXIS_L2: number;
-
-export const GAMEPAD_PS3_AXIS_LEFT_X: number;
-
-export const GAMEPAD_PS3_AXIS_LEFT_Y: number;
-
-export const GAMEPAD_PS3_AXIS_R2: number;
-
-export const GAMEPAD_PS3_AXIS_RIGHT_X: number;
-
-export const GAMEPAD_PS3_AXIS_RIGHT_Y: number;
-
-export const GAMEPAD_PS3_BUTTON_CIRCLE: number;
-
-export const GAMEPAD_PS3_BUTTON_CROSS: number;
-
-export const GAMEPAD_PS3_BUTTON_DOWN: number;
-
-export const GAMEPAD_PS3_BUTTON_L1: number;
-
-export const GAMEPAD_PS3_BUTTON_L2: number;
-
-export const GAMEPAD_PS3_BUTTON_LEFT: number;
-
-export const GAMEPAD_PS3_BUTTON_PS: number;
-
-export const GAMEPAD_PS3_BUTTON_R1: number;
-
-export const GAMEPAD_PS3_BUTTON_R2: number;
-
-export const GAMEPAD_PS3_BUTTON_RIGHT: number;
-
-export const GAMEPAD_PS3_BUTTON_SELECT: number;
-
-export const GAMEPAD_PS3_BUTTON_SQUARE: number;
-
-export const GAMEPAD_PS3_BUTTON_START: number;
-
-export const GAMEPAD_PS3_BUTTON_TRIANGLE: number;
-
-export const GAMEPAD_PS3_BUTTON_UP: number;
-
-export const GAMEPAD_XBOX_AXIS_LEFT_X: number;
-
-export const GAMEPAD_XBOX_AXIS_LEFT_Y: number;
-
-export const GAMEPAD_XBOX_AXIS_LT: number;
-
-export const GAMEPAD_XBOX_AXIS_RIGHT_X: number;
-
-export const GAMEPAD_XBOX_AXIS_RIGHT_Y: number;
-
-export const GAMEPAD_XBOX_AXIS_RT: number;
-
-export const GAMEPAD_XBOX_BUTTON_A: number;
-
-export const GAMEPAD_XBOX_BUTTON_B: number;
-
-export const GAMEPAD_XBOX_BUTTON_DOWN: number;
-
-export const GAMEPAD_XBOX_BUTTON_HOME: number;
-
-export const GAMEPAD_XBOX_BUTTON_LB: number;
-
-export const GAMEPAD_XBOX_BUTTON_LEFT: number;
-
-export const GAMEPAD_XBOX_BUTTON_RB: number;
-
-export const GAMEPAD_XBOX_BUTTON_RIGHT: number;
-
-export const GAMEPAD_XBOX_BUTTON_SELECT: number;
-
-export const GAMEPAD_XBOX_BUTTON_START: number;
-
-export const GAMEPAD_XBOX_BUTTON_UP: number;
-
-export const GAMEPAD_XBOX_BUTTON_X: number;
-
-export const GAMEPAD_XBOX_BUTTON_Y: number;
 
 export const GESTURE_DOUBLETAP: number;
 
@@ -308,18 +262,6 @@ export const GREEN: {
     g: number;
     r: number;
 };
-
-export const HMD_DEFAULT_DEVICE: number;
-
-export const HMD_OCULUS_GO: number;
-
-export const HMD_OCULUS_RIFT_CV1: number;
-
-export const HMD_OCULUS_RIFT_DK2: number;
-
-export const HMD_SONY_PSVR: number;
-
-export const HMD_VALVE_HTC_VIVE: number;
 
 export const KEY_A: number;
 
@@ -565,6 +507,8 @@ export const LOC_MAP_BRDF: number;
 
 export const LOC_MAP_CUBEMAP: number;
 
+export const LOC_MAP_DIFFUSE: number;
+
 export const LOC_MAP_EMISSION: number;
 
 export const LOC_MAP_HEIGHT: number;
@@ -580,6 +524,8 @@ export const LOC_MAP_OCCLUSION: number;
 export const LOC_MAP_PREFILTER: number;
 
 export const LOC_MAP_ROUGHNESS: number;
+
+export const LOC_MAP_SPECULAR: number;
 
 export const LOC_MATRIX_MODEL: number;
 
@@ -798,6 +744,8 @@ export function BeginMode2D(): any;
 
 export function BeginMode3D(): any;
 
+export function BeginScissorMode(): any;
+
 export function BeginTextureMode(): any;
 
 export function Camera(position: any, target: any, up: any, fovy: any, type: any): any;
@@ -833,6 +781,8 @@ export function CloseAudioStream(): any;
 export function CloseWindow(): any;
 
 export function Color(red: any, green: any, blue: any, alpha: any): any;
+
+export function ColorFromHSV(): any;
 
 export function ColorNormalize(): any;
 
@@ -956,6 +906,8 @@ export function EndMode2D(): any;
 
 export function EndMode3D(): any;
 
+export function EndScissorMode(): any;
+
 export function EndTextureMode(): any;
 
 export function ExportImage(): any;
@@ -973,6 +925,8 @@ export function FileExists(): any;
 export function FormatText(): any;
 
 export function GetCameraMatrix(): any;
+
+export function GetCameraMatrix2D(): any;
 
 export function GetClipboardText(): any;
 
@@ -1048,6 +1002,8 @@ export function GetRandomValue(): any;
 
 export function GetScreenHeight(): any;
 
+export function GetScreenToWorld2D(): any;
+
 export function GetScreenWidth(): any;
 
 export function GetSoundsPlaying(): any;
@@ -1068,6 +1024,8 @@ export function GetWorkingDirectory(): any;
 
 export function GetWorldToScreen(): any;
 
+export function GetWorldToScreen2D(): any;
+
 export function HideCursor(): any;
 
 export function HideWindow(): any;
@@ -1080,11 +1038,11 @@ export function InitAudioStream(): any;
 
 export function InitWindow(): any;
 
-export function IsAudioBufferProcessed(): any;
-
 export function IsAudioDeviceReady(): any;
 
 export function IsAudioStreamPlaying(): any;
+
+export function IsAudioStreamProcessed(): any;
 
 export function IsCursorHidden(): any;
 
