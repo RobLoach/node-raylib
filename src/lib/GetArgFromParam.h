@@ -8,21 +8,27 @@
 
 template <typename ReturnType>
 inline ReturnType GetArgFromParam(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
+  (void)info;
+  (void)paramNum;
   throw "GetArgFromParam not defined for this type!";
 }
 
 template <>
 unsigned char GetArgFromParam<unsigned char>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
   return info[paramNum].As<Napi::Number>().Int32Value();
 }
 
 template <>
 unsigned int GetArgFromParam<unsigned int>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
   return info[paramNum].As<Napi::Number>().Uint32Value();
 }
 
 template <>
 const char* GetArgFromParam<const char*>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
   std::string val = info[paramNum].As<Napi::String>().Utf8Value();
   const std::string::size_type size = val.size();
   char *buffer = new char[size + 1];   //we need extra char for NUL
@@ -32,17 +38,26 @@ const char* GetArgFromParam<const char*>(Napi::Env& env, const Napi::CallbackInf
 
 template <>
 int GetArgFromParam<int>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
   return info[paramNum].As<Napi::Number>().Int32Value();
 }
 
 template <>
 long GetArgFromParam<long>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
   return info[paramNum].As<Napi::Number>().Int64Value();
 }
 
 template <>
 bool GetArgFromParam<bool>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
   return info[paramNum].As<Napi::Boolean>().Value();
+}
+
+template <>
+float GetArgFromParam<float>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
+  return info[paramNum].As<Napi::Number>().FloatValue();
 }
 
 template <>
@@ -68,11 +83,6 @@ NPatchInfo GetArgFromParam<NPatchInfo>(Napi::Env& env, const Napi::CallbackInfo&
 template <>
 Rectangle GetArgFromParam<Rectangle>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   return ToRectangle(env, info[paramNum]);
-}
-
-template <>
-float GetArgFromParam<float>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return info[paramNum].As<Napi::Number>().FloatValue();
 }
 
 template <>

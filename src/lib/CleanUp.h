@@ -13,6 +13,7 @@
 template <typename P1>
 inline void CleanUp(P1 val) {
   // Do nothing.
+  (void)val;
 }
 
 /**

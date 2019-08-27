@@ -21,7 +21,7 @@ raylib.MAX_SHADER_LOCATIONS = 32
 raylib.MAX_MATERIAL_MAPS = 12
 
 // Colors
-raylib.Color = function (red, green, blue, alpha) {
+raylib.Color = function (red, green, blue, alpha = 255) {
   return {
     r: red,
     g: green,
