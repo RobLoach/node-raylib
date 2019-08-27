@@ -40,15 +40,15 @@
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
     "bindings": "^1.5.0",
-    "cmake-js": "^5.1.0",
+    "cmake-js": "^5.3.2",
     "meow": "^5.0.0",
-    "module-alias": "^2.2.0",
-    "node-addon-api": "^1.6.2"
+    "module-alias": "^2.2.1",
+    "node-addon-api": "^1.7.1"
   },
   "devDependencies": {
-    "archiver": "^3.0.0",
+    "archiver": "^3.1.1",
     "chai": "^4.2.0",
-    "mocha": "^6.0.2",
-    "pkg": "^4.3.7"
+    "mocha": "^6.2.0",
+    "pkg": "^4.4.0"
   }
 }

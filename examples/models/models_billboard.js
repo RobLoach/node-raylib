@@ -26,7 +26,7 @@ camera.up = r.Vector3(0.0, 1.0, 0.0)
 camera.fovy = 45.0
 camera.type = r.CAMERA_PERSPECTIVE
 
-const bill = r.LoadTexture("resources/billboard.png")     // Our texture billboard
+const bill = r.LoadTexture(__dirname + "/resources/billboard.png")     // Our texture billboard
 const billPosition = r.Vector3(0.0, 2.0, 0.0)                 // Position where draw billboard
 
 r.SetCameraMode(camera, r.CAMERA_ORBITAL)  // Set an orbital camera mode
