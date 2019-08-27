@@ -71,6 +71,15 @@ The following are a few notes and resources when developing `node-raylib`...
 npm it
 ```
 
+### TypeScript Definitions
+
+To rebuild [`index.d.ts`](index.d.ts), run the following commands:
+
+```
+npm i -g dts-gen yargs RobLoach/node-raylib
+dts-gen -m raylib -f index.d.ts -o
+```
+
 ### Package
 
 To build the packaged releases, use the following command:
