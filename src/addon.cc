@@ -12,6 +12,7 @@
 #include "models.h"
 #include "mouse.h"
 #include "rlgl.h"
+#include "screenspace.h"
 #include "shapes.h"
 #include "storage.h"
 #include "text.h"
@@ -37,6 +38,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   node_raylib_init_models(env, exports);
   node_raylib_init_mouse(env, exports);
   node_raylib_init_rlgl(env, exports);
+  node_raylib_init_screenspace(env, exports);
   node_raylib_init_shapes(env, exports);
   node_raylib_init_storage(env, exports);
   node_raylib_init_text(env, exports);

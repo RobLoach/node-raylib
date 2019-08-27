@@ -49,7 +49,7 @@ void node_raylib_init_audio(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "InitAudioStream", InitAudioStream);
   //AddFunction(env, exports, "UpdateAudioStream", UpdateAudioStream);
   AddFunction(env, exports, "CloseAudioStream", CloseAudioStream);
-  AddFunction(env, exports, "IsAudioBufferProcessed", IsAudioBufferProcessed);
+  AddFunction(env, exports, "IsAudioStreamProcessed", IsAudioStreamProcessed);
   AddFunction(env, exports, "PlayAudioStream", PlayAudioStream);
   AddFunction(env, exports, "PauseAudioStream", PauseAudioStream);
   AddFunction(env, exports, "ResumeAudioStream", ResumeAudioStream);

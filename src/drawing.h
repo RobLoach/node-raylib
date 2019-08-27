@@ -16,10 +16,8 @@ void node_raylib_init_drawing(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "EndMode3D", EndMode3D);
   AddFunction(env, exports, "BeginTextureMode", BeginTextureMode);
   AddFunction(env, exports, "EndTextureMode", EndTextureMode);
-
-  AddFunction(env, exports, "GetMouseRay", GetMouseRay);
-  AddFunction(env, exports, "GetWorldToScreen", GetWorldToScreen);
-  AddFunction(env, exports, "GetCameraMatrix", GetCameraMatrix);
+  AddFunction(env, exports, "BeginScissorMode", BeginScissorMode);
+  AddFunction(env, exports, "EndScissorMode", EndScissorMode);
 }
 
 #endif

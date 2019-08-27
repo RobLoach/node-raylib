@@ -22,6 +22,12 @@ r.InitWindow(screenWidth, screenHeight, "raylib [textures] example - image loadi
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
 const image = r.LoadImage(__dirname + "/resources/raylib_logo.png");     // Loaded in CPU memory (RAM)
+
+// TODO: Fix thrown exception
+// INFO: [/home/rob/Documents/node-raylib/examples/textures/resources/raylib_logo.png] Image loaded successfully (256x256)
+// terminate called after throwing an instance of 'char const*'
+// [1]    26364 abort (core dumped)  bin/node-raylib examples/textures/textures_image_loading.js
+
 const texture = r.LoadTextureFromImage(image);          // Image converted to texture, GPU memory (VRAM)
 
 r.UnloadImage(image);   // Once image has been converted to texture and uploaded to VRAM, it can be unloaded from RAM
