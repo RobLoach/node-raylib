@@ -127,6 +127,37 @@ raylib.UpdateCamera = function(camera) {
   }
 }
 
+raylib.VrDeviceInfo = function() {
+  return {
+    hResolution: 2160,
+    vResolution: 1200,
+    hScreenSize: 0.133793,
+    vScreenSize: 0.0669,
+    vScreenCenter: 0.04678,
+    eyeToScreenDistance: 0.041,
+    lensSeparationDistance: 0.07,
+    interpupillaryDistance: 0.07,
+    lensDistortionValues: [1.0, 0.22, 0.24, 0.0],
+    chromaAbCorrection: [0.996, -0.004, 1.014, 0.0]
+  }
+}
+
+/**
+ * UpdateVrTracking is wrapped to allow object reference.
+ *
+ * @see UpdateVrTrackingWrap()
+ */
+raylib.UpdateVrTracking = function(camera) {
+  const newCamera = raylib.UpdateVrTrackingWrap(camera)
+  if (newCamera) {
+    camera.position = newCamera.position
+    camera.target = newCamera.target
+    camera.up = newCamera.up
+    camera.fovy = newCamera.fovy
+    camera.type = newCamera.type
+  }
+}
+
 raylib.Ray = function (position, direction) {
   return {
     position: position,

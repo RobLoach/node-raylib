@@ -551,9 +551,6 @@ Music ToMusic(Napi::Env& env, const Napi::Value& arg) {
   if (argObject.Has("sampleCount")) {
     out.sampleCount = argObject.Get("sampleCount").ToNumber().Uint32Value();
   }
-  if (argObject.Has("sampleLeft")) {
-    out.sampleLeft = argObject.Get("sampleLeft").ToNumber().Uint32Value();
-  }
   if (argObject.Has("loopCount")) {
     out.loopCount = argObject.Get("loopCount").ToNumber().Uint32Value();
   }
@@ -568,10 +565,69 @@ Napi::Object ToObject(Napi::Env& env, Music input) {
   out.Set("ctxType", input.ctxType);
   out.Set("ctxData", (int64_t)input.ctxData);
   out.Set("sampleCount", input.sampleCount);
-  out.Set("sampleLeft", input.sampleLeft);
   out.Set("loopCount", input.loopCount);
   out.Set("stream", ToObject(env, input.stream));
   return out;
 }
+
+VrDeviceInfo ToVrDeviceInfo(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  VrDeviceInfo out;
+  if (argObject.Has("hResolution")) {
+    out.hResolution = argObject.Get("hResolution").ToNumber().Int32Value();
+  }
+  if (argObject.Has("vResolution")) {
+    out.vResolution = argObject.Get("vResolution").ToNumber().Int32Value();
+  }
+  if (argObject.Has("hScreenSize")) {
+    out.hScreenSize = argObject.Get("hScreenSize").ToNumber().FloatValue();
+  }
+  if (argObject.Has("vScreenSize")) {
+    out.vScreenSize = argObject.Get("vScreenSize").ToNumber().FloatValue();
+  }
+  if (argObject.Has("vScreenCenter")) {
+    out.vScreenCenter = argObject.Get("vScreenCenter").ToNumber().FloatValue();
+  }
+  if (argObject.Has("eyeToScreenDistance")) {
+    out.eyeToScreenDistance = argObject.Get("eyeToScreenDistance").ToNumber().FloatValue();
+  }
+  if (argObject.Has("lensSeparationDistance")) {
+    out.lensSeparationDistance = argObject.Get("lensSeparationDistance").ToNumber().FloatValue();
+  }
+  if (argObject.Has("interpupillaryDistance")) {
+    out.interpupillaryDistance = argObject.Get("interpupillaryDistance").ToNumber().FloatValue();
+  }
+  // TODO: Fix lensDistortionValues and chromaAbCorrection
+  /*
+  auto lensDistortionValues = argObject.Get("lensDistortionValues").As<Napi::Array>();
+  for (int i = 0; i < lensDistortionValues.Length(); i++) {
+    out.lensDistortionValues[i] = lensDistortionValues[i].Value().ToNumber().FloatValue();
+  }
+  auto chromaAbCorrection = argObject.Get("chromaAbCorrection").As<Napi::Array>();
+  for (int i = 0; i < chromaAbCorrection.Length(); i++) {
+    out.chromaAbCorrection[i] = lensDistortionValues[i].Value().ToNumber().FloatValue();
+  }
+  */
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, VrDeviceInfo input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("hResolution", input.hResolution);
+  out.Set("vResolution", input.vResolution);
+  out.Set("hScreenSize", input.hScreenSize);
+  out.Set("vScreenSize", input.vScreenSize);
+  out.Set("vScreenCenter", input.vScreenCenter);
+  out.Set("eyeToScreenDistance", input.eyeToScreenDistance);
+  out.Set("lensSeparationDistance", input.lensSeparationDistance);
+  out.Set("interpupillaryDistance", input.interpupillaryDistance);
+
+  // TODO: Fix lensDistortionValues and chromaAbCorrection
+  //out.Set("lensDistortionValues", input.lensDistortionValues);
+  //out.Set("chromaAbCorrection", input.chromaAbCorrection);
+  return out;
+}
+
+// TODO: Add Shader
 
 #endif
