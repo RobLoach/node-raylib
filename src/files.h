@@ -7,6 +7,8 @@
 #include "lib/AddFunction.h"
 
 void node_raylib_init_files(Napi::Env& env, Napi::Object& exports) {
+  AddFunction(env, exports, "LoadFileData", LoadFileData);
+  AddFunction(env, exports, "SaveFileData", SaveFileData);
   AddFunction(env, exports, "FileExists", FileExists);
   AddFunction(env, exports, "IsFileExtension", IsFileExtension);
   AddFunction(env, exports, "GetExtension", GetExtension);
