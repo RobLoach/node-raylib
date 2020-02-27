@@ -11,8 +11,8 @@ void node_raylib_init_keyboard(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "IsKeyDown", IsKeyDown);
   AddFunction(env, exports, "IsKeyReleased", IsKeyReleased);
   AddFunction(env, exports, "IsKeyUp", IsKeyUp);
-  AddFunction(env, exports, "GetKeyPressed", GetKeyPressed);
   AddFunction(env, exports, "SetExitKey", SetExitKey);
+  AddFunction(env, exports, "GetKeyPressed", GetKeyPressed);
 }
 
 #endif
