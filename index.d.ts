@@ -738,6 +738,8 @@ export const YELLOW: {
 
 export const path: string;
 
+export function BeginBlendMode(): any;
+
 export function BeginDrawing(): any;
 
 export function BeginMode2D(): any;
@@ -747,6 +749,8 @@ export function BeginMode3D(): any;
 export function BeginScissorMode(): any;
 
 export function BeginTextureMode(): any;
+
+export function BeginVrDrawing(): any;
 
 export function Camera(position: any, target: any, up: any, fovy: any, type: any): any;
 
@@ -778,17 +782,27 @@ export function CloseAudioDevice(): any;
 
 export function CloseAudioStream(): any;
 
+export function CloseVrSimulator(): any;
+
 export function CloseWindow(): any;
 
 export function Color(red: any, green: any, blue: any, alpha: any): any;
 
 export function ColorFromHSV(): any;
 
+export function ColorFromNormalized(): any;
+
 export function ColorNormalize(): any;
 
 export function ColorToHSV(): any;
 
 export function ColorToInt(): any;
+
+export function CompressData(): any;
+
+export function DecompressData(): any;
+
+export function DirectoryExists(): any;
 
 export function DisableCursor(): any;
 
@@ -822,6 +836,10 @@ export function DrawCylinder(): any;
 
 export function DrawCylinderWires(): any;
 
+export function DrawEllipse(): any;
+
+export function DrawEllipseLines(): any;
+
 export function DrawFPS(): any;
 
 export function DrawGizmo(): any;
@@ -836,6 +854,8 @@ export function DrawLineBezier(): any;
 
 export function DrawLineEx(): any;
 
+export function DrawLineStrip(): any;
+
 export function DrawLineV(): any;
 
 export function DrawPixel(): any;
@@ -845,6 +865,8 @@ export function DrawPixelV(): any;
 export function DrawPlane(): any;
 
 export function DrawPoly(): any;
+
+export function DrawPolyLines(): any;
 
 export function DrawRay(): any;
 
@@ -886,6 +908,8 @@ export function DrawTexture(): any;
 
 export function DrawTextureEx(): any;
 
+export function DrawTextureNPatch(): any;
+
 export function DrawTexturePro(): any;
 
 export function DrawTextureQuad(): any;
@@ -896,9 +920,15 @@ export function DrawTextureV(): any;
 
 export function DrawTriangle(): any;
 
+export function DrawTriangleFan(): any;
+
 export function DrawTriangleLines(): any;
 
+export function DrawTriangleStrip(): any;
+
 export function EnableCursor(): any;
+
+export function EndBlendMode(): any;
 
 export function EndDrawing(): any;
 
@@ -908,7 +938,11 @@ export function EndMode3D(): any;
 
 export function EndScissorMode(): any;
 
+export function EndShaderMode(): any;
+
 export function EndTextureMode(): any;
+
+export function EndVrDrawing(): any;
 
 export function ExportImage(): any;
 
@@ -923,6 +957,24 @@ export function Fade(): any;
 export function FileExists(): any;
 
 export function FormatText(): any;
+
+export function GenImageCellular(): any;
+
+export function GenImageChecked(): any;
+
+export function GenImageColor(): any;
+
+export function GenImageGradientH(): any;
+
+export function GenImageGradientRadial(): any;
+
+export function GenImageGradientV(): any;
+
+export function GenImagePerlinNoise(): any;
+
+export function GenImageWhiteNoise(): any;
+
+export function GenTextureMipmaps(): any;
 
 export function GetCameraMatrix(): any;
 
@@ -968,7 +1020,15 @@ export function GetGesturePinchAngle(): any;
 
 export function GetGesturePinchVector(): any;
 
+export function GetImageAlphaBorder(): any;
+
+export function GetImageData(): any;
+
+export function GetImageDataNormalized(): any;
+
 export function GetKeyPressed(): any;
+
+export function GetMatrixModelview(): any;
 
 export function GetMonitorCount(): any;
 
@@ -998,7 +1058,11 @@ export function GetMusicTimePlayed(): any;
 
 export function GetPixelDataSize(): any;
 
+export function GetPrevDirectoryPath(): any;
+
 export function GetRandomValue(): any;
+
+export function GetScreenData(): any;
 
 export function GetScreenHeight(): any;
 
@@ -1007,6 +1071,10 @@ export function GetScreenToWorld2D(): any;
 export function GetScreenWidth(): any;
 
 export function GetSoundsPlaying(): any;
+
+export function GetTextureData(): any;
+
+export function GetTextureDefault(): any;
 
 export function GetTime(): any;
 
@@ -1018,7 +1086,11 @@ export function GetTouchX(): any;
 
 export function GetTouchY(): any;
 
+export function GetWaveData(): any;
+
 export function GetWindowHandle(): any;
+
+export function GetWindowPosition(): any;
 
 export function GetWorkingDirectory(): any;
 
@@ -1026,15 +1098,89 @@ export function GetWorldToScreen(): any;
 
 export function GetWorldToScreen2D(): any;
 
+export function GetWorldToScreenEx(): any;
+
 export function HideCursor(): any;
 
 export function HideWindow(): any;
 
+export function ImageAlphaClear(): any;
+
+export function ImageAlphaCrop(): any;
+
+export function ImageAlphaMask(): any;
+
+export function ImageAlphaPremultiply(): any;
+
+export function ImageClearBackground(): any;
+
+export function ImageColorBrightness(): any;
+
+export function ImageColorContrast(): any;
+
+export function ImageColorGrayscale(): any;
+
+export function ImageColorInvert(): any;
+
+export function ImageColorReplace(): any;
+
+export function ImageColorTint(): any;
+
 export function ImageCopy(): any;
+
+export function ImageCrop(): any;
+
+export function ImageDither(): any;
+
+export function ImageDraw(): any;
+
+export function ImageDrawCircle(): any;
+
+export function ImageDrawLineEx(): any;
+
+export function ImageDrawPixel(): any;
+
+export function ImageDrawRectangle(): any;
+
+export function ImageDrawRectangleLines(): any;
+
+export function ImageDrawText(): any;
+
+export function ImageDrawTextEx(): any;
+
+export function ImageExtractPalette(): any;
+
+export function ImageFlipHorizontal(): any;
+
+export function ImageFlipVertical(): any;
+
+export function ImageFormat(): any;
+
+export function ImageFromImage(): any;
+
+export function ImageMipmaps(): any;
+
+export function ImageResize(): any;
+
+export function ImageResizeCanvas(): any;
+
+export function ImageResizeNN(): any;
+
+export function ImageRotateCCW(): any;
+
+export function ImageRotateCW(): any;
+
+export function ImageText(): any;
+
+export function ImageTextEx(): any;
+
+export function ImageToPOT(): any;
 
 export function InitAudioDevice(): any;
 
 export function InitAudioStream(): any;
+
+export function InitVrSimulator(): any;
 
 export function InitWindow(): any;
 
@@ -1084,6 +1230,8 @@ export function IsMusicPlaying(): any;
 
 export function IsSoundPlaying(): any;
 
+export function IsVrSimulatorReady(): any;
+
 export function IsWindowHidden(): any;
 
 export function IsWindowMinimized(): any;
@@ -1091,6 +1239,10 @@ export function IsWindowMinimized(): any;
 export function IsWindowReady(): any;
 
 export function IsWindowResized(): any;
+
+export function LoadFileData(): any;
+
+export function LoadFileText(): any;
 
 export function LoadImage(): any;
 
@@ -1108,9 +1260,13 @@ export function LoadSound(): any;
 
 export function LoadSoundFromWave(): any;
 
+export function LoadStorageValue(): any;
+
 export function LoadText(): any;
 
 export function LoadTexture(): any;
+
+export function LoadTextureCubemap(): any;
 
 export function LoadTextureFromImage(): any;
 
@@ -1146,6 +1302,14 @@ export function ResumeMusicStream(): any;
 
 export function ResumeSound(): any;
 
+export function SaveFileData(): any;
+
+export function SaveFileText(): any;
+
+export function SaveStorageValue(): any;
+
+export function SetAudioStreamBufferSizeDefault(): any;
+
 export function SetAudioStreamPitch(): any;
 
 export function SetAudioStreamVolume(): any;
@@ -1170,6 +1334,8 @@ export function SetGesturesEnabled(): any;
 
 export function SetMasterVolume(): any;
 
+export function SetMatrixProjection(): any;
+
 export function SetMouseOffset(): any;
 
 export function SetMousePosition(): any;
@@ -1182,17 +1348,21 @@ export function SetMusicPitch(): any;
 
 export function SetMusicVolume(): any;
 
-export function SetShapesTexture(): any;
-
 export function SetSoundPitch(): any;
 
 export function SetSoundVolume(): any;
 
 export function SetTargetFPS(): any;
 
+export function SetTextureFilter(): any;
+
+export function SetTextureWrap(): any;
+
 export function SetTraceLogExit(): any;
 
 export function SetTraceLogLevel(): any;
+
+export function SetVrConfiguration(): any;
 
 export function SetWindowIcon(): any;
 
@@ -1218,10 +1388,6 @@ export function StopSound(): any;
 
 export function StopSoundMulti(): any;
 
-export function StorageLoadValue(): any;
-
-export function StorageSaveValue(): any;
-
 export function TakeScreenshot(): any;
 
 export function TextFormat(): any;
@@ -1240,6 +1406,8 @@ export function TextToUpper(): any;
 
 export function ToggleFullscreen(): any;
 
+export function ToggleVrMode(): any;
+
 export function UnhideWindow(): any;
 
 export function UnloadImage(): any;
@@ -1254,11 +1422,21 @@ export function UnloadTexture(): any;
 
 export function UnloadWave(): any;
 
+export function UpdateAudioStream(): any;
+
 export function UpdateCamera(camera: any): void;
 
 export function UpdateCameraWrap(): any;
 
 export function UpdateMusicStream(): any;
+
+export function UpdateSound(): any;
+
+export function UpdateTexture(): any;
+
+export function UpdateVrTracking(camera: any): void;
+
+export function UpdateVrTrackingWrap(): any;
 
 export function Vector2(x: any, y: any): any;
 
@@ -1266,7 +1444,13 @@ export function Vector3(x: any, y: any, z: any): any;
 
 export function Vector4(x: any, y: any, z: any, w: any): any;
 
+export function VrDeviceInfo(): any;
+
 export function WaveCopy(): any;
+
+export function WaveCrop(): any;
+
+export function WaveFormat(): any;
 
 export function WindowShouldClose(): any;
 
