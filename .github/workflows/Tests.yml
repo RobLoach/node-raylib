@@ -1,0 +1,24 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  Test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: sudo apt-get install xorg-dev libglu1-mesa-dev
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '11.x'
+
+    - name: Install
+      run: npm i
+
+    - name: Test
+      run: npm t
