@@ -10,12 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Dependencies
-      run: sudo apt-get install xorg-dev libglu1-mesa-dev
-
     - uses: actions/setup-node@v1
       with:
         node-version: '11.x'
+
+    - name: Install Dependencies
+      run: sudo apt-get install xorg-dev libglu1-mesa-dev
 
     - name: Install
       run: npm i
