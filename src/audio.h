@@ -14,7 +14,7 @@ void node_raylib_init_audio(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "LoadWave", LoadWave);
   AddFunction(env, exports, "LoadSound", LoadSound);
   AddFunction(env, exports, "LoadSoundFromWave", LoadSoundFromWave);
-  //AddFunction(env, exports, "UpdateSound", UpdateSound);
+  AddFunction(env, exports, "UpdateSound", UpdateSound);
   AddFunction(env, exports, "UnloadWave", UnloadWave);
   AddFunction(env, exports, "UnloadSound", UnloadSound);
   AddFunction(env, exports, "ExportWave", ExportWave);
@@ -29,10 +29,10 @@ void node_raylib_init_audio(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "IsSoundPlaying", IsSoundPlaying);
   AddFunction(env, exports, "SetSoundVolume", SetSoundVolume);
   AddFunction(env, exports, "SetSoundPitch", SetSoundPitch);
-  //AddFunction(env, exports, "WaveFormat", WaveFormat);
+  AddFunction(env, exports, "WaveFormat", WaveFormat);
   AddFunction(env, exports, "WaveCopy", WaveCopy);
-  //AddFunction(env, exports, "WaveCrop", WaveCrop);
-  //AddFunction(env, exports, "GetWaveData", GetWaveData);
+  AddFunction(env, exports, "WaveCrop", WaveCrop);
+  AddFunction(env, exports, "GetWaveData", GetWaveData);
   AddFunction(env, exports, "LoadMusicStream", LoadMusicStream);
   AddFunction(env, exports, "UnloadMusicStream", UnloadMusicStream);
   AddFunction(env, exports, "PlayMusicStream", PlayMusicStream);
@@ -47,7 +47,7 @@ void node_raylib_init_audio(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetMusicTimeLength", GetMusicTimeLength);
   AddFunction(env, exports, "GetMusicTimePlayed", GetMusicTimePlayed);
   AddFunction(env, exports, "InitAudioStream", InitAudioStream);
-  //AddFunction(env, exports, "UpdateAudioStream", UpdateAudioStream);
+  AddFunction(env, exports, "UpdateAudioStream", UpdateAudioStream);
   AddFunction(env, exports, "CloseAudioStream", CloseAudioStream);
   AddFunction(env, exports, "IsAudioStreamProcessed", IsAudioStreamProcessed);
   AddFunction(env, exports, "PlayAudioStream", PlayAudioStream);
@@ -57,6 +57,7 @@ void node_raylib_init_audio(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "StopAudioStream", StopAudioStream);
   AddFunction(env, exports, "SetAudioStreamVolume", SetAudioStreamVolume);
   AddFunction(env, exports, "SetAudioStreamPitch", SetAudioStreamPitch);
+  AddFunction(env, exports, "SetAudioStreamBufferSizeDefault", SetAudioStreamBufferSizeDefault);
 }
 
 #endif

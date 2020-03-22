@@ -11,6 +11,7 @@ void node_raylib_init_screenspace(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetCameraMatrix", GetCameraMatrix);
   AddFunction(env, exports, "GetCameraMatrix2D", GetCameraMatrix2D);
   AddFunction(env, exports, "GetWorldToScreen", GetWorldToScreen);
+  AddFunction(env, exports, "GetWorldToScreenEx", GetWorldToScreenEx);
   AddFunction(env, exports, "GetWorldToScreen2D", GetWorldToScreen2D);
   AddFunction(env, exports, "GetScreenToWorld2D", GetScreenToWorld2D);
 }

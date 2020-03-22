@@ -1,3 +1,5 @@
+![node-raylib Logo](logo/raylib-node_256x256.png)
+
 # node-raylib
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).

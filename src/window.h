@@ -31,6 +31,7 @@ void node_raylib_init_window(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetMonitorHeight", GetMonitorHeight);
   AddFunction(env, exports, "GetMonitorPhysicalWidth", GetMonitorPhysicalWidth);
   AddFunction(env, exports, "GetMonitorPhysicalHeight", GetMonitorPhysicalHeight);
+  AddFunction(env, exports, "GetWindowPosition", GetWindowPosition);
   AddFunction(env, exports, "GetMonitorName", GetMonitorName);
   AddFunction(env, exports, "GetClipboardText", GetClipboardText);
   AddFunction(env, exports, "SetClipboardText", SetClipboardText);

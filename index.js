@@ -69,6 +69,7 @@ raylib.Vector2 = function (x = 0, y = 0) {
     y: y
   }
 }
+
 raylib.Vector3 = function (x = 0, y = 0, z = 0) {
   return {
     x: x,
@@ -76,6 +77,7 @@ raylib.Vector3 = function (x = 0, y = 0, z = 0) {
     z: z
   }
 }
+
 raylib.Vector4 = function (x = 0, y = 0, z = 0, w = 0) {
   return {
     x: x,
@@ -84,6 +86,7 @@ raylib.Vector4 = function (x = 0, y = 0, z = 0, w = 0) {
     w: w
   }
 }
+
 raylib.Rectangle = function (x = 0, y = 0, width = 0, height = 0) {
   return {
     x: x,
@@ -92,6 +95,7 @@ raylib.Rectangle = function (x = 0, y = 0, width = 0, height = 0) {
     height: height
   }
 }
+
 raylib.Camera2D = function (offset, target, rotation, zoom) {
   return {
     offset: offset,

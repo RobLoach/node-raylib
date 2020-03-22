@@ -13,13 +13,16 @@ void node_raylib_init_shapes(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "DrawLineV", DrawLineV);
   AddFunction(env, exports, "DrawLineEx", DrawLineEx);
   AddFunction(env, exports, "DrawLineBezier", DrawLineBezier);
+  AddFunction(env, exports, "DrawLineStrip", DrawLineStrip);
   AddFunction(env, exports, "DrawCircle", DrawCircle);
   AddFunction(env, exports, "DrawCircleSector", DrawCircleSector);
-  AddFunction(env, exports, "DrawCircleSectorLines", DrawCircleSector);
+  AddFunction(env, exports, "DrawCircleSectorLines", DrawCircleSectorLines);
   AddFunction(env, exports, "DrawCircleGradient", DrawCircleGradient);
   AddFunction(env, exports, "DrawCircleV", DrawCircleV);
   AddFunction(env, exports, "DrawCircleLines", DrawCircleLines);
-  AddFunction(env, exports, "DrawRing", DrawRectangle);
+  AddFunction(env, exports, "DrawEllipse", DrawEllipse);
+  AddFunction(env, exports, "DrawEllipseLines", DrawEllipseLines);
+  AddFunction(env, exports, "DrawRing", DrawRing);
   AddFunction(env, exports, "DrawRingLines", DrawRingLines);
   AddFunction(env, exports, "DrawRectangle", DrawRectangle);
   AddFunction(env, exports, "DrawRectangleV", DrawRectangleV);
@@ -34,11 +37,10 @@ void node_raylib_init_shapes(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "DrawRectangleRoundedLines", DrawRectangleRoundedLines);
   AddFunction(env, exports, "DrawTriangle", DrawTriangle);
   AddFunction(env, exports, "DrawTriangleLines", DrawTriangleLines);
+  AddFunction(env, exports, "DrawTriangleFan", DrawTriangleFan);
+  AddFunction(env, exports, "DrawTriangleStrip", DrawTriangleStrip);
   AddFunction(env, exports, "DrawPoly", DrawPoly);
-
-  AddFunction(env, exports, "SetShapesTexture", SetShapesTexture);
-
-  // Basic shapes collision detection functions
+  AddFunction(env, exports, "DrawPolyLines", DrawPolyLines);
   AddFunction(env, exports, "CheckCollisionRecs", CheckCollisionRecs);
   AddFunction(env, exports, "CheckCollisionCircles", CheckCollisionCircles);
   AddFunction(env, exports, "CheckCollisionCircleRec", CheckCollisionCircleRec);
