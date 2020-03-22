@@ -11,7 +11,7 @@
 
 ## Usage
 
-1. Add `robloach/node-raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
+1. Add `raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
     ``` bash
     npm init
     npm install raylib --save
