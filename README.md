@@ -1,6 +1,6 @@
 ![node-raylib Logo](logo/raylib-node_256x256.png)
 
-# node-raylib
+# node-raylib [![npm version](http://img.shields.io/npm/v/raylib.svg)](https://npmjs.org/package/raylib "View this project on npm") [![Tests](https://github.com/RobLoach/node-raylib/workflows/Tests/badge.svg)](https://github.com/RobLoach/node-raylib/actions?query=workflow%3ATests+branch%3Amaster "See automated test status on GitHub Actions")
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
@@ -11,7 +11,7 @@
 
 ## Usage
 
-1. Add `robloach/node-raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
+1. Add `raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
     ``` bash
     npm init
     npm install raylib --save
