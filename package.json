@@ -30,9 +30,11 @@
     "src/lib/*",
     "CMakeLists.txt",
     "index.js",
+    "index.d.js",
     "package.json",
     "README.md",
-    "LICENSE"
+    "LICENSE.md",
+    "CHANGELOG.md"
   ],
   "bugs": {
     "url": "https://github.com/RobLoach/node-raylib/issues"
