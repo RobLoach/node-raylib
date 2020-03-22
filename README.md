@@ -1,6 +1,6 @@
 ![node-raylib Logo](logo/raylib-node_256x256.png)
 
-# node-raylib
+# node-raylib [![Tests](https://github.com/RobLoach/node-raylib/workflows/Tests/badge.svg)](https://github.com/RobLoach/node-raylib/actions?query=workflow%3ATests+branch%3Amaster)
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
