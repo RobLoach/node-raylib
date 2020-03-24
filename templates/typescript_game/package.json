@@ -1,0 +1,18 @@
+{
+  "name": "raylib-typescript-game",
+  "description": "Example of using raylib with TypeScript.",
+  "private": true,
+  "version": "1.0.0",
+  "main": "typescript_game.js",
+  "scripts": {
+    "build": "tsc typescript_game.ts",
+    "prestart": "npm run build",
+    "start": "node typescript_game.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "raylib": "*",
+    "typescript": "^3.8.3"
+  }
+}
