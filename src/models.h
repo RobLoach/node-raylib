@@ -9,6 +9,7 @@
 void node_raylib_init_models(Napi::Env& env, Napi::Object& exports) {
   // Basic geometric 3D shapes drawing functions
   AddFunction(env, exports, "DrawLine3D", DrawLine3D);
+  AddFunction(env, exports, "DrawPoint3D", DrawPoint3D);
   AddFunction(env, exports, "DrawCircle3D", DrawCircle3D);
   AddFunction(env, exports, "DrawCube", DrawCube);
   AddFunction(env, exports, "DrawCubeV", DrawCubeV);

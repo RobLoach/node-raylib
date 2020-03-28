@@ -14,6 +14,7 @@ void node_raylib_init_window(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "IsWindowMinimized", IsWindowMinimized);
   AddFunction(env, exports, "IsWindowResized", IsWindowResized);
   AddFunction(env, exports, "IsWindowHidden", IsWindowHidden);
+  AddFunction(env, exports, "IsWindowFullscreen", IsWindowFullscreen);
   AddFunction(env, exports, "ToggleFullscreen", ToggleFullscreen);
   AddFunction(env, exports, "UnhideWindow", UnhideWindow);
   AddFunction(env, exports, "HideWindow", HideWindow);
