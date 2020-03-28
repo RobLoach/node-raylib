@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `man` documentation
 - Update package.json schema
+- Update raylib
 
 ## [0.4.1] - 2019-03-24
 ### Fixed

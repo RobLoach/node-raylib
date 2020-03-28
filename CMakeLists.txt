@@ -17,13 +17,13 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # TODO: Move this to cmake/FindRaylib.cmake?
-find_package(raylib 2.5.0 QUIET)
+find_package(raylib 3.0.0)
 if (NOT raylib_FOUND)
   include(FetchContent)
   FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
-    GIT_TAG 6c44c9d73049501a6ba6fdccd9bed9b1dd81793d
+    GIT_TAG 02df366a7aa11920413e05e3ceeaa81af3b21f67
   )
   FetchContent_GetProperties(raylib)
   if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
