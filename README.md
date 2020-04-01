@@ -8,6 +8,7 @@
 
 - [Node.js](https://nodejs.org) >= 10
 - [npm](https://www.npmjs.com)
+- [cmake](https://cmake.org)
 
 ## Usage
 
