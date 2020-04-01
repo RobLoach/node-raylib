@@ -17,7 +17,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # TODO: Move this to cmake/FindRaylib.cmake?
-find_package(raylib 3.0.0 QUIET)
+find_package(raylib 3.0.0)
 if (NOT raylib_FOUND)
   include(FetchContent)
   FetchContent_Declare(

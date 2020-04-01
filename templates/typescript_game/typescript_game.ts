@@ -15,7 +15,7 @@ import * as r from "raylib"
 const screenWidth: number = 800
 const screenHeight: number = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window")
+r.InitWindow(screenWidth, screenHeight, "raylib [core] example - typescript game")
 
 r.SetTargetFPS(60)
 //--------------------------------------------------------------------------------------

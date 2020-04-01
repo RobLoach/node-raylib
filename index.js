@@ -5,7 +5,7 @@
  */
 
 // Find the bindings.
-const raylib = require('bindings')('node-raylib');
+const raylib = require('bindings')('node-raylib')
 const enums = require('./src/enums')
 
 // Inject the enums.
@@ -192,4 +192,4 @@ raylib.ShowWindow = raylib.UnhideWindow
 raylib.LoadText = raylib.LoadFileText
 
 // Export the bindings for the module.
-module.exports = raylib;
+module.exports = raylib
