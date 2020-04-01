@@ -748,6 +748,8 @@ export function BeginMode3D(): any;
 
 export function BeginScissorMode(): any;
 
+export function BeginShaderMode(): any;
+
 export function BeginTextureMode(): any;
 
 export function BeginVrDrawing(): any;
@@ -760,6 +762,10 @@ export function Camera3D(position: any, target: any, up: any, fovy: any, type: a
 
 export function ChangeDirectory(): any;
 
+export function CheckCollisionBoxSphere(): any;
+
+export function CheckCollisionBoxes(): any;
+
 export function CheckCollisionCircleRec(): any;
 
 export function CheckCollisionCircles(): any;
@@ -770,7 +776,15 @@ export function CheckCollisionPointRec(): any;
 
 export function CheckCollisionPointTriangle(): any;
 
+export function CheckCollisionRayBox(): any;
+
+export function CheckCollisionRaySphere(): any;
+
+export function CheckCollisionRaySphereEx(): any;
+
 export function CheckCollisionRecs(): any;
+
+export function CheckCollisionSpheres(): any;
 
 export function ClearBackground(): any;
 
@@ -785,6 +799,8 @@ export function CloseAudioStream(): any;
 export function CloseVrSimulator(): any;
 
 export function CloseWindow(): any;
+
+export function CodepointToUtf8(): any;
 
 export function Color(red: any, green: any, blue: any, alpha: any): any;
 
@@ -807,6 +823,10 @@ export function DirectoryExists(): any;
 export function DisableCursor(): any;
 
 export function DrawBillboard(): any;
+
+export function DrawBillboardRec(): any;
+
+export function DrawBoundingBox(): any;
 
 export function DrawCircle(): any;
 
@@ -864,6 +884,8 @@ export function DrawPixelV(): any;
 
 export function DrawPlane(): any;
 
+export function DrawPoint3D(): any;
+
 export function DrawPoly(): any;
 
 export function DrawPolyLines(): any;
@@ -903,6 +925,12 @@ export function DrawSphereEx(): any;
 export function DrawSphereWires(): any;
 
 export function DrawText(): any;
+
+export function DrawTextCodepoint(): any;
+
+export function DrawTextEx(): any;
+
+export function DrawTextRec(): any;
 
 export function DrawTexture(): any;
 
@@ -964,6 +992,8 @@ export function GenImageChecked(): any;
 
 export function GenImageColor(): any;
 
+export function GenImageFontAtlas(): any;
+
 export function GenImageGradientH(): any;
 
 export function GenImageGradientRadial(): any;
@@ -974,7 +1004,15 @@ export function GenImagePerlinNoise(): any;
 
 export function GenImageWhiteNoise(): any;
 
+export function GenTextureBRDF(): any;
+
+export function GenTextureCubemap(): any;
+
+export function GenTextureIrradiance(): any;
+
 export function GenTextureMipmaps(): any;
+
+export function GenTexturePrefilter(): any;
 
 export function GetCameraMatrix(): any;
 
@@ -982,11 +1020,23 @@ export function GetCameraMatrix2D(): any;
 
 export function GetClipboardText(): any;
 
+export function GetCodepoints(): any;
+
+export function GetCodepointsCount(): any;
+
+export function GetCollisionRayGround(): any;
+
+export function GetCollisionRayTriangle(): any;
+
 export function GetCollisionRec(): any;
 
 export function GetColor(): any;
 
+export function GetDirectoryFiles(): any;
+
 export function GetDirectoryPath(): any;
+
+export function GetDroppedFiles(): any;
 
 export function GetExtension(): any;
 
@@ -997,6 +1047,8 @@ export function GetFileModTime(): any;
 export function GetFileName(): any;
 
 export function GetFileNameWithoutExt(): any;
+
+export function GetFontDefault(): any;
 
 export function GetFrameTime(): any;
 
@@ -1020,6 +1072,8 @@ export function GetGesturePinchAngle(): any;
 
 export function GetGesturePinchVector(): any;
 
+export function GetGlyphIndex(): any;
+
 export function GetImageAlphaBorder(): any;
 
 export function GetImageData(): any;
@@ -1028,7 +1082,7 @@ export function GetImageDataNormalized(): any;
 
 export function GetKeyPressed(): any;
 
-export function GetMatrixModelview(): any;
+export function GetMatrixProjection(): any;
 
 export function GetMonitorCount(): any;
 
@@ -1056,6 +1110,8 @@ export function GetMusicTimeLength(): any;
 
 export function GetMusicTimePlayed(): any;
 
+export function GetNextCodepoint(): any;
+
 export function GetPixelDataSize(): any;
 
 export function GetPrevDirectoryPath(): any;
@@ -1069,6 +1125,14 @@ export function GetScreenHeight(): any;
 export function GetScreenToWorld2D(): any;
 
 export function GetScreenWidth(): any;
+
+export function GetShaderDefault(): any;
+
+export function GetShaderLocation(): any;
+
+export function GetShapesTexture(): any;
+
+export function GetShapesTextureRec(): any;
 
 export function GetSoundsPlaying(): any;
 
@@ -1136,13 +1200,23 @@ export function ImageDraw(): any;
 
 export function ImageDrawCircle(): any;
 
-export function ImageDrawLineEx(): any;
+export function ImageDrawCircleV(): any;
+
+export function ImageDrawLine(): any;
+
+export function ImageDrawLineV(): any;
 
 export function ImageDrawPixel(): any;
+
+export function ImageDrawPixelV(): any;
 
 export function ImageDrawRectangle(): any;
 
 export function ImageDrawRectangleLines(): any;
+
+export function ImageDrawRectangleRec(): any;
+
+export function ImageDrawRectangleV(): any;
 
 export function ImageDrawText(): any;
 
@@ -1232,6 +1306,8 @@ export function IsSoundPlaying(): any;
 
 export function IsVrSimulatorReady(): any;
 
+export function IsWindowFullscreen(): any;
+
 export function IsWindowHidden(): any;
 
 export function IsWindowMinimized(): any;
@@ -1244,6 +1320,14 @@ export function LoadFileData(): any;
 
 export function LoadFileText(): any;
 
+export function LoadFont(): any;
+
+export function LoadFontData(): any;
+
+export function LoadFontEx(): any;
+
+export function LoadFontFromImage(): any;
+
 export function LoadImage(): any;
 
 export function LoadImageEx(): any;
@@ -1255,6 +1339,10 @@ export function LoadImageRaw(): any;
 export function LoadMusicStream(): any;
 
 export function LoadRenderTexture(): any;
+
+export function LoadShader(): any;
+
+export function LoadShaderCode(): any;
 
 export function LoadSound(): any;
 
@@ -1273,6 +1361,8 @@ export function LoadTextureFromImage(): any;
 export function LoadWave(): any;
 
 export function MeasureText(): any;
+
+export function MeasureTextEx(): any;
 
 export function OpenURL(): any;
 
@@ -1348,6 +1438,16 @@ export function SetMusicPitch(): any;
 
 export function SetMusicVolume(): any;
 
+export function SetShaderValue(): any;
+
+export function SetShaderValueMatrix(): any;
+
+export function SetShaderValueTexture(): any;
+
+export function SetShaderValueV(): any;
+
+export function SetShapesTexture(): any;
+
 export function SetSoundPitch(): any;
 
 export function SetSoundVolume(): any;
@@ -1357,10 +1457,6 @@ export function SetTargetFPS(): any;
 export function SetTextureFilter(): any;
 
 export function SetTextureWrap(): any;
-
-export function SetTraceLogExit(): any;
-
-export function SetTraceLogLevel(): any;
 
 export function SetVrConfiguration(): any;
 
@@ -1380,6 +1476,8 @@ export function Shader(id: any, locs: any): any;
 
 export function ShowCursor(): any;
 
+export function ShowWindow(): any;
+
 export function StopAudioStream(): any;
 
 export function StopMusicStream(): any;
@@ -1388,13 +1486,31 @@ export function StopSound(): any;
 
 export function StopSoundMulti(): any;
 
+export function SubText(): any;
+
 export function TakeScreenshot(): any;
+
+export function TextAppend(): any;
+
+export function TextCopy(): any;
+
+export function TextFindIndex(): any;
 
 export function TextFormat(): any;
 
+export function TextInsert(): any;
+
 export function TextIsEqual(): any;
 
+export function TextJoin(): any;
+
 export function TextLength(): any;
+
+export function TextReplace(): any;
+
+export function TextSplit(): any;
+
+export function TextSubtext(): any;
 
 export function TextToInteger(): any;
 
@@ -1404,17 +1520,23 @@ export function TextToPascal(): any;
 
 export function TextToUpper(): any;
 
+export function TextToUtf8(): any;
+
 export function ToggleFullscreen(): any;
 
 export function ToggleVrMode(): any;
 
 export function UnhideWindow(): any;
 
+export function UnloadFont(): any;
+
 export function UnloadImage(): any;
 
 export function UnloadMusicStream(): any;
 
 export function UnloadRenderTexture(): any;
+
+export function UnloadShader(): any;
 
 export function UnloadSound(): any;
 
