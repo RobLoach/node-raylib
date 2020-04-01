@@ -80,6 +80,10 @@ inline Napi::Value ToValue(Napi::Env& env, Ray value) {
   return ToObject(env, value);
 }
 
+inline Napi::Value ToValue(Napi::Env& env, RayHitInfo value) {
+  return ToObject(env, value);
+}
+
 inline Napi::Value ToValue(Napi::Env& env, BoundingBox value) {
   return ToObject(env, value);
 }
@@ -93,6 +97,14 @@ inline Napi::Value ToValue(Napi::Env& env, NPatchInfo value) {
 }
 
 inline Napi::Value ToValue(Napi::Env& env, Wave value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Shader value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Font value) {
   return ToObject(env, value);
 }
 

@@ -17,13 +17,13 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # TODO: Move this to cmake/FindRaylib.cmake?
-find_package(raylib 2.5.0 QUIET)
+find_package(raylib 3.0.0 QUIET)
 if (NOT raylib_FOUND)
   include(FetchContent)
   FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
-    GIT_TAG 6c44c9d73049501a6ba6fdccd9bed9b1dd81793d
+    GIT_TAG 6a8b1079c13b7d5e1bddc0ecc86ad7e16fc2556d
   )
   FetchContent_GetProperties(raylib)
   if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
@@ -55,21 +55,7 @@ add_library(${PROJECT_NAME} SHARED
   src/lib/ToValue.h
   src/lib/ValidArgs.h
   src/addon.cc
-  src/audio.h
-  src/camera.h
-  src/color.h
-  src/core.h
-  src/cursor.h
-  src/drawing.h
-  src/files.h
-  src/gestures.h
-  src/misc.h
-  src/rlgl.h
-  src/shapes.h
-  src/text.h
-  src/textures.h
-  src/timing.h
-  src/window.h
+  src/wrappedfunctions.h
 )
 
 ## Suffix the node module with .node.

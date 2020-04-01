@@ -118,6 +118,11 @@ Ray GetArgFromParam<Ray>(Napi::Env& env, const Napi::CallbackInfo& info, int par
 }
 
 template <>
+RayHitInfo GetArgFromParam<RayHitInfo>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToRayHitInfo(env, info[paramNum]);
+}
+
+template <>
 BoundingBox GetArgFromParam<BoundingBox>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   return ToBoundingBox(env, info[paramNum]);
 }
@@ -140,6 +145,16 @@ Vector4 GetArgFromParam<Vector4>(Napi::Env& env, const Napi::CallbackInfo& info,
 template <>
 Wave GetArgFromParam<Wave>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
     return ToWave(env, info[paramNum]);
+}
+
+template <>
+Shader GetArgFromParam<Shader>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToShader(env, info[paramNum]);
+}
+
+template <>
+Font GetArgFromParam<Font>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToFont(env, info[paramNum]);
 }
 
 template <>

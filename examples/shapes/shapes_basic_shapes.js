@@ -13,12 +13,12 @@ const r = require('raylib')
 
 // Initialization
 //--------------------------------------------------------------------------------------
-const screenWidth = 800;
-const screenHeight = 450;
+const screenWidth = 800
+const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [shapes] example - basic shapes drawing");
+r.InitWindow(screenWidth, screenHeight, "raylib [shapes] example - basic shapes drawing")
 
-r.SetTargetFPS(60);
+r.SetTargetFPS(60)
 //--------------------------------------------------------------------------------------
 
 // Main game loop
@@ -31,11 +31,11 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
 
     // Draw
     //----------------------------------------------------------------------------------
-    r.BeginDrawing();
+    r.BeginDrawing()
 
-        r.ClearBackground(r.RAYWHITE);
+        r.ClearBackground(r.RAYWHITE)
 
-        r.DrawText("some basic shapes available on raylib", 20, 20, 20, r.DARKGRAY);
+        r.DrawText("some basic shapes available on raylib", 20, 20, 20, r.DARKGRAY)
 
         var position = {
             x: 100,

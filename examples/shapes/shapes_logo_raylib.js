@@ -16,9 +16,9 @@ const r = require('raylib')
 const screenWidth = 800
 const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [shapes] example - raylib logo using shapes");
+r.InitWindow(screenWidth, screenHeight, "raylib [shapes] example - raylib logo using shapes")
 
-r.SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+r.SetTargetFPS(60)               // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
@@ -36,20 +36,20 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
     //----------------------------------------------------------------------------------
     r.BeginDrawing();
 
-        r.ClearBackground(background);
+        r.ClearBackground(background)
 
-        r.DrawRectangle(screenWidth/2 - 128, screenHeight/2 - 128, 256, 256, foreground);
-        r.DrawRectangle(screenWidth/2 - 112, screenHeight/2 - 112, 224, 224, background);
-        r.DrawText("raylib", screenWidth/2 - 44, screenHeight/2 + 48, 50, foreground);
-        r.DrawText("node", screenWidth/2 - 74, screenHeight/2 + 18, 50, nodeGreen);
+        r.DrawRectangle(screenWidth/2 - 128, screenHeight/2 - 128, 256, 256, foreground)
+        r.DrawRectangle(screenWidth/2 - 112, screenHeight/2 - 112, 224, 224, background)
+        r.DrawText("raylib", screenWidth/2 - 44, screenHeight/2 + 48, 50, foreground)
+        r.DrawText("node", screenWidth/2 - 74, screenHeight/2 + 18, 50, nodeGreen)
 
-        r.DrawText("this is NOT a texture!", 350, 370, 10, foreground);
+        r.DrawText("this is NOT a texture!", 350, 370, 10, foreground)
 
-    r.EndDrawing();
+    r.EndDrawing()
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-r.CloseWindow();        // Close window and OpenGL context
+r.CloseWindow()        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

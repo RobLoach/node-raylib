@@ -13,8 +13,8 @@ const r = require('raylib')
 
 // Initialization
 //--------------------------------------------------------------------------------------
-const screenWidth = 800;
-const screenHeight = 450;
+const screenWidth = 800
+const screenHeight = 450
 
 r.InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d camera free")
 
@@ -30,9 +30,9 @@ const camera = r.Camera(
 const cubePosition = r.Vector3()
 let cubeScreenPosition = r.Vector2()
 
-r.SetCameraMode(camera, r.CAMERA_FREE); // Set a free camera mode
+r.SetCameraMode(camera, r.CAMERA_FREE) // Set a free camera mode
 
-r.SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
+r.SetTargetFPS(60)                   // Set our game to run at 60 frames-per-second
 //--------------------------------------------------------------------------------------
 
 // Main game loop
@@ -40,7 +40,7 @@ while (!r.WindowShouldClose())        // Detect window close button or ESC key
 {
     // Update
     //----------------------------------------------------------------------------------
-    r.UpdateCamera(camera);          // Update camera
+    r.UpdateCamera(camera)          // Update camera
 
     // Calculate cube screen space position (with a little offset to be in top)
     const cubePositionVector = r.Vector3(cubePosition.x, cubePosition.y + 2.5, cubePosition.z)
@@ -55,21 +55,21 @@ while (!r.WindowShouldClose())        // Detect window close button or ESC key
 
         r.BeginMode3D(camera)
 
-            r.DrawCube(cubePosition, 2, 2, 2, r.RED);
-            r.DrawCubeWires(cubePosition, 2, 2, 2, r.MAROON);
+            r.DrawCube(cubePosition, 2, 2, 2, r.RED)
+            r.DrawCubeWires(cubePosition, 2, 2, 2, r.MAROON)
 
-            r.DrawGrid(10, 1);
+            r.DrawGrid(10, 1)
 
-        r.EndMode3D();
+        r.EndMode3D()
 
-        r.DrawText("Enemy: 100 / 100", cubeScreenPosition.x - r.MeasureText("Enemy: 100 / 100", 20) / 2, cubeScreenPosition.y, 20, r.BLACK);
-        r.DrawText("Text is always on top of the cube", (screenWidth - r.MeasureText("Text is always on top of the cube", 20)) / 2, 25, 20, r.GRAY);
+        r.DrawText("Enemy: 100 / 100", cubeScreenPosition.x - r.MeasureText("Enemy: 100 / 100", 20) / 2, cubeScreenPosition.y, 20, r.BLACK)
+        r.DrawText("Text is always on top of the cube", (screenWidth - r.MeasureText("Text is always on top of the cube", 20)) / 2, 25, 20, r.GRAY)
 
-    r.EndDrawing();
+    r.EndDrawing()
     //----------------------------------------------------------------------------------
 }
 
 // De-Initialization
 //--------------------------------------------------------------------------------------
-r.CloseWindow();        // Close window and OpenGL context
+r.CloseWindow()        // Close window and OpenGL context
 //--------------------------------------------------------------------------------------

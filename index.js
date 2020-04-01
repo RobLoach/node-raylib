@@ -185,5 +185,11 @@ raylib.Shader = function (id, locs) {
   }
 }
 
+// #defines
+raylib.FormatText = raylib.TextFormat
+raylib.SubText = raylib.TextSubtext
+raylib.ShowWindow = raylib.UnhideWindow
+raylib.LoadText = raylib.LoadFileText
+
 // Export the bindings for the module.
 module.exports = raylib;

@@ -322,6 +322,38 @@ Napi::Object ToObject(Napi::Env& env, Ray input) {
 /**
  * Convert the given argument value to a BoundingBox.
  */
+RayHitInfo ToRayHitInfo(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+
+  RayHitInfo output;
+  if (argObject.Has("hit")) {
+    output.hit = argObject.Get("hit").ToBoolean();
+  }
+  if (argObject.Has("distance")) {
+    output.distance = argObject.Get("distance").ToNumber().FloatValue();
+  }
+  if (argObject.Has("position")) {
+    output.position = ToVector3(env, argObject.Get("position"));
+  }
+  if (argObject.Has("normal")) {
+    output.normal = ToVector3(env, argObject.Get("normal"));
+  }
+
+  return output;
+}
+
+Napi::Object ToObject(Napi::Env& env, RayHitInfo input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("hit", input.hit);
+  out.Set("distance", input.distance);
+  out.Set("position", ToObject(env, input.position));
+  out.Set("normal", ToObject(env, input.normal));
+  return out;
+}
+
+/**
+ * Convert the given argument value to a BoundingBox.
+ */
 BoundingBox ToBoundingBox(Napi::Env& env, const Napi::Value& arg) {
   Napi::Object argObject(env, arg.As<Napi::Object>());
 
@@ -537,8 +569,6 @@ Napi::Object ToObject(Napi::Env& env, Sound input) {
   return out;
 }
 
-
-
 Music ToMusic(Napi::Env& env, const Napi::Value& arg) {
   Napi::Object argObject(env, arg.As<Napi::Object>());
   Music out;
@@ -567,6 +597,27 @@ Napi::Object ToObject(Napi::Env& env, Music input) {
   out.Set("sampleCount", input.sampleCount);
   out.Set("loopCount", input.loopCount);
   out.Set("stream", ToObject(env, input.stream));
+  return out;
+}
+
+
+
+Shader ToShader(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Shader out;
+  if (argObject.Has("id")) {
+    out.id = argObject.Get("id").ToNumber().Uint32Value();
+  }
+  if (argObject.Has("locs")) {
+    out.locs = (int*)argObject.Get("locs").ToNumber().Int64Value();
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, Shader input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("id", input.id);
+  out.Set("locs", (int64_t)input.locs);
   return out;
 }
 
@@ -628,6 +679,59 @@ Napi::Object ToObject(Napi::Env& env, VrDeviceInfo input) {
   return out;
 }
 
-// TODO: Add Shader
+
+MaterialMap ToMaterialMap(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  MaterialMap out;
+  if (argObject.Has("texture")) {
+    out.texture = ToTexture(env, argObject.Get("texture"));
+  }
+  if (argObject.Has("color")) {
+    out.color = ToColor(env, argObject.Get("color"));
+  }
+  if (argObject.Has("value")) {
+    out.value = argObject.Get("value").ToNumber().FloatValue();
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, MaterialMap input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("texture", ToObject(env, input.texture));
+  out.Set("color", ToObject(env, input.color));
+  out.Set("id", input.value);
+  return out;
+}
+
+Font ToFont(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Font out;
+  if (argObject.Has("baseSize")) {
+    out.baseSize = argObject.Get("baseSize").ToNumber().Int32Value();
+  }
+  if (argObject.Has("charsCount")) {
+    out.charsCount = argObject.Get("charsCount").ToNumber().Int32Value();
+  }
+  if (argObject.Has("texture")) {
+    out.texture = ToTexture(env, argObject.Get("texture"));
+  }
+  if (argObject.Has("recs")) {
+    out.recs = (Rectangle*)argObject.Get("recs").ToNumber().Int64Value();
+  }
+  if (argObject.Has("chars")) {
+    out.chars = (CharInfo*)argObject.Get("chars").ToNumber().Int64Value();
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, Font input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("baseSize", input.baseSize);
+  out.Set("charsCount", input.charsCount);
+  out.Set("texture", ToObject(env, input.texture));
+  out.Set("recs", (int64_t)input.recs);
+  out.Set("chars", (int64_t)input.chars);
+  return out;
+}
 
 #endif
