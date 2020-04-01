@@ -12,7 +12,7 @@ jobs:
 
     - uses: actions/setup-node@v1
       with:
-        node-version: '11.x'
+        node-version: '13.x'
 
     - name: Install Dependencies
       run: sudo apt-get install xorg-dev libglu1-mesa-dev
