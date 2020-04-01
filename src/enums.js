@@ -155,9 +155,9 @@ module.exports = {
   GAMEPAD_BUTTON_RIGHT_TRIGGER_2: 12,
 
   // These are buttons in the center of the gamepad
-  GAMEPAD_BUTTON_MIDDLE_LEFT: 13, //PS3 Select
-  GAMEPAD_BUTTON_MIDDLE: 14, //PS Button/XBOX Button
-  GAMEPAD_BUTTON_MIDDLE_RIGHT: 15, //PS3 Start
+  GAMEPAD_BUTTON_MIDDLE_LEFT: 13, // PS3 Select
+  GAMEPAD_BUTTON_MIDDLE: 14, // PS Button/XBOX Button
+  GAMEPAD_BUTTON_MIDDLE_RIGHT: 15, // PS3 Start
 
   // These are the joystick press in buttons
   GAMEPAD_BUTTON_LEFT_THUMB: 16,
