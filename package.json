@@ -64,10 +64,10 @@
     "semicolon": false,
     "space": 2,
     "rules": {
-       "max-params": 0,
-       "capitalized-comments": 0,
-       "new-cap": 0,
-       "guard-for-in": 0
+      "max-params": 0,
+      "capitalized-comments": 0,
+      "new-cap": 0,
+      "guard-for-in": 0
     }
   }
 }
