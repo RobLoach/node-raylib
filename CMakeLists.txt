@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.11)
-project (node-raylib)
+project (node-raylib
+  VERSION 0.5.0
+  DESCRIPTION "Node.js bindings for raylib"
+  HOMEPAGE_URL "https://github.com/RobLoach/node-raylib"
+  LANGUAGES CXX)
 
 if ( CMAKE_COMPILER_IS_GNUCC )
     set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS} -Wno-unused-result")
