@@ -7,7 +7,6 @@
 #include <raylib.h>
 #include "lib/AddFunction.h"
 
-
 void node_raylib_rlgl(Napi::Env& env, Napi::Object& exports) {
   // TODO: Add rlgl
   (void)env;

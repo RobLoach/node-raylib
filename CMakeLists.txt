@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 project (node-raylib
-  VERSION 0.5.0
+  VERSION 0.5.2
   DESCRIPTION "Node.js bindings for raylib"
   HOMEPAGE_URL "https://github.com/RobLoach/node-raylib"
   LANGUAGES C CXX)
@@ -59,6 +59,8 @@ add_library(${PROJECT_NAME} SHARED
   src/lib/ToValue.h
   src/lib/ValidArgs.h
   src/addon.cc
+  src/node-raylib.h
+  src/node-rlgl.h
   src/wrappedfunctions.h
 )
 

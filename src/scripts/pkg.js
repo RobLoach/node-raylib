@@ -1,22 +1,20 @@
-const { exec } = require('pkg')
+const {exec} = require('pkg')
 const archiver = require('archiver')
 const fs = require('fs')
 const path = require('path')
-const package = require('../../package.json')
 
 // Options
-var binaryFilename = 'node-raylib'
-var packageName = `${binaryFilename}-${process.platform}-${process.arch}`
-var compression = 'tar'
-var compressOptions = {}
+let binaryFilename = 'node-raylib'
+let packageName = `${binaryFilename}-${process.platform}-${process.arch}`
+let compression = 'tar'
+let compressOptions = {}
 
 // Platform overrides
-if (process.platform == 'win32') {
+if (process.platform === 'win32') {
   binaryFilename += '.exe'
   packageName += '.zip'
   compression = 'zip'
-}
-else {
+} else {
   packageName += '.tar.gz'
   compressOptions = {
     store: true,
@@ -39,15 +37,15 @@ async function pkg() {
  * Compress the files into the archive.
  */
 async function compress() {
-  var output = fs.createWriteStream(packageName);
-  var archive = archiver(compression, compressOptions);
-  archive.on('error', err =>{
-      throw err;
-  });
-  archive.pipe(output);
+  const output = fs.createWriteStream(packageName)
+  const archive = archiver(compression, compressOptions)
+  archive.on('error', err => {
+    throw err
+  })
+  archive.pipe(output)
   archive.directory('build/Release', false)
   archive.directory('examples')
   archive.file('README.md')
   archive.file('LICENSE.md')
-  archive.finalize();
+  archive.finalize()
 }

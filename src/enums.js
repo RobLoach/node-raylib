@@ -1,14 +1,14 @@
 module.exports = {
-  FLAG_RESERVED: 1, // Reserved
-  FLAG_FULLSCREEN_MODE: 2, // Set to run program in fullscreen
-  FLAG_WINDOW_RESIZABLE: 4, // Set to allow resizable window
-  FLAG_WINDOW_UNDECORATED: 8, // Set to disable window decoration (frame and buttons)
-  FLAG_WINDOW_TRANSPARENT: 16, // Set to allow transparent window
-  FLAG_WINDOW_HIDDEN: 128, // Set to create the window initially hidden
-  FLAG_WINDOW_ALWAYS_RUN: 256, // Set to allow windows running while minimized
-  FLAG_MSAA_4X_HINT: 32, // Set to try enabling MSAA 4X
-  FLAG_VSYNC_HINT: 64, // Set to try enabling V-Sync on GPU
-  LOG_ALL: 0, // Display all logs
+  FLAG_RESERVED: 1,
+  FLAG_FULLSCREEN_MODE: 2,
+  FLAG_WINDOW_RESIZABLE: 4,
+  FLAG_WINDOW_UNDECORATED: 8,
+  FLAG_WINDOW_TRANSPARENT: 16,
+  FLAG_WINDOW_HIDDEN: 128,
+  FLAG_WINDOW_ALWAYS_RUN: 256,
+  FLAG_MSAA_4X_HINT: 32,
+  FLAG_VSYNC_HINT: 64,
+  LOG_ALL: 0,
   LOG_TRACE: 1,
   LOG_DEBUG: 2,
   LOG_INFO: 3,
@@ -132,50 +132,31 @@ module.exports = {
   GAMEPAD_PLAYER2: 1,
   GAMEPAD_PLAYER3: 2,
   GAMEPAD_PLAYER4: 3,
-  // This is here just for error checking
   GAMEPAD_BUTTON_UNKNOWN: 0,
-
-  // This is normally [A,B,X,Y]/[Circle,Triangle,Square,Cross]
-  // No support for 6 button controllers though..
   GAMEPAD_BUTTON_LEFT_FACE_UP: 1,
   GAMEPAD_BUTTON_LEFT_FACE_RIGHT: 2,
   GAMEPAD_BUTTON_LEFT_FACE_DOWN: 3,
   GAMEPAD_BUTTON_LEFT_FACE_LEFT: 4,
-
-  // This is normally a DPAD
   GAMEPAD_BUTTON_RIGHT_FACE_UP: 5,
   GAMEPAD_BUTTON_RIGHT_FACE_RIGHT: 6,
   GAMEPAD_BUTTON_RIGHT_FACE_DOWN: 7,
   GAMEPAD_BUTTON_RIGHT_FACE_LEFT: 8,
-
-  // Triggers
   GAMEPAD_BUTTON_LEFT_TRIGGER_1: 9,
   GAMEPAD_BUTTON_LEFT_TRIGGER_2: 10,
   GAMEPAD_BUTTON_RIGHT_TRIGGER_1: 11,
   GAMEPAD_BUTTON_RIGHT_TRIGGER_2: 12,
-
-  // These are buttons in the center of the gamepad
-  GAMEPAD_BUTTON_MIDDLE_LEFT: 13, // PS3 Select
-  GAMEPAD_BUTTON_MIDDLE: 14, // PS Button/XBOX Button
-  GAMEPAD_BUTTON_MIDDLE_RIGHT: 15, // PS3 Start
-
-  // These are the joystick press in buttons
+  GAMEPAD_BUTTON_MIDDLE_LEFT: 13,
+  GAMEPAD_BUTTON_MIDDLE: 14,
+  GAMEPAD_BUTTON_MIDDLE_RIGHT: 15,
   GAMEPAD_BUTTON_LEFT_THUMB: 16,
   GAMEPAD_BUTTON_RIGHT_THUMB: 17,
-  // This is here just for error checking
   GAMEPAD_AXIS_UNKNOWN: 0,
-
-  // Left stick
   GAMEPAD_AXIS_LEFT_X: 1,
   GAMEPAD_AXIS_LEFT_Y: 2,
-
-  // Right stick
   GAMEPAD_AXIS_RIGHT_X: 3,
   GAMEPAD_AXIS_RIGHT_Y: 4,
-
-  // Pressure levels for the back triggers
-  GAMEPAD_AXIS_LEFT_TRIGGER: 5, // [1..-1] (pressure-level)
-  GAMEPAD_AXIS_RIGHT_TRIGGER: 6, // [1..-1] (pressure-level)
+  GAMEPAD_AXIS_LEFT_TRIGGER: 5,
+  GAMEPAD_AXIS_RIGHT_TRIGGER: 6,
   LOC_VERTEX_POSITION: 0,
   LOC_VERTEX_TEXCOORD01: 1,
   LOC_VERTEX_TEXCOORD02: 2,
@@ -190,8 +171,8 @@ module.exports = {
   LOC_COLOR_DIFFUSE: 11,
   LOC_COLOR_SPECULAR: 12,
   LOC_COLOR_AMBIENT: 13,
-  LOC_MAP_ALBEDO: 14, // LOC_MAP_DIFFUSE
-  LOC_MAP_METALNESS: 15, // LOC_MAP_SPECULAR
+  LOC_MAP_ALBEDO: 14,
+  LOC_MAP_METALNESS: 15,
   LOC_MAP_NORMAL: 16,
   LOC_MAP_ROUGHNESS: 17,
   LOC_MAP_OCCLUSION: 18,
@@ -212,62 +193,62 @@ module.exports = {
   UNIFORM_IVEC3: 6,
   UNIFORM_IVEC4: 7,
   UNIFORM_SAMPLER2D: 8,
-  MAP_ALBEDO: 0, // MAP_DIFFUSE
-  MAP_METALNESS: 1, // MAP_SPECULAR
+  MAP_ALBEDO: 0,
+  MAP_METALNESS: 1,
   MAP_NORMAL: 2,
   MAP_ROUGHNESS: 3,
   MAP_OCCLUSION: 4,
   MAP_EMISSION: 5,
   MAP_HEIGHT: 6,
-  MAP_CUBEMAP: 7, // NOTE: Uses GL_TEXTURE_CUBE_MAP
-  MAP_IRRADIANCE: 8, // NOTE: Uses GL_TEXTURE_CUBE_MAP
-  MAP_PREFILTER: 9, // NOTE: Uses GL_TEXTURE_CUBE_MAP
+  MAP_CUBEMAP: 7,
+  MAP_IRRADIANCE: 8,
+  MAP_PREFILTER: 9,
   MAP_BRDF: 10,
   MAP_DIFFUSE: 0,
   MAP_SPECULAR: 1,
-  UNCOMPRESSED_GRAYSCALE: 1, // 8 bit per pixel (no alpha)
-  UNCOMPRESSED_GRAY_ALPHA: 2, // 8*2 bpp (2 channels)
-  UNCOMPRESSED_R5G6B5: 3, // 16 bpp
-  UNCOMPRESSED_R8G8B8: 4, // 24 bpp
-  UNCOMPRESSED_R5G5B5A1: 5, // 16 bpp (1 bit alpha)
-  UNCOMPRESSED_R4G4B4A4: 6, // 16 bpp (4 bit alpha)
-  UNCOMPRESSED_R8G8B8A8: 7, // 32 bpp
-  UNCOMPRESSED_R32: 8, // 32 bpp (1 channel - float)
-  UNCOMPRESSED_R32G32B32: 9, // 32*3 bpp (3 channels - float)
-  UNCOMPRESSED_R32G32B32A32: 10, // 32*4 bpp (4 channels - float)
-  COMPRESSED_DXT1_RGB: 11, // 4 bpp (no alpha)
-  COMPRESSED_DXT1_RGBA: 12, // 4 bpp (1 bit alpha)
-  COMPRESSED_DXT3_RGBA: 13, // 8 bpp
-  COMPRESSED_DXT5_RGBA: 14, // 8 bpp
-  COMPRESSED_ETC1_RGB: 15, // 4 bpp
-  COMPRESSED_ETC2_RGB: 16, // 4 bpp
-  COMPRESSED_ETC2_EAC_RGBA: 17, // 8 bpp
-  COMPRESSED_PVRT_RGB: 18, // 4 bpp
-  COMPRESSED_PVRT_RGBA: 19, // 4 bpp
-  COMPRESSED_ASTC_4x4_RGBA: 20, // 8 bpp
-  COMPRESSED_ASTC_8x8_RGBA: 21, // 2 bpp
-  FILTER_POINT: 0, // No filter, just pixel aproximation
-  FILTER_BILINEAR: 1, // Linear filtering
-  FILTER_TRILINEAR: 2, // Trilinear filtering (linear with mipmaps)
-  FILTER_ANISOTROPIC_4X: 3, // Anisotropic filtering 4x
-  FILTER_ANISOTROPIC_8X: 4, // Anisotropic filtering 8x
-  FILTER_ANISOTROPIC_16X: 5, // Anisotropic filtering 16x
-  CUBEMAP_AUTO_DETECT: 0, // Automatically detect layout type
-  CUBEMAP_LINE_VERTICAL: 1, // Layout is defined by a vertical line with faces
-  CUBEMAP_LINE_HORIZONTAL: 2, // Layout is defined by an horizontal line with faces
-  CUBEMAP_CROSS_THREE_BY_FOUR: 3, // Layout is defined by a 3x4 cross with cubemap faces
-  CUBEMAP_CROSS_FOUR_BY_THREE: 4, // Layout is defined by a 4x3 cross with cubemap faces
-  CUBEMAP_PANORAMA: 5, // Layout is defined by a panorama image (equirectangular map)
-  WRAP_REPEAT: 0, // Repeats texture in tiled mode
-  WRAP_CLAMP: 1, // Clamps texture to edge pixel in tiled mode
-  WRAP_MIRROR_REPEAT: 2, // Mirrors and repeats the texture in tiled mode
-  WRAP_MIRROR_CLAMP: 3, // Mirrors and clamps to border the texture in tiled mode
-  FONT_DEFAULT: 0, // Default font generation, anti-aliased
-  FONT_BITMAP: 1, // Bitmap font generation, no anti-aliasing
-  FONT_SDF: 2, // SDF font generation, requires external shader
-  BLEND_ALPHA: 0, // Blend textures considering alpha (default)
-  BLEND_ADDITIVE: 1, // Blend textures adding colors
-  BLEND_MULTIPLIED: 2, // Blend textures multiplying colors
+  UNCOMPRESSED_GRAYSCALE: 1,
+  UNCOMPRESSED_GRAY_ALPHA: 2,
+  UNCOMPRESSED_R5G6B5: 3,
+  UNCOMPRESSED_R8G8B8: 4,
+  UNCOMPRESSED_R5G5B5A1: 5,
+  UNCOMPRESSED_R4G4B4A4: 6,
+  UNCOMPRESSED_R8G8B8A8: 7,
+  UNCOMPRESSED_R32: 8,
+  UNCOMPRESSED_R32G32B32: 9,
+  UNCOMPRESSED_R32G32B32A32: 10,
+  COMPRESSED_DXT1_RGB: 11,
+  COMPRESSED_DXT1_RGBA: 12,
+  COMPRESSED_DXT3_RGBA: 13,
+  COMPRESSED_DXT5_RGBA: 14,
+  COMPRESSED_ETC1_RGB: 15,
+  COMPRESSED_ETC2_RGB: 16,
+  COMPRESSED_ETC2_EAC_RGBA: 17,
+  COMPRESSED_PVRT_RGB: 18,
+  COMPRESSED_PVRT_RGBA: 19,
+  COMPRESSED_ASTC_4x4_RGBA: 20,
+  COMPRESSED_ASTC_8x8_RGBA: 21,
+  FILTER_POINT: 0,
+  FILTER_BILINEAR: 1,
+  FILTER_TRILINEAR: 2,
+  FILTER_ANISOTROPIC_4X: 3,
+  FILTER_ANISOTROPIC_8X: 4,
+  FILTER_ANISOTROPIC_16X: 5,
+  CUBEMAP_AUTO_DETECT: 0,
+  CUBEMAP_LINE_VERTICAL: 1,
+  CUBEMAP_LINE_HORIZONTAL: 2,
+  CUBEMAP_CROSS_THREE_BY_FOUR: 3,
+  CUBEMAP_CROSS_FOUR_BY_THREE: 4,
+  CUBEMAP_PANORAMA: 5,
+  WRAP_REPEAT: 0,
+  WRAP_CLAMP: 1,
+  WRAP_MIRROR_REPEAT: 2,
+  WRAP_MIRROR_CLAMP: 3,
+  FONT_DEFAULT: 0,
+  FONT_BITMAP: 1,
+  FONT_SDF: 2,
+  BLEND_ALPHA: 0,
+  BLEND_ADDITIVE: 1,
+  BLEND_MULTIPLIED: 2,
   GESTURE_NONE: 0,
   GESTURE_TAP: 1,
   GESTURE_DOUBLETAP: 2,
@@ -286,7 +267,7 @@ module.exports = {
   CAMERA_THIRD_PERSON: 4,
   CAMERA_PERSPECTIVE: 0,
   CAMERA_ORTHOGRAPHIC: 1,
-  NPT_9PATCH: 0, // Npatch defined by 3x3 tiles
-  NPT_3PATCH_VERTICAL: 1, // Npatch defined by 1x3 tiles
-  NPT_3PATCH_HORIZONTAL: 2 // Npatch defined by 3x1 tiles
+  NPT_9PATCH: 0,
+  NPT_3PATCH_VERTICAL: 1,
+  NPT_3PATCH_HORIZONTAL: 2
 }
