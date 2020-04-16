@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 project (node-raylib
-  VERSION 0.5.2
+  VERSION 0.5.3
   DESCRIPTION "Node.js bindings for raylib"
   HOMEPAGE_URL "https://github.com/RobLoach/node-raylib"
   LANGUAGES C CXX)
