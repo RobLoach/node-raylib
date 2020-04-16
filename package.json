@@ -34,6 +34,7 @@
     "man/node-raylib.1",
     "src/*",
     "src/lib/*",
+    "vendor/*",
     "CMakeLists.txt",
     "index.js",
     "index.d.js",
