@@ -12,13 +12,19 @@
 
 ## Usage
 
+1. Create a new Node.js project:
+    ``` bash
+    mkdir myexample
+    cd myexample
+    npm init
+    ```
+
 1. Add `raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
     ``` bash
-    npm init
     npm install raylib --save
     ```
 
-2. Create a JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
+2. Create a `index.js` JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
     ``` javascript
     const r = require('raylib')
 
@@ -36,9 +42,9 @@
     r.CloseWindow()        // Close window and OpenGL context
     ```
 
-3. Run it through Node.js:
+3. Run `index.js` through Node.js:
     ``` bash
-    node core_basic_window.js
+    node index.js
     ```
 
 Check for more [examples](examples) organized by raylib modules.
