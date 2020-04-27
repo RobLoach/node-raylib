@@ -20,6 +20,11 @@ endif()
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
+# raylib
+if(${NODE_ARCH} STREQUAL "arm" OR ${NODE_ARCH} STREQUAL "arm64")
+  set(PLATFORM "Raspberry Pi")
+endif()
+
 # TODO: Move this to cmake/FindRaylib.cmake?
 find_package(raylib 3.0.0)
 if (NOT raylib_FOUND)
