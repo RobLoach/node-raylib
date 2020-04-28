@@ -7,6 +7,7 @@
 // Find the bindings.
 const raylib = require('bindings')('node-raylib')
 const enums = require('./src/enums')
+const {format} = require('util')
 
 // Inject the enums.
 for (const enumName in enums) {
@@ -19,6 +20,22 @@ raylib.RAD2DEG = (180 / raylib.PI)
 raylib.MAX_TOUCH_POINTS = 10
 raylib.MAX_SHADER_LOCATIONS = 32
 raylib.MAX_MATERIAL_MAPS = 12
+
+// Wrapped Functions
+
+/**
+ * Text formatting with variables (sprintf style)
+ */
+raylib.TextFormat = format
+
+/**
+ * Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR).
+ *
+ * @param {number} logType The type of message to present.
+ */
+raylib.TraceLog = function (logType, ...args) {
+  raylib.TraceLogWrap(logType, raylib.TextFormat(...args))
+}
 
 // Colors
 raylib.Color = function (red, green, blue, alpha = 255) {

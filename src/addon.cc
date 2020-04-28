@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include "lib/AddFunction.h"
 #include "node-raylib.h"
+#include "node-raymath.h"
 #include "node-rlgl.h"
 #include "wrappedfunctions.h"
 
@@ -12,6 +13,7 @@
  */
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
   node_raylib_bindings(env, exports);
+  node_raylib_raymath(env, exports);
   node_raylib_rlgl(env, exports);
   node_raylib_wrappedfunctions(env, exports);
 

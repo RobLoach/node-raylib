@@ -4,7 +4,8 @@
 #include <napi.h>
 #include <string>
 #include <napi.h>
-#include <raylib.h>
+
+#include "raylib.h"
 #include "lib/AddFunction.h"
 
 void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
@@ -13,6 +14,7 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "CloseWindow", CloseWindow);
   AddFunction(env, exports, "IsWindowReady", IsWindowReady);
   AddFunction(env, exports, "IsWindowMinimized", IsWindowMinimized);
+  AddFunction(env, exports, "IsWindowFocused", IsWindowFocused);
   AddFunction(env, exports, "IsWindowResized", IsWindowResized);
   AddFunction(env, exports, "IsWindowHidden", IsWindowHidden);
   AddFunction(env, exports, "IsWindowFullscreen", IsWindowFullscreen);
@@ -34,6 +36,7 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetMonitorPhysicalWidth", GetMonitorPhysicalWidth);
   AddFunction(env, exports, "GetMonitorPhysicalHeight", GetMonitorPhysicalHeight);
   AddFunction(env, exports, "GetWindowPosition", GetWindowPosition);
+  AddFunction(env, exports, "GetWindowScaleDPI", GetWindowScaleDPI);
   AddFunction(env, exports, "GetMonitorName", GetMonitorName);
   AddFunction(env, exports, "GetClipboardText", GetClipboardText);
   AddFunction(env, exports, "SetClipboardText", SetClipboardText);
@@ -72,8 +75,8 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetColor", GetColor);
   AddFunction(env, exports, "Fade", Fade);
   AddFunction(env, exports, "SetConfigFlags", SetConfigFlags);
-  // AddFunction(env, exports, "SetTraceLogLevel", SetTraceLogLevel);
-  // AddFunction(env, exports, "SetTraceLogExit", SetTraceLogExit);
+  AddFunction(env, exports, "SetTraceLogLevel", SetTraceLogLevel);
+  AddFunction(env, exports, "SetTraceLogExit", SetTraceLogExit);
   // AddFunction(env, exports, "SetTraceLogCallback", SetTraceLogCallback);
   // AddFunction(env, exports, "TraceLog", TraceLog);
   AddFunction(env, exports, "TakeScreenshot", TakeScreenshot);
@@ -143,7 +146,7 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetGesturePinchVector", GetGesturePinchVector);
   AddFunction(env, exports, "GetGesturePinchAngle", GetGesturePinchAngle);
   AddFunction(env, exports, "SetCameraMode", SetCameraMode);
-  //AddFunction(env, exports, "UpdateCamera", UpdateCamera);
+  // AddFunction(env, exports, "UpdateCamera", UpdateCamera);
   AddFunction(env, exports, "SetCameraPanControl", SetCameraPanControl);
   AddFunction(env, exports, "SetCameraAltControl", SetCameraAltControl);
   AddFunction(env, exports, "SetCameraSmoothZoomControl", SetCameraSmoothZoomControl);
@@ -191,7 +194,6 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "CheckCollisionPointTriangle", CheckCollisionPointTriangle);
   AddFunction(env, exports, "LoadImage", LoadImage);
   AddFunction(env, exports, "LoadImageEx", LoadImageEx);
-  AddFunction(env, exports, "LoadImagePro", LoadImagePro);
   AddFunction(env, exports, "LoadImageRaw", LoadImageRaw);
   AddFunction(env, exports, "UnloadImage", UnloadImage);
   AddFunction(env, exports, "ExportImage", ExportImage);
@@ -279,7 +281,7 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "DrawText", DrawText);
   AddFunction(env, exports, "DrawTextEx", DrawTextEx);
   AddFunction(env, exports, "DrawTextRec", DrawTextRec);
-  //AddFunction(env, exports, "DrawTextRecEx", DrawTextRecEx);
+  // AddFunction(env, exports, "DrawTextRecEx", DrawTextRecEx);
   AddFunction(env, exports, "DrawTextCodepoint", DrawTextCodepoint);
   AddFunction(env, exports, "MeasureText", MeasureText);
   AddFunction(env, exports, "MeasureTextEx", MeasureTextEx);
@@ -287,7 +289,7 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "TextCopy", TextCopy);
   AddFunction(env, exports, "TextIsEqual", TextIsEqual);
   AddFunction(env, exports, "TextLength", TextLength);
-  //AddFunction(env, exports, "TextFormat", TextFormat);
+  // AddFunction(env, exports, "TextFormat", TextFormat);
   AddFunction(env, exports, "TextSubtext", TextSubtext);
   AddFunction(env, exports, "TextReplace", TextReplace);
   AddFunction(env, exports, "TextInsert", TextInsert);
@@ -321,17 +323,17 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "DrawRay", DrawRay);
   AddFunction(env, exports, "DrawGrid", DrawGrid);
   AddFunction(env, exports, "DrawGizmo", DrawGizmo);
-  //AddFunction(env, exports, "LoadModel", LoadModel);
-  //AddFunction(env, exports, "LoadModelFromMesh", LoadModelFromMesh);
-  //AddFunction(env, exports, "UnloadModel", UnloadModel);
-  //AddFunction(env, exports, "LoadMeshes", LoadMeshes);
-  //AddFunction(env, exports, "ExportMesh", ExportMesh);
-  //AddFunction(env, exports, "UnloadMesh", UnloadMesh);
-  //AddFunction(env, exports, "LoadMaterials", LoadMaterials);
-  //AddFunction(env, exports, "LoadMaterialDefault", LoadMaterialDefault);
-  //AddFunction(env, exports, "UnloadMaterial", UnloadMaterial);
-  //AddFunction(env, exports, "SetMaterialTexture", SetMaterialTexture);
-  //AddFunction(env, exports, "SetModelMeshMaterial", SetModelMeshMaterial);
+  // AddFunction(env, exports, "LoadModel", LoadModel);
+  // AddFunction(env, exports, "LoadModelFromMesh", LoadModelFromMesh);
+  // AddFunction(env, exports, "UnloadModel", UnloadModel);
+  // AddFunction(env, exports, "LoadMeshes", LoadMeshes);
+  // AddFunction(env, exports, "ExportMesh", ExportMesh);
+  // AddFunction(env, exports, "UnloadMesh", UnloadMesh);
+  // AddFunction(env, exports, "LoadMaterials", LoadMaterials);
+  // AddFunction(env, exports, "LoadMaterialDefault", LoadMaterialDefault);
+  // AddFunction(env, exports, "UnloadMaterial", UnloadMaterial);
+  // AddFunction(env, exports, "SetMaterialTexture", SetMaterialTexture);
+  // AddFunction(env, exports, "SetModelMeshMaterial", SetModelMeshMaterial);
   // AddFunction(env, exports, "LoadModelAnimations", LoadModelAnimations);
   // AddFunction(env, exports, "UpdateModelAnimation", UpdateModelAnimation);
   // AddFunction(env, exports, "UnloadModelAnimation", UnloadModelAnimation);
@@ -362,7 +364,7 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "CheckCollisionRaySphere", CheckCollisionRaySphere);
   AddFunction(env, exports, "CheckCollisionRaySphereEx", CheckCollisionRaySphereEx);
   AddFunction(env, exports, "CheckCollisionRayBox", CheckCollisionRayBox);
-  //AddFunction(env, exports, "GetCollisionRayModel", GetCollisionRayModel);
+  AddFunction(env, exports, "GetCollisionRayModel", GetCollisionRayModel);
   AddFunction(env, exports, "GetCollisionRayTriangle", GetCollisionRayTriangle);
   AddFunction(env, exports, "GetCollisionRayGround", GetCollisionRayGround);
   AddFunction(env, exports, "LoadShader", LoadShader);
@@ -392,7 +394,7 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "EndBlendMode", EndBlendMode);
   AddFunction(env, exports, "InitVrSimulator", InitVrSimulator);
   AddFunction(env, exports, "CloseVrSimulator", CloseVrSimulator);
-  //AddFunction(env, exports, "UpdateVrTracking", UpdateVrTracking);
+  // AddFunction(env, exports, "UpdateVrTracking", UpdateVrTracking);
   AddFunction(env, exports, "SetVrConfiguration", SetVrConfiguration);
   AddFunction(env, exports, "IsVrSimulatorReady", IsVrSimulatorReady);
   AddFunction(env, exports, "ToggleVrMode", ToggleVrMode);
