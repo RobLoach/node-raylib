@@ -605,7 +605,15 @@ export const MAROON: {
     r: number;
 };
 
+export const MAX_BATCH_BUFFERING: number;
+
+export const MAX_BATCH_ELEMENTS: number;
+
+export const MAX_DRAWCALL_REGISTERED: number;
+
 export const MAX_MATERIAL_MAPS: number;
+
+export const MAX_MATRIX_STACK_SIZE: number;
 
 export const MAX_SHADER_LOCATIONS: number;
 
@@ -661,6 +669,52 @@ export const RED: {
     g: number;
     r: number;
 };
+
+export const RL_FAR_CULL_DISTANCE: number;
+
+export const RL_FILTER_LINEAR: number;
+
+export const RL_FILTER_LINEAR_MIP_NEAREST: number;
+
+export const RL_FILTER_MIP_LINEAR: number;
+
+export const RL_FILTER_MIP_NEAREST: number;
+
+export const RL_FILTER_NEAREST: number;
+
+export const RL_FILTER_NEAREST_MIP_LINEAR: number;
+
+export const RL_LINES: number;
+
+export const RL_MODELVIEW: number;
+
+export const RL_NEAR_CULL_DISTANCE: number;
+
+export const RL_PROJECTION: number;
+
+export const RL_QUADS: number;
+
+export const RL_TEXTURE: number;
+
+export const RL_TEXTURE_ANISOTROPIC_FILTER: number;
+
+export const RL_TEXTURE_MAG_FILTER: number;
+
+export const RL_TEXTURE_MIN_FILTER: number;
+
+export const RL_TEXTURE_WRAP_S: number;
+
+export const RL_TEXTURE_WRAP_T: number;
+
+export const RL_TRIANGLES: number;
+
+export const RL_WRAP_CLAMP: number;
+
+export const RL_WRAP_MIRROR_CLAMP: number;
+
+export const RL_WRAP_MIRROR_REPEAT: number;
+
+export const RL_WRAP_REPEAT: number;
 
 export const SKYBLUE: {
     a: number;
@@ -984,7 +1038,7 @@ export function Fade(): any;
 
 export function FileExists(): any;
 
-export function FormatText(): any;
+export function FormatText(args: any): any;
 
 export function GenImageCellular(): any;
 
@@ -1025,6 +1079,8 @@ export function GetCodepoints(): any;
 export function GetCodepointsCount(): any;
 
 export function GetCollisionRayGround(): any;
+
+export function GetCollisionRayModel(): any;
 
 export function GetCollisionRayTriangle(): any;
 
@@ -1155,6 +1211,8 @@ export function GetWaveData(): any;
 export function GetWindowHandle(): any;
 
 export function GetWindowPosition(): any;
+
+export function GetWindowScaleDPI(): any;
 
 export function GetWorkingDirectory(): any;
 
@@ -1306,6 +1364,8 @@ export function IsSoundPlaying(): any;
 
 export function IsVrSimulatorReady(): any;
 
+export function IsWindowFocused(): any;
+
 export function IsWindowFullscreen(): any;
 
 export function IsWindowHidden(): any;
@@ -1331,8 +1391,6 @@ export function LoadFontFromImage(): any;
 export function LoadImage(): any;
 
 export function LoadImageEx(): any;
-
-export function LoadImagePro(): any;
 
 export function LoadImageRaw(): any;
 
@@ -1458,6 +1516,10 @@ export function SetTextureFilter(): any;
 
 export function SetTextureWrap(): any;
 
+export function SetTraceLogExit(): any;
+
+export function SetTraceLogLevel(): any;
+
 export function SetVrConfiguration(): any;
 
 export function SetWindowIcon(): any;
@@ -1496,7 +1558,7 @@ export function TextCopy(): any;
 
 export function TextFindIndex(): any;
 
-export function TextFormat(): any;
+export function TextFormat(args: any): any;
 
 export function TextInsert(): any;
 
@@ -1525,6 +1587,10 @@ export function TextToUtf8(): any;
 export function ToggleFullscreen(): any;
 
 export function ToggleVrMode(): any;
+
+export function TraceLog(logType: any, args: any): void;
+
+export function TraceLogWrap(): any;
 
 export function UnhideWindow(): any;
 
@@ -1575,4 +1641,142 @@ export function WaveCrop(): any;
 export function WaveFormat(): any;
 
 export function WindowShouldClose(): any;
+
+export function rlBegin(): any;
+
+export function rlCheckBufferLimit(): any;
+
+export function rlClearColor(): any;
+
+export function rlClearScreenBuffers(): any;
+
+export function rlColor3f(): any;
+
+export function rlColor4f(): any;
+
+export function rlColor4ub(): any;
+
+export function rlDeleteBuffers(): any;
+
+export function rlDeleteRenderTextures(): any;
+
+export function rlDeleteShader(): any;
+
+export function rlDeleteTextures(): any;
+
+export function rlDeleteVertexArrays(): any;
+
+export function rlDisableBackfaceCulling(): any;
+
+export function rlDisableDepthTest(): any;
+
+export function rlDisableRenderTexture(): any;
+
+export function rlDisableScissorTest(): any;
+
+export function rlDisableTexture(): any;
+
+export function rlDisableWireMode(): any;
+
+export function rlDrawMesh(): any;
+
+export function rlEnableBackfaceCulling(): any;
+
+export function rlEnableDepthTest(): any;
+
+export function rlEnableRenderTexture(): any;
+
+export function rlEnableScissorTest(): any;
+
+export function rlEnableTexture(): any;
+
+export function rlEnableWireMode(): any;
+
+export function rlEnd(): any;
+
+export function rlFrustum(): any;
+
+export function rlGenerateMipmaps(): any;
+
+export function rlGetGlTextureFormats(): any;
+
+export function rlGetVersion(): any;
+
+export function rlLoadAttribBuffer(): any;
+
+export function rlLoadExtensions(): any;
+
+export function rlLoadIdentity(): any;
+
+export function rlLoadMesh(): any;
+
+export function rlLoadRenderTexture(): any;
+
+export function rlLoadTexture(): any;
+
+export function rlLoadTextureCubemap(): any;
+
+export function rlLoadTextureDepth(): any;
+
+export function rlMatrixMode(): any;
+
+export function rlMultMatrixf(): any;
+
+export function rlNormal3f(): any;
+
+export function rlOrtho(): any;
+
+export function rlPopMatrix(): any;
+
+export function rlPushMatrix(): any;
+
+export function rlReadScreenPixels(): any;
+
+export function rlReadTexturePixels(): any;
+
+export function rlRenderTextureAttach(): any;
+
+export function rlRenderTextureComplete(): any;
+
+export function rlRotatef(): any;
+
+export function rlScalef(): any;
+
+export function rlScissor(): any;
+
+export function rlSetDebugMarker(): any;
+
+export function rlTexCoord2f(): any;
+
+export function rlTextureParameters(): any;
+
+export function rlTranslatef(): any;
+
+export function rlUnloadMesh(): any;
+
+export function rlUnloadTexture(): any;
+
+export function rlUnproject(): any;
+
+export function rlUpdateBuffer(): any;
+
+export function rlUpdateMesh(): any;
+
+export function rlUpdateMeshAt(): any;
+
+export function rlUpdateTexture(): any;
+
+export function rlVertex2f(): any;
+
+export function rlVertex2i(): any;
+
+export function rlVertex3f(): any;
+
+export function rlViewport(): any;
+
+export function rlglClose(): any;
+
+export function rlglDraw(): any;
+
+export function rlglInit(): any;
 
