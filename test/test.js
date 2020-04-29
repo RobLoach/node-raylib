@@ -24,6 +24,21 @@ describe('raylib', function() {
     })
   })
 
+  describe('TextFormat', function() {
+    it('TextFormat()', function() {
+      const str = 'Hello, %s! Number %i'
+      const num = 5
+      assert.equal(r.TextFormat(str, 'Ray', num), 'Hello, Ray! Number 5');
+      assert.equal(r.FormatText(str, 'Ray', num), 'Hello, Ray! Number 5');
+    })
+  })
+
+  describe('TraceLog', function () {
+    it('TraceLog(r.LOG_INFO)', function() {
+      r.TraceLog(r.LOG_INFO, 'Hello, %s', 'Ray')
+    })
+  })
+
   describe('file', function() {
     it('FileExists()', function() {
       assert(r.FileExists(path.join(__dirname, '..', 'package.json')))
@@ -41,6 +56,10 @@ describe('raylib', function() {
       var output = r.LoadText(filename)
       assert.isNotEmpty(output)
       assert.include(output, '"raylib"', 'package.json contains "raylib"')
+    })
+
+    it ('RL_FAR_CULL_DISTANCE', function() {
+      assert.equal(r.RL_FAR_CULL_DISTANCE, 1000)
     })
   })
 
