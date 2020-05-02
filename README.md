@@ -72,11 +72,13 @@ node-raylib --version
 
 The following are a few notes and resources when developing `node-raylib`...
 
-### Node.js Bindings
+### Testing
 
 [node-addon-api](https://github.com/nodejs/node-addon-api) is used to construct the bindings. Feel free to read through [`src/addons.cc`](src/addons.cc) for an understanding on how methods are defined. A lot is missing from the project, so feel free to get involved in the issue queue and submit pull requests. Run the following to run tests...
 
 ```
+git clone https://github.com/RobLoach/node-raylib.git
+cd node-raylib
 git submodule update --init
 npm it
 ```
