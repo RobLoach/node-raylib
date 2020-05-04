@@ -1,7 +1,6 @@
 #ifndef NODE_RAYLIB_NODE_RAYLIB_H
 #define NODE_RAYLIB_NODE_RAYLIB_H
 
-#include <napi.h>
 #include <string>
 #include <napi.h>
 

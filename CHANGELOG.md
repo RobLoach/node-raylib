@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Updated to latest raylib
+- Updated to `node-addon-api@^3.0.0`
 
 ## [0.5.3] - 2020-04-06
 ### Added
