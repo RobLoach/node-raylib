@@ -50,16 +50,16 @@
   "dependencies": {
     "bindings": "^1.5.0",
     "cmake-js": "^6.1.0",
-    "meow": "^6.1.0",
+    "meow": "^6.1.1",
     "module-alias": "^2.2.2",
-    "node-addon-api": "^2.0.0"
+    "node-addon-api": "^3.0.0"
   },
   "devDependencies": {
     "archiver": "^4.0.1",
     "chai": "^4.2.0",
-    "mocha": "^7.1.1",
-    "pkg": "^4.4.7",
-    "xo": "^0.29.1"
+    "mocha": "^7.1.2",
+    "pkg": "^4.4.8",
+    "xo": "^0.30.0"
   },
   "xo": {
     "semicolon": false,
