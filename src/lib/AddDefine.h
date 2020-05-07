@@ -3,6 +3,10 @@
 
 #include <napi.h>
 
+void AddDefineInteger(Napi::Env& env, Napi::Object& exports, const char* name, int value) {
+  exports.Set(Napi::String::New(env, name), Napi::Number::New(env, value));
+}
+
 void AddDefine(Napi::Env& env, Napi::Object& exports, const char* name, float value) {
   exports.Set(Napi::String::New(env, name), Napi::Number::New(env, value));
 }
