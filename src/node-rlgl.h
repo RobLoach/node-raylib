@@ -10,15 +10,39 @@
 #include "./lib/AddDefine.h"
 
 void node_raylib_rlgl_defines(Napi::Env& env, Napi::Object& exports) {
-  AddDefine(env, exports, "MAX_BATCH_ELEMENTS", MAX_BATCH_ELEMENTS);
-  AddDefine(env, exports, "MAX_BATCH_ELEMENTS", MAX_BATCH_ELEMENTS);
-  AddDefine(env, exports, "MAX_BATCH_BUFFERING", MAX_BATCH_BUFFERING);
+#if defined(GRAPHICS_API_OPENGL_11)
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_11", true);
+#else
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_11", false);
+#endif
+#if defined(GRAPHICS_API_OPENGL_21)
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_21", true);
+#else
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_21", false);
+#endif
+#if defined(GRAPHICS_API_OPENGL_33)
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_33", true);
+#else
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_33", false);
+#endif
+#if defined(GRAPHICS_API_OPENGL_ES2)
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_ES2", true);
+#else
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_ES2", false);
+#endif
+#if defined(GRAPHICS_API_OPENGL_33)
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_33", true);
+#else
+  AddDefineBoolean(env, exports, "GRAPHICS_API_OPENGL_33", false);
+#endif
+  AddDefine(env, exports, "DEFAULT_BATCH_BUFFER_ELEMENTS", DEFAULT_BATCH_BUFFER_ELEMENTS);
+  AddDefine(env, exports, "DEFAULT_BATCH_BUFFERS", DEFAULT_BATCH_BUFFERS);
+  AddDefine(env, exports, "DEFAULT_BATCH_DRAWCALLS", DEFAULT_BATCH_DRAWCALLS);
   AddDefine(env, exports, "MAX_MATRIX_STACK_SIZE", MAX_MATRIX_STACK_SIZE);
-  AddDefine(env, exports, "MAX_DRAWCALL_REGISTERED", MAX_DRAWCALL_REGISTERED);
   AddDefine(env, exports, "MAX_SHADER_LOCATIONS", MAX_SHADER_LOCATIONS);
   AddDefine(env, exports, "MAX_MATERIAL_MAPS", MAX_MATERIAL_MAPS);
-  AddDefine(env, exports, "RL_NEAR_CULL_DISTANCE", RL_NEAR_CULL_DISTANCE);
-  AddDefine(env, exports, "RL_FAR_CULL_DISTANCE", RL_FAR_CULL_DISTANCE);
+  AddDefine(env, exports, "RL_CULL_DISTANCE_NEAR", RL_CULL_DISTANCE_NEAR);
+  AddDefine(env, exports, "RL_CULL_DISTANCE_FAR", RL_CULL_DISTANCE_FAR);
   AddDefine(env, exports, "RL_TEXTURE_WRAP_S", RL_TEXTURE_WRAP_S);
   AddDefine(env, exports, "RL_TEXTURE_WRAP_T", RL_TEXTURE_WRAP_T);
   AddDefine(env, exports, "RL_TEXTURE_MAG_FILTER", RL_TEXTURE_MAG_FILTER);

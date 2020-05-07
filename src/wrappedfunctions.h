@@ -10,6 +10,7 @@ Camera UpdateCameraWrap(Camera camera) {
   UpdateCamera(&camera);
   return camera;
 }
+
 Camera UpdateVrTrackingWrap(Camera camera) {
   UpdateVrTracking(&camera);
   return camera;

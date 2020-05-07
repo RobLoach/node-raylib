@@ -1,6 +1,6 @@
 {
   "name": "raylib",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Node.js bindings for raylib.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -50,7 +50,7 @@
   "dependencies": {
     "bindings": "^1.5.0",
     "cmake-js": "^6.1.0",
-    "meow": "^6.1.1",
+    "meow": "^7.0.0",
     "module-alias": "^2.2.2",
     "node-addon-api": "^3.0.0"
   },
