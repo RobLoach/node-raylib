@@ -4,10 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.5.x] - xxxx-xx-xx
+## [0.6.x] - xxxx-xx-xx
 ### Added
-- rlgl.h
-- TraceLog()
+- rlgl
+- raymath
+- `TraceLog()`
 
 ### Changed
 - Updated to latest raylib

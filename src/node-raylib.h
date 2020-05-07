@@ -308,6 +308,8 @@ void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "DrawLine3D", DrawLine3D);
   AddFunction(env, exports, "DrawPoint3D", DrawPoint3D);
   AddFunction(env, exports, "DrawCircle3D", DrawCircle3D);
+  AddFunction(env, exports, "DrawTriangle3D", DrawTriangle3D);
+  AddFunction(env, exports, "DrawTriangleStrip3D", DrawTriangleStrip3D);
   AddFunction(env, exports, "DrawCube", DrawCube);
   AddFunction(env, exports, "DrawCubeV", DrawCubeV);
   AddFunction(env, exports, "DrawCubeWires", DrawCubeWires);

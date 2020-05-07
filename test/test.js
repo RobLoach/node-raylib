@@ -58,8 +58,8 @@ describe('raylib', function() {
       assert.include(output, '"raylib"', 'package.json contains "raylib"')
     })
 
-    it ('RL_FAR_CULL_DISTANCE', function() {
-      assert.equal(r.RL_FAR_CULL_DISTANCE, 1000)
+    it ('RL_QUADS', function() {
+      assert.equal(r.RL_QUADS, 0x0007)
     })
   })
 
@@ -95,6 +95,16 @@ describe('raylib', function() {
       const matrix = r.GetCameraMatrix(camera)
       expect(matrix.m2).to.greaterThan(0.6)
       expect(matrix.m2).to.lessThan(0.8)
+    })
+  })
+
+  describe('raymath', function() {
+    it('Vector2Add()', function() {
+      const first = r.Vector2(10, 20)
+      const second = r.Vector2(30, 40)
+      const third = r.Vector2Add(first, second)
+      expect(third.x).to.equal(40)
+      expect(third.y).to.equal(60)
     })
   })
 

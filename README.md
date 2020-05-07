@@ -102,4 +102,4 @@ npm run pkg
 *node-raylib* is licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 BSD-like license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
 
-*Copyright (c) 2018 Rob Loach ([@RobLoach](https://twitter.com/RobLoach))*
+*Copyright (c) 2019 Rob Loach ([@RobLoach](https://twitter.com/RobLoach))*
