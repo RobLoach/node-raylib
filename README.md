@@ -54,7 +54,7 @@ Check for more [examples](examples) organized by raylib modules.
 The project also comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly:
 
 ``` bash
-# Linux
+# Unix
 ./node-raylib core_basic_window.js
 
 # Windows

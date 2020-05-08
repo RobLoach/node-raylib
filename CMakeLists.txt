@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 project (node-raylib
-  VERSION 0.5.3
+  VERSION 0.6.0
   DESCRIPTION "Node.js bindings for raylib"
   HOMEPAGE_URL "https://github.com/RobLoach/node-raylib"
   LANGUAGES C CXX)
@@ -41,6 +41,7 @@ include_directories(${PROJECT_NAME}
 
 # This is hardcoded so that updates force a re-compile.
 add_library(${PROJECT_NAME} SHARED
+  src/lib/AddDefine.h
   src/lib/AddFunction.h
   src/lib/CleanUp.h
   src/lib/GetArgFromParam.h
