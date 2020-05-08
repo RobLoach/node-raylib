@@ -6,20 +6,13 @@
 
 // Find the bindings.
 const raylib = require('bindings')('node-raylib')
-const enums = require('./src/enums')
 const {format} = require('util')
 
-// Inject the enums.
-for (const enumName in enums) {
-  raylib[enumName] = enums[enumName]
-}
-
-raylib.PI = 3.14159265358979323846
-raylib.DEG2RAD = (raylib.PI / 180)
-raylib.RAD2DEG = (180 / raylib.PI)
+raylib.MAX_GAMEPADS = 4
+raylib.MAX_GAMEPAD_AXIS = 8
+raylib.MAX_GAMEPAD_BUTTONS = 32
 raylib.MAX_TOUCH_POINTS = 10
-raylib.MAX_SHADER_LOCATIONS = 32
-raylib.MAX_MATERIAL_MAPS = 12
+raylib.MAX_KEY_PRESSED_QUEUE = 16
 
 // Wrapped Functions
 
