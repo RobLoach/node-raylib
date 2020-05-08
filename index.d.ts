@@ -124,6 +124,12 @@ export const DARKPURPLE: {
     r: number;
 };
 
+export const DEFAULT_BATCH_BUFFERS: number;
+
+export const DEFAULT_BATCH_BUFFER_ELEMENTS: number;
+
+export const DEFAULT_BATCH_DRAWCALLS: number;
+
 export const DEG2RAD: number;
 
 export const FILTER_ANISOTROPIC_16X: number;
@@ -248,6 +254,14 @@ export const GOLD: {
     g: number;
     r: number;
 };
+
+export const GRAPHICS_API_OPENGL_11: boolean;
+
+export const GRAPHICS_API_OPENGL_21: boolean;
+
+export const GRAPHICS_API_OPENGL_33: boolean;
+
+export const GRAPHICS_API_OPENGL_ES2: boolean;
 
 export const GRAY: {
     a: number;
@@ -605,11 +619,13 @@ export const MAROON: {
     r: number;
 };
 
-export const MAX_BATCH_BUFFERING: number;
+export const MAX_GAMEPADS: number;
 
-export const MAX_BATCH_ELEMENTS: number;
+export const MAX_GAMEPAD_AXIS: number;
 
-export const MAX_DRAWCALL_REGISTERED: number;
+export const MAX_GAMEPAD_BUTTONS: number;
+
+export const MAX_KEY_PRESSED_QUEUE: number;
 
 export const MAX_MATERIAL_MAPS: number;
 
@@ -670,7 +686,9 @@ export const RED: {
     r: number;
 };
 
-export const RL_FAR_CULL_DISTANCE: number;
+export const RL_CULL_DISTANCE_FAR: number;
+
+export const RL_CULL_DISTANCE_NEAR: number;
 
 export const RL_FILTER_LINEAR: number;
 
@@ -687,8 +705,6 @@ export const RL_FILTER_NEAREST_MIP_LINEAR: number;
 export const RL_LINES: number;
 
 export const RL_MODELVIEW: number;
-
-export const RL_NEAR_CULL_DISTANCE: number;
 
 export const RL_PROJECTION: number;
 
@@ -839,6 +855,8 @@ export function CheckCollisionRaySphereEx(): any;
 export function CheckCollisionRecs(): any;
 
 export function CheckCollisionSpheres(): any;
+
+export function Clamp(): any;
 
 export function ClearBackground(): any;
 
@@ -1002,11 +1020,15 @@ export function DrawTextureV(): any;
 
 export function DrawTriangle(): any;
 
+export function DrawTriangle3D(): any;
+
 export function DrawTriangleFan(): any;
 
 export function DrawTriangleLines(): any;
 
 export function DrawTriangleStrip(): any;
+
+export function DrawTriangleStrip3D(): any;
 
 export function EnableCursor(): any;
 
@@ -1376,6 +1398,8 @@ export function IsWindowReady(): any;
 
 export function IsWindowResized(): any;
 
+export function Lerp(): any;
+
 export function LoadFileData(): any;
 
 export function LoadFileText(): any;
@@ -1418,6 +1442,46 @@ export function LoadTextureFromImage(): any;
 
 export function LoadWave(): any;
 
+export function MatrixAdd(): any;
+
+export function MatrixDeterminant(): any;
+
+export function MatrixFrustum(): any;
+
+export function MatrixIdentity(): any;
+
+export function MatrixInvert(): any;
+
+export function MatrixLookAt(): any;
+
+export function MatrixMultiply(): any;
+
+export function MatrixNormalize(): any;
+
+export function MatrixOrtho(): any;
+
+export function MatrixPerspective(): any;
+
+export function MatrixRotate(): any;
+
+export function MatrixRotateX(): any;
+
+export function MatrixRotateXYZ(): any;
+
+export function MatrixRotateY(): any;
+
+export function MatrixRotateZ(): any;
+
+export function MatrixScale(): any;
+
+export function MatrixSubtract(): any;
+
+export function MatrixTrace(): any;
+
+export function MatrixTranslate(): any;
+
+export function MatrixTranspose(): any;
+
 export function MeasureText(): any;
 
 export function MeasureTextEx(): any;
@@ -1437,6 +1501,48 @@ export function PlayMusicStream(): any;
 export function PlaySound(): any;
 
 export function PlaySoundMulti(): any;
+
+export function QuaternionAdd(): any;
+
+export function QuaternionAddValue(): any;
+
+export function QuaternionDivide(): any;
+
+export function QuaternionFromAxisAngle(): any;
+
+export function QuaternionFromEuler(): any;
+
+export function QuaternionFromMatrix(): any;
+
+export function QuaternionFromVector3ToVector3(): any;
+
+export function QuaternionIdentity(): any;
+
+export function QuaternionInvert(): any;
+
+export function QuaternionLength(): any;
+
+export function QuaternionLerp(): any;
+
+export function QuaternionMultiply(): any;
+
+export function QuaternionNormalize(): any;
+
+export function QuaternionScale(): any;
+
+export function QuaternionSlerp(): any;
+
+export function QuaternionSubtract(): any;
+
+export function QuaternionSubtractValue(): any;
+
+export function QuaternionToAxisAngle(): any;
+
+export function QuaternionToEuler(): any;
+
+export function QuaternionToMatrix(): any;
+
+export function QuaternionTransform(): any;
 
 export function Ray(position: any, direction: any): any;
 
@@ -1628,7 +1734,91 @@ export function UpdateVrTrackingWrap(): any;
 
 export function Vector2(x: any, y: any): any;
 
+export function Vector2Add(): any;
+
+export function Vector2AddValue(): any;
+
+export function Vector2Angle(): any;
+
+export function Vector2Distance(): any;
+
+export function Vector2Divide(): any;
+
+export function Vector2DotProduct(): any;
+
+export function Vector2Length(): any;
+
+export function Vector2Lerp(): any;
+
+export function Vector2MoveTowards(): any;
+
+export function Vector2Multiply(): any;
+
+export function Vector2Negate(): any;
+
+export function Vector2Normalize(): any;
+
+export function Vector2One(): any;
+
+export function Vector2Rotate(): any;
+
+export function Vector2Scale(): any;
+
+export function Vector2Subtract(): any;
+
+export function Vector2SubtractValue(): any;
+
+export function Vector2Zero(): any;
+
 export function Vector3(x: any, y: any, z: any): any;
+
+export function Vector3Add(): any;
+
+export function Vector3AddValue(): any;
+
+export function Vector3Barycenter(): any;
+
+export function Vector3CrossProduct(): any;
+
+export function Vector3Distance(): any;
+
+export function Vector3Divide(): any;
+
+export function Vector3DotProduct(): any;
+
+export function Vector3Length(): any;
+
+export function Vector3Lerp(): any;
+
+export function Vector3Max(): any;
+
+export function Vector3Min(): any;
+
+export function Vector3Multiply(): any;
+
+export function Vector3Negate(): any;
+
+export function Vector3Normalize(): any;
+
+export function Vector3One(): any;
+
+export function Vector3OrthoNormalize(): any;
+
+export function Vector3Perpendicular(): any;
+
+export function Vector3Reflect(): any;
+
+export function Vector3RotateByQuaternion(): any;
+
+export function Vector3Scale(): any;
+
+export function Vector3Subtract(): any;
+
+export function Vector3SubtractValue(): any;
+
+export function Vector3Transform(): any;
+
+export function Vector3Zero(): any;
 
 export function Vector4(x: any, y: any, z: any, w: any): any;
 
