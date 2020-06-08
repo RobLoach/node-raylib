@@ -578,11 +578,11 @@ Music ToMusic(Napi::Env& env, const Napi::Value& arg) {
   if (argObject.Has("ctxData")) {
     out.ctxData = (void*)argObject.Get("ctxData").ToNumber().Int64Value();
   }
+  if (argObject.Has("looping")) {
+    out.looping = argObject.Get("looping").ToBoolean();
+  }
   if (argObject.Has("sampleCount")) {
     out.sampleCount = argObject.Get("sampleCount").ToNumber().Uint32Value();
-  }
-  if (argObject.Has("loopCount")) {
-    out.loopCount = argObject.Get("loopCount").ToNumber().Uint32Value();
   }
   if (argObject.Has("stream")) {
     out.stream = ToAudioStream(env, argObject.Get("stream"));
@@ -594,8 +594,8 @@ Napi::Object ToObject(Napi::Env& env, Music input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("ctxType", input.ctxType);
   out.Set("ctxData", (int64_t)input.ctxData);
+  out.Set("looping", (bool)input.looping);
   out.Set("sampleCount", input.sampleCount);
-  out.Set("loopCount", input.loopCount);
   out.Set("stream", ToObject(env, input.stream));
   return out;
 }

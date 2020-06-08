@@ -160,7 +160,6 @@ void node_raylib_bindings_defines(Napi::Env& env, Napi::Object& exports) {
   AddDefineInteger(env, exports, "GAMEPAD_BUTTON_MIDDLE_RIGHT", GAMEPAD_BUTTON_MIDDLE_RIGHT);
   AddDefineInteger(env, exports, "GAMEPAD_BUTTON_LEFT_THUMB", GAMEPAD_BUTTON_LEFT_THUMB);
   AddDefineInteger(env, exports, "GAMEPAD_BUTTON_RIGHT_THUMB", GAMEPAD_BUTTON_RIGHT_THUMB);
-  AddDefineInteger(env, exports, "GAMEPAD_AXIS_UNKNOWN", GAMEPAD_AXIS_UNKNOWN);
   AddDefineInteger(env, exports, "GAMEPAD_AXIS_LEFT_X", GAMEPAD_AXIS_LEFT_X);
   AddDefineInteger(env, exports, "GAMEPAD_AXIS_LEFT_Y", GAMEPAD_AXIS_LEFT_Y);
   AddDefineInteger(env, exports, "GAMEPAD_AXIS_RIGHT_X", GAMEPAD_AXIS_RIGHT_X);
@@ -255,6 +254,7 @@ void node_raylib_bindings_defines(Napi::Env& env, Napi::Object& exports) {
   AddDefineInteger(env, exports, "BLEND_ALPHA", BLEND_ALPHA);
   AddDefineInteger(env, exports, "BLEND_ADDITIVE", BLEND_ADDITIVE);
   AddDefineInteger(env, exports, "BLEND_MULTIPLIED", BLEND_MULTIPLIED);
+  AddDefineInteger(env, exports, "BLEND_ADD_COLORS", BLEND_ADD_COLORS);
   AddDefineInteger(env, exports, "GESTURE_NONE", GESTURE_NONE);
   AddDefineInteger(env, exports, "GESTURE_TAP", GESTURE_TAP);
   AddDefineInteger(env, exports, "GESTURE_DOUBLETAP", GESTURE_DOUBLETAP);
@@ -319,6 +319,7 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "IsCursorHidden", IsCursorHidden);
   AddFunction(env, exports, "EnableCursor", EnableCursor);
   AddFunction(env, exports, "DisableCursor", DisableCursor);
+  AddFunction(env, exports, "IsCursorOnScreen", IsCursorOnScreen);
   AddFunction(env, exports, "ClearBackground", ClearBackground);
   AddFunction(env, exports, "BeginDrawing", BeginDrawing);
   AddFunction(env, exports, "EndDrawing", EndDrawing);
@@ -472,8 +473,6 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "UnloadImage", UnloadImage);
   AddFunction(env, exports, "ExportImage", ExportImage);
   AddFunction(env, exports, "ExportImageAsCode", ExportImageAsCode);
-  AddFunction(env, exports, "GetImageData", GetImageData);
-  AddFunction(env, exports, "GetImageDataNormalized", GetImageDataNormalized);
   AddFunction(env, exports, "GenImageColor", GenImageColor);
   AddFunction(env, exports, "GenImageGradientV", GenImageGradientV);
   AddFunction(env, exports, "GenImageGradientH", GenImageGradientH);
@@ -486,13 +485,13 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "ImageFromImage", ImageFromImage);
   AddFunction(env, exports, "ImageText", ImageText);
   AddFunction(env, exports, "ImageTextEx", ImageTextEx);
-  AddFunction(env, exports, "ImageToPOT", ImageToPOT);
   AddFunction(env, exports, "ImageFormat", ImageFormat);
-  AddFunction(env, exports, "ImageAlphaMask", ImageAlphaMask);
-  AddFunction(env, exports, "ImageAlphaClear", ImageAlphaClear);
-  AddFunction(env, exports, "ImageAlphaCrop", ImageAlphaCrop);
-  AddFunction(env, exports, "ImageAlphaPremultiply", ImageAlphaPremultiply);
+  AddFunction(env, exports, "ImageToPOT", ImageToPOT);
   AddFunction(env, exports, "ImageCrop", ImageCrop);
+  AddFunction(env, exports, "ImageAlphaCrop", ImageAlphaCrop);
+  AddFunction(env, exports, "ImageAlphaClear", ImageAlphaClear);
+  AddFunction(env, exports, "ImageAlphaMask", ImageAlphaMask);
+  AddFunction(env, exports, "ImageAlphaPremultiply", ImageAlphaPremultiply);
   AddFunction(env, exports, "ImageResize", ImageResize);
   AddFunction(env, exports, "ImageResizeNN", ImageResizeNN);
   AddFunction(env, exports, "ImageResizeCanvas", ImageResizeCanvas);
@@ -508,7 +507,9 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "ImageColorContrast", ImageColorContrast);
   AddFunction(env, exports, "ImageColorBrightness", ImageColorBrightness);
   AddFunction(env, exports, "ImageColorReplace", ImageColorReplace);
-  AddFunction(env, exports, "ImageExtractPalette", ImageExtractPalette);
+  // AddFunction(env, exports, "GetImageData", GetImageData);
+  // AddFunction(env, exports, "GetImagePalette", GetImagePalette);
+  // AddFunction(env, exports, "GetImageDataNormalized", GetImageDataNormalized);
   AddFunction(env, exports, "GetImageAlphaBorder", GetImageAlphaBorder);
   AddFunction(env, exports, "ImageClearBackground", ImageClearBackground);
   AddFunction(env, exports, "ImageDrawPixel", ImageDrawPixel);
@@ -657,8 +658,8 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "SetShaderValueMatrix", SetShaderValueMatrix);
   AddFunction(env, exports, "SetShaderValueTexture", SetShaderValueTexture);
   AddFunction(env, exports, "SetMatrixProjection", SetMatrixProjection);
-  // AddFunction(env, exports, "SetMatrixModelview", SetMatrixModelview);
-  // AddFunction(env, exports, "GetMatrixModelview", GetMatrixModelview);
+  AddFunction(env, exports, "SetMatrixModelview", SetMatrixModelview);
+  AddFunction(env, exports, "GetMatrixModelview", GetMatrixModelview);
   AddFunction(env, exports, "GetMatrixProjection", GetMatrixProjection);
   AddFunction(env, exports, "GenTextureCubemap", GenTextureCubemap);
   AddFunction(env, exports, "GenTextureIrradiance", GenTextureIrradiance);
@@ -712,7 +713,6 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "IsMusicPlaying", IsMusicPlaying);
   AddFunction(env, exports, "SetMusicVolume", SetMusicVolume);
   AddFunction(env, exports, "SetMusicPitch", SetMusicPitch);
-  AddFunction(env, exports, "SetMusicLoopCount", SetMusicLoopCount);
   AddFunction(env, exports, "GetMusicTimeLength", GetMusicTimeLength);
   AddFunction(env, exports, "GetMusicTimePlayed", GetMusicTimePlayed);
   AddFunction(env, exports, "InitAudioStream", InitAudioStream);
