@@ -1,0 +1,23 @@
+{
+  "name": "raylib",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "node test",
+    "prebuild": "emcmake cmake . -B build '-s USE_GLFW=3'",
+    "build": "emmake make -C build",
+    "clean": "emmake make clean -C build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobLoach/node-raylib.git"
+  },
+  "author": "Rob Loach",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RobLoach/node-raylib/issues"
+  },
+  "homepage": "https://github.com/RobLoach/node-raylib#readme"
+}
