@@ -764,4 +764,28 @@ Napi::Object ToObject(Napi::Env& env, const CharInfo& input) {
   return out;
 }
 
+Transform ToTransform(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Transform out;
+  if (argObject.Has("translation")) {
+    out.translation = ToVector3(env, argObject.Get("translation"));
+  }
+  if (argObject.Has("rotation")) {
+    out.rotation = ToVector4(env, argObject.Get("rotation"));
+  }
+  if (argObject.Has("scale")) {
+    out.scale = ToVector3(env, argObject.Get("scale"));
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, const Transform& input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("translation", ToObject(env, input.translation));
+  out.Set("rotation", ToObject(env, input.rotation));
+  out.Set("scale", ToObject(env, input.scale));
+  return out;
+}
+
+
 #endif

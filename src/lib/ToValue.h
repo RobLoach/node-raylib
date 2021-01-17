@@ -68,14 +68,6 @@ inline Napi::Value ToValue(Napi::Env& env, Matrix value) {
   return ToObject(env, value);
 }
 
-inline Napi::Value ToValue(Napi::Env& env, Camera value) {
-  return ToObject(env, value);
-}
-
-inline Napi::Value ToValue(Napi::Env& env, Camera2D value) {
-  return ToObject(env, value);
-}
-
 inline Napi::Value ToValue(Napi::Env& env, Ray value) {
   return ToObject(env, value);
 }
@@ -96,15 +88,31 @@ inline Napi::Value ToValue(Napi::Env& env, NPatchInfo value) {
   return ToObject(env, value);
 }
 
+inline Napi::Value ToValue(Napi::Env& env, CharInfo value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Transform value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Font value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Camera value) {
+  return ToObject(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Camera2D value) {
+  return ToObject(env, value);
+}
+
 inline Napi::Value ToValue(Napi::Env& env, Wave value) {
   return ToObject(env, value);
 }
 
 inline Napi::Value ToValue(Napi::Env& env, Shader value) {
-  return ToObject(env, value);
-}
-
-inline Napi::Value ToValue(Napi::Env& env, Font value) {
   return ToObject(env, value);
 }
 

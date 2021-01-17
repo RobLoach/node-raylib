@@ -301,10 +301,10 @@ void node_raylib_bindings_defines(Napi::Env& env, Napi::Object& exports) {
 }
 
 void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
-  AddFunction(env, exports, "InitWindow", InitWindow);
-  AddFunction(env, exports, "WindowShouldClose", WindowShouldClose);
-  AddFunction(env, exports, "CloseWindow", CloseWindow);
-  AddFunction(env, exports, "IsWindowReady", IsWindowReady);
+  AddFunction(env, exports, "InitWindow", &InitWindow);
+  AddFunction(env, exports, "WindowShouldClose", &WindowShouldClose);
+  AddFunction(env, exports, "CloseWindow", &CloseWindow);
+  AddFunction(env, exports, "IsWindowReady", &IsWindowReady);
   AddFunction(env, exports, "IsWindowFullscreen", IsWindowFullscreen);
   AddFunction(env, exports, "IsWindowHidden", IsWindowHidden);
   AddFunction(env, exports, "IsWindowMinimized", IsWindowMinimized);
@@ -443,7 +443,7 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GetGesturePinchVector", GetGesturePinchVector);
   AddFunction(env, exports, "GetGesturePinchAngle", GetGesturePinchAngle);
   AddFunction(env, exports, "SetCameraMode", SetCameraMode);
-  AddFunction(env, exports, "UpdateCamera", UpdateCamera);
+  // AddFunction(env, exports, "UpdateCamera", UpdateCamera);
   AddFunction(env, exports, "SetCameraPanControl", SetCameraPanControl);
   AddFunction(env, exports, "SetCameraAltControl", SetCameraAltControl);
   AddFunction(env, exports, "SetCameraSmoothZoomControl", SetCameraSmoothZoomControl);
@@ -715,7 +715,7 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "EndBlendMode", EndBlendMode);
   AddFunction(env, exports, "InitVrSimulator", InitVrSimulator);
   AddFunction(env, exports, "CloseVrSimulator", CloseVrSimulator);
-  AddFunction(env, exports, "UpdateVrTracking", UpdateVrTracking);
+  // AddFunction(env, exports, "UpdateVrTracking", UpdateVrTracking);
   AddFunction(env, exports, "SetVrConfiguration", SetVrConfiguration);
   AddFunction(env, exports, "IsVrSimulatorReady", IsVrSimulatorReady);
   AddFunction(env, exports, "ToggleVrMode", ToggleVrMode);
