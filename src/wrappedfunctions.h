@@ -21,9 +21,9 @@ void TraceLogWrap(int logType, const char* message) {
 }
 
 void node_raylib_wrappedfunctions(Napi::Env& env, Napi::Object& exports) {
-  AddFunction(env, exports, "TraceLogWrap", TraceLogWrap);
-  AddFunction(env, exports, "UpdateVrTrackingWrap", UpdateVrTrackingWrap);
-  AddFunction(env, exports, "UpdateCameraWrap", UpdateCameraWrap);
+  AddFunction(env, exports, "TraceLogWrap", &TraceLogWrap);
+  AddFunction(env, exports, "UpdateVrTrackingWrap", &UpdateVrTrackingWrap);
+  AddFunction(env, exports, "UpdateCameraWrap", &UpdateCameraWrap);
 }
 
 #endif
