@@ -61,8 +61,38 @@ float GetArgFromParam<float>(Napi::Env& env, const Napi::CallbackInfo& info, int
 }
 
 template <>
+Vector2 GetArgFromParam<Vector2>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToVector2(env, info[paramNum]);
+}
+
+template <>
+Vector3 GetArgFromParam<Vector3>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToVector3(env, info[paramNum]);
+}
+
+template <>
+Vector4 GetArgFromParam<Vector4>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToVector4(env, info[paramNum]);
+}
+
+template <>
+Matrix GetArgFromParam<Matrix>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToMatrix(env, info[paramNum]);
+}
+
+template <>
 Color GetArgFromParam<Color>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   return ToColor(env, info[paramNum]);
+}
+
+template <>
+Rectangle GetArgFromParam<Rectangle>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToRectangle(env, info[paramNum]);
+}
+
+template <>
+Image GetArgFromParam<Image>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToImage(env, info[paramNum]);
 }
 
 template <>
@@ -81,8 +111,8 @@ NPatchInfo GetArgFromParam<NPatchInfo>(Napi::Env& env, const Napi::CallbackInfo&
 }
 
 template <>
-Rectangle GetArgFromParam<Rectangle>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToRectangle(env, info[paramNum]);
+CharInfo GetArgFromParam<CharInfo>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToCharInfo(env, info[paramNum]);
 }
 
 template <>
@@ -108,8 +138,18 @@ Camera2D GetArgFromParam<Camera2D>(Napi::Env& env, const Napi::CallbackInfo& inf
 }
 
 template <>
-Matrix GetArgFromParam<Matrix>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToMatrix(env, info[paramNum]);
+Shader GetArgFromParam<Shader>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToShader(env, info[paramNum]);
+}
+
+template <>
+MaterialMap GetArgFromParam<MaterialMap>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToMaterialMap(env, info[paramNum]);
+}
+
+template <>
+Transform GetArgFromParam<Transform>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToTransform(env, info[paramNum]);
 }
 
 template <>
@@ -128,28 +168,8 @@ BoundingBox GetArgFromParam<BoundingBox>(Napi::Env& env, const Napi::CallbackInf
 }
 
 template <>
-Vector2 GetArgFromParam<Vector2>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-    return ToVector2(env, info[paramNum]);
-}
-
-template <>
-Vector3 GetArgFromParam<Vector3>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-    return ToVector3(env, info[paramNum]);
-}
-
-template <>
-Vector4 GetArgFromParam<Vector4>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-    return ToVector4(env, info[paramNum]);
-}
-
-template <>
 Wave GetArgFromParam<Wave>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
     return ToWave(env, info[paramNum]);
-}
-
-template <>
-Shader GetArgFromParam<Shader>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-    return ToShader(env, info[paramNum]);
 }
 
 template <>

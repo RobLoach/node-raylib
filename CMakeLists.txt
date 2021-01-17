@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 project (node-raylib
-  VERSION 0.6.0
+  VERSION 0.7.0
   DESCRIPTION "Node.js bindings for raylib"
   HOMEPAGE_URL "https://github.com/RobLoach/node-raylib"
   LANGUAGES C CXX)
@@ -21,7 +21,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # TODO: Move this to cmake/FindRaylib.cmake?
-find_package(raylib 3.0.0)
+find_package(raylib 3.5.0)
 if (NOT raylib_FOUND)
   set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
   set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games

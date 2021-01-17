@@ -3,3 +3,4 @@ package-lock.json
 /build
 *.zip
 *.tar.gz
+.vscode
