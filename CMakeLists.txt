@@ -9,3 +9,13 @@ set(PLATFORM Web)
 
 add_subdirectory(vendor/raylib)
 add_subdirectory(vendor/raylib-cpp/include)
+
+add_executable(raylib-wasm
+    src/raylib.cpp
+)
+
+target_link_libraries(raylib-wasm PUBLIC raylib raylib-cpp)
+
+set_target_properties(raylib-wasm PROPERTIES
+    OUTPUT_NAME "raylib"
+    LINK_FLAGS "-s ASYNCIFY -s EXPORT_NAME=raylib -s MODULARIZE=1 -s USE_GLFW=3 -s DEMANGLE_SUPPORT=1 --bind")

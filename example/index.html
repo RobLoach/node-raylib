@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <title>raylib-wasm</title>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <style>
+            body {
+                text-align: center;
+            }
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+        <script src="../build/raylib-wasm.js"></script>
+    </head>
+	<body>
+        <canvas id="canvas"></canvas>
+        <script>
+            const options = {
+                canvas: document.getElementById("canvas")
+            }
+            raylib(options).then((r) => {
+                r.InitWindow(800, 450, "raylib")
+
+                function loop(time) {
+                    r.ClearBackground(r.SKYBLUE)
+                    r.BeginDrawing()
+                    r.DrawRectangle(r.GetMouseX(), r.GetMouseY(), 50, 50, r.MAROON)
+                    r.EndDrawing()
+
+                    requestAnimationFrame(loop)
+                }
+
+                requestAnimationFrame(loop)
+            })
+        </script>
+	</body>
+</html>

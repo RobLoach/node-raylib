@@ -2,13 +2,14 @@
   "name": "raylib",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "build/raylib.js",
   "scripts": {
     "pretest": "npm run build",
-    "test": "node test",
-    "prebuild": "emcmake cmake . -B build '-s USE_GLFW=3'",
+    "test": "mocha test",
+    "prebuild": "emcmake cmake . -B build -DPLATFORM=Web",
     "build": "emmake make -C build",
-    "clean": "emmake make clean -C build"
+    "clean": "emmake make clean -C build",
+    "start": "light-server --no-reload -s . --historyindex '/example/index.html'"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/RobLoach/node-raylib/issues"
   },
-  "homepage": "https://github.com/RobLoach/node-raylib#readme"
+  "homepage": "https://github.com/RobLoach/node-raylib#readme",
+  "devDependencies": {
+    "light-server": "^2.9.1",
+    "mocha": "^8.2.1"
+  }
 }
