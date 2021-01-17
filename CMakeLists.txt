@@ -18,4 +18,11 @@ target_link_libraries(raylib-wasm PUBLIC raylib raylib-cpp)
 
 set_target_properties(raylib-wasm PROPERTIES
     OUTPUT_NAME "raylib"
-    LINK_FLAGS "-s ASYNCIFY -s EXPORT_NAME=raylib -s MODULARIZE=1 -s USE_GLFW=3 -s DEMANGLE_SUPPORT=1 --bind")
+    LINK_FLAGS "\
+        -s ENVIRONMENT=web,webview,node \
+        -s ASYNCIFY \
+        -s EXPORT_NAME=raylib \
+        -s MODULARIZE=1 \
+        -s USE_GLFW=3 \
+        -s DEMANGLE_SUPPORT=1 \
+        --bind")

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+        <!--
+      'unsafe-eval' is required because of a Chrome bug(?) that disallows
+      loading WASM from 'self'.
+
+      https://github.com/anderejd/electron-wasm-rust-example/issues/6
+      https://github.com/WebAssembly/content-security-policy/issues/7
+      https://bugs.chromium.org/p/chromium/issues/detail?id=948834&can=1&q=wasm-eval
+    -->
+    <!--<meta http-equiv="Content-Security-Policy" content="script-src 'self' app: 'unsafe-eval'; object-src 'self' app:;">-->
+
+
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' app: 'unsafe-eval'; object-src 'self' app:;" />
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>raylib-electron</title>
+    <link rel="stylesheet" href="./index.css">
+    <!--<script src="raylib.js"></script>-->
+
+    <script src="js-wasm.js"></script>
+    <script type="application/wasm" src="raylib.wasm"></script>
+
+    <script src="renderer.js"></script>
+  </head>
+  <body>
+    <h1>💖 Hello World!</h1>
+    <p>Welcome to your Electron application.</p>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>
