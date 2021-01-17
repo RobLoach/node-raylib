@@ -205,9 +205,6 @@ RenderTexture2D ToRenderTexture2D(Napi::Env& env, const Napi::Value& arg) {
   if (argObject.Has("depth")) {
     out.depth = ToTexture(env, argObject.Get("depth"));
   }
-  if (argObject.Has("depthTexture")) {
-    out.depthTexture = argObject.Get("depthTexture").ToBoolean();
-  }
   return out;
 }
 
@@ -216,7 +213,6 @@ Napi::Object ToObject(Napi::Env& env, RenderTexture2D input) {
   out.Set("id", input.id);
   out.Set("texture", ToObject(env, input.texture));
   out.Set("depth", ToObject(env, input.depth));
-  out.Set("depthTexture", input.depthTexture);
   return out;
 }
 
@@ -456,8 +452,8 @@ NPatchInfo ToNPatchInfo(Napi::Env& env, const Napi::Value& arg) {
   Napi::Object argObject(env, arg.As<Napi::Object>());
 
   NPatchInfo output;
-  if (argObject.Has("sourceRec")) {
-    output.sourceRec = ToRectangle(env, argObject.Get("sourceRec"));
+  if (argObject.Has("source")) {
+    output.source = ToRectangle(env, argObject.Get("source"));
   }
   if (argObject.Has("left")) {
     output.left = argObject.Get("left").ToNumber().Int32Value();
@@ -483,7 +479,7 @@ NPatchInfo ToNPatchInfo(Napi::Env& env, const Napi::Value& arg) {
  */
 Napi::Object ToObject(Napi::Env& env, NPatchInfo input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("sourceRec", ToObject(env, input.sourceRec));
+  out.Set("source", ToObject(env, input.source));
   out.Set("left", input.left);
   out.Set("top", input.top);
   out.Set("right", input.right);
@@ -731,6 +727,37 @@ Napi::Object ToObject(Napi::Env& env, Font input) {
   out.Set("texture", ToObject(env, input.texture));
   out.Set("recs", (int64_t)input.recs);
   out.Set("chars", (int64_t)input.chars);
+  return out;
+}
+
+CharInfo ToCharInfo(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  CharInfo out;
+  if (argObject.Has("value")) {
+    out.value = argObject.Get("value").ToNumber().Int32Value();
+  }
+  if (argObject.Has("offsetX")) {
+    out.offsetX = argObject.Get("offsetX").ToNumber().Int32Value();
+  }
+  if (argObject.Has("offsetY")) {
+    out.offsetY = argObject.Get("offsetY").ToNumber().Int32Value();
+  }
+  if (argObject.Has("advanceX")) {
+    out.advanceX = argObject.Get("advanceX").ToNumber().Int32Value();
+  }
+  if (argObject.Has("image")) {
+    out.image = ToImage(env, argObject.Get("image"));
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, CharInfo input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("value", input.value);
+  out.Set("offsetX", input.offsetX);
+  out.Set("offsetY", input.offsetY);
+  out.Set("advanceX", input.advanceX);
+  out.Set("image", ToObject(env, input.image));
   return out;
 }
 

@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "mocha",
-    "posttest": "xo index.js bin/node-raylib src/scripts/pkg.js",
+    "posttest": "echo 'xo index.js bin/node-raylib src/scripts/pkg.js'",
     "postinstall": "cmake-js compile",
     "clean": "rm -rf build",
     "compile": "cmake-js compile",
@@ -50,16 +50,15 @@
   "dependencies": {
     "bindings": "^1.5.0",
     "cmake-js": "^6.1.0",
-    "meow": "^7.0.1",
+    "meow": "^9.0.0",
     "module-alias": "^2.2.2",
-    "node-addon-api": "^3.0.0"
+    "node-addon-api": "^3.1.0"
   },
   "devDependencies": {
-    "archiver": "^4.0.1",
+    "archiver": "^5.2.0",
     "chai": "^4.2.0",
-    "mocha": "^7.2.0",
-    "pkg": "^4.4.8",
-    "xo": "^0.32.0"
+    "mocha": "^8.2.1",
+    "pkg": "^4.4.9"
   },
   "xo": {
     "semicolon": false,

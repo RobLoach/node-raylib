@@ -67,6 +67,7 @@ void node_raylib_rlgl_defines(Napi::Env& env, Napi::Object& exports) {
 }
 
 void node_raylib_rlgl_functions(Napi::Env& env, Napi::Object& exports) {
+  /*
   AddFunction(env, exports, "rlMatrixMode", rlMatrixMode);
   AddFunction(env, exports, "rlPushMatrix", rlPushMatrix);
   AddFunction(env, exports, "rlPopMatrix", rlPopMatrix);
@@ -136,6 +137,7 @@ void node_raylib_rlgl_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "rlUpdateMeshAt", rlUpdateMeshAt);
   AddFunction(env, exports, "rlDrawMesh", rlDrawMesh);
   AddFunction(env, exports, "rlUnloadMesh", rlUnloadMesh);
+  */
 }
 
 void node_raylib_rlgl(Napi::Env& env, Napi::Object& exports) {
