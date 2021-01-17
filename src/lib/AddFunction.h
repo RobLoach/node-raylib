@@ -217,6 +217,146 @@ void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name,
   }));
 }
 
+template <typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9, typename P10>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 10)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    auto arg6 = GetArgFromParam<P7>(env, info, 6);
+    auto arg7 = GetArgFromParam<P8>(env, info, 7);
+    auto arg8 = GetArgFromParam<P9>(env, info, 8);
+    auto arg9 = GetArgFromParam<P10>(env, info, 9);
+    (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    CleanUp(arg6);
+    CleanUp(arg7);
+    CleanUp(arg8);
+    CleanUp(arg9);
+    return env.Null();
+  }));
+}
+
+template <typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9, typename P10, typename P11>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 11)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    auto arg6 = GetArgFromParam<P7>(env, info, 6);
+    auto arg7 = GetArgFromParam<P8>(env, info, 7);
+    auto arg8 = GetArgFromParam<P9>(env, info, 8);
+    auto arg9 = GetArgFromParam<P10>(env, info, 9);
+    auto arg10 = GetArgFromParam<P11>(env, info, 10);
+    (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    CleanUp(arg6);
+    CleanUp(arg7);
+    CleanUp(arg8);
+    CleanUp(arg9);
+    CleanUp(arg10);
+    return env.Null();
+  }));
+}
+
+template <typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9, typename P10, typename P11, typename P12>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 12)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    auto arg6 = GetArgFromParam<P7>(env, info, 6);
+    auto arg7 = GetArgFromParam<P8>(env, info, 7);
+    auto arg8 = GetArgFromParam<P9>(env, info, 8);
+    auto arg9 = GetArgFromParam<P10>(env, info, 9);
+    auto arg10 = GetArgFromParam<P11>(env, info, 10);
+    auto arg11 = GetArgFromParam<P12>(env, info, 11);
+    (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    CleanUp(arg6);
+    CleanUp(arg7);
+    CleanUp(arg8);
+    CleanUp(arg9);
+    CleanUp(arg10);
+    CleanUp(arg11);
+    return env.Null();
+  }));
+}
+
+template <typename P1, typename P2, typename P3, typename P4, typename P5, typename P6, typename P7, typename P8, typename P9, typename P10, typename P11, typename P12, typename P13>
+void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, void (*f)(P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13)) {
+  exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
+    Napi::Env env = info.Env();
+    if (!ValidArgs(env, info, 13)) {
+      return env.Null();
+    }
+    auto arg0 = GetArgFromParam<P1>(env, info, 0);
+    auto arg1 = GetArgFromParam<P2>(env, info, 1);
+    auto arg2 = GetArgFromParam<P3>(env, info, 2);
+    auto arg3 = GetArgFromParam<P4>(env, info, 3);
+    auto arg4 = GetArgFromParam<P5>(env, info, 4);
+    auto arg5 = GetArgFromParam<P6>(env, info, 5);
+    auto arg6 = GetArgFromParam<P7>(env, info, 6);
+    auto arg7 = GetArgFromParam<P8>(env, info, 7);
+    auto arg8 = GetArgFromParam<P9>(env, info, 8);
+    auto arg9 = GetArgFromParam<P10>(env, info, 9);
+    auto arg10 = GetArgFromParam<P11>(env, info, 10);
+    auto arg11 = GetArgFromParam<P12>(env, info, 11);
+    auto arg12 = GetArgFromParam<P13>(env, info, 12);
+    (*f)(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12);
+    CleanUp(arg0);
+    CleanUp(arg1);
+    CleanUp(arg2);
+    CleanUp(arg3);
+    CleanUp(arg4);
+    CleanUp(arg5);
+    CleanUp(arg6);
+    CleanUp(arg7);
+    CleanUp(arg8);
+    CleanUp(arg9);
+    CleanUp(arg10);
+    CleanUp(arg11);
+    CleanUp(arg12);
+    return env.Null();
+  }));
+}
+
 template <typename ReturnType>
 void AddFunction(Napi::Env& env, Napi::Object& exports, const std::string& name, ReturnType (*f)()) {
   exports.Set(Napi::String::New(env, name), Napi::Function::New(env, [f] (const Napi::CallbackInfo& info) -> Napi::Value {
