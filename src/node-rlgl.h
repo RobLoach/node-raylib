@@ -67,8 +67,8 @@ void node_raylib_rlgl_defines(Napi::Env& env, Napi::Object& exports) {
 }
 
 void node_raylib_rlgl_functions(Napi::Env& env, Napi::Object& exports) {
-  /*
   AddFunction(env, exports, "rlMatrixMode", rlMatrixMode);
+  /*
   AddFunction(env, exports, "rlPushMatrix", rlPushMatrix);
   AddFunction(env, exports, "rlPopMatrix", rlPopMatrix);
   AddFunction(env, exports, "rlLoadIdentity", rlLoadIdentity);

@@ -153,6 +153,11 @@ Shader GetArgFromParam<Shader>(Napi::Env& env, const Napi::CallbackInfo& info, i
 }
 
 template <>
+CharInfo GetArgFromParam<CharInfo>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToCharInfo(env, info[paramNum]);
+}
+
+template <>
 Font GetArgFromParam<Font>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
     return ToFont(env, info[paramNum]);
 }
