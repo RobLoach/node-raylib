@@ -68,7 +68,6 @@ void node_raylib_rlgl_defines(Napi::Env& env, Napi::Object& exports) {
 
 void node_raylib_rlgl_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "rlMatrixMode", rlMatrixMode);
-  /*
   AddFunction(env, exports, "rlPushMatrix", rlPushMatrix);
   AddFunction(env, exports, "rlPopMatrix", rlPopMatrix);
   AddFunction(env, exports, "rlLoadIdentity", rlLoadIdentity);
@@ -92,10 +91,14 @@ void node_raylib_rlgl_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "rlEnableTexture", rlEnableTexture);
   AddFunction(env, exports, "rlDisableTexture", rlDisableTexture);
   AddFunction(env, exports, "rlTextureParameters", rlTextureParameters);
-  AddFunction(env, exports, "rlEnableRenderTexture", rlEnableRenderTexture);
-  AddFunction(env, exports, "rlDisableRenderTexture", rlDisableRenderTexture);
+  AddFunction(env, exports, "rlEnableShader", rlEnableShader);
+  AddFunction(env, exports, "rlDisableShader", rlDisableShader);
+  AddFunction(env, exports, "rlEnableFramebuffer", rlEnableFramebuffer);
+  AddFunction(env, exports, "rlDisableFramebuffer", rlDisableFramebuffer);
   AddFunction(env, exports, "rlEnableDepthTest", rlEnableDepthTest);
   AddFunction(env, exports, "rlDisableDepthTest", rlDisableDepthTest);
+  AddFunction(env, exports, "rlEnableDepthMask", rlEnableDepthMask);
+  AddFunction(env, exports, "rlDisableDepthMask", rlDisableDepthMask);
   AddFunction(env, exports, "rlEnableBackfaceCulling", rlEnableBackfaceCulling);
   AddFunction(env, exports, "rlDisableBackfaceCulling", rlDisableBackfaceCulling);
   AddFunction(env, exports, "rlEnableScissorTest", rlEnableScissorTest);
@@ -103,11 +106,10 @@ void node_raylib_rlgl_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "rlScissor", rlScissor);
   AddFunction(env, exports, "rlEnableWireMode", rlEnableWireMode);
   AddFunction(env, exports, "rlDisableWireMode", rlDisableWireMode);
-  AddFunction(env, exports, "rlDeleteTextures", rlDeleteTextures);
-  AddFunction(env, exports, "rlDeleteRenderTextures", rlDeleteRenderTextures);
-  AddFunction(env, exports, "rlDeleteShader", rlDeleteShader);
-  AddFunction(env, exports, "rlDeleteVertexArrays", rlDeleteVertexArrays);
-  AddFunction(env, exports, "rlDeleteBuffers", rlDeleteBuffers);
+  AddFunction(env, exports, "rlSetLineWidth", rlSetLineWidth);
+  AddFunction(env, exports, "rlGetLineWidth", rlGetLineWidth);
+  AddFunction(env, exports, "rlEnableSmoothLines", rlEnableSmoothLines);
+  AddFunction(env, exports, "rlDisableSmoothLines", rlDisableSmoothLines);
   AddFunction(env, exports, "rlClearColor", rlClearColor);
   AddFunction(env, exports, "rlClearScreenBuffers", rlClearScreenBuffers);
   AddFunction(env, exports, "rlUpdateBuffer", rlUpdateBuffer);
@@ -115,11 +117,12 @@ void node_raylib_rlgl_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "rlglInit", rlglInit);
   AddFunction(env, exports, "rlglClose", rlglClose);
   AddFunction(env, exports, "rlglDraw", rlglDraw);
+  AddFunction(env, exports, "rlCheckErrors", rlCheckErrors);
   AddFunction(env, exports, "rlGetVersion", rlGetVersion);
   AddFunction(env, exports, "rlCheckBufferLimit", rlCheckBufferLimit);
   AddFunction(env, exports, "rlSetDebugMarker", rlSetDebugMarker);
+  AddFunction(env, exports, "rlSetBlendMode", rlSetBlendMode);
   AddFunction(env, exports, "rlLoadExtensions", rlLoadExtensions);
-  AddFunction(env, exports, "rlUnproject", rlUnproject);
   AddFunction(env, exports, "rlLoadTexture", rlLoadTexture);
   AddFunction(env, exports, "rlLoadTextureDepth", rlLoadTextureDepth);
   AddFunction(env, exports, "rlLoadTextureCubemap", rlLoadTextureCubemap);
@@ -129,15 +132,16 @@ void node_raylib_rlgl_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "rlGenerateMipmaps", rlGenerateMipmaps);
   AddFunction(env, exports, "rlReadTexturePixels", rlReadTexturePixels);
   AddFunction(env, exports, "rlReadScreenPixels", rlReadScreenPixels);
-  AddFunction(env, exports, "rlLoadRenderTexture", rlLoadRenderTexture);
-  AddFunction(env, exports, "rlRenderTextureAttach", rlRenderTextureAttach);
-  AddFunction(env, exports, "rlRenderTextureComplete", rlRenderTextureComplete);
+  AddFunction(env, exports, "rlLoadFramebuffer", rlLoadFramebuffer);
+  AddFunction(env, exports, "rlFramebufferAttach", rlFramebufferAttach);
+  AddFunction(env, exports, "rlFramebufferComplete", rlFramebufferComplete);
+  AddFunction(env, exports, "rlUnloadFramebuffer", rlUnloadFramebuffer);
   AddFunction(env, exports, "rlLoadMesh", rlLoadMesh);
   AddFunction(env, exports, "rlUpdateMesh", rlUpdateMesh);
   AddFunction(env, exports, "rlUpdateMeshAt", rlUpdateMeshAt);
   AddFunction(env, exports, "rlDrawMesh", rlDrawMesh);
+  AddFunction(env, exports, "rlDrawMeshInstanced", rlDrawMeshInstanced);
   AddFunction(env, exports, "rlUnloadMesh", rlUnloadMesh);
-  */
 }
 
 void node_raylib_rlgl(Napi::Env& env, Napi::Object& exports) {
