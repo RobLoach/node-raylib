@@ -37,6 +37,13 @@ const char* GetArgFromParam<const char*>(Napi::Env& env, const Napi::CallbackInf
 }
 
 template <>
+const unsigned char* GetArgFromParam<const unsigned char*>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  (void)env;
+  Napi::Buffer<unsigned char> buf = info[paramNum].As<Napi::Buffer<unsigned char>>();
+  return (const unsigned char*) buf.Data();
+}
+
+template <>
 int GetArgFromParam<int>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   (void)env;
   return info[paramNum].As<Napi::Number>().Int32Value();
