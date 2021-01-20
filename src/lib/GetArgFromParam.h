@@ -43,7 +43,6 @@ const unsigned char* GetArgFromParam<const unsigned char*>(Napi::Env& env, const
   return (const unsigned char*) buf.Data();
 }
 
-
 template <>
 int GetArgFromParam<int>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
   (void)env;
