@@ -124,4 +124,17 @@ describe('raylib', function() {
     })
 
   })
+
+  describe('image', () => {
+    it('should load images correctly', () => {
+      const rabbit = path.join(__dirname, '.resources', 'rabbit.png')
+      const image = r.LoadImage(rabbit)
+      assert.isNotNull(image)
+    })
+    it('should return null when failing to load', () => {
+      const missingImage = 'missingImage.png'
+      const image = r.LoadImage(missingImage)
+      assert.isNull(image)
+    })
+  })
 })

@@ -53,6 +53,9 @@ inline Napi::Value ToValue(Napi::Env& env, Color value) {
 }
 
 inline Napi::Value ToValue(Napi::Env& env, Image value) {
+  if (value.data == NULL) {
+    return env.Null();
+  }
   return ToObject(env, value);
 }
 
@@ -61,6 +64,9 @@ inline Napi::Value ToValue(Napi::Env& env, Rectangle value) {
 }
 
 inline Napi::Value ToValue(Napi::Env& env, Texture value) {
+  if (value.width == 0 && value.height == 0) {
+    return env.Null();
+  }
   return ToObject(env, value);
 }
 
@@ -121,6 +127,9 @@ inline Napi::Value ToValue(Napi::Env& env, AudioStream value) {
 }
 
 inline Napi::Value ToValue(Napi::Env& env, Sound value) {
+  if (value.stream.buffer == NULL) {
+    return env.Null();
+  }
   return ToObject(env, value);
 }
 
