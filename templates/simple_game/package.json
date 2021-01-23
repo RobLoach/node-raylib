@@ -5,7 +5,7 @@
   "description": "",
   "main": "simple_game.js",
   "scripts": {
-    "test": "node simple_game.js"
+    "start": "node simple_game.js"
   },
   "author": "",
   "license": "MIT",

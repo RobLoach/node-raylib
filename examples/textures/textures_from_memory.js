@@ -27,7 +27,7 @@ r.InitWindow(screenWidth, screenHeight, "raylib [textures] example - image loadi
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
 const image = r.LoadImageFromMemory('png', raw, raw.length);     // Loaded in CPU memory (RAM)
-if (! image.data) {
+if (!image) {
 	console.error('image failed to load!');
 	process.exit(1);
 }
@@ -46,7 +46,7 @@ r.UnloadImage(image);   // Once image has been converted to texture and uploaded
 while (!r.WindowShouldClose())    // Detect window close button or ESC key
 {
     // Update
-	
+
     // Draw
     //----------------------------------------------------------------------------------
     r.BeginDrawing();

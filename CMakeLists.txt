@@ -50,6 +50,7 @@ add_library(${PROJECT_NAME} SHARED
   src/lib/ValidArgs.h
   src/addon.cc
   src/node-raylib.h
+  src/node-raymath.h
   src/node-rlgl.h
   src/wrappedfunctions.h
 )

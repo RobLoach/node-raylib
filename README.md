@@ -19,12 +19,12 @@
     npm init
     ```
 
-1. Add `raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
+2. Add `raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
     ``` bash
     npm install raylib --save
     ```
 
-2. Create a `index.js` JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
+3. Create a `index.js` JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
     ``` javascript
     const r = require('raylib')
 
@@ -42,7 +42,7 @@
     r.CloseWindow()        // Close window and OpenGL context
     ```
 
-3. Run `index.js` through Node.js:
+4. Run `index.js` through Node.js:
     ``` bash
     node index.js
     ```
