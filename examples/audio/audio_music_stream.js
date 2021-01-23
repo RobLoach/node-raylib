@@ -21,6 +21,9 @@ r.InitWindow(screenWidth, screenHeight, "raylib [audio] example - music playing 
 r.InitAudioDevice()              // Initialize audio device
 
 const music = r.LoadMusicStream(__dirname + "/resources/guitar_noodling.ogg")
+if (!music) {
+  console.error("Error loading guitar_noodling.ogg")
+}
 
 r.PlayMusicStream(music)
 
