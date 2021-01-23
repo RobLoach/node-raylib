@@ -98,6 +98,19 @@ describe('raylib', function() {
     })
   })
 
+  describe('image', () => {
+    it('should load images correctly', () => {
+      const rabbit = path.join(__dirname, 'resources', 'rabbit.png')
+      const image = r.LoadImage(rabbit)
+      assert.isNotNull(image)
+    })
+    it('should return null when failing to load', () => {
+      const missingImage = 'missingImage.png'
+      const image = r.LoadImage(missingImage)
+      assert.isNull(image)
+    })
+  })
+
   describe('raymath', function() {
     it('Vector2Add()', function() {
       const first = r.Vector2(10, 20)
@@ -113,7 +126,7 @@ describe('raylib', function() {
 
     it('should execute on a script', () => {
       const out = child_process.execFileSync(cliPath, [
-        path.join(__dirname, '.resources', 'node-raylib-test.js')
+        path.join(__dirname, 'resources', 'node-raylib-test.js')
       ])
       assert.include(out.toString(), 'Test runner')
     })
@@ -123,18 +136,5 @@ describe('raylib', function() {
       assert(output.includes(package.description))
     })
 
-  })
-
-  describe('image', () => {
-    it('should load images correctly', () => {
-      const rabbit = path.join(__dirname, '.resources', 'rabbit.png')
-      const image = r.LoadImage(rabbit)
-      assert.isNotNull(image)
-    })
-    it('should return null when failing to load', () => {
-      const missingImage = 'missingImage.png'
-      const image = r.LoadImage(missingImage)
-      assert.isNull(image)
-    })
   })
 })
