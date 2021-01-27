@@ -7,7 +7,7 @@
 ## Sample Applications
 
 - [Flappy](https://github.com/arthurmassanes/flappy) - Flappy Bird clone by [@arthurmassanes](https://github.com/arthurmassanes)
-- Check out the [examples](examples folder)
+- Check out the [examples folder](examples)
 
 ## Dependencies
 
