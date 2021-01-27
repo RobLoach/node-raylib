@@ -4,6 +4,11 @@
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
+## Sample Applications
+
+- [Flappy](https://github.com/arthurmassanes/flappy) - Flappy Bird clone by [@arthurmassanes](https://github.com/arthurmassanes)
+- Check out the [examples folder](examples)
+
 ## Dependencies
 
 - [Node.js](https://nodejs.org) >= 10
