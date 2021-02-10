@@ -1690,8 +1690,6 @@ export function SetShaderValueMatrix(): any;
 
 export function SetShaderValueTexture(): any;
 
-export function SetShaderValueV(): any;
-
 export function SetShaderValueVector2(): any;
 
 export function SetShaderValueVector3(): any;
