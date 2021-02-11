@@ -6,8 +6,10 @@ in vec4 fragColor;
 
 // Input uniform values
 uniform sampler2D texture0;
+
 // lets test the uniform I/O to manipulate the ramp
 uniform float dt;
+uniform vec3 weights;
 
 // Output fragment color
 out vec4 finalColor;
@@ -18,7 +20,8 @@ void main()
     vec4 texelColor = texture(texture0, fragTexCoord)*fragColor*dt;
     
     // Convert texel color to grayscale using NTSC conversion weights
-    float gray = dot(texelColor.rgb, vec3(0.299, 0.587, 0.114));
+    // float gray = dot(texelColor.rgb, vec3(0.299, 0.587, 0.114));
+    float gray = dot(texelColor.rgb, weights);
     
     // Calculate final fragment color
     finalColor = vec4(gray, gray, gray, texelColor.a);

@@ -24,15 +24,22 @@ const GLSL_Grayscaler = {
 }
 
 const SH_Grayscaler = r.LoadShaderCode(GLSL_Grayscaler.vert, GLSL_Grayscaler.frag)
+const ntsc_weights = r.Vector3(0.299, 0.587, 0.114)
+
 if (! SH_Grayscaler) {
     console.error('[!] Failed to load shader!')
     process.exit(1)
 } else {
     SH_Grayscaler.dt = r.GetShaderLocation(SH_Grayscaler, "dt")
-    if (! SH_Grayscaler.dt) { 
-        console.error('[!] Failed to find ID for uniform')
+    const u_weights = r.GetShaderLocation(SH_Grayscaler, "weights")
+
+    if (! SH_Grayscaler.dt || ! u_weights) { 
+        console.error('[!] Failed to find ID for uniforms!')
         process.exit(1)
     }
+
+    // this won't change during rendering
+    r.SetShaderValueVector3(SH_Grayscaler, u_weights, ntsc_weights)
 }
 
 // Main game loop
@@ -51,7 +58,7 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
         // calculate a new uniform value using a basic sine wave over time
         dt += r.GetFrameTime();
         const new_uv = (Math.sin(dt) + 1) / 2;
-        r.SetShaderValueFloat(SH_Grayscaler, SH_Grayscaler.dt, new_uv);
+        r.SetShaderValueFloat(SH_Grayscaler, SH_Grayscaler.dt, new_uv)
 
         r.ClearBackground(r.RAYWHITE)
 

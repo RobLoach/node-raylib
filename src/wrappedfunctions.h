@@ -26,15 +26,18 @@ void SetShaderValueFloat(Shader shader, int loc, float value) {
 }
 
 void SetShaderValueVector2(Shader shader, int loc, Vector2 value) {
-  SetShaderValueV(shader, loc, &value, UNIFORM_VEC2, 2);
+  const float fvalue[2] = { value.x, value.y };
+  SetShaderValueV(shader, loc, &fvalue, UNIFORM_VEC2, 1);
 }
 
 void SetShaderValueVector3(Shader shader, int loc, Vector3 value) {
-  SetShaderValueV(shader, loc, &value, UNIFORM_VEC3, 3);
+  const float fvalue[3] = { value.x, value.y, value.z };
+  SetShaderValueV(shader, loc, &fvalue, UNIFORM_VEC3, 1);
 }
 
 void SetShaderValueVector4(Shader shader, int loc, Vector4 value) {
-  SetShaderValueV(shader, loc, &value, UNIFORM_VEC4, 4);
+  const float fvalue[4] = { value.x, value.y, value.z, value.w };
+  SetShaderValueV(shader, loc, &fvalue, UNIFORM_VEC4, 1);
 }
 
 void TraceLogWrap(int logType, const char* message) {
