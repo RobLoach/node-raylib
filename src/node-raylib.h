@@ -697,8 +697,8 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "SetShapesTexture", &SetShapesTexture);
   AddFunction(env, exports, "GetShaderLocation", &GetShaderLocation);
   AddFunction(env, exports, "GetShaderLocationAttrib", &GetShaderLocationAttrib);
-  AddFunction(env, exports, "SetShaderValue", &SetShaderValue);
-  AddFunction(env, exports, "SetShaderValueV", &SetShaderValueV);
+  // AddFunction(env, exports, "SetShaderValue", &SetShaderValue);
+  // AddFunction(env, exports, "SetShaderValueV", &SetShaderValueV);
   AddFunction(env, exports, "SetShaderValueMatrix", &SetShaderValueMatrix);
   AddFunction(env, exports, "SetShaderValueTexture", &SetShaderValueTexture);
   AddFunction(env, exports, "SetMatrixProjection", &SetMatrixProjection);

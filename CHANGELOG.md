@@ -8,8 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - `LoadXXXXFromMemory()` support through an argument orchestrator for `unsigned char *`
   - By [@eviltreehouse](https://github.com/eviltreehouse) in [#78](https://github.com/RobLoach/node-raylib/pull/78)
+- `SetShaderValue*()` functions
+  - By [@eviltreehouse](https://github.com/eviltreehouse) in [#83](https://github.com/RobLoach/node-raylib/pull/83)
 ### Added
-- When a resource fails to load, it will now return a `null` object
+- When a resource fails to load, it now returns a `null` object
 
 ## [0.7.0] - 2021-01-17
 ### Changed

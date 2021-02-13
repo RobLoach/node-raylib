@@ -23,9 +23,15 @@ export const BLANK: {
 
 export const BLEND_ADDITIVE: number;
 
+export const BLEND_ADD_COLORS: number;
+
 export const BLEND_ALPHA: number;
 
+export const BLEND_CUSTOM: number;
+
 export const BLEND_MULTIPLIED: number;
+
+export const BLEND_SUBTRACT_COLORS: number;
 
 export const BLUE: {
     a: number;
@@ -146,9 +152,9 @@ export const FILTER_TRILINEAR: number;
 
 export const FLAG_FULLSCREEN_MODE: number;
 
-export const FLAG_MSAA_4X_HINT: number;
+export const FLAG_INTERLACED_HINT: number;
 
-export const FLAG_RESERVED: number;
+export const FLAG_MSAA_4X_HINT: number;
 
 export const FLAG_VSYNC_HINT: number;
 
@@ -156,11 +162,21 @@ export const FLAG_WINDOW_ALWAYS_RUN: number;
 
 export const FLAG_WINDOW_HIDDEN: number;
 
+export const FLAG_WINDOW_HIGHDPI: number;
+
+export const FLAG_WINDOW_MAXIMIZED: number;
+
+export const FLAG_WINDOW_MINIMIZED: number;
+
 export const FLAG_WINDOW_RESIZABLE: number;
+
+export const FLAG_WINDOW_TOPMOST: number;
 
 export const FLAG_WINDOW_TRANSPARENT: number;
 
 export const FLAG_WINDOW_UNDECORATED: number;
+
+export const FLAG_WINDOW_UNFOCUSED: number;
 
 export const FONT_BITMAP: number;
 
@@ -179,8 +195,6 @@ export const GAMEPAD_AXIS_RIGHT_TRIGGER: number;
 export const GAMEPAD_AXIS_RIGHT_X: number;
 
 export const GAMEPAD_AXIS_RIGHT_Y: number;
-
-export const GAMEPAD_AXIS_UNKNOWN: number;
 
 export const GAMEPAD_BUTTON_LEFT_FACE_DOWN: number;
 
@@ -635,6 +649,28 @@ export const MAX_SHADER_LOCATIONS: number;
 
 export const MAX_TOUCH_POINTS: number;
 
+export const MOUSE_CURSOR_ARROW: number;
+
+export const MOUSE_CURSOR_CROSSHAIR: number;
+
+export const MOUSE_CURSOR_DEFAULT: number;
+
+export const MOUSE_CURSOR_IBEAM: number;
+
+export const MOUSE_CURSOR_NOT_ALLOWED: number;
+
+export const MOUSE_CURSOR_POINTING_HAND: number;
+
+export const MOUSE_CURSOR_RESIZE_ALL: number;
+
+export const MOUSE_CURSOR_RESIZE_EW: number;
+
+export const MOUSE_CURSOR_RESIZE_NESW: number;
+
+export const MOUSE_CURSOR_RESIZE_NS: number;
+
+export const MOUSE_CURSOR_RESIZE_NWSE: number;
+
 export const MOUSE_LEFT_BUTTON: number;
 
 export const MOUSE_MIDDLE_BUTTON: number;
@@ -739,6 +775,8 @@ export const SKYBLUE: {
     r: number;
 };
 
+export const ShowWindow: any;
+
 export const UNCOMPRESSED_GRAYSCALE: number;
 
 export const UNCOMPRESSED_GRAY_ALPHA: number;
@@ -840,6 +878,8 @@ export function CheckCollisionCircleRec(): any;
 
 export function CheckCollisionCircles(): any;
 
+export function CheckCollisionLines(): any;
+
 export function CheckCollisionPointCircle(): any;
 
 export function CheckCollisionPointRec(): any;
@@ -864,6 +904,8 @@ export function ClearDirectoryFiles(): any;
 
 export function ClearDroppedFiles(): any;
 
+export function ClearWindowState(): any;
+
 export function CloseAudioDevice(): any;
 
 export function CloseAudioStream(): any;
@@ -875,6 +917,10 @@ export function CloseWindow(): any;
 export function CodepointToUtf8(): any;
 
 export function Color(red: any, green: any, blue: any, alpha: any): any;
+
+export function ColorAlpha(): any;
+
+export function ColorAlphaBlend(): any;
 
 export function ColorFromHSV(): any;
 
@@ -1004,6 +1050,8 @@ export function DrawTextEx(): any;
 
 export function DrawTextRec(): any;
 
+export function DrawTextRecEx(): any;
+
 export function DrawTexture(): any;
 
 export function DrawTextureEx(): any;
@@ -1015,6 +1063,8 @@ export function DrawTexturePro(): any;
 export function DrawTextureQuad(): any;
 
 export function DrawTextureRec(): any;
+
+export function DrawTextureTiled(): any;
 
 export function DrawTextureV(): any;
 
@@ -1094,6 +1144,8 @@ export function GetCameraMatrix(): any;
 
 export function GetCameraMatrix2D(): any;
 
+export function GetCharPressed(): any;
+
 export function GetClipboardText(): any;
 
 export function GetCodepoints(): any;
@@ -1101,8 +1153,6 @@ export function GetCodepoints(): any;
 export function GetCodepointsCount(): any;
 
 export function GetCollisionRayGround(): any;
-
-export function GetCollisionRayModel(): any;
 
 export function GetCollisionRayTriangle(): any;
 
@@ -1116,9 +1166,9 @@ export function GetDirectoryPath(): any;
 
 export function GetDroppedFiles(): any;
 
-export function GetExtension(): any;
-
 export function GetFPS(): any;
+
+export function GetFileExtension(): any;
 
 export function GetFileModTime(): any;
 
@@ -1154,11 +1204,9 @@ export function GetGlyphIndex(): any;
 
 export function GetImageAlphaBorder(): any;
 
-export function GetImageData(): any;
-
-export function GetImageDataNormalized(): any;
-
 export function GetKeyPressed(): any;
+
+export function GetMatrixModelview(): any;
 
 export function GetMatrixProjection(): any;
 
@@ -1172,7 +1220,13 @@ export function GetMonitorPhysicalHeight(): any;
 
 export function GetMonitorPhysicalWidth(): any;
 
+export function GetMonitorPosition(): any;
+
+export function GetMonitorRefreshRate(): any;
+
 export function GetMonitorWidth(): any;
+
+export function GetMouseCursor(): any;
 
 export function GetMousePosition(): any;
 
@@ -1189,6 +1243,8 @@ export function GetMusicTimeLength(): any;
 export function GetMusicTimePlayed(): any;
 
 export function GetNextCodepoint(): any;
+
+export function GetPixelColor(): any;
 
 export function GetPixelDataSize(): any;
 
@@ -1207,6 +1263,8 @@ export function GetScreenWidth(): any;
 export function GetShaderDefault(): any;
 
 export function GetShaderLocation(): any;
+
+export function GetShaderLocationAttrib(): any;
 
 export function GetShapesTexture(): any;
 
@@ -1228,10 +1286,6 @@ export function GetTouchX(): any;
 
 export function GetTouchY(): any;
 
-export function GetWaveData(): any;
-
-export function GetWindowHandle(): any;
-
 export function GetWindowPosition(): any;
 
 export function GetWindowScaleDPI(): any;
@@ -1245,8 +1299,6 @@ export function GetWorldToScreen2D(): any;
 export function GetWorldToScreenEx(): any;
 
 export function HideCursor(): any;
-
-export function HideWindow(): any;
 
 export function ImageAlphaClear(): any;
 
@@ -1302,8 +1354,6 @@ export function ImageDrawText(): any;
 
 export function ImageDrawTextEx(): any;
 
-export function ImageExtractPalette(): any;
-
 export function ImageFlipHorizontal(): any;
 
 export function ImageFlipVertical(): any;
@@ -1345,6 +1395,8 @@ export function IsAudioStreamPlaying(): any;
 export function IsAudioStreamProcessed(): any;
 
 export function IsCursorHidden(): any;
+
+export function IsCursorOnScreen(): any;
 
 export function IsFileDropped(): any;
 
@@ -1392,11 +1444,15 @@ export function IsWindowFullscreen(): any;
 
 export function IsWindowHidden(): any;
 
+export function IsWindowMaximized(): any;
+
 export function IsWindowMinimized(): any;
 
 export function IsWindowReady(): any;
 
 export function IsWindowResized(): any;
+
+export function IsWindowState(): any;
 
 export function Lerp(): any;
 
@@ -1412,9 +1468,17 @@ export function LoadFontEx(): any;
 
 export function LoadFontFromImage(): any;
 
+export function LoadFontFromMemory(): any;
+
 export function LoadImage(): any;
 
-export function LoadImageEx(): any;
+export function LoadImageAnim(): any;
+
+export function LoadImageColors(): any;
+
+export function LoadImageFromMemory(): any;
+
+export function LoadImagePalette(): any;
 
 export function LoadImageRaw(): any;
 
@@ -1441,6 +1505,10 @@ export function LoadTextureCubemap(): any;
 export function LoadTextureFromImage(): any;
 
 export function LoadWave(): any;
+
+export function LoadWaveFromMemory(): any;
+
+export function LoadWaveSamples(): any;
 
 export function MatrixAdd(): any;
 
@@ -1482,9 +1550,17 @@ export function MatrixTranslate(): any;
 
 export function MatrixTranspose(): any;
 
+export function MaximizeWindow(): any;
+
 export function MeasureText(): any;
 
 export function MeasureTextEx(): any;
+
+export function MemAlloc(): any;
+
+export function MemFree(): any;
+
+export function MinimizeWindow(): any;
 
 export function OpenURL(): any;
 
@@ -1550,6 +1626,8 @@ export function RayHitInfo(hit: any, distance: any, position: any, normal: any):
 
 export function Rectangle(x: any, y: any, width: any, height: any): any;
 
+export function RestoreWindow(): any;
+
 export function ResumeAudioStream(): any;
 
 export function ResumeMusicStream(): any;
@@ -1588,7 +1666,11 @@ export function SetGesturesEnabled(): any;
 
 export function SetMasterVolume(): any;
 
+export function SetMatrixModelview(): any;
+
 export function SetMatrixProjection(): any;
+
+export function SetMouseCursor(): any;
 
 export function SetMouseOffset(): any;
 
@@ -1596,19 +1678,23 @@ export function SetMousePosition(): any;
 
 export function SetMouseScale(): any;
 
-export function SetMusicLoopCount(): any;
-
 export function SetMusicPitch(): any;
 
 export function SetMusicVolume(): any;
 
-export function SetShaderValue(): any;
+export function SetPixelColor(): any;
+
+export function SetShaderValueFloat(): any;
 
 export function SetShaderValueMatrix(): any;
 
 export function SetShaderValueTexture(): any;
 
-export function SetShaderValueV(): any;
+export function SetShaderValueVector2(): any;
+
+export function SetShaderValueVector3(): any;
+
+export function SetShaderValueVector4(): any;
 
 export function SetShapesTexture(): any;
 
@@ -1638,13 +1724,13 @@ export function SetWindowPosition(): any;
 
 export function SetWindowSize(): any;
 
+export function SetWindowState(): any;
+
 export function SetWindowTitle(): any;
 
 export function Shader(id: any, locs: any): any;
 
 export function ShowCursor(): any;
-
-export function ShowWindow(): any;
 
 export function StopAudioStream(): any;
 
@@ -1698,11 +1784,19 @@ export function TraceLog(logType: any, args: any): void;
 
 export function TraceLogWrap(): any;
 
-export function UnhideWindow(): any;
+export function UnloadFileData(): any;
+
+export function UnloadFileText(): any;
 
 export function UnloadFont(): any;
 
+export function UnloadFontData(): any;
+
 export function UnloadImage(): any;
+
+export function UnloadImageColors(): any;
+
+export function UnloadImagePalette(): any;
 
 export function UnloadMusicStream(): any;
 
@@ -1716,6 +1810,8 @@ export function UnloadTexture(): any;
 
 export function UnloadWave(): any;
 
+export function UnloadWaveSamples(): any;
+
 export function UpdateAudioStream(): any;
 
 export function UpdateCamera(camera: any): void;
@@ -1727,6 +1823,8 @@ export function UpdateMusicStream(): any;
 export function UpdateSound(): any;
 
 export function UpdateTexture(): any;
+
+export function UpdateTextureRec(): any;
 
 export function UpdateVrTracking(camera: any): void;
 
@@ -1836,6 +1934,8 @@ export function rlBegin(): any;
 
 export function rlCheckBufferLimit(): any;
 
+export function rlCheckErrors(): any;
+
 export function rlClearColor(): any;
 
 export function rlClearScreenBuffers(): any;
@@ -1846,23 +1946,19 @@ export function rlColor4f(): any;
 
 export function rlColor4ub(): any;
 
-export function rlDeleteBuffers(): any;
-
-export function rlDeleteRenderTextures(): any;
-
-export function rlDeleteShader(): any;
-
-export function rlDeleteTextures(): any;
-
-export function rlDeleteVertexArrays(): any;
-
 export function rlDisableBackfaceCulling(): any;
+
+export function rlDisableDepthMask(): any;
 
 export function rlDisableDepthTest(): any;
 
-export function rlDisableRenderTexture(): any;
+export function rlDisableFramebuffer(): any;
 
 export function rlDisableScissorTest(): any;
+
+export function rlDisableShader(): any;
+
+export function rlDisableSmoothLines(): any;
 
 export function rlDisableTexture(): any;
 
@@ -1870,13 +1966,21 @@ export function rlDisableWireMode(): any;
 
 export function rlDrawMesh(): any;
 
+export function rlDrawMeshInstanced(): any;
+
 export function rlEnableBackfaceCulling(): any;
+
+export function rlEnableDepthMask(): any;
 
 export function rlEnableDepthTest(): any;
 
-export function rlEnableRenderTexture(): any;
+export function rlEnableFramebuffer(): any;
 
 export function rlEnableScissorTest(): any;
+
+export function rlEnableShader(): any;
+
+export function rlEnableSmoothLines(): any;
 
 export function rlEnableTexture(): any;
 
@@ -1884,11 +1988,17 @@ export function rlEnableWireMode(): any;
 
 export function rlEnd(): any;
 
+export function rlFramebufferAttach(): any;
+
+export function rlFramebufferComplete(): any;
+
 export function rlFrustum(): any;
 
 export function rlGenerateMipmaps(): any;
 
 export function rlGetGlTextureFormats(): any;
+
+export function rlGetLineWidth(): any;
 
 export function rlGetVersion(): any;
 
@@ -1896,11 +2006,11 @@ export function rlLoadAttribBuffer(): any;
 
 export function rlLoadExtensions(): any;
 
+export function rlLoadFramebuffer(): any;
+
 export function rlLoadIdentity(): any;
 
 export function rlLoadMesh(): any;
-
-export function rlLoadRenderTexture(): any;
 
 export function rlLoadTexture(): any;
 
@@ -1924,17 +2034,17 @@ export function rlReadScreenPixels(): any;
 
 export function rlReadTexturePixels(): any;
 
-export function rlRenderTextureAttach(): any;
-
-export function rlRenderTextureComplete(): any;
-
 export function rlRotatef(): any;
 
 export function rlScalef(): any;
 
 export function rlScissor(): any;
 
+export function rlSetBlendMode(): any;
+
 export function rlSetDebugMarker(): any;
+
+export function rlSetLineWidth(): any;
 
 export function rlTexCoord2f(): any;
 
@@ -1942,11 +2052,11 @@ export function rlTextureParameters(): any;
 
 export function rlTranslatef(): any;
 
+export function rlUnloadFramebuffer(): any;
+
 export function rlUnloadMesh(): any;
 
 export function rlUnloadTexture(): any;
-
-export function rlUnproject(): any;
 
 export function rlUpdateBuffer(): any;
 
