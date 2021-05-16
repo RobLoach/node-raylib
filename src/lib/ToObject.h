@@ -711,6 +711,9 @@ Font ToFont(Napi::Env& env, const Napi::Value& arg) {
   if (argObject.Has("charsCount")) {
     out.charsCount = argObject.Get("charsCount").ToNumber().Int32Value();
   }
+  if (argObject.Has("charsPadding")) {
+    out.charsPadding = argObject.Get("charsPadding").ToNumber().Int32Value();
+  }
   if (argObject.Has("texture")) {
     out.texture = ToTexture(env, argObject.Get("texture"));
   }
@@ -727,6 +730,7 @@ Napi::Object ToObject(Napi::Env& env, const Font& input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("baseSize", input.baseSize);
   out.Set("charsCount", input.charsCount);
+  out.Set("charsPadding", input.charsPadding);
   out.Set("texture", ToObject(env, input.texture));
   out.Set("recs", (int64_t)input.recs);
   out.Set("chars", (int64_t)input.chars);
