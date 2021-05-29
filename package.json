@@ -37,7 +37,7 @@
     "vendor/*",
     "CMakeLists.txt",
     "index.js",
-    "index.d.js",
+    "index.d.ts",
     "package.json",
     "README.md",
     "LICENSE.md",
