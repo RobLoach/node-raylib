@@ -27,4 +27,9 @@ describe('raylib', function() {
             assert.strictEqual(collision, true)
         })
     })
+
+    describe('Vector2', () => {
+        let vector = r.Vector2(3,2)
+        console.log(vector)
+    })
 })

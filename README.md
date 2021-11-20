@@ -3,4 +3,4 @@
 ## Dependencies
 
 - emscripten
-- node 12+
+- node +15.5
