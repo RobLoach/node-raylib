@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "main": "build/raylib.js",
+  "files": [
+    "build/raylib.js",
+    "build/raylib.wasm"
+  ],
   "scripts": {
     "pretest": "npm run build",
     "test": "mocha test",

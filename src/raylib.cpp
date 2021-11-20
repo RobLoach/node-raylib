@@ -143,15 +143,11 @@ EMSCRIPTEN_BINDINGS(raylib) {
     function("SetMouseOffset", &SetMouseOffset);
     function("SetMouseScale", &SetMouseScale);
     function("GetMouseWheelMove", &GetMouseWheelMove);
-    function("GetMouseCursor", &GetMouseCursor);
-    function("SetMouseCursor", &SetMouseCursor);
     function("GetTouchX", &GetTouchX);
     function("GetTouchY", &GetTouchY);
-    function("GetTouchPosition", &GetTouchPosition);
     function("SetGesturesEnabled", &SetGesturesEnabled);
     function("IsGestureDetected", &IsGestureDetected);
     function("GetGestureDetected", &GetGestureDetected);
-    function("GetTouchPointsCount", &GetTouchPointsCount);
     function("GetGestureHoldDuration", &GetGestureHoldDuration);
     function("GetGestureDragVector", &GetGestureDragVector);
     function("GetGestureDragAngle", &GetGestureDragAngle);
