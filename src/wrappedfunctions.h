@@ -4,7 +4,7 @@
 #include <string>
 #include <napi.h>
 #include <raylib.h>
-#include "lib/AddFunction.h"
+#include "./lib/AddFunction.h"
 
 /**
  * RLAPI#SetShaderValue & SetShaderValueV uses a void pointer and some internal

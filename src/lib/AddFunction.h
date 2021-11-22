@@ -3,8 +3,8 @@
 
 #include <napi.h>
 #include "ValidArgs.h"
-#include "ToObject.h"
-#include "ToValue.h"
+#include "../generated/ToObject.h"
+#include "../generated/ToValue.h"
 #include "GetArgFromParam.h"
 #include "CleanUp.h"
 

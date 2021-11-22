@@ -4,3 +4,4 @@ package-lock.json
 *.zip
 *.tar.gz
 .vscode
+.DS_Store

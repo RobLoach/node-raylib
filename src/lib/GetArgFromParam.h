@@ -4,7 +4,7 @@
 #include <napi.h>
 // cstring is used for memcpy()
 #include <cstring>
-#include "ToObject.h"
+#include "../generated/ToObject.h"
 
 template <typename ReturnType>
 inline ReturnType GetArgFromParam(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
