@@ -60,7 +60,7 @@ templates['node-raylib'] = () => `
 void node_raylib_bindings_defines(Napi::Env& env, Napi::Object& exports) {
   ${def.enums
     .filter(({ name }) => !blocklist.includes(name))
-    .map(({ name }) => `AddDefineInteger(env, exports, "${name}", ${name});`)
+    .map(({ values }) => values.map(({ name }) => `AddDefineInteger(env, exports, "${name}", ${name});`).join('\n  '))
     .join('\n  ')
   }
 }
