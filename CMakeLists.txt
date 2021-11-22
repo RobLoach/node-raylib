@@ -1,3 +1,5 @@
+include(FetchContent)
+
 cmake_minimum_required(VERSION 3.11)
 project (node-raylib
   VERSION 0.8.0
