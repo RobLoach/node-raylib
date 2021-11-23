@@ -41,10 +41,10 @@ inline Napi::Value ToValue(Napi::Env& env, float value) {
   return Napi::Number::New(env, value);
 }
 
-inline Napi::Value ToValue(Napi::Env& env, Matrix value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Vector2 value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Vector3 value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Vector4 value) { return ToObject(env, value); }
+inline Napi::Value ToValue(Napi::Env& env, Matrix value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Color value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Rectangle value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Image value) { return ToObject(env, value); }

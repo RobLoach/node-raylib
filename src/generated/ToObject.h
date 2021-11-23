@@ -4,8 +4,6 @@
 
 #include <napi.h>
 
-// TODO: these need soem more stuff to output correct values
-
 void Tovoid(Napi::Env& env, Napi::Value value) {
 }
 
@@ -35,82 +33,6 @@ char Tochar(Napi::Env& env, Napi::Value value) {
 
 bool Tobool(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Boolean>();
-}
-
-
-Matrix ToMatrix(Napi::Env& env, const Napi::Value& arg) {
-  Napi::Object argObject(env, arg.As<Napi::Object>());
-  Matrix out;
-  if (argObject.Has("m0")) {
-    out.m0 = argObject.Get("m0").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m1")) {
-    out.m1 = argObject.Get("m1").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m2")) {
-    out.m2 = argObject.Get("m2").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m3")) {
-    out.m3 = argObject.Get("m3").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m4")) {
-    out.m4 = argObject.Get("m4").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m5")) {
-    out.m5 = argObject.Get("m5").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m6")) {
-    out.m6 = argObject.Get("m6").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m7")) {
-    out.m7 = argObject.Get("m7").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m8")) {
-    out.m8 = argObject.Get("m8").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m9")) {
-    out.m9 = argObject.Get("m9").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m10")) {
-    out.m10 = argObject.Get("m10").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m11")) {
-    out.m11 = argObject.Get("m11").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m12")) {
-    out.m12 = argObject.Get("m12").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m13")) {
-    out.m13 = argObject.Get("m13").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m14")) {
-    out.m14 = argObject.Get("m14").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m15")) {
-    out.m15 = argObject.Get("m15").ToNumber().FloatValue();
-  }
-  return out;
-}
-
-Napi::Object ToObject(Napi::Env& env, const Matrix& input) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("m0", input.m0);
-  out.Set("m1", input.m1);
-  out.Set("m2", input.m2);
-  out.Set("m3", input.m3);
-  out.Set("m4", input.m4);
-  out.Set("m5", input.m5);
-  out.Set("m6", input.m6);
-  out.Set("m7", input.m7);
-  out.Set("m8", input.m8);
-  out.Set("m9", input.m9);
-  out.Set("m10", input.m10);
-  out.Set("m11", input.m11);
-  out.Set("m12", input.m12);
-  out.Set("m13", input.m13);
-  out.Set("m14", input.m14);
-  out.Set("m15", input.m15);
-  return out;
 }
 
 
@@ -198,6 +120,114 @@ Vector4 ToVector4(Napi::Env& env, const Napi::Value& arg) {
 
   if (argObject.Has("w")) {
     out.w = Tofloat(env, argObject.Get("w"));
+  }
+
+  return out;
+}
+
+  
+Napi::Object ToObject(Napi::Env& env, const Matrix& input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("m0", input.m0);
+  out.Set("m4", input.m4);
+  out.Set("m8", input.m8);
+  out.Set("m12", input.m12);
+  out.Set("m1", input.m1);
+  out.Set("m5", input.m5);
+  out.Set("m9", input.m9);
+  out.Set("m13", input.m13);
+  out.Set("m2", input.m2);
+  out.Set("m6", input.m6);
+  out.Set("m10", input.m10);
+  out.Set("m14", input.m14);
+  out.Set("m3", input.m3);
+  out.Set("m7", input.m7);
+  out.Set("m11", input.m11);
+  out.Set("m15", input.m15);
+  return out;
+}
+
+Matrix ToMatrix(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Matrix out;
+  
+  if (argObject.Has("m0")) {
+    out.m0 = Tofloat(env, argObject.Get("m0"));
+  }
+
+
+  if (argObject.Has("m4")) {
+    out.m4 = Tofloat(env, argObject.Get("m4"));
+  }
+
+
+  if (argObject.Has("m8")) {
+    out.m8 = Tofloat(env, argObject.Get("m8"));
+  }
+
+
+  if (argObject.Has("m12")) {
+    out.m12 = Tofloat(env, argObject.Get("m12"));
+  }
+
+
+  if (argObject.Has("m1")) {
+    out.m1 = Tofloat(env, argObject.Get("m1"));
+  }
+
+
+  if (argObject.Has("m5")) {
+    out.m5 = Tofloat(env, argObject.Get("m5"));
+  }
+
+
+  if (argObject.Has("m9")) {
+    out.m9 = Tofloat(env, argObject.Get("m9"));
+  }
+
+
+  if (argObject.Has("m13")) {
+    out.m13 = Tofloat(env, argObject.Get("m13"));
+  }
+
+
+  if (argObject.Has("m2")) {
+    out.m2 = Tofloat(env, argObject.Get("m2"));
+  }
+
+
+  if (argObject.Has("m6")) {
+    out.m6 = Tofloat(env, argObject.Get("m6"));
+  }
+
+
+  if (argObject.Has("m10")) {
+    out.m10 = Tofloat(env, argObject.Get("m10"));
+  }
+
+
+  if (argObject.Has("m14")) {
+    out.m14 = Tofloat(env, argObject.Get("m14"));
+  }
+
+
+  if (argObject.Has("m3")) {
+    out.m3 = Tofloat(env, argObject.Get("m3"));
+  }
+
+
+  if (argObject.Has("m7")) {
+    out.m7 = Tofloat(env, argObject.Get("m7"));
+  }
+
+
+  if (argObject.Has("m11")) {
+    out.m11 = Tofloat(env, argObject.Get("m11"));
+  }
+
+
+  if (argObject.Has("m15")) {
+    out.m15 = Tofloat(env, argObject.Get("m15"));
   }
 
   return out;
@@ -612,7 +642,7 @@ Napi::Object ToObject(Napi::Env& env, const Mesh& input) {
   out.Set("triangleCount", input.triangleCount);
   out.Set("vertices", (int64_t)input.vertices);
   out.Set("texcoords", (int64_t)input.texcoords);
-  out.Set("texcoords", (int64_t)input.texcoords);
+  out.Set("texcoords2", (int64_t)input.texcoords2);
   out.Set("normals", (int64_t)input.normals);
   out.Set("tangents", (int64_t)input.tangents);
   out.Set("colors", (int64_t)input.colors);
@@ -650,8 +680,8 @@ Mesh ToMesh(Napi::Env& env, const Napi::Value& arg) {
   }
 
 
-  if (argObject.Has("texcoords")) {
-    out.texcoords = (float *)argObject.Get("texcoords").As<Napi::Number>().Int64Value();
+  if (argObject.Has("texcoords2")) {
+    out.texcoords2 = (float *)argObject.Get("texcoords2").As<Napi::Number>().Int64Value();
   }
 
 

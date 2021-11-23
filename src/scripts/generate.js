@@ -6,7 +6,22 @@ const def = require('./raylib_api.json')
 const { writeFileSync } = require('fs')
 const path = require('path')
 
-// TODO: handle vars with commas in them
+// first clean up def data
+def.structs.forEach(struct => {
+  struct.fields.forEach((field, i) => {
+    if (field.name.includes(',')) {
+      const newfields = field.name.split(',').map(n => {
+        return {
+          ...field,
+          name: n.trim()
+        }
+      })
+      delete struct.fields[i]
+      struct.fields = [...struct.fields, ...newfields]
+    }
+  })
+  struct.fields = struct.fields.filter(f => f)
+})
 
 // When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
 const toJSClassConvert = (name, type) => {
@@ -20,14 +35,14 @@ const toJSClassConvert = (name, type) => {
 const toJS = struct => `
 Napi::Object ToObject(Napi::Env& env, const ${struct.name}& input) {
   Napi::Object out = Napi::Object::New(env);
-  ${struct.fields.map(({ name, type }) => toJSClassConvert(name.replace(/[\[\]0-9]+/g, ''), type)).join('\n  ')}
+  ${struct.fields.map(({ name, type }) => toJSClassConvert(name.replace(/\[[0-9]+\]/g, ''), type)).join('\n  ')}
   return out;
 }`
 
 // generate a single adapter for JS->C
 const toC = struct => {
   const fields = struct.fields.map(field => {
-    const name = field.name.replace(/[\[\]0-9]+/g, '')
+    const name = field.name.replace(/\[[0-9]+\]+/g, '')
     if (field.type.endsWith('*')) {
       return `
   if (argObject.Has("${name}")) {
@@ -48,12 +63,8 @@ const toC = struct => {
   }
 `
   })
-  let converter = `To${struct.name}`
-  if (struct.name === 'Texture2D') {
-    converter = 'ToTexture'
-  }
   return `
-${struct.name} ${converter}(Napi::Env& env, const Napi::Value& arg) {
+${struct.name} To${struct.name}(Napi::Env& env, const Napi::Value& arg) {
   Napi::Object argObject(env, arg.As<Napi::Object>());
   ${struct.name} out;
   ${fields.join('\n')}
@@ -65,9 +76,8 @@ ${struct.name} ${converter}(Napi::Env& env, const Napi::Value& arg) {
 const templates = {}
 
 // use this to keep from wrapping things
+// TODO: document why these are being blocked
 const blocklist = [
-  'Matrix',
-  'ToTexture2D',
   'TraceLog',
   'TextFormat'
 ]
@@ -150,7 +160,6 @@ inline Napi::Value ToValue(Napi::Env& env, float value) {
   return Napi::Number::New(env, value);
 }
 
-inline Napi::Value ToValue(Napi::Env& env, Matrix value) { return ToObject(env, value); }
 ${def.structs
     .filter(({ name }) => !blocklist.includes(name))
     .map(({ name }) => `inline Napi::Value ToValue(Napi::Env& env, ${name} value) { return ToObject(env, value); }`)
@@ -165,8 +174,6 @@ templates.ToObject = () => `
 #define NODE_RAYLIB_TOOBJECT_H_
 
 #include <napi.h>
-
-// TODO: these need soem more stuff to output correct values
 
 void Tovoid(Napi::Env& env, Napi::Value value) {
 }
@@ -197,82 +204,6 @@ char Tochar(Napi::Env& env, Napi::Value value) {
 
 bool Tobool(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Boolean>();
-}
-
-
-Matrix ToMatrix(Napi::Env& env, const Napi::Value& arg) {
-  Napi::Object argObject(env, arg.As<Napi::Object>());
-  Matrix out;
-  if (argObject.Has("m0")) {
-    out.m0 = argObject.Get("m0").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m1")) {
-    out.m1 = argObject.Get("m1").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m2")) {
-    out.m2 = argObject.Get("m2").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m3")) {
-    out.m3 = argObject.Get("m3").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m4")) {
-    out.m4 = argObject.Get("m4").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m5")) {
-    out.m5 = argObject.Get("m5").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m6")) {
-    out.m6 = argObject.Get("m6").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m7")) {
-    out.m7 = argObject.Get("m7").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m8")) {
-    out.m8 = argObject.Get("m8").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m9")) {
-    out.m9 = argObject.Get("m9").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m10")) {
-    out.m10 = argObject.Get("m10").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m11")) {
-    out.m11 = argObject.Get("m11").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m12")) {
-    out.m12 = argObject.Get("m12").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m13")) {
-    out.m13 = argObject.Get("m13").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m14")) {
-    out.m14 = argObject.Get("m14").ToNumber().FloatValue();
-  }
-  if (argObject.Has("m15")) {
-    out.m15 = argObject.Get("m15").ToNumber().FloatValue();
-  }
-  return out;
-}
-
-Napi::Object ToObject(Napi::Env& env, const Matrix& input) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("m0", input.m0);
-  out.Set("m1", input.m1);
-  out.Set("m2", input.m2);
-  out.Set("m3", input.m3);
-  out.Set("m4", input.m4);
-  out.Set("m5", input.m5);
-  out.Set("m6", input.m6);
-  out.Set("m7", input.m7);
-  out.Set("m8", input.m8);
-  out.Set("m9", input.m9);
-  out.Set("m10", input.m10);
-  out.Set("m11", input.m11);
-  out.Set("m12", input.m12);
-  out.Set("m13", input.m13);
-  out.Set("m14", input.m14);
-  out.Set("m15", input.m15);
-  return out;
 }
 
 ${def.structs
