@@ -172,7 +172,7 @@ void Tovoid(Napi::Env& env, Napi::Value value) {
 }
 
 float Tofloat(Napi::Env& env, Napi::Value value) {
-  return value.As<Napi::Number>();
+  return value.As<Napi::Number>().FloatValue();
 }
 
 unsigned char Tounsignedchar(Napi::Env& env, Napi::Value value) {
@@ -180,15 +180,15 @@ unsigned char Tounsignedchar(Napi::Env& env, Napi::Value value) {
 }
 
 int Toint(Napi::Env& env, Napi::Value value) {
-  return value.As<Napi::Number>();
+  return value.As<Napi::Number>().Int32Value();
 }
 
 unsigned int Tounsignedint(Napi::Env& env, Napi::Value value) {
-  return value.As<Napi::Number>();
+  return value.As<Napi::Number>().Uint32Value();
 }
 
 unsigned short Tounsignedshort(Napi::Env& env, Napi::Value value) {
-  return value.As<Napi::Number>();
+  return value.As<Napi::Number>().Uint32Value();
 }
 
 char Tochar(Napi::Env& env, Napi::Value value) {
