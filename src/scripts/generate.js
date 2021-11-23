@@ -10,22 +10,19 @@ const path = require('path')
 
 // When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
 const toJSClassConvert = (name, type) => {
-  if (type.endsWith('*')) 
-    return `out.Set("${name}", (int64_t)input.${name});`
-  return type[0].toUpperCase() != type[0] ?
-    `out.Set("${name}", input.${name});` :
-    `out.Set("${name}", ToObject(env, input.${name}));`
+  if (type.endsWith('*')) { return `out.Set("${name}", (int64_t)input.${name});` }
+  return type[0].toUpperCase() != type[0]
+    ? `out.Set("${name}", input.${name});`
+    : `out.Set("${name}", ToObject(env, input.${name}));`
 }
 
 // generate a single adapter for C->JS
 const toJS = struct => `
 Napi::Object ToObject(Napi::Env& env, const ${struct.name}& input) {
   Napi::Object out = Napi::Object::New(env);
-  ${struct.fields.map(({ name, type }) => toJSClassConvert(name.replace(/[\[\]0-9]+/g, ''), type) ).join('\n  ')}
+  ${struct.fields.map(({ name, type }) => toJSClassConvert(name.replace(/[\[\]0-9]+/g, ''), type)).join('\n  ')}
   return out;
 }`
-
-
 
 // generate a single adapter for JS->C
 const toC = struct => {
@@ -40,9 +37,14 @@ const toC = struct => {
     }
     const type = field.type.replace(/[* ]+/g, '')
 
+    let fname = `To${type}`
+    if (type === 'Texture2D') {
+      fname = 'ToTexture'
+    }
+
     return `
   if (argObject.Has("${name}")) {
-    out.${name} = To${type}(env, argObject.Get("${name}"));
+    out.${name} = ${fname}(env, argObject.Get("${name}"));
   }
 `
   })
@@ -156,8 +158,7 @@ templates.ToObject = () => `
 
 // TODO: these need soem more stuff to output correct values
 
-void Tovoid(Napi::Env& env) {
-  return
+void Tovoid(Napi::Env& env, Napi::Value value) {
 }
 
 float Tofloat(Napi::Env& env, Napi::Value value) {

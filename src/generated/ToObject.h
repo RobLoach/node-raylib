@@ -6,8 +6,7 @@
 
 // TODO: these need soem more stuff to output correct values
 
-void Tovoid(Napi::Env& env) {
-  return
+void Tovoid(Napi::Env& env, Napi::Value value) {
 }
 
 float Tofloat(Napi::Env& env, Napi::Value value) {
@@ -512,7 +511,7 @@ Font ToFont(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("texture")) {
-    out.texture = ToTexture2D(env, argObject.Get("texture"));
+    out.texture = ToTexture(env, argObject.Get("texture"));
   }
 
 
@@ -746,7 +745,7 @@ MaterialMap ToMaterialMap(Napi::Env& env, const Napi::Value& arg) {
   MaterialMap out;
   
   if (argObject.Has("texture")) {
-    out.texture = ToTexture2D(env, argObject.Get("texture"));
+    out.texture = ToTexture(env, argObject.Get("texture"));
   }
 
 
