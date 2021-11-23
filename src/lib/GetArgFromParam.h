@@ -108,8 +108,8 @@ Texture GetArgFromParam<Texture>(Napi::Env& env, const Napi::CallbackInfo& info,
 }
 
 template <>
-RenderTexture2D GetArgFromParam<RenderTexture2D>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToRenderTexture2D(env, info[paramNum]);
+RenderTexture GetArgFromParam<RenderTexture2D>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToRenderTexture(env, info[paramNum]);
 }
 
 template <>
@@ -118,24 +118,24 @@ NPatchInfo GetArgFromParam<NPatchInfo>(Napi::Env& env, const Napi::CallbackInfo&
 }
 
 template <>
-CharInfo GetArgFromParam<CharInfo>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-    return ToCharInfo(env, info[paramNum]);
+GlyphInfo GetArgFromParam<GlyphInfo>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToGlyphInfo(env, info[paramNum]);
 }
 
 template <>
-Camera GetArgFromParam<Camera>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToCamera(env, info[paramNum]);
+Camera3D GetArgFromParam<Camera>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToCamera3D(env, info[paramNum]);
 }
 
 template <>
-Camera* GetArgFromParam<Camera*>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  Camera params = ToCamera(env, info[paramNum]);
-  Camera* output = new Camera();
+Camera3D* GetArgFromParam<Camera*>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  Camera3D params = ToCamera3D(env, info[paramNum]);
+  Camera3D* output = new Camera3D();
   output->position = params.position;
   output->target = params.target;
   output->up = params.up;
   output->fovy = params.fovy;
-  output->type = params.type;
+  output->projection = params.projection;
   return output;
 }
 
@@ -170,8 +170,8 @@ Ray GetArgFromParam<Ray>(Napi::Env& env, const Napi::CallbackInfo& info, int par
 }
 
 template <>
-RayHitInfo GetArgFromParam<RayHitInfo>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
-  return ToRayHitInfo(env, info[paramNum]);
+RayCollision GetArgFromParam<RayCollision>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+  return ToRayCollision(env, info[paramNum]);
 }
 
 template <>

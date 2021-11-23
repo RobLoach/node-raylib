@@ -65,7 +65,12 @@ ${struct.name} ${converter}(Napi::Env& env, const Napi::Value& arg) {
 const templates = {}
 
 // use this to keep from wrapping things
-const blocklist = ['Matrix', 'ToTexture2D']
+const blocklist = [
+  'Matrix',
+  'ToTexture2D',
+  'TraceLog',
+  'TextFormat'
+]
 
 templates['node-raylib'] = () => `
 #ifndef NODE_RAYLIB_NODE_RAYLIB_H
@@ -141,6 +146,11 @@ inline Napi::Value ToValue(Napi::Env& env, double value) {
   return Napi::Number::New(env, value);
 }
 
+inline Napi::Value ToValue(Napi::Env& env, float value) {
+  return Napi::Number::New(env, value);
+}
+
+inline Napi::Value ToValue(Napi::Env& env, Matrix value) { return ToObject(env, value); }
 ${def.structs
     .filter(({ name }) => !blocklist.includes(name))
     .map(({ name }) => `inline Napi::Value ToValue(Napi::Env& env, ${name} value) { return ToObject(env, value); }`)

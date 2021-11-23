@@ -395,7 +395,6 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "SetRandomSeed", &SetRandomSeed);
   AddFunction(env, exports, "TakeScreenshot", &TakeScreenshot);
   AddFunction(env, exports, "SetConfigFlags", &SetConfigFlags);
-  AddFunction(env, exports, "TraceLog", &TraceLog);
   AddFunction(env, exports, "SetTraceLogLevel", &SetTraceLogLevel);
   AddFunction(env, exports, "MemAlloc", &MemAlloc);
   AddFunction(env, exports, "MemRealloc", &MemRealloc);
@@ -651,7 +650,6 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "TextCopy", &TextCopy);
   AddFunction(env, exports, "TextIsEqual", &TextIsEqual);
   AddFunction(env, exports, "TextLength", &TextLength);
-  AddFunction(env, exports, "TextFormat", &TextFormat);
   AddFunction(env, exports, "TextSubtext", &TextSubtext);
   AddFunction(env, exports, "TextReplace", &TextReplace);
   AddFunction(env, exports, "TextInsert", &TextInsert);
