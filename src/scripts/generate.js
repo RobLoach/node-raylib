@@ -8,19 +8,38 @@ const path = require('path')
 
 // TODO: handle vars with commas in them
 
+// When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
+const toJSClassConvert = (name, type) => {
+  if (type.endsWith('*')) 
+    return `out.Set("${name}", (int64_t)input.${name});`
+  return type[0].toUpperCase() != type[0] ?
+    `out.Set("${name}", input.${name});` :
+    `out.Set("${name}", ToObject(env, input.${name}));`
+}
+
 // generate a single adapter for C->JS
 const toJS = struct => `
 Napi::Object ToObject(Napi::Env& env, const ${struct.name}& input) {
   Napi::Object out = Napi::Object::New(env);
-  ${struct.fields.map(({ name }) => `out.Set("${name.replace(/[\[\]0-9]+/g, '')}", input.${name.replace(/[\[\]0-9]+/g, '')});`).join('\n  ')}
+  ${struct.fields.map(({ name, type }) => toJSClassConvert(name.replace(/[\[\]0-9]+/g, ''), type) ).join('\n  ')}
   return out;
 }`
+
+
 
 // generate a single adapter for JS->C
 const toC = struct => {
   const fields = struct.fields.map(field => {
-    const type = field.type.replace(/[* ]+/g, '')
     const name = field.name.replace(/[\[\]0-9]+/g, '')
+    if (field.type.endsWith('*')) {
+      return `
+  if (argObject.Has("${name}")) {
+    out.${name} = (${field.type})obj.Get("${name}").As<Napi::Number>().Int64Value();
+  }
+`
+    }
+    const type = field.type.replace(/[* ]+/g, '')
+
     return `
   if (argObject.Has("${name}")) {
     out.${name} = To${type}(env, argObject.Get("${name}"));
@@ -138,34 +157,35 @@ templates.ToObject = () => `
 // TODO: these need soem more stuff to output correct values
 
 void Tovoid(Napi::Env& env) {
+  return
 }
 
-float Tofloat(Napi::Env& env, Napi::Value) {
-  return 0.0;
+float Tofloat(Napi::Env& env, Napi::Value value) {
+  return value.As<Napi::Number>();
 }
 
-unsigned char Tounsignedchar(Napi::Env& env, Napi::Value) {
-  return 0;
+unsigned char Tounsignedchar(Napi::Env& env, Napi::Value value) {
+  return value.As<Napi::Number>().Uint32Value();
 }
 
 int Toint(Napi::Env& env, Napi::Value) {
-  return 0;
+  return value.As<Napi::Number>();
 }
 
 unsigned int Tounsignedint(Napi::Env& env, Napi::Value) {
-  return 0;
+  return value.As<Napi::Number>();
 }
 
 unsigned short Tounsignedshort(Napi::Env& env, Napi::Value) {
-  return 0;
+  return value.As<Napi::Number>();
 }
 
 char Tochar(Napi::Env& env, Napi::Value) {
-  return 0;
+  return value.As<Napi::Number>().Uint32Value();
 }
 
 bool Tobool(Napi::Env& env, Napi::Value) {
-  return false;
+  return value.As<Napi::Boolean>();
 }
 
 

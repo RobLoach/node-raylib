@@ -7,34 +7,35 @@
 // TODO: these need soem more stuff to output correct values
 
 void Tovoid(Napi::Env& env) {
+  return
 }
 
-float Tofloat(Napi::Env& env, Napi::Value) {
-  return 0.0;
+float Tofloat(Napi::Env& env, Napi::Value value) {
+  return value.As<Napi::Number>();
 }
 
-unsigned char Tounsignedchar(Napi::Env& env, Napi::Value) {
-  return 0;
+unsigned char Tounsignedchar(Napi::Env& env, Napi::Value value) {
+  return value.As<Napi::Number>().Uint32Value();
 }
 
 int Toint(Napi::Env& env, Napi::Value) {
-  return 0;
+  return value.As<Napi::Number>();
 }
 
 unsigned int Tounsignedint(Napi::Env& env, Napi::Value) {
-  return 0;
+  return value.As<Napi::Number>();
 }
 
 unsigned short Tounsignedshort(Napi::Env& env, Napi::Value) {
-  return 0;
+  return value.As<Napi::Number>();
 }
 
 char Tochar(Napi::Env& env, Napi::Value) {
-  return 0;
+  return value.As<Napi::Number>().Uint32Value();
 }
 
 bool Tobool(Napi::Env& env, Napi::Value) {
-  return false;
+  return value.As<Napi::Boolean>();
 }
 
 
@@ -278,7 +279,7 @@ Rectangle ToRectangle(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Image& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("data", input.data);
+  out.Set("data", (int64_t)input.data);
   out.Set("width", input.width);
   out.Set("height", input.height);
   out.Set("mipmaps", input.mipmaps);
@@ -291,7 +292,7 @@ Image ToImage(Napi::Env& env, const Napi::Value& arg) {
   Image out;
   
   if (argObject.Has("data")) {
-    out.data = Tovoid(env, argObject.Get("data"));
+    out.data = (void *)obj.Get("data").As<Napi::Number>().Int64Value();
   }
 
 
@@ -363,8 +364,8 @@ Texture ToTexture(Napi::Env& env, const Napi::Value& arg) {
 Napi::Object ToObject(Napi::Env& env, const RenderTexture& input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("id", input.id);
-  out.Set("texture", input.texture);
-  out.Set("depth", input.depth);
+  out.Set("texture", ToObject(env, input.texture));
+  out.Set("depth", ToObject(env, input.depth));
   return out;
 }
 
@@ -392,7 +393,7 @@ RenderTexture ToRenderTexture(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const NPatchInfo& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("source", input.source);
+  out.Set("source", ToObject(env, input.source));
   out.Set("left", input.left);
   out.Set("top", input.top);
   out.Set("right", input.right);
@@ -444,7 +445,7 @@ Napi::Object ToObject(Napi::Env& env, const GlyphInfo& input) {
   out.Set("offsetX", input.offsetX);
   out.Set("offsetY", input.offsetY);
   out.Set("advanceX", input.advanceX);
-  out.Set("image", input.image);
+  out.Set("image", ToObject(env, input.image));
   return out;
 }
 
@@ -485,9 +486,9 @@ Napi::Object ToObject(Napi::Env& env, const Font& input) {
   out.Set("baseSize", input.baseSize);
   out.Set("glyphCount", input.glyphCount);
   out.Set("glyphPadding", input.glyphPadding);
-  out.Set("texture", input.texture);
-  out.Set("recs", input.recs);
-  out.Set("glyphs", input.glyphs);
+  out.Set("texture", ToObject(env, input.texture));
+  out.Set("recs", (int64_t)input.recs);
+  out.Set("glyphs", (int64_t)input.glyphs);
   return out;
 }
 
@@ -516,12 +517,12 @@ Font ToFont(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("recs")) {
-    out.recs = ToRectangle(env, argObject.Get("recs"));
+    out.recs = (Rectangle *)obj.Get("recs").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("glyphs")) {
-    out.glyphs = ToGlyphInfo(env, argObject.Get("glyphs"));
+    out.glyphs = (GlyphInfo *)obj.Get("glyphs").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -530,9 +531,9 @@ Font ToFont(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Camera3D& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("position", input.position);
-  out.Set("target", input.target);
-  out.Set("up", input.up);
+  out.Set("position", ToObject(env, input.position));
+  out.Set("target", ToObject(env, input.target));
+  out.Set("up", ToObject(env, input.up));
   out.Set("fovy", input.fovy);
   out.Set("projection", input.projection);
   return out;
@@ -572,8 +573,8 @@ Camera3D ToCamera3D(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Camera2D& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("offset", input.offset);
-  out.Set("target", input.target);
+  out.Set("offset", ToObject(env, input.offset));
+  out.Set("target", ToObject(env, input.target));
   out.Set("rotation", input.rotation);
   out.Set("zoom", input.zoom);
   return out;
@@ -610,19 +611,19 @@ Napi::Object ToObject(Napi::Env& env, const Mesh& input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("vertexCount", input.vertexCount);
   out.Set("triangleCount", input.triangleCount);
-  out.Set("vertices", input.vertices);
-  out.Set("texcoords", input.texcoords);
-  out.Set("texcoords", input.texcoords);
-  out.Set("normals", input.normals);
-  out.Set("tangents", input.tangents);
-  out.Set("colors", input.colors);
-  out.Set("indices", input.indices);
-  out.Set("animVertices", input.animVertices);
-  out.Set("animNormals", input.animNormals);
-  out.Set("boneIds", input.boneIds);
-  out.Set("boneWeights", input.boneWeights);
+  out.Set("vertices", (int64_t)input.vertices);
+  out.Set("texcoords", (int64_t)input.texcoords);
+  out.Set("texcoords", (int64_t)input.texcoords);
+  out.Set("normals", (int64_t)input.normals);
+  out.Set("tangents", (int64_t)input.tangents);
+  out.Set("colors", (int64_t)input.colors);
+  out.Set("indices", (int64_t)input.indices);
+  out.Set("animVertices", (int64_t)input.animVertices);
+  out.Set("animNormals", (int64_t)input.animNormals);
+  out.Set("boneIds", (int64_t)input.boneIds);
+  out.Set("boneWeights", (int64_t)input.boneWeights);
   out.Set("vaoId", input.vaoId);
-  out.Set("vboId", input.vboId);
+  out.Set("vboId", (int64_t)input.vboId);
   return out;
 }
 
@@ -641,57 +642,57 @@ Mesh ToMesh(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("vertices")) {
-    out.vertices = Tofloat(env, argObject.Get("vertices"));
+    out.vertices = (float *)obj.Get("vertices").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("texcoords")) {
-    out.texcoords = Tofloat(env, argObject.Get("texcoords"));
+    out.texcoords = (float *)obj.Get("texcoords").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("texcoords")) {
-    out.texcoords = Tofloat(env, argObject.Get("texcoords"));
+    out.texcoords = (float *)obj.Get("texcoords").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("normals")) {
-    out.normals = Tofloat(env, argObject.Get("normals"));
+    out.normals = (float *)obj.Get("normals").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("tangents")) {
-    out.tangents = Tofloat(env, argObject.Get("tangents"));
+    out.tangents = (float *)obj.Get("tangents").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("colors")) {
-    out.colors = Tounsignedchar(env, argObject.Get("colors"));
+    out.colors = (unsigned char *)obj.Get("colors").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("indices")) {
-    out.indices = Tounsignedshort(env, argObject.Get("indices"));
+    out.indices = (unsigned short *)obj.Get("indices").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("animVertices")) {
-    out.animVertices = Tofloat(env, argObject.Get("animVertices"));
+    out.animVertices = (float *)obj.Get("animVertices").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("animNormals")) {
-    out.animNormals = Tofloat(env, argObject.Get("animNormals"));
+    out.animNormals = (float *)obj.Get("animNormals").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("boneIds")) {
-    out.boneIds = Tounsignedchar(env, argObject.Get("boneIds"));
+    out.boneIds = (unsigned char *)obj.Get("boneIds").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("boneWeights")) {
-    out.boneWeights = Tofloat(env, argObject.Get("boneWeights"));
+    out.boneWeights = (float *)obj.Get("boneWeights").As<Napi::Number>().Int64Value();
   }
 
 
@@ -701,7 +702,7 @@ Mesh ToMesh(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("vboId")) {
-    out.vboId = Tounsignedint(env, argObject.Get("vboId"));
+    out.vboId = (unsigned int *)obj.Get("vboId").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -711,7 +712,7 @@ Mesh ToMesh(Napi::Env& env, const Napi::Value& arg) {
 Napi::Object ToObject(Napi::Env& env, const Shader& input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("id", input.id);
-  out.Set("locs", input.locs);
+  out.Set("locs", (int64_t)input.locs);
   return out;
 }
 
@@ -725,7 +726,7 @@ Shader ToShader(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("locs")) {
-    out.locs = Toint(env, argObject.Get("locs"));
+    out.locs = (int *)obj.Get("locs").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -734,8 +735,8 @@ Shader ToShader(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const MaterialMap& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("texture", input.texture);
-  out.Set("color", input.color);
+  out.Set("texture", ToObject(env, input.texture));
+  out.Set("color", ToObject(env, input.color));
   out.Set("value", input.value);
   return out;
 }
@@ -764,8 +765,8 @@ MaterialMap ToMaterialMap(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Material& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("shader", input.shader);
-  out.Set("maps", input.maps);
+  out.Set("shader", ToObject(env, input.shader));
+  out.Set("maps", (int64_t)input.maps);
   out.Set("params", input.params);
   return out;
 }
@@ -780,7 +781,7 @@ Material ToMaterial(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("maps")) {
-    out.maps = ToMaterialMap(env, argObject.Get("maps"));
+    out.maps = (MaterialMap *)obj.Get("maps").As<Napi::Number>().Int64Value();
   }
 
 
@@ -794,9 +795,9 @@ Material ToMaterial(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Transform& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("translation", input.translation);
-  out.Set("rotation", input.rotation);
-  out.Set("scale", input.scale);
+  out.Set("translation", ToObject(env, input.translation));
+  out.Set("rotation", ToObject(env, input.rotation));
+  out.Set("scale", ToObject(env, input.scale));
   return out;
 }
 
@@ -848,15 +849,15 @@ BoneInfo ToBoneInfo(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Model& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("transform", input.transform);
+  out.Set("transform", ToObject(env, input.transform));
   out.Set("meshCount", input.meshCount);
   out.Set("materialCount", input.materialCount);
-  out.Set("meshes", input.meshes);
-  out.Set("materials", input.materials);
-  out.Set("meshMaterial", input.meshMaterial);
+  out.Set("meshes", (int64_t)input.meshes);
+  out.Set("materials", (int64_t)input.materials);
+  out.Set("meshMaterial", (int64_t)input.meshMaterial);
   out.Set("boneCount", input.boneCount);
-  out.Set("bones", input.bones);
-  out.Set("bindPose", input.bindPose);
+  out.Set("bones", (int64_t)input.bones);
+  out.Set("bindPose", (int64_t)input.bindPose);
   return out;
 }
 
@@ -880,17 +881,17 @@ Model ToModel(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("meshes")) {
-    out.meshes = ToMesh(env, argObject.Get("meshes"));
+    out.meshes = (Mesh *)obj.Get("meshes").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("materials")) {
-    out.materials = ToMaterial(env, argObject.Get("materials"));
+    out.materials = (Material *)obj.Get("materials").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("meshMaterial")) {
-    out.meshMaterial = Toint(env, argObject.Get("meshMaterial"));
+    out.meshMaterial = (int *)obj.Get("meshMaterial").As<Napi::Number>().Int64Value();
   }
 
 
@@ -900,12 +901,12 @@ Model ToModel(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("bones")) {
-    out.bones = ToBoneInfo(env, argObject.Get("bones"));
+    out.bones = (BoneInfo *)obj.Get("bones").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("bindPose")) {
-    out.bindPose = ToTransform(env, argObject.Get("bindPose"));
+    out.bindPose = (Transform *)obj.Get("bindPose").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -916,8 +917,8 @@ Napi::Object ToObject(Napi::Env& env, const ModelAnimation& input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("boneCount", input.boneCount);
   out.Set("frameCount", input.frameCount);
-  out.Set("bones", input.bones);
-  out.Set("framePoses", input.framePoses);
+  out.Set("bones", (int64_t)input.bones);
+  out.Set("framePoses", (int64_t)input.framePoses);
   return out;
 }
 
@@ -936,12 +937,12 @@ ModelAnimation ToModelAnimation(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("bones")) {
-    out.bones = ToBoneInfo(env, argObject.Get("bones"));
+    out.bones = (BoneInfo *)obj.Get("bones").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("framePoses")) {
-    out.framePoses = ToTransform(env, argObject.Get("framePoses"));
+    out.framePoses = (Transform **)obj.Get("framePoses").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -950,8 +951,8 @@ ModelAnimation ToModelAnimation(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Ray& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("position", input.position);
-  out.Set("direction", input.direction);
+  out.Set("position", ToObject(env, input.position));
+  out.Set("direction", ToObject(env, input.direction));
   return out;
 }
 
@@ -976,8 +977,8 @@ Napi::Object ToObject(Napi::Env& env, const RayCollision& input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("hit", input.hit);
   out.Set("distance", input.distance);
-  out.Set("point", input.point);
-  out.Set("normal", input.normal);
+  out.Set("point", ToObject(env, input.point));
+  out.Set("normal", ToObject(env, input.normal));
   return out;
 }
 
@@ -1010,8 +1011,8 @@ RayCollision ToRayCollision(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const BoundingBox& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("min", input.min);
-  out.Set("max", input.max);
+  out.Set("min", ToObject(env, input.min));
+  out.Set("max", ToObject(env, input.max));
   return out;
 }
 
@@ -1038,7 +1039,7 @@ Napi::Object ToObject(Napi::Env& env, const Wave& input) {
   out.Set("sampleRate", input.sampleRate);
   out.Set("sampleSize", input.sampleSize);
   out.Set("channels", input.channels);
-  out.Set("data", input.data);
+  out.Set("data", (int64_t)input.data);
   return out;
 }
 
@@ -1067,7 +1068,7 @@ Wave ToWave(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("data")) {
-    out.data = Tovoid(env, argObject.Get("data"));
+    out.data = (void *)obj.Get("data").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -1076,7 +1077,7 @@ Wave ToWave(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const AudioStream& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("buffer", input.buffer);
+  out.Set("buffer", (int64_t)input.buffer);
   out.Set("sampleRate", input.sampleRate);
   out.Set("sampleSize", input.sampleSize);
   out.Set("channels", input.channels);
@@ -1088,7 +1089,7 @@ AudioStream ToAudioStream(Napi::Env& env, const Napi::Value& arg) {
   AudioStream out;
   
   if (argObject.Has("buffer")) {
-    out.buffer = TorAudioBuffer(env, argObject.Get("buffer"));
+    out.buffer = (rAudioBuffer *)obj.Get("buffer").As<Napi::Number>().Int64Value();
   }
 
 
@@ -1112,7 +1113,7 @@ AudioStream ToAudioStream(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Sound& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("stream", input.stream);
+  out.Set("stream", ToObject(env, input.stream));
   out.Set("frameCount", input.frameCount);
   return out;
 }
@@ -1136,11 +1137,11 @@ Sound ToSound(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const Music& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("stream", input.stream);
+  out.Set("stream", ToObject(env, input.stream));
   out.Set("frameCount", input.frameCount);
   out.Set("looping", input.looping);
   out.Set("ctxType", input.ctxType);
-  out.Set("ctxData", input.ctxData);
+  out.Set("ctxData", (int64_t)input.ctxData);
   return out;
 }
 
@@ -1169,7 +1170,7 @@ Music ToMusic(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("ctxData")) {
-    out.ctxData = Tovoid(env, argObject.Get("ctxData"));
+    out.ctxData = (void *)obj.Get("ctxData").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -1250,8 +1251,8 @@ VrDeviceInfo ToVrDeviceInfo(Napi::Env& env, const Napi::Value& arg) {
   
 Napi::Object ToObject(Napi::Env& env, const VrStereoConfig& input) {
   Napi::Object out = Napi::Object::New(env);
-  out.Set("projection", input.projection);
-  out.Set("viewOffset", input.viewOffset);
+  out.Set("projection", ToObject(env, input.projection));
+  out.Set("viewOffset", ToObject(env, input.viewOffset));
   out.Set("leftLensCenter", input.leftLensCenter);
   out.Set("rightLensCenter", input.rightLensCenter);
   out.Set("leftScreenCenter", input.leftScreenCenter);
