@@ -20,12 +20,22 @@ endif()
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-# TODO: Move this to cmake/FindRaylib.cmake?
-find_package(raylib 3.5.0)
+# version doesn't seem to pick correct version
+#find_package(raylib 3.5 QUIET EXACT)
 if (NOT raylib_FOUND)
-  set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
-  set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
-  add_subdirectory(vendor/raylib)
+  include(FetchContent)
+  FetchContent_Declare(
+    raylib
+    GIT_REPOSITORY https://github.com/raysan5/raylib.git
+    GIT_TAG 3.5.0
+  )
+  FetchContent_GetProperties(raylib)
+  if (NOT raylib_POPULATED)
+    set(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(raylib)
+    set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
+  endif()
 endif()
 
 # Add all the include directories.
