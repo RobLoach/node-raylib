@@ -11,7 +11,7 @@ const path = require('path')
 // When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
 const toJSClassConvert = (name, type) => {
   if (type.endsWith('*')) { return `out.Set("${name}", (int64_t)input.${name});` }
-  return type[0].toUpperCase() != type[0]
+  return type[0].toUpperCase() !== type[0]
     ? `out.Set("${name}", input.${name});`
     : `out.Set("${name}", ToObject(env, input.${name}));`
 }
@@ -31,7 +31,7 @@ const toC = struct => {
     if (field.type.endsWith('*')) {
       return `
   if (argObject.Has("${name}")) {
-    out.${name} = (${field.type})obj.Get("${name}").As<Napi::Number>().Int64Value();
+    out.${name} = (${field.type})argObject.Get("${name}").As<Napi::Number>().Int64Value();
   }
 `
     }
@@ -169,23 +169,23 @@ unsigned char Tounsignedchar(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
 
-int Toint(Napi::Env& env, Napi::Value) {
+int Toint(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>();
 }
 
-unsigned int Tounsignedint(Napi::Env& env, Napi::Value) {
+unsigned int Tounsignedint(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>();
 }
 
-unsigned short Tounsignedshort(Napi::Env& env, Napi::Value) {
+unsigned short Tounsignedshort(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>();
 }
 
-char Tochar(Napi::Env& env, Napi::Value) {
+char Tochar(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
 
-bool Tobool(Napi::Env& env, Napi::Value) {
+bool Tobool(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Boolean>();
 }
 

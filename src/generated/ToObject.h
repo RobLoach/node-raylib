@@ -17,23 +17,23 @@ unsigned char Tounsignedchar(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
 
-int Toint(Napi::Env& env, Napi::Value) {
+int Toint(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>();
 }
 
-unsigned int Tounsignedint(Napi::Env& env, Napi::Value) {
+unsigned int Tounsignedint(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>();
 }
 
-unsigned short Tounsignedshort(Napi::Env& env, Napi::Value) {
+unsigned short Tounsignedshort(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>();
 }
 
-char Tochar(Napi::Env& env, Napi::Value) {
+char Tochar(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
 
-bool Tobool(Napi::Env& env, Napi::Value) {
+bool Tobool(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Boolean>();
 }
 
@@ -291,7 +291,7 @@ Image ToImage(Napi::Env& env, const Napi::Value& arg) {
   Image out;
   
   if (argObject.Has("data")) {
-    out.data = (void *)obj.Get("data").As<Napi::Number>().Int64Value();
+    out.data = (void *)argObject.Get("data").As<Napi::Number>().Int64Value();
   }
 
 
@@ -516,12 +516,12 @@ Font ToFont(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("recs")) {
-    out.recs = (Rectangle *)obj.Get("recs").As<Napi::Number>().Int64Value();
+    out.recs = (Rectangle *)argObject.Get("recs").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("glyphs")) {
-    out.glyphs = (GlyphInfo *)obj.Get("glyphs").As<Napi::Number>().Int64Value();
+    out.glyphs = (GlyphInfo *)argObject.Get("glyphs").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -641,57 +641,57 @@ Mesh ToMesh(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("vertices")) {
-    out.vertices = (float *)obj.Get("vertices").As<Napi::Number>().Int64Value();
+    out.vertices = (float *)argObject.Get("vertices").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("texcoords")) {
-    out.texcoords = (float *)obj.Get("texcoords").As<Napi::Number>().Int64Value();
+    out.texcoords = (float *)argObject.Get("texcoords").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("texcoords")) {
-    out.texcoords = (float *)obj.Get("texcoords").As<Napi::Number>().Int64Value();
+    out.texcoords = (float *)argObject.Get("texcoords").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("normals")) {
-    out.normals = (float *)obj.Get("normals").As<Napi::Number>().Int64Value();
+    out.normals = (float *)argObject.Get("normals").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("tangents")) {
-    out.tangents = (float *)obj.Get("tangents").As<Napi::Number>().Int64Value();
+    out.tangents = (float *)argObject.Get("tangents").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("colors")) {
-    out.colors = (unsigned char *)obj.Get("colors").As<Napi::Number>().Int64Value();
+    out.colors = (unsigned char *)argObject.Get("colors").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("indices")) {
-    out.indices = (unsigned short *)obj.Get("indices").As<Napi::Number>().Int64Value();
+    out.indices = (unsigned short *)argObject.Get("indices").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("animVertices")) {
-    out.animVertices = (float *)obj.Get("animVertices").As<Napi::Number>().Int64Value();
+    out.animVertices = (float *)argObject.Get("animVertices").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("animNormals")) {
-    out.animNormals = (float *)obj.Get("animNormals").As<Napi::Number>().Int64Value();
+    out.animNormals = (float *)argObject.Get("animNormals").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("boneIds")) {
-    out.boneIds = (unsigned char *)obj.Get("boneIds").As<Napi::Number>().Int64Value();
+    out.boneIds = (unsigned char *)argObject.Get("boneIds").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("boneWeights")) {
-    out.boneWeights = (float *)obj.Get("boneWeights").As<Napi::Number>().Int64Value();
+    out.boneWeights = (float *)argObject.Get("boneWeights").As<Napi::Number>().Int64Value();
   }
 
 
@@ -701,7 +701,7 @@ Mesh ToMesh(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("vboId")) {
-    out.vboId = (unsigned int *)obj.Get("vboId").As<Napi::Number>().Int64Value();
+    out.vboId = (unsigned int *)argObject.Get("vboId").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -725,7 +725,7 @@ Shader ToShader(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("locs")) {
-    out.locs = (int *)obj.Get("locs").As<Napi::Number>().Int64Value();
+    out.locs = (int *)argObject.Get("locs").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -780,7 +780,7 @@ Material ToMaterial(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("maps")) {
-    out.maps = (MaterialMap *)obj.Get("maps").As<Napi::Number>().Int64Value();
+    out.maps = (MaterialMap *)argObject.Get("maps").As<Napi::Number>().Int64Value();
   }
 
 
@@ -880,17 +880,17 @@ Model ToModel(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("meshes")) {
-    out.meshes = (Mesh *)obj.Get("meshes").As<Napi::Number>().Int64Value();
+    out.meshes = (Mesh *)argObject.Get("meshes").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("materials")) {
-    out.materials = (Material *)obj.Get("materials").As<Napi::Number>().Int64Value();
+    out.materials = (Material *)argObject.Get("materials").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("meshMaterial")) {
-    out.meshMaterial = (int *)obj.Get("meshMaterial").As<Napi::Number>().Int64Value();
+    out.meshMaterial = (int *)argObject.Get("meshMaterial").As<Napi::Number>().Int64Value();
   }
 
 
@@ -900,12 +900,12 @@ Model ToModel(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("bones")) {
-    out.bones = (BoneInfo *)obj.Get("bones").As<Napi::Number>().Int64Value();
+    out.bones = (BoneInfo *)argObject.Get("bones").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("bindPose")) {
-    out.bindPose = (Transform *)obj.Get("bindPose").As<Napi::Number>().Int64Value();
+    out.bindPose = (Transform *)argObject.Get("bindPose").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -936,12 +936,12 @@ ModelAnimation ToModelAnimation(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("bones")) {
-    out.bones = (BoneInfo *)obj.Get("bones").As<Napi::Number>().Int64Value();
+    out.bones = (BoneInfo *)argObject.Get("bones").As<Napi::Number>().Int64Value();
   }
 
 
   if (argObject.Has("framePoses")) {
-    out.framePoses = (Transform **)obj.Get("framePoses").As<Napi::Number>().Int64Value();
+    out.framePoses = (Transform **)argObject.Get("framePoses").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -1067,7 +1067,7 @@ Wave ToWave(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("data")) {
-    out.data = (void *)obj.Get("data").As<Napi::Number>().Int64Value();
+    out.data = (void *)argObject.Get("data").As<Napi::Number>().Int64Value();
   }
 
   return out;
@@ -1088,7 +1088,7 @@ AudioStream ToAudioStream(Napi::Env& env, const Napi::Value& arg) {
   AudioStream out;
   
   if (argObject.Has("buffer")) {
-    out.buffer = (rAudioBuffer *)obj.Get("buffer").As<Napi::Number>().Int64Value();
+    out.buffer = (rAudioBuffer *)argObject.Get("buffer").As<Napi::Number>().Int64Value();
   }
 
 
@@ -1169,7 +1169,7 @@ Music ToMusic(Napi::Env& env, const Napi::Value& arg) {
 
 
   if (argObject.Has("ctxData")) {
-    out.ctxData = (void *)obj.Get("ctxData").As<Napi::Number>().Int64Value();
+    out.ctxData = (void *)argObject.Get("ctxData").As<Napi::Number>().Int64Value();
   }
 
   return out;
