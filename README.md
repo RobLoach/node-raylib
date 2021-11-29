@@ -84,8 +84,7 @@ The following are a few notes and resources when developing `node-raylib`...
 ```
 git clone https://github.com/RobLoach/node-raylib.git
 cd node-raylib
-git submodule update --init
-npm it
+npm i
 ```
 
 ### TypeScript Definitions
