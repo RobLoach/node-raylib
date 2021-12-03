@@ -7,6 +7,33 @@
 using namespace emscripten;
 
 void raylib_constants() {
+    constant("LIGHTGRAY", LIGHTGRAY);
+    constant("GRAY", GRAY);
+    constant("DARKGRAY", DARKGRAY);
+    constant("YELLOW", YELLOW);
+    constant("GOLD", GOLD);
+    constant("ORANGE", ORANGE);
+    constant("PINK", PINK);
+    constant("RED", RED);
+    constant("MAROON", MAROON);
+    constant("GREEN", GREEN);
+    constant("LIME", LIME);
+    constant("DARKGREEN", DARKGREEN);
+    constant("SKYBLUE", SKYBLUE);
+    constant("BLUE", BLUE);
+    constant("DARKBLUE", DARKBLUE);
+    constant("PURPLE", PURPLE);
+    constant("VIOLET", VIOLET);
+    constant("DARKPURPLE", DARKPURPLE);
+    constant("BEIGE", BEIGE);
+    constant("BROWN", BROWN);
+    constant("DARKBROWN", DARKBROWN);
+    constant("WHITE", WHITE);
+    constant("BLACK", BLACK);
+    constant("BLANK", BLANK);
+    constant("MAGENTA", MAGENTA);
+    constant("RAYWHITE", RAYWHITE);
+
     constant("FLAG_VSYNC_HINT", FLAG_VSYNC_HINT);
     constant("FLAG_FULLSCREEN_MODE", FLAG_FULLSCREEN_MODE);
     constant("FLAG_WINDOW_RESIZABLE", FLAG_WINDOW_RESIZABLE);

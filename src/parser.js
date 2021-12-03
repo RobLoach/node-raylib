@@ -1,12 +1,16 @@
-let api = require('../vendor/raylib/parser/raylib_api.json')
-
+/**
+ * Parser - Will read raylib_api.json and will attempt to write the API.
+ */
+const api = require('../vendor/raylib/parser/raylib_api.json')
 
 function enums_header() {
     return `void raylib_enums() {\n`
 }
+
 function enums_footer() {
     return '}\n'
 }
+
 function enums_body(allEnums) {
     let output = ''
     for (let family of allEnums) {
@@ -24,6 +28,7 @@ function enums(allEnums) {
 function structs_header() {
     return `void raylib_structs() {\n`
 }
+
 function structs_footer() {
     return '}\n'
 }
@@ -57,6 +62,7 @@ function structs_body(allStructs) {
     }
     return output;
 }
+
 function structs(allStructs) {
     return structs_header() + structs_body(allStructs) + structs_footer();
 }
@@ -64,9 +70,11 @@ function structs(allStructs) {
 function functions_header() {
     return `void raylib_functions() {\n`
 }
+
 function functions_footer() {
     return `}\n`
 }
+
 function functions_body(allFunctions) {
     output = ''
     let wrapperFunctions = [
@@ -104,7 +112,6 @@ function functions_body(allFunctions) {
                 }
                 // Ensure it's valid function
                 if (func.params && func.params["callback"] == undefined) {
-
                     output += `    function("${func.name}", &${finalFuncName});\n`
                 }
                 break
@@ -112,9 +119,12 @@ function functions_body(allFunctions) {
     }
     return output
 }
+
 function functions(allFunctions) {
     return functions_header() + functions_body(allFunctions) + functions_footer()
 }
+
+// TODO: Have the parser write to the files directly.
 console.log(enums(api.enums))
 console.log(structs(api.structs))
 console.log(functions(api.functions))

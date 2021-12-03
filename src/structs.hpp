@@ -7,7 +7,7 @@
 using namespace emscripten;
 
 void raylib_structs() {
-   value_object<Vector2>("Vector2")
+    value_object<Vector2>("Vector2")
         .field("x", &Vector2::x)
         .field("y", &Vector2::y)
     ;
@@ -52,6 +52,7 @@ void raylib_structs() {
         .field("width", &Rectangle::width)
         .field("height", &Rectangle::height)
     ;
+
     value_object<Image>("Image")
         .field("width", &Image::width)
         .field("height", &Image::height)
@@ -93,7 +94,7 @@ void raylib_structs() {
         .field("target", &Camera2D::target)
         .field("rotation", &Camera2D::rotation)
         .field("zoom", &Camera2D::zoom)
-    ;
+    ;/*
     value_object<Mesh>("Mesh")
         .field("vertexCount", &Mesh::vertexCount)
         .field("triangleCount", &Mesh::triangleCount)
@@ -197,6 +198,7 @@ void raylib_structs() {
     ;
     value_object<VrStereoConfig>("VrStereoConfig")
     ;
+*/
 
 }
 
