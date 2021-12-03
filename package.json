@@ -12,6 +12,7 @@
     "test": "mocha test",
     "prebuild": "emcmake cmake . -B build -DPLATFORM=Web",
     "build": "emmake make -C build",
+    "parser": "node src/parser.js",
     "clean": "emmake make clean -C build",
     "start": "light-server --no-reload -s . --historyindex '/example/index.html'"
   },

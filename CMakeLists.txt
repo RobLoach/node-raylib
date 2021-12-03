@@ -25,5 +25,5 @@ set_target_properties(raylib-wasm PROPERTIES
         -s MODULARIZE=1 \
         -s USE_GLFW=3 \
         -s DEMANGLE_SUPPORT=1 \
-        --bind" \
+        --bind"
 )
