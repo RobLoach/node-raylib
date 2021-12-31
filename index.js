@@ -127,22 +127,6 @@ raylib.Camera = function (position, target, up, fovy, type) {
 
 raylib.Camera3D = raylib.Camera
 
-/**
- * UpdateCamera is wrapped to allow object reference.
- *
- * @see UpdateCameraWrap()
- */
-raylib.UpdateCamera = function (camera) {
-  const newCamera = raylib.UpdateCameraWrap(camera)
-  if (newCamera) {
-    camera.position = newCamera.position
-    camera.target = newCamera.target
-    camera.up = newCamera.up
-    camera.fovy = newCamera.fovy
-    camera.type = newCamera.type
-  }
-}
-
 raylib.VrDeviceInfo = function () {
   return {
     hResolution: 2160,
@@ -159,18 +143,65 @@ raylib.VrDeviceInfo = function () {
 }
 
 /**
- * UpdateVrTracking is wrapped to allow object reference.
+ * The following functions wrapped to allow object reference.
  *
- * @see UpdateVrTrackingWrap()
+ * @see /src/wrappedfunctions.h
  */
-raylib.UpdateVrTracking = function (camera) {
-  const newCamera = raylib.UpdateVrTrackingWrap(camera)
-  if (newCamera) {
-    camera.position = newCamera.position
-    camera.target = newCamera.target
-    camera.up = newCamera.up
-    camera.fovy = newCamera.fovy
-    camera.type = newCamera.type
+let wrapped_functions = [
+  'UpdateCamera',
+  'UpdateVrTracking',
+	'ImageFormat',
+	'ImageToPOT',
+	'ImageCrop',
+	'ImageAlphaCrop',
+	'ImageAlphaClear',
+	'ImageAlphaMask',
+	'ImageAlphaPremultiply',
+	'ImageResize',
+	'ImageResizeNN',
+	'ImageResizeCanvas',
+	'ImageMipmaps',
+	'ImageDither',
+	'ImageFlipVertical',
+	'ImageFlipHorizontal',
+	'ImageRotateCW',
+	'ImageRotateCCW',
+	'ImageColorTint',
+	'ImageColorInvert',
+	'ImageColorGrayscale',
+	'ImageColorContrast',
+	'ImageColorBrightness',
+	'ImageColorReplace',
+	'ImageClearBackground',
+	'ImageDrawPixel',
+	'ImageDrawPixelV',
+	'ImageDrawLine',
+	'ImageDrawLineV',
+	'ImageDrawCircle',
+	'ImageDrawCircleV',
+	'ImageDrawRectangle',
+	'ImageDrawRectangleV',
+	'ImageDrawRectangleRec',
+	'ImageDrawRectangleLines',
+	'ImageDraw',
+	'ImageDrawText',
+	'ImageDrawTextEx',
+]
+// Wrapped functions return the value modified after calling the function.
+// When passed back to JS - the 'by reference' manipulation needs to occur
+// manually like so:
+for (let func of wrapped_functions) {
+  raylib[func] = function(...args) {
+    let obj = raylib[func + 'Wrap'](...args)
+    if (obj) {
+      for (let key in obj) {
+        // This makes the assumption the first argument of the function is
+        // the by-reference variable, which is true for the above functions so far
+        if (Object.hasOwnProperty.call(args[0], key)) {
+          args[0][key] = obj[key]
+        }
+      }
+    }
   }
 }
 
