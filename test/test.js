@@ -104,6 +104,14 @@ describe('raylib', function() {
       const image = r.LoadImage(rabbit)
       assert.isNotNull(image)
     })
+    it('should correctly use wrapped image manipulation functions', () => {
+      const rabbit = path.join(__dirname, 'resources', 'rabbit.png')
+      let image = r.LoadImage(rabbit)
+      let initial_data = image.data
+      r.ImageRotateCW(image)
+      let modified_data = image.data
+      assert.notEqual(initial_data, modified_data)
+    })
     it('should return null when failing to load', () => {
       const missingImage = 'missingImage.png'
       const image = r.LoadImage(missingImage)
