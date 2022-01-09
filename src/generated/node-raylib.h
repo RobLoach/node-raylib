@@ -710,8 +710,6 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GenMeshKnot", &GenMeshKnot);
   AddFunction(env, exports, "GenMeshHeightmap", &GenMeshHeightmap);
   AddFunction(env, exports, "GenMeshCubicmap", &GenMeshCubicmap);
-  AddFunction(env, exports, "LoadMaterials", &LoadMaterials);
-  AddFunction(env, exports, "LoadMaterialDefault", &LoadMaterialDefault);
   AddFunction(env, exports, "SetModelMeshMaterial", &SetModelMeshMaterial);
   AddFunction(env, exports, "LoadModelAnimations", &LoadModelAnimations);
   AddFunction(env, exports, "UpdateModelAnimation", &UpdateModelAnimation);

@@ -62,11 +62,16 @@ for (const struct of structs) {
   }
 }
 
-// filter out all functions that have blocked types
+// filter out all functions that use blocked types
 for (const f of functions) {
-  for (const param of (f.params || [])) {
-    if (blocklist.includes(param.type.replace(/[* ]/g, ''))) {
-      blocklist.push(f.name)
+  if (blocklist.includes(f.returnType.replace(/[* ]/g, ''))) {
+    blocklist.push(f.name)
+  } else {
+    for (const param of (f.params || [])) {
+      if (blocklist.includes(param.type.replace(/[* ]/g, ''))) {
+        blocklist.push(f.name)
+        break
+      }
     }
   }
 }
