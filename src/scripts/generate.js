@@ -9,6 +9,18 @@ const { structs, enums, functions } = defs
 const { writeFileSync } = require('fs')
 const path = require('path')
 
+// use this to keep from wrapping things
+// TODO: document why these are being blocked
+const blocklist = [
+  'TraceLog',
+  'TextFormat'
+]
+
+// thse are aliased types
+const typeAliases = {
+  Quaternion: 'Vector4'
+}
+
 // pre-process the data for later analysis
 const rSize = /\[([0-9]+)\]/g
 for (const struct of structs) {
@@ -39,20 +51,17 @@ for (const struct of structs) {
     } else {
       field.size = 1
     }
+    const type = field.type.replace(/[* ]+/g, '')
+    if (typeAliases[type]) {
+      field.type = typeAliases[type]
+    }
   }
 
   // TODO: should I also process *-refs to seperate name & the fact it's a ref?
 }
 
-// use this to keep from wrapping things
-// TODO: document why these are being blocked
-const blocklist = [
-  'TraceLog',
-  'TextFormat'
-]
-
 // aliases
-structs.push({ ...structs.find(s => s.name === 'Vector4'), name: 'Quaternion' })
+// structs.push({ ...structs.find(s => s.name === 'Vector4'), name: 'Quaternion' })
 
 // XXX: Since array support isn't complete, just filter out all structs & functions that use them,
 // so we get an (incomplete) wrapper that will build.
@@ -80,6 +89,7 @@ for (const f of functions) {
 }
 
 console.log('blocking:\n ', blocklist.join('\n  '))
+writeFileSync('/home/konsumer/Downloads/processed_raylib_api.json', JSON.stringify({ structs, enums, functions }, null, 2))
 
 // When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
 const toJSClassConvert = (name, type) => {
@@ -228,11 +238,13 @@ char Tochar(Napi::Env& env, Napi::Value value) {
 bool Tobool(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Boolean>();
 }
+
 ${structs
     .filter(({ name }) => !blocklist.includes(name))
     .map((struct) => toJS(struct) + '\n' + toC(struct))
     .join('\n  ')
 }
+
 #endif
 `
 
