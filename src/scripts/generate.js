@@ -51,6 +51,9 @@ const blocklist = [
   'TextFormat'
 ]
 
+// aliases
+structs.push({ ...structs.find(s => s.name === 'Vector4'), name: 'Quaternion' })
+
 // XXX: Since array support isn't complete, just filter out all structs & functions that use them,
 // so we get an (incomplete) wrapper that will build.
 // THIS IS CURRENTLY NOT WORKING
@@ -75,6 +78,8 @@ for (const f of functions) {
     }
   }
 }
+
+console.log('blocking:\n ', blocklist.join('\n  '))
 
 // When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
 const toJSClassConvert = (name, type) => {

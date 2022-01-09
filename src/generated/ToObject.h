@@ -1141,4 +1141,40 @@ Music ToMusic(Napi::Env& env, const Napi::Value& arg) {
   return out;
 }
 
+  
+Napi::Object ToObject(Napi::Env& env, const Quaternion& input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("x", input.x);
+  out.Set("y", input.y);
+  out.Set("z", input.z);
+  out.Set("w", input.w);
+  return out;
+}
+
+Quaternion ToQuaternion(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Quaternion out;
+  
+  if (argObject.Has("x")) {
+    out.x = Tofloat(env, argObject.Get("x"));
+  }
+
+
+  if (argObject.Has("y")) {
+    out.y = Tofloat(env, argObject.Get("y"));
+  }
+
+
+  if (argObject.Has("z")) {
+    out.z = Tofloat(env, argObject.Get("z"));
+  }
+
+
+  if (argObject.Has("w")) {
+    out.w = Tofloat(env, argObject.Get("w"));
+  }
+
+  return out;
+}
+
 #endif
