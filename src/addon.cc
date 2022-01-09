@@ -6,7 +6,7 @@
 #include "./generated/node-raylib.h"
 //#include "node-raymath.h"
 //#include "node-rlgl.h"
-//#include "wrappedfunctions.h"
+#include "./lib/WrappedFunctions.h"
 
 /**
  * Initialize all the node-raylib modules.
@@ -15,7 +15,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   node_raylib_bindings(env, exports);
   //node_raylib_raymath(env, exports);
   //node_raylib_rlgl(env, exports);
-  //node_raylib_wrappedfunctions(env, exports);
+  node_raylib_wrappedfunctions(env, exports);
 
   return exports;
 }
