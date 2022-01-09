@@ -10,8 +10,8 @@ const { writeFileSync } = require('fs')
 const path = require('path')
 
 // use this to keep from wrapping things
-// TODO: document why these are being blocked
 const blocklist = [
+  // error: invalid conversion from ‘void (*)(int, const char*, ...)’ to ‘void (*)()’ [-fpermissive]
   'TraceLog',
   'TextFormat',
 
@@ -93,9 +93,6 @@ for (const f of functions) {
     }
   }
 }
-
-console.log('blocking:\n ', blocklist.join('\n  '))
-writeFileSync('/home/konsumer/Downloads/processed_raylib_api.json', JSON.stringify({ structs, enums, functions }, null, 2))
 
 // When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
 const toJSClassConvert = (name, type) => {
