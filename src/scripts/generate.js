@@ -22,7 +22,7 @@ const blocklist = [
   'ExportFontAsCode'
 ]
 
-// thse are aliased types
+// thse are aliased types, so you the resolved-type
 const typeAliases = {
   Quaternion: 'Vector4'
 }
