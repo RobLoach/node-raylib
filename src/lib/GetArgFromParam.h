@@ -155,6 +155,11 @@ MaterialMap GetArgFromParam<MaterialMap>(Napi::Env& env, const Napi::CallbackInf
 }
 
 template <>
+Material GetArgFromParam<Material>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
+    return ToMaterial(env, info[paramNum]);
+}
+
+template <>
 Transform GetArgFromParam<Transform>(Napi::Env& env, const Napi::CallbackInfo& info, int paramNum) {
     return ToTransform(env, info[paramNum]);
 }

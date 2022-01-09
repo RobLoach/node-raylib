@@ -791,5 +791,54 @@ Napi::Object ToObject(Napi::Env& env, const Transform& input) {
   return out;
 }
 
+Material ToMaterial(Napi::Env& env, const Napi::Value& arg) {
+  Napi::Object argObject(env, arg.As<Napi::Object>());
+  Material out;
+  if (argObject.Has("shader")) {
+    out.shader = ToShader(env, argObject.Get("shader"));
+  }
+  if (argObject.Has("maps")) {
+    auto maps = argObject.Get("maps").As<Napi::Array>();
+    int length = maps.Length();
+    out.maps = new MaterialMap[length];
+    for (int i = 0; i < length; i++) {
+      out.maps[i] = ToMaterialMap(env, maps[i]);
+    }
+  }
+  if (argObject.Has("params")) {
+    out.params = new float[4];
+    auto params = argObject.Get("params").As<Napi::Float32Array>();
+    for (int i = 0; i < 3; i++) {
+      out.params[i] = params[i];
+    }
+  }
+  return out;
+}
+
+Napi::Object ToObject(Napi::Env& env, const Material& input) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("shader", ToObject(env, input.shader));
+
+  // Maps
+  int count = 0; // TODO: Clean up getting the actual count.
+  MaterialMap* current = input.maps;
+  while(current++){
+    count++;
+  }
+  auto maps = Napi::Array::New(env, count);
+  for (int i = 0; i < count; i++) {
+    maps[i] = ToObject(env, input.maps[i]);
+  }
+  out.Set("maps", maps);
+
+  // Params
+  auto params = Napi::Float32Array::New(env, 4);
+  for (int i = 0; i < 4; i++) {
+    params[i] = input.params[i];
+  }
+  out.Set("params", params);
+  return out;
+}
+
 
 #endif
