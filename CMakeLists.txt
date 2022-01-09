@@ -64,7 +64,7 @@ add_library(${PROJECT_NAME} SHARED
   src/addon.cc
   src/node-raymath.h
   src/node-rlgl.h
-  src/wrappedfunctions.h
+  src/lib/WrappedFunctions.h
 )
 
 ## Suffix the node module with .node.
