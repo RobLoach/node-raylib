@@ -1,26 +1,71 @@
 // this will generate the wrappers & type-adapters in src/generated
 
 // this file comes from https://github.com/raysan5/raylib/blob/master/parser/raylib_api.json
-const def = require('./raylib_api.json')
+const defs = require('./raylib_api.json')
+
+// TODO: once array-support works, I should be able to do this:
+// const { structs, enums, functions } = defs
+const enums = defs.enums
+const _structs = defs.structs
+const _functions = defs.functions
 
 const { writeFileSync } = require('fs')
 const path = require('path')
 
-// first clean up def data
-def.structs.forEach(struct => {
-  struct.fields.forEach((field, i) => {
+// pre-process the data for later analysis
+const rSize = /\[([0-9]+)\]/g
+for (const struct of _structs) {
+  // take multi-fields (like in Matrix) and make them all distinct fields
+  let newfields = []
+  for (const i in struct.fields) {
+    const field = struct.fields[i]
+
     if (field.name.includes(',')) {
-      const newfields = field.name.split(',').map(n => {
+      newfields = [...newfields, ...field.name.split(',').map(n => {
         return {
           ...field,
           name: n.trim()
         }
-      })
-      delete struct.fields[i]
-      struct.fields = [...struct.fields, ...newfields]
+      })]
+    } else {
+      newfields.push(field)
     }
-  })
-  struct.fields = struct.fields.filter(f => f)
+  }
+  struct.fields = newfields
+
+  // find all arrays in structs, and give all fields a size and stripped name for later
+  for (const field of struct.fields) {
+    const n = [...field.name.matchAll(rSize)]
+    if (n.length) {
+      field.size = parseInt(n[0][1])
+      field.name = field.name.replace(rSize, '')
+    } else {
+      field.size = 1
+    }
+  }
+
+  // TODO: should I also process *-refs to seperate name & the fact it's a ref?
+}
+
+// XXX: Since array support isn't complete, just filter out all structs & functions that use them,
+// so we get an (incomplete) wrapper that will build.
+// THIS IS CURRENTLY NOT WORKING
+
+const arrayStructs = []
+const structs = _structs.filter(s => {
+  const usesArray = s.fields.find(f => f.size !== 1)
+  if (usesArray) {
+    arrayStructs.push(s.name)
+  }
+  return !usesArray
+})
+const functions = _functions.filter(f => {
+  for (const param of (f.params || [])) {
+    if (arrayStructs.includes(param.type.replace(/[* ]/g, ''))) {
+      return false
+    }
+  }
+  return true
 })
 
 // When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
@@ -35,18 +80,17 @@ const toJSClassConvert = (name, type) => {
 const toJS = struct => `
 Napi::Object ToObject(Napi::Env& env, const ${struct.name}& input) {
   Napi::Object out = Napi::Object::New(env);
-  ${struct.fields.map(({ name, type }) => toJSClassConvert(name.replace(/\[[0-9]+\]/g, ''), type)).join('\n  ')}
+  ${struct.fields.map(({ name, type }) => toJSClassConvert(name, type)).join('\n  ')}
   return out;
 }`
 
 // generate a single adapter for JS->C
 const toC = struct => {
   const fields = struct.fields.map(field => {
-    const name = field.name.replace(/\[[0-9]+\]+/g, '')
     if (field.type.endsWith('*')) {
       return `
-  if (argObject.Has("${name}")) {
-    out.${name} = (${field.type})argObject.Get("${name}").As<Napi::Number>().Int64Value();
+  if (argObject.Has("${field.name}")) {
+    out.${field.name} = (${field.type})argObject.Get("${field.name}").As<Napi::Number>().Int64Value();
   }
 `
     }
@@ -58,8 +102,8 @@ const toC = struct => {
     }
 
     return `
-  if (argObject.Has("${name}")) {
-    out.${name} = ${fname}(env, argObject.Get("${name}"));
+  if (argObject.Has("${field.name}")) {
+    out.${field.name} = ${fname}(env, argObject.Get("${field.name}"));
   }
 `
   })
@@ -85,133 +129,104 @@ const blocklist = [
 templates['node-raylib'] = () => `
 #ifndef NODE_RAYLIB_NODE_RAYLIB_H
 #define NODE_RAYLIB_NODE_RAYLIB_H
-
 #include <string>
 #include <napi.h>
-
 #include "raylib.h"
 #include "../lib/AddDefine.h"
 #include "../lib/AddFunction.h"
-
 void node_raylib_bindings_defines(Napi::Env& env, Napi::Object& exports) {
-  ${def.enums
+  ${enums
     .filter(({ name }) => !blocklist.includes(name))
     .map(({ values }) => values.map(({ name }) => `AddDefineInteger(env, exports, "${name}", ${name});`).join('\n  '))
     .join('\n  ')
   }
 }
-
 void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
-  ${def.functions
+  ${functions
     .filter(({ name }) => !blocklist.includes(name))
     .map(({ name }) => `AddFunction(env, exports, "${name}", &${name});`)
     .join('\n  ')
   }
 }
-
 void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   node_raylib_bindings_defines(env, exports);
   node_raylib_bindings_functions(env, exports);
 }
-
 #endif
 `
 
 templates.ToValue = () => `
 #ifndef NODE_RAYLIB_TOVALUE_H_
 #define NODE_RAYLIB_TOVALUE_H_
-
 #include <napi.h>
 #include "./ToObject.h"
-
 inline Napi::Value ToValue(Napi::Env& env, bool value) {
   return Napi::Boolean::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, const char* value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, const std::string& value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, char* value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, int value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, unsigned int value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, long value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, double value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, float value) {
   return Napi::Number::New(env, value);
 }
-
-${def.structs
+${structs
     .filter(({ name }) => !blocklist.includes(name))
     .map(({ name }) => `inline Napi::Value ToValue(Napi::Env& env, ${name} value) { return ToObject(env, value); }`)
     .join('\n')
 }
-
 #endif
 `
 
 templates.ToObject = () => `
 #ifndef NODE_RAYLIB_TOOBJECT_H_
 #define NODE_RAYLIB_TOOBJECT_H_
-
 #include <napi.h>
-
 void Tovoid(Napi::Env& env, Napi::Value value) {
 }
-
 float Tofloat(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().FloatValue();
 }
-
 unsigned char Tounsignedchar(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
-
 int Toint(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Int32Value();
 }
-
 unsigned int Tounsignedint(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
-
 unsigned short Tounsignedshort(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
-
 char Tochar(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
-
 bool Tobool(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Boolean>();
 }
-
-${def.structs
+${structs
     .filter(({ name }) => !blocklist.includes(name))
     .map((struct) => toJS(struct) + '\n' + toC(struct))
     .join('\n  ')
 }
-
 #endif
 `
 

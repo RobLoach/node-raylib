@@ -1,14 +1,11 @@
 
 #ifndef NODE_RAYLIB_NODE_RAYLIB_H
 #define NODE_RAYLIB_NODE_RAYLIB_H
-
 #include <string>
 #include <napi.h>
-
 #include "raylib.h"
 #include "../lib/AddDefine.h"
 #include "../lib/AddFunction.h"
-
 void node_raylib_bindings_defines(Napi::Env& env, Napi::Object& exports) {
   AddDefineInteger(env, exports, "FLAG_VSYNC_HINT", FLAG_VSYNC_HINT);
   AddDefineInteger(env, exports, "FLAG_FULLSCREEN_MODE", FLAG_FULLSCREEN_MODE);
@@ -302,7 +299,6 @@ void node_raylib_bindings_defines(Napi::Env& env, Napi::Object& exports) {
   AddDefineInteger(env, exports, "NPATCH_THREE_PATCH_VERTICAL", NPATCH_THREE_PATCH_VERTICAL);
   AddDefineInteger(env, exports, "NPATCH_THREE_PATCH_HORIZONTAL", NPATCH_THREE_PATCH_HORIZONTAL);
 }
-
 void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "InitWindow", &InitWindow);
   AddFunction(env, exports, "WindowShouldClose", &WindowShouldClose);
@@ -327,9 +323,12 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "SetWindowMonitor", &SetWindowMonitor);
   AddFunction(env, exports, "SetWindowMinSize", &SetWindowMinSize);
   AddFunction(env, exports, "SetWindowSize", &SetWindowSize);
+  AddFunction(env, exports, "SetWindowOpacity", &SetWindowOpacity);
   AddFunction(env, exports, "GetWindowHandle", &GetWindowHandle);
   AddFunction(env, exports, "GetScreenWidth", &GetScreenWidth);
   AddFunction(env, exports, "GetScreenHeight", &GetScreenHeight);
+  AddFunction(env, exports, "GetRenderWidth", &GetRenderWidth);
+  AddFunction(env, exports, "GetRenderHeight", &GetRenderHeight);
   AddFunction(env, exports, "GetMonitorCount", &GetMonitorCount);
   AddFunction(env, exports, "GetCurrentMonitor", &GetCurrentMonitor);
   AddFunction(env, exports, "GetMonitorPosition", &GetMonitorPosition);
@@ -367,10 +366,7 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "EndBlendMode", &EndBlendMode);
   AddFunction(env, exports, "BeginScissorMode", &BeginScissorMode);
   AddFunction(env, exports, "EndScissorMode", &EndScissorMode);
-  AddFunction(env, exports, "BeginVrStereoMode", &BeginVrStereoMode);
   AddFunction(env, exports, "EndVrStereoMode", &EndVrStereoMode);
-  AddFunction(env, exports, "LoadVrStereoConfig", &LoadVrStereoConfig);
-  AddFunction(env, exports, "UnloadVrStereoConfig", &UnloadVrStereoConfig);
   AddFunction(env, exports, "LoadShader", &LoadShader);
   AddFunction(env, exports, "LoadShaderFromMemory", &LoadShaderFromMemory);
   AddFunction(env, exports, "GetShaderLocation", &GetShaderLocation);
@@ -631,6 +627,7 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GenImageFontAtlas", &GenImageFontAtlas);
   AddFunction(env, exports, "UnloadFontData", &UnloadFontData);
   AddFunction(env, exports, "UnloadFont", &UnloadFont);
+  AddFunction(env, exports, "ExportFontAsCode", &ExportFontAsCode);
   AddFunction(env, exports, "DrawFPS", &DrawFPS);
   AddFunction(env, exports, "DrawText", &DrawText);
   AddFunction(env, exports, "DrawTextEx", &DrawTextEx);
@@ -698,8 +695,6 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "UploadMesh", &UploadMesh);
   AddFunction(env, exports, "UpdateMeshBuffer", &UpdateMeshBuffer);
   AddFunction(env, exports, "UnloadMesh", &UnloadMesh);
-  AddFunction(env, exports, "DrawMesh", &DrawMesh);
-  AddFunction(env, exports, "DrawMeshInstanced", &DrawMeshInstanced);
   AddFunction(env, exports, "ExportMesh", &ExportMesh);
   AddFunction(env, exports, "GetMeshBoundingBox", &GetMeshBoundingBox);
   AddFunction(env, exports, "GenMeshTangents", &GenMeshTangents);
@@ -717,8 +712,6 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GenMeshCubicmap", &GenMeshCubicmap);
   AddFunction(env, exports, "LoadMaterials", &LoadMaterials);
   AddFunction(env, exports, "LoadMaterialDefault", &LoadMaterialDefault);
-  AddFunction(env, exports, "UnloadMaterial", &UnloadMaterial);
-  AddFunction(env, exports, "SetMaterialTexture", &SetMaterialTexture);
   AddFunction(env, exports, "SetModelMeshMaterial", &SetModelMeshMaterial);
   AddFunction(env, exports, "LoadModelAnimations", &LoadModelAnimations);
   AddFunction(env, exports, "UpdateModelAnimation", &UpdateModelAnimation);
@@ -789,10 +782,8 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "SetAudioStreamPitch", &SetAudioStreamPitch);
   AddFunction(env, exports, "SetAudioStreamBufferSizeDefault", &SetAudioStreamBufferSizeDefault);
 }
-
 void node_raylib_bindings(Napi::Env& env, Napi::Object& exports) {
   node_raylib_bindings_defines(env, exports);
   node_raylib_bindings_functions(env, exports);
 }
-
 #endif

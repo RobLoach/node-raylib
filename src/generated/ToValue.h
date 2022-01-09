@@ -1,46 +1,35 @@
 
 #ifndef NODE_RAYLIB_TOVALUE_H_
 #define NODE_RAYLIB_TOVALUE_H_
-
 #include <napi.h>
 #include "./ToObject.h"
-
 inline Napi::Value ToValue(Napi::Env& env, bool value) {
   return Napi::Boolean::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, const char* value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, const std::string& value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, char* value) {
   return Napi::String::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, int value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, unsigned int value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, long value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, double value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, float value) {
   return Napi::Number::New(env, value);
 }
-
 inline Napi::Value ToValue(Napi::Env& env, Vector2 value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Vector3 value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Vector4 value) { return ToObject(env, value); }
@@ -58,9 +47,7 @@ inline Napi::Value ToValue(Napi::Env& env, Camera2D value) { return ToObject(env
 inline Napi::Value ToValue(Napi::Env& env, Mesh value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Shader value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, MaterialMap value) { return ToObject(env, value); }
-inline Napi::Value ToValue(Napi::Env& env, Material value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Transform value) { return ToObject(env, value); }
-inline Napi::Value ToValue(Napi::Env& env, BoneInfo value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Model value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, ModelAnimation value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Ray value) { return ToObject(env, value); }
@@ -70,7 +57,4 @@ inline Napi::Value ToValue(Napi::Env& env, Wave value) { return ToObject(env, va
 inline Napi::Value ToValue(Napi::Env& env, AudioStream value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Sound value) { return ToObject(env, value); }
 inline Napi::Value ToValue(Napi::Env& env, Music value) { return ToObject(env, value); }
-inline Napi::Value ToValue(Napi::Env& env, VrDeviceInfo value) { return ToObject(env, value); }
-inline Napi::Value ToValue(Napi::Env& env, VrStereoConfig value) { return ToObject(env, value); }
-
 #endif

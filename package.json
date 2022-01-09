@@ -12,7 +12,8 @@
     "compile": "cmake-js compile",
     "prepkg": "npm run build",
     "pkg": "node src/scripts/pkg.js",
-    "start": "bin/node-raylib examples/core/core_basic_window.js"
+    "start": "bin/node-raylib examples/core/core_basic_window.js",
+    "gen": "node src/scripts/generate.js"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {
@@ -59,6 +60,7 @@
     "archiver": "^5.3.0",
     "chai": "^4.3.4",
     "mocha": "^8.4.0",
+    "node-fetch": "^3.1.0",
     "pkg": "^5.2.1"
   },
   "xo": {

@@ -1,40 +1,30 @@
 
 #ifndef NODE_RAYLIB_TOOBJECT_H_
 #define NODE_RAYLIB_TOOBJECT_H_
-
 #include <napi.h>
-
 void Tovoid(Napi::Env& env, Napi::Value value) {
 }
-
 float Tofloat(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().FloatValue();
 }
-
 unsigned char Tounsignedchar(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
-
 int Toint(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Int32Value();
 }
-
 unsigned int Tounsignedint(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
-
 unsigned short Tounsignedshort(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
-
 char Tochar(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Number>().Uint32Value();
 }
-
 bool Tobool(Napi::Env& env, Napi::Value value) {
   return value.As<Napi::Boolean>();
 }
-
 
 Napi::Object ToObject(Napi::Env& env, const Vector2& input) {
   Napi::Object out = Napi::Object::New(env);
@@ -792,36 +782,6 @@ MaterialMap ToMaterialMap(Napi::Env& env, const Napi::Value& arg) {
 }
 
   
-Napi::Object ToObject(Napi::Env& env, const Material& input) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("shader", ToObject(env, input.shader));
-  out.Set("maps", (int64_t)input.maps);
-  out.Set("params", input.params);
-  return out;
-}
-
-Material ToMaterial(Napi::Env& env, const Napi::Value& arg) {
-  Napi::Object argObject(env, arg.As<Napi::Object>());
-  Material out;
-  
-  if (argObject.Has("shader")) {
-    out.shader = ToShader(env, argObject.Get("shader"));
-  }
-
-
-  if (argObject.Has("maps")) {
-    out.maps = (MaterialMap *)argObject.Get("maps").As<Napi::Number>().Int64Value();
-  }
-
-
-  if (argObject.Has("params")) {
-    out.params = Tofloat(env, argObject.Get("params"));
-  }
-
-  return out;
-}
-
-  
 Napi::Object ToObject(Napi::Env& env, const Transform& input) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("translation", ToObject(env, input.translation));
@@ -846,30 +806,6 @@ Transform ToTransform(Napi::Env& env, const Napi::Value& arg) {
 
   if (argObject.Has("scale")) {
     out.scale = ToVector3(env, argObject.Get("scale"));
-  }
-
-  return out;
-}
-
-  
-Napi::Object ToObject(Napi::Env& env, const BoneInfo& input) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("name", input.name);
-  out.Set("parent", input.parent);
-  return out;
-}
-
-BoneInfo ToBoneInfo(Napi::Env& env, const Napi::Value& arg) {
-  Napi::Object argObject(env, arg.As<Napi::Object>());
-  BoneInfo out;
-  
-  if (argObject.Has("name")) {
-    out.name = Tochar(env, argObject.Get("name"));
-  }
-
-
-  if (argObject.Has("parent")) {
-    out.parent = Toint(env, argObject.Get("parent"));
   }
 
   return out;
@@ -1204,138 +1140,5 @@ Music ToMusic(Napi::Env& env, const Napi::Value& arg) {
 
   return out;
 }
-
-  
-Napi::Object ToObject(Napi::Env& env, const VrDeviceInfo& input) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("hResolution", input.hResolution);
-  out.Set("vResolution", input.vResolution);
-  out.Set("hScreenSize", input.hScreenSize);
-  out.Set("vScreenSize", input.vScreenSize);
-  out.Set("vScreenCenter", input.vScreenCenter);
-  out.Set("eyeToScreenDistance", input.eyeToScreenDistance);
-  out.Set("lensSeparationDistance", input.lensSeparationDistance);
-  out.Set("interpupillaryDistance", input.interpupillaryDistance);
-  out.Set("lensDistortionValues", input.lensDistortionValues);
-  out.Set("chromaAbCorrection", input.chromaAbCorrection);
-  return out;
-}
-
-VrDeviceInfo ToVrDeviceInfo(Napi::Env& env, const Napi::Value& arg) {
-  Napi::Object argObject(env, arg.As<Napi::Object>());
-  VrDeviceInfo out;
-  
-  if (argObject.Has("hResolution")) {
-    out.hResolution = Toint(env, argObject.Get("hResolution"));
-  }
-
-
-  if (argObject.Has("vResolution")) {
-    out.vResolution = Toint(env, argObject.Get("vResolution"));
-  }
-
-
-  if (argObject.Has("hScreenSize")) {
-    out.hScreenSize = Tofloat(env, argObject.Get("hScreenSize"));
-  }
-
-
-  if (argObject.Has("vScreenSize")) {
-    out.vScreenSize = Tofloat(env, argObject.Get("vScreenSize"));
-  }
-
-
-  if (argObject.Has("vScreenCenter")) {
-    out.vScreenCenter = Tofloat(env, argObject.Get("vScreenCenter"));
-  }
-
-
-  if (argObject.Has("eyeToScreenDistance")) {
-    out.eyeToScreenDistance = Tofloat(env, argObject.Get("eyeToScreenDistance"));
-  }
-
-
-  if (argObject.Has("lensSeparationDistance")) {
-    out.lensSeparationDistance = Tofloat(env, argObject.Get("lensSeparationDistance"));
-  }
-
-
-  if (argObject.Has("interpupillaryDistance")) {
-    out.interpupillaryDistance = Tofloat(env, argObject.Get("interpupillaryDistance"));
-  }
-
-
-  if (argObject.Has("lensDistortionValues")) {
-    out.lensDistortionValues = Tofloat(env, argObject.Get("lensDistortionValues"));
-  }
-
-
-  if (argObject.Has("chromaAbCorrection")) {
-    out.chromaAbCorrection = Tofloat(env, argObject.Get("chromaAbCorrection"));
-  }
-
-  return out;
-}
-
-  
-Napi::Object ToObject(Napi::Env& env, const VrStereoConfig& input) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("projection", ToObject(env, input.projection));
-  out.Set("viewOffset", ToObject(env, input.viewOffset));
-  out.Set("leftLensCenter", input.leftLensCenter);
-  out.Set("rightLensCenter", input.rightLensCenter);
-  out.Set("leftScreenCenter", input.leftScreenCenter);
-  out.Set("rightScreenCenter", input.rightScreenCenter);
-  out.Set("scale", input.scale);
-  out.Set("scaleIn", input.scaleIn);
-  return out;
-}
-
-VrStereoConfig ToVrStereoConfig(Napi::Env& env, const Napi::Value& arg) {
-  Napi::Object argObject(env, arg.As<Napi::Object>());
-  VrStereoConfig out;
-  
-  if (argObject.Has("projection")) {
-    out.projection = ToMatrix(env, argObject.Get("projection"));
-  }
-
-
-  if (argObject.Has("viewOffset")) {
-    out.viewOffset = ToMatrix(env, argObject.Get("viewOffset"));
-  }
-
-
-  if (argObject.Has("leftLensCenter")) {
-    out.leftLensCenter = Tofloat(env, argObject.Get("leftLensCenter"));
-  }
-
-
-  if (argObject.Has("rightLensCenter")) {
-    out.rightLensCenter = Tofloat(env, argObject.Get("rightLensCenter"));
-  }
-
-
-  if (argObject.Has("leftScreenCenter")) {
-    out.leftScreenCenter = Tofloat(env, argObject.Get("leftScreenCenter"));
-  }
-
-
-  if (argObject.Has("rightScreenCenter")) {
-    out.rightScreenCenter = Tofloat(env, argObject.Get("rightScreenCenter"));
-  }
-
-
-  if (argObject.Has("scale")) {
-    out.scale = Tofloat(env, argObject.Get("scale"));
-  }
-
-
-  if (argObject.Has("scaleIn")) {
-    out.scaleIn = Tofloat(env, argObject.Get("scaleIn"));
-  }
-
-  return out;
-}
-
 
 #endif
