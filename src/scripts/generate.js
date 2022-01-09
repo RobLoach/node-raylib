@@ -4,17 +4,14 @@
 const defs = require('./raylib_api.json')
 
 // TODO: once array-support works, I should be able to do this:
-// const { structs, enums, functions } = defs
-const enums = defs.enums
-const _structs = defs.structs
-const _functions = defs.functions
+const { structs, enums, functions } = defs
 
 const { writeFileSync } = require('fs')
 const path = require('path')
 
 // pre-process the data for later analysis
 const rSize = /\[([0-9]+)\]/g
-for (const struct of _structs) {
+for (const struct of structs) {
   // take multi-fields (like in Matrix) and make them all distinct fields
   let newfields = []
   for (const i in struct.fields) {
@@ -47,26 +44,32 @@ for (const struct of _structs) {
   // TODO: should I also process *-refs to seperate name & the fact it's a ref?
 }
 
+// use this to keep from wrapping things
+// TODO: document why these are being blocked
+const blocklist = [
+  'TraceLog',
+  'TextFormat'
+]
+
 // XXX: Since array support isn't complete, just filter out all structs & functions that use them,
 // so we get an (incomplete) wrapper that will build.
 // THIS IS CURRENTLY NOT WORKING
 
-const arrayStructs = []
-const structs = _structs.filter(s => {
-  const usesArray = s.fields.find(f => f.size !== 1)
+for (const struct of structs) {
+  const usesArray = struct.fields.find(f => f.size !== 1)
   if (usesArray) {
-    arrayStructs.push(s.name)
+    blocklist.push(struct.name)
   }
-  return !usesArray
-})
-const functions = _functions.filter(f => {
+}
+
+// filter out all functions that have blocked types
+for (const f of functions) {
   for (const param of (f.params || [])) {
-    if (arrayStructs.includes(param.type.replace(/[* ]/g, ''))) {
-      return false
+    if (blocklist.includes(param.type.replace(/[* ]/g, ''))) {
+      blocklist.push(f.name)
     }
   }
-  return true
-})
+}
 
 // When Outputting an Napi::Object, you cannot Set() instances of structs - so they need to be converted to Napi::Objects first
 const toJSClassConvert = (name, type) => {
@@ -118,13 +121,6 @@ ${struct.name} To${struct.name}(Napi::Env& env, const Napi::Value& arg) {
 }
 
 const templates = {}
-
-// use this to keep from wrapping things
-// TODO: document why these are being blocked
-const blocklist = [
-  'TraceLog',
-  'TextFormat'
-]
 
 templates['node-raylib'] = () => `
 #ifndef NODE_RAYLIB_NODE_RAYLIB_H
