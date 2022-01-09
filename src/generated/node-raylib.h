@@ -323,12 +323,9 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "SetWindowMonitor", &SetWindowMonitor);
   AddFunction(env, exports, "SetWindowMinSize", &SetWindowMinSize);
   AddFunction(env, exports, "SetWindowSize", &SetWindowSize);
-  AddFunction(env, exports, "SetWindowOpacity", &SetWindowOpacity);
   AddFunction(env, exports, "GetWindowHandle", &GetWindowHandle);
   AddFunction(env, exports, "GetScreenWidth", &GetScreenWidth);
   AddFunction(env, exports, "GetScreenHeight", &GetScreenHeight);
-  AddFunction(env, exports, "GetRenderWidth", &GetRenderWidth);
-  AddFunction(env, exports, "GetRenderHeight", &GetRenderHeight);
   AddFunction(env, exports, "GetMonitorCount", &GetMonitorCount);
   AddFunction(env, exports, "GetCurrentMonitor", &GetCurrentMonitor);
   AddFunction(env, exports, "GetMonitorPosition", &GetMonitorPosition);
@@ -627,7 +624,6 @@ void node_raylib_bindings_functions(Napi::Env& env, Napi::Object& exports) {
   AddFunction(env, exports, "GenImageFontAtlas", &GenImageFontAtlas);
   AddFunction(env, exports, "UnloadFontData", &UnloadFontData);
   AddFunction(env, exports, "UnloadFont", &UnloadFont);
-  AddFunction(env, exports, "ExportFontAsCode", &ExportFontAsCode);
   AddFunction(env, exports, "DrawFPS", &DrawFPS);
   AddFunction(env, exports, "DrawText", &DrawText);
   AddFunction(env, exports, "DrawTextEx", &DrawTextEx);

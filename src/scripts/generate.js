@@ -13,7 +13,13 @@ const path = require('path')
 // TODO: document why these are being blocked
 const blocklist = [
   'TraceLog',
-  'TextFormat'
+  'TextFormat',
+
+  // these appear to not be defined, even though they are in JSON
+  'SetWindowOpacity',
+  'GetRenderWidth',
+  'GetRenderHeight',
+  'ExportFontAsCode'
 ]
 
 // thse are aliased types
