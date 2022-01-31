@@ -149,4 +149,11 @@ inline Napi::Value ToValue(Napi::Env& env, Music value) {
   return ToObject(env, value);
 }
 
+inline Napi::Value ToValue(Napi::Env& env, Material value) {
+  if (value.maps == NULL) {
+    return env.Null();
+  }
+  return ToObject(env, value);
+}
+
 #endif
