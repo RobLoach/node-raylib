@@ -229,9 +229,9 @@ function processTextureOutput(texture) {
 
 ## free struct example
 
-These are a bit less automatic.
-
 ### UnloadTexture
+
+We free the struct in C-space:
 
 ```cpp
 void BindUnloadTexture(const Napi::CallbackInfo& info) {
@@ -239,6 +239,8 @@ void BindUnloadTexture(const Napi::CallbackInfo& info) {
   MemFree((void*)info[0].As<Napi::Number>().Int64Value());
 }
 ```
+
+An pull out the pointer in JS-space:
 
 ```ts
 export function UnloadTexture(texture: Texture) {
