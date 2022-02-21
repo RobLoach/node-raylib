@@ -240,7 +240,7 @@ void BindUnloadTexture(const Napi::CallbackInfo& info) {
 }
 ```
 
-An pull out the pointer in JS-space:
+And pull out the pointer from the object, in JS-space:
 
 ```ts
 export function UnloadTexture(texture: Texture) {
