@@ -1,4 +1,6 @@
 
+// GENERATED CODE: DO NOT MODIFY
+
 #ifndef NODE_RAYLIB_TOVALUE_H_
 #define NODE_RAYLIB_TOVALUE_H_
 #include <napi.h>
