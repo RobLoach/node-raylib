@@ -8,39 +8,39 @@
 *
 ********************************************************************************************/
 
-const r = require('raylib')
+const r = require('../../index.js')
 
 // Initialization
-//--------------------------------------------------------------------------------------
-var screenWidth = 800
-var screenHeight = 450
+// --------------------------------------------------------------------------------------
+const screenWidth = 800
+const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window")
+r.InitWindow(screenWidth, screenHeight, 'raylib [core] example - basic window')
 
 r.SetTargetFPS(60)
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose())    // Detect window close button or ESC key
+while (!r.WindowShouldClose()) // Detect window close button or ESC key
 {
-    // Update
-    //----------------------------------------------------------------------------------
-    // TODO: Update your variables here
-    //----------------------------------------------------------------------------------
+  // Update
+  // ----------------------------------------------------------------------------------
+  // TODO: Update your variables here
+  // ----------------------------------------------------------------------------------
 
-    // Draw
-    //----------------------------------------------------------------------------------
-    r.BeginDrawing()
+  // Draw
+  // ----------------------------------------------------------------------------------
+  r.BeginDrawing()
 
-        r.ClearBackground(r.RAYWHITE)
+  r.ClearBackground(r.RAYWHITE)
 
-        r.DrawText("Congrats! You created your first window!", 190, 200, 20, r.LIGHTGRAY)
+  r.DrawText('Congrats! You created your first window!', 190, 200, 20, r.LIGHTGRAY)
 
-    r.EndDrawing()
-    //----------------------------------------------------------------------------------
+  r.EndDrawing()
+  // ----------------------------------------------------------------------------------
 }
 
 // De-Initialization
-//--------------------------------------------------------------------------------------
-r.CloseWindow()        // Close window and OpenGL context
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
+r.CloseWindow() // Close window and OpenGL context
+// --------------------------------------------------------------------------------------

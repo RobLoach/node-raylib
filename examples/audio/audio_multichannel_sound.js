@@ -11,24 +11,24 @@
 *
 ********************************************************************************************/
 
-const r = require('raylib')
+const r = require('../../index.js')
 
 // Initialization
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 const screenWidth = 800
 const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [audio] example - Multichannel sound playing")
+r.InitWindow(screenWidth, screenHeight, 'raylib [audio] example - Multichannel sound playing')
 
-r.InitAudioDevice()      // Initialize audio device
+r.InitAudioDevice() // Initialize audio device
 
-const fxWav = r.LoadSound(__dirname + "/resources/sound.wav")         // Load WAV audio file
-const fxOgg = r.LoadSound(__dirname + "/resources/tanatana.ogg")      // Load OGG audio file
+const fxWav = r.LoadSound(__dirname + '/resources/sound.wav') // Load WAV audio file
+const fxOgg = r.LoadSound(__dirname + '/resources/tanatana.ogg') // Load OGG audio file
 
 let frame = 0
 
 r.SetSoundVolume(fxWav, 0.2)
-r.PlaySound(fxOgg);
+r.PlaySound(fxOgg)
 
 let inhibitWav = false
 let inhibitOgg = false
@@ -36,60 +36,58 @@ let maxFrame = 60
 
 let soundsCounter = 0
 
-r.SetTargetFPS(60)       // Set our game to run at 60 frames-per-second
-//--------------------------------------------------------------------------------------
+r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
+// --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose())    // Detect window close button or ESC key
+while (!r.WindowShouldClose()) // Detect window close button or ESC key
 {
-    // Update
-    //----------------------------------------------------------------------------------
-    frame++
+  // Update
+  // ----------------------------------------------------------------------------------
+  frame++
 
-    if (r.IsKeyDown(r.KEY_ENTER)) inhibitWav = !inhibitWav
-    if (r.IsKeyDown(r.KEY_SPACE)) inhibitOgg = !inhibitOgg
+  if (r.IsKeyDown(r.KEY_ENTER)) inhibitWav = !inhibitWav
+  if (r.IsKeyDown(r.KEY_SPACE)) inhibitOgg = !inhibitOgg
 
-    // Deliberatly hammer the play pool to see what dropping old pool entries sounds like....
-    if ((frame%5) == 0)
-    {
-       if (!inhibitWav) r.PlaySoundMulti(fxWav)
-    }
+  // Deliberatly hammer the play pool to see what dropping old pool entries sounds like....
+  if ((frame % 5) == 0) {
+    if (!inhibitWav) r.PlaySoundMulti(fxWav)
+  }
 
-    if (frame == maxFrame)
-    {
-        if (!inhibitOgg) r.PlaySoundMulti(fxOgg)
+  if (frame == maxFrame) {
+    if (!inhibitOgg) r.PlaySoundMulti(fxOgg)
 
-        frame = 0;
-        maxFrame = r.GetRandomValue(6,12)
-    }
+    frame = 0
+    maxFrame = r.GetRandomValue(6, 12)
+  }
 
-    soundsCounter = r.GetSoundsPlaying()
-    //----------------------------------------------------------------------------------
+  soundsCounter = r.GetSoundsPlaying()
+  // ----------------------------------------------------------------------------------
 
-    // Draw
-    //----------------------------------------------------------------------------------
-    r.BeginDrawing()
+  // Draw
+  // ----------------------------------------------------------------------------------
+  r.BeginDrawing()
 
-        r.ClearBackground(r.RAYWHITE)
+  r.ClearBackground(r.RAYWHITE)
 
-        r.DrawText("Multichannel sound abuse!", 200, 180, 20, r.LIGHTGRAY)
-        r.DrawText("Space to inhibit new ogg triggering", 200, 200, 20, r.LIGHTGRAY)
-        r.DrawText("Enter to inhibit new wav triggering", 200, 220, 20, r.LIGHTGRAY)
+  r.DrawText('Multichannel sound abuse!', 200, 180, 20, r.LIGHTGRAY)
+  r.DrawText('Space to inhibit new ogg triggering', 200, 200, 20, r.LIGHTGRAY)
+  r.DrawText('Enter to inhibit new wav triggering', 200, 220, 20, r.LIGHTGRAY)
 
-        r.DrawText(r.FormatText("Number of concurrentsounds: %i", soundsCounter), 200, 280, 20, r.LIGHTGRAY)
+  r.DrawText(r.FormatText('Number of concurrentsounds: %i', soundsCounter), 200, 280, 20, r.LIGHTGRAY)
 
-    r.EndDrawing();
-    //----------------------------------------------------------------------------------
+  r.EndDrawing()
+  // ----------------------------------------------------------------------------------
 }
 
 // De-Initialization
-//--------------------------------------------------------------------------------------
-r.StopSoundMulti()       // We must stop the buffer pool before unloading
+// --------------------------------------------------------------------------------------
+r.StopSoundMulti() // We must stop the buffer pool before unloading
 
-r.UnloadSound(fxWav)     // Unload sound data
-r.UnloadSound(fxOgg)     // Unload sound data
+r.UnloadSound(fxWav) // Unload sound data
+r.UnloadSound(fxOgg) // Unload sound data
 
-r.CloseAudioDevice()     // Close audio device
+r.CloseAudioDevice() // Close audio device
 
-r.CloseWindow()          // Close window and OpenGL context
-//--------------------------------------------------------------------------------------
+r.CloseWindow() // Close window and OpenGL context
+// --------------------------------------------------------------------------------------

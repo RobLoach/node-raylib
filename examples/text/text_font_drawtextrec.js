@@ -11,24 +11,24 @@
 ********************************************************************************************/
 
 // Initialization
-//--------------------------------------------------------------------------------------
-const r = require('raylib');
-const rec = r.Rectangle(100, 100, 500, 500);
+// --------------------------------------------------------------------------------------
+const r = require('../../index.js')
 
-r.InitWindow(1024, 768, "test");
-//--------------------------------------------------------------------------------------
+const rec = r.Rectangle(100, 100, 500, 500)
+
+r.InitWindow(1024, 768, 'test')
+// --------------------------------------------------------------------------------------
 
 // Main game loop
 while (!r.WindowShouldClose()) {
-
-    // Draw
-    //----------------------------------------------------------------------------------
-    r.BeginDrawing();
-    r.ClearBackground(r.BLACK);
-    r.DrawRectangleLinesEx(rec, 1, r.RED);
-    r.DrawTextRec(r.GetFontDefault(), "hello world", rec, 10, 1, true, r.WHITE);
-    r.EndDrawing();
-    //----------------------------------------------------------------------------------
+  // Draw
+  // ----------------------------------------------------------------------------------
+  r.BeginDrawing()
+  r.ClearBackground(r.BLACK)
+  r.DrawRectangleLinesEx(rec, 1, r.RED)
+  r.DrawTextRec(r.GetFontDefault(), 'hello world', rec, 10, 1, true, r.WHITE)
+  r.EndDrawing()
+  // ----------------------------------------------------------------------------------
 }
 
-r.CloseWindow();          // Close window and OpenGL context
+r.CloseWindow() // Close window and OpenGL context
