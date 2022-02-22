@@ -7,12 +7,13 @@
   "scripts": {
     "test": "mocha",
     "posttest": "echo 'xo index.js bin/node-raylib src/scripts/pkg.js'",
-    "postinstall": "cmake-js compile",
+    "postinstall": "cmake-js build",
     "clean": "rm -rf build",
     "compile": "cmake-js compile",
-    "prepkg": "npm run compile",
+    "prepkg": "npm run build",
     "pkg": "node src/scripts/pkg.js",
-    "start": "bin/node-raylib examples/core/core_basic_window.js"
+    "start": "bin/node-raylib examples/core/core_basic_window.js",
+    "gen": "node src/scripts/generate.js"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {
@@ -48,6 +49,7 @@
   },
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
+    "2": "^3.0.0",
     "bindings": "^1.5.0",
     "cmake-js": "^6.1.0",
     "meow": "^9.0.0",
@@ -58,6 +60,7 @@
     "archiver": "^5.3.0",
     "chai": "^4.3.4",
     "mocha": "^8.4.0",
+    "node-fetch": "^3.1.0",
     "pkg": "^5.2.1"
   },
   "xo": {

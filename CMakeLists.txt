@@ -1,3 +1,5 @@
+include(FetchContent)
+
 cmake_minimum_required(VERSION 3.11)
 project (node-raylib
   VERSION 0.8.0
@@ -21,13 +23,13 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # version doesn't seem to pick correct version
-#find_package(raylib 3.5 QUIET EXACT)
+#find_package(raylib 4.0 QUIET EXACT)
 if (NOT raylib_FOUND)
   include(FetchContent)
   FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
-    GIT_TAG 3.5.0
+    GIT_TAG 4.0.0
   )
   FetchContent_GetProperties(raylib)
   if (NOT raylib_POPULATED)
@@ -37,6 +39,9 @@ if (NOT raylib_FOUND)
     add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
   endif()
 endif()
+
+set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(BUILD_GAMES    OFF CACHE BOOL "" FORCE)
 
 # Add all the include directories.
 include_directories(${PROJECT_NAME}
@@ -55,14 +60,11 @@ add_library(${PROJECT_NAME} SHARED
   src/lib/AddFunction.h
   src/lib/CleanUp.h
   src/lib/GetArgFromParam.h
-  src/lib/ToObject.h
-  src/lib/ToValue.h
   src/lib/ValidArgs.h
   src/addon.cc
-  src/node-raylib.h
   src/node-raymath.h
   src/node-rlgl.h
-  src/wrappedfunctions.h
+  src/lib/WrappedFunctions.h
 )
 
 ## Suffix the node module with .node.
