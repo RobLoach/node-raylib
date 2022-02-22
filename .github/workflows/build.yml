@@ -1,0 +1,88 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: sudo apt-get update && sudo apt-get install xorg-dev libglu1-mesa-dev
+
+    - name: Install
+      run: npm i
+
+    - name: Archive node addon
+      uses: actions/upload-artifact@v2
+      with:
+        name: raylib-4.0-linux.node
+        path: build/Release/raylib-4.0.node
+
+  build-macos:
+
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install
+      run: npm i
+      
+    - name: Archive node addon
+      uses: actions/upload-artifact@v2
+      with:
+        name: raylib-4.0-macos.node
+        path: build/Release/raylib-4.0.node
+
+  build-win:
+
+      runs-on: windows-latest
+
+      strategy:
+        matrix:
+          node-version: [12.x, 14.x, 16.x]
+          # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+      steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install
+        run: npm i
+
+      - name: Archive node addon
+        uses: actions/upload-artifact@v2
+        with:
+          name: raylib-4.0-win.node
+          path: build/Release/raylib-4.0.node
