@@ -323,7 +323,7 @@ function/structs (in api JSON) look like this:
 ]
 ```
 
-In this case, there is nop good way to pass an array of Vector2, so the JS looks like this:
+In this case, there is no good way to pass an array of Vector2, so the JS looks like this:
 
 ```ts
 export function DrawLineStrip(points: [Vector2], color: Color) {
