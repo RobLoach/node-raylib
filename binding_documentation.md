@@ -253,7 +253,7 @@ export function UnloadTexture(texture: Texture) {
 
 ### DrawLineStrip
 
-> **WRANING**: we are still working on this, and it's not the best way to do this, for sure
+> **WARNING**: we are still working on this, and it's not the best way to do this, for sure
 
 function/structs (in api JSON) look like this:
 
@@ -323,31 +323,19 @@ function/structs (in api JSON) look like this:
 ]
 ```
 
-```cpp
-void BindDrawLineStrip(const Napi::CallbackInfo& info) {
-    // TODO
-}
-```
-
-and the JS looks like this:
+In this case, there is nop good way to pass an array of Vector2, so the JS looks like this:
 
 ```ts
 export function DrawLineStrip(points: [Vector2], color: Color) {
- // TODO
-}
-
-// allocate an array with a epcific length
-function getArray(type: String, length: Number) {
-  return r[`CreateArray${type}`](length)
+ for (let i = 1; i < points.length; i++) {
+    let a = points[i-1]
+    let b = points[i]
+    r.DrawLine(a.x, a.y, b.x, b.y, ...processColorInput(color))
+  }
 }
 
 // initial process just flattens 
 function processColorInput(color) {
   return [color.r, color.g, color.b, color.a]
-}
-
-// initial process just flattens 
-function processVector2Input(vector) {
-  return [vector.y, vector.x]
 }
 ```
