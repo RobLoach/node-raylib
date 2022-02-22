@@ -332,7 +332,7 @@ void BindDrawLineStrip(const Napi::CallbackInfo& info) {
 and the JS looks like this:
 
 ```ts
-export function DrawLineStrip(points: PointList, color: Color) {
+export function DrawLineStrip(points: [Vector2], color: Color) {
  // TODO
 }
 
