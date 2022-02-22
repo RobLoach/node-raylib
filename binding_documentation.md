@@ -84,7 +84,7 @@ function/structs (in api JSON) look like this:
 so we generate a wrapper for `DrawTexture` that flattens the structs
 
 ```cpp
-void BindDrawTextureFlat(const Napi::CallbackInfo& info) {
+void BindDrawTexture(const Napi::CallbackInfo& info) {
   DrawTexture(
     (Texture2D) {
       info[0].As<Napi::Number>(),
@@ -109,7 +109,7 @@ and the JS-wrapper looks like this (flattening the structs and calling them):
 
 ```ts
 export function DrawTexture(texture: Texture, posX: Number, posY: Number, tint: Color) {
-  r.BindDrawTextureFlat(...processTextureInput(texture), posX, posY, ...processColorInput(color))
+  r.BindDrawTexture(...processTextureInput(texture), posX, posY, ...processColorInput(color))
 }
 
 // initial process just flattens 
@@ -245,5 +245,109 @@ And pull out the pointer from the object, in JS-space:
 ```ts
 export function UnloadTexture(texture: Texture) {
   r.BindUnloadTexture(texture.pointer)
+}
+```
+
+
+## array input
+
+### DrawLineStrip
+
+> **WRANING**: we are still working on this, and it's not the best way to do this, for sure
+
+function/structs (in api JSON) look like this:
+
+```json
+[
+{
+  "name": "DrawLineStrip",
+  "description": "Draw lines sequence",
+  "returnType": "void",
+  "params": [
+    {
+      "type": "Vector2 *",
+      "name": "points"
+    },
+    {
+      "type": "int",
+      "name": "pointCount"
+    },
+    {
+      "type": "Color",
+      "name": "color"
+    }
+  ]
+},
+{
+  "name": "Vector2",
+  "description": "Vector2, 2 components",
+  "fields": [
+    {
+      "type": "float",
+      "name": "x",
+      "description": "Vector x component"
+    },
+    {
+      "type": "float",
+      "name": "y",
+      "description": "Vector y component"
+    }
+  ]
+},
+{
+  "name": "Color",
+  "description": "Color, 4 components, R8G8B8A8 (32bit)",
+  "fields": [
+    {
+      "type": "unsigned char",
+      "name": "r",
+      "description": "Color red value"
+    },
+    {
+      "type": "unsigned char",
+      "name": "g",
+      "description": "Color green value"
+    },
+    {
+      "type": "unsigned char",
+      "name": "b",
+      "description": "Color blue value"
+    },
+    {
+      "type": "unsigned char",
+      "name": "a",
+      "description": "Color alpha value"
+    }
+  ]
+}
+]
+```
+
+```cpp
+void BindDrawLineStrip(const Napi::CallbackInfo& info) {
+    // TODO
+}
+```
+
+and the JS looks like this:
+
+```ts
+export function DrawLineStrip(points: PointList, color: Color) {
+ // TODO
+}
+
+// allocate an array with a epcific length
+function getArray(type: String, length: Number) {
+  return r[`CreateArray${type}`](length)
+}
+
+// initial process just flattens 
+function processColorInput(color) {
+  return [color.r, color.g, color.b, color.a]
+}
+
+// initial process just flattens 
+function processVector2Input(vector) {
+  return [vector.y, vector.x]
 }
 ```
