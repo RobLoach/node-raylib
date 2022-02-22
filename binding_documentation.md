@@ -327,10 +327,11 @@ In this case, there is no good way to pass an array of Vector2, so the JS looks 
 
 ```ts
 export function DrawLineStrip(points: [Vector2], color: Color) {
- for (let i = 1; i < points.length; i++) {
+  const colors = processColorInput(color)
+  for (let i = 1; i < points.length; i++) {
     let a = points[i-1]
     let b = points[i]
-    r.DrawLine(a.x, a.y, b.x, b.y, ...processColorInput(color))
+    r.DrawLine(a.x, a.y, b.x, b.y, ...colors)
   }
 }
 
