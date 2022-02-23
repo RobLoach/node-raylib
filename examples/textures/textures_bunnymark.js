@@ -27,7 +27,7 @@ const texBunny = r.LoadTexture(join(__dirname, '..', 'textures', 'resources', 'w
 
 while (!r.WindowShouldClose()) {
   if (r.GetFPS() > 60) {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 10; i++) {
       if (bunnies.length < MAX_BUNNIES) {
         bunnies.push(Bunny())
       }

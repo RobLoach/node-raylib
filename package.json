@@ -13,7 +13,8 @@
     "prepkg": "npm run build",
     "pkg": "node src/scripts/pkg.js",
     "start": "bin/node-raylib examples/core/core_basic_window.js",
-    "gen": "node src/scripts/generate.js"
+    "gen": "node src/scripts/generate.js",
+    "benchmark": "node examples/textures/textures_bunnymark.js"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {

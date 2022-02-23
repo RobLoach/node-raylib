@@ -8,22 +8,16 @@ This causes problems when trying to use these functions from JS. When you make a
 We can get around this by writing our function binding to _return_ the modified copy back to JS. This means we need to _change_ the return type of `BindImageDrawPixel` from `void` (which is what the raylib API specifies for it) to an `Napi::Object` that represents the now updated Image.
 
 ```cpp
-Napi::Object BindImageDrawPixel(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawPixel(const Napi::CallbackInfo& info) {
 
 	Image obj = //convert from info[0] to Image
 
 	// this function is void because it is pass-by-reference
-	ImageDrawPixel(&obj /* <- Image pointer */, ...);
+	ImageDrawPixel(obj/* <- Image reference */, ...);
 
 	// now we must reference the updated values,
 	// and build a new Napi::Object to return to the user
-	Napi::Object out = Napi::Object::New(info.Env());
-	out.Set("data", (int64_t)obj.data);
-	out.Set("width", obj.width);
-	out.Set("height", obj.height);
-	out.Set("mipmaps", obj.mipmaps);
-	out.Set("format", obj.format);
-	return out;
+	return ToValue(info.Env(), obj); // assume there is some function Napi::Value ToValue(napi_env env, Image obj) {}
 }
 ```
 Now when the user calls the bound function from JS - the function _returns_ a new `Image` object that they need to replace their existing one with. To make that easier, the NodeJS `ImageDrawPixel()` should wrap the native addon function:
