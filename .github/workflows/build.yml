@@ -30,7 +30,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Install System Dependencies
-        if: matrix.os == ubuntu
+        if: matrix.os == "ubuntu"
         run: sudo apt-get update && sudo apt-get install -y xorg-dev libglu1-mesa-dev
 
       - name: Build Node Addon
