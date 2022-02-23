@@ -150,7 +150,7 @@ describe('raylib', function() {
   describe('cli', () => {
     const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
 
-    it('should execute on a script', () => {
+    it('should execute on a script', function() {
       // TODO: fails on windows, investigate on raylib4
       if (os.platform() === 'win32'){
         this.skip()
@@ -162,7 +162,7 @@ describe('raylib', function() {
       assert.include(out.toString(), 'Test runner')
     })
 
-    it('should display the help', () => {
+    it('should display the help', function() {
       // TODO: fails on windows, investigate on raylib4
       if (os.platform() === 'win32'){
         this.skip()
