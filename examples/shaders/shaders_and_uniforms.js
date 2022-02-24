@@ -5,7 +5,7 @@
 ********************************************************************************************/
 const { readFileSync } = require('fs')
 const { resolve } = require('path')
-const r = require('../../index.js')
+const r = require('raylib')
 
 // Initialization
 // --------------------------------------------------------------------------------------

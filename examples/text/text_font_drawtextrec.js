@@ -12,7 +12,7 @@
 
 // Initialization
 // --------------------------------------------------------------------------------------
-const r = require('../../index.js')
+const r = require('raylib')
 
 const rec = r.Rectangle(100, 100, 500, 500)
 

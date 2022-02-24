@@ -9,7 +9,7 @@
 *
 ********************************************************************************************/
 
-const r = require('../../index.js')
+const r = require('raylib')
 
 // #if defined(PLATFORM_DESKTOP)
 const GLSL_VERSION = 330
