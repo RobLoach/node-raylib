@@ -12,6 +12,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
 // --------------------------------------------------------------------------------------
@@ -21,7 +22,7 @@ const screenHeight = 450
 r.InitWindow(screenWidth, screenHeight, 'raylib [textures] example - image loading')
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-const image = r.LoadImage(__dirname + '/resources/raylib_logo.png') // Loaded in CPU memory (RAM)
+const image = r.LoadImage(join(__dirname, 'resources', 'raylib_logo.png')) // Loaded in CPU memory (RAM)
 
 // TODO: Fix thrown exception
 // INFO: [/home/rob/Documents/node-raylib/examples/textures/resources/raylib_logo.png] Image loaded successfully (256x256)
@@ -34,8 +35,7 @@ r.UnloadImage(image) // Once image has been converted to texture and uploaded to
 // ---------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   // TODO: Update your variables here

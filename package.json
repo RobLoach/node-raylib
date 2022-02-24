@@ -5,16 +5,16 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "mocha",
-    "posttest": "npx standard --fix",
-    "postinstall": "cmake-js build",
-    "clean": "rm -rf build",
-    "compile": "cmake-js compile",
-    "prepkg": "npm run build",
-    "pkg": "node src/scripts/pkg.js",
     "start": "bin/node-raylib examples/core/core_basic_window.js",
-    "gen": "node src/scripts/generate.js",
-    "benchmark": "node examples/textures/textures_bunnymark.js"
+    "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
+    "test": "npx -y jest",
+    "posttest": "npx standard --fix",
+    "postinstall": "node tools/postinstall.js || npm run compile",
+    "clean": "rm -rf build",
+    "compile": "npm i --no-save node-addon-api && npx -y cmake-js compile",
+    "prepkg": "npm run build",
+    "pkg": "node tools/pkg.js",
+    "gen:code": "node tools/generate.js"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {
@@ -50,17 +50,11 @@
   },
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
-    "2": "^3.0.0",
-    "bindings": "^1.5.0",
-    "cmake-js": "^6.1.0",
-    "module-alias": "^2.2.2",
-    "node-addon-api": "^3.2.0"
+    "cross-fetch": "^3.1.5",
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "archiver": "^5.3.0",
-    "chai": "^4.3.4",
-    "mocha": "^8.4.0",
-    "node-fetch": "^3.1.0",
     "pkg": "^5.2.1"
   }
 }

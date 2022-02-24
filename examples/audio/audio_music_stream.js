@@ -10,6 +10,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
 // --------------------------------------------------------------------------------------
@@ -20,7 +21,7 @@ r.InitWindow(screenWidth, screenHeight, 'raylib [audio] example - music playing 
 
 r.InitAudioDevice() // Initialize audio device
 
-const music = r.LoadMusicStream(__dirname + '/resources/guitar_noodling.ogg')
+const music = r.LoadMusicStream(join(__dirname, 'resources', 'guitar_noodling.ogg'))
 if (!music) {
   console.error('Error loading guitar_noodling.ogg')
 }
@@ -34,8 +35,7 @@ r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 // --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   r.UpdateMusicStream(music) // Update music buffer with new stream data

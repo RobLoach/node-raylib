@@ -1,4 +1,4 @@
-const {exec} = require('pkg')
+const { exec } = require('pkg')
 const archiver = require('archiver')
 const fs = require('fs')
 const path = require('path')
@@ -28,7 +28,7 @@ pkg()
 /**
  * Build the binary with pkg.
  */
-async function pkg() {
+async function pkg () {
   await exec(['.', '--target', 'host', '--output', path.join('build', 'Release', binaryFilename)])
   await compress()
 }
@@ -36,7 +36,7 @@ async function pkg() {
 /**
  * Compress the files into the archive.
  */
-async function compress() {
+async function compress () {
   const output = fs.createWriteStream(packageName)
   const archive = archiver(compression, compressOptions)
   archive.on('error', err => {

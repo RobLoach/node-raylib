@@ -10,6 +10,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
 // --------------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ camera.up = r.Vector3(0.0, 1.0, 0.0)
 camera.fovy = 45.0
 camera.type = r.CAMERA_PERSPECTIVE
 
-const bill = r.LoadTexture(__dirname + '/resources/billboard.png') // Our texture billboard
+const bill = r.LoadTexture(join(__dirname, 'resources', 'billboard.png')) // Our texture billboard
 const billPosition = r.Vector3(0.0, 2.0, 0.0) // Position where draw billboard
 
 r.SetCameraMode(camera, r.CAMERA_ORBITAL) // Set an orbital camera mode
@@ -35,8 +36,7 @@ r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 // --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   // r.UpdateCamera(camera);              // Update camera

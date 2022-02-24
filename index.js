@@ -5,8 +5,8 @@
  */
 
 // Find the bindings.
-const raylib = require('bindings')('node-raylib')
-const {format} = require('util')
+const raylib = require('./build/Release/node-raylib.node')
+const { format } = require('util')
 
 raylib.MAX_GAMEPADS = 4
 raylib.MAX_GAMEPAD_AXIS = 8
@@ -147,54 +147,54 @@ raylib.VrDeviceInfo = function () {
  *
  * @see /src/wrappedfunctions.h
  */
-let wrapped_functions = [
+const wrappedFunctions = [
   'UpdateCamera',
   'UpdateVrTracking',
-	'ImageFormat',
-	'ImageToPOT',
-	'ImageCrop',
-	'ImageAlphaCrop',
-	'ImageAlphaClear',
-	'ImageAlphaMask',
-	'ImageAlphaPremultiply',
-	'ImageResize',
-	'ImageResizeNN',
-	'ImageResizeCanvas',
-	'ImageMipmaps',
-	'ImageDither',
-	'ImageFlipVertical',
-	'ImageFlipHorizontal',
-	'ImageRotateCW',
-	'ImageRotateCCW',
-	'ImageColorTint',
-	'ImageColorInvert',
-	'ImageColorGrayscale',
-	'ImageColorContrast',
-	'ImageColorBrightness',
-	'ImageColorReplace',
-	'ImageClearBackground',
-	'ImageDrawPixel',
-	'ImageDrawPixelV',
-	'ImageDrawLine',
-	'ImageDrawLineV',
-	'ImageDrawCircle',
-	'ImageDrawCircleV',
-	'ImageDrawRectangle',
-	'ImageDrawRectangleV',
-	'ImageDrawRectangleRec',
-	'ImageDrawRectangleLines',
-	'ImageDraw',
-	'ImageDrawText',
-	'ImageDrawTextEx',
+  'ImageFormat',
+  'ImageToPOT',
+  'ImageCrop',
+  'ImageAlphaCrop',
+  'ImageAlphaClear',
+  'ImageAlphaMask',
+  'ImageAlphaPremultiply',
+  'ImageResize',
+  'ImageResizeNN',
+  'ImageResizeCanvas',
+  'ImageMipmaps',
+  'ImageDither',
+  'ImageFlipVertical',
+  'ImageFlipHorizontal',
+  'ImageRotateCW',
+  'ImageRotateCCW',
+  'ImageColorTint',
+  'ImageColorInvert',
+  'ImageColorGrayscale',
+  'ImageColorContrast',
+  'ImageColorBrightness',
+  'ImageColorReplace',
+  'ImageClearBackground',
+  'ImageDrawPixel',
+  'ImageDrawPixelV',
+  'ImageDrawLine',
+  'ImageDrawLineV',
+  'ImageDrawCircle',
+  'ImageDrawCircleV',
+  'ImageDrawRectangle',
+  'ImageDrawRectangleV',
+  'ImageDrawRectangleRec',
+  'ImageDrawRectangleLines',
+  'ImageDraw',
+  'ImageDrawText',
+  'ImageDrawTextEx'
 ]
 // Wrapped functions return the value modified after calling the function.
 // When passed back to JS - the 'by reference' manipulation needs to occur
 // manually like so:
-for (let func of wrapped_functions) {
-  raylib[func] = function(...args) {
-    let obj = raylib[func + 'Wrap'](...args)
+for (const func of wrappedFunctions) {
+  raylib[func] = function (...args) {
+    const obj = raylib[func + 'Wrap'](...args)
     if (obj) {
-      for (let key in obj) {
+      for (const key in obj) {
         // This makes the assumption the first argument of the function is
         // the by-reference variable, which is true for the above functions so far
         if (Object.hasOwnProperty.call(args[0], key)) {

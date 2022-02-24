@@ -10,6 +10,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
 // --------------------------------------------------------------------------------------
@@ -20,15 +21,14 @@ r.InitWindow(screenWidth, screenHeight, 'raylib [audio] example - sound loading 
 
 r.InitAudioDevice() // Initialize audio device
 
-const fxWav = r.LoadSound(__dirname + '/resources/sound.wav') // Load WAV audio file
-const fxOgg = r.LoadSound(__dirname + '/resources/tanatana.ogg') // Load OGG audio file
+const fxWav = r.LoadSound(join(__dirname, 'resources', 'sound.wav')) // Load WAV audio file
+const fxOgg = r.LoadSound(join(__dirname, 'resources', 'tanatana.ogg')) // Load OGG audio file
 
 r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 // --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   if (r.IsKeyPressed(r.KEY_SPACE)) r.PlaySound(fxWav) // Play WAV sound

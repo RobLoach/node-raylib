@@ -25,8 +25,7 @@ r.SetTargetFPS(60)
 // ---------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   ballPosition = r.GetMousePosition()

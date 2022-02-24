@@ -26,14 +26,13 @@ r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 // --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   framesCounter++
 
   // Every two seconds (120 frames) a new random value is generated
-  if (((framesCounter / 120) % 2) == 1) {
+  if (((framesCounter / 120) % 2) === 1) {
     randValue = r.GetRandomValue(-8, 5)
     framesCounter = 0
   }

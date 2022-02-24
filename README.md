@@ -12,8 +12,6 @@
 ## Dependencies
 
 - [Node.js](https://nodejs.org) >= 10
-- [npm](https://www.npmjs.com)
-- [cmake](https://cmake.org)
 
 ## Usage
 
@@ -24,10 +22,15 @@
     npm init
     ```
 
-2. Add `raylib` to your [package.json dependencies](https://docs.npmjs.com/files/package.json#dependencies):
-    ``` bash
-    npm install raylib --save
-    ```
+2. Use the runtime by adding this to the `scripts` section of your package.json.
+
+```json
+{
+    "scripts": {
+        "start": "npx -y raylib"
+    }
+}
+```
 
 3. Create a `index.js` JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
     ``` javascript
@@ -49,14 +52,14 @@
 
 4. Run `index.js` through Node.js:
     ``` bash
-    node index.js
+    npm start
     ```
 
 Check for more [examples](examples) organized by raylib modules.
 
 ## CLI
 
-The project also comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly:
+The project comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly:
 
 ``` bash
 # Unix
@@ -85,6 +88,7 @@ The following are a few notes and resources when developing `node-raylib`...
 git clone https://github.com/RobLoach/node-raylib.git
 cd node-raylib
 npm i
+npm t
 ```
 
 ### TypeScript Definitions

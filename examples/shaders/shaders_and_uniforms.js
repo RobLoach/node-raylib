@@ -4,7 +4,7 @@
 *
 ********************************************************************************************/
 const { readFileSync } = require('fs')
-const { resolve } = require('path')
+const { resolve, join } = require('path')
 const r = require('raylib')
 
 // Initialization
@@ -15,37 +15,36 @@ const screenHeight = 450
 r.InitWindow(screenWidth, screenHeight, 'raylib [textures] example - texture loading and drawing')
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-const texture = r.LoadTexture(__dirname + '/resources/raylib_logo.png') // Texture loading
+const texture = r.LoadTexture(join(__dirname, 'resources', 'raylib_logo.png')) // Texture loading
 // ---------------------------------------------------------------------------------------
 
-const GLSL_Grayscaler = {
+const glGrayscaler = {
   vert: readFileSync(resolve(__dirname, 'resources', 'generic.vert.glsl'), 'utf-8'),
   frag: readFileSync(resolve(__dirname, 'resources', 'grayscaler.frag.glsl'), 'utf-8')
 }
 
-const SH_Grayscaler = r.LoadShaderCode(GLSL_Grayscaler.vert, GLSL_Grayscaler.frag)
-const ntsc_weights = r.Vector3(0.299, 0.587, 0.114)
+const shGrayscaler = r.LoadShaderCode(glGrayscaler.vert, glGrayscaler.frag)
+const ntscWeights = r.Vector3(0.299, 0.587, 0.114)
 
-if (!SH_Grayscaler) {
+if (!shGrayscaler) {
   console.error('[!] Failed to load shader!')
   process.exit(1)
 } else {
-  SH_Grayscaler.dt = r.GetShaderLocation(SH_Grayscaler, 'dt')
-  const u_weights = r.GetShaderLocation(SH_Grayscaler, 'weights')
+  shGrayscaler.dt = r.GetShaderLocation(shGrayscaler, 'dt')
+  const uWeights = r.GetShaderLocation(shGrayscaler, 'weights')
 
-  if (!SH_Grayscaler.dt || !u_weights) {
+  if (!shGrayscaler.dt || !uWeights) {
     console.error('[!] Failed to find ID for uniforms!')
     process.exit(1)
   }
 
   // this won't change during rendering
-  r.SetShaderValueVector3(SH_Grayscaler, u_weights, ntsc_weights)
+  r.SetShaderValueVector3(shGrayscaler, uWeights, ntscWeights)
 }
 
 // Main game loop
 let dt = 0.0
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   // TODO: Update your variables here
@@ -57,12 +56,12 @@ while (!r.WindowShouldClose()) // Detect window close button or ESC key
 
   // calculate a new uniform value using a basic sine wave over time
   dt += r.GetFrameTime()
-  const new_uv = (Math.sin(dt) + 1) / 2
-  r.SetShaderValueFloat(SH_Grayscaler, SH_Grayscaler.dt, new_uv)
+  const newUv = (Math.sin(dt) + 1) / 2
+  r.SetShaderValueFloat(shGrayscaler, shGrayscaler.dt, newUv)
 
   r.ClearBackground(r.RAYWHITE)
 
-  r.BeginShaderMode(SH_Grayscaler)
+  r.BeginShaderMode(shGrayscaler)
   r.DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, r.WHITE)
   r.EndShaderMode()
 
@@ -75,7 +74,7 @@ while (!r.WindowShouldClose()) // Detect window close button or ESC key
 // De-Initialization
 // --------------------------------------------------------------------------------------
 r.UnloadTexture(texture) // Texture unloading
-r.UnloadShader(SH_Grayscaler)
+r.UnloadShader(shGrayscaler)
 
 r.CloseWindow() // Close window and OpenGL context
 // --------------------------------------------------------------------------------------

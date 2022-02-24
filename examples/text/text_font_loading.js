@@ -19,6 +19,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
 // --------------------------------------------------------------------------------------
@@ -34,7 +35,7 @@ const msg = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHI\nJKLMNOPQRSTUVWXYZ[]^_`a
 // NOTE: Textures/Fonts MUST be loaded after Window initialization (OpenGL context is required)
 
 // BMFont (AngelCode) : Font data and image atlas have been generated using external program
-const fontBm = r.LoadFont(__dirname + '/resources/pixantiqua.fnt')
+const fontBm = r.LoadFont(join(__dirname, 'resources', 'pixantiqua.fnt'))
 
 // TTF font : Font data and atlas are generated directly from TTF
 // NOTE: We define a font base size of 32 pixels tall and up-to 250 characters
@@ -47,8 +48,7 @@ r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 // --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   useTtf = r.IsKeyDown(r.KEY_SPACE)

@@ -10,6 +10,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // #if defined(PLATFORM_DESKTOP)
 const GLSL_VERSION = 330
@@ -54,19 +55,19 @@ hmd.chromaAbCorrection[2] = 1.014 // HMD chromatic aberration correction paramet
 hmd.chromaAbCorrection[3] = 0.0 // HMD chromatic aberration correction parameter 3
 
 // Distortion shader (uses device lens distortion and chroma)
-const distortion = r.LoadShader(0, r.FormatText(__dirname + '/resources/distortion%i.fs', GLSL_VERSION))
+const distortion = r.LoadShader(0, r.FormatText(join(__dirname, 'resources', 'distortion%i.fs'), GLSL_VERSION))
 
 r.SetVrConfiguration(hmd, distortion) // Set Vr device parameters for stereo rendering
 
 // Define the camera to look into our 3d world
-const camera = Camera()
-camera.position = Vector3(5.0, 2.0, 5.0) // Camera position
-camera.target = Vector3(0.0, 2.0, 0.0) // Camera looking at point
-camera.up = Vector3(0.0, 1.0, 0.0) // Camera up vector (rotation towards target)
+const camera = r.Camera()
+camera.position = r.Vector3(5.0, 2.0, 5.0) // Camera position
+camera.target = r.Vector3(0.0, 2.0, 0.0) // Camera looking at point
+camera.up = r.Vector3(0.0, 1.0, 0.0) // Camera up vector (rotation towards target)
 camera.fovy = 60.0 // Camera field-of-view Y
 camera.type = r.CAMERA_PERSPECTIVE // Camera type
 
-const cubePosition = Vector3()
+const cubePosition = r.Vector3()
 
 r.SetCameraMode(camera, r.CAMERA_FIRST_PERSON) // Set first person camera mode
 
@@ -74,8 +75,7 @@ r.SetTargetFPS(90) // Set our game to run at 90 frames-per-second
 // --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   r.UpdateCamera(camera) // Update camera (simulator mode)

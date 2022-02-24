@@ -12,6 +12,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
 // --------------------------------------------------------------------------------------
@@ -22,8 +23,8 @@ r.InitWindow(screenWidth, screenHeight, 'raylib [audio] example - Multichannel s
 
 r.InitAudioDevice() // Initialize audio device
 
-const fxWav = r.LoadSound(__dirname + '/resources/sound.wav') // Load WAV audio file
-const fxOgg = r.LoadSound(__dirname + '/resources/tanatana.ogg') // Load OGG audio file
+const fxWav = r.LoadSound(join(__dirname, 'resources', 'sound.wav')) // Load WAV audio file
+const fxOgg = r.LoadSound(join(__dirname, 'resources', 'tanatana.ogg')) // Load OGG audio file
 
 let frame = 0
 
@@ -40,8 +41,7 @@ r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 // --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   frame++
@@ -50,11 +50,11 @@ while (!r.WindowShouldClose()) // Detect window close button or ESC key
   if (r.IsKeyDown(r.KEY_SPACE)) inhibitOgg = !inhibitOgg
 
   // Deliberatly hammer the play pool to see what dropping old pool entries sounds like....
-  if ((frame % 5) == 0) {
+  if ((frame % 5) === 0) {
     if (!inhibitWav) r.PlaySoundMulti(fxWav)
   }
 
-  if (frame == maxFrame) {
+  if (frame === maxFrame) {
     if (!inhibitOgg) r.PlaySoundMulti(fxOgg)
 
     frame = 0

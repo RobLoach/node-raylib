@@ -10,6 +10,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
 // --------------------------------------------------------------------------------------
@@ -19,12 +20,11 @@ const screenHeight = 450
 r.InitWindow(screenWidth, screenHeight, 'raylib [textures] example - texture loading and drawing')
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-const texture = r.LoadTexture(__dirname + '/resources/raylib_logo.png') // Texture loading
+const texture = r.LoadTexture(join(__dirname, 'resources', 'raylib_logo.png')) // Texture loading
 // ---------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   // TODO: Update your variables here
