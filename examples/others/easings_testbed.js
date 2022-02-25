@@ -8,7 +8,7 @@
 *   Example contributed by Juan Miguel López (@flashback-fx) and reviewed by Ramon Santamaria (@raysan5)
 *
 *   Copyright (c) 2019 Juan Miguel López (@flashback-fx ) and Ramon Santamaria (@raysan5)
-*   Ported to javascript 2022 by David Konsumer
+*   Ported to javascript 2022 by David Konsumer (@konsumer)
 *
 ********************************************************************************************/
 
