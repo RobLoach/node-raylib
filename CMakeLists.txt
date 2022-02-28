@@ -30,6 +30,7 @@ if (NOT raylib_FOUND)
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
     GIT_TAG 4.0.0
+    GIT_SHALLOW TRUE
   )
   FetchContent_GetProperties(raylib)
   if (NOT raylib_POPULATED)

@@ -67,6 +67,8 @@ raylib.BLANK = raylib.Color(0, 0, 0, 0) // Blank (Transparent)
 raylib.MAGENTA = raylib.Color(255, 0, 255, 255) // Magenta
 raylib.RAYWHITE = raylib.Color(245, 245, 245, 255) // My own White (raylib logo)
 
+console.log(raylib.RAYWHITE)
+
 /**
  * Create a Vector2 object.
  *

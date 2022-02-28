@@ -69,11 +69,13 @@ The project comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib
 node-raylib.exe core_basic_window.js
 ```
 
-The CLI can be installed with the [packaged releases](https://github.com/RobLoach/node-raylib/releases), or globally through `npm`:
+The CLI can be installed with the [packaged releases](https://github.com/RobLoach/node-raylib/releases), or globally through `npm` or `npx` for no-install:
 
 ``` bash
 npm install raylib --global
 node-raylib --version
+
+npx -y raylib --version
 ```
 
 ## Development
