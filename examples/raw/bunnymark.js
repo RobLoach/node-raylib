@@ -1,6 +1,6 @@
 // performance test of drawing a bunch of bunnies with current code
 
-const r = require('raylib')
+const r = require('./raylib.js')
 const { join } = require('path')
 
 const MAX_BUNNIES = 1000000

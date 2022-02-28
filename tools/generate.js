@@ -9,17 +9,79 @@ const blocklist = [
   // error: invalid conversion from ‘void (*)(int, const char*, ...)’ to ‘void (*)()’ [-fpermissive]
   'TraceLog',
   'TextFormat',
+  
+  // DataCallback types not implemented in JSON?
+  'SetTraceLogCallback',
+  'SetLoadFileDataCallback',
+  'SetSaveFileDataCallback',
+  'SetLoadFileTextCallback',
+  'SetSaveFileTextCallback',
 
   // these appear to not be defined, even though they are in JSON
   'SetWindowOpacity',
   'GetRenderWidth',
   'GetRenderHeight',
-  'ExportFontAsCode'
+  'ExportFontAsCode',
+
 ]
 
-// these are aliased types, so you the resolved-type
+// these functions expect the first argument to be passed as a reference in C++
+// so some extra wrapping needs to be done to return updated values from C++ to JS
+let by_ref_list = [
+  'UpdateCamera',
+  'ImageFormat',
+  'ImageToPOT',
+  'ImageCrop',
+  'ImageAlphaCrop',
+  'ImageAlphaClear',
+  'ImageAlphaMask',
+  'ImageAlphaPremultiply',
+  'ImageResize',
+  'ImageResizeNN',
+  'ImageResizeCanvas',
+  'ImageMipmaps',
+  'ImageDither',
+  'ImageFlipVertical',
+  'ImageFlipHorizontal',
+  'ImageRotateCW',
+  'ImageRotateCCW',
+  'ImageColorTint',
+  'ImageColorInvert',
+  'ImageColorGrayscale',
+  'ImageColorContrast',
+  'ImageColorBrightness',
+  'ImageColorReplace',
+  'ImageClearBackground',
+  'ImageDrawPixel',
+  'ImageDrawPixelV',
+  'ImageDrawLine',
+  'ImageDrawLineV',
+  'ImageDrawCircle',
+  'ImageDrawCircleV',
+  'ImageDrawRectangle',
+  'ImageDrawRectangleV',
+  'ImageDrawRectangleRec',
+  'ImageDrawRectangleLines',
+  'ImageDraw',
+  'ImageDrawText',
+  'ImageDrawTextEx',
+  'GenTextureMipmaps',
+  'GenTextureMipmaps',
+  'UploadMesh',
+  'GenMeshTangents',
+  'GenMeshBinormals',
+  'SetMaterialTexture',
+  'SetModelMeshMaterial',
+  'WaveFormat',
+  'WaveCrop'
+]
+
+// these are aliased types, so you use the resolved-type
 const typeAliases = {
-  Quaternion: 'Vector4'
+  Quaternion: 'Vector4',
+  RenderTexture2D: 'Texture',
+  Texture2D: 'Texture',
+  Camera: 'Camera3D'
 }
 
 // used to find array-size in defs
@@ -100,10 +162,7 @@ function getDefs () {
     })
 }
 
-const templates = ['node-raylib', 'ToObject', 'ToValue']
 getDefs().then(({ structs, enums, functions }) => {
-  templates.forEach(file => {
-    const tpl = require(`./generate_templates/${file}.js`)
-    writeFileSync(path.join(__dirname, '..', 'src', 'generated', `${file}.h`), tpl({ enums, blocklist, functions, structs }))
-  })
+  const template = require('./generate_templates/node-raylib.js')
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', `node-raylib.cc`), template({ enums, blocklist, functions, structs, by_ref_list }))
 })

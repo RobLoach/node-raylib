@@ -57,15 +57,16 @@ include_directories(${PROJECT_NAME}
 
 # This is hardcoded so that updates force a re-compile.
 add_library(${PROJECT_NAME} SHARED
-  src/lib/AddDefine.h
-  src/lib/AddFunction.h
-  src/lib/CleanUp.h
-  src/lib/GetArgFromParam.h
-  src/lib/ValidArgs.h
-  src/addon.cc
-  src/node-raymath.h
-  src/node-rlgl.h
-  src/lib/WrappedFunctions.h
+  # src/lib/AddDefine.h
+  # src/lib/AddFunction.h
+  # src/lib/CleanUp.h
+  # src/lib/GetArgFromParam.h
+  # src/lib/ValidArgs.h
+  # src/addon.cc
+  # src/node-raymath.h
+  # src/node-rlgl.h
+  # src/lib/WrappedFunctions.h
+  src/generated/node-raylib.cc
 )
 
 ## Suffix the node module with .node.
