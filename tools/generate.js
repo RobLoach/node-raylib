@@ -97,6 +97,12 @@ function getDefs () {
       const { structs, enums, functions } = defs
       for (const struct of structs) {
         // take multi-fields (like in Matrix) and make them all distinct fields
+
+        // temporary fix for building on Mac/Win? Wonder why this is necessary
+        if (struct.name === 'BoneInfo') {
+          struct.fields[1].type = 'char'
+        }
+
         let newfields = []
         for (const i in struct.fields) {
           const field = struct.fields[i]

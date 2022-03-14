@@ -258,7 +258,7 @@ declare module "raylib" {
     /** Bone name */
     name: string
     /** Bone parent */
-    parent: number
+    parent: string
   }
   /** Model, meshes, materials and animation data */
   export interface Model {
