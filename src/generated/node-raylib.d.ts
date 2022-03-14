@@ -900,7 +900,7 @@ declare module "raylib" {
 	export function SetCameraMode(camera: Camera3D, mode: number): void
 	
   /** Update camera position for selected mode */
-	export function UpdateCamera(camera: number): void
+	export function UpdateCamera(camera: Camera3D): void
 	
   /** Set camera pan key to combine with mouse movement (free camera) */
 	export function SetCameraPanControl(keyPan: number): void
@@ -1116,70 +1116,70 @@ declare module "raylib" {
 	export function ImageTextEx(font: Font, text: string, fontSize: number, spacing: number, tint: Color): Image
 	
   /** Convert image data to desired format */
-	export function ImageFormat(image: number, newFormat: number): void
+	export function ImageFormat(image: Image, newFormat: number): void
 	
   /** Convert image to POT (power-of-two) */
-	export function ImageToPOT(image: number, fill: Color): void
+	export function ImageToPOT(image: Image, fill: Color): void
 	
   /** Crop an image to a defined rectangle */
-	export function ImageCrop(image: number, crop: Rectangle): void
+	export function ImageCrop(image: Image, crop: Rectangle): void
 	
   /** Crop image depending on alpha value */
-	export function ImageAlphaCrop(image: number, threshold: number): void
+	export function ImageAlphaCrop(image: Image, threshold: number): void
 	
   /** Clear alpha channel to desired color */
-	export function ImageAlphaClear(image: number, color: Color, threshold: number): void
+	export function ImageAlphaClear(image: Image, color: Color, threshold: number): void
 	
   /** Apply alpha mask to image */
-	export function ImageAlphaMask(image: number, alphaMask: Image): void
+	export function ImageAlphaMask(image: Image, alphaMask: Image): void
 	
   /** Premultiply alpha channel */
-	export function ImageAlphaPremultiply(image: number): void
+	export function ImageAlphaPremultiply(image: Image): void
 	
   /** Resize image (Bicubic scaling algorithm) */
-	export function ImageResize(image: number, newWidth: number, newHeight: number): void
+	export function ImageResize(image: Image, newWidth: number, newHeight: number): void
 	
   /** Resize image (Nearest-Neighbor scaling algorithm) */
-	export function ImageResizeNN(image: number, newWidth: number, newHeight: number): void
+	export function ImageResizeNN(image: Image, newWidth: number, newHeight: number): void
 	
   /** Resize canvas and fill with color */
-	export function ImageResizeCanvas(image: number, newWidth: number, newHeight: number, offsetX: number, offsetY: number, fill: Color): void
+	export function ImageResizeCanvas(image: Image, newWidth: number, newHeight: number, offsetX: number, offsetY: number, fill: Color): void
 	
   /** Compute all mipmap levels for a provided image */
-	export function ImageMipmaps(image: number): void
+	export function ImageMipmaps(image: Image): void
 	
   /** Dither image data to 16bpp or lower (Floyd-Steinberg dithering) */
-	export function ImageDither(image: number, rBpp: number, gBpp: number, bBpp: number, aBpp: number): void
+	export function ImageDither(image: Image, rBpp: number, gBpp: number, bBpp: number, aBpp: number): void
 	
   /** Flip image vertically */
-	export function ImageFlipVertical(image: number): void
+	export function ImageFlipVertical(image: Image): void
 	
   /** Flip image horizontally */
-	export function ImageFlipHorizontal(image: number): void
+	export function ImageFlipHorizontal(image: Image): void
 	
   /** Rotate image clockwise 90deg */
-	export function ImageRotateCW(image: number): void
+	export function ImageRotateCW(image: Image): void
 	
   /** Rotate image counter-clockwise 90deg */
-	export function ImageRotateCCW(image: number): void
+	export function ImageRotateCCW(image: Image): void
 	
   /** Modify image color: tint */
-	export function ImageColorTint(image: number, color: Color): void
+	export function ImageColorTint(image: Image, color: Color): void
 	
   /** Modify image color: invert */
-	export function ImageColorInvert(image: number): void
+	export function ImageColorInvert(image: Image): void
 	
   /** Modify image color: grayscale */
-	export function ImageColorGrayscale(image: number): void
+	export function ImageColorGrayscale(image: Image): void
 	
   /** Modify image color: contrast (-100 to 100) */
-	export function ImageColorContrast(image: number, contrast: number): void
+	export function ImageColorContrast(image: Image, contrast: number): void
 	
   /** Modify image color: brightness (-255 to 255) */
-	export function ImageColorBrightness(image: number, brightness: number): void
+	export function ImageColorBrightness(image: Image, brightness: number): void
 	
   /** Modify image color: replace color */
-	export function ImageColorReplace(image: number, color: Color, replace: Color): void
+	export function ImageColorReplace(image: Image, color: Color, replace: Color): void
 	
   /** Load color data from image as a Color array (RGBA - 32bit) */
 	export function LoadImageColors(image: Image): number
@@ -1200,46 +1200,46 @@ declare module "raylib" {
 	export function GetImageColor(image: Image, x: number, y: number): Color
 	
   /** Clear image background with given color */
-	export function ImageClearBackground(dst: number, color: Color): void
+	export function ImageClearBackground(dst: Image, color: Color): void
 	
   /** Draw pixel within an image */
-	export function ImageDrawPixel(dst: number, posX: number, posY: number, color: Color): void
+	export function ImageDrawPixel(dst: Image, posX: number, posY: number, color: Color): void
 	
   /** Draw pixel within an image (Vector version) */
-	export function ImageDrawPixelV(dst: number, position: Vector2, color: Color): void
+	export function ImageDrawPixelV(dst: Image, position: Vector2, color: Color): void
 	
   /** Draw line within an image */
-	export function ImageDrawLine(dst: number, startPosX: number, startPosY: number, endPosX: number, endPosY: number, color: Color): void
+	export function ImageDrawLine(dst: Image, startPosX: number, startPosY: number, endPosX: number, endPosY: number, color: Color): void
 	
   /** Draw line within an image (Vector version) */
-	export function ImageDrawLineV(dst: number, start: Vector2, end: Vector2, color: Color): void
+	export function ImageDrawLineV(dst: Image, start: Vector2, end: Vector2, color: Color): void
 	
   /** Draw circle within an image */
-	export function ImageDrawCircle(dst: number, centerX: number, centerY: number, radius: number, color: Color): void
+	export function ImageDrawCircle(dst: Image, centerX: number, centerY: number, radius: number, color: Color): void
 	
   /** Draw circle within an image (Vector version) */
-	export function ImageDrawCircleV(dst: number, center: Vector2, radius: number, color: Color): void
+	export function ImageDrawCircleV(dst: Image, center: Vector2, radius: number, color: Color): void
 	
   /** Draw rectangle within an image */
-	export function ImageDrawRectangle(dst: number, posX: number, posY: number, width: number, height: number, color: Color): void
+	export function ImageDrawRectangle(dst: Image, posX: number, posY: number, width: number, height: number, color: Color): void
 	
   /** Draw rectangle within an image (Vector version) */
-	export function ImageDrawRectangleV(dst: number, position: Vector2, size: Vector2, color: Color): void
+	export function ImageDrawRectangleV(dst: Image, position: Vector2, size: Vector2, color: Color): void
 	
   /** Draw rectangle within an image */
-	export function ImageDrawRectangleRec(dst: number, rec: Rectangle, color: Color): void
+	export function ImageDrawRectangleRec(dst: Image, rec: Rectangle, color: Color): void
 	
   /** Draw rectangle lines within an image */
-	export function ImageDrawRectangleLines(dst: number, rec: Rectangle, thick: number, color: Color): void
+	export function ImageDrawRectangleLines(dst: Image, rec: Rectangle, thick: number, color: Color): void
 	
   /** Draw a source image within a destination image (tint applied to source) */
-	export function ImageDraw(dst: number, src: Image, srcRec: Rectangle, dstRec: Rectangle, tint: Color): void
+	export function ImageDraw(dst: Image, src: Image, srcRec: Rectangle, dstRec: Rectangle, tint: Color): void
 	
   /** Draw text (using default font) within an image (destination) */
-	export function ImageDrawText(dst: number, text: string, posX: number, posY: number, fontSize: number, color: Color): void
+	export function ImageDrawText(dst: Image, text: string, posX: number, posY: number, fontSize: number, color: Color): void
 	
   /** Draw text (custom sprite font) within an image (destination) */
-	export function ImageDrawTextEx(dst: number, font: Font, text: string, position: Vector2, fontSize: number, spacing: number, tint: Color): void
+	export function ImageDrawTextEx(dst: Image, font: Font, text: string, position: Vector2, fontSize: number, spacing: number, tint: Color): void
 	
   /** Load texture from file into GPU memory (VRAM) */
 	export function LoadTexture(fileName: string): Texture2D
@@ -1266,7 +1266,7 @@ declare module "raylib" {
 	export function UpdateTextureRec(texture: Texture, rec: Rectangle, pixels: number): void
 	
   /** Generate GPU mipmaps for a texture */
-	export function GenTextureMipmaps(texture: number): void
+	export function GenTextureMipmaps(texture: Texture): void
 	
   /** Set texture scaling filter mode */
 	export function SetTextureFilter(texture: Texture, filter: number): void
@@ -1557,7 +1557,7 @@ declare module "raylib" {
 	export function DrawBillboardPro(camera: Camera3D, texture: Texture, source: Rectangle, position: Vector3, up: Vector3, size: Vector2, origin: Vector2, rotation: number, tint: Color): void
 	
   /** Upload mesh vertex data in GPU and provide VAO/VBO ids */
-	export function UploadMesh(mesh: number, dynamic: boolean): void
+	export function UploadMesh(mesh: Mesh, dynamic: boolean): void
 	
   /** Update mesh vertex data in GPU for a specific buffer index */
 	export function UpdateMeshBuffer(mesh: Mesh, index: number, data: number, dataSize: number, offset: number): void
@@ -1572,10 +1572,10 @@ declare module "raylib" {
 	export function GetMeshBoundingBox(mesh: Mesh): BoundingBox
 	
   /** Compute mesh tangents */
-	export function GenMeshTangents(mesh: number): void
+	export function GenMeshTangents(mesh: Mesh): void
 	
   /** Compute mesh binormals */
-	export function GenMeshBinormals(mesh: number): void
+	export function GenMeshBinormals(mesh: Mesh): void
 	
   /** Generate polygonal mesh */
 	export function GenMeshPoly(sides: number, radius: number): Mesh
@@ -1611,7 +1611,7 @@ declare module "raylib" {
 	export function GenMeshCubicmap(cubicmap: Image, cubeSize: Vector3): Mesh
 	
   /** Set material for a mesh */
-	export function SetModelMeshMaterial(model: number, meshId: number, materialId: number): void
+	export function SetModelMeshMaterial(model: Model, meshId: number, materialId: number): void
 	
   /** Load model animations from file */
 	export function LoadModelAnimations(fileName: string, animCount: number): number
@@ -1725,13 +1725,13 @@ declare module "raylib" {
 	export function SetSoundPitch(sound: Sound, pitch: number): void
 	
   /** Convert wave data to desired format */
-	export function WaveFormat(wave: number, sampleRate: number, sampleSize: number, channels: number): void
+	export function WaveFormat(wave: Wave, sampleRate: number, sampleSize: number, channels: number): void
 	
   /** Copy a wave to a new wave */
 	export function WaveCopy(wave: Wave): Wave
 	
   /** Crop a wave to defined samples range */
-	export function WaveCrop(wave: number, initSample: number, finalSample: number): void
+	export function WaveCrop(wave: Wave, initSample: number, finalSample: number): void
 	
   /** Load samples data from wave as a floats array */
 	export function LoadWaveSamples(wave: Wave): number

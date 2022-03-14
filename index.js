@@ -26,7 +26,7 @@ raylib.Color = function (red, green, blue, alpha = 255) {
 }
 
 raylib.Vector2 = function (x, y) {
-  return {x, y}
+  return { x, y }
 }
 
 raylib.Easings = easings

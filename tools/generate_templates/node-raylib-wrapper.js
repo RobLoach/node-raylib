@@ -1,51 +1,66 @@
 const FlattenArgument = (structs, param) => {
-	if (param.type == 'Camera') {param.type = 'Camera3D'}
-	if (param.type == 'Texture2D') {param.type = 'Texture'}
-	let out = ''
-	let isStruct = false
-	for (const struct of structs) {
-		if (struct.name == param.type) {
-			isStruct = true
-			for (const field of struct.fields) {
-				out += FlattenArgument(structs, {type: field.type, name: param.name + '.' + field.name}) + ',\n    '
-			}
-			out = out.slice(0, out.length - 6) // remove final comma
-		}
-	}
+  if (param.type == 'Camera') { param.type = 'Camera3D' }
+  if (param.type == 'Texture2D') { param.type = 'Texture' }
+  let out = ''
+  let isStruct = false
+  for (const struct of structs) {
+    if (struct.name == param.type) {
+      isStruct = true
+      for (const field of struct.fields) {
+        out += FlattenArgument(structs, { type: field.type, name: param.name + '.' + field.name }) + ',\n    '
+      }
+      out = out.slice(0, out.length - 6) // remove final comma
+    }
+  }
 
-	if (!isStruct) {
-		out += param.name
-	}
-	return out
+  if (!isStruct) {
+    out += param.name
+  }
+  return out
 }
 
 const WrapFunction = (structs, func) => {
-	return `
+  return `
 /** ${func.description} */
-raylib.${func.name} = function(${!func.params? '' : func.params.map(param => param.name).join(', ')}) {
+raylib.${func.name} = function(${!func.params ? '' : func.params.map(param => param.name).join(', ')}) {
 	return r.Bind${func.name}(${
-		!func.params? '' : '\n    ' +
+		!func.params
+? ''
+: '\n    ' +
 			func.params
-			.map(param => {return FlattenArgument(structs, param)})
+			.map(param => { return FlattenArgument(structs, param) })
 			.join(',\n    ') + '\n  '
 	})
 }`
 }
 
 const WrapByRefFunction = (structs, func) => {
-	return `
+  // copy params array to make edits nondestructively
+  const params = []
+  for (const param of func.params) {
+    params.push(param)
+  }
+  // no longer a pointer function - instead pass a copy - C++ creates the pointer at execution time
+  if (params[0]) {
+    params[0].type = params[0].type.replace('*', '')
+    params[0].type = params[0].type.replace(' ', '')
+  }
+
+  return `
 /** ${func.description} */
-raylib.${func.name} = function(${!func.params? '' : func.params.map(param => param.name).join(', ')}) {
+raylib.${func.name} = function(${!params ? '' : params.map(param => param.name).join(', ')}) {
 	let obj = r.Bind${func.name}(${
-		!func.params? '' : '\n    ' +
-			func.params
-			.map(param => {return FlattenArgument(structs, param)})
+		!params
+? ''
+: '\n    ' +
+		params
+			.map(param => { return FlattenArgument(structs, param) })
 			.join(',\n    ') + '\n  '
 	})
 	if (obj) {
 		for (let key in obj) {
-			if (Object.hasOwnProperty.call(${func.params[0].name}, key)) {
-				${func.params[0].name}[key] = obj[key]
+			if (Object.hasOwnProperty.call(${params[0].name}, key)) {
+				${params[0].name}[key] = obj[key]
 			}
 		}
 	}
@@ -53,7 +68,7 @@ raylib.${func.name} = function(${!func.params? '' : func.params.map(param => par
 }
 
 module.exports = ({ functions, structs, enums, blocklist, by_ref_list }) => {
-	return `// GENERATED CODE: DO NOT MODIFY
+  return `// GENERATED CODE: DO NOT MODIFY
 const r = require('../../build/Release/node-raylib.node')
 
 const raylib = {}
@@ -72,7 +87,7 @@ ${functions
 }
 
 ${enums
-	.map((e) => { return e.values.map(v => `/** ${v.description} */\nraylib.${v.name} = ${v.value}`).join('\n')})
+	.map((e) => { return e.values.map(v => `/** ${v.description} */\nraylib.${v.name} = ${v.value}`).join('\n') })
 	.join('\n')
 }
 

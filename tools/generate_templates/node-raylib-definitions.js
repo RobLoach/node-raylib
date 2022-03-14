@@ -1,38 +1,38 @@
-function ArgumentTypeConversion(arg) {
+function ArgumentTypeConversion (arg) {
+  if (arg === 'const unsigned char *') { return 'Buffer' }
+  if (arg === 'unsigned char *') { return 'Buffer' }
 
-	if (arg === 'const unsigned char *') {return 'Buffer'}
-	if (arg === 'unsigned char *') {return 'Buffer'}
+  if (arg === 'char') { return 'string' }
+  if (arg === 'char *') { return 'string' }
+  if (arg === 'const char *') { return 'string' }
 
-	if (arg === 'char') {return 'string'}
-	if (arg === 'char *') {return 'string'}
-	if (arg === 'const char *') {return 'string'}
+  if (arg === 'int') { return 'number' }
+  if (arg === 'float') { return 'number' }
+  if (arg === 'unsigned int') { return 'number' }
+  if (arg === 'unsigned char') { return 'number' }
+  if (arg === 'long') { return 'number' }
+  if (arg === 'double') { return 'number' }
 
-	if (arg === 'int') {return 'number'}
-	if (arg === 'float') {return 'number'}
-	if (arg === 'unsigned int') {return 'number'}
-	if (arg === 'unsigned char') {return 'number'}
-	if (arg === 'long') {return 'number'}
-	if (arg === 'double') {return 'number'}
+  if (arg === 'bool') { return 'boolean' }
 
-	if (arg === 'bool') {return 'boolean'}
+  // Camera2D arguments are already in JSON
+  if (arg === 'Camera') { return 'Camera3D' }
 
-	// Camera2D arguments are already in JSON 
-	if (arg === 'Camera') {return 'Camera3D'}
+  // pointers
+  arg = arg.replace('const ', '')
+  if (arg.includes('*')) {
+    return 'number'
+  }
 
-	// pointers
-	arg = arg.replace('const ', '')
-	if (arg.includes('*')) {
-		return 'number'
-	}
-
-	return arg
+  return arg
 }
 
 const FunctionDefinition = (func) => {
-	return `/** ${func.description} */
+  return `/** ${func.description} */
 	export function ${func.name}(${
-		!func.params? '' :
-			func.params
+		!func.params
+? ''
+			: func.params
 				.map(param => `${param.name}: ${ArgumentTypeConversion(param.type)}`)
 				.join(', ')
 	}): ${ArgumentTypeConversion(func.returnType)}
@@ -40,7 +40,7 @@ const FunctionDefinition = (func) => {
 }
 
 const StructInterface = (struct) => {
-	return `/** ${struct.description} */
+  return `/** ${struct.description} */
   export interface ${struct.name} {
 		${struct.fields
 		.map(field => `/** ${field.description} */\n    ${field.name}: ${ArgumentTypeConversion(field.type)}`)
@@ -50,7 +50,7 @@ const StructInterface = (struct) => {
 }
 
 module.exports = ({ functions, structs, enums, blocklist, by_ref_list }) => {
-	return `// GENERATED CODE: DO NOT MODIFY
+  return `// GENERATED CODE: DO NOT MODIFY
 declare module "raylib" {
 	${structs
 		.map(StructInterface)
@@ -64,7 +64,7 @@ declare module "raylib" {
 	}
 
 	${enums
-		.map((e) => { return e.values.map(v => `  /** ${v.description} */\n  export const ${v.name} = ${v.value}`).join('\n')})
+		.map((e) => { return e.values.map(v => `  /** ${v.description} */\n  export const ${v.name} = ${v.value}`).join('\n') })
 		.join('\n')
 	}
 

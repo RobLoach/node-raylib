@@ -193,6 +193,9 @@ inline Napi::Value ToValue(Napi::Env env, double value) {
 inline Napi::Value ToValue(Napi::Env env, float value) {
   return Napi::Number::New(env, value);
 }
+inline Napi::Value ToValue(Napi::Env env, void * value) {
+  return Napi::Number::New(env, (int64_t) value);
+}
 
 inline float floatFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>();
@@ -200,8 +203,8 @@ inline float floatFromValue(const Napi::CallbackInfo& info, int index) {
 inline int intFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>();
 }
-inline void * pointerFromValue(const Napi::CallbackInfo& info, int index) {
-  return (void *) info[index].As<Napi::Number>().Int64Value();
+uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
 }
 inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
