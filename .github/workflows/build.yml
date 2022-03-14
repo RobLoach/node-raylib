@@ -34,10 +34,13 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y xorg-dev libglu1-mesa-dev
 
       - name: Build Node Addon
-        run: npm run compile
+        run: npm run ci:compile
 
       - name: Test
-        run: npm test
+        run: npm ci:test
+
+      - name: Format
+        run: npm ci:format
 
       - name: Archive Node Addon
         uses: actions/upload-artifact@v2

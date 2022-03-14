@@ -7,14 +7,17 @@
   "scripts": {
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
-    "test": "npm i --no-save jest && jest",
-    "posttest": "npm i --no-save standard && standard --fix",
+    "test": "npx -y jest",
+    "posttest": "npx -y standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
-    "compile": "npm i --no-save node-addon-api cmake-js && cmake-js compile",
+    "compile": "npm i --no-save node-addon-api && npx -y cmake-js compile",
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
-    "gen:code": "node tools/generate.js"
+    "gen:code": "node tools/generate.js",
+    "ci:compile": "npm i --no-save node-addon-api cmake-js && cmake-js compile",
+    "ci:test": "npm i --no-save jest && jest",
+    "ci:format": "npm i --no-save standard && standard --fix"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {
