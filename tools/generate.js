@@ -9,7 +9,7 @@ const blocklist = [
   // error: invalid conversion from ‘void (*)(int, const char*, ...)’ to ‘void (*)()’ [-fpermissive]
   'TraceLog',
   'TextFormat',
-  
+
   // DataCallback types not implemented in JSON?
   'SetTraceLogCallback',
   'SetLoadFileDataCallback',
@@ -21,13 +21,13 @@ const blocklist = [
   'SetWindowOpacity',
   'GetRenderWidth',
   'GetRenderHeight',
-  'ExportFontAsCode',
+  'ExportFontAsCode'
 
 ]
 
 // these functions expect the first argument to be passed as a reference in C++
 // so some extra wrapping needs to be done to return updated values from C++ to JS
-let by_ref_list = [
+const by_ref_list = [
   'UpdateCamera',
   'ImageFormat',
   'ImageToPOT',
@@ -91,7 +91,7 @@ const rSize = /\[([0-9]+)\]/g
 function getDefs () {
   console.log('Downloading definitions')
 
-  return fetch('https://raw.githubusercontent.com/raysan5/raylib/master/parser/raylib_api.json')
+  return fetch('https://raw.githubusercontent.com/raysan5/raylib/2e3cfdcc2f5c70e82536caa57d4aa72e3f00fd40/parser/raylib_api.json')
     .then(r => r.json())
     .then(defs => {
       const { structs, enums, functions } = defs
@@ -107,7 +107,7 @@ function getDefs () {
                 ...field,
                 name: n.trim()
               }
-            })]
+            })].sort((a, b) => a.name.match(/\d+/)[0] - b.name.match(/\d+/)[0])
           } else {
             newfields.push(field)
           }
@@ -163,6 +163,10 @@ function getDefs () {
 }
 
 getDefs().then(({ structs, enums, functions }) => {
-  const template = require('./generate_templates/node-raylib.js')
-  writeFileSync(path.join(__dirname, '..', 'src', 'generated', `node-raylib.cc`), template({ enums, blocklist, functions, structs, by_ref_list }))
+  const GenBindings = require('./generate_templates/node-raylib-bindings.js')
+  const GenWrapper = require('./generate_templates/node-raylib-wrapper.js')
+  const GenTSDefs = require('./generate_templates/node-raylib-definitions.js')
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.cc'), GenBindings({ enums, blocklist, functions, structs, by_ref_list }))
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.js'), GenWrapper({ enums, blocklist, functions, structs, by_ref_list }))
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.d.ts'), GenTSDefs({ enums, blocklist, functions, structs, by_ref_list }))
 })

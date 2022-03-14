@@ -129,7 +129,7 @@ while (!r.WindowShouldClose()) {
       if (writeLength > readLength) writeLength = readLength
 
       // Write the slice
-      memcpy(writeBuf, writeCursor, data, readCursor, writeLength);
+      memcpy(writeBuf, writeCursor, data, readCursor, writeLength)
 
       // Update cursors and loop audio
       readCursor = (readCursor + writeLength) % waveLength
