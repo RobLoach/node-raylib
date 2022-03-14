@@ -22,7 +22,7 @@ const FlattenArgument = (structs, param) => {
 const WrapFunction = (structs, func) => {
   return `
 /** ${func.description} */
-raylib.${func.name} = function(${!func.params ? '' : func.params.map(param => param.name).join(', ')}) {
+raylib.${func.name} = function (${!func.params ? '' : func.params.map(param => param.name).join(', ')}) {
   return r.Bind${func.name}(${
     !func.params
 ? ''
@@ -48,8 +48,8 @@ const WrapByRefFunction = (structs, func) => {
 
   return `
 /** ${func.description} */
-raylib.${func.name} = function(${!params ? '' : params.map(param => param.name).join(', ')}) {
-  let obj = r.Bind${func.name}(${
+raylib.${func.name} = function (${!params ? '' : params.map(param => param.name).join(', ')}) {
+  const obj = r.Bind${func.name}(${
     !params
 ? ''
 : '\n    ' +
@@ -58,7 +58,7 @@ raylib.${func.name} = function(${!params ? '' : params.map(param => param.name).
       .join(',\n    ') + '\n  '
   })
   if (obj) {
-    for (let key in obj) {
+    for (const key in obj) {
       if (Object.hasOwnProperty.call(${params[0].name}, key)) {
         ${params[0].name}[key] = obj[key]
       }
