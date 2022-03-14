@@ -7,8 +7,8 @@
   "scripts": {
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
-    "test": "npx -y jest",
-    "posttest": "npx standard --fix",
+    "test": "npm i --no-save jest && jest",
+    "posttest": "npm i --no-save standard && standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
     "compile": "npm i --no-save node-addon-api cmake-js && cmake-js compile",
