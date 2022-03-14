@@ -1,10 +1,10 @@
 const FlattenArgument = (structs, param) => {
-  if (param.type == 'Camera') { param.type = 'Camera3D' }
-  if (param.type == 'Texture2D') { param.type = 'Texture' }
+  if (param.type === 'Camera') { param.type = 'Camera3D' }
+  if (param.type === 'Texture2D') { param.type = 'Texture' }
   let out = ''
   let isStruct = false
   for (const struct of structs) {
-    if (struct.name == param.type) {
+    if (struct.name === param.type) {
       isStruct = true
       for (const field of struct.fields) {
         out += FlattenArgument(structs, { type: field.type, name: param.name + '.' + field.name }) + ',\n    '
@@ -23,14 +23,14 @@ const WrapFunction = (structs, func) => {
   return `
 /** ${func.description} */
 raylib.${func.name} = function(${!func.params ? '' : func.params.map(param => param.name).join(', ')}) {
-	return r.Bind${func.name}(${
-		!func.params
+  return r.Bind${func.name}(${
+    !func.params
 ? ''
 : '\n    ' +
-			func.params
-			.map(param => { return FlattenArgument(structs, param) })
-			.join(',\n    ') + '\n  '
-	})
+      func.params
+      .map(param => { return FlattenArgument(structs, param) })
+      .join(',\n    ') + '\n  '
+  })
 }`
 }
 
@@ -49,46 +49,46 @@ const WrapByRefFunction = (structs, func) => {
   return `
 /** ${func.description} */
 raylib.${func.name} = function(${!params ? '' : params.map(param => param.name).join(', ')}) {
-	let obj = r.Bind${func.name}(${
-		!params
+  let obj = r.Bind${func.name}(${
+    !params
 ? ''
 : '\n    ' +
-		params
-			.map(param => { return FlattenArgument(structs, param) })
-			.join(',\n    ') + '\n  '
-	})
-	if (obj) {
-		for (let key in obj) {
-			if (Object.hasOwnProperty.call(${params[0].name}, key)) {
-				${params[0].name}[key] = obj[key]
-			}
-		}
-	}
+    params
+      .map(param => { return FlattenArgument(structs, param) })
+      .join(',\n    ') + '\n  '
+  })
+  if (obj) {
+    for (let key in obj) {
+      if (Object.hasOwnProperty.call(${params[0].name}, key)) {
+        ${params[0].name}[key] = obj[key]
+      }
+    }
+  }
 }`
 }
 
-module.exports = ({ functions, structs, enums, blocklist, by_ref_list }) => {
+module.exports = ({ functions, structs, enums, blocklist, byreflist }) => {
   return `// GENERATED CODE: DO NOT MODIFY
 const r = require('../../build/Release/node-raylib.node')
 
 const raylib = {}
 ${functions
-	.filter(({ name }) => !blocklist.includes(name))
-	.filter(({ name }) => !by_ref_list.includes(name))
-	.map((func) => { return WrapFunction(structs, func) })
-	.join('\n')
+  .filter(({ name }) => !blocklist.includes(name))
+  .filter(({ name }) => !byreflist.includes(name))
+  .map((func) => { return WrapFunction(structs, func) })
+  .join('\n')
 }
 
 ${functions
-	.filter(({ name }) => !blocklist.includes(name))
-	.filter(({ name }) => by_ref_list.includes(name))
-	.map((func) => { return WrapByRefFunction(structs, func) })
-	.join('\n')
+  .filter(({ name }) => !blocklist.includes(name))
+  .filter(({ name }) => byreflist.includes(name))
+  .map((func) => { return WrapByRefFunction(structs, func) })
+  .join('\n')
 }
 
 ${enums
-	.map((e) => { return e.values.map(v => `/** ${v.description} */\nraylib.${v.name} = ${v.value}`).join('\n') })
-	.join('\n')
+  .map((e) => { return e.values.map(v => `/** ${v.description} */\nraylib.${v.name} = ${v.value}`).join('\n') })
+  .join('\n')
 }
 
 raylib.LIGHTGRAY = { r: 200, g: 200, b: 200, a: 255 }

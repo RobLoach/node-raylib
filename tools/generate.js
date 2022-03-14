@@ -27,7 +27,7 @@ const blocklist = [
 
 // these functions expect the first argument to be passed as a reference in C++
 // so some extra wrapping needs to be done to return updated values from C++ to JS
-const by_ref_list = [
+const byreflist = [
   'UpdateCamera',
   'ImageFormat',
   'ImageToPOT',
@@ -166,7 +166,7 @@ getDefs().then(({ structs, enums, functions }) => {
   const GenBindings = require('./generate_templates/node-raylib-bindings.js')
   const GenWrapper = require('./generate_templates/node-raylib-wrapper.js')
   const GenTSDefs = require('./generate_templates/node-raylib-definitions.js')
-  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.cc'), GenBindings({ enums, blocklist, functions, structs, by_ref_list }))
-  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.js'), GenWrapper({ enums, blocklist, functions, structs, by_ref_list }))
-  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.d.ts'), GenTSDefs({ enums, blocklist, functions, structs, by_ref_list }))
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.cc'), GenBindings({ enums, blocklist, functions, structs, byreflist }))
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.js'), GenWrapper({ enums, blocklist, functions, structs, byreflist }))
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.d.ts'), GenTSDefs({ enums, blocklist, functions, structs, byreflist }))
 })
