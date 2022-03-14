@@ -4917,7 +4917,6 @@ raylib.SetAudioStreamBufferSizeDefault = function (size) {
   )
 }
 
-
 /** Update camera position for selected mode */
 raylib.UpdateCamera = function (camera) {
   const obj = r.BindUpdateCamera(

@@ -78,7 +78,6 @@ ${functions
   .map((func) => { return WrapFunction(structs, func) })
   .join('\n')
 }
-
 ${functions
   .filter(({ name }) => !blocklist.includes(name))
   .filter(({ name }) => byreflist.includes(name))
