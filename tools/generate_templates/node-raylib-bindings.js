@@ -75,7 +75,7 @@ const UnwrappedFuncArguments = (structs, func) => {
  */
 const FromValue = (structs, struct) => `
 inline ${struct.name} ${SanitizeTypeName(struct.name)}FromValue(const Napi::CallbackInfo& info, int index) {
-  return (${struct.name}) {
+  return {
     ${UnwrappedStructProperties(structs, struct)}
   };
 }`
