@@ -37,10 +37,10 @@ jobs:
         run: npm run ci:compile
 
       - name: Test
-        run: npm ci:test
+        run: npm run ci:test
 
       - name: Format
-        run: npm ci:format
+        run: npm run ci:format
 
       - name: Archive Node Addon
         uses: actions/upload-artifact@v2
