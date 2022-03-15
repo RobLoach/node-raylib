@@ -3,21 +3,18 @@
   "version": "0.8.1",
   "description": "Node.js bindings for raylib.",
   "main": "index.js",
-  "types": "./src/generated/node-raylib.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
-    "test": "npx -y jest",
-    "posttest": "npx -y standard --fix",
+    "test": "npx jest",
+    "posttest": "npx standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
-    "compile": "npm i --no-save node-addon-api && npx -y cmake-js compile",
+    "compile": "npm i --no-save node-addon-api && npx cmake-js compile",
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
-    "gen:code": "node tools/generate.js",
-    "ci:compile": "npm i --no-save node-addon-api cmake-js && cmake-js compile",
-    "ci:test": "npm i --no-save jest && jest",
-    "ci:format": "npm i --no-save standard && standard --fix"
+    "gen:code": "node tools/generate.js"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {
