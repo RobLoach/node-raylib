@@ -28,12 +28,6 @@ describe('raylib', () => {
     })
   })
 
-  describe.skip('TraceLog', () => {
-    it('TraceLog(r.LOG_INFO)', () => {
-      r.TraceLog(r.LOG_INFO, 'Hello, %s', 'Ray')
-    })
-  })
-
   describe('file', () => {
     it('FileExists()', () => {
       expect(r.FileExists(path.join(__dirname, '..', 'package.json'))).toBeTruthy()
@@ -42,15 +36,6 @@ describe('raylib', () => {
     it('IsFileExtension()', () => {
       expect(r.IsFileExtension('something.txt', '.txt')).toBeTruthy()
       expect(r.IsFileExtension('something.txt', '.md')).toBeFalsy()
-    })
-  })
-
-  describe.skip('rlgl', () => {
-    it('LoadText()', () => {
-      const filename = path.join(__dirname, '..', 'package.json')
-      const output = r.LoadText(filename)
-      expect(output).toBeDefined()
-      expect(output).toContain('"raylib"')
     })
   })
 
@@ -76,7 +61,7 @@ describe('raylib', () => {
     })
   })
 
-  describe.skip('camera', () => {
+  describe('camera', () => {
     it('Camera()', () => {
       const camera = r.Camera(
         r.Vector3(5, 4, 5),
@@ -118,34 +103,27 @@ describe('raylib', () => {
       expect(image.data).toBe(0)
     })
   })
+})
 
-  describe('raymath', () => {
-    // no math
-    it.skip('Vector2Add()', () => {
-      const first = r.Vector2(10, 20)
-      const second = r.Vector2(30, 40)
-      const third = r.Vector2Add(first, second)
-      expect(third.x).to.equal(40)
-      expect(third.y).to.equal(60)
-    })
+// these are not correct tests on windows
+describe('cli', () => {
+  const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
+
+  it('should execute on a script', () => {
+    const out = execFileSync(cliPath, [
+      path.join(__dirname, 'resources', 'node-raylib-test.js')
+    ])
+    expect(out.toString()).toContain('Test runner')
   })
 
-  // these are not correct tests on windows
-  describe.skip('cli', () => {
-    const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
+  it('should display the help', () => {
+    let output = ''
+    try { // we expect an error here - jest fails tests when any errors are thrown
+      execFileSync(cliPath, ['--help']).toString()
+    } catch (e) {
+      output = e.toString()
+    }
 
-    it('should execute on a script', () => {
-      const out = execFileSync(cliPath, [
-        path.join(__dirname, 'resources', 'node-raylib-test.js')
-      ])
-      expect(out.toString()).toContain('Test runner')
-    })
-
-    it('should display the help', () => {
-      const output = execFileSync(cliPath + ' --help')
-      console.log(output, pkg.description)
-
-      expect(output).toCOntain(pkg.description)
-    })
+    expect(output).toContain(pkg.description)
   })
 })
