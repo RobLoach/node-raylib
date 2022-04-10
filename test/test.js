@@ -106,6 +106,7 @@ describe('raylib', () => {
 })
 
 // these are not correct tests on windows
+if(process.platform !== 'win32')
 describe('cli', () => {
   const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
 
