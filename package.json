@@ -11,7 +11,7 @@
     "posttest": "npx standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
-    "compile": "npm i --no-save node-addon-api && npx cmake-js compile",
+    "compile": "npx cmake-js compile",
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
     "gen:code": "node tools/generate.js"
@@ -50,13 +50,14 @@
   },
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
-    "cmake-js": "^6.3.0",
     "cross-fetch": "^3.1.5",
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "archiver": "^5.3.0",
+    "cmake-js": "^6.3.0",
     "jest": "^27.5.1",
+    "node-addon-api": "^4.3.0",
     "pkg": "^5.2.1",
     "standard": "^16.0.4"
   }
