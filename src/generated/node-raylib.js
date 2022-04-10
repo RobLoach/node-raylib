@@ -440,29 +440,6 @@ raylib.GetShaderLocationAttrib = function (shader, attribName) {
   )
 }
 
-/** Set shader uniform value */
-raylib.SetShaderValue = function (shader, locIndex, value, uniformType) {
-  return r.BindSetShaderValue(
-    shader.id,
-    shader.locs,
-    locIndex,
-    value,
-    uniformType
-  )
-}
-
-/** Set shader uniform value vector */
-raylib.SetShaderValueV = function (shader, locIndex, value, uniformType, count) {
-  return r.BindSetShaderValueV(
-    shader.id,
-    shader.locs,
-    locIndex,
-    value,
-    uniformType,
-    count
-  )
-}
-
 /** Set shader uniform value (matrix 4x4) */
 raylib.SetShaderValueMatrix = function (shader, locIndex, mat) {
   return r.BindSetShaderValueMatrix(
@@ -5943,6 +5920,92 @@ raylib.WaveCrop = function (wave, initSample, finalSample) {
       }
     }
   }
+}
+
+raylib.Color = function (r, g, b, a) {
+  return { r, g, b, a }
+}
+
+raylib.Vector2 = function (x, y) {
+  return { x, y }
+}
+
+raylib.Vector3 = function (x, y, z) {
+  return { x, y, z }
+}
+
+raylib.Vector4 = function (x, y, z, w) {
+  return { x, y, z, w }
+}
+
+raylib.Rectangle = function (x, y, width, height) {
+  return { x, y, width, height }
+}
+
+raylib.Camera2D = function (offset, target, rotation, zoom) {
+  return { offset, target, rotation, zoom }
+}
+
+raylib.Camera3D = function (position, target, up, fovy, projection) {
+  return { position, target, up, fovy, projection }
+}
+raylib.Camera = raylib.Camera3D
+
+// Wrapped Typed Shader Functions
+/** Set shader uniform value float */
+raylib.SetShaderFloat = function (shader, locIndex, value) {
+  return r.BindSetShaderFloat(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value
+  )
+}
+
+/** Set shader uniform value float */
+raylib.SetShaderInt = function (shader, locIndex, value) {
+  return r.BindSetShaderInt(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value
+  )
+}
+
+/** Set shader uniform value vector2 */
+raylib.SetShaderVec2 = function (shader, locIndex, value) {
+  return r.BindSetShaderVec2(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value.x,
+    value.y
+  )
+}
+
+/** Set shader uniform value vector3 */
+raylib.SetShaderVec2 = function (shader, locIndex, value) {
+  return r.BindSetShaderVec3(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value.x,
+    value.y,
+    value.z
+  )
+}
+
+/** Set shader uniform value vector4 */
+raylib.SetShaderVec4 = function (shader, locIndex, value) {
+  return r.BindSetShaderVec4(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value.x,
+    value.y,
+    value.z,
+    value.w
+  )
 }
 
 /** Set to try enabling V-Sync on GPU */

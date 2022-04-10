@@ -10,6 +10,10 @@ const blocklist = [
   'TraceLog',
   'TextFormat',
 
+  // edge case: need additional wrapping to function
+  'SetShaderValue',
+  'SetShaderValueV',
+
   // DataCallback types not implemented in JSON?
   'SetTraceLogCallback',
   'SetLoadFileDataCallback',

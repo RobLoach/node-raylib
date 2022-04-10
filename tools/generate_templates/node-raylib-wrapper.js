@@ -1,3 +1,14 @@
+// These are struct types that the JS wrapper will create simple functions to generate objects for.
+const constructors = [
+  'Color',
+  'Vector2',
+  'Vector3',
+  'Vector4',
+  'Rectangle',
+  'Camera2D',
+  'Camera3D'
+]
+
 const FlattenArgument = (structs, param) => {
   if (param.type === 'Camera') { param.type = 'Camera3D' }
   if (param.type === 'Texture2D') { param.type = 'Texture' }
@@ -67,6 +78,19 @@ raylib.${func.name} = function (${!params ? '' : params.map(param => param.name)
 }`
 }
 
+const WrapConstructor = (structs, constructor) => {
+  let info
+  for (const struct of structs) {
+    if (struct.name === constructor) info = struct
+  }
+  if (info) {
+    return `raylib.${info.name} = function (${info.fields.map(field => `${field.name}`).join(',')}) {
+  return {${info.fields.map(field => `${field.name}`).join(',')}}
+}
+`
+  } else return ''
+}
+
 module.exports = ({ functions, structs, enums, blocklist, byreflist }) => {
   return `// GENERATED CODE: DO NOT MODIFY
 const r = require('../../build/Release/node-raylib.node')
@@ -83,6 +107,68 @@ ${functions
   .filter(({ name }) => byreflist.includes(name))
   .map((func) => { return WrapByRefFunction(structs, func) })
   .join('\n')
+}
+
+${constructors
+  .map(ctor => WrapConstructor(structs, ctor))
+  .join('\n')
+}raylib.Camera = raylib.Camera3D
+
+// Wrapped Typed Shader Functions
+/** Set shader uniform value float */
+raylib.SetShaderFloat = function (shader, locIndex, value) {
+  return r.BindSetShaderFloat(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value
+  )
+}
+
+/** Set shader uniform value float */
+raylib.SetShaderInt = function (shader, locIndex, value) {
+  return r.BindSetShaderInt(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value
+  )
+}
+
+/** Set shader uniform value vector2 */
+raylib.SetShaderVec2 = function (shader, locIndex, value) {
+  return r.BindSetShaderVec2(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value.x,
+    value.y
+  )
+}
+
+/** Set shader uniform value vector3 */
+raylib.SetShaderVec2 = function (shader, locIndex, value) {
+  return r.BindSetShaderVec3(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value.x,
+    value.y,
+    value.z
+  )
+}
+
+/** Set shader uniform value vector4 */
+raylib.SetShaderVec4 = function (shader, locIndex, value) {
+  return r.BindSetShaderVec4(
+    shader.id,
+    shader.locs,
+    locIndex,
+    value.x,
+    value.y,
+    value.z,
+    value.w
+  )
 }
 
 ${enums

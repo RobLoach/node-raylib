@@ -21,14 +21,6 @@ raylib.MAX_KEY_PRESSED_QUEUE = 16
  */
 raylib.TextFormat = format
 
-raylib.Color = function (red, green, blue, alpha = 255) {
-  return { r: red, g: green, b: blue, a: alpha }
-}
-
-raylib.Vector2 = function (x, y) {
-  return { x, y }
-}
-
 raylib.Easings = easings
 
 // Export the bindings for the module.

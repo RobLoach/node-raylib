@@ -270,6 +270,62 @@ ${functions
     .join('\n')
   }
 
+// Shader Functions
+void BindSetShaderFloat(const Napi::CallbackInfo& info) {
+  float value = floatFromValue(info, 3);
+  SetShaderValueV(
+     ShaderFromValue(info, 0),
+       intFromValue(info, 2),
+       &value,
+       SHADER_UNIFORM_FLOAT,
+       1
+  );
+}
+
+void BindSetShaderInt(const Napi::CallbackInfo& info) {
+  int value = intFromValue(info, 3);
+  SetShaderValueV(
+     ShaderFromValue(info, 0),
+       intFromValue(info, 2),
+       &value,
+       SHADER_UNIFORM_INT,
+       1
+  );
+}
+
+void BindSetShaderVec2(const Napi::CallbackInfo& info) {
+  Vector2 value = Vector2FromValue(info, 3);
+  SetShaderValueV(
+     ShaderFromValue(info, 0),
+       intFromValue(info, 2),
+       &value,
+       SHADER_UNIFORM_VEC2,
+       1
+  );
+}
+
+void BindSetShaderVec3(const Napi::CallbackInfo& info) {
+  Vector3 value = Vector3FromValue(info, 3);
+  SetShaderValueV(
+     ShaderFromValue(info, 0),
+       intFromValue(info, 2),
+       &value,
+       SHADER_UNIFORM_VEC3,
+       1
+  );
+}
+
+void BindSetShaderVec4(const Napi::CallbackInfo& info) {
+  Vector4 value = Vector4FromValue(info, 3);
+  SetShaderValueV(
+     ShaderFromValue(info, 0),
+       intFromValue(info, 2),
+       &value,
+       SHADER_UNIFORM_VEC4,
+       1
+  );
+}
+
 // Exported JS Module object
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
 
@@ -278,6 +334,12 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     .map(ExportFunctionBinding)
     .join('\n  ')
   }
+
+  exports.Set("BindSetShaderFloat", Napi::Function::New(env, BindSetShaderFloat));
+  exports.Set("BindSetShaderInt", Napi::Function::New(env, BindSetShaderInt));
+  exports.Set("BindSetShaderVec2", Napi::Function::New(env, BindSetShaderVec2));
+  exports.Set("BindSetShaderVec3", Napi::Function::New(env, BindSetShaderVec3));
+  exports.Set("BindSetShaderVec4", Napi::Function::New(env, BindSetShaderVec4));
 
   return exports;
 }
