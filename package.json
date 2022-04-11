@@ -29,6 +29,16 @@
     "name": "Rob Loach",
     "url": "https://robloach.net"
   },
+  "contributors": [
+    {
+      "name": "konsumer",
+      "url": "https://keybase.io/konsumer"
+    },
+    {
+      "name": "twuky",
+      "url": "http://tuckie.zone"
+    }
+  ],
   "license": "Zlib",
   "files": [
     "docs/*",
