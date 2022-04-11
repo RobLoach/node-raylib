@@ -57,6 +57,8 @@
 
 Check for more [examples](examples) organized by raylib modules.
 
+## Installation
+Raylib is implemented as bindings with the node-addon-api. Bindings are prebuilt for many platforms in [Releases](https://github.com/RobLoach/node-raylib/releases). If your platform is not supported by a prebuilt binary, you will need CMake to build the native addon. Windows users building manually will also require MSVC Build Tools 2019, or Visual Studio 2019 with build tools for C/C++.
 ## CLI
 
 The project comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly:
@@ -82,9 +84,10 @@ npx -y raylib --version
 
 The following are a few notes and resources when developing `node-raylib`...
 
-### Testing
+[node-addon-api](https://github.com/nodejs/node-addon-api) is used to construct the bindings. Raylib provides a header parser that generates a JSON file containing information on the API. The code binding raylib to NodeJS is automatically generated based on this file. For information on how bindings are written for raylib read the [docs here](https://github.com/RobLoach/node-raylib/tree/raylib4/docs). Code generators for the C++ bindings, TS Definitions, and JS wrapper functions are located [here](https://github.com/RobLoach/node-raylib/tree/raylib4/tools/generate_templates).
 
-[node-addon-api](https://github.com/nodejs/node-addon-api) is used to construct the bindings. Feel free to read through [`src/addons.cc`](src/addons.cc) for an understanding on how methods are defined. A lot is missing from the project, so feel free to get involved in the issue queue and submit pull requests. Run the following to run tests...
+### Testing 
+Run the following to run tests...
 
 ```
 git clone https://github.com/RobLoach/node-raylib.git
@@ -95,12 +98,7 @@ npm t
 
 ### TypeScript Definitions
 
-To rebuild [`index.d.ts`](index.d.ts), run the following commands:
-
-```
-npm i -g dts-gen yargs RobLoach/node-raylib
-dts-gen -m raylib -f index.d.ts -o
-```
+Typescript definitions are provided by a generator based on raylib's header parser. See [here](https://github.com/RobLoach/node-raylib/blob/raylib4/tools/generate_templates/node-raylib-definitions.js) for information on how to generate them.
 
 ### Package
 
@@ -115,4 +113,4 @@ npm run pkg
 *node-raylib* is licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 BSD-like license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
 
-*Copyright (c) 2019 Rob Loach ([@RobLoach](https://twitter.com/RobLoach))*
+*Copyright (c) 2022 Rob Loach ([@RobLoach](https://twitter.com/RobLoach))*
