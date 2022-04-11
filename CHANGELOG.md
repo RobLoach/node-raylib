@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Tool to generate raylib bindings
 - Easings bindings
+- Provide pre-built release artifacts to speed up and ease installation
 
 ## [0.8.1] - 2021-05-28
 ### Fixed
