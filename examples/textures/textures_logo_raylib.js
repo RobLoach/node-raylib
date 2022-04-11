@@ -10,44 +10,43 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 const screenWidth = 800
 const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [textures] example - texture loading and drawing")
+r.InitWindow(screenWidth, screenHeight, 'raylib [textures] example - texture loading and drawing')
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-const texture = r.LoadTexture(__dirname + "/resources/raylib_logo.png")        // Texture loading
-//---------------------------------------------------------------------------------------
+const texture = r.LoadTexture(join(__dirname, 'resources', 'raylib_logo.png')) // Texture loading
+// ---------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose())    // Detect window close button or ESC key
-{
-    // Update
-    //----------------------------------------------------------------------------------
-    // TODO: Update your variables here
-    //----------------------------------------------------------------------------------
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
+  // Update
+  // ----------------------------------------------------------------------------------
+  // TODO: Update your variables here
+  // ----------------------------------------------------------------------------------
 
-    // Draw
-    //----------------------------------------------------------------------------------
-    r.BeginDrawing()
+  // Draw
+  // ----------------------------------------------------------------------------------
+  r.BeginDrawing()
 
-        r.ClearBackground(r.RAYWHITE)
+  r.ClearBackground(r.RAYWHITE)
 
-        r.DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, r.WHITE)
+  r.DrawTexture(texture, screenWidth / 2 - texture.width / 2, screenHeight / 2 - texture.height / 2, r.WHITE)
 
-        r.DrawText("this IS a texture!", 360, 370, 10, r.GRAY)
+  r.DrawText('this IS a texture!', 360, 370, 10, r.GRAY)
 
-    r.EndDrawing()
-    //----------------------------------------------------------------------------------
+  r.EndDrawing()
+  // ----------------------------------------------------------------------------------
 }
 
 // De-Initialization
-//--------------------------------------------------------------------------------------
-r.UnloadTexture(texture)       // Texture unloading
+// --------------------------------------------------------------------------------------
+r.UnloadTexture(texture) // Texture unloading
 
-r.CloseWindow()                // Close window and OpenGL context
-//--------------------------------------------------------------------------------------
-
+r.CloseWindow() // Close window and OpenGL context
+// --------------------------------------------------------------------------------------

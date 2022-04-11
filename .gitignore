@@ -1,6 +1,6 @@
 node_modules
-package-lock.json
 /build
 *.zip
 *.tar.gz
 .vscode
+.DS_Store

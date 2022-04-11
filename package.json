@@ -1,18 +1,20 @@
 {
   "name": "raylib",
-  "version": "0.8.1",
+  "version": "0.8.5",
   "description": "Node.js bindings for raylib.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "mocha",
-    "posttest": "echo 'xo index.js bin/node-raylib src/scripts/pkg.js'",
-    "postinstall": "cmake-js compile",
+    "start": "bin/node-raylib examples/core/core_basic_window.js",
+    "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
+    "test": "npx jest",
+    "posttest": "npx standard --fix",
+    "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
-    "compile": "cmake-js compile",
-    "prepkg": "npm run compile",
-    "pkg": "node src/scripts/pkg.js",
-    "start": "bin/node-raylib examples/core/core_basic_window.js"
+    "compile": "npm i --no-save node-addon-api cmake-js && cmake-js compile",
+    "prepkg": "npm run build",
+    "pkg": "node tools/pkg.js",
+    "gen:code": "node tools/generate.js"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {
@@ -27,6 +29,16 @@
     "name": "Rob Loach",
     "url": "https://robloach.net"
   },
+  "contributors": [
+    {
+      "name": "konsumer",
+      "url": "https://keybase.io/konsumer"
+    },
+    {
+      "name": "twuky",
+      "url": "http://tuckie.zone"
+    }
+  ],
   "license": "Zlib",
   "files": [
     "docs/*",
@@ -41,33 +53,19 @@
     "package.json",
     "README.md",
     "LICENSE.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "tools/postinstall.js"
   ],
   "bugs": {
     "url": "https://github.com/RobLoach/node-raylib/issues"
   },
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
-    "bindings": "^1.5.0",
-    "cmake-js": "^6.1.0",
-    "meow": "^9.0.0",
-    "module-alias": "^2.2.2",
-    "node-addon-api": "^3.2.0"
+    "cross-fetch": "^3.1.5",
+    "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "archiver": "^5.3.0",
-    "chai": "^4.3.4",
-    "mocha": "^8.4.0",
     "pkg": "^5.2.1"
-  },
-  "xo": {
-    "semicolon": false,
-    "space": 2,
-    "rules": {
-      "max-params": 0,
-      "capitalized-comments": 0,
-      "new-cap": 0,
-      "guard-for-in": 0
-    }
   }
 }

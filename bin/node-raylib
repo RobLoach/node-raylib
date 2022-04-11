@@ -1,35 +1,49 @@
 #!/usr/bin/env node
 
-const meow = require('meow');
+// sometimes eval is not evil...
+/* eslint no-eval: 0 */
+
 const fs = require('fs')
 const path = require('path')
 const raylib = require('..')
 
-// Build the command line utility.
-const cli = meow(`
+const usage = `
+  Node.js bindings for raylib.
     Usage
-      $ node-raylib <file>
+      $ node-raylib [file]
 
     Examples
+      $ node-raylib - runs data/index.js or index.js
       $ node-raylib core_basic_window.js
-`, {
-})
+`
 
-// Display help if needed.
-if (cli.input.length == 0) {
-  cli.showHelp(0)
+// find best file for enry-point
+let filename = process.argv[2]
+
+if (filename === '--help') {
+  console.error(usage)
+  process.exit(1)
 }
 
-// Load input.
-const filename = cli.input[0]
+if (!filename) {
+  const f1 = path.join(process.cwd(), 'data', 'index.js')
+  const f2 = path.join(process.cwd(), 'index.js')
+  if (raylib.FileExists(f1)) {
+    filename = f1
+  } else if (raylib.FileExists(f2)) {
+    filename = f2
+  }
+}
+
 if (!raylib.FileExists(filename)) {
-  console.error("Provided file does not exist.")
-  return
+  console.error('Provided file does not exist.')
+  console.error(usage)
+  process.exit(1)
 }
 
-// Add a "node-raylib" module alias for when it's not found.
+// Add a "raylib" module alias for when it's not found.
 const moduleAlias = require('module-alias')
-moduleAlias.addAlias('raylib', __dirname + '/..')
+moduleAlias.addAlias('raylib', path.join(__dirname, '..'))
 
 // Retrieve the context of the file.
 const realpath = fs.realpathSync(filename)
@@ -42,3 +56,6 @@ global.raylib = raylib
 
 // Load up the module's path.
 require(realpath)
+
+// load the file, but don't require it (so you can use this file in an exe bundler)
+eval(fs.readFileSync(realpath))

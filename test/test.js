@@ -1,100 +1,79 @@
-const child_process = require('child_process')
+/* global describe, it, expect */
+
+const { execFileSync } = require('child_process')
 const path = require('path')
 const r = require('..')
-const package = require('../package.json')
-const {expect, assert} = require('chai')
+const pkg = require('../package.json')
 
-describe('raylib', function() {
-  describe('window', function() {
-    it('IsWindowReady()', function() {
-      assert.isFalse(r.IsWindowReady())
-    })
+r.SetTraceLogLevel(r.LOG_WARNING)
 
-    it('IsWindowReady("incorrect", "number", "of", "args")', function() {
-      const shouldThrowOnIncorrectArgs = function() {
-        r.IsWindowReady('incorrect', 'number', 'of', 'args')
-      }
-      expect(shouldThrowOnIncorrectArgs).to.throw()
+describe('raylib', () => {
+  describe('window', () => {
+    it('IsWindowReady()', () => {
+      expect(r.IsWindowReady()).toBeFalsy()
     })
   })
 
-  describe('audio', function() {
-    it('IsAudioDeviceReady()', function() {
-      assert.isFalse(r.IsAudioDeviceReady(), 'IsAudioDeviceReady')
+  describe('audio', () => {
+    it('IsAudioDeviceReady()', () => {
+      expect(r.IsAudioDeviceReady()).toBeFalsy()
     })
   })
 
-  describe('TextFormat', function() {
-    it('TextFormat()', function() {
+  describe('TextFormat', () => {
+    it('TextFormat()', () => {
       const str = 'Hello, %s! Number %i'
       const num = 5
-      assert.equal(r.TextFormat(str, 'Ray', num), 'Hello, Ray! Number 5');
-      assert.equal(r.FormatText(str, 'Ray', num), 'Hello, Ray! Number 5');
+      expect(r.TextFormat(str, 'Ray', num)).toEqual('Hello, Ray! Number 5')
     })
   })
 
-  describe('TraceLog', function () {
-    it('TraceLog(r.LOG_INFO)', function() {
-      r.TraceLog(r.LOG_INFO, 'Hello, %s', 'Ray')
+  describe('file', () => {
+    it('FileExists()', () => {
+      expect(r.FileExists(path.join(__dirname, '..', 'package.json'))).toBeTruthy()
+    })
+
+    it('IsFileExtension()', () => {
+      expect(r.IsFileExtension('something.txt', '.txt')).toBeTruthy()
+      expect(r.IsFileExtension('something.txt', '.md')).toBeFalsy()
     })
   })
 
-  describe('file', function() {
-    it('FileExists()', function() {
-      assert(r.FileExists(path.join(__dirname, '..', 'package.json')))
+  describe('enums', () => {
+    it('KEY_A', () => {
+      expect(r.KEY_A).toBe(65)
     })
-
-    it('IsFileExtension()', function() {
-      assert(r.IsFileExtension("something.txt", ".txt"))
-      assert.isFalse(r.IsFileExtension("something.txt", ".md"))
+    it('PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA', () => {
+      expect(r.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA).toBe(20)
     })
   })
 
-  describe('rlgl', function() {
-    it('LoadText()', function() {
-      var filename = path.join(__dirname, '..', 'package.json')
-      var output = r.LoadText(filename)
-      assert.isNotEmpty(output)
-      assert.include(output, '"raylib"', 'package.json contains "raylib"')
-    })
-
-    it ('RL_QUADS', function() {
-      assert.equal(r.RL_QUADS, 0x0007)
-    })
-  })
-
-  describe('enums', function() {
-    it('KEY_A', function() {
-      assert.equal(r.KEY_A, 65)
-    })
-    it ('COMPRESSED_ASTC_4x4_RGBA', function() {
-      assert.equal(r.COMPRESSED_ASTC_4x4_RGBA, 20)
-    })
-  })
-
-  describe('color', function() {
-    it('GetColor()', function () {
+  describe('color', () => {
+    it('GetColor()', () => {
       const colorInt = r.ColorToInt(r.DARKPURPLE)
-      expect(colorInt).to.be.a('number')
+      expect(typeof colorInt).toBe('number')
       const colorPurple = r.GetColor(colorInt)
-      assert.containsAllKeys(colorPurple, ['r', 'g', 'b', 'a'])
-      assert.equal(colorPurple.g, r.DARKPURPLE.g)
+      expect(colorPurple).toHaveProperty('r')
+      expect(colorPurple).toHaveProperty('g')
+      expect(colorPurple).toHaveProperty('b')
+      expect(colorPurple).toHaveProperty('a')
+      expect(colorPurple.g).toBe(r.DARKPURPLE.g)
     })
   })
 
-  describe('camera', function() {
-    it('Camera()', function () {
+  describe('camera', () => {
+    it('Camera()', () => {
       const camera = r.Camera(
         r.Vector3(5, 4, 5),
         r.Vector3(0, 2, 0),
         r.Vector3(0, 1, 0),
         45,
         r.CAMERA_PERSPECTIVE)
-      expect(camera.position.x).to.equal(5)
+      expect(camera.position.x).toEqual(5)
 
       const matrix = r.GetCameraMatrix(camera)
-      expect(matrix.m2).to.greaterThan(0.6)
-      expect(matrix.m2).to.lessThan(0.8)
+      expect(matrix.m2).toBeGreaterThan(0.6)
+      expect(matrix.m2).toBeLessThan(0.8)
     })
   })
 
@@ -102,52 +81,51 @@ describe('raylib', function() {
     it('should load images correctly', () => {
       const rabbit = path.join(__dirname, 'resources', 'rabbit.png')
       const image = r.LoadImage(rabbit)
-      assert.isNotNull(image)
+      expect(image).not.toBeNull()
+      console.log(image)
       r.UnloadImage(image)
     })
     it('should correctly use wrapped image manipulation functions', () => {
       const rabbit = path.join(__dirname, 'resources', 'rabbit.png')
-      let image = r.LoadImage(rabbit)
-      let initialWidth = image.width
-      assert.equal(initialWidth, 32)
+      const image = r.LoadImage(rabbit)
+      const initialWidth = image.width
+      expect(initialWidth).toBe(32)
 
       // Rotate the image
       r.ImageRotateCW(image)
-      let modifiedWidth = image.width
-      assert.equal(modifiedWidth, 42)
+      const modifiedWidth = image.width
+      expect(modifiedWidth).toBe(42)
       r.UnloadImage(image)
     })
-    it('should return null when failing to load', () => {
+    it('should return empty object when failing to load', () => {
       const missingImage = 'missingImage.png'
       const image = r.LoadImage(missingImage)
-      assert.isNull(image)
+      expect(image.data).toBe(0)
     })
   })
+})
 
-  describe('raymath', function() {
-    it('Vector2Add()', function() {
-      const first = r.Vector2(10, 20)
-      const second = r.Vector2(30, 40)
-      const third = r.Vector2Add(first, second)
-      expect(third.x).to.equal(40)
-      expect(third.y).to.equal(60)
-    })
-  })
-
+// these are not correct tests on windows
+if (process.platform !== 'win32') {
   describe('cli', () => {
     const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
 
     it('should execute on a script', () => {
-      const out = child_process.execFileSync(cliPath, [
+      const out = execFileSync(cliPath, [
         path.join(__dirname, 'resources', 'node-raylib-test.js')
       ])
-      assert.include(out.toString(), 'Test runner')
+      expect(out.toString()).toContain('Test runner')
     })
 
     it('should display the help', () => {
-      var output = child_process.execFileSync(cliPath)
-      assert(output.includes(package.description))
-    })
+      let output = ''
+      try { // we expect an error here - jest fails tests when any errors are thrown
+        execFileSync(cliPath, ['--help']).toString()
+      } catch (e) {
+        output = e.toString()
+      }
 
+      expect(output).toContain(pkg.description)
+    })
   })
-})
+}

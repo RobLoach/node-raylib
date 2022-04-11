@@ -10,13 +10,14 @@
 ********************************************************************************************/
 
 const r = require('raylib')
+const { join } = require('path')
 
 // Initialization
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 const screenWidth = 800
 const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [models] example - drawing billboards")
+r.InitWindow(screenWidth, screenHeight, 'raylib [models] example - drawing billboards')
 
 // Define the camera to look into our 3d world
 const camera = r.Camera()
@@ -26,45 +27,44 @@ camera.up = r.Vector3(0.0, 1.0, 0.0)
 camera.fovy = 45.0
 camera.type = r.CAMERA_PERSPECTIVE
 
-const bill = r.LoadTexture(__dirname + "/resources/billboard.png")     // Our texture billboard
-const billPosition = r.Vector3(0.0, 2.0, 0.0)                 // Position where draw billboard
+const bill = r.LoadTexture(join(__dirname, 'resources', 'billboard.png')) // Our texture billboard
+const billPosition = r.Vector3(0.0, 2.0, 0.0) // Position where draw billboard
 
-r.SetCameraMode(camera, r.CAMERA_ORBITAL)  // Set an orbital camera mode
+r.SetCameraMode(camera, r.CAMERA_ORBITAL) // Set an orbital camera mode
 
-r.SetTargetFPS(60)                       // Set our game to run at 60 frames-per-second
-//--------------------------------------------------------------------------------------
+r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
+// --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose())            // Detect window close button or ESC key
-{
-    // Update
-    //----------------------------------------------------------------------------------
-    //r.UpdateCamera(camera);              // Update camera
-    //----------------------------------------------------------------------------------
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
+  // Update
+  // ----------------------------------------------------------------------------------
+  // r.UpdateCamera(camera);              // Update camera
+  // ----------------------------------------------------------------------------------
 
-    // Draw
-    //----------------------------------------------------------------------------------
-    r.BeginDrawing()
+  // Draw
+  // ----------------------------------------------------------------------------------
+  r.BeginDrawing()
 
-        r.ClearBackground(r.RAYWHITE)
+  r.ClearBackground(r.RAYWHITE)
 
-        r.BeginMode3D(camera)
+  r.BeginMode3D(camera)
 
-            r.DrawGrid(10, 1.0)        // Draw a grid
+  r.DrawGrid(10, 1.0) // Draw a grid
 
-            r.DrawBillboard(camera, bill, billPosition, 2.0, r.WHITE)
+  r.DrawBillboard(camera, bill, billPosition, 2.0, r.WHITE)
 
-        r.EndMode3D()
+  r.EndMode3D()
 
-        r.DrawFPS(10, 10)
+  r.DrawFPS(10, 10)
 
-    r.EndDrawing()
-    //----------------------------------------------------------------------------------
+  r.EndDrawing()
+  // ----------------------------------------------------------------------------------
 }
 
 // De-Initialization
-//--------------------------------------------------------------------------------------
-r.UnloadTexture(bill)        // Unload texture
+// --------------------------------------------------------------------------------------
+r.UnloadTexture(bill) // Unload texture
 
-r.CloseWindow()              // Close window and OpenGL context
-//--------------------------------------------------------------------------------------
+r.CloseWindow() // Close window and OpenGL context
+// --------------------------------------------------------------------------------------

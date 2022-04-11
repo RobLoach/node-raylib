@@ -12,49 +12,48 @@
 const r = require('raylib')
 
 // Initialization
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 const screenWidth = 800
 const screenHeight = 450
 
-r.InitWindow(screenWidth, screenHeight, "raylib [shapes] example - basic shapes drawing")
+r.InitWindow(screenWidth, screenHeight, 'raylib [shapes] example - basic shapes drawing')
 
 r.SetTargetFPS(60)
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 
 // Main game loop
-while (!r.WindowShouldClose())    // Detect window close button or ESC key
-{
-    // Update
-    //----------------------------------------------------------------------------------
-    // TODO: Update your variables here
-    //----------------------------------------------------------------------------------
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
+  // Update
+  // ----------------------------------------------------------------------------------
+  // TODO: Update your variables here
+  // ----------------------------------------------------------------------------------
 
-    // Draw
-    //----------------------------------------------------------------------------------
-    r.BeginDrawing()
+  // Draw
+  // ----------------------------------------------------------------------------------
+  r.BeginDrawing()
 
-        r.ClearBackground(r.RAYWHITE)
+  r.ClearBackground(r.RAYWHITE)
 
-        r.DrawText("some basic shapes available on raylib", 20, 20, 20, r.DARKGRAY)
+  r.DrawText('some basic shapes available on raylib', 20, 20, 20, r.DARKGRAY)
 
-        var position = {
-            x: 100,
-            y: 100
-        }
-        var size = {
-            x: 200,
-            y: 150
-        }
-        r.DrawRectangleV(position, size, r.DARKBLUE)
+  const position = {
+    x: 100,
+    y: 100
+  }
+  const size = {
+    x: 200,
+    y: 150
+  }
+  r.DrawRectangleV(position, size, r.DARKBLUE)
 
-        r.DrawRectangleRec({
-            x: 50,
-            y: 50,
-            width: 50,
-            height: 50
-        }, r.PINK)
+  r.DrawRectangleRec({
+    x: 50,
+    y: 50,
+    width: 50,
+    height: 50
+  }, r.PINK)
 
-        /*
+  /*
         DrawCircle(screenWidth/4, 120, 35, DARKBLUE);
 
         DrawRectangle(screenWidth/4*2 - 60, 100, 120, 60, RED);
@@ -77,12 +76,11 @@ while (!r.WindowShouldClose())    // Detect window close button or ESC key
                           (Vector2){screenWidth/4*3 - 20, 230},
                           (Vector2){screenWidth/4*3 + 20, 230}, DARKBLUE);
         */
-    r.EndDrawing();
-    //----------------------------------------------------------------------------------
+  r.EndDrawing()
+  // ----------------------------------------------------------------------------------
 }
 
 // De-Initialization
-//--------------------------------------------------------------------------------------
-r.CloseWindow();        // Close window and OpenGL context
-//--------------------------------------------------------------------------------------
-
+// --------------------------------------------------------------------------------------
+r.CloseWindow() // Close window and OpenGL context
+// --------------------------------------------------------------------------------------
