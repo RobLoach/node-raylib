@@ -20,9 +20,6 @@ const SanitizeTypeName = name => {
   if (name === 'Texture2D') {
     return 'Texture'
   }
-  if (name === 'RenderTexture2D') {
-    return 'RenderTexture'
-  }
   return name.replace(/ /g, '')
 }
 
@@ -71,6 +68,11 @@ const UnwrappedFuncArguments = (structs, func) => {
     .join(',\n      ')
 }
 
+/**
+ *
+ * @param {*} struct
+ * @returns
+ */
 const FromValue = (structs, struct) => `
 inline ${struct.name} ${SanitizeTypeName(struct.name)}FromValue(const Napi::CallbackInfo& info, int index) {
   return {
@@ -78,6 +80,11 @@ inline ${struct.name} ${SanitizeTypeName(struct.name)}FromValue(const Napi::Call
   };
 }`
 
+/**
+ *
+ * @param {*} struct
+ * @returns
+ */
 const ToValue = (struct) => `
 inline Napi::Value ToValue(Napi::Env env, ${struct.name} obj) {
   Napi::Object out = Napi::Object::New(env);
@@ -88,6 +95,11 @@ inline Napi::Value ToValue(Napi::Env env, ${struct.name} obj) {
   return out;
 }`
 
+/**
+ *
+ * @param {*} func
+ * @returns
+ */
 const BindFunction = (structs, func) => `
 Napi::Value Bind${func.name}(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), 
@@ -97,6 +109,11 @@ Napi::Value Bind${func.name}(const Napi::CallbackInfo& info) {
   );
 }`
 
+/**
+ *
+ * @param {*} func
+ * @returns
+ */
 const BindVoidFunction = (structs, func) => `
 void Bind${func.name}(const Napi::CallbackInfo& info) {
   ${func.name}(
@@ -104,6 +121,11 @@ void Bind${func.name}(const Napi::CallbackInfo& info) {
   );
 }`
 
+/**
+ *
+ * @param {*} func
+ * @returns
+ */
 const BindFunctionPassByRef = (structs, func) => {
   let returnType = func.params[0].type
   let length = 1
@@ -128,60 +150,6 @@ Napi::Value Bind${func.name}(const Napi::CallbackInfo& info) {
 }`
 }
 
-const GetStructPointer = (structs, pointerStruct) => {
-  let info
-  for (let s of structs) {
-    if (s.name == SanitizeTypeName(pointerStruct.name)) info = s
-  }
-  if (!info) return ''
-
-  return `
-Napi::Value BindGet${pointerStruct.name}Pointer(const Napi::CallbackInfo& info) {
-  ${pointerStruct.name} val = ${SanitizeTypeName(pointerStruct.name)}FromValue(info, 0);
-  void* ptr = MemAlloc(sizeof(${pointerStruct.name}));
-  *(${pointerStruct.name}*)ptr = val;
-  return Napi::Number::New(info.Env(), (int64_t) ptr);
-}`
-}
-
-const UnwrappedFuncArgumentsStructPointer = (structs, func, pointerStructList) => {
-  if (!func.params) { return '' }
-  let length = 0
-
-  return func.params
-    .map(param => {
-      let ptrStruct
-      for (let s of pointerStructList) {
-        if (s.name == param.type) ptrStruct = s
-      }
-      if (ptrStruct) {
-        const out = `*(${ptrStruct.name}*)pointerFromValue(info, ${length})`
-        length += 1
-        return out
-      }
-      const out = `${param.type.endsWith('*') ? ` (${param.type})` : ''} ${SanitizeTypeName(param.type)}FromValue(info, ${length})`
-      length += TypeUnwrappedLength(structs, param.type)
-      return out
-    })
-    .join(',\n      ')
-}
-
-const BindFunctionStructPointer = (structs, func, pointerStructList) => `
-Napi::Value Bind${func.name}Pointer(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(), 
-    ${func.name}(
-      ${UnwrappedFuncArgumentsStructPointer(structs, func, pointerStructList)}
-    )
-  );
-}`
-
-const BindVoidFunctionStructPointer = (structs, func, pointerStructList) => `
-void Bind${func.name}Pointer(const Napi::CallbackInfo& info) {
-  ${func.name}(
-    ${UnwrappedFuncArgumentsStructPointer(structs, func, pointerStructList)}
-  );
-}`
-
 /**
  *
  * @param {*} func
@@ -189,7 +157,7 @@ void Bind${func.name}Pointer(const Napi::CallbackInfo& info) {
  */
 const ExportFunctionBinding = func => `exports.Set("Bind${func.name}", Napi::Function::New(env, Bind${func.name}));`
 
-module.exports = ({ functions, structs, enums, blocklist, byreflist, pointerStructList }) => `
+module.exports = ({ functions, structs, enums, blocklist, byreflist }) => `
 // GENERATED CODE: DO NOT MODIFY
 #include <string>
 #include <napi.h>
@@ -279,64 +247,21 @@ inline Camera CameraFromValue(const Napi::CallbackInfo& info, int index) {
   return Camera3DFromValue(info, index);
 }
 
-void BindFreePointer(const Napi::CallbackInfo& info) {
-  void* ptr = (void*) pointerFromValue(info, 0);
-  MemFree(ptr);
-}
-
-${pointerStructList
-  .map(s => GetStructPointer(structs, s))
-  .join('\n')
-}
 // Raylib API function bindings
 ${functions
-  .filter(({ name }) => !blocklist.includes(name))
-  .filter(({ name }) => !byreflist.includes(name))
-  .filter((func) => func.returnType !== 'void')
-  .map((func) => { return BindFunction(structs, func) })
-  .join('\n')
-}
+    .filter(({ name }) => !blocklist.includes(name))
+    .filter(({ name }) => !byreflist.includes(name))
+    .filter((func) => func.returnType !== 'void')
+    .map((func) => { return BindFunction(structs, func) })
+    .join('\n')
+  }
 ${functions
-  .filter(({ name }) => !blocklist.includes(name))
-  .filter(({ name }) => !byreflist.includes(name))
-  .filter((func) => func.returnType === 'void')
-  .map((func) => { return BindVoidFunction(structs, func) })
-  .join('\n')
-}
-${functions
-  .filter(({ name }) => !blocklist.includes(name))
-  .filter(({ name }) => !byreflist.includes(name))
-  .filter((func) => func.returnType !== 'void')
-  .filter((func) => {
-    let pointer = false
-    if (!func.params) return false
-    for (let p of func.params) {
-      for (let s of pointerStructList) {
-        if (p.type == (s.name)) pointer = true
-      }
-    }
-    return pointer
-  })
-  .map((func) => { return BindFunctionStructPointer(structs, func, pointerStructList) })
-  .join('\n')
-}
-${functions
-  .filter(({ name }) => !blocklist.includes(name))
-  .filter(({ name }) => !byreflist.includes(name))
-  .filter((func) => func.returnType === 'void')
-  .filter((func) => {
-    let pointer = false
-    if (!func.params) return false
-    for (let p of func.params) {
-      for (let s of pointerStructList) {
-        if (p.type == (s.name)) pointer = true
-      }
-    }
-    return pointer
-  })
-  .map((func) => { return BindVoidFunctionStructPointer(structs, func, pointerStructList) })
-  .join('\n')
-}
+    .filter(({ name }) => !blocklist.includes(name))
+    .filter(({ name }) => !byreflist.includes(name))
+    .filter((func) => func.returnType === 'void')
+    .map((func) => { return BindVoidFunction(structs, func) })
+    .join('\n')
+  }
 // By-Reference function bindings
 ${functions
     .filter(({ name }) => !blocklist.includes(name))
@@ -409,29 +334,6 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     .map(ExportFunctionBinding)
     .join('\n  ')
   }
-
-  ${functions
-    .filter(({ name }) => !blocklist.includes(name))
-    .filter(({ name }) => !byreflist.includes(name))
-    .filter((func) => {
-      let pointer = false
-      if (!func.params) return false
-      for (let p of func.params) {
-        for (let s of pointerStructList) {
-          if (p.type == (s.name)) pointer = true
-        }
-      }
-      return pointer
-    })
-    .map((func) => `exports.Set("Bind${func.name}Pointer", Napi::Function::New(env, Bind${func.name}Pointer));`)
-    .join('\n')
-  }
-
-  ${pointerStructList
-    .map(s => `exports.Set("BindGet${s.name}Pointer", Napi::Function::New(env, BindGet${s.name}Pointer));`)
-    .join('\n  ')
-  }
-  exports.Set("BindFreePointer", Napi::Function::New(env, BindFreePointer));
 
   exports.Set("BindSetShaderFloat", Napi::Function::New(env, BindSetShaderFloat));
   exports.Set("BindSetShaderInt", Napi::Function::New(env, BindSetShaderInt));

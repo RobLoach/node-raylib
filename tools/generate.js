@@ -80,19 +80,6 @@ const byreflist = [
   'WaveCrop'
 ]
 
-const pointerStructList = [
-  {
-    name: 'Texture2D',
-    load: ['LoadTexture', 'LoadTextureFromImage'],
-    unload: ['UnloadTexture']
-  },
-  {
-    name: 'RenderTexture2D',
-    load: ['LoadRenderTexture'],
-    unload: ['UnloadRenderTexture']
-  }
-]
-
 // these are aliased types, so you use the resolved-type
 const typeAliases = {
   Quaternion: 'Vector4',
@@ -189,7 +176,7 @@ getDefs().then(({ structs, enums, functions }) => {
   const GenBindings = require('./generate_templates/node-raylib-bindings.js')
   const GenWrapper = require('./generate_templates/node-raylib-wrapper.js')
   const GenTSDefs = require('./generate_templates/node-raylib-definitions.js')
-  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.cc'), GenBindings({ enums, blocklist, functions, structs, byreflist, pointerStructList }))
-  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.js'), GenWrapper({ enums, blocklist, functions, structs, byreflist, pointerStructList }))
-  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.d.ts'), GenTSDefs({ enums, blocklist, functions, structs, byreflist, pointerStructList }))
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.cc'), GenBindings({ enums, blocklist, functions, structs, byreflist }))
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.js'), GenWrapper({ enums, blocklist, functions, structs, byreflist }))
+  writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.d.ts'), GenTSDefs({ enums, blocklist, functions, structs, byreflist }))
 })
