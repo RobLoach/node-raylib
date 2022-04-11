@@ -11,7 +11,7 @@
     "posttest": "npx standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
-    "compile": "npm i --no-save node-addon-api && npx cmake-js compile",
+    "compile": "npm i --no-save node-addon-api cmake-js && cmake-js compile",
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
     "gen:code": "node tools/generate.js"
