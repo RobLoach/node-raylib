@@ -43,7 +43,8 @@
     "package.json",
     "README.md",
     "LICENSE.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "tools/postinstall.js"
   ],
   "bugs": {
     "url": "https://github.com/RobLoach/node-raylib/issues"
