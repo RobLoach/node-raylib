@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.5] - 2022-04-11
 ### Changed
-- Updated to raylib 4.0.0, by [@twunky](https://github.com/twunky) and [@konsumer](https://github.com/konsumer)
+- Updated to raylib 4.0.0, by [@twuky](https://github.com/twuky) and [@konsumer](https://github.com/konsumer)
 
 ### Added
 - Tool to generate raylib bindings
