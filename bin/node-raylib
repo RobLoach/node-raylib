@@ -39,6 +39,10 @@ if (!filename) {
   } else if (raylib.FileExists(f2)) {
     filename = f2
   }
+  else {
+    console.error(usage)
+    process.exit(0)
+  }
 }
 
 if (!raylib.FileExists(filename)) {
