@@ -2,7 +2,7 @@ include(FetchContent)
 
 cmake_minimum_required(VERSION 3.11)
 project (node-raylib
-  VERSION 0.8.0
+  VERSION 0.8.5
   DESCRIPTION "Node.js bindings for raylib"
   HOMEPAGE_URL "https://github.com/RobLoach/node-raylib"
   LANGUAGES C CXX)
