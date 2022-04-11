@@ -82,7 +82,8 @@ describe('raylib', () => {
       const rabbit = path.join(__dirname, 'resources', 'rabbit.png')
       const image = r.LoadImage(rabbit)
       expect(image).not.toBeNull()
-      console.log(image)
+      const imageWidth = image.width
+      expect(imageWidth).toBe(32)
       r.UnloadImage(image)
     })
     it('should correctly use wrapped image manipulation functions', () => {
