@@ -31,17 +31,7 @@ async function main () {
     process.exit(0)
   }
 
-  let p
-  if (process.platform === 'linux') {
-    p = 'ubuntu'
-  }
-  if (process.platform === 'darwin') {
-    p = 'macos'
-  }
-  if (process.platform === 'win32') {
-    p = 'windows'
-  }
-  const url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-4.0-${p}-${process.arch}.node`
+  const url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-4.0-${process.platform}-${process.arch}.node`
 
   console.log(`Checking for ${url}`)
 
