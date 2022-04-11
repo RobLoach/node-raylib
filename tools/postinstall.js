@@ -22,27 +22,26 @@ async function main () {
     process.exit(0)
   }
 
-  // our current CI only supports intel x64
-  if (process.arch === 'x64') {
-    // map to CI names
-    let p
-    if (process.platform === 'linux') {
-      p = 'ubuntu'
-    }
-    if (process.platform === 'darwin') {
-      p = 'macos'
-    }
-    if (process.platform === 'win32') {
-      p = 'windows'
-    }
-    console.log(`Checking for ${process.env.npm_package_version}-${p}-${process.arch}`)
-    try {
-      const data = await fetch(`https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-4.0-${p}-${process.arch}.node`).then(r => r.arrayBuffer())
-      await fs.writeFile(targetPath, data)
-      console.log('Found on releases.')
-      process.exit(0)
-    } catch (e) {}
+  let p
+  if (process.platform === 'linux') {
+    p = 'ubuntu'
   }
+  if (process.platform === 'darwin') {
+    p = 'macos'
+  }
+  if (process.platform === 'win32') {
+    p = 'windows'
+  }
+  const url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-4.0-${p}-${process.arch}.node`
+
+  console.log(`Checking for ${url}`)
+
+  try {
+    const data = await fetch(url).then(r => r.arrayBuffer())
+    await fs.writeFile(targetPath, data)
+    console.log('Found on releases.')
+    process.exit(0)
+  } catch (e) {}
 
   // couldn't find it, so tell postinstall to compile it
   console.log('Not found. Building.')
