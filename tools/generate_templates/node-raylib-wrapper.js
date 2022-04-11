@@ -91,7 +91,7 @@ const WrapConstructor = (structs, constructor) => {
   } else return ''
 }
 
-module.exports = ({ functions, structs, enums, blocklist, byreflist }) => {
+module.exports = ({ functions, structs, enums, blocklist, byreflist, pointerStructList }) => {
   return `// GENERATED CODE: DO NOT MODIFY
 const r = require('../../build/Release/node-raylib.node')
 

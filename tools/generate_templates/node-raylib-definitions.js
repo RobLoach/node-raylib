@@ -48,7 +48,7 @@ const StructInterface = (struct) => {
   }`
 }
 
-module.exports = ({ functions, structs, enums, blocklist }) => {
+module.exports = ({ functions, structs, enums, blocklist, byreflist, pointerStructList }) => {
   return `// GENERATED CODE: DO NOT MODIFY
 declare module "raylib" {
   ${structs

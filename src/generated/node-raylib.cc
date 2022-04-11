@@ -700,6 +700,25 @@ inline Camera CameraFromValue(const Napi::CallbackInfo& info, int index) {
   return Camera3DFromValue(info, index);
 }
 
+void BindFreePointer(const Napi::CallbackInfo& info) {
+  void* ptr = (void*) pointerFromValue(info, 0);
+  MemFree(ptr);
+}
+
+
+Napi::Value BindGetTexture2DPointer(const Napi::CallbackInfo& info) {
+  Texture2D val = TextureFromValue(info, 0);
+  void* ptr = MemAlloc(sizeof(Texture2D));
+  *(Texture2D*)ptr = val;
+  return Napi::Number::New(info.Env(), (int64_t) ptr);
+}
+
+Napi::Value BindGetRenderTexture2DPointer(const Napi::CallbackInfo& info) {
+  RenderTexture2D val = RenderTextureFromValue(info, 0);
+  void* ptr = MemAlloc(sizeof(RenderTexture2D));
+  *(RenderTexture2D*)ptr = val;
+  return Napi::Number::New(info.Env(), (int64_t) ptr);
+}
 // Raylib API function bindings
 
 Napi::Value BindWindowShouldClose(const Napi::CallbackInfo& info) {
@@ -2900,7 +2919,7 @@ void BindEndMode3D(const Napi::CallbackInfo& info) {
 
 void BindBeginTextureMode(const Napi::CallbackInfo& info) {
   BeginTextureMode(
-     RenderTexture2DFromValue(info, 0)
+     RenderTextureFromValue(info, 0)
   );
 }
 
@@ -3501,7 +3520,7 @@ void BindUnloadTexture(const Napi::CallbackInfo& info) {
 
 void BindUnloadRenderTexture(const Napi::CallbackInfo& info) {
   UnloadRenderTexture(
-     RenderTexture2DFromValue(info, 0)
+     RenderTextureFromValue(info, 0)
   );
 }
 
@@ -4243,6 +4262,225 @@ void BindSetAudioStreamPitch(const Napi::CallbackInfo& info) {
 void BindSetAudioStreamBufferSizeDefault(const Napi::CallbackInfo& info) {
   SetAudioStreamBufferSizeDefault(
      intFromValue(info, 0)
+  );
+}
+
+Napi::Value BindLoadImageFromTexturePointer(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(), 
+    LoadImageFromTexture(
+      *(Texture2D*)pointerFromValue(info, 0)
+    )
+  );
+}
+
+void BindBeginTextureModePointer(const Napi::CallbackInfo& info) {
+  BeginTextureMode(
+    *(RenderTexture2D*)pointerFromValue(info, 0)
+  );
+}
+
+void BindSetShaderValueTexturePointer(const Napi::CallbackInfo& info) {
+  SetShaderValueTexture(
+     ShaderFromValue(info, 0),
+       intFromValue(info, 2),
+      *(Texture2D*)pointerFromValue(info, 3)
+  );
+}
+
+void BindSetShapesTexturePointer(const Napi::CallbackInfo& info) {
+  SetShapesTexture(
+    *(Texture2D*)pointerFromValue(info, 0),
+       RectangleFromValue(info, 1)
+  );
+}
+
+void BindUnloadTexturePointer(const Napi::CallbackInfo& info) {
+  UnloadTexture(
+    *(Texture2D*)pointerFromValue(info, 0)
+  );
+}
+
+void BindUnloadRenderTexturePointer(const Napi::CallbackInfo& info) {
+  UnloadRenderTexture(
+    *(RenderTexture2D*)pointerFromValue(info, 0)
+  );
+}
+
+void BindUpdateTexturePointer(const Napi::CallbackInfo& info) {
+  UpdateTexture(
+    *(Texture2D*)pointerFromValue(info, 0),
+       (const void *) pointerFromValue(info, 1)
+  );
+}
+
+void BindUpdateTextureRecPointer(const Napi::CallbackInfo& info) {
+  UpdateTextureRec(
+    *(Texture2D*)pointerFromValue(info, 0),
+       RectangleFromValue(info, 1),
+       (const void *) pointerFromValue(info, 5)
+  );
+}
+
+void BindSetTextureFilterPointer(const Napi::CallbackInfo& info) {
+  SetTextureFilter(
+    *(Texture2D*)pointerFromValue(info, 0),
+       intFromValue(info, 1)
+  );
+}
+
+void BindSetTextureWrapPointer(const Napi::CallbackInfo& info) {
+  SetTextureWrap(
+    *(Texture2D*)pointerFromValue(info, 0),
+       intFromValue(info, 1)
+  );
+}
+
+void BindDrawTexturePointer(const Napi::CallbackInfo& info) {
+  DrawTexture(
+    *(Texture2D*)pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       ColorFromValue(info, 3)
+  );
+}
+
+void BindDrawTextureVPointer(const Napi::CallbackInfo& info) {
+  DrawTextureV(
+    *(Texture2D*)pointerFromValue(info, 0),
+       Vector2FromValue(info, 1),
+       ColorFromValue(info, 3)
+  );
+}
+
+void BindDrawTextureExPointer(const Napi::CallbackInfo& info) {
+  DrawTextureEx(
+    *(Texture2D*)pointerFromValue(info, 0),
+       Vector2FromValue(info, 1),
+       floatFromValue(info, 3),
+       floatFromValue(info, 4),
+       ColorFromValue(info, 5)
+  );
+}
+
+void BindDrawTextureRecPointer(const Napi::CallbackInfo& info) {
+  DrawTextureRec(
+    *(Texture2D*)pointerFromValue(info, 0),
+       RectangleFromValue(info, 1),
+       Vector2FromValue(info, 5),
+       ColorFromValue(info, 7)
+  );
+}
+
+void BindDrawTextureQuadPointer(const Napi::CallbackInfo& info) {
+  DrawTextureQuad(
+    *(Texture2D*)pointerFromValue(info, 0),
+       Vector2FromValue(info, 1),
+       Vector2FromValue(info, 3),
+       RectangleFromValue(info, 5),
+       ColorFromValue(info, 9)
+  );
+}
+
+void BindDrawTextureTiledPointer(const Napi::CallbackInfo& info) {
+  DrawTextureTiled(
+    *(Texture2D*)pointerFromValue(info, 0),
+       RectangleFromValue(info, 1),
+       RectangleFromValue(info, 5),
+       Vector2FromValue(info, 9),
+       floatFromValue(info, 11),
+       floatFromValue(info, 12),
+       ColorFromValue(info, 13)
+  );
+}
+
+void BindDrawTextureProPointer(const Napi::CallbackInfo& info) {
+  DrawTexturePro(
+    *(Texture2D*)pointerFromValue(info, 0),
+       RectangleFromValue(info, 1),
+       RectangleFromValue(info, 5),
+       Vector2FromValue(info, 9),
+       floatFromValue(info, 11),
+       ColorFromValue(info, 12)
+  );
+}
+
+void BindDrawTextureNPatchPointer(const Napi::CallbackInfo& info) {
+  DrawTextureNPatch(
+    *(Texture2D*)pointerFromValue(info, 0),
+       NPatchInfoFromValue(info, 1),
+       RectangleFromValue(info, 10),
+       Vector2FromValue(info, 14),
+       floatFromValue(info, 16),
+       ColorFromValue(info, 17)
+  );
+}
+
+void BindDrawTexturePolyPointer(const Napi::CallbackInfo& info) {
+  DrawTexturePoly(
+    *(Texture2D*)pointerFromValue(info, 0),
+       Vector2FromValue(info, 1),
+       (Vector2 *) pointerFromValue(info, 3),
+       (Vector2 *) pointerFromValue(info, 4),
+       intFromValue(info, 5),
+       ColorFromValue(info, 6)
+  );
+}
+
+void BindDrawCubeTexturePointer(const Napi::CallbackInfo& info) {
+  DrawCubeTexture(
+    *(Texture2D*)pointerFromValue(info, 0),
+       Vector3FromValue(info, 1),
+       floatFromValue(info, 4),
+       floatFromValue(info, 5),
+       floatFromValue(info, 6),
+       ColorFromValue(info, 7)
+  );
+}
+
+void BindDrawCubeTextureRecPointer(const Napi::CallbackInfo& info) {
+  DrawCubeTextureRec(
+    *(Texture2D*)pointerFromValue(info, 0),
+       RectangleFromValue(info, 1),
+       Vector3FromValue(info, 5),
+       floatFromValue(info, 8),
+       floatFromValue(info, 9),
+       floatFromValue(info, 10),
+       ColorFromValue(info, 11)
+  );
+}
+
+void BindDrawBillboardPointer(const Napi::CallbackInfo& info) {
+  DrawBillboard(
+     Camera3DFromValue(info, 0),
+      *(Texture2D*)pointerFromValue(info, 11),
+       Vector3FromValue(info, 12),
+       floatFromValue(info, 15),
+       ColorFromValue(info, 16)
+  );
+}
+
+void BindDrawBillboardRecPointer(const Napi::CallbackInfo& info) {
+  DrawBillboardRec(
+     Camera3DFromValue(info, 0),
+      *(Texture2D*)pointerFromValue(info, 11),
+       RectangleFromValue(info, 12),
+       Vector3FromValue(info, 16),
+       Vector2FromValue(info, 19),
+       ColorFromValue(info, 21)
+  );
+}
+
+void BindDrawBillboardProPointer(const Napi::CallbackInfo& info) {
+  DrawBillboardPro(
+     Camera3DFromValue(info, 0),
+      *(Texture2D*)pointerFromValue(info, 11),
+       RectangleFromValue(info, 12),
+       Vector3FromValue(info, 16),
+       Vector3FromValue(info, 19),
+       Vector2FromValue(info, 22),
+       Vector2FromValue(info, 24),
+       floatFromValue(info, 26),
+       ColorFromValue(info, 27)
   );
 }
 // By-Reference function bindings
@@ -5189,6 +5427,35 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindSetAudioStreamVolume", Napi::Function::New(env, BindSetAudioStreamVolume));
   exports.Set("BindSetAudioStreamPitch", Napi::Function::New(env, BindSetAudioStreamPitch));
   exports.Set("BindSetAudioStreamBufferSizeDefault", Napi::Function::New(env, BindSetAudioStreamBufferSizeDefault));
+
+  exports.Set("BindBeginTextureModePointer", Napi::Function::New(env, BindBeginTextureModePointer));
+exports.Set("BindSetShaderValueTexturePointer", Napi::Function::New(env, BindSetShaderValueTexturePointer));
+exports.Set("BindSetShapesTexturePointer", Napi::Function::New(env, BindSetShapesTexturePointer));
+exports.Set("BindLoadImageFromTexturePointer", Napi::Function::New(env, BindLoadImageFromTexturePointer));
+exports.Set("BindUnloadTexturePointer", Napi::Function::New(env, BindUnloadTexturePointer));
+exports.Set("BindUnloadRenderTexturePointer", Napi::Function::New(env, BindUnloadRenderTexturePointer));
+exports.Set("BindUpdateTexturePointer", Napi::Function::New(env, BindUpdateTexturePointer));
+exports.Set("BindUpdateTextureRecPointer", Napi::Function::New(env, BindUpdateTextureRecPointer));
+exports.Set("BindSetTextureFilterPointer", Napi::Function::New(env, BindSetTextureFilterPointer));
+exports.Set("BindSetTextureWrapPointer", Napi::Function::New(env, BindSetTextureWrapPointer));
+exports.Set("BindDrawTexturePointer", Napi::Function::New(env, BindDrawTexturePointer));
+exports.Set("BindDrawTextureVPointer", Napi::Function::New(env, BindDrawTextureVPointer));
+exports.Set("BindDrawTextureExPointer", Napi::Function::New(env, BindDrawTextureExPointer));
+exports.Set("BindDrawTextureRecPointer", Napi::Function::New(env, BindDrawTextureRecPointer));
+exports.Set("BindDrawTextureQuadPointer", Napi::Function::New(env, BindDrawTextureQuadPointer));
+exports.Set("BindDrawTextureTiledPointer", Napi::Function::New(env, BindDrawTextureTiledPointer));
+exports.Set("BindDrawTextureProPointer", Napi::Function::New(env, BindDrawTextureProPointer));
+exports.Set("BindDrawTextureNPatchPointer", Napi::Function::New(env, BindDrawTextureNPatchPointer));
+exports.Set("BindDrawTexturePolyPointer", Napi::Function::New(env, BindDrawTexturePolyPointer));
+exports.Set("BindDrawCubeTexturePointer", Napi::Function::New(env, BindDrawCubeTexturePointer));
+exports.Set("BindDrawCubeTextureRecPointer", Napi::Function::New(env, BindDrawCubeTextureRecPointer));
+exports.Set("BindDrawBillboardPointer", Napi::Function::New(env, BindDrawBillboardPointer));
+exports.Set("BindDrawBillboardRecPointer", Napi::Function::New(env, BindDrawBillboardRecPointer));
+exports.Set("BindDrawBillboardProPointer", Napi::Function::New(env, BindDrawBillboardProPointer));
+
+  exports.Set("BindGetTexture2DPointer", Napi::Function::New(env, BindGetTexture2DPointer));
+  exports.Set("BindGetRenderTexture2DPointer", Napi::Function::New(env, BindGetRenderTexture2DPointer));
+  exports.Set("BindFreePointer", Napi::Function::New(env, BindFreePointer));
 
   exports.Set("BindSetShaderFloat", Napi::Function::New(env, BindSetShaderFloat));
   exports.Set("BindSetShaderInt", Napi::Function::New(env, BindSetShaderInt));
