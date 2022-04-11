@@ -1,6 +1,6 @@
 {
   "name": "raylib",
-  "version": "0.8.5",
+  "version": "0.9.0",
   "description": "Node.js bindings for raylib.",
   "main": "index.js",
   "types": "index.d.ts",
