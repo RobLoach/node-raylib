@@ -7,6 +7,15 @@ const fetch = require('cross-fetch')
 
 const targetPath = path.join(__dirname, '..', 'build', 'Release', 'node-raylib.node')
 
+function toBuffer (ab) {
+  const buf = Buffer.alloc(ab.byteLength)
+  const view = new Uint8Array(ab)
+  for (let i = 0; i < buf.length; ++i) {
+    buf[i] = view[i]
+  }
+  return buf
+}
+
 async function exists (path) {
   try {
     await fs.access(path)
@@ -37,11 +46,21 @@ async function main () {
   console.log(`Checking for ${url}`)
 
   try {
+    await fs.mkdir(path.join(__dirname, '..', 'build'))
+  } catch (e) {}
+
+  try {
+    await fs.mkdir(path.join(__dirname, '..', 'build', 'Release'))
+  } catch (e) {}
+
+  try {
     const data = await fetch(url).then(r => r.arrayBuffer())
-    await fs.writeFile(targetPath, data)
+    await fs.writeFile(targetPath, toBuffer(data))
     console.log('Found on releases.')
     process.exit(0)
-  } catch (e) {}
+  } catch (e) {
+    console.error(e)
+  }
 
   // couldn't find it, so tell postinstall to compile it
   console.log('Not found. Building.')
