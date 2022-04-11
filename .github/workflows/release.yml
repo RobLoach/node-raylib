@@ -1,0 +1,109 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    outputs:
+      url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+       - name: create_release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: Automated Release ${{ github.ref }}
+          tag_name: ${{ github.ref }}
+          body: This is an automated release for ${{ github.ref }}. It will be used to speed up `npm install`.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+  linux:
+    runs-on: ubuntu-latest
+    needs: create_release
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache Node Dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - name: Install Node Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
+      - name: Install System Dependencies
+        run: sudo apt-get update && sudo apt-get install -y xorg-dev libglu1-mesa-dev
+      - name: Build Node Addon
+        run: npm run compile
+      - name: upload linux artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.url }}
+          asset_path: ./build/Release/node-raylib.node
+          asset_name: node-raylib-4.0-ubuntu-x64.node
+          asset_content_type: application/octet-stream
+  windows:
+    runs-on: windows-latest
+    needs: create_release
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache Node Dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - name: Install Node Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
+      - name: Build Node Addon
+        run: npm run compile
+      - name: upload windows artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.url }}
+          asset_path: ./build/Release/node-raylib.node
+          asset_name: node-raylib-4.0-windows-x64.node
+          asset_content_type: application/octet-stream
+  macos:
+    runs-on: macos-latest
+    needs: create_release
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache Node Dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - name: Install Node Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
+      - name: Build Node Addon
+        run: npm run compile
+      - name: upload macos artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.url }}
+          asset_path: ./build/Release/node-raylib.node
+          asset_name: node-raylib-4.0-macos-x64.node
+          asset_content_type: application/octet-stream

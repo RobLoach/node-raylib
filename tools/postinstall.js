@@ -37,7 +37,7 @@ async function main () {
     }
     console.log(`Checking for ${process.env.npm_package_version}-${p}-${process.arch}`)
     try {
-      const data = await fetch(`https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-${p}-${process.arch}.zip`).then(r => r.arrayBuffer())
+      const data = await fetch(`https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-4.0-${p}-${process.arch}.node`).then(r => r.arrayBuffer())
       await fs.writeFile(targetPath, data)
       console.log('Found on releases.')
       process.exit(0)

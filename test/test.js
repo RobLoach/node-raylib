@@ -106,25 +106,26 @@ describe('raylib', () => {
 })
 
 // these are not correct tests on windows
-if(process.platform !== 'win32')
-describe('cli', () => {
-  const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
+if (process.platform !== 'win32') {
+  describe('cli', () => {
+    const cliPath = path.join(__dirname, '..', 'bin', 'node-raylib')
 
-  it('should execute on a script', () => {
-    const out = execFileSync(cliPath, [
-      path.join(__dirname, 'resources', 'node-raylib-test.js')
-    ])
-    expect(out.toString()).toContain('Test runner')
+    it('should execute on a script', () => {
+      const out = execFileSync(cliPath, [
+        path.join(__dirname, 'resources', 'node-raylib-test.js')
+      ])
+      expect(out.toString()).toContain('Test runner')
+    })
+
+    it('should display the help', () => {
+      let output = ''
+      try { // we expect an error here - jest fails tests when any errors are thrown
+        execFileSync(cliPath, ['--help']).toString()
+      } catch (e) {
+        output = e.toString()
+      }
+
+      expect(output).toContain(pkg.description)
+    })
   })
-
-  it('should display the help', () => {
-    let output = ''
-    try { // we expect an error here - jest fails tests when any errors are thrown
-      execFileSync(cliPath, ['--help']).toString()
-    } catch (e) {
-      output = e.toString()
-    }
-
-    expect(output).toContain(pkg.description)
-  })
-})
+}

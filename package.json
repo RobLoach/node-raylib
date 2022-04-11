@@ -1,6 +1,6 @@
 {
   "name": "raylib",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Node.js bindings for raylib.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -11,7 +11,7 @@
     "posttest": "npx standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
-    "compile": "npm i --no-save node-addon-api && npx cmake-js compile",
+    "compile": "npm i --no-save node-addon-api cmake-js && cmake-js compile",
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
     "gen:code": "node tools/generate.js"
