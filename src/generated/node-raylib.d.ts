@@ -582,7 +582,7 @@ declare module "raylib" {
   export function EndMode3D(): void
   
   /** Begin drawing to render texture */
-  export function BeginTextureMode(target: RenderTexture2D): void
+  export function BeginTextureMode(target: RenderTexture): void
   
   /** Ends drawing to render texture */
   export function EndTextureMode(): void
@@ -1263,7 +1263,7 @@ declare module "raylib" {
   export function UnloadTexture(texture: Texture): void
   
   /** Unload render texture from GPU memory (VRAM) */
-  export function UnloadRenderTexture(target: RenderTexture2D): void
+  export function UnloadRenderTexture(target: RenderTexture): void
   
   /** Update GPU texture with new data */
   export function UpdateTexture(texture: Texture, pixels: number): void

@@ -352,7 +352,17 @@ raylib.EndMode3D = function () {
 /** Begin drawing to render texture */
 raylib.BeginTextureMode = function (target) {
   return r.BindBeginTextureMode(
-    target
+    target.id,
+    target.texture.id,
+    target.texture.width,
+    target.texture.height,
+    target.texture.mipmaps,
+    target.texture.format,
+    target.depth.id,
+    target.depth.width,
+    target.depth.height,
+    target.depth.mipmaps,
+    target.depth.format
   )
 }
 
@@ -2277,7 +2287,17 @@ raylib.UnloadTexture = function (texture) {
 /** Unload render texture from GPU memory (VRAM) */
 raylib.UnloadRenderTexture = function (target) {
   return r.BindUnloadRenderTexture(
-    target
+    target.id,
+    target.texture.id,
+    target.texture.width,
+    target.texture.height,
+    target.texture.mipmaps,
+    target.texture.format,
+    target.depth.id,
+    target.depth.width,
+    target.depth.height,
+    target.depth.mipmaps,
+    target.depth.format
   )
 }
 

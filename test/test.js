@@ -9,7 +9,7 @@ r.SetTraceLogLevel(r.LOG_WARNING)
 
 describe('raylib', () => {
   describe('window', () => {
-    it('IsWindowReady()', () => {
+    it('IsWindowReady() false before initializing window', () => {
       expect(r.IsWindowReady()).toBeFalsy()
     })
   })
