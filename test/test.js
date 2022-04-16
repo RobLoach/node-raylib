@@ -5,12 +5,14 @@ const path = require('path')
 const r = require('..')
 const pkg = require('../package.json')
 
-r.SetTraceLogLevel(r.LOG_WARNING)
-
 describe('raylib', () => {
+  beforeEach(() => {
+    r.SetTraceLogLevel(r.LOG_WARNING)
+    r.SetWindowState(r.FLAG_WINDOW_HIDDEN)
+  })
+
   describe('window', () => {
     it('IsWindowReady() false before initializing window', () => {
-      r.SetWindowState(r.FLAG_WINDOW_HIDDEN)
       expect(r.IsWindowReady()).toBeFalsy()
     })
 
