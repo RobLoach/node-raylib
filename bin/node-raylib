@@ -6,6 +6,7 @@
 const fs = require('fs')
 const path = require('path')
 const raylib = require('..')
+const pkg = require('../package.json')
 
 const usage = `
   Node.js bindings for raylib.
@@ -25,6 +26,11 @@ if (filename === '--help') {
   process.exit(1)
 }
 
+if (filename === '--version') {
+  console.log(pkg.version)
+  process.exit(0)
+}
+
 if (!filename) {
   const f1 = path.join(process.cwd(), 'data', 'index.js')
   const f2 = path.join(process.cwd(), 'index.js')
@@ -32,6 +38,10 @@ if (!filename) {
     filename = f1
   } else if (raylib.FileExists(f2)) {
     filename = f2
+  }
+  else {
+    console.error(usage)
+    process.exit(0)
   }
 }
 
