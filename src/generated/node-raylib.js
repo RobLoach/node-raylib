@@ -352,7 +352,17 @@ raylib.EndMode3D = function () {
 /** Begin drawing to render texture */
 raylib.BeginTextureMode = function (target) {
   return r.BindBeginTextureMode(
-    target
+    target.id,
+    target.texture.id,
+    target.texture.width,
+    target.texture.height,
+    target.texture.mipmaps,
+    target.texture.format,
+    target.depth.id,
+    target.depth.width,
+    target.depth.height,
+    target.depth.mipmaps,
+    target.depth.format
   )
 }
 
@@ -2277,7 +2287,17 @@ raylib.UnloadTexture = function (texture) {
 /** Unload render texture from GPU memory (VRAM) */
 raylib.UnloadRenderTexture = function (target) {
   return r.BindUnloadRenderTexture(
-    target
+    target.id,
+    target.texture.id,
+    target.texture.width,
+    target.texture.height,
+    target.texture.mipmaps,
+    target.texture.format,
+    target.depth.id,
+    target.depth.width,
+    target.depth.height,
+    target.depth.mipmaps,
+    target.depth.format
   )
 }
 
@@ -5922,32 +5942,32 @@ raylib.WaveCrop = function (wave, initSample, finalSample) {
   }
 }
 
-raylib.Color = function (r, g, b, a) {
-  return { r, g, b, a }
+raylib.Color = function (r,g,b,a) {
+  return {r,g,b,a}
 }
 
-raylib.Vector2 = function (x, y) {
-  return { x, y }
+raylib.Vector2 = function (x,y) {
+  return {x,y}
 }
 
-raylib.Vector3 = function (x, y, z) {
-  return { x, y, z }
+raylib.Vector3 = function (x,y,z) {
+  return {x,y,z}
 }
 
-raylib.Vector4 = function (x, y, z, w) {
-  return { x, y, z, w }
+raylib.Vector4 = function (x,y,z,w) {
+  return {x,y,z,w}
 }
 
-raylib.Rectangle = function (x, y, width, height) {
-  return { x, y, width, height }
+raylib.Rectangle = function (x,y,width,height) {
+  return {x,y,width,height}
 }
 
-raylib.Camera2D = function (offset, target, rotation, zoom) {
-  return { offset, target, rotation, zoom }
+raylib.Camera2D = function (offset,target,rotation,zoom) {
+  return {offset,target,rotation,zoom}
 }
 
-raylib.Camera3D = function (position, target, up, fovy, projection) {
-  return { position, target, up, fovy, projection }
+raylib.Camera3D = function (position,target,up,fovy,projection) {
+  return {position,target,up,fovy,projection}
 }
 raylib.Camera = raylib.Camera3D
 

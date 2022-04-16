@@ -12,6 +12,7 @@ const constructors = [
 const FlattenArgument = (structs, param) => {
   if (param.type === 'Camera') { param.type = 'Camera3D' }
   if (param.type === 'Texture2D') { param.type = 'Texture' }
+  if (param.type === 'RenderTexture2D') { param.type = 'RenderTexture' }
   let out = ''
   let isStruct = false
   for (const struct of structs) {

@@ -9,8 +9,15 @@ r.SetTraceLogLevel(r.LOG_WARNING)
 
 describe('raylib', () => {
   describe('window', () => {
-    it('IsWindowReady()', () => {
+    it('IsWindowReady() false before initializing window', () => {
+      r.SetWindowState(r.FLAG_WINDOW_HIDDEN)
       expect(r.IsWindowReady()).toBeFalsy()
+    })
+
+    it('Core - Can initialize window', () => {
+      r.InitWindow(100, 100, 'Test')
+      expect(r.IsWindowReady()).toBe(true)
+      r.CloseWindow()
     })
   })
 
@@ -102,6 +109,15 @@ describe('raylib', () => {
       const missingImage = 'missingImage.png'
       const image = r.LoadImage(missingImage)
       expect(image.data).toBe(0)
+    })
+  })
+
+  describe('RenderTexture', () => {
+    it('can create and unload a RenderTexture', () => {
+      r.InitWindow(100, 100, 'Test')
+      const texture = r.LoadRenderTexture(320, 320)
+      r.UnloadRenderTexture(texture)
+      r.CloseWindow()
     })
   })
 })
