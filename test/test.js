@@ -5,21 +5,12 @@ const path = require('path')
 const r = require('..')
 const pkg = require('../package.json')
 
-describe('raylib', () => {
-  beforeEach(() => {
-    r.SetTraceLogLevel(r.LOG_WARNING)
-    r.SetWindowState(r.FLAG_WINDOW_HIDDEN)
-  })
+r.SetTraceLogLevel(r.LOG_WARNING)
 
+describe('raylib', () => {
   describe('window', () => {
     it('IsWindowReady() false before initializing window', () => {
       expect(r.IsWindowReady()).toBeFalsy()
-    })
-
-    it('Core - Can initialize window', () => {
-      r.InitWindow(100, 100, 'Test')
-      expect(r.IsWindowReady()).toBe(true)
-      r.CloseWindow()
     })
   })
 
@@ -111,15 +102,6 @@ describe('raylib', () => {
       const missingImage = 'missingImage.png'
       const image = r.LoadImage(missingImage)
       expect(image.data).toBe(0)
-    })
-  })
-
-  describe('RenderTexture', () => {
-    it('can create and unload a RenderTexture', () => {
-      r.InitWindow(100, 100, 'Test')
-      const texture = r.LoadRenderTexture(320, 320)
-      r.UnloadRenderTexture(texture)
-      r.CloseWindow()
     })
   })
 })
