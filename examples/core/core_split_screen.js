@@ -23,9 +23,45 @@ function InitCamera () {
   }
 }
 
-let textureGrid
+// Initialization
+// --------------------------------------------------------------------------------------
+const screenWidth = 800
+const screenHeight = 450
+
+r.InitWindow(screenWidth, screenHeight, 'raylib [core] example - split screen')
+
+// Generate a simple texture to use for trees
+const img = r.GenImageChecked(256, 256, 32, 32, r.DARKGRAY, r.WHITE)
+const textureGrid = r.LoadTextureFromImage(img)
+r.UnloadImage(img)
+r.SetTextureFilter(textureGrid, r.TEXTURE_FILTER_ANISOTROPIC_16X)
+r.SetTextureWrap(textureGrid, r.TEXTURE_WRAP_CLAMP)
+
+// Setup player 1 camera and screen
 const cameraPlayer1 = InitCamera()
+cameraPlayer1.fovy = 45
+cameraPlayer1.up.y = 1
+cameraPlayer1.target.y = 1
+cameraPlayer1.position.z = -3
+cameraPlayer1.position.y = 1
+
+const screenPlayer1 = r.LoadRenderTexture(screenWidth / 2, screenHeight)
+
+// Setup player two camera and screen
 const cameraPlayer2 = InitCamera()
+cameraPlayer2.fovy = 45
+cameraPlayer2.up.y = 1
+cameraPlayer2.target.y = 3
+cameraPlayer2.position.x = -3
+cameraPlayer2.position.y = 3
+
+const screenPlayer2 = r.LoadRenderTexture(screenWidth / 2, screenHeight)
+
+// Build a flipped rectangle the size of the split view to use for drawing later
+const splitScreenRect = r.Rectangle(0, 0, screenPlayer1.texture.width, -screenPlayer1.texture.height)
+
+r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
+// --------------------------------------------------------------------------------------
 
 // Scene drawing
 function DrawScene () {
@@ -47,48 +83,8 @@ function DrawScene () {
   r.DrawCube(cameraPlayer2.position, 1, 1, 1, r.BLUE)
 }
 
-// Initialization
-// --------------------------------------------------------------------------------------
-const screenWidth = 800
-const screenHeight = 450
-
-r.InitWindow(screenWidth, screenHeight, 'raylib [core] example - split screen')
-
-// Generate a simple texture to use for trees
-const img = r.GenImageChecked(256, 256, 32, 32, r.DARKGRAY, r.WHITE)
-textureGrid = r.LoadTextureFromImage(img)
-r.UnloadImage(img)
-r.SetTextureFilter(textureGrid, r.TEXTURE_FILTER_ANISOTROPIC_16X)
-r.SetTextureWrap(textureGrid, r.TEXTURE_WRAP_CLAMP)
-console.log(cameraPlayer1)
-
-// Setup player 1 camera and screen
-cameraPlayer1.fovy = 45
-cameraPlayer1.up.y = 1
-cameraPlayer1.target.y = 1
-cameraPlayer1.position.z = -3
-cameraPlayer1.position.y = 1
-
-const screenPlayer1 = r.LoadRenderTexture(screenWidth / 2, screenHeight)
-
-// Setup player two camera and screen
-cameraPlayer2.fovy = 45
-cameraPlayer2.up.y = 1
-cameraPlayer2.target.y = 3
-cameraPlayer2.position.x = -3
-cameraPlayer2.position.y = 3
-
-const screenPlayer2 = r.LoadRenderTexture(screenWidth / 2, screenHeight)
-
-// Build a flipped rectangle the size of the split view to use for drawing later
-const splitScreenRect = r.Rectangle(0, 0, screenPlayer1.texture.width, -screenPlayer1.texture.height)
-
-r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
-// --------------------------------------------------------------------------------------
-
 // Main game loop
-while (!r.WindowShouldClose()) // Detect window close button or ESC key
-{
+while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
   // If anyone moves this frame, how far will they move based on the time since the last frame
