@@ -48,6 +48,7 @@ async function main () {
       if (r.status !== 200) {
         throw new Error(`Status: ${r.status}`)
       }
+      return r
     }).then(r => r.arrayBuffer())
     await fs.writeFile(targetPath, toBuffer(data))
     console.log('Found on releases.')
