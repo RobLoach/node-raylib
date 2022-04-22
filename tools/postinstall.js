@@ -44,12 +44,17 @@ async function main () {
   } catch (e) {}
 
   try {
-    const data = await fetch(url).then(r => r.arrayBuffer())
+    const data = await fetch(url).then(r => {
+      if (r.status !== 200) {
+        throw new Error(`Status: ${r.status}`)
+      }
+      return r
+    }).then(r => r.arrayBuffer())
     await fs.writeFile(targetPath, toBuffer(data))
     console.log('Found on releases.')
     process.exit(0)
   } catch (e) {
-    console.error(e)
+    console.error(e.message)
   }
 
   // couldn't find it, so tell postinstall to compile it
