@@ -13,7 +13,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
-const easing = require('raylib/easings')
+const easing = require('raylib/addons/easings')
 
 const FONT_SIZE = 20
 
