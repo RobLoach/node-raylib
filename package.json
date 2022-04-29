@@ -8,7 +8,7 @@
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
     "test": "jest",
-    "posttest": "standard src/*.js tools test examples index.js",
+    "posttest": "standard tools test examples index.js",
     "test:fix": "standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
