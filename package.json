@@ -43,7 +43,6 @@
   "files": [
     "docs/*",
     "bin/*",
-    "addons/*",
     "man/node-raylib.1",
     "src/*",
     "src/lib/*",

@@ -39,14 +39,14 @@ let easingY = 0 // Easing selected for y axis
 r.SetTargetFPS(60)
 
 // Easing functions reference data
-let easingTypes = Object.keys(r)
+const easingTypes = Object.keys(r)
   .filter(name => name.startsWith('Ease'))
   .map(function (name) {
-    return {name: name, func: r[name]}
+    return { name: name, func: r[name] }
   })
 
 // NoEase function, used when "no easing" is selected for any axis.
-easingTypes.push({name: "None", func: (t, b, c, d) => b})
+easingTypes.push({ name: 'None', func: (t, b, c, d) => b })
 
 while (!r.WindowShouldClose()) {
   // Update

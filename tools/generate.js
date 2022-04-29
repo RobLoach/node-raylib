@@ -91,17 +91,22 @@ const typeAliases = {
 // used to find array-size in defs
 const rSize = /\[([0-9]+)\]/g
 
-function getDefEasings() {
-  let functions = []
+/**
+ * Generates the function definitions for easings.h
+ *
+ * @see https://github.com/raysan5/raylib/blob/master/src/extras/easings.h
+ */
+function getDefEasings () {
+  const functions = []
   const easingsDefaults = {
     name: 'FunctionName',
     description: 'FuntionName',
     returnType: 'float',
     params: [
-      {type: 'float', name: 'a'},
-      {type: 'float', name: 'b'},
-      {type: 'float', name: 'c'},
-      {type: 'float', name: 'd'}
+      { type: 'float', name: 't' },
+      { type: 'float', name: 'b' },
+      { type: 'float', name: 'c' },
+      { type: 'float', name: 'd' }
     ]
   }
   const functionNames = [
@@ -132,12 +137,12 @@ function getDefEasings() {
     'EaseBounceInOut',
     'EaseElasticIn',
     'EaseElasticOut',
-    'EaseElasticInOut',
+    'EaseElasticInOut'
   ]
-  for (let funcName of functionNames) {
-    let func = Object.assign({}, easingsDefaults)
+  for (const funcName of functionNames) {
+    const func = Object.assign({}, easingsDefaults)
     func.name = funcName
-    func.description = `Implementation of ${funcName}.`
+    func.description = `Easing: ${funcName}.`
     functions.push(func)
   }
   return functions

@@ -1823,89 +1823,89 @@ declare module "raylib" {
   /** Default size for new audio streams */
   export function SetAudioStreamBufferSizeDefault(size: number): void
   
-  /** Implementation of EaseLinearNone. */
-  export function EaseLinearNone(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseLinearNone. */
+  export function EaseLinearNone(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseLinearIn. */
-  export function EaseLinearIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseLinearIn. */
+  export function EaseLinearIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseLinearOut. */
-  export function EaseLinearOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseLinearOut. */
+  export function EaseLinearOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseLinearInOut. */
-  export function EaseLinearInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseLinearInOut. */
+  export function EaseLinearInOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseSineIn. */
-  export function EaseSineIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseSineIn. */
+  export function EaseSineIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseSineOut. */
-  export function EaseSineOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseSineOut. */
+  export function EaseSineOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseSineInOut. */
-  export function EaseSineInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseSineInOut. */
+  export function EaseSineInOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseCircIn. */
-  export function EaseCircIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseCircIn. */
+  export function EaseCircIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseCircOut. */
-  export function EaseCircOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseCircOut. */
+  export function EaseCircOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseCircInOut. */
-  export function EaseCircInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseCircInOut. */
+  export function EaseCircInOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseCubicIn. */
-  export function EaseCubicIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseCubicIn. */
+  export function EaseCubicIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseCubicOut. */
-  export function EaseCubicOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseCubicOut. */
+  export function EaseCubicOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseCubicInOut. */
-  export function EaseCubicInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseCubicInOut. */
+  export function EaseCubicInOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseQuadIn. */
-  export function EaseQuadIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseQuadIn. */
+  export function EaseQuadIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseQuadOut. */
-  export function EaseQuadOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseQuadOut. */
+  export function EaseQuadOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseQuadInOut. */
-  export function EaseQuadInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseQuadInOut. */
+  export function EaseQuadInOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseExpoIn. */
-  export function EaseExpoIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseExpoIn. */
+  export function EaseExpoIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseExpoOut. */
-  export function EaseExpoOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseExpoOut. */
+  export function EaseExpoOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseExpoInOut. */
-  export function EaseExpoInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseExpoInOut. */
+  export function EaseExpoInOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseBackIn. */
-  export function EaseBackIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseBackIn. */
+  export function EaseBackIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseBackOut. */
-  export function EaseBackOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseBackOut. */
+  export function EaseBackOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseBackInOut. */
-  export function EaseBackInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseBackInOut. */
+  export function EaseBackInOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseBounceOut. */
-  export function EaseBounceOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseBounceOut. */
+  export function EaseBounceOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseBounceIn. */
-  export function EaseBounceIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseBounceIn. */
+  export function EaseBounceIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseBounceInOut. */
-  export function EaseBounceInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseBounceInOut. */
+  export function EaseBounceInOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseElasticIn. */
-  export function EaseElasticIn(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseElasticIn. */
+  export function EaseElasticIn(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseElasticOut. */
-  export function EaseElasticOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseElasticOut. */
+  export function EaseElasticOut(t: number, b: number, c: number, d: number): number
   
-  /** Implementation of EaseElasticInOut. */
-  export function EaseElasticInOut(a: number, b: number, c: number, d: number): number
+  /** Easing: EaseElasticInOut. */
+  export function EaseElasticInOut(t: number, b: number, c: number, d: number): number
   
 
   /** Set shader uniform float */
