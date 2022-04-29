@@ -104,6 +104,17 @@ describe('raylib', () => {
       expect(image.data).toBe(0)
     })
   })
+
+  describe('easings', () => {
+    it('EaseLinearOut()', () => {
+      const t = 10
+      const b = 20
+      const c = 30
+      const d = 40
+      const out = r.EaseLinearOut(t, b, c, d)
+      expect(out).toBe(c * t / d + b)
+    })
+  })
 })
 
 // these are not correct tests on windows

@@ -102,7 +102,7 @@ inline Napi::Value ToValue(Napi::Env env, ${struct.name} obj) {
  */
 const BindFunction = (structs, func) => `
 Napi::Value Bind${func.name}(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(), 
+  return ToValue(info.Env(),
     ${func.name}(
       ${UnwrappedFuncArguments(structs, func)}
     )
@@ -164,6 +164,7 @@ module.exports = ({ functions, structs, enums, blocklist, byreflist }) => `
 #include <iostream>
 #include <cstring>
 #include "raylib.h"
+#include "extras/easings.h"
 using namespace Napi;
 
 inline Napi::Value ToValue(Napi::Env env, bool value) {
