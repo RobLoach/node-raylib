@@ -35,10 +35,8 @@ while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // ----------------------------------------------------------------------------------
   if (state === 0) { // Move ball position X with easing
     framesCounter++
-    console.log(ballPositionX)
     ballPositionX = r.EaseElasticOut(framesCounter, -100, screenWidth / 2.0 + 100, 120)
 
-    console.log(ballPositionX)
     if (framesCounter >= 120) {
       framesCounter = 0
       state = 1
