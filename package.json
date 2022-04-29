@@ -7,11 +7,13 @@
   "scripts": {
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
-    "test": "npx jest",
-    "posttest": "npx standard --fix",
+    "test": "jest",
+    "posttest": "standard",
+    "test:fix": "standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
-    "compile": "npm i --no-save node-addon-api cmake-js && cmake-js compile",
+    "precompile": "npm i --no-save node-addon-api cmake-js",
+    "compile": "cmake-js compile",
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
     "gen:code": "node tools/generate.js"
@@ -45,14 +47,9 @@
     "bin/*",
     "man/node-raylib.1",
     "src/*",
-    "src/lib/*",
-    "vendor/*",
+    "src/generated/*",
     "CMakeLists.txt",
     "index.js",
-    "index.d.ts",
-    "package.json",
-    "README.md",
-    "LICENSE.md",
     "CHANGELOG.md",
     "tools/postinstall.js"
   ],
@@ -66,6 +63,8 @@
   },
   "devDependencies": {
     "archiver": "^5.3.1",
-    "pkg": "^5.6.0"
+    "jest": "^28.0.2",
+    "pkg": "^5.6.0",
+    "standard": "^17.0.0"
   }
 }

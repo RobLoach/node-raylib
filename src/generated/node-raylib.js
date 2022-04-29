@@ -5942,32 +5942,32 @@ raylib.WaveCrop = function (wave, initSample, finalSample) {
   }
 }
 
-raylib.Color = function (r, g, b, a) {
-  return { r, g, b, a }
+raylib.Color = function (r,g,b,a) {
+  return {r,g,b,a}
 }
 
-raylib.Vector2 = function (x, y) {
-  return { x, y }
+raylib.Vector2 = function (x,y) {
+  return {x,y}
 }
 
-raylib.Vector3 = function (x, y, z) {
-  return { x, y, z }
+raylib.Vector3 = function (x,y,z) {
+  return {x,y,z}
 }
 
-raylib.Vector4 = function (x, y, z, w) {
-  return { x, y, z, w }
+raylib.Vector4 = function (x,y,z,w) {
+  return {x,y,z,w}
 }
 
-raylib.Rectangle = function (x, y, width, height) {
-  return { x, y, width, height }
+raylib.Rectangle = function (x,y,width,height) {
+  return {x,y,width,height}
 }
 
-raylib.Camera2D = function (offset, target, rotation, zoom) {
-  return { offset, target, rotation, zoom }
+raylib.Camera2D = function (offset,target,rotation,zoom) {
+  return {offset,target,rotation,zoom}
 }
 
-raylib.Camera3D = function (position, target, up, fovy, projection) {
-  return { position, target, up, fovy, projection }
+raylib.Camera3D = function (position,target,up,fovy,projection) {
+  return {position,target,up,fovy,projection}
 }
 raylib.Camera = raylib.Camera3D
 
