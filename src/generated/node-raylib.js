@@ -4914,6 +4914,286 @@ raylib.SetAudioStreamBufferSizeDefault = function (size) {
   )
 }
 
+/** Easing: EaseLinearNone. */
+raylib.EaseLinearNone = function (t, b, c, d) {
+  return r.BindEaseLinearNone(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseLinearIn. */
+raylib.EaseLinearIn = function (t, b, c, d) {
+  return r.BindEaseLinearIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseLinearOut. */
+raylib.EaseLinearOut = function (t, b, c, d) {
+  return r.BindEaseLinearOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseLinearInOut. */
+raylib.EaseLinearInOut = function (t, b, c, d) {
+  return r.BindEaseLinearInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseSineIn. */
+raylib.EaseSineIn = function (t, b, c, d) {
+  return r.BindEaseSineIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseSineOut. */
+raylib.EaseSineOut = function (t, b, c, d) {
+  return r.BindEaseSineOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseSineInOut. */
+raylib.EaseSineInOut = function (t, b, c, d) {
+  return r.BindEaseSineInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseCircIn. */
+raylib.EaseCircIn = function (t, b, c, d) {
+  return r.BindEaseCircIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseCircOut. */
+raylib.EaseCircOut = function (t, b, c, d) {
+  return r.BindEaseCircOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseCircInOut. */
+raylib.EaseCircInOut = function (t, b, c, d) {
+  return r.BindEaseCircInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseCubicIn. */
+raylib.EaseCubicIn = function (t, b, c, d) {
+  return r.BindEaseCubicIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseCubicOut. */
+raylib.EaseCubicOut = function (t, b, c, d) {
+  return r.BindEaseCubicOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseCubicInOut. */
+raylib.EaseCubicInOut = function (t, b, c, d) {
+  return r.BindEaseCubicInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseQuadIn. */
+raylib.EaseQuadIn = function (t, b, c, d) {
+  return r.BindEaseQuadIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseQuadOut. */
+raylib.EaseQuadOut = function (t, b, c, d) {
+  return r.BindEaseQuadOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseQuadInOut. */
+raylib.EaseQuadInOut = function (t, b, c, d) {
+  return r.BindEaseQuadInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseExpoIn. */
+raylib.EaseExpoIn = function (t, b, c, d) {
+  return r.BindEaseExpoIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseExpoOut. */
+raylib.EaseExpoOut = function (t, b, c, d) {
+  return r.BindEaseExpoOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseExpoInOut. */
+raylib.EaseExpoInOut = function (t, b, c, d) {
+  return r.BindEaseExpoInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseBackIn. */
+raylib.EaseBackIn = function (t, b, c, d) {
+  return r.BindEaseBackIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseBackOut. */
+raylib.EaseBackOut = function (t, b, c, d) {
+  return r.BindEaseBackOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseBackInOut. */
+raylib.EaseBackInOut = function (t, b, c, d) {
+  return r.BindEaseBackInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseBounceOut. */
+raylib.EaseBounceOut = function (t, b, c, d) {
+  return r.BindEaseBounceOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseBounceIn. */
+raylib.EaseBounceIn = function (t, b, c, d) {
+  return r.BindEaseBounceIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseBounceInOut. */
+raylib.EaseBounceInOut = function (t, b, c, d) {
+  return r.BindEaseBounceInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseElasticIn. */
+raylib.EaseElasticIn = function (t, b, c, d) {
+  return r.BindEaseElasticIn(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseElasticOut. */
+raylib.EaseElasticOut = function (t, b, c, d) {
+  return r.BindEaseElasticOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
+/** Easing: EaseElasticInOut. */
+raylib.EaseElasticInOut = function (t, b, c, d) {
+  return r.BindEaseElasticInOut(
+    t,
+    b,
+    c,
+    d
+  )
+}
+
 /** Update camera position for selected mode */
 raylib.UpdateCamera = function (camera) {
   const obj = r.BindUpdateCamera(

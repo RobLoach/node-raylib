@@ -13,7 +13,6 @@
 ********************************************************************************************/
 
 const r = require('raylib')
-const easing = require('raylib/easings')
 
 const FONT_SIZE = 20
 
@@ -39,10 +38,15 @@ let easingY = 0 // Easing selected for y axis
 
 r.SetTargetFPS(60)
 
-const easingTypes = Object.values(easing)
+// Easing functions reference data
+const easingTypes = Object.keys(r)
+  .filter(name => name.startsWith('Ease'))
+  .map(function (name) {
+    return { name: name, func: r[name] }
+  })
 
-// NoEase function, used when "no easing" is selected for any axis. It just ignores all parameters besides b.
-easingTypes.shift((t, b, c, d) => b)
+// NoEase function, used when "no easing" is selected for any axis.
+easingTypes.push({ name: 'None', func: (t, b, c, d) => b })
 
 while (!r.WindowShouldClose()) {
   // Update
@@ -91,8 +95,8 @@ while (!r.WindowShouldClose()) {
 
   // Movement computation
   if (!paused && ((boundedT && t < d) || !boundedT)) {
-    ballPosition.x = easingTypes[easingX](t, 100.0, 700.0 - 100.0, d)
-    ballPosition.y = easingTypes[easingY](t, 100.0, 400.0 - 100.0, d)
+    ballPosition.x = easingTypes[easingX].func(t, 100.0, 700.0 - 100.0, d)
+    ballPosition.y = easingTypes[easingY].func(t, 100.0, 400.0 - 100.0, d)
     t += 1.0
   }
   r.BeginDrawing()

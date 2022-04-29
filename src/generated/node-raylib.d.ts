@@ -1823,6 +1823,90 @@ declare module "raylib" {
   /** Default size for new audio streams */
   export function SetAudioStreamBufferSizeDefault(size: number): void
   
+  /** Easing: EaseLinearNone. */
+  export function EaseLinearNone(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseLinearIn. */
+  export function EaseLinearIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseLinearOut. */
+  export function EaseLinearOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseLinearInOut. */
+  export function EaseLinearInOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseSineIn. */
+  export function EaseSineIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseSineOut. */
+  export function EaseSineOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseSineInOut. */
+  export function EaseSineInOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseCircIn. */
+  export function EaseCircIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseCircOut. */
+  export function EaseCircOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseCircInOut. */
+  export function EaseCircInOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseCubicIn. */
+  export function EaseCubicIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseCubicOut. */
+  export function EaseCubicOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseCubicInOut. */
+  export function EaseCubicInOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseQuadIn. */
+  export function EaseQuadIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseQuadOut. */
+  export function EaseQuadOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseQuadInOut. */
+  export function EaseQuadInOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseExpoIn. */
+  export function EaseExpoIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseExpoOut. */
+  export function EaseExpoOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseExpoInOut. */
+  export function EaseExpoInOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseBackIn. */
+  export function EaseBackIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseBackOut. */
+  export function EaseBackOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseBackInOut. */
+  export function EaseBackInOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseBounceOut. */
+  export function EaseBounceOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseBounceIn. */
+  export function EaseBounceIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseBounceInOut. */
+  export function EaseBounceInOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseElasticIn. */
+  export function EaseElasticIn(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseElasticOut. */
+  export function EaseElasticOut(t: number, b: number, c: number, d: number): number
+  
+  /** Easing: EaseElasticInOut. */
+  export function EaseElasticInOut(t: number, b: number, c: number, d: number): number
+  
 
   /** Set shader uniform float */
   export function SetShaderFloat(shader: Shader, locIndex: number, value: number): void
