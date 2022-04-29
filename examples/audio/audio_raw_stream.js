@@ -22,8 +22,8 @@ function memcpy (src, srcOffset, dst, dstOffset, length) {
 
   src = srcOffset
     ? src.subarray
-        ? src.subarray(srcOffset, length && srcOffset + length)
-        : src.slice(srcOffset, length && srcOffset + length)
+      ? src.subarray(srcOffset, length && srcOffset + length)
+      : src.slice(srcOffset, length && srcOffset + length)
     : src
 
   if (dst.set) {

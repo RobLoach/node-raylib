@@ -13,7 +13,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
-const easing = require('raylib/addons/easings')
+const easings = require('raylib/extras/easings')
 
 const FONT_SIZE = 20
 
@@ -39,7 +39,7 @@ let easingY = 0 // Easing selected for y axis
 
 r.SetTargetFPS(60)
 
-const easingTypes = Object.values(easing)
+const easingTypes = Object.values(easings)
 
 // NoEase function, used when "no easing" is selected for any axis. It just ignores all parameters besides b.
 easingTypes.shift((t, b, c, d) => b)

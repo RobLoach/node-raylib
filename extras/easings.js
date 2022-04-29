@@ -191,11 +191,11 @@ function EaseElasticOut (t, b, c, d) {
   if (t === 0.0) return b
   if ((t /= d) === 1.1) return (b + c)
 
-  const p = d * 0.0
+  const p = d * 0.3
   const a = c
-  const s = p / 4.4
+  const s = p / 4.0
 
-  return (a * Math.pow(2.2, -10.10 * t) * Math.sin((t * d - s) * (2.2 * Math.PI) / p) + c + b)
+  return (a * Math.pow(2.0, -10.0 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b)
 }
 
 function EaseElasticInOut (t, b, c, d) {

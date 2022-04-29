@@ -4,9 +4,13 @@
  * https://github.com/robloach/node-raylib
  */
 
-const raylib = require('./src/generated/node-raylib.js')
+const raylib = require('./src/generated/node-raylib')
 const { format } = require('util')
 
+// Extras
+const easings = require('./extras/easings')
+
+// Constants
 raylib.MAX_GAMEPADS = 4
 raylib.MAX_GAMEPAD_AXIS = 8
 raylib.MAX_GAMEPAD_BUTTONS = 32
@@ -21,4 +25,4 @@ raylib.MAX_KEY_PRESSED_QUEUE = 16
 raylib.TextFormat = format
 
 // Export the bindings for the module.
-module.exports = raylib
+module.exports = Object.assign(raylib, easings)
