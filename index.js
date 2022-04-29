@@ -7,9 +7,6 @@
 const raylib = require('./src/generated/node-raylib')
 const { format } = require('util')
 
-// Extras
-const easings = require('./extras/easings')
-
 // Constants
 raylib.MAX_GAMEPADS = 4
 raylib.MAX_GAMEPAD_AXIS = 8
@@ -25,4 +22,4 @@ raylib.MAX_KEY_PRESSED_QUEUE = 16
 raylib.TextFormat = format
 
 // Export the bindings for the module.
-module.exports = Object.assign(raylib, easings)
+module.exports = raylib
