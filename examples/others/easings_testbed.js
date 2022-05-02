@@ -41,8 +41,8 @@ r.SetTargetFPS(60)
 // Easing functions reference data
 const easingTypes = Object.keys(r)
   .filter(name => name.startsWith('Ease'))
-  .map(function (name) {
-    return { name: name, func: r[name] }
+  .map(funcName => {
+    return { name: funcName, func: r[funcName] }
   })
 
 // NoEase function, used when "no easing" is selected for any axis.
