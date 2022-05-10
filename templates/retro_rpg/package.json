@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "mdif": "^0.0.5",
-    "raylib": "^0.9.1"
+    "raylib": "^0.9.1",
+    "tiled-load": "^0.0.2"
   }
 }
