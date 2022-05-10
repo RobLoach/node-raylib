@@ -1,0 +1,16 @@
+{
+  "name": "retro_rpg",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "node game.js assets/game.md"
+  },
+  "keywords": [],
+  "author": "David Konsumer <konsumer@jetboystudio.com>",
+  "license": "MIT",
+  "dependencies": {
+    "mdif": "^0.0.5",
+    "raylib": "^0.9.1"
+  }
+}
