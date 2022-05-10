@@ -4,7 +4,7 @@ This project is meant to help you with ideas for setting up a retro RPG, like in
 
 ## Features
 
-- dialog-flows that can be easily edited in markdown (vi [mdif](https://github.com/notnullgames/mdif))
+- dialog-flows that can be easily edited in markdown (via [mdif](https://github.com/notnullgames/mdif))
 - simple mapping in [tiled](https://www.mapeditor.org/)
 - normalized characters (easier NPC & player modification with spritesheets) that you can edit graphically [here](https://notnullgames.github.io/universal-sprites/)
 
