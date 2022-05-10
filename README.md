@@ -80,6 +80,10 @@ node-raylib --version
 npx -y raylib --version
 ```
 
+## Projects
+
+- [Retro RPG Template](https://github.com/notnullgames/raylib-example-retro_rpg)
+
 ## Development
 
 The following are a few notes and resources when developing `node-raylib`...
@@ -95,6 +99,7 @@ cd node-raylib
 npm i
 npm t
 ```
+
 
 ### TypeScript Definitions
 
