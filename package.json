@@ -17,7 +17,7 @@
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
     "gen:code": "node tools/generate.js",
-    "gen:docs": "jsdoc2md --files src/generated/node-raylib.js > docs/API.md"
+    "gen:docs": "jsdoc2md > docs/API.md"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {
@@ -68,5 +68,10 @@
     "jsdoc-to-markdown": "^7.1.1",
     "pkg": "^5.6.0",
     "standard": "^17.0.0"
+  },
+  "jsdoc2md": {
+    "files": [
+      "src/generated/node-raylib.js"
+    ]
   }
 }

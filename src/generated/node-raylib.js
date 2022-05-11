@@ -1,4 +1,12 @@
-// GENERATED CODE: DO NOT MODIFY
+/**
+ * node-raylib
+ *
+ * @module raylib
+ * @file Definitions file for node-raylib.
+ *
+ * GENERATED CODE: DO NOT MODIFY
+ */
+
 const r = require('../../build/Release/node-raylib.node')
 
 const raylib = {}
@@ -9971,1436 +9979,2329 @@ raylib.SetShaderVec4 = SetShaderVec4
 
 /**
  * Set to try enabling V-Sync on GPU
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_VSYNC_HINT = 64
 
 /**
  * Set to run program in fullscreen
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_FULLSCREEN_MODE = 2
 
 /**
  * Set to allow resizable window
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_RESIZABLE = 4
 
 /**
  * Set to disable window decoration (frame and buttons)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_UNDECORATED = 8
 
 /**
  * Set to hide window
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_HIDDEN = 128
 
 /**
  * Set to minimize window (iconify)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_MINIMIZED = 512
 
 /**
  * Set to maximize window (expanded to monitor)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_MAXIMIZED = 1024
 
 /**
  * Set to window non focused
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_UNFOCUSED = 2048
 
 /**
  * Set to window always on top
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_TOPMOST = 4096
 
 /**
  * Set to allow windows running while minimized
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_ALWAYS_RUN = 256
 
 /**
  * Set to allow transparent framebuffer
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_TRANSPARENT = 16
 
 /**
  * Set to support HighDPI
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_WINDOW_HIGHDPI = 8192
 
 /**
  * Set to try enabling MSAA 4X
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_MSAA_4X_HINT = 32
 
 /**
  * Set to try enabling interlaced video format (for V3D)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FLAG_INTERLACED_HINT = 65536
+
 /**
  * Display all logs
+ *
+ * @type {number}
+ * @constant
  */
 raylib.LOG_ALL = 0
 
 /**
  * Trace logging, intended for internal use only
+ *
+ * @type {number}
+ * @constant
  */
 raylib.LOG_TRACE = 1
 
 /**
  * Debug logging, used for internal debugging, it should be disabled on release builds
+ *
+ * @type {number}
+ * @constant
  */
 raylib.LOG_DEBUG = 2
 
 /**
  * Info logging, used for program execution info
+ *
+ * @type {number}
+ * @constant
  */
 raylib.LOG_INFO = 3
 
 /**
  * Warning logging, used on recoverable failures
+ *
+ * @type {number}
+ * @constant
  */
 raylib.LOG_WARNING = 4
 
 /**
  * Error logging, used on unrecoverable failures
+ *
+ * @type {number}
+ * @constant
  */
 raylib.LOG_ERROR = 5
 
 /**
  * Fatal logging, used to abort program: exit(EXIT_FAILURE)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.LOG_FATAL = 6
 
 /**
  * Disable logging
+ *
+ * @type {number}
+ * @constant
  */
 raylib.LOG_NONE = 7
+
 /**
  * Key: NULL, used for no key pressed
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_NULL = 0
 
 /**
  * Key: '
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_APOSTROPHE = 39
 
 /**
  * Key: ,
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_COMMA = 44
 
 /**
  * Key: -
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_MINUS = 45
 
 /**
  * Key: .
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_PERIOD = 46
 
 /**
  * Key: /
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_SLASH = 47
 
 /**
  * Key: 0
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_ZERO = 48
 
 /**
  * Key: 1
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_ONE = 49
 
 /**
  * Key: 2
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_TWO = 50
 
 /**
  * Key: 3
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_THREE = 51
 
 /**
  * Key: 4
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_FOUR = 52
 
 /**
  * Key: 5
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_FIVE = 53
 
 /**
  * Key: 6
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_SIX = 54
 
 /**
  * Key: 7
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_SEVEN = 55
 
 /**
  * Key: 8
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_EIGHT = 56
 
 /**
  * Key: 9
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_NINE = 57
 
 /**
  * Key: ;
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_SEMICOLON = 59
 
 /**
  * Key: =
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_EQUAL = 61
 
 /**
  * Key: A | a
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_A = 65
 
 /**
  * Key: B | b
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_B = 66
 
 /**
  * Key: C | c
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_C = 67
 
 /**
  * Key: D | d
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_D = 68
 
 /**
  * Key: E | e
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_E = 69
 
 /**
  * Key: F | f
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F = 70
 
 /**
  * Key: G | g
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_G = 71
 
 /**
  * Key: H | h
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_H = 72
 
 /**
  * Key: I | i
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_I = 73
 
 /**
  * Key: J | j
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_J = 74
 
 /**
  * Key: K | k
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_K = 75
 
 /**
  * Key: L | l
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_L = 76
 
 /**
  * Key: M | m
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_M = 77
 
 /**
  * Key: N | n
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_N = 78
 
 /**
  * Key: O | o
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_O = 79
 
 /**
  * Key: P | p
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_P = 80
 
 /**
  * Key: Q | q
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_Q = 81
 
 /**
  * Key: R | r
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_R = 82
 
 /**
  * Key: S | s
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_S = 83
 
 /**
  * Key: T | t
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_T = 84
 
 /**
  * Key: U | u
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_U = 85
 
 /**
  * Key: V | v
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_V = 86
 
 /**
  * Key: W | w
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_W = 87
 
 /**
  * Key: X | x
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_X = 88
 
 /**
  * Key: Y | y
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_Y = 89
 
 /**
  * Key: Z | z
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_Z = 90
 
 /**
  * Key: [
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_LEFT_BRACKET = 91
 
 /**
  * Key: '\'
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_BACKSLASH = 92
 
 /**
  * Key: ]
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_RIGHT_BRACKET = 93
 
 /**
  * Key: `
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_GRAVE = 96
 
 /**
  * Key: Space
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_SPACE = 32
 
 /**
  * Key: Esc
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_ESCAPE = 256
 
 /**
  * Key: Enter
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_ENTER = 257
 
 /**
  * Key: Tab
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_TAB = 258
 
 /**
  * Key: Backspace
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_BACKSPACE = 259
 
 /**
  * Key: Ins
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_INSERT = 260
 
 /**
  * Key: Del
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_DELETE = 261
 
 /**
  * Key: Cursor right
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_RIGHT = 262
 
 /**
  * Key: Cursor left
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_LEFT = 263
 
 /**
  * Key: Cursor down
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_DOWN = 264
 
 /**
  * Key: Cursor up
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_UP = 265
 
 /**
  * Key: Page up
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_PAGE_UP = 266
 
 /**
  * Key: Page down
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_PAGE_DOWN = 267
 
 /**
  * Key: Home
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_HOME = 268
 
 /**
  * Key: End
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_END = 269
 
 /**
  * Key: Caps lock
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_CAPS_LOCK = 280
 
 /**
  * Key: Scroll down
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_SCROLL_LOCK = 281
 
 /**
  * Key: Num lock
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_NUM_LOCK = 282
 
 /**
  * Key: Print screen
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_PRINT_SCREEN = 283
 
 /**
  * Key: Pause
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_PAUSE = 284
 
 /**
  * Key: F1
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F1 = 290
 
 /**
  * Key: F2
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F2 = 291
 
 /**
  * Key: F3
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F3 = 292
 
 /**
  * Key: F4
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F4 = 293
 
 /**
  * Key: F5
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F5 = 294
 
 /**
  * Key: F6
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F6 = 295
 
 /**
  * Key: F7
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F7 = 296
 
 /**
  * Key: F8
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F8 = 297
 
 /**
  * Key: F9
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F9 = 298
 
 /**
  * Key: F10
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F10 = 299
 
 /**
  * Key: F11
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F11 = 300
 
 /**
  * Key: F12
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_F12 = 301
 
 /**
  * Key: Shift left
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_LEFT_SHIFT = 340
 
 /**
  * Key: Control left
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_LEFT_CONTROL = 341
 
 /**
  * Key: Alt left
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_LEFT_ALT = 342
 
 /**
  * Key: Super left
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_LEFT_SUPER = 343
 
 /**
  * Key: Shift right
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_RIGHT_SHIFT = 344
 
 /**
  * Key: Control right
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_RIGHT_CONTROL = 345
 
 /**
  * Key: Alt right
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_RIGHT_ALT = 346
 
 /**
  * Key: Super right
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_RIGHT_SUPER = 347
 
 /**
  * Key: KB menu
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KB_MENU = 348
 
 /**
  * Key: Keypad 0
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_0 = 320
 
 /**
  * Key: Keypad 1
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_1 = 321
 
 /**
  * Key: Keypad 2
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_2 = 322
 
 /**
  * Key: Keypad 3
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_3 = 323
 
 /**
  * Key: Keypad 4
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_4 = 324
 
 /**
  * Key: Keypad 5
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_5 = 325
 
 /**
  * Key: Keypad 6
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_6 = 326
 
 /**
  * Key: Keypad 7
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_7 = 327
 
 /**
  * Key: Keypad 8
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_8 = 328
 
 /**
  * Key: Keypad 9
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_9 = 329
 
 /**
  * Key: Keypad .
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_DECIMAL = 330
 
 /**
  * Key: Keypad /
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_DIVIDE = 331
 
 /**
  * Key: Keypad *
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_MULTIPLY = 332
 
 /**
  * Key: Keypad -
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_SUBTRACT = 333
 
 /**
  * Key: Keypad +
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_ADD = 334
 
 /**
  * Key: Keypad Enter
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_ENTER = 335
 
 /**
  * Key: Keypad =
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_KP_EQUAL = 336
 
 /**
  * Key: Android back button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_BACK = 4
 
 /**
  * Key: Android menu button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_MENU = 82
 
 /**
  * Key: Android volume up button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_VOLUME_UP = 24
 
 /**
  * Key: Android volume down button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.KEY_VOLUME_DOWN = 25
+
 /**
  * Mouse button left
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_BUTTON_LEFT = 0
 
 /**
  * Mouse button right
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_BUTTON_RIGHT = 1
 
 /**
  * Mouse button middle (pressed wheel)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_BUTTON_MIDDLE = 2
 
 /**
  * Mouse button side (advanced mouse device)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_BUTTON_SIDE = 3
 
 /**
  * Mouse button extra (advanced mouse device)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_BUTTON_EXTRA = 4
 
 /**
  * Mouse button fordward (advanced mouse device)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_BUTTON_FORWARD = 5
 
 /**
  * Mouse button back (advanced mouse device)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_BUTTON_BACK = 6
+
 /**
  * Default pointer shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_DEFAULT = 0
 
 /**
  * Arrow shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_ARROW = 1
 
 /**
  * Text writing cursor shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_IBEAM = 2
 
 /**
  * Cross shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_CROSSHAIR = 3
 
 /**
  * Pointing hand cursor
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_POINTING_HAND = 4
 
 /**
  * Horizontal resize/move arrow shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_RESIZE_EW = 5
 
 /**
  * Vertical resize/move arrow shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_RESIZE_NS = 6
 
 /**
  * Top-left to bottom-right diagonal resize/move arrow shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_RESIZE_NWSE = 7
 
 /**
  * The top-right to bottom-left diagonal resize/move arrow shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_RESIZE_NESW = 8
 
 /**
  * The omni-directional resize/move cursor shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_RESIZE_ALL = 9
 
 /**
  * The operation-not-allowed shape
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MOUSE_CURSOR_NOT_ALLOWED = 10
+
 /**
  * Unknown button, just for error checking
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_UNKNOWN = 0
 
 /**
  * Gamepad left DPAD up button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_LEFT_FACE_UP = 1
 
 /**
  * Gamepad left DPAD right button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_LEFT_FACE_RIGHT = 2
 
 /**
  * Gamepad left DPAD down button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_LEFT_FACE_DOWN = 3
 
 /**
  * Gamepad left DPAD left button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_LEFT_FACE_LEFT = 4
 
 /**
  * Gamepad right button up (i.e. PS3: Triangle, Xbox: Y)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_RIGHT_FACE_UP = 5
 
 /**
  * Gamepad right button right (i.e. PS3: Square, Xbox: X)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_RIGHT_FACE_RIGHT = 6
 
 /**
  * Gamepad right button down (i.e. PS3: Cross, Xbox: A)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_RIGHT_FACE_DOWN = 7
 
 /**
  * Gamepad right button left (i.e. PS3: Circle, Xbox: B)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_RIGHT_FACE_LEFT = 8
 
 /**
  * Gamepad top/back trigger left (first), it could be a trailing button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_LEFT_TRIGGER_1 = 9
 
 /**
  * Gamepad top/back trigger left (second), it could be a trailing button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_LEFT_TRIGGER_2 = 10
 
 /**
  * Gamepad top/back trigger right (one), it could be a trailing button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_RIGHT_TRIGGER_1 = 11
 
 /**
  * Gamepad top/back trigger right (second), it could be a trailing button
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_RIGHT_TRIGGER_2 = 12
 
 /**
  * Gamepad center buttons, left one (i.e. PS3: Select)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_MIDDLE_LEFT = 13
 
 /**
  * Gamepad center buttons, middle one (i.e. PS3: PS, Xbox: XBOX)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_MIDDLE = 14
 
 /**
  * Gamepad center buttons, right one (i.e. PS3: Start)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_MIDDLE_RIGHT = 15
 
 /**
  * Gamepad joystick pressed button left
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_LEFT_THUMB = 16
 
 /**
  * Gamepad joystick pressed button right
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_BUTTON_RIGHT_THUMB = 17
+
 /**
  * Gamepad left stick X axis
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_AXIS_LEFT_X = 0
 
 /**
  * Gamepad left stick Y axis
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_AXIS_LEFT_Y = 1
 
 /**
  * Gamepad right stick X axis
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_AXIS_RIGHT_X = 2
 
 /**
  * Gamepad right stick Y axis
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_AXIS_RIGHT_Y = 3
 
 /**
  * Gamepad back trigger left, pressure level: [1..-1]
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_AXIS_LEFT_TRIGGER = 4
 
 /**
  * Gamepad back trigger right, pressure level: [1..-1]
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GAMEPAD_AXIS_RIGHT_TRIGGER = 5
+
 /**
  * Albedo material (same as: MATERIAL_MAP_DIFFUSE)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_ALBEDO = 0
 
 /**
  * Metalness material (same as: MATERIAL_MAP_SPECULAR)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_METALNESS = 1
 
 /**
  * Normal material
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_NORMAL = 2
 
 /**
  * Roughness material
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_ROUGHNESS = 3
 
 /**
  * Ambient occlusion material
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_OCCLUSION = 4
 
 /**
  * Emission material
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_EMISSION = 5
 
 /**
  * Heightmap material
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_HEIGHT = 6
 
 /**
  * Cubemap material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_CUBEMAP = 7
 
 /**
  * Irradiance material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_IRRADIANCE = 8
 
 /**
  * Prefilter material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_PREFILTER = 9
 
 /**
  * Brdf material
+ *
+ * @type {number}
+ * @constant
  */
 raylib.MATERIAL_MAP_BRDF = 10
+
 /**
  * Shader location: vertex attribute: position
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_VERTEX_POSITION = 0
 
 /**
  * Shader location: vertex attribute: texcoord01
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_VERTEX_TEXCOORD01 = 1
 
 /**
  * Shader location: vertex attribute: texcoord02
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_VERTEX_TEXCOORD02 = 2
 
 /**
  * Shader location: vertex attribute: normal
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_VERTEX_NORMAL = 3
 
 /**
  * Shader location: vertex attribute: tangent
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_VERTEX_TANGENT = 4
 
 /**
  * Shader location: vertex attribute: color
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_VERTEX_COLOR = 5
 
 /**
  * Shader location: matrix uniform: model-view-projection
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MATRIX_MVP = 6
 
 /**
  * Shader location: matrix uniform: view (camera transform)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MATRIX_VIEW = 7
 
 /**
  * Shader location: matrix uniform: projection
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MATRIX_PROJECTION = 8
 
 /**
  * Shader location: matrix uniform: model (transform)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MATRIX_MODEL = 9
 
 /**
  * Shader location: matrix uniform: normal
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MATRIX_NORMAL = 10
 
 /**
  * Shader location: vector uniform: view
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_VECTOR_VIEW = 11
 
 /**
  * Shader location: vector uniform: diffuse color
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_COLOR_DIFFUSE = 12
 
 /**
  * Shader location: vector uniform: specular color
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_COLOR_SPECULAR = 13
 
 /**
  * Shader location: vector uniform: ambient color
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_COLOR_AMBIENT = 14
 
 /**
  * Shader location: sampler2d texture: albedo (same as: SHADER_LOC_MAP_DIFFUSE)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_ALBEDO = 15
 
 /**
  * Shader location: sampler2d texture: metalness (same as: SHADER_LOC_MAP_SPECULAR)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_METALNESS = 16
 
 /**
  * Shader location: sampler2d texture: normal
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_NORMAL = 17
 
 /**
  * Shader location: sampler2d texture: roughness
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_ROUGHNESS = 18
 
 /**
  * Shader location: sampler2d texture: occlusion
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_OCCLUSION = 19
 
 /**
  * Shader location: sampler2d texture: emission
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_EMISSION = 20
 
 /**
  * Shader location: sampler2d texture: height
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_HEIGHT = 21
 
 /**
  * Shader location: samplerCube texture: cubemap
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_CUBEMAP = 22
 
 /**
  * Shader location: samplerCube texture: irradiance
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_IRRADIANCE = 23
 
 /**
  * Shader location: samplerCube texture: prefilter
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_PREFILTER = 24
 
 /**
  * Shader location: sampler2d texture: brdf
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_LOC_MAP_BRDF = 25
+
 /**
  * Shader uniform type: float
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_FLOAT = 0
 
 /**
  * Shader uniform type: vec2 (2 float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_VEC2 = 1
 
 /**
  * Shader uniform type: vec3 (3 float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_VEC3 = 2
 
 /**
  * Shader uniform type: vec4 (4 float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_VEC4 = 3
 
 /**
  * Shader uniform type: int
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_INT = 4
 
 /**
  * Shader uniform type: ivec2 (2 int)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_IVEC2 = 5
 
 /**
  * Shader uniform type: ivec3 (3 int)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_IVEC3 = 6
 
 /**
  * Shader uniform type: ivec4 (4 int)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_IVEC4 = 7
 
 /**
  * Shader uniform type: sampler2d
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_UNIFORM_SAMPLER2D = 8
+
 /**
  * Shader attribute type: float
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_ATTRIB_FLOAT = 0
 
 /**
  * Shader attribute type: vec2 (2 float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_ATTRIB_VEC2 = 1
 
 /**
  * Shader attribute type: vec3 (3 float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_ATTRIB_VEC3 = 2
 
 /**
  * Shader attribute type: vec4 (4 float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.SHADER_ATTRIB_VEC4 = 3
+
 /**
  * 8 bit per pixel (no alpha)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1
 
 /**
  * 8*2 bpp (2 channels)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2
 
 /**
  * 16 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3
 
 /**
  * 24 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4
 
 /**
  * 16 bpp (1 bit alpha)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5
 
 /**
  * 16 bpp (4 bit alpha)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6
 
 /**
  * 32 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7
 
 /**
  * 32 bpp (1 channel - float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_R32 = 8
 
 /**
  * 32*3 bpp (3 channels - float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
 
 /**
  * 32*4 bpp (4 channels - float)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
 
 /**
  * 4 bpp (no alpha)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
 
 /**
  * 4 bpp (1 bit alpha)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
 
 /**
  * 8 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
 
 /**
  * 8 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
 
 /**
  * 4 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
 
 /**
  * 4 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
 
 /**
  * 8 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
 
 /**
  * 4 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
 
 /**
  * 4 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
 
 /**
  * 8 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
 
 /**
  * 2 bpp
+ *
+ * @type {number}
+ * @constant
  */
 raylib.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
+
 /**
  * No filter, just pixel approximation
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_FILTER_POINT = 0
 
 /**
  * Linear filtering
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_FILTER_BILINEAR = 1
 
 /**
  * Trilinear filtering (linear with mipmaps)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_FILTER_TRILINEAR = 2
 
 /**
  * Anisotropic filtering 4x
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_FILTER_ANISOTROPIC_4X = 3
 
 /**
  * Anisotropic filtering 8x
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_FILTER_ANISOTROPIC_8X = 4
 
 /**
  * Anisotropic filtering 16x
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_FILTER_ANISOTROPIC_16X = 5
+
 /**
  * Repeats texture in tiled mode
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_WRAP_REPEAT = 0
 
 /**
  * Clamps texture to edge pixel in tiled mode
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_WRAP_CLAMP = 1
 
 /**
  * Mirrors and repeats the texture in tiled mode
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_WRAP_MIRROR_REPEAT = 2
 
 /**
  * Mirrors and clamps to border the texture in tiled mode
+ *
+ * @type {number}
+ * @constant
  */
 raylib.TEXTURE_WRAP_MIRROR_CLAMP = 3
+
 /**
  * Automatically detect layout type
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CUBEMAP_LAYOUT_AUTO_DETECT = 0
 
 /**
  * Layout is defined by a vertical line with faces
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CUBEMAP_LAYOUT_LINE_VERTICAL = 1
 
 /**
  * Layout is defined by an horizontal line with faces
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2
 
 /**
  * Layout is defined by a 3x4 cross with cubemap faces
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = 3
 
 /**
  * Layout is defined by a 4x3 cross with cubemap faces
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = 4
 
 /**
  * Layout is defined by a panorama image (equirectangular map)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CUBEMAP_LAYOUT_PANORAMA = 5
+
 /**
  * Default font generation, anti-aliased
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FONT_DEFAULT = 0
 
 /**
  * Bitmap font generation, no anti-aliasing
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FONT_BITMAP = 1
 
 /**
  * SDF font generation, requires external shader
+ *
+ * @type {number}
+ * @constant
  */
 raylib.FONT_SDF = 2
+
 /**
  * Blend textures considering alpha (default)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.BLEND_ALPHA = 0
 
 /**
  * Blend textures adding colors
+ *
+ * @type {number}
+ * @constant
  */
 raylib.BLEND_ADDITIVE = 1
 
 /**
  * Blend textures multiplying colors
+ *
+ * @type {number}
+ * @constant
  */
 raylib.BLEND_MULTIPLIED = 2
 
 /**
  * Blend textures adding colors (alternative)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.BLEND_ADD_COLORS = 3
 
 /**
  * Blend textures subtracting colors (alternative)
+ *
+ * @type {number}
+ * @constant
  */
 raylib.BLEND_SUBTRACT_COLORS = 4
 
 /**
  * Belnd textures using custom src/dst factors (use rlSetBlendMode())
+ *
+ * @type {number}
+ * @constant
  */
 raylib.BLEND_CUSTOM = 5
+
 /**
  * No gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_NONE = 0
 
 /**
  * Tap gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_TAP = 1
 
 /**
  * Double tap gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_DOUBLETAP = 2
 
 /**
  * Hold gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_HOLD = 4
 
 /**
  * Drag gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_DRAG = 8
 
 /**
  * Swipe right gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_SWIPE_RIGHT = 16
 
 /**
  * Swipe left gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_SWIPE_LEFT = 32
 
 /**
  * Swipe up gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_SWIPE_UP = 64
 
 /**
  * Swipe down gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_SWIPE_DOWN = 128
 
 /**
  * Pinch in gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_PINCH_IN = 256
 
 /**
  * Pinch out gesture
+ *
+ * @type {number}
+ * @constant
  */
 raylib.GESTURE_PINCH_OUT = 512
+
 /**
  * Custom camera
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CAMERA_CUSTOM = 0
 
 /**
  * Free camera
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CAMERA_FREE = 1
 
 /**
  * Orbital camera
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CAMERA_ORBITAL = 2
 
 /**
  * First person camera
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CAMERA_FIRST_PERSON = 3
 
 /**
  * Third person camera
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CAMERA_THIRD_PERSON = 4
+
 /**
  * Perspective projection
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CAMERA_PERSPECTIVE = 0
 
 /**
  * Orthographic projection
+ *
+ * @type {number}
+ * @constant
  */
 raylib.CAMERA_ORTHOGRAPHIC = 1
+
 /**
  * Npatch layout: 3x3 tiles
+ *
+ * @type {number}
+ * @constant
  */
 raylib.NPATCH_NINE_PATCH = 0
 
 /**
  * Npatch layout: 1x3 tiles
+ *
+ * @type {number}
+ * @constant
  */
 raylib.NPATCH_THREE_PATCH_VERTICAL = 1
 
 /**
  * Npatch layout: 3x1 tiles
+ *
+ * @type {number}
+ * @constant
  */
 raylib.NPATCH_THREE_PATCH_HORIZONTAL = 2
 

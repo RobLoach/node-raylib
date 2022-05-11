@@ -141,7 +141,15 @@ raylib.${info.name} = ${info.name}
 }
 
 module.exports = ({ functions, structs, enums, blocklist, byreflist }) => {
-  return `// GENERATED CODE: DO NOT MODIFY
+  return `/**
+ * node-raylib
+ *
+ * @module raylib
+ * @file Definitions file for node-raylib.
+ *
+ * GENERATED CODE: DO NOT MODIFY
+ */
+
 const r = require('../../build/Release/node-raylib.node')
 
 const raylib = {}
@@ -235,9 +243,18 @@ function SetShaderVec4(shader, locIndex, value) {
   )
 }
 raylib.SetShaderVec4 = SetShaderVec4
-
 ${enums
-  .map((e) => { return e.values.map(v => `/**\n * ${v.description}\n */\nraylib.${v.name} = ${v.value}`).join('\n\n') })
+  .map((e) => {
+    return e.values.map(v => `
+/**
+ * ${v.description}
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.${v.name} = ${v.value}`)
+    .join('\n')
+  })
   .join('\n')
 }
 
