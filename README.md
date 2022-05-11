@@ -4,10 +4,13 @@
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
-## Sample Applications
+## Examples
 
-- [Flappy](https://github.com/arthurmassanes/flappy) - Flappy Bird clone by [@arthurmassanes](https://github.com/arthurmassanes)
-- Check out the [examples folder](examples)
+| Name | Description |
+|:-----|:------------|
+| [Offical Examples](examples) | Ports of raylib's examples to node-raylib |
+| [Flappy](https://github.com/arthurmassanes/flappy) | Flappy Bird clone by [@arthurmassanes](https://github.com/arthurmassanes) |
+| [Retro RPG Template](https://github.com/notnullgames/raylib-example-retro_rpg) | Small prototype to build a retro-inspired RPG game |
 
 ## Dependencies
 
