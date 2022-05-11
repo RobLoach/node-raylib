@@ -23,18 +23,19 @@
     ``` bash
     mkdir myexample
     cd myexample
-    npm init
     ```
 
-2. Use the runtime by adding this to the `scripts` section of your package.json.
-
-```json
-{
-    "scripts": {
-        "start": "npx -y raylib"
+2. Create a `package.json` file with:
+    ``` json
+    {
+      "dependencies": {
+        "raylib": "*"
+      },
+      "scripts": {
+          "start": "node index.js"
+      }
     }
-}
-```
+    ```
 
 3. Create a `index.js` JavaScript file, like [`core_basic_window.js`](examples/core/core_basic_window.js):
     ``` javascript
@@ -48,22 +49,35 @@
     while (!r.WindowShouldClose()) {
         r.BeginDrawing();
         r.ClearBackground(r.RAYWHITE)
-        r.DrawText("Congrats! You created your first window!", 190, 200, 20, r.LIGHTGRAY)
+        r.DrawText("Congrats! You created your first node-raylib window!", 120, 200, 20, r.LIGHTGRAY)
         r.EndDrawing()
     }
-    r.CloseWindow()        // Close window and OpenGL context
+    r.CloseWindow()
     ```
 
-4. Run `index.js` through Node.js:
+4. Have npm install the dependencies for you:
+    ``` bash
+    npm install
+    ```
+
+5. Run `index.js` through Node.js:
     ``` bash
     npm start
     ```
+    ![Screenshot](examples/core/core_basic_window.png)
 
 Check for more [examples](examples) organized by raylib modules.
 
 ## Installation
-Raylib is implemented as bindings with the node-addon-api. Bindings are prebuilt for many platforms in [Releases](https://github.com/RobLoach/node-raylib/releases). If your platform is not supported by a prebuilt binary, you will need CMake to build the native addon. Windows users building manually will also require MSVC Build Tools 2019, or Visual Studio 2019 with build tools for C/C++.
-## CLI
+
+Raylib is implemented as bindings with [node-addon-api](https://github.com/nodejs/node-addon-api). Bindings are prebuilt for many platforms in [Releases](https://github.com/RobLoach/node-raylib/releases). If your platform is not supported by a prebuilt binary, you will need CMake to build the native addon. Windows users building manually will also require MSVC Build Tools 2019, or Visual Studio 2019 with build tools for C/C++.
+
+In general, to install node-raylib locally, use [npm](https://www.npmjs.com/):
+```
+npm install raylib
+```
+
+### CLI
 
 The project comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly:
 
@@ -80,17 +94,14 @@ The CLI can be installed globally through `npm` or `npx` for no-install:
 ``` bash
 npm install raylib --global
 node-raylib --version
-
 npx -y raylib --version
 ```
 
 ## Development
 
-The following are a few notes and resources when developing `node-raylib`...
+[node-addon-api](https://github.com/nodejs/node-addon-api) is used to construct the bindings. Raylib provides a header parser that generates a JSON file containing information on the API. The code binding raylib to NodeJS is automatically generated based on this file. For information on how bindings are written for raylib read the [documentation](docs). Code generators for the C++ bindings, TypeScript definitions, and JavaScript wrapper functions are found in the [tools/generate_templates folder](tools/generate_templates).
 
-[node-addon-api](https://github.com/nodejs/node-addon-api) is used to construct the bindings. Raylib provides a header parser that generates a JSON file containing information on the API. The code binding raylib to NodeJS is automatically generated based on this file. For information on how bindings are written for raylib read the [docs here](https://github.com/RobLoach/node-raylib/tree/raylib4/docs). Code generators for the C++ bindings, TS Definitions, and JS wrapper functions are located [here](https://github.com/RobLoach/node-raylib/tree/raylib4/tools/generate_templates).
-
-### Testing 
+### Testing
 Run the following to run tests...
 
 ```
@@ -102,7 +113,7 @@ npm t
 
 ### TypeScript Definitions
 
-Typescript definitions are provided by a generator based on raylib's header parser. See [here](https://github.com/RobLoach/node-raylib/blob/raylib4/tools/generate_templates/node-raylib-definitions.js) for information on how to generate them.
+Typescript definitions are provided by a generator based on raylib's header parser. See [node-raylib-definitions.js](tools/generate_templates/node-raylib-definitions.js) for information on how to generate them.
 
 ### Package
 
