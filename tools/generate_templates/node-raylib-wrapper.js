@@ -54,6 +54,9 @@ const JSDocsForFunction = (structs, func) => {
   if (func.returnType && func.returnType !== 'void') {
     returnType = `\n *\n * @return {${ArgumentTypeConversion(func.returnType)}} The resulting ${func.returnType}.`
   }
+  else {
+    returnType = `\n *\n * @return {null}`
+  }
 
   return `
 /**
@@ -120,17 +123,28 @@ const WrapConstructor = (structs, constructor) => {
 
     // Construct the field parameters
     let params = ''
+    let props = ''
     if (info.fields) {
       params = '\n *'
+      props = '\n *'
       for (const field of info.fields) {
-        params += `\n * @param {${ArgumentTypeConversion(field.type)}} ${field.name} ${field.description}`
+        params += `\n * @param {${ArgumentTypeConversion(field.type)}} ${field.name} - ${field.description}`
+        props += `\n * @property {${ArgumentTypeConversion(field.type)}} ${field.name} - ${field.description}`
       }
     }
     return `/**
+ * ${description}
+ * @typedef {Object} ${info.name}${props}
+ *
+ * @hideconstructor
+ */
+
+/**
  * ${description}${params}
  *
+ * @constructs ${info.name}
+ *
  * @return {${info.name}} The new ${info.name}.
- * @constructor
  */
 function ${info.name}(${info.fields.map(field => `${field.name}`).join(',')}) {
   return {${info.fields.map(field => `${field.name}`).join(',')}}

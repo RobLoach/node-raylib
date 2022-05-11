@@ -20,13 +20,13 @@
 ## Functions
 
 <dl>
-<dt><a href="#InitWindow">InitWindow(width, height, title)</a></dt>
+<dt><a href="#InitWindow">InitWindow(width, height, title)</a> ⇒ <code>null</code></dt>
 <dd><p>Initialize window and OpenGL context</p>
 </dd>
 <dt><a href="#WindowShouldClose">WindowShouldClose()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if KEY_ESCAPE pressed or Close icon pressed</p>
 </dd>
-<dt><a href="#CloseWindow">CloseWindow()</a></dt>
+<dt><a href="#CloseWindow">CloseWindow()</a> ⇒ <code>null</code></dt>
 <dd><p>Close window and unload OpenGL context</p>
 </dd>
 <dt><a href="#IsWindowReady">IsWindowReady()</a> ⇒ <code>boolean</code></dt>
@@ -53,40 +53,40 @@
 <dt><a href="#IsWindowState">IsWindowState(flag)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if one specific window flag is enabled</p>
 </dd>
-<dt><a href="#SetWindowState">SetWindowState(flags)</a></dt>
+<dt><a href="#SetWindowState">SetWindowState(flags)</a> ⇒ <code>null</code></dt>
 <dd><p>Set window configuration state using flags (only PLATFORM_DESKTOP)</p>
 </dd>
-<dt><a href="#ClearWindowState">ClearWindowState(flags)</a></dt>
+<dt><a href="#ClearWindowState">ClearWindowState(flags)</a> ⇒ <code>null</code></dt>
 <dd><p>Clear window configuration state flags</p>
 </dd>
-<dt><a href="#ToggleFullscreen">ToggleFullscreen()</a></dt>
+<dt><a href="#ToggleFullscreen">ToggleFullscreen()</a> ⇒ <code>null</code></dt>
 <dd><p>Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)</p>
 </dd>
-<dt><a href="#MaximizeWindow">MaximizeWindow()</a></dt>
+<dt><a href="#MaximizeWindow">MaximizeWindow()</a> ⇒ <code>null</code></dt>
 <dd><p>Set window state: maximized, if resizable (only PLATFORM_DESKTOP)</p>
 </dd>
-<dt><a href="#MinimizeWindow">MinimizeWindow()</a></dt>
+<dt><a href="#MinimizeWindow">MinimizeWindow()</a> ⇒ <code>null</code></dt>
 <dd><p>Set window state: minimized, if resizable (only PLATFORM_DESKTOP)</p>
 </dd>
-<dt><a href="#RestoreWindow">RestoreWindow()</a></dt>
+<dt><a href="#RestoreWindow">RestoreWindow()</a> ⇒ <code>null</code></dt>
 <dd><p>Set window state: not minimized/maximized (only PLATFORM_DESKTOP)</p>
 </dd>
-<dt><a href="#SetWindowIcon">SetWindowIcon(image)</a></dt>
+<dt><a href="#SetWindowIcon">SetWindowIcon(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Set icon for window (only PLATFORM_DESKTOP)</p>
 </dd>
-<dt><a href="#SetWindowTitle">SetWindowTitle(title)</a></dt>
+<dt><a href="#SetWindowTitle">SetWindowTitle(title)</a> ⇒ <code>null</code></dt>
 <dd><p>Set title for window (only PLATFORM_DESKTOP)</p>
 </dd>
-<dt><a href="#SetWindowPosition">SetWindowPosition(x, y)</a></dt>
+<dt><a href="#SetWindowPosition">SetWindowPosition(x, y)</a> ⇒ <code>null</code></dt>
 <dd><p>Set window position on screen (only PLATFORM_DESKTOP)</p>
 </dd>
-<dt><a href="#SetWindowMonitor">SetWindowMonitor(monitor)</a></dt>
+<dt><a href="#SetWindowMonitor">SetWindowMonitor(monitor)</a> ⇒ <code>null</code></dt>
 <dd><p>Set monitor for the current window (fullscreen mode)</p>
 </dd>
-<dt><a href="#SetWindowMinSize">SetWindowMinSize(width, height)</a></dt>
+<dt><a href="#SetWindowMinSize">SetWindowMinSize(width, height)</a> ⇒ <code>null</code></dt>
 <dd><p>Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)</p>
 </dd>
-<dt><a href="#SetWindowSize">SetWindowSize(width, height)</a></dt>
+<dt><a href="#SetWindowSize">SetWindowSize(width, height)</a> ⇒ <code>null</code></dt>
 <dd><p>Set window dimensions</p>
 </dd>
 <dt><a href="#GetWindowHandle">GetWindowHandle()</a> ⇒ <code>number</code></dt>
@@ -131,85 +131,85 @@
 <dt><a href="#GetMonitorName">GetMonitorName(monitor)</a> ⇒ <code>string</code></dt>
 <dd><p>Get the human-readable, UTF-8 encoded name of the primary monitor</p>
 </dd>
-<dt><a href="#SetClipboardText">SetClipboardText(text)</a></dt>
+<dt><a href="#SetClipboardText">SetClipboardText(text)</a> ⇒ <code>null</code></dt>
 <dd><p>Set clipboard text content</p>
 </dd>
 <dt><a href="#GetClipboardText">GetClipboardText()</a> ⇒ <code>string</code></dt>
 <dd><p>Get clipboard text content</p>
 </dd>
-<dt><a href="#SwapScreenBuffer">SwapScreenBuffer()</a></dt>
+<dt><a href="#SwapScreenBuffer">SwapScreenBuffer()</a> ⇒ <code>null</code></dt>
 <dd><p>Swap back buffer with front buffer (screen drawing)</p>
 </dd>
-<dt><a href="#PollInputEvents">PollInputEvents()</a></dt>
+<dt><a href="#PollInputEvents">PollInputEvents()</a> ⇒ <code>null</code></dt>
 <dd><p>Register all input events</p>
 </dd>
-<dt><a href="#WaitTime">WaitTime(ms)</a></dt>
+<dt><a href="#WaitTime">WaitTime(ms)</a> ⇒ <code>null</code></dt>
 <dd><p>Wait for some milliseconds (halt program execution)</p>
 </dd>
-<dt><a href="#ShowCursor">ShowCursor()</a></dt>
+<dt><a href="#ShowCursor">ShowCursor()</a> ⇒ <code>null</code></dt>
 <dd><p>Shows cursor</p>
 </dd>
-<dt><a href="#HideCursor">HideCursor()</a></dt>
+<dt><a href="#HideCursor">HideCursor()</a> ⇒ <code>null</code></dt>
 <dd><p>Hides cursor</p>
 </dd>
 <dt><a href="#IsCursorHidden">IsCursorHidden()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if cursor is not visible</p>
 </dd>
-<dt><a href="#EnableCursor">EnableCursor()</a></dt>
+<dt><a href="#EnableCursor">EnableCursor()</a> ⇒ <code>null</code></dt>
 <dd><p>Enables cursor (unlock cursor)</p>
 </dd>
-<dt><a href="#DisableCursor">DisableCursor()</a></dt>
+<dt><a href="#DisableCursor">DisableCursor()</a> ⇒ <code>null</code></dt>
 <dd><p>Disables cursor (lock cursor)</p>
 </dd>
 <dt><a href="#IsCursorOnScreen">IsCursorOnScreen()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if cursor is on the screen</p>
 </dd>
-<dt><a href="#ClearBackground">ClearBackground(color)</a></dt>
+<dt><a href="#ClearBackground">ClearBackground(color)</a> ⇒ <code>null</code></dt>
 <dd><p>Set background color (framebuffer clear color)</p>
 </dd>
-<dt><a href="#BeginDrawing">BeginDrawing()</a></dt>
+<dt><a href="#BeginDrawing">BeginDrawing()</a> ⇒ <code>null</code></dt>
 <dd><p>Setup canvas (framebuffer) to start drawing</p>
 </dd>
-<dt><a href="#EndDrawing">EndDrawing()</a></dt>
+<dt><a href="#EndDrawing">EndDrawing()</a> ⇒ <code>null</code></dt>
 <dd><p>End canvas drawing and swap buffers (double buffering)</p>
 </dd>
-<dt><a href="#BeginMode2D">BeginMode2D(camera)</a></dt>
+<dt><a href="#BeginMode2D">BeginMode2D(camera)</a> ⇒ <code>null</code></dt>
 <dd><p>Begin 2D mode with custom camera (2D)</p>
 </dd>
-<dt><a href="#EndMode2D">EndMode2D()</a></dt>
+<dt><a href="#EndMode2D">EndMode2D()</a> ⇒ <code>null</code></dt>
 <dd><p>Ends 2D mode with custom camera</p>
 </dd>
-<dt><a href="#BeginMode3D">BeginMode3D(camera)</a></dt>
+<dt><a href="#BeginMode3D">BeginMode3D(camera)</a> ⇒ <code>null</code></dt>
 <dd><p>Begin 3D mode with custom camera (3D)</p>
 </dd>
-<dt><a href="#EndMode3D">EndMode3D()</a></dt>
+<dt><a href="#EndMode3D">EndMode3D()</a> ⇒ <code>null</code></dt>
 <dd><p>Ends 3D mode and returns to default 2D orthographic mode</p>
 </dd>
-<dt><a href="#BeginTextureMode">BeginTextureMode(target)</a></dt>
+<dt><a href="#BeginTextureMode">BeginTextureMode(target)</a> ⇒ <code>null</code></dt>
 <dd><p>Begin drawing to render texture</p>
 </dd>
-<dt><a href="#EndTextureMode">EndTextureMode()</a></dt>
+<dt><a href="#EndTextureMode">EndTextureMode()</a> ⇒ <code>null</code></dt>
 <dd><p>Ends drawing to render texture</p>
 </dd>
-<dt><a href="#BeginShaderMode">BeginShaderMode(shader)</a></dt>
+<dt><a href="#BeginShaderMode">BeginShaderMode(shader)</a> ⇒ <code>null</code></dt>
 <dd><p>Begin custom shader drawing</p>
 </dd>
-<dt><a href="#EndShaderMode">EndShaderMode()</a></dt>
+<dt><a href="#EndShaderMode">EndShaderMode()</a> ⇒ <code>null</code></dt>
 <dd><p>End custom shader drawing (use default shader)</p>
 </dd>
-<dt><a href="#BeginBlendMode">BeginBlendMode(mode)</a></dt>
+<dt><a href="#BeginBlendMode">BeginBlendMode(mode)</a> ⇒ <code>null</code></dt>
 <dd><p>Begin blending mode (alpha, additive, multiplied, subtract, custom)</p>
 </dd>
-<dt><a href="#EndBlendMode">EndBlendMode()</a></dt>
+<dt><a href="#EndBlendMode">EndBlendMode()</a> ⇒ <code>null</code></dt>
 <dd><p>End blending mode (reset to default: alpha blending)</p>
 </dd>
-<dt><a href="#BeginScissorMode">BeginScissorMode(x, y, width, height)</a></dt>
+<dt><a href="#BeginScissorMode">BeginScissorMode(x, y, width, height)</a> ⇒ <code>null</code></dt>
 <dd><p>Begin scissor mode (define screen area for following drawing)</p>
 </dd>
-<dt><a href="#EndScissorMode">EndScissorMode()</a></dt>
+<dt><a href="#EndScissorMode">EndScissorMode()</a> ⇒ <code>null</code></dt>
 <dd><p>End scissor mode</p>
 </dd>
-<dt><a href="#EndVrStereoMode">EndVrStereoMode()</a></dt>
+<dt><a href="#EndVrStereoMode">EndVrStereoMode()</a> ⇒ <code>null</code></dt>
 <dd><p>End stereo rendering (requires VR simulator)</p>
 </dd>
 <dt><a href="#LoadShader">LoadShader(vsFileName, fsFileName)</a> ⇒ <code>Shader</code></dt>
@@ -224,13 +224,13 @@
 <dt><a href="#GetShaderLocationAttrib">GetShaderLocationAttrib(shader, attribName)</a> ⇒ <code>number</code></dt>
 <dd><p>Get shader attribute location</p>
 </dd>
-<dt><a href="#SetShaderValueMatrix">SetShaderValueMatrix(shader, locIndex, mat)</a></dt>
+<dt><a href="#SetShaderValueMatrix">SetShaderValueMatrix(shader, locIndex, mat)</a> ⇒ <code>null</code></dt>
 <dd><p>Set shader uniform value (matrix 4x4)</p>
 </dd>
-<dt><a href="#SetShaderValueTexture">SetShaderValueTexture(shader, locIndex, texture)</a></dt>
+<dt><a href="#SetShaderValueTexture">SetShaderValueTexture(shader, locIndex, texture)</a> ⇒ <code>null</code></dt>
 <dd><p>Set shader uniform value for texture (sampler2d)</p>
 </dd>
-<dt><a href="#UnloadShader">UnloadShader(shader)</a></dt>
+<dt><a href="#UnloadShader">UnloadShader(shader)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload shader from GPU memory (VRAM)</p>
 </dd>
 <dt><a href="#GetMouseRay">GetMouseRay(mousePosition, camera)</a> ⇒ <code>Ray</code></dt>
@@ -254,7 +254,7 @@
 <dt><a href="#GetScreenToWorld2D">GetScreenToWorld2D(position, camera)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
 <dd><p>Get the world space position for a 2d camera screen space position</p>
 </dd>
-<dt><a href="#SetTargetFPS">SetTargetFPS(fps)</a></dt>
+<dt><a href="#SetTargetFPS">SetTargetFPS(fps)</a> ⇒ <code>null</code></dt>
 <dd><p>Set target FPS (maximum)</p>
 </dd>
 <dt><a href="#GetFPS">GetFPS()</a> ⇒ <code>number</code></dt>
@@ -269,16 +269,16 @@
 <dt><a href="#GetRandomValue">GetRandomValue(min, max)</a> ⇒ <code>number</code></dt>
 <dd><p>Get a random value between min and max (both included)</p>
 </dd>
-<dt><a href="#SetRandomSeed">SetRandomSeed(seed)</a></dt>
+<dt><a href="#SetRandomSeed">SetRandomSeed(seed)</a> ⇒ <code>null</code></dt>
 <dd><p>Set the seed for the random number generator</p>
 </dd>
-<dt><a href="#TakeScreenshot">TakeScreenshot(fileName)</a></dt>
+<dt><a href="#TakeScreenshot">TakeScreenshot(fileName)</a> ⇒ <code>null</code></dt>
 <dd><p>Takes a screenshot of current screen (filename extension defines format)</p>
 </dd>
-<dt><a href="#SetConfigFlags">SetConfigFlags(flags)</a></dt>
+<dt><a href="#SetConfigFlags">SetConfigFlags(flags)</a> ⇒ <code>null</code></dt>
 <dd><p>Setup init configuration flags (view FLAGS)</p>
 </dd>
-<dt><a href="#SetTraceLogLevel">SetTraceLogLevel(logLevel)</a></dt>
+<dt><a href="#SetTraceLogLevel">SetTraceLogLevel(logLevel)</a> ⇒ <code>null</code></dt>
 <dd><p>Set the current threshold (minimum) log level</p>
 </dd>
 <dt><a href="#MemAlloc">MemAlloc(size)</a> ⇒ <code>number</code></dt>
@@ -287,13 +287,13 @@
 <dt><a href="#MemRealloc">MemRealloc(ptr, size)</a> ⇒ <code>number</code></dt>
 <dd><p>Internal memory reallocator</p>
 </dd>
-<dt><a href="#MemFree">MemFree(ptr)</a></dt>
+<dt><a href="#MemFree">MemFree(ptr)</a> ⇒ <code>null</code></dt>
 <dd><p>Internal memory free</p>
 </dd>
 <dt><a href="#LoadFileData">LoadFileData(fileName, bytesRead)</a> ⇒ <code>Buffer</code></dt>
 <dd><p>Load file data as byte array (read)</p>
 </dd>
-<dt><a href="#UnloadFileData">UnloadFileData(data)</a></dt>
+<dt><a href="#UnloadFileData">UnloadFileData(data)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload file data allocated by LoadFileData()</p>
 </dd>
 <dt><a href="#SaveFileData">SaveFileData(fileName, data, bytesToWrite)</a> ⇒ <code>boolean</code></dt>
@@ -302,7 +302,7 @@
 <dt><a href="#LoadFileText">LoadFileText(fileName)</a> ⇒ <code>string</code></dt>
 <dd><p>Load text data from file (read), returns a &#39;\0&#39; terminated string</p>
 </dd>
-<dt><a href="#UnloadFileText">UnloadFileText(text)</a></dt>
+<dt><a href="#UnloadFileText">UnloadFileText(text)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload file text data allocated by LoadFileText()</p>
 </dd>
 <dt><a href="#SaveFileText">SaveFileText(fileName, text)</a> ⇒ <code>boolean</code></dt>
@@ -338,7 +338,7 @@
 <dt><a href="#GetDirectoryFiles">GetDirectoryFiles(dirPath, count)</a> ⇒ <code>number</code></dt>
 <dd><p>Get filenames in a directory path (memory should be freed)</p>
 </dd>
-<dt><a href="#ClearDirectoryFiles">ClearDirectoryFiles()</a></dt>
+<dt><a href="#ClearDirectoryFiles">ClearDirectoryFiles()</a> ⇒ <code>null</code></dt>
 <dd><p>Clear directory files paths buffers (free memory)</p>
 </dd>
 <dt><a href="#ChangeDirectory">ChangeDirectory(dir)</a> ⇒ <code>boolean</code></dt>
@@ -350,7 +350,7 @@
 <dt><a href="#GetDroppedFiles">GetDroppedFiles(count)</a> ⇒ <code>number</code></dt>
 <dd><p>Get dropped files names (memory should be freed)</p>
 </dd>
-<dt><a href="#ClearDroppedFiles">ClearDroppedFiles()</a></dt>
+<dt><a href="#ClearDroppedFiles">ClearDroppedFiles()</a> ⇒ <code>null</code></dt>
 <dd><p>Clear dropped files paths buffer (free memory)</p>
 </dd>
 <dt><a href="#GetFileModTime">GetFileModTime(fileName)</a> ⇒ <code>number</code></dt>
@@ -374,7 +374,7 @@
 <dt><a href="#LoadStorageValue">LoadStorageValue(position)</a> ⇒ <code>number</code></dt>
 <dd><p>Load integer value from storage file (from defined position)</p>
 </dd>
-<dt><a href="#OpenURL">OpenURL(url)</a></dt>
+<dt><a href="#OpenURL">OpenURL(url)</a> ⇒ <code>null</code></dt>
 <dd><p>Open URL with default system browser (if available)</p>
 </dd>
 <dt><a href="#IsKeyPressed">IsKeyPressed(key)</a> ⇒ <code>boolean</code></dt>
@@ -389,7 +389,7 @@
 <dt><a href="#IsKeyUp">IsKeyUp(key)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a key is NOT being pressed</p>
 </dd>
-<dt><a href="#SetExitKey">SetExitKey(key)</a></dt>
+<dt><a href="#SetExitKey">SetExitKey(key)</a> ⇒ <code>null</code></dt>
 <dd><p>Set a custom key to exit program (default is ESC)</p>
 </dd>
 <dt><a href="#GetKeyPressed">GetKeyPressed()</a> ⇒ <code>number</code></dt>
@@ -452,19 +452,19 @@
 <dt><a href="#GetMouseDelta">GetMouseDelta()</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
 <dd><p>Get mouse delta between frames</p>
 </dd>
-<dt><a href="#SetMousePosition">SetMousePosition(x, y)</a></dt>
+<dt><a href="#SetMousePosition">SetMousePosition(x, y)</a> ⇒ <code>null</code></dt>
 <dd><p>Set mouse position XY</p>
 </dd>
-<dt><a href="#SetMouseOffset">SetMouseOffset(offsetX, offsetY)</a></dt>
+<dt><a href="#SetMouseOffset">SetMouseOffset(offsetX, offsetY)</a> ⇒ <code>null</code></dt>
 <dd><p>Set mouse offset</p>
 </dd>
-<dt><a href="#SetMouseScale">SetMouseScale(scaleX, scaleY)</a></dt>
+<dt><a href="#SetMouseScale">SetMouseScale(scaleX, scaleY)</a> ⇒ <code>null</code></dt>
 <dd><p>Set mouse scaling</p>
 </dd>
 <dt><a href="#GetMouseWheelMove">GetMouseWheelMove()</a> ⇒ <code>number</code></dt>
 <dd><p>Get mouse wheel movement Y</p>
 </dd>
-<dt><a href="#SetMouseCursor">SetMouseCursor(cursor)</a></dt>
+<dt><a href="#SetMouseCursor">SetMouseCursor(cursor)</a> ⇒ <code>null</code></dt>
 <dd><p>Set mouse cursor</p>
 </dd>
 <dt><a href="#GetTouchX">GetTouchX()</a> ⇒ <code>number</code></dt>
@@ -482,7 +482,7 @@
 <dt><a href="#GetTouchPointCount">GetTouchPointCount()</a> ⇒ <code>number</code></dt>
 <dd><p>Get number of touch points</p>
 </dd>
-<dt><a href="#SetGesturesEnabled">SetGesturesEnabled(flags)</a></dt>
+<dt><a href="#SetGesturesEnabled">SetGesturesEnabled(flags)</a> ⇒ <code>null</code></dt>
 <dd><p>Enable a set of gestures using flags</p>
 </dd>
 <dt><a href="#IsGestureDetected">IsGestureDetected(gesture)</a> ⇒ <code>boolean</code></dt>
@@ -506,133 +506,133 @@
 <dt><a href="#GetGesturePinchAngle">GetGesturePinchAngle()</a> ⇒ <code>number</code></dt>
 <dd><p>Get gesture pinch angle</p>
 </dd>
-<dt><a href="#SetCameraMode">SetCameraMode(camera, mode)</a></dt>
+<dt><a href="#SetCameraMode">SetCameraMode(camera, mode)</a> ⇒ <code>null</code></dt>
 <dd><p>Set camera mode (multiple camera modes available)</p>
 </dd>
-<dt><a href="#SetCameraPanControl">SetCameraPanControl(keyPan)</a></dt>
+<dt><a href="#SetCameraPanControl">SetCameraPanControl(keyPan)</a> ⇒ <code>null</code></dt>
 <dd><p>Set camera pan key to combine with mouse movement (free camera)</p>
 </dd>
-<dt><a href="#SetCameraAltControl">SetCameraAltControl(keyAlt)</a></dt>
+<dt><a href="#SetCameraAltControl">SetCameraAltControl(keyAlt)</a> ⇒ <code>null</code></dt>
 <dd><p>Set camera alt key to combine with mouse movement (free camera)</p>
 </dd>
-<dt><a href="#SetCameraSmoothZoomControl">SetCameraSmoothZoomControl(keySmoothZoom)</a></dt>
+<dt><a href="#SetCameraSmoothZoomControl">SetCameraSmoothZoomControl(keySmoothZoom)</a> ⇒ <code>null</code></dt>
 <dd><p>Set camera smooth zoom key to combine with mouse (free camera)</p>
 </dd>
-<dt><a href="#SetCameraMoveControls">SetCameraMoveControls(keyFront, keyBack, keyRight, keyLeft, keyUp, keyDown)</a></dt>
+<dt><a href="#SetCameraMoveControls">SetCameraMoveControls(keyFront, keyBack, keyRight, keyLeft, keyUp, keyDown)</a> ⇒ <code>null</code></dt>
 <dd><p>Set camera move controls (1st person and 3rd person cameras)</p>
 </dd>
-<dt><a href="#SetShapesTexture">SetShapesTexture(texture, source)</a></dt>
+<dt><a href="#SetShapesTexture">SetShapesTexture(texture, source)</a> ⇒ <code>null</code></dt>
 <dd><p>Set texture and rectangle to be used on shapes drawing</p>
 </dd>
-<dt><a href="#DrawPixel">DrawPixel(posX, posY, color)</a></dt>
+<dt><a href="#DrawPixel">DrawPixel(posX, posY, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a pixel</p>
 </dd>
-<dt><a href="#DrawPixelV">DrawPixelV(position, color)</a></dt>
+<dt><a href="#DrawPixelV">DrawPixelV(position, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a pixel (Vector version)</p>
 </dd>
-<dt><a href="#DrawLine">DrawLine(startPosX, startPosY, endPosX, endPosY, color)</a></dt>
+<dt><a href="#DrawLine">DrawLine(startPosX, startPosY, endPosX, endPosY, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a line</p>
 </dd>
-<dt><a href="#DrawLineV">DrawLineV(startPos, endPos, color)</a></dt>
+<dt><a href="#DrawLineV">DrawLineV(startPos, endPos, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a line (Vector version)</p>
 </dd>
-<dt><a href="#DrawLineEx">DrawLineEx(startPos, endPos, thick, color)</a></dt>
+<dt><a href="#DrawLineEx">DrawLineEx(startPos, endPos, thick, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a line defining thickness</p>
 </dd>
-<dt><a href="#DrawLineBezier">DrawLineBezier(startPos, endPos, thick, color)</a></dt>
+<dt><a href="#DrawLineBezier">DrawLineBezier(startPos, endPos, thick, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a line using cubic-bezier curves in-out</p>
 </dd>
-<dt><a href="#DrawLineBezierQuad">DrawLineBezierQuad(startPos, endPos, controlPos, thick, color)</a></dt>
+<dt><a href="#DrawLineBezierQuad">DrawLineBezierQuad(startPos, endPos, controlPos, thick, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw line using quadratic bezier curves with a control point</p>
 </dd>
-<dt><a href="#DrawLineBezierCubic">DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color)</a></dt>
+<dt><a href="#DrawLineBezierCubic">DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw line using cubic bezier curves with 2 control points</p>
 </dd>
-<dt><a href="#DrawLineStrip">DrawLineStrip(points, pointCount, color)</a></dt>
+<dt><a href="#DrawLineStrip">DrawLineStrip(points, pointCount, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw lines sequence</p>
 </dd>
-<dt><a href="#DrawCircle">DrawCircle(centerX, centerY, radius, color)</a></dt>
+<dt><a href="#DrawCircle">DrawCircle(centerX, centerY, radius, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a color-filled circle</p>
 </dd>
-<dt><a href="#DrawCircleSector">DrawCircleSector(center, radius, startAngle, endAngle, segments, color)</a></dt>
+<dt><a href="#DrawCircleSector">DrawCircleSector(center, radius, startAngle, endAngle, segments, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a piece of a circle</p>
 </dd>
-<dt><a href="#DrawCircleSectorLines">DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color)</a></dt>
+<dt><a href="#DrawCircleSectorLines">DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw circle sector outline</p>
 </dd>
-<dt><a href="#DrawCircleGradient">DrawCircleGradient(centerX, centerY, radius, color1, color2)</a></dt>
+<dt><a href="#DrawCircleGradient">DrawCircleGradient(centerX, centerY, radius, color1, color2)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a gradient-filled circle</p>
 </dd>
-<dt><a href="#DrawCircleV">DrawCircleV(center, radius, color)</a></dt>
+<dt><a href="#DrawCircleV">DrawCircleV(center, radius, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a color-filled circle (Vector version)</p>
 </dd>
-<dt><a href="#DrawCircleLines">DrawCircleLines(centerX, centerY, radius, color)</a></dt>
+<dt><a href="#DrawCircleLines">DrawCircleLines(centerX, centerY, radius, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw circle outline</p>
 </dd>
-<dt><a href="#DrawEllipse">DrawEllipse(centerX, centerY, radiusH, radiusV, color)</a></dt>
+<dt><a href="#DrawEllipse">DrawEllipse(centerX, centerY, radiusH, radiusV, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw ellipse</p>
 </dd>
-<dt><a href="#DrawEllipseLines">DrawEllipseLines(centerX, centerY, radiusH, radiusV, color)</a></dt>
+<dt><a href="#DrawEllipseLines">DrawEllipseLines(centerX, centerY, radiusH, radiusV, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw ellipse outline</p>
 </dd>
-<dt><a href="#DrawRing">DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)</a></dt>
+<dt><a href="#DrawRing">DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw ring</p>
 </dd>
-<dt><a href="#DrawRingLines">DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)</a></dt>
+<dt><a href="#DrawRingLines">DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw ring outline</p>
 </dd>
-<dt><a href="#DrawRectangle">DrawRectangle(posX, posY, width, height, color)</a></dt>
+<dt><a href="#DrawRectangle">DrawRectangle(posX, posY, width, height, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a color-filled rectangle</p>
 </dd>
-<dt><a href="#DrawRectangleV">DrawRectangleV(position, size, color)</a></dt>
+<dt><a href="#DrawRectangleV">DrawRectangleV(position, size, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a color-filled rectangle (Vector version)</p>
 </dd>
-<dt><a href="#DrawRectangleRec">DrawRectangleRec(rec, color)</a></dt>
+<dt><a href="#DrawRectangleRec">DrawRectangleRec(rec, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a color-filled rectangle</p>
 </dd>
-<dt><a href="#DrawRectanglePro">DrawRectanglePro(rec, origin, rotation, color)</a></dt>
+<dt><a href="#DrawRectanglePro">DrawRectanglePro(rec, origin, rotation, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a color-filled rectangle with pro parameters</p>
 </dd>
-<dt><a href="#DrawRectangleGradientV">DrawRectangleGradientV(posX, posY, width, height, color1, color2)</a></dt>
+<dt><a href="#DrawRectangleGradientV">DrawRectangleGradientV(posX, posY, width, height, color1, color2)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a vertical-gradient-filled rectangle</p>
 </dd>
-<dt><a href="#DrawRectangleGradientH">DrawRectangleGradientH(posX, posY, width, height, color1, color2)</a></dt>
+<dt><a href="#DrawRectangleGradientH">DrawRectangleGradientH(posX, posY, width, height, color1, color2)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a horizontal-gradient-filled rectangle</p>
 </dd>
-<dt><a href="#DrawRectangleGradientEx">DrawRectangleGradientEx(rec, col1, col2, col3, col4)</a></dt>
+<dt><a href="#DrawRectangleGradientEx">DrawRectangleGradientEx(rec, col1, col2, col3, col4)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a gradient-filled rectangle with custom vertex colors</p>
 </dd>
-<dt><a href="#DrawRectangleLines">DrawRectangleLines(posX, posY, width, height, color)</a></dt>
+<dt><a href="#DrawRectangleLines">DrawRectangleLines(posX, posY, width, height, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw rectangle outline</p>
 </dd>
-<dt><a href="#DrawRectangleLinesEx">DrawRectangleLinesEx(rec, lineThick, color)</a></dt>
+<dt><a href="#DrawRectangleLinesEx">DrawRectangleLinesEx(rec, lineThick, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw rectangle outline with extended parameters</p>
 </dd>
-<dt><a href="#DrawRectangleRounded">DrawRectangleRounded(rec, roundness, segments, color)</a></dt>
+<dt><a href="#DrawRectangleRounded">DrawRectangleRounded(rec, roundness, segments, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw rectangle with rounded edges</p>
 </dd>
-<dt><a href="#DrawRectangleRoundedLines">DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color)</a></dt>
+<dt><a href="#DrawRectangleRoundedLines">DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw rectangle with rounded edges outline</p>
 </dd>
-<dt><a href="#DrawTriangle">DrawTriangle(v1, v2, v3, color)</a></dt>
+<dt><a href="#DrawTriangle">DrawTriangle(v1, v2, v3, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a color-filled triangle (vertex in counter-clockwise order!)</p>
 </dd>
-<dt><a href="#DrawTriangleLines">DrawTriangleLines(v1, v2, v3, color)</a></dt>
+<dt><a href="#DrawTriangleLines">DrawTriangleLines(v1, v2, v3, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw triangle outline (vertex in counter-clockwise order!)</p>
 </dd>
-<dt><a href="#DrawTriangleFan">DrawTriangleFan(points, pointCount, color)</a></dt>
+<dt><a href="#DrawTriangleFan">DrawTriangleFan(points, pointCount, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a triangle fan defined by points (first vertex is the center)</p>
 </dd>
-<dt><a href="#DrawTriangleStrip">DrawTriangleStrip(points, pointCount, color)</a></dt>
+<dt><a href="#DrawTriangleStrip">DrawTriangleStrip(points, pointCount, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a triangle strip defined by points</p>
 </dd>
-<dt><a href="#DrawPoly">DrawPoly(center, sides, radius, rotation, color)</a></dt>
+<dt><a href="#DrawPoly">DrawPoly(center, sides, radius, rotation, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a regular polygon (Vector version)</p>
 </dd>
-<dt><a href="#DrawPolyLines">DrawPolyLines(center, sides, radius, rotation, color)</a></dt>
+<dt><a href="#DrawPolyLines">DrawPolyLines(center, sides, radius, rotation, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a polygon outline of n sides</p>
 </dd>
-<dt><a href="#DrawPolyLinesEx">DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color)</a></dt>
+<dt><a href="#DrawPolyLinesEx">DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a polygon outline of n sides with extended parameters</p>
 </dd>
 <dt><a href="#CheckCollisionRecs">CheckCollisionRecs(rec1, rec2)</a> ⇒ <code>boolean</code></dt>
@@ -680,7 +680,7 @@
 <dt><a href="#LoadImageFromScreen">LoadImageFromScreen()</a> ⇒ <code>Image</code></dt>
 <dd><p>Load image from screen buffer and (screenshot)</p>
 </dd>
-<dt><a href="#UnloadImage">UnloadImage(image)</a></dt>
+<dt><a href="#UnloadImage">UnloadImage(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload image from CPU memory (RAM)</p>
 </dd>
 <dt><a href="#ExportImage">ExportImage(image, fileName)</a> ⇒ <code>boolean</code></dt>
@@ -728,10 +728,10 @@
 <dt><a href="#LoadImagePalette">LoadImagePalette(image, maxPaletteSize, colorCount)</a> ⇒ <code>number</code></dt>
 <dd><p>Load colors palette from image as a Color array (RGBA - 32bit)</p>
 </dd>
-<dt><a href="#UnloadImageColors">UnloadImageColors(colors)</a></dt>
+<dt><a href="#UnloadImageColors">UnloadImageColors(colors)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload color data loaded with LoadImageColors()</p>
 </dd>
-<dt><a href="#UnloadImagePalette">UnloadImagePalette(colors)</a></dt>
+<dt><a href="#UnloadImagePalette">UnloadImagePalette(colors)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload colors palette loaded with LoadImagePalette()</p>
 </dd>
 <dt><a href="#GetImageAlphaBorder">GetImageAlphaBorder(image, threshold)</a> ⇒ <code><a href="#Rectangle">Rectangle</a></code></dt>
@@ -752,49 +752,49 @@
 <dt><a href="#LoadRenderTexture">LoadRenderTexture(width, height)</a> ⇒ <code>RenderTexture2D</code></dt>
 <dd><p>Load texture for rendering (framebuffer)</p>
 </dd>
-<dt><a href="#UnloadTexture">UnloadTexture(texture)</a></dt>
+<dt><a href="#UnloadTexture">UnloadTexture(texture)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload texture from GPU memory (VRAM)</p>
 </dd>
-<dt><a href="#UnloadRenderTexture">UnloadRenderTexture(target)</a></dt>
+<dt><a href="#UnloadRenderTexture">UnloadRenderTexture(target)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload render texture from GPU memory (VRAM)</p>
 </dd>
-<dt><a href="#UpdateTexture">UpdateTexture(texture, pixels)</a></dt>
+<dt><a href="#UpdateTexture">UpdateTexture(texture, pixels)</a> ⇒ <code>null</code></dt>
 <dd><p>Update GPU texture with new data</p>
 </dd>
-<dt><a href="#UpdateTextureRec">UpdateTextureRec(texture, rec, pixels)</a></dt>
+<dt><a href="#UpdateTextureRec">UpdateTextureRec(texture, rec, pixels)</a> ⇒ <code>null</code></dt>
 <dd><p>Update GPU texture rectangle with new data</p>
 </dd>
-<dt><a href="#SetTextureFilter">SetTextureFilter(texture, filter)</a></dt>
+<dt><a href="#SetTextureFilter">SetTextureFilter(texture, filter)</a> ⇒ <code>null</code></dt>
 <dd><p>Set texture scaling filter mode</p>
 </dd>
-<dt><a href="#SetTextureWrap">SetTextureWrap(texture, wrap)</a></dt>
+<dt><a href="#SetTextureWrap">SetTextureWrap(texture, wrap)</a> ⇒ <code>null</code></dt>
 <dd><p>Set texture wrapping mode</p>
 </dd>
-<dt><a href="#DrawTexture">DrawTexture(texture, posX, posY, tint)</a></dt>
+<dt><a href="#DrawTexture">DrawTexture(texture, posX, posY, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a Texture2D</p>
 </dd>
-<dt><a href="#DrawTextureV">DrawTextureV(texture, position, tint)</a></dt>
+<dt><a href="#DrawTextureV">DrawTextureV(texture, position, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a Texture2D with position defined as Vector2</p>
 </dd>
-<dt><a href="#DrawTextureEx">DrawTextureEx(texture, position, rotation, scale, tint)</a></dt>
+<dt><a href="#DrawTextureEx">DrawTextureEx(texture, position, rotation, scale, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a Texture2D with extended parameters</p>
 </dd>
-<dt><a href="#DrawTextureRec">DrawTextureRec(texture, source, position, tint)</a></dt>
+<dt><a href="#DrawTextureRec">DrawTextureRec(texture, source, position, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a part of a texture defined by a rectangle</p>
 </dd>
-<dt><a href="#DrawTextureQuad">DrawTextureQuad(texture, tiling, offset, quad, tint)</a></dt>
+<dt><a href="#DrawTextureQuad">DrawTextureQuad(texture, tiling, offset, quad, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw texture quad with tiling and offset parameters</p>
 </dd>
-<dt><a href="#DrawTextureTiled">DrawTextureTiled(texture, source, dest, origin, rotation, scale, tint)</a></dt>
+<dt><a href="#DrawTextureTiled">DrawTextureTiled(texture, source, dest, origin, rotation, scale, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.</p>
 </dd>
-<dt><a href="#DrawTexturePro">DrawTexturePro(texture, source, dest, origin, rotation, tint)</a></dt>
+<dt><a href="#DrawTexturePro">DrawTexturePro(texture, source, dest, origin, rotation, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a part of a texture defined by a rectangle with &#39;pro&#39; parameters</p>
 </dd>
-<dt><a href="#DrawTextureNPatch">DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint)</a></dt>
+<dt><a href="#DrawTextureNPatch">DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draws a texture (or part of it) that stretches or shrinks nicely</p>
 </dd>
-<dt><a href="#DrawTexturePoly">DrawTexturePoly(texture, center, points, texcoords, pointCount, tint)</a></dt>
+<dt><a href="#DrawTexturePoly">DrawTexturePoly(texture, center, points, texcoords, pointCount, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a textured polygon</p>
 </dd>
 <dt><a href="#Fade">Fade(color, alpha)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
@@ -827,7 +827,7 @@
 <dt><a href="#GetPixelColor">GetPixelColor(srcPtr, format)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
 <dd><p>Get Color from a source pixel pointer of certain format</p>
 </dd>
-<dt><a href="#SetPixelColor">SetPixelColor(dstPtr, color, format)</a></dt>
+<dt><a href="#SetPixelColor">SetPixelColor(dstPtr, color, format)</a> ⇒ <code>null</code></dt>
 <dd><p>Set color formatted into destination pixel pointer</p>
 </dd>
 <dt><a href="#GetPixelDataSize">GetPixelDataSize(width, height, format)</a> ⇒ <code>number</code></dt>
@@ -854,25 +854,25 @@
 <dt><a href="#GenImageFontAtlas">GenImageFontAtlas(chars, recs, glyphCount, fontSize, padding, packMethod)</a> ⇒ <code>Image</code></dt>
 <dd><p>Generate image font atlas using chars info</p>
 </dd>
-<dt><a href="#UnloadFontData">UnloadFontData(chars, glyphCount)</a></dt>
+<dt><a href="#UnloadFontData">UnloadFontData(chars, glyphCount)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload font chars info data (RAM)</p>
 </dd>
-<dt><a href="#UnloadFont">UnloadFont(font)</a></dt>
+<dt><a href="#UnloadFont">UnloadFont(font)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload font from GPU memory (VRAM)</p>
 </dd>
-<dt><a href="#DrawFPS">DrawFPS(posX, posY)</a></dt>
+<dt><a href="#DrawFPS">DrawFPS(posX, posY)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw current FPS</p>
 </dd>
-<dt><a href="#DrawText">DrawText(text, posX, posY, fontSize, color)</a></dt>
+<dt><a href="#DrawText">DrawText(text, posX, posY, fontSize, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw text (using default font)</p>
 </dd>
-<dt><a href="#DrawTextEx">DrawTextEx(font, text, position, fontSize, spacing, tint)</a></dt>
+<dt><a href="#DrawTextEx">DrawTextEx(font, text, position, fontSize, spacing, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw text using font and additional parameters</p>
 </dd>
-<dt><a href="#DrawTextPro">DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint)</a></dt>
+<dt><a href="#DrawTextPro">DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw text using Font and pro parameters (rotation)</p>
 </dd>
-<dt><a href="#DrawTextCodepoint">DrawTextCodepoint(font, codepoint, position, fontSize, tint)</a></dt>
+<dt><a href="#DrawTextCodepoint">DrawTextCodepoint(font, codepoint, position, fontSize, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw one character (codepoint)</p>
 </dd>
 <dt><a href="#MeasureText">MeasureText(text, fontSize)</a> ⇒ <code>number</code></dt>
@@ -893,7 +893,7 @@
 <dt><a href="#LoadCodepoints">LoadCodepoints(text, count)</a> ⇒ <code>number</code></dt>
 <dd><p>Load all codepoints from a UTF-8 text string, codepoints count returned by parameter</p>
 </dd>
-<dt><a href="#UnloadCodepoints">UnloadCodepoints(codepoints)</a></dt>
+<dt><a href="#UnloadCodepoints">UnloadCodepoints(codepoints)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload codepoints data from memory</p>
 </dd>
 <dt><a href="#GetCodepointCount">GetCodepointCount(text)</a> ⇒ <code>number</code></dt>
@@ -932,7 +932,7 @@
 <dt><a href="#TextSplit">TextSplit(text, delimiter, count)</a> ⇒ <code>number</code></dt>
 <dd><p>Split text into multiple strings</p>
 </dd>
-<dt><a href="#TextAppend">TextAppend(text, append, position)</a></dt>
+<dt><a href="#TextAppend">TextAppend(text, append, position)</a> ⇒ <code>null</code></dt>
 <dd><p>Append text at specific position and move cursor!</p>
 </dd>
 <dt><a href="#TextFindIndex">TextFindIndex(text, find)</a> ⇒ <code>number</code></dt>
@@ -950,67 +950,67 @@
 <dt><a href="#TextToInteger">TextToInteger(text)</a> ⇒ <code>number</code></dt>
 <dd><p>Get integer value from text (negative values not supported)</p>
 </dd>
-<dt><a href="#DrawLine3D">DrawLine3D(startPos, endPos, color)</a></dt>
+<dt><a href="#DrawLine3D">DrawLine3D(startPos, endPos, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a line in 3D world space</p>
 </dd>
-<dt><a href="#DrawPoint3D">DrawPoint3D(position, color)</a></dt>
+<dt><a href="#DrawPoint3D">DrawPoint3D(position, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a point in 3D space, actually a small line</p>
 </dd>
-<dt><a href="#DrawCircle3D">DrawCircle3D(center, radius, rotationAxis, rotationAngle, color)</a></dt>
+<dt><a href="#DrawCircle3D">DrawCircle3D(center, radius, rotationAxis, rotationAngle, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a circle in 3D world space</p>
 </dd>
-<dt><a href="#DrawTriangle3D">DrawTriangle3D(v1, v2, v3, color)</a></dt>
+<dt><a href="#DrawTriangle3D">DrawTriangle3D(v1, v2, v3, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a color-filled triangle (vertex in counter-clockwise order!)</p>
 </dd>
-<dt><a href="#DrawTriangleStrip3D">DrawTriangleStrip3D(points, pointCount, color)</a></dt>
+<dt><a href="#DrawTriangleStrip3D">DrawTriangleStrip3D(points, pointCount, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a triangle strip defined by points</p>
 </dd>
-<dt><a href="#DrawCube">DrawCube(position, width, height, length, color)</a></dt>
+<dt><a href="#DrawCube">DrawCube(position, width, height, length, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw cube</p>
 </dd>
-<dt><a href="#DrawCubeV">DrawCubeV(position, size, color)</a></dt>
+<dt><a href="#DrawCubeV">DrawCubeV(position, size, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw cube (Vector version)</p>
 </dd>
-<dt><a href="#DrawCubeWires">DrawCubeWires(position, width, height, length, color)</a></dt>
+<dt><a href="#DrawCubeWires">DrawCubeWires(position, width, height, length, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw cube wires</p>
 </dd>
-<dt><a href="#DrawCubeWiresV">DrawCubeWiresV(position, size, color)</a></dt>
+<dt><a href="#DrawCubeWiresV">DrawCubeWiresV(position, size, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw cube wires (Vector version)</p>
 </dd>
-<dt><a href="#DrawCubeTexture">DrawCubeTexture(texture, position, width, height, length, color)</a></dt>
+<dt><a href="#DrawCubeTexture">DrawCubeTexture(texture, position, width, height, length, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw cube textured</p>
 </dd>
-<dt><a href="#DrawCubeTextureRec">DrawCubeTextureRec(texture, source, position, width, height, length, color)</a></dt>
+<dt><a href="#DrawCubeTextureRec">DrawCubeTextureRec(texture, source, position, width, height, length, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw cube with a region of a texture</p>
 </dd>
-<dt><a href="#DrawSphere">DrawSphere(centerPos, radius, color)</a></dt>
+<dt><a href="#DrawSphere">DrawSphere(centerPos, radius, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw sphere</p>
 </dd>
-<dt><a href="#DrawSphereEx">DrawSphereEx(centerPos, radius, rings, slices, color)</a></dt>
+<dt><a href="#DrawSphereEx">DrawSphereEx(centerPos, radius, rings, slices, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw sphere with extended parameters</p>
 </dd>
-<dt><a href="#DrawSphereWires">DrawSphereWires(centerPos, radius, rings, slices, color)</a></dt>
+<dt><a href="#DrawSphereWires">DrawSphereWires(centerPos, radius, rings, slices, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw sphere wires</p>
 </dd>
-<dt><a href="#DrawCylinder">DrawCylinder(position, radiusTop, radiusBottom, height, slices, color)</a></dt>
+<dt><a href="#DrawCylinder">DrawCylinder(position, radiusTop, radiusBottom, height, slices, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a cylinder/cone</p>
 </dd>
-<dt><a href="#DrawCylinderEx">DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color)</a></dt>
+<dt><a href="#DrawCylinderEx">DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a cylinder with base at startPos and top at endPos</p>
 </dd>
-<dt><a href="#DrawCylinderWires">DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color)</a></dt>
+<dt><a href="#DrawCylinderWires">DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a cylinder/cone wires</p>
 </dd>
-<dt><a href="#DrawCylinderWiresEx">DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)</a></dt>
+<dt><a href="#DrawCylinderWiresEx">DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a cylinder wires with base at startPos and top at endPos</p>
 </dd>
-<dt><a href="#DrawPlane">DrawPlane(centerPos, size, color)</a></dt>
+<dt><a href="#DrawPlane">DrawPlane(centerPos, size, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a plane XZ</p>
 </dd>
-<dt><a href="#DrawRay">DrawRay(ray, color)</a></dt>
+<dt><a href="#DrawRay">DrawRay(ray, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a ray line</p>
 </dd>
-<dt><a href="#DrawGrid">DrawGrid(slices, spacing)</a></dt>
+<dt><a href="#DrawGrid">DrawGrid(slices, spacing)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a grid (centered at (0, 0, 0))</p>
 </dd>
 <dt><a href="#LoadModel">LoadModel(fileName)</a> ⇒ <code>Model</code></dt>
@@ -1019,43 +1019,43 @@
 <dt><a href="#LoadModelFromMesh">LoadModelFromMesh(mesh)</a> ⇒ <code>Model</code></dt>
 <dd><p>Load model from generated mesh (default material)</p>
 </dd>
-<dt><a href="#UnloadModel">UnloadModel(model)</a></dt>
+<dt><a href="#UnloadModel">UnloadModel(model)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload model (including meshes) from memory (RAM and/or VRAM)</p>
 </dd>
-<dt><a href="#UnloadModelKeepMeshes">UnloadModelKeepMeshes(model)</a></dt>
+<dt><a href="#UnloadModelKeepMeshes">UnloadModelKeepMeshes(model)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload model (but not meshes) from memory (RAM and/or VRAM)</p>
 </dd>
 <dt><a href="#GetModelBoundingBox">GetModelBoundingBox(model)</a> ⇒ <code>BoundingBox</code></dt>
 <dd><p>Compute model bounding box limits (considers all meshes)</p>
 </dd>
-<dt><a href="#DrawModel">DrawModel(model, position, scale, tint)</a></dt>
+<dt><a href="#DrawModel">DrawModel(model, position, scale, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a model (with texture if set)</p>
 </dd>
-<dt><a href="#DrawModelEx">DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)</a></dt>
+<dt><a href="#DrawModelEx">DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a model with extended parameters</p>
 </dd>
-<dt><a href="#DrawModelWires">DrawModelWires(model, position, scale, tint)</a></dt>
+<dt><a href="#DrawModelWires">DrawModelWires(model, position, scale, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a model wires (with texture if set)</p>
 </dd>
-<dt><a href="#DrawModelWiresEx">DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint)</a></dt>
+<dt><a href="#DrawModelWiresEx">DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a model wires (with texture if set) with extended parameters</p>
 </dd>
-<dt><a href="#DrawBoundingBox">DrawBoundingBox(box, color)</a></dt>
+<dt><a href="#DrawBoundingBox">DrawBoundingBox(box, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw bounding box (wires)</p>
 </dd>
-<dt><a href="#DrawBillboard">DrawBillboard(camera, texture, position, size, tint)</a></dt>
+<dt><a href="#DrawBillboard">DrawBillboard(camera, texture, position, size, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a billboard texture</p>
 </dd>
-<dt><a href="#DrawBillboardRec">DrawBillboardRec(camera, texture, source, position, size, tint)</a></dt>
+<dt><a href="#DrawBillboardRec">DrawBillboardRec(camera, texture, source, position, size, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a billboard texture defined by source</p>
 </dd>
-<dt><a href="#DrawBillboardPro">DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint)</a></dt>
+<dt><a href="#DrawBillboardPro">DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a billboard texture defined by source and rotation</p>
 </dd>
-<dt><a href="#UpdateMeshBuffer">UpdateMeshBuffer(mesh, index, data, dataSize, offset)</a></dt>
+<dt><a href="#UpdateMeshBuffer">UpdateMeshBuffer(mesh, index, data, dataSize, offset)</a> ⇒ <code>null</code></dt>
 <dd><p>Update mesh vertex data in GPU for a specific buffer index</p>
 </dd>
-<dt><a href="#UnloadMesh">UnloadMesh(mesh)</a></dt>
+<dt><a href="#UnloadMesh">UnloadMesh(mesh)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload mesh data from CPU and GPU</p>
 </dd>
 <dt><a href="#ExportMesh">ExportMesh(mesh, fileName)</a> ⇒ <code>boolean</code></dt>
@@ -1100,13 +1100,13 @@
 <dt><a href="#LoadModelAnimations">LoadModelAnimations(fileName, animCount)</a> ⇒ <code>number</code></dt>
 <dd><p>Load model animations from file</p>
 </dd>
-<dt><a href="#UpdateModelAnimation">UpdateModelAnimation(model, anim, frame)</a></dt>
+<dt><a href="#UpdateModelAnimation">UpdateModelAnimation(model, anim, frame)</a> ⇒ <code>null</code></dt>
 <dd><p>Update model animation pose</p>
 </dd>
-<dt><a href="#UnloadModelAnimation">UnloadModelAnimation(anim)</a></dt>
+<dt><a href="#UnloadModelAnimation">UnloadModelAnimation(anim)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload animation data</p>
 </dd>
-<dt><a href="#UnloadModelAnimations">UnloadModelAnimations(animations, count)</a></dt>
+<dt><a href="#UnloadModelAnimations">UnloadModelAnimations(animations, count)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload animation array data</p>
 </dd>
 <dt><a href="#IsModelAnimationValid">IsModelAnimationValid(model, anim)</a> ⇒ <code>boolean</code></dt>
@@ -1139,16 +1139,16 @@
 <dt><a href="#GetRayCollisionQuad">GetRayCollisionQuad(ray, p1, p2, p3, p4)</a> ⇒ <code>RayCollision</code></dt>
 <dd><p>Get collision info between ray and quad</p>
 </dd>
-<dt><a href="#InitAudioDevice">InitAudioDevice()</a></dt>
+<dt><a href="#InitAudioDevice">InitAudioDevice()</a> ⇒ <code>null</code></dt>
 <dd><p>Initialize audio device and context</p>
 </dd>
-<dt><a href="#CloseAudioDevice">CloseAudioDevice()</a></dt>
+<dt><a href="#CloseAudioDevice">CloseAudioDevice()</a> ⇒ <code>null</code></dt>
 <dd><p>Close the audio device and context</p>
 </dd>
 <dt><a href="#IsAudioDeviceReady">IsAudioDeviceReady()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if audio device has been initialized successfully</p>
 </dd>
-<dt><a href="#SetMasterVolume">SetMasterVolume(volume)</a></dt>
+<dt><a href="#SetMasterVolume">SetMasterVolume(volume)</a> ⇒ <code>null</code></dt>
 <dd><p>Set master volume (listener)</p>
 </dd>
 <dt><a href="#LoadWave">LoadWave(fileName)</a> ⇒ <code>Wave</code></dt>
@@ -1163,13 +1163,13 @@
 <dt><a href="#LoadSoundFromWave">LoadSoundFromWave(wave)</a> ⇒ <code>Sound</code></dt>
 <dd><p>Load sound from wave data</p>
 </dd>
-<dt><a href="#UpdateSound">UpdateSound(sound, data, sampleCount)</a></dt>
+<dt><a href="#UpdateSound">UpdateSound(sound, data, sampleCount)</a> ⇒ <code>null</code></dt>
 <dd><p>Update sound buffer with new data</p>
 </dd>
-<dt><a href="#UnloadWave">UnloadWave(wave)</a></dt>
+<dt><a href="#UnloadWave">UnloadWave(wave)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload wave data</p>
 </dd>
-<dt><a href="#UnloadSound">UnloadSound(sound)</a></dt>
+<dt><a href="#UnloadSound">UnloadSound(sound)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload sound</p>
 </dd>
 <dt><a href="#ExportWave">ExportWave(wave, fileName)</a> ⇒ <code>boolean</code></dt>
@@ -1178,22 +1178,22 @@
 <dt><a href="#ExportWaveAsCode">ExportWaveAsCode(wave, fileName)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Export wave sample data to code (.h), returns true on success</p>
 </dd>
-<dt><a href="#PlaySound">PlaySound(sound)</a></dt>
+<dt><a href="#PlaySound">PlaySound(sound)</a> ⇒ <code>null</code></dt>
 <dd><p>Play a sound</p>
 </dd>
-<dt><a href="#StopSound">StopSound(sound)</a></dt>
+<dt><a href="#StopSound">StopSound(sound)</a> ⇒ <code>null</code></dt>
 <dd><p>Stop playing a sound</p>
 </dd>
-<dt><a href="#PauseSound">PauseSound(sound)</a></dt>
+<dt><a href="#PauseSound">PauseSound(sound)</a> ⇒ <code>null</code></dt>
 <dd><p>Pause a sound</p>
 </dd>
-<dt><a href="#ResumeSound">ResumeSound(sound)</a></dt>
+<dt><a href="#ResumeSound">ResumeSound(sound)</a> ⇒ <code>null</code></dt>
 <dd><p>Resume a paused sound</p>
 </dd>
-<dt><a href="#PlaySoundMulti">PlaySoundMulti(sound)</a></dt>
+<dt><a href="#PlaySoundMulti">PlaySoundMulti(sound)</a> ⇒ <code>null</code></dt>
 <dd><p>Play a sound (using multichannel buffer pool)</p>
 </dd>
-<dt><a href="#StopSoundMulti">StopSoundMulti()</a></dt>
+<dt><a href="#StopSoundMulti">StopSoundMulti()</a> ⇒ <code>null</code></dt>
 <dd><p>Stop any sound playing (using multichannel buffer pool)</p>
 </dd>
 <dt><a href="#GetSoundsPlaying">GetSoundsPlaying()</a> ⇒ <code>number</code></dt>
@@ -1202,10 +1202,10 @@
 <dt><a href="#IsSoundPlaying">IsSoundPlaying(sound)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a sound is currently playing</p>
 </dd>
-<dt><a href="#SetSoundVolume">SetSoundVolume(sound, volume)</a></dt>
+<dt><a href="#SetSoundVolume">SetSoundVolume(sound, volume)</a> ⇒ <code>null</code></dt>
 <dd><p>Set volume for a sound (1.0 is max level)</p>
 </dd>
-<dt><a href="#SetSoundPitch">SetSoundPitch(sound, pitch)</a></dt>
+<dt><a href="#SetSoundPitch">SetSoundPitch(sound, pitch)</a> ⇒ <code>null</code></dt>
 <dd><p>Set pitch for a sound (1.0 is base level)</p>
 </dd>
 <dt><a href="#WaveCopy">WaveCopy(wave)</a> ⇒ <code>Wave</code></dt>
@@ -1214,7 +1214,7 @@
 <dt><a href="#LoadWaveSamples">LoadWaveSamples(wave)</a> ⇒ <code>number</code></dt>
 <dd><p>Load samples data from wave as a floats array</p>
 </dd>
-<dt><a href="#UnloadWaveSamples">UnloadWaveSamples(samples)</a></dt>
+<dt><a href="#UnloadWaveSamples">UnloadWaveSamples(samples)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload samples data loaded with LoadWaveSamples()</p>
 </dd>
 <dt><a href="#LoadMusicStream">LoadMusicStream(fileName)</a> ⇒ <code>Music</code></dt>
@@ -1223,34 +1223,34 @@
 <dt><a href="#LoadMusicStreamFromMemory">LoadMusicStreamFromMemory(fileType, data, dataSize)</a> ⇒ <code>Music</code></dt>
 <dd><p>Load music stream from data</p>
 </dd>
-<dt><a href="#UnloadMusicStream">UnloadMusicStream(music)</a></dt>
+<dt><a href="#UnloadMusicStream">UnloadMusicStream(music)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload music stream</p>
 </dd>
-<dt><a href="#PlayMusicStream">PlayMusicStream(music)</a></dt>
+<dt><a href="#PlayMusicStream">PlayMusicStream(music)</a> ⇒ <code>null</code></dt>
 <dd><p>Start music playing</p>
 </dd>
 <dt><a href="#IsMusicStreamPlaying">IsMusicStreamPlaying(music)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if music is playing</p>
 </dd>
-<dt><a href="#UpdateMusicStream">UpdateMusicStream(music)</a></dt>
+<dt><a href="#UpdateMusicStream">UpdateMusicStream(music)</a> ⇒ <code>null</code></dt>
 <dd><p>Updates buffers for music streaming</p>
 </dd>
-<dt><a href="#StopMusicStream">StopMusicStream(music)</a></dt>
+<dt><a href="#StopMusicStream">StopMusicStream(music)</a> ⇒ <code>null</code></dt>
 <dd><p>Stop music playing</p>
 </dd>
-<dt><a href="#PauseMusicStream">PauseMusicStream(music)</a></dt>
+<dt><a href="#PauseMusicStream">PauseMusicStream(music)</a> ⇒ <code>null</code></dt>
 <dd><p>Pause music playing</p>
 </dd>
-<dt><a href="#ResumeMusicStream">ResumeMusicStream(music)</a></dt>
+<dt><a href="#ResumeMusicStream">ResumeMusicStream(music)</a> ⇒ <code>null</code></dt>
 <dd><p>Resume playing paused music</p>
 </dd>
-<dt><a href="#SeekMusicStream">SeekMusicStream(music, position)</a></dt>
+<dt><a href="#SeekMusicStream">SeekMusicStream(music, position)</a> ⇒ <code>null</code></dt>
 <dd><p>Seek music to a position (in seconds)</p>
 </dd>
-<dt><a href="#SetMusicVolume">SetMusicVolume(music, volume)</a></dt>
+<dt><a href="#SetMusicVolume">SetMusicVolume(music, volume)</a> ⇒ <code>null</code></dt>
 <dd><p>Set volume for music (1.0 is max level)</p>
 </dd>
-<dt><a href="#SetMusicPitch">SetMusicPitch(music, pitch)</a></dt>
+<dt><a href="#SetMusicPitch">SetMusicPitch(music, pitch)</a> ⇒ <code>null</code></dt>
 <dd><p>Set pitch for a music (1.0 is base level)</p>
 </dd>
 <dt><a href="#GetMusicTimeLength">GetMusicTimeLength(music)</a> ⇒ <code>number</code></dt>
@@ -1262,37 +1262,37 @@
 <dt><a href="#LoadAudioStream">LoadAudioStream(sampleRate, sampleSize, channels)</a> ⇒ <code>AudioStream</code></dt>
 <dd><p>Load audio stream (to stream raw audio pcm data)</p>
 </dd>
-<dt><a href="#UnloadAudioStream">UnloadAudioStream(stream)</a></dt>
+<dt><a href="#UnloadAudioStream">UnloadAudioStream(stream)</a> ⇒ <code>null</code></dt>
 <dd><p>Unload audio stream and free memory</p>
 </dd>
-<dt><a href="#UpdateAudioStream">UpdateAudioStream(stream, data, frameCount)</a></dt>
+<dt><a href="#UpdateAudioStream">UpdateAudioStream(stream, data, frameCount)</a> ⇒ <code>null</code></dt>
 <dd><p>Update audio stream buffers with data</p>
 </dd>
 <dt><a href="#IsAudioStreamProcessed">IsAudioStreamProcessed(stream)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if any audio stream buffers requires refill</p>
 </dd>
-<dt><a href="#PlayAudioStream">PlayAudioStream(stream)</a></dt>
+<dt><a href="#PlayAudioStream">PlayAudioStream(stream)</a> ⇒ <code>null</code></dt>
 <dd><p>Play audio stream</p>
 </dd>
-<dt><a href="#PauseAudioStream">PauseAudioStream(stream)</a></dt>
+<dt><a href="#PauseAudioStream">PauseAudioStream(stream)</a> ⇒ <code>null</code></dt>
 <dd><p>Pause audio stream</p>
 </dd>
-<dt><a href="#ResumeAudioStream">ResumeAudioStream(stream)</a></dt>
+<dt><a href="#ResumeAudioStream">ResumeAudioStream(stream)</a> ⇒ <code>null</code></dt>
 <dd><p>Resume audio stream</p>
 </dd>
 <dt><a href="#IsAudioStreamPlaying">IsAudioStreamPlaying(stream)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if audio stream is playing</p>
 </dd>
-<dt><a href="#StopAudioStream">StopAudioStream(stream)</a></dt>
+<dt><a href="#StopAudioStream">StopAudioStream(stream)</a> ⇒ <code>null</code></dt>
 <dd><p>Stop audio stream</p>
 </dd>
-<dt><a href="#SetAudioStreamVolume">SetAudioStreamVolume(stream, volume)</a></dt>
+<dt><a href="#SetAudioStreamVolume">SetAudioStreamVolume(stream, volume)</a> ⇒ <code>null</code></dt>
 <dd><p>Set volume for audio stream (1.0 is max level)</p>
 </dd>
-<dt><a href="#SetAudioStreamPitch">SetAudioStreamPitch(stream, pitch)</a></dt>
+<dt><a href="#SetAudioStreamPitch">SetAudioStreamPitch(stream, pitch)</a> ⇒ <code>null</code></dt>
 <dd><p>Set pitch for audio stream (1.0 is base level)</p>
 </dd>
-<dt><a href="#SetAudioStreamBufferSizeDefault">SetAudioStreamBufferSizeDefault(size)</a></dt>
+<dt><a href="#SetAudioStreamBufferSizeDefault">SetAudioStreamBufferSizeDefault(size)</a> ⇒ <code>null</code></dt>
 <dd><p>Default size for new audio streams</p>
 </dd>
 <dt><a href="#EaseLinearNone">EaseLinearNone(t, b, c, d)</a> ⇒ <code>number</code></dt>
@@ -1379,136 +1379,136 @@
 <dt><a href="#EaseElasticInOut">EaseElasticInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
 <dd><p>Easing: EaseElasticInOut.</p>
 </dd>
-<dt><a href="#UpdateCamera">UpdateCamera(camera)</a></dt>
+<dt><a href="#UpdateCamera">UpdateCamera(camera)</a> ⇒ <code>null</code></dt>
 <dd><p>Update camera position for selected mode</p>
 </dd>
-<dt><a href="#ImageFormat">ImageFormat(image, newFormat)</a></dt>
+<dt><a href="#ImageFormat">ImageFormat(image, newFormat)</a> ⇒ <code>null</code></dt>
 <dd><p>Convert image data to desired format</p>
 </dd>
-<dt><a href="#ImageToPOT">ImageToPOT(image, fill)</a></dt>
+<dt><a href="#ImageToPOT">ImageToPOT(image, fill)</a> ⇒ <code>null</code></dt>
 <dd><p>Convert image to POT (power-of-two)</p>
 </dd>
-<dt><a href="#ImageCrop">ImageCrop(image, crop)</a></dt>
+<dt><a href="#ImageCrop">ImageCrop(image, crop)</a> ⇒ <code>null</code></dt>
 <dd><p>Crop an image to a defined rectangle</p>
 </dd>
-<dt><a href="#ImageAlphaCrop">ImageAlphaCrop(image, threshold)</a></dt>
+<dt><a href="#ImageAlphaCrop">ImageAlphaCrop(image, threshold)</a> ⇒ <code>null</code></dt>
 <dd><p>Crop image depending on alpha value</p>
 </dd>
-<dt><a href="#ImageAlphaClear">ImageAlphaClear(image, color, threshold)</a></dt>
+<dt><a href="#ImageAlphaClear">ImageAlphaClear(image, color, threshold)</a> ⇒ <code>null</code></dt>
 <dd><p>Clear alpha channel to desired color</p>
 </dd>
-<dt><a href="#ImageAlphaMask">ImageAlphaMask(image, alphaMask)</a></dt>
+<dt><a href="#ImageAlphaMask">ImageAlphaMask(image, alphaMask)</a> ⇒ <code>null</code></dt>
 <dd><p>Apply alpha mask to image</p>
 </dd>
-<dt><a href="#ImageAlphaPremultiply">ImageAlphaPremultiply(image)</a></dt>
+<dt><a href="#ImageAlphaPremultiply">ImageAlphaPremultiply(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Premultiply alpha channel</p>
 </dd>
-<dt><a href="#ImageResize">ImageResize(image, newWidth, newHeight)</a></dt>
+<dt><a href="#ImageResize">ImageResize(image, newWidth, newHeight)</a> ⇒ <code>null</code></dt>
 <dd><p>Resize image (Bicubic scaling algorithm)</p>
 </dd>
-<dt><a href="#ImageResizeNN">ImageResizeNN(image, newWidth, newHeight)</a></dt>
+<dt><a href="#ImageResizeNN">ImageResizeNN(image, newWidth, newHeight)</a> ⇒ <code>null</code></dt>
 <dd><p>Resize image (Nearest-Neighbor scaling algorithm)</p>
 </dd>
-<dt><a href="#ImageResizeCanvas">ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill)</a></dt>
+<dt><a href="#ImageResizeCanvas">ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill)</a> ⇒ <code>null</code></dt>
 <dd><p>Resize canvas and fill with color</p>
 </dd>
-<dt><a href="#ImageMipmaps">ImageMipmaps(image)</a></dt>
+<dt><a href="#ImageMipmaps">ImageMipmaps(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Compute all mipmap levels for a provided image</p>
 </dd>
-<dt><a href="#ImageDither">ImageDither(image, rBpp, gBpp, bBpp, aBpp)</a></dt>
+<dt><a href="#ImageDither">ImageDither(image, rBpp, gBpp, bBpp, aBpp)</a> ⇒ <code>null</code></dt>
 <dd><p>Dither image data to 16bpp or lower (Floyd-Steinberg dithering)</p>
 </dd>
-<dt><a href="#ImageFlipVertical">ImageFlipVertical(image)</a></dt>
+<dt><a href="#ImageFlipVertical">ImageFlipVertical(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Flip image vertically</p>
 </dd>
-<dt><a href="#ImageFlipHorizontal">ImageFlipHorizontal(image)</a></dt>
+<dt><a href="#ImageFlipHorizontal">ImageFlipHorizontal(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Flip image horizontally</p>
 </dd>
-<dt><a href="#ImageRotateCW">ImageRotateCW(image)</a></dt>
+<dt><a href="#ImageRotateCW">ImageRotateCW(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Rotate image clockwise 90deg</p>
 </dd>
-<dt><a href="#ImageRotateCCW">ImageRotateCCW(image)</a></dt>
+<dt><a href="#ImageRotateCCW">ImageRotateCCW(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Rotate image counter-clockwise 90deg</p>
 </dd>
-<dt><a href="#ImageColorTint">ImageColorTint(image, color)</a></dt>
+<dt><a href="#ImageColorTint">ImageColorTint(image, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Modify image color: tint</p>
 </dd>
-<dt><a href="#ImageColorInvert">ImageColorInvert(image)</a></dt>
+<dt><a href="#ImageColorInvert">ImageColorInvert(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Modify image color: invert</p>
 </dd>
-<dt><a href="#ImageColorGrayscale">ImageColorGrayscale(image)</a></dt>
+<dt><a href="#ImageColorGrayscale">ImageColorGrayscale(image)</a> ⇒ <code>null</code></dt>
 <dd><p>Modify image color: grayscale</p>
 </dd>
-<dt><a href="#ImageColorContrast">ImageColorContrast(image, contrast)</a></dt>
+<dt><a href="#ImageColorContrast">ImageColorContrast(image, contrast)</a> ⇒ <code>null</code></dt>
 <dd><p>Modify image color: contrast (-100 to 100)</p>
 </dd>
-<dt><a href="#ImageColorBrightness">ImageColorBrightness(image, brightness)</a></dt>
+<dt><a href="#ImageColorBrightness">ImageColorBrightness(image, brightness)</a> ⇒ <code>null</code></dt>
 <dd><p>Modify image color: brightness (-255 to 255)</p>
 </dd>
-<dt><a href="#ImageColorReplace">ImageColorReplace(image, color, replace)</a></dt>
+<dt><a href="#ImageColorReplace">ImageColorReplace(image, color, replace)</a> ⇒ <code>null</code></dt>
 <dd><p>Modify image color: replace color</p>
 </dd>
-<dt><a href="#ImageClearBackground">ImageClearBackground(dst, color)</a></dt>
+<dt><a href="#ImageClearBackground">ImageClearBackground(dst, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Clear image background with given color</p>
 </dd>
-<dt><a href="#ImageDrawPixel">ImageDrawPixel(dst, posX, posY, color)</a></dt>
+<dt><a href="#ImageDrawPixel">ImageDrawPixel(dst, posX, posY, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw pixel within an image</p>
 </dd>
-<dt><a href="#ImageDrawPixelV">ImageDrawPixelV(dst, position, color)</a></dt>
+<dt><a href="#ImageDrawPixelV">ImageDrawPixelV(dst, position, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw pixel within an image (Vector version)</p>
 </dd>
-<dt><a href="#ImageDrawLine">ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color)</a></dt>
+<dt><a href="#ImageDrawLine">ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw line within an image</p>
 </dd>
-<dt><a href="#ImageDrawLineV">ImageDrawLineV(dst, start, end, color)</a></dt>
+<dt><a href="#ImageDrawLineV">ImageDrawLineV(dst, start, end, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw line within an image (Vector version)</p>
 </dd>
-<dt><a href="#ImageDrawCircle">ImageDrawCircle(dst, centerX, centerY, radius, color)</a></dt>
+<dt><a href="#ImageDrawCircle">ImageDrawCircle(dst, centerX, centerY, radius, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw circle within an image</p>
 </dd>
-<dt><a href="#ImageDrawCircleV">ImageDrawCircleV(dst, center, radius, color)</a></dt>
+<dt><a href="#ImageDrawCircleV">ImageDrawCircleV(dst, center, radius, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw circle within an image (Vector version)</p>
 </dd>
-<dt><a href="#ImageDrawRectangle">ImageDrawRectangle(dst, posX, posY, width, height, color)</a></dt>
+<dt><a href="#ImageDrawRectangle">ImageDrawRectangle(dst, posX, posY, width, height, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw rectangle within an image</p>
 </dd>
-<dt><a href="#ImageDrawRectangleV">ImageDrawRectangleV(dst, position, size, color)</a></dt>
+<dt><a href="#ImageDrawRectangleV">ImageDrawRectangleV(dst, position, size, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw rectangle within an image (Vector version)</p>
 </dd>
-<dt><a href="#ImageDrawRectangleRec">ImageDrawRectangleRec(dst, rec, color)</a></dt>
+<dt><a href="#ImageDrawRectangleRec">ImageDrawRectangleRec(dst, rec, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw rectangle within an image</p>
 </dd>
-<dt><a href="#ImageDrawRectangleLines">ImageDrawRectangleLines(dst, rec, thick, color)</a></dt>
+<dt><a href="#ImageDrawRectangleLines">ImageDrawRectangleLines(dst, rec, thick, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw rectangle lines within an image</p>
 </dd>
-<dt><a href="#ImageDraw">ImageDraw(dst, src, srcRec, dstRec, tint)</a></dt>
+<dt><a href="#ImageDraw">ImageDraw(dst, src, srcRec, dstRec, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw a source image within a destination image (tint applied to source)</p>
 </dd>
-<dt><a href="#ImageDrawText">ImageDrawText(dst, text, posX, posY, fontSize, color)</a></dt>
+<dt><a href="#ImageDrawText">ImageDrawText(dst, text, posX, posY, fontSize, color)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw text (using default font) within an image (destination)</p>
 </dd>
-<dt><a href="#ImageDrawTextEx">ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint)</a></dt>
+<dt><a href="#ImageDrawTextEx">ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint)</a> ⇒ <code>null</code></dt>
 <dd><p>Draw text (custom sprite font) within an image (destination)</p>
 </dd>
-<dt><a href="#GenTextureMipmaps">GenTextureMipmaps(texture)</a></dt>
+<dt><a href="#GenTextureMipmaps">GenTextureMipmaps(texture)</a> ⇒ <code>null</code></dt>
 <dd><p>Generate GPU mipmaps for a texture</p>
 </dd>
-<dt><a href="#UploadMesh">UploadMesh(mesh, dynamic)</a></dt>
+<dt><a href="#UploadMesh">UploadMesh(mesh, dynamic)</a> ⇒ <code>null</code></dt>
 <dd><p>Upload mesh vertex data in GPU and provide VAO/VBO ids</p>
 </dd>
-<dt><a href="#GenMeshTangents">GenMeshTangents(mesh)</a></dt>
+<dt><a href="#GenMeshTangents">GenMeshTangents(mesh)</a> ⇒ <code>null</code></dt>
 <dd><p>Compute mesh tangents</p>
 </dd>
-<dt><a href="#GenMeshBinormals">GenMeshBinormals(mesh)</a></dt>
+<dt><a href="#GenMeshBinormals">GenMeshBinormals(mesh)</a> ⇒ <code>null</code></dt>
 <dd><p>Compute mesh binormals</p>
 </dd>
-<dt><a href="#SetModelMeshMaterial">SetModelMeshMaterial(model, meshId, materialId)</a></dt>
+<dt><a href="#SetModelMeshMaterial">SetModelMeshMaterial(model, meshId, materialId)</a> ⇒ <code>null</code></dt>
 <dd><p>Set material for a mesh</p>
 </dd>
-<dt><a href="#WaveFormat">WaveFormat(wave, sampleRate, sampleSize, channels)</a></dt>
+<dt><a href="#WaveFormat">WaveFormat(wave, sampleRate, sampleSize, channels)</a> ⇒ <code>null</code></dt>
 <dd><p>Convert wave data to desired format</p>
 </dd>
-<dt><a href="#WaveCrop">WaveCrop(wave, initSample, finalSample)</a></dt>
+<dt><a href="#WaveCrop">WaveCrop(wave, initSample, finalSample)</a> ⇒ <code>null</code></dt>
 <dd><p>Crop a wave to defined samples range</p>
 </dd>
 <dt><a href="#SetShaderFloat">SetShaderFloat()</a></dt>
@@ -1525,6 +1525,32 @@
 </dd>
 <dt><a href="#SetShaderVec4">SetShaderVec4()</a></dt>
 <dd><p>Set shader uniform value vector4</p>
+</dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#Color">Color</a> : <code>Object</code></dt>
+<dd><p>Color, 4 components, R8G8B8A8 (32bit)</p>
+</dd>
+<dt><a href="#Vector2">Vector2</a> : <code>Object</code></dt>
+<dd><p>Vector2, 2 components</p>
+</dd>
+<dt><a href="#Vector3">Vector3</a> : <code>Object</code></dt>
+<dd><p>Vector3, 3 components</p>
+</dd>
+<dt><a href="#Vector4">Vector4</a> : <code>Object</code></dt>
+<dd><p>Vector4, 4 components</p>
+</dd>
+<dt><a href="#Rectangle">Rectangle</a> : <code>Object</code></dt>
+<dd><p>Rectangle, 4 components</p>
+</dd>
+<dt><a href="#Camera2D">Camera2D</a> : <code>Object</code></dt>
+<dd><p>Camera2D, defines position/orientation in 2d space</p>
+</dd>
+<dt><a href="#Camera3D">Camera3D</a> : <code>Object</code></dt>
+<dd><p>Camera, defines position/orientation in 3d space</p>
 </dd>
 </dl>
 
@@ -1654,7 +1680,7 @@ Camera, defines position/orientation in 3d space
 
 <a name="InitWindow"></a>
 
-## InitWindow(width, height, title)
+## InitWindow(width, height, title) ⇒ <code>null</code>
 Initialize window and OpenGL context
 
 **Kind**: global function  
@@ -1674,7 +1700,7 @@ Check if KEY_ESCAPE pressed or Close icon pressed
 **Returns**: <code>boolean</code> - The resulting bool.  
 <a name="CloseWindow"></a>
 
-## CloseWindow()
+## CloseWindow() ⇒ <code>null</code>
 Close window and unload OpenGL context
 
 **Kind**: global function  
@@ -1741,7 +1767,7 @@ Check if one specific window flag is enabled
 
 <a name="SetWindowState"></a>
 
-## SetWindowState(flags)
+## SetWindowState(flags) ⇒ <code>null</code>
 Set window configuration state using flags (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
@@ -1752,7 +1778,7 @@ Set window configuration state using flags (only PLATFORM_DESKTOP)
 
 <a name="ClearWindowState"></a>
 
-## ClearWindowState(flags)
+## ClearWindowState(flags) ⇒ <code>null</code>
 Clear window configuration state flags
 
 **Kind**: global function  
@@ -1763,31 +1789,31 @@ Clear window configuration state flags
 
 <a name="ToggleFullscreen"></a>
 
-## ToggleFullscreen()
+## ToggleFullscreen() ⇒ <code>null</code>
 Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
 <a name="MaximizeWindow"></a>
 
-## MaximizeWindow()
+## MaximizeWindow() ⇒ <code>null</code>
 Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
 <a name="MinimizeWindow"></a>
 
-## MinimizeWindow()
+## MinimizeWindow() ⇒ <code>null</code>
 Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
 <a name="RestoreWindow"></a>
 
-## RestoreWindow()
+## RestoreWindow() ⇒ <code>null</code>
 Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
 <a name="SetWindowIcon"></a>
 
-## SetWindowIcon(image)
+## SetWindowIcon(image) ⇒ <code>null</code>
 Set icon for window (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
@@ -1798,7 +1824,7 @@ Set icon for window (only PLATFORM_DESKTOP)
 
 <a name="SetWindowTitle"></a>
 
-## SetWindowTitle(title)
+## SetWindowTitle(title) ⇒ <code>null</code>
 Set title for window (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
@@ -1809,7 +1835,7 @@ Set title for window (only PLATFORM_DESKTOP)
 
 <a name="SetWindowPosition"></a>
 
-## SetWindowPosition(x, y)
+## SetWindowPosition(x, y) ⇒ <code>null</code>
 Set window position on screen (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
@@ -1821,7 +1847,7 @@ Set window position on screen (only PLATFORM_DESKTOP)
 
 <a name="SetWindowMonitor"></a>
 
-## SetWindowMonitor(monitor)
+## SetWindowMonitor(monitor) ⇒ <code>null</code>
 Set monitor for the current window (fullscreen mode)
 
 **Kind**: global function  
@@ -1832,7 +1858,7 @@ Set monitor for the current window (fullscreen mode)
 
 <a name="SetWindowMinSize"></a>
 
-## SetWindowMinSize(width, height)
+## SetWindowMinSize(width, height) ⇒ <code>null</code>
 Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
 
 **Kind**: global function  
@@ -1844,7 +1870,7 @@ Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
 
 <a name="SetWindowSize"></a>
 
-## SetWindowSize(width, height)
+## SetWindowSize(width, height) ⇒ <code>null</code>
 Set window dimensions
 
 **Kind**: global function  
@@ -1989,7 +2015,7 @@ Get the human-readable, UTF-8 encoded name of the primary monitor
 
 <a name="SetClipboardText"></a>
 
-## SetClipboardText(text)
+## SetClipboardText(text) ⇒ <code>null</code>
 Set clipboard text content
 
 **Kind**: global function  
@@ -2007,19 +2033,19 @@ Get clipboard text content
 **Returns**: <code>string</code> - The resulting const char *.  
 <a name="SwapScreenBuffer"></a>
 
-## SwapScreenBuffer()
+## SwapScreenBuffer() ⇒ <code>null</code>
 Swap back buffer with front buffer (screen drawing)
 
 **Kind**: global function  
 <a name="PollInputEvents"></a>
 
-## PollInputEvents()
+## PollInputEvents() ⇒ <code>null</code>
 Register all input events
 
 **Kind**: global function  
 <a name="WaitTime"></a>
 
-## WaitTime(ms)
+## WaitTime(ms) ⇒ <code>null</code>
 Wait for some milliseconds (halt program execution)
 
 **Kind**: global function  
@@ -2030,13 +2056,13 @@ Wait for some milliseconds (halt program execution)
 
 <a name="ShowCursor"></a>
 
-## ShowCursor()
+## ShowCursor() ⇒ <code>null</code>
 Shows cursor
 
 **Kind**: global function  
 <a name="HideCursor"></a>
 
-## HideCursor()
+## HideCursor() ⇒ <code>null</code>
 Hides cursor
 
 **Kind**: global function  
@@ -2049,13 +2075,13 @@ Check if cursor is not visible
 **Returns**: <code>boolean</code> - The resulting bool.  
 <a name="EnableCursor"></a>
 
-## EnableCursor()
+## EnableCursor() ⇒ <code>null</code>
 Enables cursor (unlock cursor)
 
 **Kind**: global function  
 <a name="DisableCursor"></a>
 
-## DisableCursor()
+## DisableCursor() ⇒ <code>null</code>
 Disables cursor (lock cursor)
 
 **Kind**: global function  
@@ -2068,7 +2094,7 @@ Check if cursor is on the screen
 **Returns**: <code>boolean</code> - The resulting bool.  
 <a name="ClearBackground"></a>
 
-## ClearBackground(color)
+## ClearBackground(color) ⇒ <code>null</code>
 Set background color (framebuffer clear color)
 
 **Kind**: global function  
@@ -2079,19 +2105,19 @@ Set background color (framebuffer clear color)
 
 <a name="BeginDrawing"></a>
 
-## BeginDrawing()
+## BeginDrawing() ⇒ <code>null</code>
 Setup canvas (framebuffer) to start drawing
 
 **Kind**: global function  
 <a name="EndDrawing"></a>
 
-## EndDrawing()
+## EndDrawing() ⇒ <code>null</code>
 End canvas drawing and swap buffers (double buffering)
 
 **Kind**: global function  
 <a name="BeginMode2D"></a>
 
-## BeginMode2D(camera)
+## BeginMode2D(camera) ⇒ <code>null</code>
 Begin 2D mode with custom camera (2D)
 
 **Kind**: global function  
@@ -2102,13 +2128,13 @@ Begin 2D mode with custom camera (2D)
 
 <a name="EndMode2D"></a>
 
-## EndMode2D()
+## EndMode2D() ⇒ <code>null</code>
 Ends 2D mode with custom camera
 
 **Kind**: global function  
 <a name="BeginMode3D"></a>
 
-## BeginMode3D(camera)
+## BeginMode3D(camera) ⇒ <code>null</code>
 Begin 3D mode with custom camera (3D)
 
 **Kind**: global function  
@@ -2119,13 +2145,13 @@ Begin 3D mode with custom camera (3D)
 
 <a name="EndMode3D"></a>
 
-## EndMode3D()
+## EndMode3D() ⇒ <code>null</code>
 Ends 3D mode and returns to default 2D orthographic mode
 
 **Kind**: global function  
 <a name="BeginTextureMode"></a>
 
-## BeginTextureMode(target)
+## BeginTextureMode(target) ⇒ <code>null</code>
 Begin drawing to render texture
 
 **Kind**: global function  
@@ -2136,13 +2162,13 @@ Begin drawing to render texture
 
 <a name="EndTextureMode"></a>
 
-## EndTextureMode()
+## EndTextureMode() ⇒ <code>null</code>
 Ends drawing to render texture
 
 **Kind**: global function  
 <a name="BeginShaderMode"></a>
 
-## BeginShaderMode(shader)
+## BeginShaderMode(shader) ⇒ <code>null</code>
 Begin custom shader drawing
 
 **Kind**: global function  
@@ -2153,13 +2179,13 @@ Begin custom shader drawing
 
 <a name="EndShaderMode"></a>
 
-## EndShaderMode()
+## EndShaderMode() ⇒ <code>null</code>
 End custom shader drawing (use default shader)
 
 **Kind**: global function  
 <a name="BeginBlendMode"></a>
 
-## BeginBlendMode(mode)
+## BeginBlendMode(mode) ⇒ <code>null</code>
 Begin blending mode (alpha, additive, multiplied, subtract, custom)
 
 **Kind**: global function  
@@ -2170,13 +2196,13 @@ Begin blending mode (alpha, additive, multiplied, subtract, custom)
 
 <a name="EndBlendMode"></a>
 
-## EndBlendMode()
+## EndBlendMode() ⇒ <code>null</code>
 End blending mode (reset to default: alpha blending)
 
 **Kind**: global function  
 <a name="BeginScissorMode"></a>
 
-## BeginScissorMode(x, y, width, height)
+## BeginScissorMode(x, y, width, height) ⇒ <code>null</code>
 Begin scissor mode (define screen area for following drawing)
 
 **Kind**: global function  
@@ -2190,13 +2216,13 @@ Begin scissor mode (define screen area for following drawing)
 
 <a name="EndScissorMode"></a>
 
-## EndScissorMode()
+## EndScissorMode() ⇒ <code>null</code>
 End scissor mode
 
 **Kind**: global function  
 <a name="EndVrStereoMode"></a>
 
-## EndVrStereoMode()
+## EndVrStereoMode() ⇒ <code>null</code>
 End stereo rendering (requires VR simulator)
 
 **Kind**: global function  
@@ -2254,7 +2280,7 @@ Get shader attribute location
 
 <a name="SetShaderValueMatrix"></a>
 
-## SetShaderValueMatrix(shader, locIndex, mat)
+## SetShaderValueMatrix(shader, locIndex, mat) ⇒ <code>null</code>
 Set shader uniform value (matrix 4x4)
 
 **Kind**: global function  
@@ -2267,7 +2293,7 @@ Set shader uniform value (matrix 4x4)
 
 <a name="SetShaderValueTexture"></a>
 
-## SetShaderValueTexture(shader, locIndex, texture)
+## SetShaderValueTexture(shader, locIndex, texture) ⇒ <code>null</code>
 Set shader uniform value for texture (sampler2d)
 
 **Kind**: global function  
@@ -2280,7 +2306,7 @@ Set shader uniform value for texture (sampler2d)
 
 <a name="UnloadShader"></a>
 
-## UnloadShader(shader)
+## UnloadShader(shader) ⇒ <code>null</code>
 Unload shader from GPU memory (VRAM)
 
 **Kind**: global function  
@@ -2382,7 +2408,7 @@ Get the world space position for a 2d camera screen space position
 
 <a name="SetTargetFPS"></a>
 
-## SetTargetFPS(fps)
+## SetTargetFPS(fps) ⇒ <code>null</code>
 Set target FPS (maximum)
 
 **Kind**: global function  
@@ -2427,7 +2453,7 @@ Get a random value between min and max (both included)
 
 <a name="SetRandomSeed"></a>
 
-## SetRandomSeed(seed)
+## SetRandomSeed(seed) ⇒ <code>null</code>
 Set the seed for the random number generator
 
 **Kind**: global function  
@@ -2438,7 +2464,7 @@ Set the seed for the random number generator
 
 <a name="TakeScreenshot"></a>
 
-## TakeScreenshot(fileName)
+## TakeScreenshot(fileName) ⇒ <code>null</code>
 Takes a screenshot of current screen (filename extension defines format)
 
 **Kind**: global function  
@@ -2449,7 +2475,7 @@ Takes a screenshot of current screen (filename extension defines format)
 
 <a name="SetConfigFlags"></a>
 
-## SetConfigFlags(flags)
+## SetConfigFlags(flags) ⇒ <code>null</code>
 Setup init configuration flags (view FLAGS)
 
 **Kind**: global function  
@@ -2460,7 +2486,7 @@ Setup init configuration flags (view FLAGS)
 
 <a name="SetTraceLogLevel"></a>
 
-## SetTraceLogLevel(logLevel)
+## SetTraceLogLevel(logLevel) ⇒ <code>null</code>
 Set the current threshold (minimum) log level
 
 **Kind**: global function  
@@ -2496,7 +2522,7 @@ Internal memory reallocator
 
 <a name="MemFree"></a>
 
-## MemFree(ptr)
+## MemFree(ptr) ⇒ <code>null</code>
 Internal memory free
 
 **Kind**: global function  
@@ -2520,7 +2546,7 @@ Load file data as byte array (read)
 
 <a name="UnloadFileData"></a>
 
-## UnloadFileData(data)
+## UnloadFileData(data) ⇒ <code>null</code>
 Unload file data allocated by LoadFileData()
 
 **Kind**: global function  
@@ -2557,7 +2583,7 @@ Load text data from file (read), returns a '\0' terminated string
 
 <a name="UnloadFileText"></a>
 
-## UnloadFileText(text)
+## UnloadFileText(text) ⇒ <code>null</code>
 Unload file text data allocated by LoadFileText()
 
 **Kind**: global function  
@@ -2698,7 +2724,7 @@ Get filenames in a directory path (memory should be freed)
 
 <a name="ClearDirectoryFiles"></a>
 
-## ClearDirectoryFiles()
+## ClearDirectoryFiles() ⇒ <code>null</code>
 Clear directory files paths buffers (free memory)
 
 **Kind**: global function  
@@ -2735,7 +2761,7 @@ Get dropped files names (memory should be freed)
 
 <a name="ClearDroppedFiles"></a>
 
-## ClearDroppedFiles()
+## ClearDroppedFiles() ⇒ <code>null</code>
 Clear dropped files paths buffer (free memory)
 
 **Kind**: global function  
@@ -2833,7 +2859,7 @@ Load integer value from storage file (from defined position)
 
 <a name="OpenURL"></a>
 
-## OpenURL(url)
+## OpenURL(url) ⇒ <code>null</code>
 Open URL with default system browser (if available)
 
 **Kind**: global function  
@@ -2892,7 +2918,7 @@ Check if a key is NOT being pressed
 
 <a name="SetExitKey"></a>
 
-## SetExitKey(key)
+## SetExitKey(key) ⇒ <code>null</code>
 Set a custom key to exit program (default is ESC)
 
 **Kind**: global function  
@@ -3113,7 +3139,7 @@ Get mouse delta between frames
 **Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
 <a name="SetMousePosition"></a>
 
-## SetMousePosition(x, y)
+## SetMousePosition(x, y) ⇒ <code>null</code>
 Set mouse position XY
 
 **Kind**: global function  
@@ -3125,7 +3151,7 @@ Set mouse position XY
 
 <a name="SetMouseOffset"></a>
 
-## SetMouseOffset(offsetX, offsetY)
+## SetMouseOffset(offsetX, offsetY) ⇒ <code>null</code>
 Set mouse offset
 
 **Kind**: global function  
@@ -3137,7 +3163,7 @@ Set mouse offset
 
 <a name="SetMouseScale"></a>
 
-## SetMouseScale(scaleX, scaleY)
+## SetMouseScale(scaleX, scaleY) ⇒ <code>null</code>
 Set mouse scaling
 
 **Kind**: global function  
@@ -3156,7 +3182,7 @@ Get mouse wheel movement Y
 **Returns**: <code>number</code> - The resulting float.  
 <a name="SetMouseCursor"></a>
 
-## SetMouseCursor(cursor)
+## SetMouseCursor(cursor) ⇒ <code>null</code>
 Set mouse cursor
 
 **Kind**: global function  
@@ -3212,7 +3238,7 @@ Get number of touch points
 **Returns**: <code>number</code> - The resulting int.  
 <a name="SetGesturesEnabled"></a>
 
-## SetGesturesEnabled(flags)
+## SetGesturesEnabled(flags) ⇒ <code>null</code>
 Enable a set of gestures using flags
 
 **Kind**: global function  
@@ -3277,7 +3303,7 @@ Get gesture pinch angle
 **Returns**: <code>number</code> - The resulting float.  
 <a name="SetCameraMode"></a>
 
-## SetCameraMode(camera, mode)
+## SetCameraMode(camera, mode) ⇒ <code>null</code>
 Set camera mode (multiple camera modes available)
 
 **Kind**: global function  
@@ -3289,7 +3315,7 @@ Set camera mode (multiple camera modes available)
 
 <a name="SetCameraPanControl"></a>
 
-## SetCameraPanControl(keyPan)
+## SetCameraPanControl(keyPan) ⇒ <code>null</code>
 Set camera pan key to combine with mouse movement (free camera)
 
 **Kind**: global function  
@@ -3300,7 +3326,7 @@ Set camera pan key to combine with mouse movement (free camera)
 
 <a name="SetCameraAltControl"></a>
 
-## SetCameraAltControl(keyAlt)
+## SetCameraAltControl(keyAlt) ⇒ <code>null</code>
 Set camera alt key to combine with mouse movement (free camera)
 
 **Kind**: global function  
@@ -3311,7 +3337,7 @@ Set camera alt key to combine with mouse movement (free camera)
 
 <a name="SetCameraSmoothZoomControl"></a>
 
-## SetCameraSmoothZoomControl(keySmoothZoom)
+## SetCameraSmoothZoomControl(keySmoothZoom) ⇒ <code>null</code>
 Set camera smooth zoom key to combine with mouse (free camera)
 
 **Kind**: global function  
@@ -3322,7 +3348,7 @@ Set camera smooth zoom key to combine with mouse (free camera)
 
 <a name="SetCameraMoveControls"></a>
 
-## SetCameraMoveControls(keyFront, keyBack, keyRight, keyLeft, keyUp, keyDown)
+## SetCameraMoveControls(keyFront, keyBack, keyRight, keyLeft, keyUp, keyDown) ⇒ <code>null</code>
 Set camera move controls (1st person and 3rd person cameras)
 
 **Kind**: global function  
@@ -3338,7 +3364,7 @@ Set camera move controls (1st person and 3rd person cameras)
 
 <a name="SetShapesTexture"></a>
 
-## SetShapesTexture(texture, source)
+## SetShapesTexture(texture, source) ⇒ <code>null</code>
 Set texture and rectangle to be used on shapes drawing
 
 **Kind**: global function  
@@ -3350,7 +3376,7 @@ Set texture and rectangle to be used on shapes drawing
 
 <a name="DrawPixel"></a>
 
-## DrawPixel(posX, posY, color)
+## DrawPixel(posX, posY, color) ⇒ <code>null</code>
 Draw a pixel
 
 **Kind**: global function  
@@ -3363,7 +3389,7 @@ Draw a pixel
 
 <a name="DrawPixelV"></a>
 
-## DrawPixelV(position, color)
+## DrawPixelV(position, color) ⇒ <code>null</code>
 Draw a pixel (Vector version)
 
 **Kind**: global function  
@@ -3375,7 +3401,7 @@ Draw a pixel (Vector version)
 
 <a name="DrawLine"></a>
 
-## DrawLine(startPosX, startPosY, endPosX, endPosY, color)
+## DrawLine(startPosX, startPosY, endPosX, endPosY, color) ⇒ <code>null</code>
 Draw a line
 
 **Kind**: global function  
@@ -3390,7 +3416,7 @@ Draw a line
 
 <a name="DrawLineV"></a>
 
-## DrawLineV(startPos, endPos, color)
+## DrawLineV(startPos, endPos, color) ⇒ <code>null</code>
 Draw a line (Vector version)
 
 **Kind**: global function  
@@ -3403,7 +3429,7 @@ Draw a line (Vector version)
 
 <a name="DrawLineEx"></a>
 
-## DrawLineEx(startPos, endPos, thick, color)
+## DrawLineEx(startPos, endPos, thick, color) ⇒ <code>null</code>
 Draw a line defining thickness
 
 **Kind**: global function  
@@ -3417,7 +3443,7 @@ Draw a line defining thickness
 
 <a name="DrawLineBezier"></a>
 
-## DrawLineBezier(startPos, endPos, thick, color)
+## DrawLineBezier(startPos, endPos, thick, color) ⇒ <code>null</code>
 Draw a line using cubic-bezier curves in-out
 
 **Kind**: global function  
@@ -3431,7 +3457,7 @@ Draw a line using cubic-bezier curves in-out
 
 <a name="DrawLineBezierQuad"></a>
 
-## DrawLineBezierQuad(startPos, endPos, controlPos, thick, color)
+## DrawLineBezierQuad(startPos, endPos, controlPos, thick, color) ⇒ <code>null</code>
 Draw line using quadratic bezier curves with a control point
 
 **Kind**: global function  
@@ -3446,7 +3472,7 @@ Draw line using quadratic bezier curves with a control point
 
 <a name="DrawLineBezierCubic"></a>
 
-## DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color)
+## DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color) ⇒ <code>null</code>
 Draw line using cubic bezier curves with 2 control points
 
 **Kind**: global function  
@@ -3462,7 +3488,7 @@ Draw line using cubic bezier curves with 2 control points
 
 <a name="DrawLineStrip"></a>
 
-## DrawLineStrip(points, pointCount, color)
+## DrawLineStrip(points, pointCount, color) ⇒ <code>null</code>
 Draw lines sequence
 
 **Kind**: global function  
@@ -3475,7 +3501,7 @@ Draw lines sequence
 
 <a name="DrawCircle"></a>
 
-## DrawCircle(centerX, centerY, radius, color)
+## DrawCircle(centerX, centerY, radius, color) ⇒ <code>null</code>
 Draw a color-filled circle
 
 **Kind**: global function  
@@ -3489,7 +3515,7 @@ Draw a color-filled circle
 
 <a name="DrawCircleSector"></a>
 
-## DrawCircleSector(center, radius, startAngle, endAngle, segments, color)
+## DrawCircleSector(center, radius, startAngle, endAngle, segments, color) ⇒ <code>null</code>
 Draw a piece of a circle
 
 **Kind**: global function  
@@ -3505,7 +3531,7 @@ Draw a piece of a circle
 
 <a name="DrawCircleSectorLines"></a>
 
-## DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color)
+## DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color) ⇒ <code>null</code>
 Draw circle sector outline
 
 **Kind**: global function  
@@ -3521,7 +3547,7 @@ Draw circle sector outline
 
 <a name="DrawCircleGradient"></a>
 
-## DrawCircleGradient(centerX, centerY, radius, color1, color2)
+## DrawCircleGradient(centerX, centerY, radius, color1, color2) ⇒ <code>null</code>
 Draw a gradient-filled circle
 
 **Kind**: global function  
@@ -3536,7 +3562,7 @@ Draw a gradient-filled circle
 
 <a name="DrawCircleV"></a>
 
-## DrawCircleV(center, radius, color)
+## DrawCircleV(center, radius, color) ⇒ <code>null</code>
 Draw a color-filled circle (Vector version)
 
 **Kind**: global function  
@@ -3549,7 +3575,7 @@ Draw a color-filled circle (Vector version)
 
 <a name="DrawCircleLines"></a>
 
-## DrawCircleLines(centerX, centerY, radius, color)
+## DrawCircleLines(centerX, centerY, radius, color) ⇒ <code>null</code>
 Draw circle outline
 
 **Kind**: global function  
@@ -3563,7 +3589,7 @@ Draw circle outline
 
 <a name="DrawEllipse"></a>
 
-## DrawEllipse(centerX, centerY, radiusH, radiusV, color)
+## DrawEllipse(centerX, centerY, radiusH, radiusV, color) ⇒ <code>null</code>
 Draw ellipse
 
 **Kind**: global function  
@@ -3578,7 +3604,7 @@ Draw ellipse
 
 <a name="DrawEllipseLines"></a>
 
-## DrawEllipseLines(centerX, centerY, radiusH, radiusV, color)
+## DrawEllipseLines(centerX, centerY, radiusH, radiusV, color) ⇒ <code>null</code>
 Draw ellipse outline
 
 **Kind**: global function  
@@ -3593,7 +3619,7 @@ Draw ellipse outline
 
 <a name="DrawRing"></a>
 
-## DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
+## DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color) ⇒ <code>null</code>
 Draw ring
 
 **Kind**: global function  
@@ -3610,7 +3636,7 @@ Draw ring
 
 <a name="DrawRingLines"></a>
 
-## DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
+## DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color) ⇒ <code>null</code>
 Draw ring outline
 
 **Kind**: global function  
@@ -3627,7 +3653,7 @@ Draw ring outline
 
 <a name="DrawRectangle"></a>
 
-## DrawRectangle(posX, posY, width, height, color)
+## DrawRectangle(posX, posY, width, height, color) ⇒ <code>null</code>
 Draw a color-filled rectangle
 
 **Kind**: global function  
@@ -3642,7 +3668,7 @@ Draw a color-filled rectangle
 
 <a name="DrawRectangleV"></a>
 
-## DrawRectangleV(position, size, color)
+## DrawRectangleV(position, size, color) ⇒ <code>null</code>
 Draw a color-filled rectangle (Vector version)
 
 **Kind**: global function  
@@ -3655,7 +3681,7 @@ Draw a color-filled rectangle (Vector version)
 
 <a name="DrawRectangleRec"></a>
 
-## DrawRectangleRec(rec, color)
+## DrawRectangleRec(rec, color) ⇒ <code>null</code>
 Draw a color-filled rectangle
 
 **Kind**: global function  
@@ -3667,7 +3693,7 @@ Draw a color-filled rectangle
 
 <a name="DrawRectanglePro"></a>
 
-## DrawRectanglePro(rec, origin, rotation, color)
+## DrawRectanglePro(rec, origin, rotation, color) ⇒ <code>null</code>
 Draw a color-filled rectangle with pro parameters
 
 **Kind**: global function  
@@ -3681,7 +3707,7 @@ Draw a color-filled rectangle with pro parameters
 
 <a name="DrawRectangleGradientV"></a>
 
-## DrawRectangleGradientV(posX, posY, width, height, color1, color2)
+## DrawRectangleGradientV(posX, posY, width, height, color1, color2) ⇒ <code>null</code>
 Draw a vertical-gradient-filled rectangle
 
 **Kind**: global function  
@@ -3697,7 +3723,7 @@ Draw a vertical-gradient-filled rectangle
 
 <a name="DrawRectangleGradientH"></a>
 
-## DrawRectangleGradientH(posX, posY, width, height, color1, color2)
+## DrawRectangleGradientH(posX, posY, width, height, color1, color2) ⇒ <code>null</code>
 Draw a horizontal-gradient-filled rectangle
 
 **Kind**: global function  
@@ -3713,7 +3739,7 @@ Draw a horizontal-gradient-filled rectangle
 
 <a name="DrawRectangleGradientEx"></a>
 
-## DrawRectangleGradientEx(rec, col1, col2, col3, col4)
+## DrawRectangleGradientEx(rec, col1, col2, col3, col4) ⇒ <code>null</code>
 Draw a gradient-filled rectangle with custom vertex colors
 
 **Kind**: global function  
@@ -3728,7 +3754,7 @@ Draw a gradient-filled rectangle with custom vertex colors
 
 <a name="DrawRectangleLines"></a>
 
-## DrawRectangleLines(posX, posY, width, height, color)
+## DrawRectangleLines(posX, posY, width, height, color) ⇒ <code>null</code>
 Draw rectangle outline
 
 **Kind**: global function  
@@ -3743,7 +3769,7 @@ Draw rectangle outline
 
 <a name="DrawRectangleLinesEx"></a>
 
-## DrawRectangleLinesEx(rec, lineThick, color)
+## DrawRectangleLinesEx(rec, lineThick, color) ⇒ <code>null</code>
 Draw rectangle outline with extended parameters
 
 **Kind**: global function  
@@ -3756,7 +3782,7 @@ Draw rectangle outline with extended parameters
 
 <a name="DrawRectangleRounded"></a>
 
-## DrawRectangleRounded(rec, roundness, segments, color)
+## DrawRectangleRounded(rec, roundness, segments, color) ⇒ <code>null</code>
 Draw rectangle with rounded edges
 
 **Kind**: global function  
@@ -3770,7 +3796,7 @@ Draw rectangle with rounded edges
 
 <a name="DrawRectangleRoundedLines"></a>
 
-## DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color)
+## DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color) ⇒ <code>null</code>
 Draw rectangle with rounded edges outline
 
 **Kind**: global function  
@@ -3785,7 +3811,7 @@ Draw rectangle with rounded edges outline
 
 <a name="DrawTriangle"></a>
 
-## DrawTriangle(v1, v2, v3, color)
+## DrawTriangle(v1, v2, v3, color) ⇒ <code>null</code>
 Draw a color-filled triangle (vertex in counter-clockwise order!)
 
 **Kind**: global function  
@@ -3799,7 +3825,7 @@ Draw a color-filled triangle (vertex in counter-clockwise order!)
 
 <a name="DrawTriangleLines"></a>
 
-## DrawTriangleLines(v1, v2, v3, color)
+## DrawTriangleLines(v1, v2, v3, color) ⇒ <code>null</code>
 Draw triangle outline (vertex in counter-clockwise order!)
 
 **Kind**: global function  
@@ -3813,7 +3839,7 @@ Draw triangle outline (vertex in counter-clockwise order!)
 
 <a name="DrawTriangleFan"></a>
 
-## DrawTriangleFan(points, pointCount, color)
+## DrawTriangleFan(points, pointCount, color) ⇒ <code>null</code>
 Draw a triangle fan defined by points (first vertex is the center)
 
 **Kind**: global function  
@@ -3826,7 +3852,7 @@ Draw a triangle fan defined by points (first vertex is the center)
 
 <a name="DrawTriangleStrip"></a>
 
-## DrawTriangleStrip(points, pointCount, color)
+## DrawTriangleStrip(points, pointCount, color) ⇒ <code>null</code>
 Draw a triangle strip defined by points
 
 **Kind**: global function  
@@ -3839,7 +3865,7 @@ Draw a triangle strip defined by points
 
 <a name="DrawPoly"></a>
 
-## DrawPoly(center, sides, radius, rotation, color)
+## DrawPoly(center, sides, radius, rotation, color) ⇒ <code>null</code>
 Draw a regular polygon (Vector version)
 
 **Kind**: global function  
@@ -3854,7 +3880,7 @@ Draw a regular polygon (Vector version)
 
 <a name="DrawPolyLines"></a>
 
-## DrawPolyLines(center, sides, radius, rotation, color)
+## DrawPolyLines(center, sides, radius, rotation, color) ⇒ <code>null</code>
 Draw a polygon outline of n sides
 
 **Kind**: global function  
@@ -3869,7 +3895,7 @@ Draw a polygon outline of n sides
 
 <a name="DrawPolyLinesEx"></a>
 
-## DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color)
+## DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color) ⇒ <code>null</code>
 Draw a polygon outline of n sides with extended parameters
 
 **Kind**: global function  
@@ -4087,7 +4113,7 @@ Load image from screen buffer and (screenshot)
 **Returns**: <code>Image</code> - The resulting Image.  
 <a name="UnloadImage"></a>
 
-## UnloadImage(image)
+## UnloadImage(image) ⇒ <code>null</code>
 Unload image from CPU memory (RAM)
 
 **Kind**: global function  
@@ -4310,7 +4336,7 @@ Load colors palette from image as a Color array (RGBA - 32bit)
 
 <a name="UnloadImageColors"></a>
 
-## UnloadImageColors(colors)
+## UnloadImageColors(colors) ⇒ <code>null</code>
 Unload color data loaded with LoadImageColors()
 
 **Kind**: global function  
@@ -4321,7 +4347,7 @@ Unload color data loaded with LoadImageColors()
 
 <a name="UnloadImagePalette"></a>
 
-## UnloadImagePalette(colors)
+## UnloadImagePalette(colors) ⇒ <code>null</code>
 Unload colors palette loaded with LoadImagePalette()
 
 **Kind**: global function  
@@ -4409,7 +4435,7 @@ Load texture for rendering (framebuffer)
 
 <a name="UnloadTexture"></a>
 
-## UnloadTexture(texture)
+## UnloadTexture(texture) ⇒ <code>null</code>
 Unload texture from GPU memory (VRAM)
 
 **Kind**: global function  
@@ -4420,7 +4446,7 @@ Unload texture from GPU memory (VRAM)
 
 <a name="UnloadRenderTexture"></a>
 
-## UnloadRenderTexture(target)
+## UnloadRenderTexture(target) ⇒ <code>null</code>
 Unload render texture from GPU memory (VRAM)
 
 **Kind**: global function  
@@ -4431,7 +4457,7 @@ Unload render texture from GPU memory (VRAM)
 
 <a name="UpdateTexture"></a>
 
-## UpdateTexture(texture, pixels)
+## UpdateTexture(texture, pixels) ⇒ <code>null</code>
 Update GPU texture with new data
 
 **Kind**: global function  
@@ -4443,7 +4469,7 @@ Update GPU texture with new data
 
 <a name="UpdateTextureRec"></a>
 
-## UpdateTextureRec(texture, rec, pixels)
+## UpdateTextureRec(texture, rec, pixels) ⇒ <code>null</code>
 Update GPU texture rectangle with new data
 
 **Kind**: global function  
@@ -4456,7 +4482,7 @@ Update GPU texture rectangle with new data
 
 <a name="SetTextureFilter"></a>
 
-## SetTextureFilter(texture, filter)
+## SetTextureFilter(texture, filter) ⇒ <code>null</code>
 Set texture scaling filter mode
 
 **Kind**: global function  
@@ -4468,7 +4494,7 @@ Set texture scaling filter mode
 
 <a name="SetTextureWrap"></a>
 
-## SetTextureWrap(texture, wrap)
+## SetTextureWrap(texture, wrap) ⇒ <code>null</code>
 Set texture wrapping mode
 
 **Kind**: global function  
@@ -4480,7 +4506,7 @@ Set texture wrapping mode
 
 <a name="DrawTexture"></a>
 
-## DrawTexture(texture, posX, posY, tint)
+## DrawTexture(texture, posX, posY, tint) ⇒ <code>null</code>
 Draw a Texture2D
 
 **Kind**: global function  
@@ -4494,7 +4520,7 @@ Draw a Texture2D
 
 <a name="DrawTextureV"></a>
 
-## DrawTextureV(texture, position, tint)
+## DrawTextureV(texture, position, tint) ⇒ <code>null</code>
 Draw a Texture2D with position defined as Vector2
 
 **Kind**: global function  
@@ -4507,7 +4533,7 @@ Draw a Texture2D with position defined as Vector2
 
 <a name="DrawTextureEx"></a>
 
-## DrawTextureEx(texture, position, rotation, scale, tint)
+## DrawTextureEx(texture, position, rotation, scale, tint) ⇒ <code>null</code>
 Draw a Texture2D with extended parameters
 
 **Kind**: global function  
@@ -4522,7 +4548,7 @@ Draw a Texture2D with extended parameters
 
 <a name="DrawTextureRec"></a>
 
-## DrawTextureRec(texture, source, position, tint)
+## DrawTextureRec(texture, source, position, tint) ⇒ <code>null</code>
 Draw a part of a texture defined by a rectangle
 
 **Kind**: global function  
@@ -4536,7 +4562,7 @@ Draw a part of a texture defined by a rectangle
 
 <a name="DrawTextureQuad"></a>
 
-## DrawTextureQuad(texture, tiling, offset, quad, tint)
+## DrawTextureQuad(texture, tiling, offset, quad, tint) ⇒ <code>null</code>
 Draw texture quad with tiling and offset parameters
 
 **Kind**: global function  
@@ -4551,7 +4577,7 @@ Draw texture quad with tiling and offset parameters
 
 <a name="DrawTextureTiled"></a>
 
-## DrawTextureTiled(texture, source, dest, origin, rotation, scale, tint)
+## DrawTextureTiled(texture, source, dest, origin, rotation, scale, tint) ⇒ <code>null</code>
 Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.
 
 **Kind**: global function  
@@ -4568,7 +4594,7 @@ Draw part of a texture (defined by a rectangle) with rotation and scale tiled in
 
 <a name="DrawTexturePro"></a>
 
-## DrawTexturePro(texture, source, dest, origin, rotation, tint)
+## DrawTexturePro(texture, source, dest, origin, rotation, tint) ⇒ <code>null</code>
 Draw a part of a texture defined by a rectangle with 'pro' parameters
 
 **Kind**: global function  
@@ -4584,7 +4610,7 @@ Draw a part of a texture defined by a rectangle with 'pro' parameters
 
 <a name="DrawTextureNPatch"></a>
 
-## DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint)
+## DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint) ⇒ <code>null</code>
 Draws a texture (or part of it) that stretches or shrinks nicely
 
 **Kind**: global function  
@@ -4600,7 +4626,7 @@ Draws a texture (or part of it) that stretches or shrinks nicely
 
 <a name="DrawTexturePoly"></a>
 
-## DrawTexturePoly(texture, center, points, texcoords, pointCount, tint)
+## DrawTexturePoly(texture, center, points, texcoords, pointCount, tint) ⇒ <code>null</code>
 Draw a textured polygon
 
 **Kind**: global function  
@@ -4743,7 +4769,7 @@ Get Color from a source pixel pointer of certain format
 
 <a name="SetPixelColor"></a>
 
-## SetPixelColor(dstPtr, color, format)
+## SetPixelColor(dstPtr, color, format) ⇒ <code>null</code>
 Set color formatted into destination pixel pointer
 
 **Kind**: global function  
@@ -4869,7 +4895,7 @@ Generate image font atlas using chars info
 
 <a name="UnloadFontData"></a>
 
-## UnloadFontData(chars, glyphCount)
+## UnloadFontData(chars, glyphCount) ⇒ <code>null</code>
 Unload font chars info data (RAM)
 
 **Kind**: global function  
@@ -4881,7 +4907,7 @@ Unload font chars info data (RAM)
 
 <a name="UnloadFont"></a>
 
-## UnloadFont(font)
+## UnloadFont(font) ⇒ <code>null</code>
 Unload font from GPU memory (VRAM)
 
 **Kind**: global function  
@@ -4892,7 +4918,7 @@ Unload font from GPU memory (VRAM)
 
 <a name="DrawFPS"></a>
 
-## DrawFPS(posX, posY)
+## DrawFPS(posX, posY) ⇒ <code>null</code>
 Draw current FPS
 
 **Kind**: global function  
@@ -4904,7 +4930,7 @@ Draw current FPS
 
 <a name="DrawText"></a>
 
-## DrawText(text, posX, posY, fontSize, color)
+## DrawText(text, posX, posY, fontSize, color) ⇒ <code>null</code>
 Draw text (using default font)
 
 **Kind**: global function  
@@ -4919,7 +4945,7 @@ Draw text (using default font)
 
 <a name="DrawTextEx"></a>
 
-## DrawTextEx(font, text, position, fontSize, spacing, tint)
+## DrawTextEx(font, text, position, fontSize, spacing, tint) ⇒ <code>null</code>
 Draw text using font and additional parameters
 
 **Kind**: global function  
@@ -4935,7 +4961,7 @@ Draw text using font and additional parameters
 
 <a name="DrawTextPro"></a>
 
-## DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint)
+## DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint) ⇒ <code>null</code>
 Draw text using Font and pro parameters (rotation)
 
 **Kind**: global function  
@@ -4953,7 +4979,7 @@ Draw text using Font and pro parameters (rotation)
 
 <a name="DrawTextCodepoint"></a>
 
-## DrawTextCodepoint(font, codepoint, position, fontSize, tint)
+## DrawTextCodepoint(font, codepoint, position, fontSize, tint) ⇒ <code>null</code>
 Draw one character (codepoint)
 
 **Kind**: global function  
@@ -5048,7 +5074,7 @@ Load all codepoints from a UTF-8 text string, codepoints count returned by param
 
 <a name="UnloadCodepoints"></a>
 
-## UnloadCodepoints(codepoints)
+## UnloadCodepoints(codepoints) ⇒ <code>null</code>
 Unload codepoints data from memory
 
 **Kind**: global function  
@@ -5218,7 +5244,7 @@ Split text into multiple strings
 
 <a name="TextAppend"></a>
 
-## TextAppend(text, append, position)
+## TextAppend(text, append, position) ⇒ <code>null</code>
 Append text at specific position and move cursor!
 
 **Kind**: global function  
@@ -5292,7 +5318,7 @@ Get integer value from text (negative values not supported)
 
 <a name="DrawLine3D"></a>
 
-## DrawLine3D(startPos, endPos, color)
+## DrawLine3D(startPos, endPos, color) ⇒ <code>null</code>
 Draw a line in 3D world space
 
 **Kind**: global function  
@@ -5305,7 +5331,7 @@ Draw a line in 3D world space
 
 <a name="DrawPoint3D"></a>
 
-## DrawPoint3D(position, color)
+## DrawPoint3D(position, color) ⇒ <code>null</code>
 Draw a point in 3D space, actually a small line
 
 **Kind**: global function  
@@ -5317,7 +5343,7 @@ Draw a point in 3D space, actually a small line
 
 <a name="DrawCircle3D"></a>
 
-## DrawCircle3D(center, radius, rotationAxis, rotationAngle, color)
+## DrawCircle3D(center, radius, rotationAxis, rotationAngle, color) ⇒ <code>null</code>
 Draw a circle in 3D world space
 
 **Kind**: global function  
@@ -5332,7 +5358,7 @@ Draw a circle in 3D world space
 
 <a name="DrawTriangle3D"></a>
 
-## DrawTriangle3D(v1, v2, v3, color)
+## DrawTriangle3D(v1, v2, v3, color) ⇒ <code>null</code>
 Draw a color-filled triangle (vertex in counter-clockwise order!)
 
 **Kind**: global function  
@@ -5346,7 +5372,7 @@ Draw a color-filled triangle (vertex in counter-clockwise order!)
 
 <a name="DrawTriangleStrip3D"></a>
 
-## DrawTriangleStrip3D(points, pointCount, color)
+## DrawTriangleStrip3D(points, pointCount, color) ⇒ <code>null</code>
 Draw a triangle strip defined by points
 
 **Kind**: global function  
@@ -5359,7 +5385,7 @@ Draw a triangle strip defined by points
 
 <a name="DrawCube"></a>
 
-## DrawCube(position, width, height, length, color)
+## DrawCube(position, width, height, length, color) ⇒ <code>null</code>
 Draw cube
 
 **Kind**: global function  
@@ -5374,7 +5400,7 @@ Draw cube
 
 <a name="DrawCubeV"></a>
 
-## DrawCubeV(position, size, color)
+## DrawCubeV(position, size, color) ⇒ <code>null</code>
 Draw cube (Vector version)
 
 **Kind**: global function  
@@ -5387,7 +5413,7 @@ Draw cube (Vector version)
 
 <a name="DrawCubeWires"></a>
 
-## DrawCubeWires(position, width, height, length, color)
+## DrawCubeWires(position, width, height, length, color) ⇒ <code>null</code>
 Draw cube wires
 
 **Kind**: global function  
@@ -5402,7 +5428,7 @@ Draw cube wires
 
 <a name="DrawCubeWiresV"></a>
 
-## DrawCubeWiresV(position, size, color)
+## DrawCubeWiresV(position, size, color) ⇒ <code>null</code>
 Draw cube wires (Vector version)
 
 **Kind**: global function  
@@ -5415,7 +5441,7 @@ Draw cube wires (Vector version)
 
 <a name="DrawCubeTexture"></a>
 
-## DrawCubeTexture(texture, position, width, height, length, color)
+## DrawCubeTexture(texture, position, width, height, length, color) ⇒ <code>null</code>
 Draw cube textured
 
 **Kind**: global function  
@@ -5431,7 +5457,7 @@ Draw cube textured
 
 <a name="DrawCubeTextureRec"></a>
 
-## DrawCubeTextureRec(texture, source, position, width, height, length, color)
+## DrawCubeTextureRec(texture, source, position, width, height, length, color) ⇒ <code>null</code>
 Draw cube with a region of a texture
 
 **Kind**: global function  
@@ -5448,7 +5474,7 @@ Draw cube with a region of a texture
 
 <a name="DrawSphere"></a>
 
-## DrawSphere(centerPos, radius, color)
+## DrawSphere(centerPos, radius, color) ⇒ <code>null</code>
 Draw sphere
 
 **Kind**: global function  
@@ -5461,7 +5487,7 @@ Draw sphere
 
 <a name="DrawSphereEx"></a>
 
-## DrawSphereEx(centerPos, radius, rings, slices, color)
+## DrawSphereEx(centerPos, radius, rings, slices, color) ⇒ <code>null</code>
 Draw sphere with extended parameters
 
 **Kind**: global function  
@@ -5476,7 +5502,7 @@ Draw sphere with extended parameters
 
 <a name="DrawSphereWires"></a>
 
-## DrawSphereWires(centerPos, radius, rings, slices, color)
+## DrawSphereWires(centerPos, radius, rings, slices, color) ⇒ <code>null</code>
 Draw sphere wires
 
 **Kind**: global function  
@@ -5491,7 +5517,7 @@ Draw sphere wires
 
 <a name="DrawCylinder"></a>
 
-## DrawCylinder(position, radiusTop, radiusBottom, height, slices, color)
+## DrawCylinder(position, radiusTop, radiusBottom, height, slices, color) ⇒ <code>null</code>
 Draw a cylinder/cone
 
 **Kind**: global function  
@@ -5507,7 +5533,7 @@ Draw a cylinder/cone
 
 <a name="DrawCylinderEx"></a>
 
-## DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color)
+## DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color) ⇒ <code>null</code>
 Draw a cylinder with base at startPos and top at endPos
 
 **Kind**: global function  
@@ -5523,7 +5549,7 @@ Draw a cylinder with base at startPos and top at endPos
 
 <a name="DrawCylinderWires"></a>
 
-## DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color)
+## DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color) ⇒ <code>null</code>
 Draw a cylinder/cone wires
 
 **Kind**: global function  
@@ -5539,7 +5565,7 @@ Draw a cylinder/cone wires
 
 <a name="DrawCylinderWiresEx"></a>
 
-## DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)
+## DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color) ⇒ <code>null</code>
 Draw a cylinder wires with base at startPos and top at endPos
 
 **Kind**: global function  
@@ -5555,7 +5581,7 @@ Draw a cylinder wires with base at startPos and top at endPos
 
 <a name="DrawPlane"></a>
 
-## DrawPlane(centerPos, size, color)
+## DrawPlane(centerPos, size, color) ⇒ <code>null</code>
 Draw a plane XZ
 
 **Kind**: global function  
@@ -5568,7 +5594,7 @@ Draw a plane XZ
 
 <a name="DrawRay"></a>
 
-## DrawRay(ray, color)
+## DrawRay(ray, color) ⇒ <code>null</code>
 Draw a ray line
 
 **Kind**: global function  
@@ -5580,7 +5606,7 @@ Draw a ray line
 
 <a name="DrawGrid"></a>
 
-## DrawGrid(slices, spacing)
+## DrawGrid(slices, spacing) ⇒ <code>null</code>
 Draw a grid (centered at (0, 0, 0))
 
 **Kind**: global function  
@@ -5616,7 +5642,7 @@ Load model from generated mesh (default material)
 
 <a name="UnloadModel"></a>
 
-## UnloadModel(model)
+## UnloadModel(model) ⇒ <code>null</code>
 Unload model (including meshes) from memory (RAM and/or VRAM)
 
 **Kind**: global function  
@@ -5627,7 +5653,7 @@ Unload model (including meshes) from memory (RAM and/or VRAM)
 
 <a name="UnloadModelKeepMeshes"></a>
 
-## UnloadModelKeepMeshes(model)
+## UnloadModelKeepMeshes(model) ⇒ <code>null</code>
 Unload model (but not meshes) from memory (RAM and/or VRAM)
 
 **Kind**: global function  
@@ -5650,7 +5676,7 @@ Compute model bounding box limits (considers all meshes)
 
 <a name="DrawModel"></a>
 
-## DrawModel(model, position, scale, tint)
+## DrawModel(model, position, scale, tint) ⇒ <code>null</code>
 Draw a model (with texture if set)
 
 **Kind**: global function  
@@ -5664,7 +5690,7 @@ Draw a model (with texture if set)
 
 <a name="DrawModelEx"></a>
 
-## DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+## DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint) ⇒ <code>null</code>
 Draw a model with extended parameters
 
 **Kind**: global function  
@@ -5680,7 +5706,7 @@ Draw a model with extended parameters
 
 <a name="DrawModelWires"></a>
 
-## DrawModelWires(model, position, scale, tint)
+## DrawModelWires(model, position, scale, tint) ⇒ <code>null</code>
 Draw a model wires (with texture if set)
 
 **Kind**: global function  
@@ -5694,7 +5720,7 @@ Draw a model wires (with texture if set)
 
 <a name="DrawModelWiresEx"></a>
 
-## DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint)
+## DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint) ⇒ <code>null</code>
 Draw a model wires (with texture if set) with extended parameters
 
 **Kind**: global function  
@@ -5710,7 +5736,7 @@ Draw a model wires (with texture if set) with extended parameters
 
 <a name="DrawBoundingBox"></a>
 
-## DrawBoundingBox(box, color)
+## DrawBoundingBox(box, color) ⇒ <code>null</code>
 Draw bounding box (wires)
 
 **Kind**: global function  
@@ -5722,7 +5748,7 @@ Draw bounding box (wires)
 
 <a name="DrawBillboard"></a>
 
-## DrawBillboard(camera, texture, position, size, tint)
+## DrawBillboard(camera, texture, position, size, tint) ⇒ <code>null</code>
 Draw a billboard texture
 
 **Kind**: global function  
@@ -5737,7 +5763,7 @@ Draw a billboard texture
 
 <a name="DrawBillboardRec"></a>
 
-## DrawBillboardRec(camera, texture, source, position, size, tint)
+## DrawBillboardRec(camera, texture, source, position, size, tint) ⇒ <code>null</code>
 Draw a billboard texture defined by source
 
 **Kind**: global function  
@@ -5753,7 +5779,7 @@ Draw a billboard texture defined by source
 
 <a name="DrawBillboardPro"></a>
 
-## DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint)
+## DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint) ⇒ <code>null</code>
 Draw a billboard texture defined by source and rotation
 
 **Kind**: global function  
@@ -5772,7 +5798,7 @@ Draw a billboard texture defined by source and rotation
 
 <a name="UpdateMeshBuffer"></a>
 
-## UpdateMeshBuffer(mesh, index, data, dataSize, offset)
+## UpdateMeshBuffer(mesh, index, data, dataSize, offset) ⇒ <code>null</code>
 Update mesh vertex data in GPU for a specific buffer index
 
 **Kind**: global function  
@@ -5787,7 +5813,7 @@ Update mesh vertex data in GPU for a specific buffer index
 
 <a name="UnloadMesh"></a>
 
-## UnloadMesh(mesh)
+## UnloadMesh(mesh) ⇒ <code>null</code>
 Unload mesh data from CPU and GPU
 
 **Kind**: global function  
@@ -5990,7 +6016,7 @@ Load model animations from file
 
 <a name="UpdateModelAnimation"></a>
 
-## UpdateModelAnimation(model, anim, frame)
+## UpdateModelAnimation(model, anim, frame) ⇒ <code>null</code>
 Update model animation pose
 
 **Kind**: global function  
@@ -6003,7 +6029,7 @@ Update model animation pose
 
 <a name="UnloadModelAnimation"></a>
 
-## UnloadModelAnimation(anim)
+## UnloadModelAnimation(anim) ⇒ <code>null</code>
 Unload animation data
 
 **Kind**: global function  
@@ -6014,7 +6040,7 @@ Unload animation data
 
 <a name="UnloadModelAnimations"></a>
 
-## UnloadModelAnimations(animations, count)
+## UnloadModelAnimations(animations, count) ⇒ <code>null</code>
 Unload animation array data
 
 **Kind**: global function  
@@ -6166,13 +6192,13 @@ Get collision info between ray and quad
 
 <a name="InitAudioDevice"></a>
 
-## InitAudioDevice()
+## InitAudioDevice() ⇒ <code>null</code>
 Initialize audio device and context
 
 **Kind**: global function  
 <a name="CloseAudioDevice"></a>
 
-## CloseAudioDevice()
+## CloseAudioDevice() ⇒ <code>null</code>
 Close the audio device and context
 
 **Kind**: global function  
@@ -6185,7 +6211,7 @@ Check if audio device has been initialized successfully
 **Returns**: <code>boolean</code> - The resulting bool.  
 <a name="SetMasterVolume"></a>
 
-## SetMasterVolume(volume)
+## SetMasterVolume(volume) ⇒ <code>null</code>
 Set master volume (listener)
 
 **Kind**: global function  
@@ -6246,7 +6272,7 @@ Load sound from wave data
 
 <a name="UpdateSound"></a>
 
-## UpdateSound(sound, data, sampleCount)
+## UpdateSound(sound, data, sampleCount) ⇒ <code>null</code>
 Update sound buffer with new data
 
 **Kind**: global function  
@@ -6259,7 +6285,7 @@ Update sound buffer with new data
 
 <a name="UnloadWave"></a>
 
-## UnloadWave(wave)
+## UnloadWave(wave) ⇒ <code>null</code>
 Unload wave data
 
 **Kind**: global function  
@@ -6270,7 +6296,7 @@ Unload wave data
 
 <a name="UnloadSound"></a>
 
-## UnloadSound(sound)
+## UnloadSound(sound) ⇒ <code>null</code>
 Unload sound
 
 **Kind**: global function  
@@ -6307,7 +6333,7 @@ Export wave sample data to code (.h), returns true on success
 
 <a name="PlaySound"></a>
 
-## PlaySound(sound)
+## PlaySound(sound) ⇒ <code>null</code>
 Play a sound
 
 **Kind**: global function  
@@ -6318,7 +6344,7 @@ Play a sound
 
 <a name="StopSound"></a>
 
-## StopSound(sound)
+## StopSound(sound) ⇒ <code>null</code>
 Stop playing a sound
 
 **Kind**: global function  
@@ -6329,7 +6355,7 @@ Stop playing a sound
 
 <a name="PauseSound"></a>
 
-## PauseSound(sound)
+## PauseSound(sound) ⇒ <code>null</code>
 Pause a sound
 
 **Kind**: global function  
@@ -6340,7 +6366,7 @@ Pause a sound
 
 <a name="ResumeSound"></a>
 
-## ResumeSound(sound)
+## ResumeSound(sound) ⇒ <code>null</code>
 Resume a paused sound
 
 **Kind**: global function  
@@ -6351,7 +6377,7 @@ Resume a paused sound
 
 <a name="PlaySoundMulti"></a>
 
-## PlaySoundMulti(sound)
+## PlaySoundMulti(sound) ⇒ <code>null</code>
 Play a sound (using multichannel buffer pool)
 
 **Kind**: global function  
@@ -6362,7 +6388,7 @@ Play a sound (using multichannel buffer pool)
 
 <a name="StopSoundMulti"></a>
 
-## StopSoundMulti()
+## StopSoundMulti() ⇒ <code>null</code>
 Stop any sound playing (using multichannel buffer pool)
 
 **Kind**: global function  
@@ -6387,7 +6413,7 @@ Check if a sound is currently playing
 
 <a name="SetSoundVolume"></a>
 
-## SetSoundVolume(sound, volume)
+## SetSoundVolume(sound, volume) ⇒ <code>null</code>
 Set volume for a sound (1.0 is max level)
 
 **Kind**: global function  
@@ -6399,7 +6425,7 @@ Set volume for a sound (1.0 is max level)
 
 <a name="SetSoundPitch"></a>
 
-## SetSoundPitch(sound, pitch)
+## SetSoundPitch(sound, pitch) ⇒ <code>null</code>
 Set pitch for a sound (1.0 is base level)
 
 **Kind**: global function  
@@ -6435,7 +6461,7 @@ Load samples data from wave as a floats array
 
 <a name="UnloadWaveSamples"></a>
 
-## UnloadWaveSamples(samples)
+## UnloadWaveSamples(samples) ⇒ <code>null</code>
 Unload samples data loaded with LoadWaveSamples()
 
 **Kind**: global function  
@@ -6472,7 +6498,7 @@ Load music stream from data
 
 <a name="UnloadMusicStream"></a>
 
-## UnloadMusicStream(music)
+## UnloadMusicStream(music) ⇒ <code>null</code>
 Unload music stream
 
 **Kind**: global function  
@@ -6483,7 +6509,7 @@ Unload music stream
 
 <a name="PlayMusicStream"></a>
 
-## PlayMusicStream(music)
+## PlayMusicStream(music) ⇒ <code>null</code>
 Start music playing
 
 **Kind**: global function  
@@ -6506,7 +6532,7 @@ Check if music is playing
 
 <a name="UpdateMusicStream"></a>
 
-## UpdateMusicStream(music)
+## UpdateMusicStream(music) ⇒ <code>null</code>
 Updates buffers for music streaming
 
 **Kind**: global function  
@@ -6517,7 +6543,7 @@ Updates buffers for music streaming
 
 <a name="StopMusicStream"></a>
 
-## StopMusicStream(music)
+## StopMusicStream(music) ⇒ <code>null</code>
 Stop music playing
 
 **Kind**: global function  
@@ -6528,7 +6554,7 @@ Stop music playing
 
 <a name="PauseMusicStream"></a>
 
-## PauseMusicStream(music)
+## PauseMusicStream(music) ⇒ <code>null</code>
 Pause music playing
 
 **Kind**: global function  
@@ -6539,7 +6565,7 @@ Pause music playing
 
 <a name="ResumeMusicStream"></a>
 
-## ResumeMusicStream(music)
+## ResumeMusicStream(music) ⇒ <code>null</code>
 Resume playing paused music
 
 **Kind**: global function  
@@ -6550,7 +6576,7 @@ Resume playing paused music
 
 <a name="SeekMusicStream"></a>
 
-## SeekMusicStream(music, position)
+## SeekMusicStream(music, position) ⇒ <code>null</code>
 Seek music to a position (in seconds)
 
 **Kind**: global function  
@@ -6562,7 +6588,7 @@ Seek music to a position (in seconds)
 
 <a name="SetMusicVolume"></a>
 
-## SetMusicVolume(music, volume)
+## SetMusicVolume(music, volume) ⇒ <code>null</code>
 Set volume for music (1.0 is max level)
 
 **Kind**: global function  
@@ -6574,7 +6600,7 @@ Set volume for music (1.0 is max level)
 
 <a name="SetMusicPitch"></a>
 
-## SetMusicPitch(music, pitch)
+## SetMusicPitch(music, pitch) ⇒ <code>null</code>
 Set pitch for a music (1.0 is base level)
 
 **Kind**: global function  
@@ -6624,7 +6650,7 @@ Load audio stream (to stream raw audio pcm data)
 
 <a name="UnloadAudioStream"></a>
 
-## UnloadAudioStream(stream)
+## UnloadAudioStream(stream) ⇒ <code>null</code>
 Unload audio stream and free memory
 
 **Kind**: global function  
@@ -6635,7 +6661,7 @@ Unload audio stream and free memory
 
 <a name="UpdateAudioStream"></a>
 
-## UpdateAudioStream(stream, data, frameCount)
+## UpdateAudioStream(stream, data, frameCount) ⇒ <code>null</code>
 Update audio stream buffers with data
 
 **Kind**: global function  
@@ -6660,7 +6686,7 @@ Check if any audio stream buffers requires refill
 
 <a name="PlayAudioStream"></a>
 
-## PlayAudioStream(stream)
+## PlayAudioStream(stream) ⇒ <code>null</code>
 Play audio stream
 
 **Kind**: global function  
@@ -6671,7 +6697,7 @@ Play audio stream
 
 <a name="PauseAudioStream"></a>
 
-## PauseAudioStream(stream)
+## PauseAudioStream(stream) ⇒ <code>null</code>
 Pause audio stream
 
 **Kind**: global function  
@@ -6682,7 +6708,7 @@ Pause audio stream
 
 <a name="ResumeAudioStream"></a>
 
-## ResumeAudioStream(stream)
+## ResumeAudioStream(stream) ⇒ <code>null</code>
 Resume audio stream
 
 **Kind**: global function  
@@ -6705,7 +6731,7 @@ Check if audio stream is playing
 
 <a name="StopAudioStream"></a>
 
-## StopAudioStream(stream)
+## StopAudioStream(stream) ⇒ <code>null</code>
 Stop audio stream
 
 **Kind**: global function  
@@ -6716,7 +6742,7 @@ Stop audio stream
 
 <a name="SetAudioStreamVolume"></a>
 
-## SetAudioStreamVolume(stream, volume)
+## SetAudioStreamVolume(stream, volume) ⇒ <code>null</code>
 Set volume for audio stream (1.0 is max level)
 
 **Kind**: global function  
@@ -6728,7 +6754,7 @@ Set volume for audio stream (1.0 is max level)
 
 <a name="SetAudioStreamPitch"></a>
 
-## SetAudioStreamPitch(stream, pitch)
+## SetAudioStreamPitch(stream, pitch) ⇒ <code>null</code>
 Set pitch for audio stream (1.0 is base level)
 
 **Kind**: global function  
@@ -6740,7 +6766,7 @@ Set pitch for audio stream (1.0 is base level)
 
 <a name="SetAudioStreamBufferSizeDefault"></a>
 
-## SetAudioStreamBufferSizeDefault(size)
+## SetAudioStreamBufferSizeDefault(size) ⇒ <code>null</code>
 Default size for new audio streams
 
 **Kind**: global function  
@@ -7171,7 +7197,7 @@ Easing: EaseElasticInOut.
 
 <a name="UpdateCamera"></a>
 
-## UpdateCamera(camera)
+## UpdateCamera(camera) ⇒ <code>null</code>
 Update camera position for selected mode
 
 **Kind**: global function  
@@ -7182,7 +7208,7 @@ Update camera position for selected mode
 
 <a name="ImageFormat"></a>
 
-## ImageFormat(image, newFormat)
+## ImageFormat(image, newFormat) ⇒ <code>null</code>
 Convert image data to desired format
 
 **Kind**: global function  
@@ -7194,7 +7220,7 @@ Convert image data to desired format
 
 <a name="ImageToPOT"></a>
 
-## ImageToPOT(image, fill)
+## ImageToPOT(image, fill) ⇒ <code>null</code>
 Convert image to POT (power-of-two)
 
 **Kind**: global function  
@@ -7206,7 +7232,7 @@ Convert image to POT (power-of-two)
 
 <a name="ImageCrop"></a>
 
-## ImageCrop(image, crop)
+## ImageCrop(image, crop) ⇒ <code>null</code>
 Crop an image to a defined rectangle
 
 **Kind**: global function  
@@ -7218,7 +7244,7 @@ Crop an image to a defined rectangle
 
 <a name="ImageAlphaCrop"></a>
 
-## ImageAlphaCrop(image, threshold)
+## ImageAlphaCrop(image, threshold) ⇒ <code>null</code>
 Crop image depending on alpha value
 
 **Kind**: global function  
@@ -7230,7 +7256,7 @@ Crop image depending on alpha value
 
 <a name="ImageAlphaClear"></a>
 
-## ImageAlphaClear(image, color, threshold)
+## ImageAlphaClear(image, color, threshold) ⇒ <code>null</code>
 Clear alpha channel to desired color
 
 **Kind**: global function  
@@ -7243,7 +7269,7 @@ Clear alpha channel to desired color
 
 <a name="ImageAlphaMask"></a>
 
-## ImageAlphaMask(image, alphaMask)
+## ImageAlphaMask(image, alphaMask) ⇒ <code>null</code>
 Apply alpha mask to image
 
 **Kind**: global function  
@@ -7255,7 +7281,7 @@ Apply alpha mask to image
 
 <a name="ImageAlphaPremultiply"></a>
 
-## ImageAlphaPremultiply(image)
+## ImageAlphaPremultiply(image) ⇒ <code>null</code>
 Premultiply alpha channel
 
 **Kind**: global function  
@@ -7266,7 +7292,7 @@ Premultiply alpha channel
 
 <a name="ImageResize"></a>
 
-## ImageResize(image, newWidth, newHeight)
+## ImageResize(image, newWidth, newHeight) ⇒ <code>null</code>
 Resize image (Bicubic scaling algorithm)
 
 **Kind**: global function  
@@ -7279,7 +7305,7 @@ Resize image (Bicubic scaling algorithm)
 
 <a name="ImageResizeNN"></a>
 
-## ImageResizeNN(image, newWidth, newHeight)
+## ImageResizeNN(image, newWidth, newHeight) ⇒ <code>null</code>
 Resize image (Nearest-Neighbor scaling algorithm)
 
 **Kind**: global function  
@@ -7292,7 +7318,7 @@ Resize image (Nearest-Neighbor scaling algorithm)
 
 <a name="ImageResizeCanvas"></a>
 
-## ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill)
+## ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill) ⇒ <code>null</code>
 Resize canvas and fill with color
 
 **Kind**: global function  
@@ -7308,7 +7334,7 @@ Resize canvas and fill with color
 
 <a name="ImageMipmaps"></a>
 
-## ImageMipmaps(image)
+## ImageMipmaps(image) ⇒ <code>null</code>
 Compute all mipmap levels for a provided image
 
 **Kind**: global function  
@@ -7319,7 +7345,7 @@ Compute all mipmap levels for a provided image
 
 <a name="ImageDither"></a>
 
-## ImageDither(image, rBpp, gBpp, bBpp, aBpp)
+## ImageDither(image, rBpp, gBpp, bBpp, aBpp) ⇒ <code>null</code>
 Dither image data to 16bpp or lower (Floyd-Steinberg dithering)
 
 **Kind**: global function  
@@ -7334,7 +7360,7 @@ Dither image data to 16bpp or lower (Floyd-Steinberg dithering)
 
 <a name="ImageFlipVertical"></a>
 
-## ImageFlipVertical(image)
+## ImageFlipVertical(image) ⇒ <code>null</code>
 Flip image vertically
 
 **Kind**: global function  
@@ -7345,7 +7371,7 @@ Flip image vertically
 
 <a name="ImageFlipHorizontal"></a>
 
-## ImageFlipHorizontal(image)
+## ImageFlipHorizontal(image) ⇒ <code>null</code>
 Flip image horizontally
 
 **Kind**: global function  
@@ -7356,7 +7382,7 @@ Flip image horizontally
 
 <a name="ImageRotateCW"></a>
 
-## ImageRotateCW(image)
+## ImageRotateCW(image) ⇒ <code>null</code>
 Rotate image clockwise 90deg
 
 **Kind**: global function  
@@ -7367,7 +7393,7 @@ Rotate image clockwise 90deg
 
 <a name="ImageRotateCCW"></a>
 
-## ImageRotateCCW(image)
+## ImageRotateCCW(image) ⇒ <code>null</code>
 Rotate image counter-clockwise 90deg
 
 **Kind**: global function  
@@ -7378,7 +7404,7 @@ Rotate image counter-clockwise 90deg
 
 <a name="ImageColorTint"></a>
 
-## ImageColorTint(image, color)
+## ImageColorTint(image, color) ⇒ <code>null</code>
 Modify image color: tint
 
 **Kind**: global function  
@@ -7390,7 +7416,7 @@ Modify image color: tint
 
 <a name="ImageColorInvert"></a>
 
-## ImageColorInvert(image)
+## ImageColorInvert(image) ⇒ <code>null</code>
 Modify image color: invert
 
 **Kind**: global function  
@@ -7401,7 +7427,7 @@ Modify image color: invert
 
 <a name="ImageColorGrayscale"></a>
 
-## ImageColorGrayscale(image)
+## ImageColorGrayscale(image) ⇒ <code>null</code>
 Modify image color: grayscale
 
 **Kind**: global function  
@@ -7412,7 +7438,7 @@ Modify image color: grayscale
 
 <a name="ImageColorContrast"></a>
 
-## ImageColorContrast(image, contrast)
+## ImageColorContrast(image, contrast) ⇒ <code>null</code>
 Modify image color: contrast (-100 to 100)
 
 **Kind**: global function  
@@ -7424,7 +7450,7 @@ Modify image color: contrast (-100 to 100)
 
 <a name="ImageColorBrightness"></a>
 
-## ImageColorBrightness(image, brightness)
+## ImageColorBrightness(image, brightness) ⇒ <code>null</code>
 Modify image color: brightness (-255 to 255)
 
 **Kind**: global function  
@@ -7436,7 +7462,7 @@ Modify image color: brightness (-255 to 255)
 
 <a name="ImageColorReplace"></a>
 
-## ImageColorReplace(image, color, replace)
+## ImageColorReplace(image, color, replace) ⇒ <code>null</code>
 Modify image color: replace color
 
 **Kind**: global function  
@@ -7449,7 +7475,7 @@ Modify image color: replace color
 
 <a name="ImageClearBackground"></a>
 
-## ImageClearBackground(dst, color)
+## ImageClearBackground(dst, color) ⇒ <code>null</code>
 Clear image background with given color
 
 **Kind**: global function  
@@ -7461,7 +7487,7 @@ Clear image background with given color
 
 <a name="ImageDrawPixel"></a>
 
-## ImageDrawPixel(dst, posX, posY, color)
+## ImageDrawPixel(dst, posX, posY, color) ⇒ <code>null</code>
 Draw pixel within an image
 
 **Kind**: global function  
@@ -7475,7 +7501,7 @@ Draw pixel within an image
 
 <a name="ImageDrawPixelV"></a>
 
-## ImageDrawPixelV(dst, position, color)
+## ImageDrawPixelV(dst, position, color) ⇒ <code>null</code>
 Draw pixel within an image (Vector version)
 
 **Kind**: global function  
@@ -7488,7 +7514,7 @@ Draw pixel within an image (Vector version)
 
 <a name="ImageDrawLine"></a>
 
-## ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color)
+## ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color) ⇒ <code>null</code>
 Draw line within an image
 
 **Kind**: global function  
@@ -7504,7 +7530,7 @@ Draw line within an image
 
 <a name="ImageDrawLineV"></a>
 
-## ImageDrawLineV(dst, start, end, color)
+## ImageDrawLineV(dst, start, end, color) ⇒ <code>null</code>
 Draw line within an image (Vector version)
 
 **Kind**: global function  
@@ -7518,7 +7544,7 @@ Draw line within an image (Vector version)
 
 <a name="ImageDrawCircle"></a>
 
-## ImageDrawCircle(dst, centerX, centerY, radius, color)
+## ImageDrawCircle(dst, centerX, centerY, radius, color) ⇒ <code>null</code>
 Draw circle within an image
 
 **Kind**: global function  
@@ -7533,7 +7559,7 @@ Draw circle within an image
 
 <a name="ImageDrawCircleV"></a>
 
-## ImageDrawCircleV(dst, center, radius, color)
+## ImageDrawCircleV(dst, center, radius, color) ⇒ <code>null</code>
 Draw circle within an image (Vector version)
 
 **Kind**: global function  
@@ -7547,7 +7573,7 @@ Draw circle within an image (Vector version)
 
 <a name="ImageDrawRectangle"></a>
 
-## ImageDrawRectangle(dst, posX, posY, width, height, color)
+## ImageDrawRectangle(dst, posX, posY, width, height, color) ⇒ <code>null</code>
 Draw rectangle within an image
 
 **Kind**: global function  
@@ -7563,7 +7589,7 @@ Draw rectangle within an image
 
 <a name="ImageDrawRectangleV"></a>
 
-## ImageDrawRectangleV(dst, position, size, color)
+## ImageDrawRectangleV(dst, position, size, color) ⇒ <code>null</code>
 Draw rectangle within an image (Vector version)
 
 **Kind**: global function  
@@ -7577,7 +7603,7 @@ Draw rectangle within an image (Vector version)
 
 <a name="ImageDrawRectangleRec"></a>
 
-## ImageDrawRectangleRec(dst, rec, color)
+## ImageDrawRectangleRec(dst, rec, color) ⇒ <code>null</code>
 Draw rectangle within an image
 
 **Kind**: global function  
@@ -7590,7 +7616,7 @@ Draw rectangle within an image
 
 <a name="ImageDrawRectangleLines"></a>
 
-## ImageDrawRectangleLines(dst, rec, thick, color)
+## ImageDrawRectangleLines(dst, rec, thick, color) ⇒ <code>null</code>
 Draw rectangle lines within an image
 
 **Kind**: global function  
@@ -7604,7 +7630,7 @@ Draw rectangle lines within an image
 
 <a name="ImageDraw"></a>
 
-## ImageDraw(dst, src, srcRec, dstRec, tint)
+## ImageDraw(dst, src, srcRec, dstRec, tint) ⇒ <code>null</code>
 Draw a source image within a destination image (tint applied to source)
 
 **Kind**: global function  
@@ -7619,7 +7645,7 @@ Draw a source image within a destination image (tint applied to source)
 
 <a name="ImageDrawText"></a>
 
-## ImageDrawText(dst, text, posX, posY, fontSize, color)
+## ImageDrawText(dst, text, posX, posY, fontSize, color) ⇒ <code>null</code>
 Draw text (using default font) within an image (destination)
 
 **Kind**: global function  
@@ -7635,7 +7661,7 @@ Draw text (using default font) within an image (destination)
 
 <a name="ImageDrawTextEx"></a>
 
-## ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint)
+## ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint) ⇒ <code>null</code>
 Draw text (custom sprite font) within an image (destination)
 
 **Kind**: global function  
@@ -7652,7 +7678,7 @@ Draw text (custom sprite font) within an image (destination)
 
 <a name="GenTextureMipmaps"></a>
 
-## GenTextureMipmaps(texture)
+## GenTextureMipmaps(texture) ⇒ <code>null</code>
 Generate GPU mipmaps for a texture
 
 **Kind**: global function  
@@ -7663,7 +7689,7 @@ Generate GPU mipmaps for a texture
 
 <a name="UploadMesh"></a>
 
-## UploadMesh(mesh, dynamic)
+## UploadMesh(mesh, dynamic) ⇒ <code>null</code>
 Upload mesh vertex data in GPU and provide VAO/VBO ids
 
 **Kind**: global function  
@@ -7675,7 +7701,7 @@ Upload mesh vertex data in GPU and provide VAO/VBO ids
 
 <a name="GenMeshTangents"></a>
 
-## GenMeshTangents(mesh)
+## GenMeshTangents(mesh) ⇒ <code>null</code>
 Compute mesh tangents
 
 **Kind**: global function  
@@ -7686,7 +7712,7 @@ Compute mesh tangents
 
 <a name="GenMeshBinormals"></a>
 
-## GenMeshBinormals(mesh)
+## GenMeshBinormals(mesh) ⇒ <code>null</code>
 Compute mesh binormals
 
 **Kind**: global function  
@@ -7697,7 +7723,7 @@ Compute mesh binormals
 
 <a name="SetModelMeshMaterial"></a>
 
-## SetModelMeshMaterial(model, meshId, materialId)
+## SetModelMeshMaterial(model, meshId, materialId) ⇒ <code>null</code>
 Set material for a mesh
 
 **Kind**: global function  
@@ -7710,7 +7736,7 @@ Set material for a mesh
 
 <a name="WaveFormat"></a>
 
-## WaveFormat(wave, sampleRate, sampleSize, channels)
+## WaveFormat(wave, sampleRate, sampleSize, channels) ⇒ <code>null</code>
 Convert wave data to desired format
 
 **Kind**: global function  
@@ -7724,7 +7750,7 @@ Convert wave data to desired format
 
 <a name="WaveCrop"></a>
 
-## WaveCrop(wave, initSample, finalSample)
+## WaveCrop(wave, initSample, finalSample) ⇒ <code>null</code>
 Crop a wave to defined samples range
 
 **Kind**: global function  
@@ -7765,3 +7791,202 @@ Set shader uniform value vector3
 Set shader uniform value vector4
 
 **Kind**: global function  
+<a name="Color"></a>
+
+## Color : <code>Object</code>
+Color, 4 components, R8G8B8A8 (32bit)
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| r | <code>number</code> | Color red value |
+| g | <code>number</code> | Color green value |
+| b | <code>number</code> | Color blue value |
+| a | <code>number</code> | Color alpha value |
+
+<a name="new_Color_new"></a>
+
+### new Color(r, g, b, a)
+Color, 4 components, R8G8B8A8 (32bit)
+
+**Returns**: [<code>Color</code>](#Color) - The new Color.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| r | <code>number</code> | Color red value |
+| g | <code>number</code> | Color green value |
+| b | <code>number</code> | Color blue value |
+| a | <code>number</code> | Color alpha value |
+
+<a name="Vector2"></a>
+
+## Vector2 : <code>Object</code>
+Vector2, 2 components
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+
+<a name="new_Vector2_new"></a>
+
+### new Vector2(x, y)
+Vector2, 2 components
+
+**Returns**: [<code>Vector2</code>](#Vector2) - The new Vector2.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+
+<a name="Vector3"></a>
+
+## Vector3 : <code>Object</code>
+Vector3, 3 components
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+| z | <code>number</code> | Vector z component |
+
+<a name="new_Vector3_new"></a>
+
+### new Vector3(x, y, z)
+Vector3, 3 components
+
+**Returns**: [<code>Vector3</code>](#Vector3) - The new Vector3.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+| z | <code>number</code> | Vector z component |
+
+<a name="Vector4"></a>
+
+## Vector4 : <code>Object</code>
+Vector4, 4 components
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+| z | <code>number</code> | Vector z component |
+| w | <code>number</code> | Vector w component |
+
+<a name="new_Vector4_new"></a>
+
+### new Vector4(x, y, z, w)
+Vector4, 4 components
+
+**Returns**: [<code>Vector4</code>](#Vector4) - The new Vector4.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+| z | <code>number</code> | Vector z component |
+| w | <code>number</code> | Vector w component |
+
+<a name="Rectangle"></a>
+
+## Rectangle : <code>Object</code>
+Rectangle, 4 components
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Rectangle top-left corner position x |
+| y | <code>number</code> | Rectangle top-left corner position y |
+| width | <code>number</code> | Rectangle width |
+| height | <code>number</code> | Rectangle height |
+
+<a name="new_Rectangle_new"></a>
+
+### new Rectangle(x, y, width, height)
+Rectangle, 4 components
+
+**Returns**: [<code>Rectangle</code>](#Rectangle) - The new Rectangle.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Rectangle top-left corner position x |
+| y | <code>number</code> | Rectangle top-left corner position y |
+| width | <code>number</code> | Rectangle width |
+| height | <code>number</code> | Rectangle height |
+
+<a name="Camera2D"></a>
+
+## Camera2D : <code>Object</code>
+Camera2D, defines position/orientation in 2d space
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| offset | [<code>Vector2</code>](#Vector2) | Camera offset (displacement from target) |
+| target | [<code>Vector2</code>](#Vector2) | Camera target (rotation and zoom origin) |
+| rotation | <code>number</code> | Camera rotation in degrees |
+| zoom | <code>number</code> | Camera zoom (scaling), should be 1.0f by default |
+
+<a name="new_Camera2D_new"></a>
+
+### new Camera2D(offset, target, rotation, zoom)
+Camera2D, defines position/orientation in 2d space
+
+**Returns**: [<code>Camera2D</code>](#Camera2D) - The new Camera2D.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| offset | [<code>Vector2</code>](#Vector2) | Camera offset (displacement from target) |
+| target | [<code>Vector2</code>](#Vector2) | Camera target (rotation and zoom origin) |
+| rotation | <code>number</code> | Camera rotation in degrees |
+| zoom | <code>number</code> | Camera zoom (scaling), should be 1.0f by default |
+
+<a name="Camera3D"></a>
+
+## Camera3D : <code>Object</code>
+Camera, defines position/orientation in 3d space
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| position | [<code>Vector3</code>](#Vector3) | Camera position |
+| target | [<code>Vector3</code>](#Vector3) | Camera target it looks-at |
+| up | [<code>Vector3</code>](#Vector3) | Camera up vector (rotation over its axis) |
+| fovy | <code>number</code> | Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic |
+| projection | <code>number</code> | Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC |
+
+<a name="new_Camera3D_new"></a>
+
+### new Camera3D(position, target, up, fovy, projection)
+Camera, defines position/orientation in 3d space
+
+**Returns**: [<code>Camera3D</code>](#Camera3D) - The new Camera3D.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| position | [<code>Vector3</code>](#Vector3) | Camera position |
+| target | [<code>Vector3</code>](#Vector3) | Camera target it looks-at |
+| up | [<code>Vector3</code>](#Vector3) | Camera up vector (rotation over its axis) |
+| fovy | <code>number</code> | Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic |
+| projection | <code>number</code> | Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC |
+
