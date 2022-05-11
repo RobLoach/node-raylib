@@ -1,3 +1,5 @@
+const ArgumentTypeConversion = require('./ArgumentTypeConversion')
+
 // These are struct types that the JS wrapper will create simple functions to generate objects for.
 const constructors = [
   'Color',
@@ -31,10 +33,37 @@ const FlattenArgument = (structs, param) => {
   return out
 }
 
-const WrapFunction = (structs, func) => {
+/**
+ * Generates the JSDocs for the given function.
+ */
+const JSDocsForFunction = (structs, func) => {
+  // Determine the function description.
+  const description = func.description ?? func.name
+
+  // Define the parameters.
+  let params = ''
+  if (func.params) {
+    params = '\n *'
+    for (const param of func.params) {
+      params += `\n * @param {${ArgumentTypeConversion(param.type)}} ${param.name}`
+    }
+  }
+
+  // Find the return type.
+  let returnType = ''
+  if (func.returnType && func.returnType !== 'void') {
+    returnType = `\n *\n * @return {${ArgumentTypeConversion(func.returnType)}} The resulting ${func.returnType}.`
+  }
+
   return `
-/** ${func.description} */
-raylib.${func.name} = function (${!func.params ? '' : func.params.map(param => param.name).join(', ')}) {
+/**
+ * ${description}${params}${returnType}
+ */`
+}
+
+const WrapFunction = (structs, func) => {
+  return `${JSDocsForFunction(structs, func)}
+function ${func.name}(${!func.params ? '' : func.params.map(param => param.name).join(', ')}) {
   return r.Bind${func.name}(${
     !func.params
 ? ''
@@ -43,7 +72,8 @@ raylib.${func.name} = function (${!func.params ? '' : func.params.map(param => p
       .map(param => { return FlattenArgument(structs, param) })
       .join(',\n    ') + '\n  '
   })
-}`
+}
+raylib.${func.name} = ${func.name}`
 }
 
 const WrapByRefFunction = (structs, func) => {
@@ -58,9 +88,8 @@ const WrapByRefFunction = (structs, func) => {
     params[0].type = params[0].type.replace(' ', '')
   }
 
-  return `
-/** ${func.description} */
-raylib.${func.name} = function (${!params ? '' : params.map(param => param.name).join(', ')}) {
+  return `${JSDocsForFunction(structs, func)}
+function ${func.name}(${!params ? '' : params.map(param => param.name).join(', ')}) {
   const obj = r.Bind${func.name}(${
     !params
 ? ''
@@ -76,7 +105,8 @@ raylib.${func.name} = function (${!params ? '' : params.map(param => param.name)
       }
     }
   }
-}`
+}
+raylib.${func.name} = ${func.name}`
 }
 
 const WrapConstructor = (structs, constructor) => {
@@ -85,9 +115,27 @@ const WrapConstructor = (structs, constructor) => {
     if (struct.name === constructor) info = struct
   }
   if (info) {
-    return `raylib.${info.name} = function (${info.fields.map(field => `${field.name}`).join(',')}) {
+    // Grab the description for the object.
+    const description = info.description ?? info.name
+
+    // Construct the field parameters
+    let params = ''
+    if (info.fields) {
+      params = '\n *'
+      for (const field of info.fields) {
+        params += `\n * @param {${ArgumentTypeConversion(field.type)}} ${field.name} ${field.description}`
+      }
+    }
+    return `/**
+ * ${description}${params}
+ *
+ * @return {${info.name}} The new ${info.name}.
+ * @constructor
+ */
+function ${info.name}(${info.fields.map(field => `${field.name}`).join(',')}) {
   return {${info.fields.map(field => `${field.name}`).join(',')}}
 }
+raylib.${info.name} = ${info.name}
 `
   } else return ''
 }
@@ -115,9 +163,12 @@ ${constructors
   .join('\n')
 }raylib.Camera = raylib.Camera3D
 
-// Wrapped Typed Shader Functions
-/** Set shader uniform value float */
-raylib.SetShaderFloat = function (shader, locIndex, value) {
+// WRAPPED TYPED SHADER FUNCTIONS
+
+/**
+ * Set shader uniform value float
+ */
+function SetShaderFloat(shader, locIndex, value) {
   return r.BindSetShaderFloat(
     shader.id,
     shader.locs,
@@ -125,9 +176,12 @@ raylib.SetShaderFloat = function (shader, locIndex, value) {
     value
   )
 }
+raylib.SetShaderFloat = SetShaderFloat
 
-/** Set shader uniform value float */
-raylib.SetShaderInt = function (shader, locIndex, value) {
+/**
+ * Set shader uniform value float
+ */
+function SetShaderInt(shader, locIndex, value) {
   return r.BindSetShaderInt(
     shader.id,
     shader.locs,
@@ -135,9 +189,12 @@ raylib.SetShaderInt = function (shader, locIndex, value) {
     value
   )
 }
+raylib.SetShaderInt = SetShaderInt
 
-/** Set shader uniform value vector2 */
-raylib.SetShaderVec2 = function (shader, locIndex, value) {
+/**
+ * Set shader uniform value vector2
+ */
+function SetShaderVec2(shader, locIndex, value) {
   return r.BindSetShaderVec2(
     shader.id,
     shader.locs,
@@ -146,9 +203,12 @@ raylib.SetShaderVec2 = function (shader, locIndex, value) {
     value.y
   )
 }
+raylib.SetShaderVec2 = SetShaderVec2
 
-/** Set shader uniform value vector3 */
-raylib.SetShaderVec2 = function (shader, locIndex, value) {
+/**
+ * Set shader uniform value vector3
+ */
+function SetShaderVec3(shader, locIndex, value) {
   return r.BindSetShaderVec3(
     shader.id,
     shader.locs,
@@ -158,9 +218,12 @@ raylib.SetShaderVec2 = function (shader, locIndex, value) {
     value.z
   )
 }
+raylib.SetShaderVec3 = SetShaderVec3
 
-/** Set shader uniform value vector4 */
-raylib.SetShaderVec4 = function (shader, locIndex, value) {
+/**
+ * Set shader uniform value vector4
+ */
+function SetShaderVec4(shader, locIndex, value) {
   return r.BindSetShaderVec4(
     shader.id,
     shader.locs,
@@ -171,9 +234,10 @@ raylib.SetShaderVec4 = function (shader, locIndex, value) {
     value.w
   )
 }
+raylib.SetShaderVec4 = SetShaderVec4
 
 ${enums
-  .map((e) => { return e.values.map(v => `/** ${v.description} */\nraylib.${v.name} = ${v.value}`).join('\n') })
+  .map((e) => { return e.values.map(v => `/**\n * ${v.description}\n */\nraylib.${v.name} = ${v.value}`).join('\n\n') })
   .join('\n')
 }
 
