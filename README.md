@@ -6,8 +6,9 @@
 
 ## Sample Applications
 
+- [Examples](examples) - Ports of raylib's examples to node-raylib
 - [Flappy](https://github.com/arthurmassanes/flappy) - Flappy Bird clone by [@arthurmassanes](https://github.com/arthurmassanes)
-- Check out the [examples folder](examples)
+- [Retro RPG Template](https://github.com/notnullgames/raylib-example-retro_rpg) - Small prototype to build a retro-inspired RPG game
 
 ## Dependencies
 
@@ -79,10 +80,6 @@ node-raylib --version
 
 npx -y raylib --version
 ```
-
-## Projects
-
-- [Retro RPG Template](https://github.com/notnullgames/raylib-example-retro_rpg)
 
 ## Development
 
