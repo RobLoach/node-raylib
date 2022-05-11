@@ -1,22 +1,3 @@
-## Classes
-
-<dl>
-<dt><a href="#Color">Color</a></dt>
-<dd></dd>
-<dt><a href="#Vector2">Vector2</a></dt>
-<dd></dd>
-<dt><a href="#Vector3">Vector3</a></dt>
-<dd></dd>
-<dt><a href="#Vector4">Vector4</a></dt>
-<dd></dd>
-<dt><a href="#Rectangle">Rectangle</a></dt>
-<dd></dd>
-<dt><a href="#Camera2D">Camera2D</a></dt>
-<dd></dd>
-<dt><a href="#Camera3D">Camera3D</a></dt>
-<dd></dd>
-</dl>
-
 ## Functions
 
 <dl>
@@ -1511,6 +1492,27 @@
 <dt><a href="#WaveCrop">WaveCrop(wave, initSample, finalSample)</a> ⇒ <code>null</code></dt>
 <dd><p>Crop a wave to defined samples range</p>
 </dd>
+<dt><a href="#Color">Color(r, g, b, a)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
+<dd><p>Color, 4 components, R8G8B8A8 (32bit)</p>
+</dd>
+<dt><a href="#Vector2">Vector2(x, y)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Vector2, 2 components</p>
+</dd>
+<dt><a href="#Vector3">Vector3(x, y, z)</a> ⇒ <code><a href="#Vector3">Vector3</a></code></dt>
+<dd><p>Vector3, 3 components</p>
+</dd>
+<dt><a href="#Vector4">Vector4(x, y, z, w)</a> ⇒ <code><a href="#Vector4">Vector4</a></code></dt>
+<dd><p>Vector4, 4 components</p>
+</dd>
+<dt><a href="#Rectangle">Rectangle(x, y, width, height)</a> ⇒ <code><a href="#Rectangle">Rectangle</a></code></dt>
+<dd><p>Rectangle, 4 components</p>
+</dd>
+<dt><a href="#Camera2D">Camera2D(offset, target, rotation, zoom)</a> ⇒ <code><a href="#Camera2D">Camera2D</a></code></dt>
+<dd><p>Camera2D, defines position/orientation in 2d space</p>
+</dd>
+<dt><a href="#Camera3D">Camera3D(position, target, up, fovy, projection)</a> ⇒ <code><a href="#Camera3D">Camera3D</a></code></dt>
+<dd><p>Camera, defines position/orientation in 3d space</p>
+</dd>
 <dt><a href="#SetShaderFloat">SetShaderFloat()</a></dt>
 <dd><p>Set shader uniform value float</p>
 </dd>
@@ -1527,156 +1529,6 @@
 <dd><p>Set shader uniform value vector4</p>
 </dd>
 </dl>
-
-## Typedefs
-
-<dl>
-<dt><a href="#Color">Color</a> : <code>Object</code></dt>
-<dd><p>Color, 4 components, R8G8B8A8 (32bit)</p>
-</dd>
-<dt><a href="#Vector2">Vector2</a> : <code>Object</code></dt>
-<dd><p>Vector2, 2 components</p>
-</dd>
-<dt><a href="#Vector3">Vector3</a> : <code>Object</code></dt>
-<dd><p>Vector3, 3 components</p>
-</dd>
-<dt><a href="#Vector4">Vector4</a> : <code>Object</code></dt>
-<dd><p>Vector4, 4 components</p>
-</dd>
-<dt><a href="#Rectangle">Rectangle</a> : <code>Object</code></dt>
-<dd><p>Rectangle, 4 components</p>
-</dd>
-<dt><a href="#Camera2D">Camera2D</a> : <code>Object</code></dt>
-<dd><p>Camera2D, defines position/orientation in 2d space</p>
-</dd>
-<dt><a href="#Camera3D">Camera3D</a> : <code>Object</code></dt>
-<dd><p>Camera, defines position/orientation in 3d space</p>
-</dd>
-</dl>
-
-<a name="Color"></a>
-
-## Color
-**Kind**: global class  
-<a name="new_Color_new"></a>
-
-### new Color(r, g, b, a)
-Color, 4 components, R8G8B8A8 (32bit)
-
-**Returns**: [<code>Color</code>](#Color) - The new Color.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| r | <code>number</code> | Color red value |
-| g | <code>number</code> | Color green value |
-| b | <code>number</code> | Color blue value |
-| a | <code>number</code> | Color alpha value |
-
-<a name="Vector2"></a>
-
-## Vector2
-**Kind**: global class  
-<a name="new_Vector2_new"></a>
-
-### new Vector2(x, y)
-Vector2, 2 components
-
-**Returns**: [<code>Vector2</code>](#Vector2) - The new Vector2.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-
-<a name="Vector3"></a>
-
-## Vector3
-**Kind**: global class  
-<a name="new_Vector3_new"></a>
-
-### new Vector3(x, y, z)
-Vector3, 3 components
-
-**Returns**: [<code>Vector3</code>](#Vector3) - The new Vector3.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-| z | <code>number</code> | Vector z component |
-
-<a name="Vector4"></a>
-
-## Vector4
-**Kind**: global class  
-<a name="new_Vector4_new"></a>
-
-### new Vector4(x, y, z, w)
-Vector4, 4 components
-
-**Returns**: [<code>Vector4</code>](#Vector4) - The new Vector4.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-| z | <code>number</code> | Vector z component |
-| w | <code>number</code> | Vector w component |
-
-<a name="Rectangle"></a>
-
-## Rectangle
-**Kind**: global class  
-<a name="new_Rectangle_new"></a>
-
-### new Rectangle(x, y, width, height)
-Rectangle, 4 components
-
-**Returns**: [<code>Rectangle</code>](#Rectangle) - The new Rectangle.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Rectangle top-left corner position x |
-| y | <code>number</code> | Rectangle top-left corner position y |
-| width | <code>number</code> | Rectangle width |
-| height | <code>number</code> | Rectangle height |
-
-<a name="Camera2D"></a>
-
-## Camera2D
-**Kind**: global class  
-<a name="new_Camera2D_new"></a>
-
-### new Camera2D(offset, target, rotation, zoom)
-Camera2D, defines position/orientation in 2d space
-
-**Returns**: [<code>Camera2D</code>](#Camera2D) - The new Camera2D.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| offset | [<code>Vector2</code>](#Vector2) | Camera offset (displacement from target) |
-| target | [<code>Vector2</code>](#Vector2) | Camera target (rotation and zoom origin) |
-| rotation | <code>number</code> | Camera rotation in degrees |
-| zoom | <code>number</code> | Camera zoom (scaling), should be 1.0f by default |
-
-<a name="Camera3D"></a>
-
-## Camera3D
-**Kind**: global class  
-<a name="new_Camera3D_new"></a>
-
-### new Camera3D(position, target, up, fovy, projection)
-Camera, defines position/orientation in 3d space
-
-**Returns**: [<code>Camera3D</code>](#Camera3D) - The new Camera3D.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| position | [<code>Vector3</code>](#Vector3) | Camera position |
-| target | [<code>Vector3</code>](#Vector3) | Camera target it looks-at |
-| up | [<code>Vector3</code>](#Vector3) | Camera up vector (rotation over its axis) |
-| fovy | <code>number</code> | Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic |
-| projection | <code>number</code> | Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC |
 
 <a name="InitWindow"></a>
 
@@ -7761,6 +7613,109 @@ Crop a wave to defined samples range
 | initSample | <code>number</code> | 
 | finalSample | <code>number</code> | 
 
+<a name="Color"></a>
+
+## Color(r, g, b, a) ⇒ [<code>Color</code>](#Color)
+Color, 4 components, R8G8B8A8 (32bit)
+
+**Kind**: global function  
+**Returns**: [<code>Color</code>](#Color) - The new Color.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| r | <code>number</code> | Color red value |
+| g | <code>number</code> | Color green value |
+| b | <code>number</code> | Color blue value |
+| a | <code>number</code> | Color alpha value |
+
+<a name="Vector2"></a>
+
+## Vector2(x, y) ⇒ [<code>Vector2</code>](#Vector2)
+Vector2, 2 components
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The new Vector2.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+
+<a name="Vector3"></a>
+
+## Vector3(x, y, z) ⇒ [<code>Vector3</code>](#Vector3)
+Vector3, 3 components
+
+**Kind**: global function  
+**Returns**: [<code>Vector3</code>](#Vector3) - The new Vector3.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+| z | <code>number</code> | Vector z component |
+
+<a name="Vector4"></a>
+
+## Vector4(x, y, z, w) ⇒ [<code>Vector4</code>](#Vector4)
+Vector4, 4 components
+
+**Kind**: global function  
+**Returns**: [<code>Vector4</code>](#Vector4) - The new Vector4.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Vector x component |
+| y | <code>number</code> | Vector y component |
+| z | <code>number</code> | Vector z component |
+| w | <code>number</code> | Vector w component |
+
+<a name="Rectangle"></a>
+
+## Rectangle(x, y, width, height) ⇒ [<code>Rectangle</code>](#Rectangle)
+Rectangle, 4 components
+
+**Kind**: global function  
+**Returns**: [<code>Rectangle</code>](#Rectangle) - The new Rectangle.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | Rectangle top-left corner position x |
+| y | <code>number</code> | Rectangle top-left corner position y |
+| width | <code>number</code> | Rectangle width |
+| height | <code>number</code> | Rectangle height |
+
+<a name="Camera2D"></a>
+
+## Camera2D(offset, target, rotation, zoom) ⇒ [<code>Camera2D</code>](#Camera2D)
+Camera2D, defines position/orientation in 2d space
+
+**Kind**: global function  
+**Returns**: [<code>Camera2D</code>](#Camera2D) - The new Camera2D.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| offset | [<code>Vector2</code>](#Vector2) | Camera offset (displacement from target) |
+| target | [<code>Vector2</code>](#Vector2) | Camera target (rotation and zoom origin) |
+| rotation | <code>number</code> | Camera rotation in degrees |
+| zoom | <code>number</code> | Camera zoom (scaling), should be 1.0f by default |
+
+<a name="Camera3D"></a>
+
+## Camera3D(position, target, up, fovy, projection) ⇒ [<code>Camera3D</code>](#Camera3D)
+Camera, defines position/orientation in 3d space
+
+**Kind**: global function  
+**Returns**: [<code>Camera3D</code>](#Camera3D) - The new Camera3D.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| position | [<code>Vector3</code>](#Vector3) | Camera position |
+| target | [<code>Vector3</code>](#Vector3) | Camera target it looks-at |
+| up | [<code>Vector3</code>](#Vector3) | Camera up vector (rotation over its axis) |
+| fovy | <code>number</code> | Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic |
+| projection | <code>number</code> | Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC |
+
 <a name="SetShaderFloat"></a>
 
 ## SetShaderFloat()
@@ -7791,202 +7746,3 @@ Set shader uniform value vector3
 Set shader uniform value vector4
 
 **Kind**: global function  
-<a name="Color"></a>
-
-## Color : <code>Object</code>
-Color, 4 components, R8G8B8A8 (32bit)
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| r | <code>number</code> | Color red value |
-| g | <code>number</code> | Color green value |
-| b | <code>number</code> | Color blue value |
-| a | <code>number</code> | Color alpha value |
-
-<a name="new_Color_new"></a>
-
-### new Color(r, g, b, a)
-Color, 4 components, R8G8B8A8 (32bit)
-
-**Returns**: [<code>Color</code>](#Color) - The new Color.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| r | <code>number</code> | Color red value |
-| g | <code>number</code> | Color green value |
-| b | <code>number</code> | Color blue value |
-| a | <code>number</code> | Color alpha value |
-
-<a name="Vector2"></a>
-
-## Vector2 : <code>Object</code>
-Vector2, 2 components
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-
-<a name="new_Vector2_new"></a>
-
-### new Vector2(x, y)
-Vector2, 2 components
-
-**Returns**: [<code>Vector2</code>](#Vector2) - The new Vector2.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-
-<a name="Vector3"></a>
-
-## Vector3 : <code>Object</code>
-Vector3, 3 components
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-| z | <code>number</code> | Vector z component |
-
-<a name="new_Vector3_new"></a>
-
-### new Vector3(x, y, z)
-Vector3, 3 components
-
-**Returns**: [<code>Vector3</code>](#Vector3) - The new Vector3.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-| z | <code>number</code> | Vector z component |
-
-<a name="Vector4"></a>
-
-## Vector4 : <code>Object</code>
-Vector4, 4 components
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-| z | <code>number</code> | Vector z component |
-| w | <code>number</code> | Vector w component |
-
-<a name="new_Vector4_new"></a>
-
-### new Vector4(x, y, z, w)
-Vector4, 4 components
-
-**Returns**: [<code>Vector4</code>](#Vector4) - The new Vector4.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Vector x component |
-| y | <code>number</code> | Vector y component |
-| z | <code>number</code> | Vector z component |
-| w | <code>number</code> | Vector w component |
-
-<a name="Rectangle"></a>
-
-## Rectangle : <code>Object</code>
-Rectangle, 4 components
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Rectangle top-left corner position x |
-| y | <code>number</code> | Rectangle top-left corner position y |
-| width | <code>number</code> | Rectangle width |
-| height | <code>number</code> | Rectangle height |
-
-<a name="new_Rectangle_new"></a>
-
-### new Rectangle(x, y, width, height)
-Rectangle, 4 components
-
-**Returns**: [<code>Rectangle</code>](#Rectangle) - The new Rectangle.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| x | <code>number</code> | Rectangle top-left corner position x |
-| y | <code>number</code> | Rectangle top-left corner position y |
-| width | <code>number</code> | Rectangle width |
-| height | <code>number</code> | Rectangle height |
-
-<a name="Camera2D"></a>
-
-## Camera2D : <code>Object</code>
-Camera2D, defines position/orientation in 2d space
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| offset | [<code>Vector2</code>](#Vector2) | Camera offset (displacement from target) |
-| target | [<code>Vector2</code>](#Vector2) | Camera target (rotation and zoom origin) |
-| rotation | <code>number</code> | Camera rotation in degrees |
-| zoom | <code>number</code> | Camera zoom (scaling), should be 1.0f by default |
-
-<a name="new_Camera2D_new"></a>
-
-### new Camera2D(offset, target, rotation, zoom)
-Camera2D, defines position/orientation in 2d space
-
-**Returns**: [<code>Camera2D</code>](#Camera2D) - The new Camera2D.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| offset | [<code>Vector2</code>](#Vector2) | Camera offset (displacement from target) |
-| target | [<code>Vector2</code>](#Vector2) | Camera target (rotation and zoom origin) |
-| rotation | <code>number</code> | Camera rotation in degrees |
-| zoom | <code>number</code> | Camera zoom (scaling), should be 1.0f by default |
-
-<a name="Camera3D"></a>
-
-## Camera3D : <code>Object</code>
-Camera, defines position/orientation in 3d space
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| position | [<code>Vector3</code>](#Vector3) | Camera position |
-| target | [<code>Vector3</code>](#Vector3) | Camera target it looks-at |
-| up | [<code>Vector3</code>](#Vector3) | Camera up vector (rotation over its axis) |
-| fovy | <code>number</code> | Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic |
-| projection | <code>number</code> | Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC |
-
-<a name="new_Camera3D_new"></a>
-
-### new Camera3D(position, target, up, fovy, projection)
-Camera, defines position/orientation in 3d space
-
-**Returns**: [<code>Camera3D</code>](#Camera3D) - The new Camera3D.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| position | [<code>Vector3</code>](#Vector3) | Camera position |
-| target | [<code>Vector3</code>](#Vector3) | Camera target it looks-at |
-| up | [<code>Vector3</code>](#Vector3) | Camera up vector (rotation over its axis) |
-| fovy | <code>number</code> | Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic |
-| projection | <code>number</code> | Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC |
-

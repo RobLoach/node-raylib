@@ -10279,25 +10279,11 @@ raylib.WaveCrop = WaveCrop
 
 /**
  * Color, 4 components, R8G8B8A8 (32bit)
- * @typedef {Object} Color
- *
- * @property {number} r - Color red value
- * @property {number} g - Color green value
- * @property {number} b - Color blue value
- * @property {number} a - Color alpha value
- *
- * @hideconstructor
- */
-
-/**
- * Color, 4 components, R8G8B8A8 (32bit)
  *
  * @param {number} r - Color red value
  * @param {number} g - Color green value
  * @param {number} b - Color blue value
  * @param {number} a - Color alpha value
- *
- * @constructs Color
  *
  * @return {Color} The new Color.
  */
@@ -10308,21 +10294,9 @@ raylib.Color = Color
 
 /**
  * Vector2, 2 components
- * @typedef {Object} Vector2
- *
- * @property {number} x - Vector x component
- * @property {number} y - Vector y component
- *
- * @hideconstructor
- */
-
-/**
- * Vector2, 2 components
  *
  * @param {number} x - Vector x component
  * @param {number} y - Vector y component
- *
- * @constructs Vector2
  *
  * @return {Vector2} The new Vector2.
  */
@@ -10333,23 +10307,10 @@ raylib.Vector2 = Vector2
 
 /**
  * Vector3, 3 components
- * @typedef {Object} Vector3
- *
- * @property {number} x - Vector x component
- * @property {number} y - Vector y component
- * @property {number} z - Vector z component
- *
- * @hideconstructor
- */
-
-/**
- * Vector3, 3 components
  *
  * @param {number} x - Vector x component
  * @param {number} y - Vector y component
  * @param {number} z - Vector z component
- *
- * @constructs Vector3
  *
  * @return {Vector3} The new Vector3.
  */
@@ -10360,25 +10321,11 @@ raylib.Vector3 = Vector3
 
 /**
  * Vector4, 4 components
- * @typedef {Object} Vector4
- *
- * @property {number} x - Vector x component
- * @property {number} y - Vector y component
- * @property {number} z - Vector z component
- * @property {number} w - Vector w component
- *
- * @hideconstructor
- */
-
-/**
- * Vector4, 4 components
  *
  * @param {number} x - Vector x component
  * @param {number} y - Vector y component
  * @param {number} z - Vector z component
  * @param {number} w - Vector w component
- *
- * @constructs Vector4
  *
  * @return {Vector4} The new Vector4.
  */
@@ -10389,25 +10336,11 @@ raylib.Vector4 = Vector4
 
 /**
  * Rectangle, 4 components
- * @typedef {Object} Rectangle
- *
- * @property {number} x - Rectangle top-left corner position x
- * @property {number} y - Rectangle top-left corner position y
- * @property {number} width - Rectangle width
- * @property {number} height - Rectangle height
- *
- * @hideconstructor
- */
-
-/**
- * Rectangle, 4 components
  *
  * @param {number} x - Rectangle top-left corner position x
  * @param {number} y - Rectangle top-left corner position y
  * @param {number} width - Rectangle width
  * @param {number} height - Rectangle height
- *
- * @constructs Rectangle
  *
  * @return {Rectangle} The new Rectangle.
  */
@@ -10418,25 +10351,11 @@ raylib.Rectangle = Rectangle
 
 /**
  * Camera2D, defines position/orientation in 2d space
- * @typedef {Object} Camera2D
- *
- * @property {Vector2} offset - Camera offset (displacement from target)
- * @property {Vector2} target - Camera target (rotation and zoom origin)
- * @property {number} rotation - Camera rotation in degrees
- * @property {number} zoom - Camera zoom (scaling), should be 1.0f by default
- *
- * @hideconstructor
- */
-
-/**
- * Camera2D, defines position/orientation in 2d space
  *
  * @param {Vector2} offset - Camera offset (displacement from target)
  * @param {Vector2} target - Camera target (rotation and zoom origin)
  * @param {number} rotation - Camera rotation in degrees
  * @param {number} zoom - Camera zoom (scaling), should be 1.0f by default
- *
- * @constructs Camera2D
  *
  * @return {Camera2D} The new Camera2D.
  */
@@ -10447,27 +10366,12 @@ raylib.Camera2D = Camera2D
 
 /**
  * Camera, defines position/orientation in 3d space
- * @typedef {Object} Camera3D
- *
- * @property {Vector3} position - Camera position
- * @property {Vector3} target - Camera target it looks-at
- * @property {Vector3} up - Camera up vector (rotation over its axis)
- * @property {number} fovy - Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
- * @property {number} projection - Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
- *
- * @hideconstructor
- */
-
-/**
- * Camera, defines position/orientation in 3d space
  *
  * @param {Vector3} position - Camera position
  * @param {Vector3} target - Camera target it looks-at
  * @param {Vector3} up - Camera up vector (rotation over its axis)
  * @param {number} fovy - Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
  * @param {number} projection - Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
- *
- * @constructs Camera3D
  *
  * @return {Camera3D} The new Camera3D.
  */

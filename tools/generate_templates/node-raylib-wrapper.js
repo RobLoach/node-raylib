@@ -123,26 +123,14 @@ const WrapConstructor = (structs, constructor) => {
 
     // Construct the field parameters
     let params = ''
-    let props = ''
     if (info.fields) {
       params = '\n *'
-      props = '\n *'
       for (const field of info.fields) {
         params += `\n * @param {${ArgumentTypeConversion(field.type)}} ${field.name} - ${field.description}`
-        props += `\n * @property {${ArgumentTypeConversion(field.type)}} ${field.name} - ${field.description}`
       }
     }
     return `/**
- * ${description}
- * @typedef {Object} ${info.name}${props}
- *
- * @hideconstructor
- */
-
-/**
  * ${description}${params}
- *
- * @constructs ${info.name}
  *
  * @return {${info.name}} The new ${info.name}.
  */
