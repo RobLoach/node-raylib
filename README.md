@@ -97,7 +97,6 @@ npm i
 npm t
 ```
 
-
 ### TypeScript Definitions
 
 Typescript definitions are provided by a generator based on raylib's header parser. See [here](https://github.com/RobLoach/node-raylib/blob/raylib4/tools/generate_templates/node-raylib-definitions.js) for information on how to generate them.
