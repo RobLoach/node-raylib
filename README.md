@@ -6,11 +6,12 @@
 
 ## Examples
 
-| Name | Description |
-|:-----|:------------|
-| [Offical Examples](examples) | Ports of raylib's examples to node-raylib |
-| [Flappy](https://github.com/arthurmassanes/flappy) | Flappy Bird clone by [@arthurmassanes](https://github.com/arthurmassanes) |
-| [Retro RPG Template](https://github.com/notnullgames/raylib-example-retro_rpg) | Small prototype to build a retro-inspired RPG game |
+| Name | Description | Author |
+|:-----|:------------|:-------|
+| [Offical Examples](examples) | Ports of raylib's examples to node-raylib | [@RobLoach](https://github.com/robloach), [@twunky](https://github.com/twuky), [@kunsumer](https://github.com/konsumer) |
+| [Flappy](https://github.com/arthurmassanes/flappy) | A [Flappy Bird](https://en.wikipedia.org/wiki/Flappy_Bird) clone | [@arthurmassanes](https://github.com/arthurmassanes) |
+| [Retro RPG Template](https://github.com/notnullgames/raylib-example-retro_rpg) | Small prototype to build a retro-inspired RPG game | [@konsumer](https://github.com/konsumer) |
+| [Chip8](https://github.com/taniarascia/chip8) | A [CHIP-8](https://en.wikipedia.org/wiki/CHIP-8) emulator whose native client using node-raylib | [@taniarascia](https://github.com/taniarascia) |
 
 ## Dependencies
 
