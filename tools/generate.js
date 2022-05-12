@@ -106,7 +106,6 @@ const rSize = /\[([0-9]+)\]/g
 function getDefs () {
   const { structs, enums, functions } = raylibApi.raylib
 
-      // Structs
       for (const struct of structs) {
         // take multi-fields (like in Matrix) and make them all distinct fields
 
@@ -156,7 +155,6 @@ function getDefs () {
       // XXX: Since array support isn't complete, just filter out all structs & functions that use them,
       // so we get an (incomplete) wrapper that will build.
 
-      // Structs
       for (const struct of structs) {
         const usesArray = struct.fields.find(f => f.size !== 1)
         if (usesArray) {
@@ -164,7 +162,7 @@ function getDefs () {
         }
       }
 
-      // Functions
+      // filter out all functions that use blocked types
       for (const f of functions) {
         if (blocklist.includes(f.returnType.replace(/[* ]/g, ''))) {
           blocklist.push(f.name)
@@ -178,15 +176,15 @@ function getDefs () {
         }
       }
 
-  // Add Easings
-  const easings = raylibApi.easings
-  functions.push(...easings.functions)
+      // Add the Easings API
+      const easings = raylibApi.easings
+      functions.push(...easings.functions)
 
-  // Add Raymath
-  const raymath = raylibApi.raymath
-  functions.push(...raymath.functions)
+      // Add Raymath
+      const raymath = raylibApi.raymath
+      functions.push(...raymath.functions)
 
-  return { structs, enums, functions }
+      return { structs, enums, functions }
 }
 
 const { structs, enums, functions } = getDefs()
