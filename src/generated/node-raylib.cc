@@ -247,26 +247,11 @@ inline MaterialMap MaterialMapFromValue(const Napi::CallbackInfo& info, int inde
   };
 }
 
-inline Material MaterialFromValue(const Napi::CallbackInfo& info, int index) {
-  return {
-     ShaderFromValue(info, index + 0),
-     (MaterialMap *) pointerFromValue(info, index + 2),
-     floatFromValue(info, index + 3)
-  };
-}
-
 inline Transform TransformFromValue(const Napi::CallbackInfo& info, int index) {
   return {
      Vector3FromValue(info, index + 0),
      Vector4FromValue(info, index + 3),
      Vector3FromValue(info, index + 7)
-  };
-}
-
-inline BoneInfo BoneInfoFromValue(const Napi::CallbackInfo& info, int index) {
-  return {
-     charFromValue(info, index + 0),
-     charFromValue(info, index + 1)
   };
 }
 
@@ -351,34 +336,6 @@ inline Music MusicFromValue(const Napi::CallbackInfo& info, int index) {
      (void *) pointerFromValue(info, index + 7)
   };
 }
-
-inline VrDeviceInfo VrDeviceInfoFromValue(const Napi::CallbackInfo& info, int index) {
-  return {
-     intFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     floatFromValue(info, index + 2),
-     floatFromValue(info, index + 3),
-     floatFromValue(info, index + 4),
-     floatFromValue(info, index + 5),
-     floatFromValue(info, index + 6),
-     floatFromValue(info, index + 7),
-     floatFromValue(info, index + 8),
-     floatFromValue(info, index + 9)
-  };
-}
-
-inline VrStereoConfig VrStereoConfigFromValue(const Napi::CallbackInfo& info, int index) {
-  return {
-     MatrixFromValue(info, index + 0),
-     MatrixFromValue(info, index + 16),
-     floatFromValue(info, index + 32),
-     floatFromValue(info, index + 33),
-     floatFromValue(info, index + 34),
-     floatFromValue(info, index + 35),
-     floatFromValue(info, index + 36),
-     floatFromValue(info, index + 37)
-  };
-}
 // Convert structs to Napi::Objects for output to JS
 
 inline Napi::Value ToValue(Napi::Env env, Vector2 obj) {
@@ -408,20 +365,20 @@ inline Napi::Value ToValue(Napi::Env env, Vector4 obj) {
 inline Napi::Value ToValue(Napi::Env env, Matrix obj) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("m0", ToValue(env, obj.m0));
-  out.Set("m1", ToValue(env, obj.m1));
-  out.Set("m2", ToValue(env, obj.m2));
-  out.Set("m3", ToValue(env, obj.m3));
   out.Set("m4", ToValue(env, obj.m4));
-  out.Set("m5", ToValue(env, obj.m5));
-  out.Set("m6", ToValue(env, obj.m6));
-  out.Set("m7", ToValue(env, obj.m7));
   out.Set("m8", ToValue(env, obj.m8));
-  out.Set("m9", ToValue(env, obj.m9));
-  out.Set("m10", ToValue(env, obj.m10));
-  out.Set("m11", ToValue(env, obj.m11));
   out.Set("m12", ToValue(env, obj.m12));
+  out.Set("m1", ToValue(env, obj.m1));
+  out.Set("m5", ToValue(env, obj.m5));
+  out.Set("m9", ToValue(env, obj.m9));
   out.Set("m13", ToValue(env, obj.m13));
+  out.Set("m2", ToValue(env, obj.m2));
+  out.Set("m6", ToValue(env, obj.m6));
+  out.Set("m10", ToValue(env, obj.m10));
   out.Set("m14", ToValue(env, obj.m14));
+  out.Set("m3", ToValue(env, obj.m3));
+  out.Set("m7", ToValue(env, obj.m7));
+  out.Set("m11", ToValue(env, obj.m11));
   out.Set("m15", ToValue(env, obj.m15));
   return out;
 }
@@ -558,26 +515,11 @@ inline Napi::Value ToValue(Napi::Env env, MaterialMap obj) {
   return out;
 }
 
-inline Napi::Value ToValue(Napi::Env env, Material obj) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("shader", ToValue(env, obj.shader));
-  out.Set("maps", ToValue(env, obj.maps));
-  out.Set("params", ToValue(env, obj.params));
-  return out;
-}
-
 inline Napi::Value ToValue(Napi::Env env, Transform obj) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("translation", ToValue(env, obj.translation));
   out.Set("rotation", ToValue(env, obj.rotation));
   out.Set("scale", ToValue(env, obj.scale));
-  return out;
-}
-
-inline Napi::Value ToValue(Napi::Env env, BoneInfo obj) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("name", ToValue(env, obj.name));
-  out.Set("parent", ToValue(env, obj.parent));
   return out;
 }
 
@@ -660,34 +602,6 @@ inline Napi::Value ToValue(Napi::Env env, Music obj) {
   out.Set("looping", ToValue(env, obj.looping));
   out.Set("ctxType", ToValue(env, obj.ctxType));
   out.Set("ctxData", ToValue(env, obj.ctxData));
-  return out;
-}
-
-inline Napi::Value ToValue(Napi::Env env, VrDeviceInfo obj) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("hResolution", ToValue(env, obj.hResolution));
-  out.Set("vResolution", ToValue(env, obj.vResolution));
-  out.Set("hScreenSize", ToValue(env, obj.hScreenSize));
-  out.Set("vScreenSize", ToValue(env, obj.vScreenSize));
-  out.Set("vScreenCenter", ToValue(env, obj.vScreenCenter));
-  out.Set("eyeToScreenDistance", ToValue(env, obj.eyeToScreenDistance));
-  out.Set("lensSeparationDistance", ToValue(env, obj.lensSeparationDistance));
-  out.Set("interpupillaryDistance", ToValue(env, obj.interpupillaryDistance));
-  out.Set("lensDistortionValues", ToValue(env, obj.lensDistortionValues));
-  out.Set("chromaAbCorrection", ToValue(env, obj.chromaAbCorrection));
-  return out;
-}
-
-inline Napi::Value ToValue(Napi::Env env, VrStereoConfig obj) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("projection", ToValue(env, obj.projection));
-  out.Set("viewOffset", ToValue(env, obj.viewOffset));
-  out.Set("leftLensCenter", ToValue(env, obj.leftLensCenter));
-  out.Set("rightLensCenter", ToValue(env, obj.rightLensCenter));
-  out.Set("leftScreenCenter", ToValue(env, obj.leftScreenCenter));
-  out.Set("rightScreenCenter", ToValue(env, obj.rightScreenCenter));
-  out.Set("scale", ToValue(env, obj.scale));
-  out.Set("scaleIn", ToValue(env, obj.scaleIn));
   return out;
 }
 

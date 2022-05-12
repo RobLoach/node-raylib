@@ -31,34 +31,34 @@ declare module "raylib" {
   export interface Matrix {
     /** Matrix first row (4 components) */
     m0: number
-    /** Matrix second row (4 components) */
-    m1: number
-    /** Matrix third row (4 components) */
-    m2: number
-    /** Matrix fourth row (4 components) */
-    m3: number
     /** Matrix first row (4 components) */
     m4: number
-    /** Matrix second row (4 components) */
-    m5: number
-    /** Matrix third row (4 components) */
-    m6: number
-    /** Matrix fourth row (4 components) */
-    m7: number
     /** Matrix first row (4 components) */
     m8: number
-    /** Matrix second row (4 components) */
-    m9: number
-    /** Matrix third row (4 components) */
-    m10: number
-    /** Matrix fourth row (4 components) */
-    m11: number
     /** Matrix first row (4 components) */
     m12: number
     /** Matrix second row (4 components) */
+    m1: number
+    /** Matrix second row (4 components) */
+    m5: number
+    /** Matrix second row (4 components) */
+    m9: number
+    /** Matrix second row (4 components) */
     m13: number
     /** Matrix third row (4 components) */
+    m2: number
+    /** Matrix third row (4 components) */
+    m6: number
+    /** Matrix third row (4 components) */
+    m10: number
+    /** Matrix third row (4 components) */
     m14: number
+    /** Matrix fourth row (4 components) */
+    m3: number
+    /** Matrix fourth row (4 components) */
+    m7: number
+    /** Matrix fourth row (4 components) */
+    m11: number
     /** Matrix fourth row (4 components) */
     m15: number
   }
@@ -242,7 +242,7 @@ declare module "raylib" {
     /** Material maps array (MAX_MATERIAL_MAPS) */
     maps: number
     /** Material generic parameters (if required) */
-    params: number
+    params: float[4]
   }
   /** Transform, vectex transformation data */
   export interface Transform {
@@ -256,7 +256,7 @@ declare module "raylib" {
   /** Bone, skeletal animation bone */
   export interface BoneInfo {
     /** Bone name */
-    name: string
+    name: char[32]
     /** Bone parent */
     parent: string
   }
@@ -380,28 +380,28 @@ declare module "raylib" {
     /** IPD (distance between pupils) in meters */
     interpupillaryDistance: number
     /** Lens distortion constant parameters */
-    lensDistortionValues: number
+    lensDistortionValues: float[4]
     /** Chromatic aberration correction parameters */
-    chromaAbCorrection: number
+    chromaAbCorrection: float[4]
   }
   /** VrStereoConfig, VR stereo rendering configuration for simulator */
   export interface VrStereoConfig {
     /** VR projection matrices (per eye) */
-    projection: Matrix
+    projection: Matrix[2]
     /** VR view offset matrices (per eye) */
-    viewOffset: Matrix
+    viewOffset: Matrix[2]
     /** VR left lens center */
-    leftLensCenter: number
+    leftLensCenter: float[2]
     /** VR right lens center */
-    rightLensCenter: number
+    rightLensCenter: float[2]
     /** VR left screen center */
-    leftScreenCenter: number
+    leftScreenCenter: float[2]
     /** VR right screen center */
-    rightScreenCenter: number
+    rightScreenCenter: float[2]
     /** VR distortion scale */
-    scale: number
+    scale: float[2]
     /** VR distortion scale in */
-    scaleIn: number
+    scaleIn: float[2]
   }
   
   /** RenderTexture, fbo for texture rendering */
@@ -449,7 +449,7 @@ declare module "raylib" {
   /** Check if one specific window flag is enabled */
   export function IsWindowState(flag: number): boolean
   
-  /** Set window configuration state using flags (only PLATFORM_DESKTOP) */
+  /** Set window configuration state using flags */
   export function SetWindowState(flags: number): void
   
   /** Clear window configuration state flags */
@@ -1349,7 +1349,7 @@ declare module "raylib" {
   /** Load font from file into GPU memory (VRAM) */
   export function LoadFont(fileName: string): Font
   
-  /** Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set */
+  /** Load font from file with extended parameters */
   export function LoadFontEx(fileName: string, fontSize: number, fontChars: number, glyphCount: number): Font
   
   /** Load font from Image (XNA style) */
@@ -1367,7 +1367,7 @@ declare module "raylib" {
   /** Unload font chars info data (RAM) */
   export function UnloadFontData(chars: number, glyphCount: number): void
   
-  /** Unload font from GPU memory (VRAM) */
+  /** Unload Font from GPU memory (VRAM) */
   export function UnloadFont(font: Font): void
   
   /** Draw current FPS */
@@ -1823,88 +1823,88 @@ declare module "raylib" {
   /** Default size for new audio streams */
   export function SetAudioStreamBufferSizeDefault(size: number): void
   
-  /** Easing: EaseLinearNone. */
+  /**  */
   export function EaseLinearNone(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseLinearIn. */
+  /**  */
   export function EaseLinearIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseLinearOut. */
+  /**  */
   export function EaseLinearOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseLinearInOut. */
+  /**  */
   export function EaseLinearInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseSineIn. */
+  /**  */
   export function EaseSineIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseSineOut. */
+  /**  */
   export function EaseSineOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseSineInOut. */
+  /**  */
   export function EaseSineInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCircIn. */
+  /**  */
   export function EaseCircIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCircOut. */
+  /**  */
   export function EaseCircOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCircInOut. */
+  /**  */
   export function EaseCircInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCubicIn. */
+  /**  */
   export function EaseCubicIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCubicOut. */
+  /**  */
   export function EaseCubicOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCubicInOut. */
+  /**  */
   export function EaseCubicInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseQuadIn. */
+  /**  */
   export function EaseQuadIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseQuadOut. */
+  /**  */
   export function EaseQuadOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseQuadInOut. */
+  /**  */
   export function EaseQuadInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseExpoIn. */
+  /**  */
   export function EaseExpoIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseExpoOut. */
+  /**  */
   export function EaseExpoOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseExpoInOut. */
+  /**  */
   export function EaseExpoInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBackIn. */
+  /**  */
   export function EaseBackIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBackOut. */
+  /**  */
   export function EaseBackOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBackInOut. */
+  /**  */
   export function EaseBackInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBounceOut. */
+  /**  */
   export function EaseBounceOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBounceIn. */
+  /**  */
   export function EaseBounceIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBounceInOut. */
+  /**  */
   export function EaseBounceInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseElasticIn. */
+  /**  */
   export function EaseElasticIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseElasticOut. */
+  /**  */
   export function EaseElasticOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseElasticInOut. */
+  /**  */
   export function EaseElasticInOut(t: number, b: number, c: number, d: number): number
   
 
@@ -2409,7 +2409,7 @@ declare module "raylib" {
   export const PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
   /** 2 bpp */
   export const PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
-  /** No filter, just pixel approximation */
+  /** No filter, just pixel aproximation */
   export const TEXTURE_FILTER_POINT = 0
   /** Linear filtering */
   export const TEXTURE_FILTER_BILINEAR = 1

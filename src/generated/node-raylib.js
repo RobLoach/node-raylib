@@ -64,7 +64,7 @@ raylib.IsWindowState = function (flag) {
   )
 }
 
-/** Set window configuration state using flags (only PLATFORM_DESKTOP) */
+/** Set window configuration state using flags */
 raylib.SetWindowState = function (flags) {
   return r.BindSetWindowState(
     flags
@@ -457,20 +457,20 @@ raylib.SetShaderValueMatrix = function (shader, locIndex, mat) {
     shader.locs,
     locIndex,
     mat.m0,
-    mat.m1,
-    mat.m2,
-    mat.m3,
     mat.m4,
-    mat.m5,
-    mat.m6,
-    mat.m7,
     mat.m8,
-    mat.m9,
-    mat.m10,
-    mat.m11,
     mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
     mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
     mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
     mat.m15
   )
 }
@@ -2691,7 +2691,7 @@ raylib.LoadFont = function (fileName) {
   )
 }
 
-/** Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set */
+/** Load font from file with extended parameters */
 raylib.LoadFontEx = function (fileName, fontSize, fontChars, glyphCount) {
   return r.BindLoadFontEx(
     fileName,
@@ -2761,7 +2761,7 @@ raylib.UnloadFontData = function (chars, glyphCount) {
   )
 }
 
-/** Unload font from GPU memory (VRAM) */
+/** Unload Font from GPU memory (VRAM) */
 raylib.UnloadFont = function (font) {
   return r.BindUnloadFont(
     font.baseSize,
@@ -3490,20 +3490,20 @@ raylib.LoadModelFromMesh = function (mesh) {
 raylib.UnloadModel = function (model) {
   return r.BindUnloadModel(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -3520,20 +3520,20 @@ raylib.UnloadModel = function (model) {
 raylib.UnloadModelKeepMeshes = function (model) {
   return r.BindUnloadModelKeepMeshes(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -3550,20 +3550,20 @@ raylib.UnloadModelKeepMeshes = function (model) {
 raylib.GetModelBoundingBox = function (model) {
   return r.BindGetModelBoundingBox(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -3580,20 +3580,20 @@ raylib.GetModelBoundingBox = function (model) {
 raylib.DrawModel = function (model, position, scale, tint) {
   return r.BindDrawModel(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -3618,20 +3618,20 @@ raylib.DrawModel = function (model, position, scale, tint) {
 raylib.DrawModelEx = function (model, position, rotationAxis, rotationAngle, scale, tint) {
   return r.BindDrawModelEx(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -3662,20 +3662,20 @@ raylib.DrawModelEx = function (model, position, rotationAxis, rotationAngle, sca
 raylib.DrawModelWires = function (model, position, scale, tint) {
   return r.BindDrawModelWires(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -3700,20 +3700,20 @@ raylib.DrawModelWires = function (model, position, scale, tint) {
 raylib.DrawModelWiresEx = function (model, position, rotationAxis, rotationAngle, scale, tint) {
   return r.BindDrawModelWiresEx(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -4074,20 +4074,20 @@ raylib.LoadModelAnimations = function (fileName, animCount) {
 raylib.UpdateModelAnimation = function (model, anim, frame) {
   return r.BindUpdateModelAnimation(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -4127,20 +4127,20 @@ raylib.UnloadModelAnimations = function (animations, count) {
 raylib.IsModelAnimationValid = function (model, anim) {
   return r.BindIsModelAnimationValid(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -4249,20 +4249,20 @@ raylib.GetRayCollisionModel = function (ray, model) {
     ray.direction.y,
     ray.direction.z,
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -4300,20 +4300,20 @@ raylib.GetRayCollisionMesh = function (ray, mesh, transform) {
     mesh.vaoId,
     mesh.vboId,
     transform.m0,
-    transform.m1,
-    transform.m2,
-    transform.m3,
     transform.m4,
-    transform.m5,
-    transform.m6,
-    transform.m7,
     transform.m8,
-    transform.m9,
-    transform.m10,
-    transform.m11,
     transform.m12,
+    transform.m1,
+    transform.m5,
+    transform.m9,
     transform.m13,
+    transform.m2,
+    transform.m6,
+    transform.m10,
     transform.m14,
+    transform.m3,
+    transform.m7,
+    transform.m11,
     transform.m15
   )
 }
@@ -4914,7 +4914,7 @@ raylib.SetAudioStreamBufferSizeDefault = function (size) {
   )
 }
 
-/** Easing: EaseLinearNone. */
+/**  */
 raylib.EaseLinearNone = function (t, b, c, d) {
   return r.BindEaseLinearNone(
     t,
@@ -4924,7 +4924,7 @@ raylib.EaseLinearNone = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseLinearIn. */
+/**  */
 raylib.EaseLinearIn = function (t, b, c, d) {
   return r.BindEaseLinearIn(
     t,
@@ -4934,7 +4934,7 @@ raylib.EaseLinearIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseLinearOut. */
+/**  */
 raylib.EaseLinearOut = function (t, b, c, d) {
   return r.BindEaseLinearOut(
     t,
@@ -4944,7 +4944,7 @@ raylib.EaseLinearOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseLinearInOut. */
+/**  */
 raylib.EaseLinearInOut = function (t, b, c, d) {
   return r.BindEaseLinearInOut(
     t,
@@ -4954,7 +4954,7 @@ raylib.EaseLinearInOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseSineIn. */
+/**  */
 raylib.EaseSineIn = function (t, b, c, d) {
   return r.BindEaseSineIn(
     t,
@@ -4964,7 +4964,7 @@ raylib.EaseSineIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseSineOut. */
+/**  */
 raylib.EaseSineOut = function (t, b, c, d) {
   return r.BindEaseSineOut(
     t,
@@ -4974,7 +4974,7 @@ raylib.EaseSineOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseSineInOut. */
+/**  */
 raylib.EaseSineInOut = function (t, b, c, d) {
   return r.BindEaseSineInOut(
     t,
@@ -4984,7 +4984,7 @@ raylib.EaseSineInOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseCircIn. */
+/**  */
 raylib.EaseCircIn = function (t, b, c, d) {
   return r.BindEaseCircIn(
     t,
@@ -4994,7 +4994,7 @@ raylib.EaseCircIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseCircOut. */
+/**  */
 raylib.EaseCircOut = function (t, b, c, d) {
   return r.BindEaseCircOut(
     t,
@@ -5004,7 +5004,7 @@ raylib.EaseCircOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseCircInOut. */
+/**  */
 raylib.EaseCircInOut = function (t, b, c, d) {
   return r.BindEaseCircInOut(
     t,
@@ -5014,7 +5014,7 @@ raylib.EaseCircInOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseCubicIn. */
+/**  */
 raylib.EaseCubicIn = function (t, b, c, d) {
   return r.BindEaseCubicIn(
     t,
@@ -5024,7 +5024,7 @@ raylib.EaseCubicIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseCubicOut. */
+/**  */
 raylib.EaseCubicOut = function (t, b, c, d) {
   return r.BindEaseCubicOut(
     t,
@@ -5034,7 +5034,7 @@ raylib.EaseCubicOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseCubicInOut. */
+/**  */
 raylib.EaseCubicInOut = function (t, b, c, d) {
   return r.BindEaseCubicInOut(
     t,
@@ -5044,7 +5044,7 @@ raylib.EaseCubicInOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseQuadIn. */
+/**  */
 raylib.EaseQuadIn = function (t, b, c, d) {
   return r.BindEaseQuadIn(
     t,
@@ -5054,7 +5054,7 @@ raylib.EaseQuadIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseQuadOut. */
+/**  */
 raylib.EaseQuadOut = function (t, b, c, d) {
   return r.BindEaseQuadOut(
     t,
@@ -5064,7 +5064,7 @@ raylib.EaseQuadOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseQuadInOut. */
+/**  */
 raylib.EaseQuadInOut = function (t, b, c, d) {
   return r.BindEaseQuadInOut(
     t,
@@ -5074,7 +5074,7 @@ raylib.EaseQuadInOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseExpoIn. */
+/**  */
 raylib.EaseExpoIn = function (t, b, c, d) {
   return r.BindEaseExpoIn(
     t,
@@ -5084,7 +5084,7 @@ raylib.EaseExpoIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseExpoOut. */
+/**  */
 raylib.EaseExpoOut = function (t, b, c, d) {
   return r.BindEaseExpoOut(
     t,
@@ -5094,7 +5094,7 @@ raylib.EaseExpoOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseExpoInOut. */
+/**  */
 raylib.EaseExpoInOut = function (t, b, c, d) {
   return r.BindEaseExpoInOut(
     t,
@@ -5104,7 +5104,7 @@ raylib.EaseExpoInOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseBackIn. */
+/**  */
 raylib.EaseBackIn = function (t, b, c, d) {
   return r.BindEaseBackIn(
     t,
@@ -5114,7 +5114,7 @@ raylib.EaseBackIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseBackOut. */
+/**  */
 raylib.EaseBackOut = function (t, b, c, d) {
   return r.BindEaseBackOut(
     t,
@@ -5124,7 +5124,7 @@ raylib.EaseBackOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseBackInOut. */
+/**  */
 raylib.EaseBackInOut = function (t, b, c, d) {
   return r.BindEaseBackInOut(
     t,
@@ -5134,7 +5134,7 @@ raylib.EaseBackInOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseBounceOut. */
+/**  */
 raylib.EaseBounceOut = function (t, b, c, d) {
   return r.BindEaseBounceOut(
     t,
@@ -5144,7 +5144,7 @@ raylib.EaseBounceOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseBounceIn. */
+/**  */
 raylib.EaseBounceIn = function (t, b, c, d) {
   return r.BindEaseBounceIn(
     t,
@@ -5154,7 +5154,7 @@ raylib.EaseBounceIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseBounceInOut. */
+/**  */
 raylib.EaseBounceInOut = function (t, b, c, d) {
   return r.BindEaseBounceInOut(
     t,
@@ -5164,7 +5164,7 @@ raylib.EaseBounceInOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseElasticIn. */
+/**  */
 raylib.EaseElasticIn = function (t, b, c, d) {
   return r.BindEaseElasticIn(
     t,
@@ -5174,7 +5174,7 @@ raylib.EaseElasticIn = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseElasticOut. */
+/**  */
 raylib.EaseElasticOut = function (t, b, c, d) {
   return r.BindEaseElasticOut(
     t,
@@ -5184,7 +5184,7 @@ raylib.EaseElasticOut = function (t, b, c, d) {
   )
 }
 
-/** Easing: EaseElasticInOut. */
+/**  */
 raylib.EaseElasticInOut = function (t, b, c, d) {
   return r.BindEaseElasticInOut(
     t,
@@ -6146,20 +6146,20 @@ raylib.GenMeshBinormals = function (mesh) {
 raylib.SetModelMeshMaterial = function (model, meshId, materialId) {
   const obj = r.BindSetModelMeshMaterial(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -6798,7 +6798,7 @@ raylib.PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
 raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
 /** 2 bpp */
 raylib.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
-/** No filter, just pixel approximation */
+/** No filter, just pixel aproximation */
 raylib.TEXTURE_FILTER_POINT = 0
 /** Linear filtering */
 raylib.TEXTURE_FILTER_BILINEAR = 1
