@@ -5,6 +5,9 @@
  * @returns
  */
 const SanitizeTypeName = name => {
+  if (name == 'const Vector3') {
+    return 'Vector3'
+  }
   if (name == 'float[2]') {
     return 'float2'
   }
@@ -28,6 +31,9 @@ const SanitizeTypeName = name => {
   }
   if (name === 'Camera') {
     return 'Camera3D'
+  }
+  if (name === 'Quaternion') {
+    return 'Vector4'
   }
   if (name === 'Texture2D') {
     return 'Texture'
@@ -177,6 +183,8 @@ module.exports = ({ functions, structs, enums, blocklist, byreflist }) => `
 #include <cstring>
 #include "raylib.h"
 #include "extras/easings.h"
+#include "raymath.h"
+
 using namespace Napi;
 
 inline Napi::Value ToValue(Napi::Env env, bool value) {
@@ -211,10 +219,13 @@ inline Napi::Value ToValue(Napi::Env env, void * value) {
 }
 
 inline float floatFromValue(const Napi::CallbackInfo& info, int index) {
-  return info[index].As<Napi::Number>();
+  return info[index].As<Napi::Number>().FloatValue();
 }
 inline int intFromValue(const Napi::CallbackInfo& info, int index) {
-  return info[index].As<Napi::Number>();
+  return info[index].As<Napi::Number>().Int32Value();
+}
+inline double doubleFromValue(const Napi::CallbackInfo& info, int index) {
+  return info[index].As<Napi::Number>().DoubleValue();
 }
 uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
   return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
@@ -223,7 +234,7 @@ inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int i
   return info[index].As<Napi::Number>().Uint32Value();
 }
 inline unsigned int unsignedintFromValue(const Napi::CallbackInfo& info, int index) {
-  return info[index].As<Napi::Number>();
+  return info[index].As<Napi::Number>().Uint32Value();
 }
 inline bool boolFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Boolean>();

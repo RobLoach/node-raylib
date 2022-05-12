@@ -33,7 +33,12 @@ const blocklist = [
   'VrStereoConfig', // Matrix[2], float[2]
   'BoneInfo', // char[32]
   'VrDeviceInfo', // float[4]
-  'Material' // float[4]
+  'Material', // float[4]
+
+  // raymath
+  // @todo Fix helper structs for float arrays
+  'Vector3ToFloatV', // float3
+  'MatrixToFloatV' // float16
 ]
 
 // these functions expect the first argument to be passed as a reference in C++
@@ -174,9 +179,13 @@ function getDefs () {
         }
       }
 
-      // Add the Easings API
+      // Add Easings
       const easings = raylibApi.easings
       functions.push(...easings.functions)
+
+      // Add Raymath
+      const raymath = raylibApi.raymath
+      functions.push(...raymath.functions)
 
       return { structs, enums, functions }
 }
