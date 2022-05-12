@@ -5,19 +5,19 @@
  * @returns
  */
 const SanitizeTypeName = name => {
-  if (name == 'const Vector3') {
+  if (name === 'const Vector3') {
     return 'Vector3'
   }
-  if (name == 'float[2]') {
+  if (name === 'float[2]') {
     return 'float2'
   }
-  if (name == 'char[32]') {
+  if (name === 'char[32]') {
     return 'char32'
   }
-  if (name == 'float[4]') {
+  if (name === 'float[4]') {
     return 'float4'
   }
-  if (name == 'Matrix[2]') {
+  if (name === 'Matrix[2]') {
     return 'Matrix2'
   }
   if (name === 'const char *') {
