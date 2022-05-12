@@ -5,6 +5,19 @@
  * @returns
  */
 const SanitizeTypeName = name => {
+  if (name == 'float[2]') {
+    return 'float2'
+  }
+  if (name == 'char[32]') {
+    return 'char32'
+  }
+  // @TODO Material: Mapping a float array to a single float is likely not correct.
+  if (name == 'float[4]') {
+    return 'float'
+  }
+  if (name == 'Matrix[2]') {
+    return 'Matrix2'
+  }
   if (name === 'const char *') {
     return 'string'
   }
@@ -229,11 +242,13 @@ inline char charFromValue(const Napi::CallbackInfo& info, int index) {
 
 // Convert structs from Napi::Values in info[] arguments
 ${structs
+    .filter(({ name }) => !blocklist.includes(name))
     .map(struct => { return FromValue(structs, struct) })
     .join('\n')
   }
 // Convert structs to Napi::Objects for output to JS
 ${structs
+    .filter(({ name }) => !blocklist.includes(name))
     .map(ToValue)
     .join('\n')
   }

@@ -26,8 +26,14 @@ const blocklist = [
   'SetWindowOpacity',
   'GetRenderWidth',
   'GetRenderHeight',
-  'ExportFontAsCode'
+  'ExportFontAsCode',
 
+  // Structs
+  // @todo Fix Structs that are problematic
+  'VrStereoConfig', // Matrix[2], float[2]
+  'BoneInfo', // char[32]
+  'VrDeviceInfo', // float[4]
+  //'Material' // float[4]
 ]
 
 // these functions expect the first argument to be passed as a reference in C++
@@ -169,7 +175,7 @@ function getDefs () {
       }
 
       // Add the Easings API
-      const easings = require('./extras/easings')
+      const easings = raylibApi.easings
       functions.push(...easings.functions)
 
       return { structs, enums, functions }
