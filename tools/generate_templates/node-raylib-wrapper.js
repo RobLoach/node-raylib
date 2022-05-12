@@ -54,7 +54,7 @@ const JSDocsForFunction = (structs, func) => {
   if (func.returnType && func.returnType !== 'void') {
     returnType = `\n *\n * @return {${ArgumentTypeConversion(func.returnType)}} The resulting ${func.returnType}.`
   } else {
-    returnType = '\n *\n * @return {null}'
+    returnType = '\n *\n * @return {undefined}'
   }
 
   return `
