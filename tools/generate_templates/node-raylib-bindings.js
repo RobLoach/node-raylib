@@ -11,9 +11,8 @@ const SanitizeTypeName = name => {
   if (name == 'char[32]') {
     return 'char32'
   }
-  // @TODO Material: Mapping a float array to a single float is likely not correct.
   if (name == 'float[4]') {
-    return 'float'
+    return 'float4'
   }
   if (name == 'Matrix[2]') {
     return 'Matrix2'

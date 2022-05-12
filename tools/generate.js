@@ -33,7 +33,7 @@ const blocklist = [
   'VrStereoConfig', // Matrix[2], float[2]
   'BoneInfo', // char[32]
   'VrDeviceInfo', // float[4]
-  //'Material' // float[4]
+  'Material' // float[4]
 ]
 
 // these functions expect the first argument to be passed as a reference in C++
