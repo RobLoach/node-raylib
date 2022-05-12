@@ -93,12 +93,9 @@ const rSize = /\[([0-9]+)\]/g
 
 // pre-process the data for later analysis
 function getDefs () {
-  console.log('Downloading definitions')
+  const { structs, enums, functions } = require('./raylib_api.json')
 
-  return fetch('https://raw.githubusercontent.com/raysan5/raylib/2e3cfdcc2f5c70e82536caa57d4aa72e3f00fd40/parser/raylib_api.json')
-    .then(r => r.json())
-    .then(defs => {
-      const { structs, enums, functions } = defs
+      // Structs
       for (const struct of structs) {
         // take multi-fields (like in Matrix) and make them all distinct fields
 
@@ -148,6 +145,7 @@ function getDefs () {
       // XXX: Since array support isn't complete, just filter out all structs & functions that use them,
       // so we get an (incomplete) wrapper that will build.
 
+      // Structs
       for (const struct of structs) {
         const usesArray = struct.fields.find(f => f.size !== 1)
         if (usesArray) {
@@ -155,7 +153,7 @@ function getDefs () {
         }
       }
 
-      // filter out all functions that use blocked types
+      // Functions
       for (const f of functions) {
         if (blocklist.includes(f.returnType.replace(/[* ]/g, ''))) {
           blocklist.push(f.name)
@@ -174,14 +172,12 @@ function getDefs () {
       functions.push(...easings.functions)
 
       return { structs, enums, functions }
-    })
 }
 
-getDefs().then(({ structs, enums, functions }) => {
+const { structs, enums, functions } = getDefs()
   const GenBindings = require('./generate_templates/node-raylib-bindings.js')
   const GenWrapper = require('./generate_templates/node-raylib-wrapper.js')
   const GenTSDefs = require('./generate_templates/node-raylib-definitions.js')
   writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.cc'), GenBindings({ enums, blocklist, functions, structs, byreflist }))
   writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.js'), GenWrapper({ enums, blocklist, functions, structs, byreflist }))
   writeFileSync(path.join(__dirname, '..', 'src', 'generated', 'node-raylib.d.ts'), GenTSDefs({ enums, blocklist, functions, structs, byreflist }))
-})
