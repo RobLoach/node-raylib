@@ -1513,19 +1513,19 @@
 <dt><a href="#Camera3D">Camera3D(position, target, up, fovy, projection)</a> ⇒ <code><a href="#Camera3D">Camera3D</a></code></dt>
 <dd><p>Camera, defines position/orientation in 3d space</p>
 </dd>
-<dt><a href="#SetShaderFloat">SetShaderFloat()</a></dt>
+<dt><a href="#SetShaderFloat">SetShaderFloat(shader, locIndex, value)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set shader uniform value float</p>
 </dd>
-<dt><a href="#SetShaderInt">SetShaderInt()</a></dt>
+<dt><a href="#SetShaderInt">SetShaderInt(shader, locIndex, value)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set shader uniform value float</p>
 </dd>
-<dt><a href="#SetShaderVec2">SetShaderVec2()</a></dt>
+<dt><a href="#SetShaderVec2">SetShaderVec2(shader, locIndex, value)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set shader uniform value vector2</p>
 </dd>
-<dt><a href="#SetShaderVec3">SetShaderVec3()</a></dt>
+<dt><a href="#SetShaderVec3">SetShaderVec3(shader, locIndex, value)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set shader uniform value vector3</p>
 </dd>
-<dt><a href="#SetShaderVec4">SetShaderVec4()</a></dt>
+<dt><a href="#SetShaderVec4">SetShaderVec4(shader, locIndex, value)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set shader uniform value vector4</p>
 </dd>
 </dl>
@@ -7718,31 +7718,66 @@ Camera, defines position/orientation in 3d space
 
 <a name="SetShaderFloat"></a>
 
-## SetShaderFloat()
+## SetShaderFloat(shader, locIndex, value) ⇒ <code>undefined</code>
 Set shader uniform value float
 
 **Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| shader | <code>Shader</code> | 
+| locIndex | <code>number</code> | 
+| value | <code>number</code> | 
+
 <a name="SetShaderInt"></a>
 
-## SetShaderInt()
+## SetShaderInt(shader, locIndex, value) ⇒ <code>undefined</code>
 Set shader uniform value float
 
 **Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| shader | <code>Shader</code> | 
+| locIndex | <code>number</code> | 
+| value | <code>number</code> | 
+
 <a name="SetShaderVec2"></a>
 
-## SetShaderVec2()
+## SetShaderVec2(shader, locIndex, value) ⇒ <code>undefined</code>
 Set shader uniform value vector2
 
 **Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| shader | <code>Shader</code> | 
+| locIndex | <code>number</code> | 
+| value | [<code>Vector2</code>](#Vector2) | 
+
 <a name="SetShaderVec3"></a>
 
-## SetShaderVec3()
+## SetShaderVec3(shader, locIndex, value) ⇒ <code>undefined</code>
 Set shader uniform value vector3
 
 **Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| shader | <code>Shader</code> | 
+| locIndex | <code>number</code> | 
+| value | [<code>Vector3</code>](#Vector3) | 
+
 <a name="SetShaderVec4"></a>
 
-## SetShaderVec4()
+## SetShaderVec4(shader, locIndex, value) ⇒ <code>undefined</code>
 Set shader uniform value vector4
 
 **Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| shader | <code>Shader</code> | 
+| locIndex | <code>number</code> | 
+| value | [<code>Vector4</code>](#Vector4) | 
+
