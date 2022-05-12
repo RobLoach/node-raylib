@@ -6,6 +6,8 @@
 #include <cstring>
 #include "raylib.h"
 #include "extras/easings.h"
+#include "raymath.h"
+
 using namespace Napi;
 
 inline Napi::Value ToValue(Napi::Env env, bool value) {
@@ -40,10 +42,13 @@ inline Napi::Value ToValue(Napi::Env env, void * value) {
 }
 
 inline float floatFromValue(const Napi::CallbackInfo& info, int index) {
-  return info[index].As<Napi::Number>();
+  return info[index].As<Napi::Number>().FloatValue();
 }
 inline int intFromValue(const Napi::CallbackInfo& info, int index) {
-  return info[index].As<Napi::Number>();
+  return info[index].As<Napi::Number>().Int32Value();
+}
+inline double doubleFromValue(const Napi::CallbackInfo& info, int index) {
+  return info[index].As<Napi::Number>().DoubleValue();
 }
 uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
   return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
@@ -52,7 +57,7 @@ inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int i
   return info[index].As<Napi::Number>().Uint32Value();
 }
 inline unsigned int unsignedintFromValue(const Napi::CallbackInfo& info, int index) {
-  return info[index].As<Napi::Number>();
+  return info[index].As<Napi::Number>().Uint32Value();
 }
 inline bool boolFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Boolean>();
@@ -2942,6 +2947,832 @@ Napi::Value BindEaseElasticInOut(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindClamp(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Clamp(
+       floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindLerp(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Lerp(
+       floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindNormalize(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Normalize(
+       floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindRemap(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Remap(
+       floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2),
+       floatFromValue(info, 3),
+       floatFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindVector2Zero(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Zero(
+      
+    )
+  );
+}
+
+Napi::Value BindVector2One(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2One(
+      
+    )
+  );
+}
+
+Napi::Value BindVector2Add(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Add(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2AddValue(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2AddValue(
+       Vector2FromValue(info, 0),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Subtract(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Subtract(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2SubtractValue(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2SubtractValue(
+       Vector2FromValue(info, 0),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Length(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Length(
+       Vector2FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector2LengthSqr(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2LengthSqr(
+       Vector2FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector2DotProduct(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2DotProduct(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Distance(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Distance(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Angle(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Angle(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Scale(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Scale(
+       Vector2FromValue(info, 0),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Multiply(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Multiply(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Negate(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Negate(
+       Vector2FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector2Divide(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Divide(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Normalize(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Normalize(
+       Vector2FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector2Lerp(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Lerp(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       floatFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindVector2Reflect(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Reflect(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2Rotate(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2Rotate(
+       Vector2FromValue(info, 0),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindVector2MoveTowards(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector2MoveTowards(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       floatFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindVector3Zero(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Zero(
+      
+    )
+  );
+}
+
+Napi::Value BindVector3One(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3One(
+      
+    )
+  );
+}
+
+Napi::Value BindVector3Add(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Add(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3AddValue(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3AddValue(
+       Vector3FromValue(info, 0),
+       floatFromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Subtract(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Subtract(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3SubtractValue(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3SubtractValue(
+       Vector3FromValue(info, 0),
+       floatFromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Scale(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Scale(
+       Vector3FromValue(info, 0),
+       floatFromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Multiply(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Multiply(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3CrossProduct(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3CrossProduct(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Perpendicular(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Perpendicular(
+       Vector3FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector3Length(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Length(
+       Vector3FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector3LengthSqr(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3LengthSqr(
+       Vector3FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector3DotProduct(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3DotProduct(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Distance(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Distance(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Angle(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Angle(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Negate(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Negate(
+       Vector3FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector3Divide(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Divide(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Normalize(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Normalize(
+       Vector3FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindVector3Transform(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Transform(
+       Vector3FromValue(info, 0),
+       MatrixFromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3RotateByQuaternion(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3RotateByQuaternion(
+       Vector3FromValue(info, 0),
+       Vector4FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Lerp(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Lerp(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3),
+       floatFromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindVector3Reflect(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Reflect(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Min(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Min(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Max(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Max(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Barycenter(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Barycenter(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3),
+       Vector3FromValue(info, 6),
+       Vector3FromValue(info, 9)
+    )
+  );
+}
+
+Napi::Value BindVector3Unproject(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Unproject(
+       Vector3FromValue(info, 0),
+       MatrixFromValue(info, 3),
+       MatrixFromValue(info, 19)
+    )
+  );
+}
+
+Napi::Value BindMatrixDeterminant(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixDeterminant(
+       MatrixFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixTrace(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixTrace(
+       MatrixFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixTranspose(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixTranspose(
+       MatrixFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixInvert(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixInvert(
+       MatrixFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixNormalize(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixNormalize(
+       MatrixFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixIdentity(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixIdentity(
+      
+    )
+  );
+}
+
+Napi::Value BindMatrixAdd(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixAdd(
+       MatrixFromValue(info, 0),
+       MatrixFromValue(info, 16)
+    )
+  );
+}
+
+Napi::Value BindMatrixSubtract(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixSubtract(
+       MatrixFromValue(info, 0),
+       MatrixFromValue(info, 16)
+    )
+  );
+}
+
+Napi::Value BindMatrixMultiply(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixMultiply(
+       MatrixFromValue(info, 0),
+       MatrixFromValue(info, 16)
+    )
+  );
+}
+
+Napi::Value BindMatrixTranslate(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixTranslate(
+       floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindMatrixRotate(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixRotate(
+       Vector3FromValue(info, 0),
+       floatFromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindMatrixRotateX(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixRotateX(
+       floatFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixRotateY(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixRotateY(
+       floatFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixRotateZ(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixRotateZ(
+       floatFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixRotateXYZ(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixRotateXYZ(
+       Vector3FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixRotateZYX(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixRotateZYX(
+       Vector3FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindMatrixScale(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixScale(
+       floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindMatrixFrustum(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixFrustum(
+       doubleFromValue(info, 0),
+       doubleFromValue(info, 1),
+       doubleFromValue(info, 2),
+       doubleFromValue(info, 3),
+       doubleFromValue(info, 4),
+       doubleFromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindMatrixPerspective(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixPerspective(
+       doubleFromValue(info, 0),
+       doubleFromValue(info, 1),
+       doubleFromValue(info, 2),
+       doubleFromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindMatrixOrtho(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixOrtho(
+       doubleFromValue(info, 0),
+       doubleFromValue(info, 1),
+       doubleFromValue(info, 2),
+       doubleFromValue(info, 3),
+       doubleFromValue(info, 4),
+       doubleFromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindMatrixLookAt(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    MatrixLookAt(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3),
+       Vector3FromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindQuaternionAdd(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionAdd(
+       Vector4FromValue(info, 0),
+       Vector4FromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindQuaternionAddValue(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionAddValue(
+       Vector4FromValue(info, 0),
+       floatFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindQuaternionSubtract(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionSubtract(
+       Vector4FromValue(info, 0),
+       Vector4FromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindQuaternionSubtractValue(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionSubtractValue(
+       Vector4FromValue(info, 0),
+       floatFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindQuaternionIdentity(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionIdentity(
+      
+    )
+  );
+}
+
+Napi::Value BindQuaternionLength(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionLength(
+       Vector4FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindQuaternionNormalize(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionNormalize(
+       Vector4FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindQuaternionInvert(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionInvert(
+       Vector4FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindQuaternionMultiply(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionMultiply(
+       Vector4FromValue(info, 0),
+       Vector4FromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindQuaternionScale(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionScale(
+       Vector4FromValue(info, 0),
+       floatFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindQuaternionDivide(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionDivide(
+       Vector4FromValue(info, 0),
+       Vector4FromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindQuaternionLerp(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionLerp(
+       Vector4FromValue(info, 0),
+       Vector4FromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindQuaternionNlerp(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionNlerp(
+       Vector4FromValue(info, 0),
+       Vector4FromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindQuaternionSlerp(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionSlerp(
+       Vector4FromValue(info, 0),
+       Vector4FromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindQuaternionFromVector3ToVector3(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionFromVector3ToVector3(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindQuaternionFromMatrix(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionFromMatrix(
+       MatrixFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindQuaternionToMatrix(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionToMatrix(
+       Vector4FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindQuaternionFromAxisAngle(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionFromAxisAngle(
+       Vector3FromValue(info, 0),
+       floatFromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindQuaternionFromEuler(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionFromEuler(
+       floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindQuaternionToEuler(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionToEuler(
+       Vector4FromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindQuaternionTransform(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    QuaternionTransform(
+       Vector4FromValue(info, 0),
+       MatrixFromValue(info, 1)
+    )
+  );
+}
+
 void BindInitWindow(const Napi::CallbackInfo& info) {
   InitWindow(
      intFromValue(info, 0),
@@ -4468,6 +5299,21 @@ void BindSetAudioStreamBufferSizeDefault(const Napi::CallbackInfo& info) {
      intFromValue(info, 0)
   );
 }
+
+void BindVector3OrthoNormalize(const Napi::CallbackInfo& info) {
+  Vector3OrthoNormalize(
+     (Vector3 *) pointerFromValue(info, 0),
+       (Vector3 *) pointerFromValue(info, 1)
+  );
+}
+
+void BindQuaternionToAxisAngle(const Napi::CallbackInfo& info) {
+  QuaternionToAxisAngle(
+     Vector4FromValue(info, 0),
+       (Vector3 *) pointerFromValue(info, 1),
+       (float *) pointerFromValue(info, 2)
+  );
+}
 // By-Reference function bindings
 
 Napi::Value BindUpdateCamera(const Napi::CallbackInfo& info) {
@@ -5440,6 +6286,100 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindEaseElasticIn", Napi::Function::New(env, BindEaseElasticIn));
   exports.Set("BindEaseElasticOut", Napi::Function::New(env, BindEaseElasticOut));
   exports.Set("BindEaseElasticInOut", Napi::Function::New(env, BindEaseElasticInOut));
+  exports.Set("BindClamp", Napi::Function::New(env, BindClamp));
+  exports.Set("BindLerp", Napi::Function::New(env, BindLerp));
+  exports.Set("BindNormalize", Napi::Function::New(env, BindNormalize));
+  exports.Set("BindRemap", Napi::Function::New(env, BindRemap));
+  exports.Set("BindVector2Zero", Napi::Function::New(env, BindVector2Zero));
+  exports.Set("BindVector2One", Napi::Function::New(env, BindVector2One));
+  exports.Set("BindVector2Add", Napi::Function::New(env, BindVector2Add));
+  exports.Set("BindVector2AddValue", Napi::Function::New(env, BindVector2AddValue));
+  exports.Set("BindVector2Subtract", Napi::Function::New(env, BindVector2Subtract));
+  exports.Set("BindVector2SubtractValue", Napi::Function::New(env, BindVector2SubtractValue));
+  exports.Set("BindVector2Length", Napi::Function::New(env, BindVector2Length));
+  exports.Set("BindVector2LengthSqr", Napi::Function::New(env, BindVector2LengthSqr));
+  exports.Set("BindVector2DotProduct", Napi::Function::New(env, BindVector2DotProduct));
+  exports.Set("BindVector2Distance", Napi::Function::New(env, BindVector2Distance));
+  exports.Set("BindVector2Angle", Napi::Function::New(env, BindVector2Angle));
+  exports.Set("BindVector2Scale", Napi::Function::New(env, BindVector2Scale));
+  exports.Set("BindVector2Multiply", Napi::Function::New(env, BindVector2Multiply));
+  exports.Set("BindVector2Negate", Napi::Function::New(env, BindVector2Negate));
+  exports.Set("BindVector2Divide", Napi::Function::New(env, BindVector2Divide));
+  exports.Set("BindVector2Normalize", Napi::Function::New(env, BindVector2Normalize));
+  exports.Set("BindVector2Lerp", Napi::Function::New(env, BindVector2Lerp));
+  exports.Set("BindVector2Reflect", Napi::Function::New(env, BindVector2Reflect));
+  exports.Set("BindVector2Rotate", Napi::Function::New(env, BindVector2Rotate));
+  exports.Set("BindVector2MoveTowards", Napi::Function::New(env, BindVector2MoveTowards));
+  exports.Set("BindVector3Zero", Napi::Function::New(env, BindVector3Zero));
+  exports.Set("BindVector3One", Napi::Function::New(env, BindVector3One));
+  exports.Set("BindVector3Add", Napi::Function::New(env, BindVector3Add));
+  exports.Set("BindVector3AddValue", Napi::Function::New(env, BindVector3AddValue));
+  exports.Set("BindVector3Subtract", Napi::Function::New(env, BindVector3Subtract));
+  exports.Set("BindVector3SubtractValue", Napi::Function::New(env, BindVector3SubtractValue));
+  exports.Set("BindVector3Scale", Napi::Function::New(env, BindVector3Scale));
+  exports.Set("BindVector3Multiply", Napi::Function::New(env, BindVector3Multiply));
+  exports.Set("BindVector3CrossProduct", Napi::Function::New(env, BindVector3CrossProduct));
+  exports.Set("BindVector3Perpendicular", Napi::Function::New(env, BindVector3Perpendicular));
+  exports.Set("BindVector3Length", Napi::Function::New(env, BindVector3Length));
+  exports.Set("BindVector3LengthSqr", Napi::Function::New(env, BindVector3LengthSqr));
+  exports.Set("BindVector3DotProduct", Napi::Function::New(env, BindVector3DotProduct));
+  exports.Set("BindVector3Distance", Napi::Function::New(env, BindVector3Distance));
+  exports.Set("BindVector3Angle", Napi::Function::New(env, BindVector3Angle));
+  exports.Set("BindVector3Negate", Napi::Function::New(env, BindVector3Negate));
+  exports.Set("BindVector3Divide", Napi::Function::New(env, BindVector3Divide));
+  exports.Set("BindVector3Normalize", Napi::Function::New(env, BindVector3Normalize));
+  exports.Set("BindVector3OrthoNormalize", Napi::Function::New(env, BindVector3OrthoNormalize));
+  exports.Set("BindVector3Transform", Napi::Function::New(env, BindVector3Transform));
+  exports.Set("BindVector3RotateByQuaternion", Napi::Function::New(env, BindVector3RotateByQuaternion));
+  exports.Set("BindVector3Lerp", Napi::Function::New(env, BindVector3Lerp));
+  exports.Set("BindVector3Reflect", Napi::Function::New(env, BindVector3Reflect));
+  exports.Set("BindVector3Min", Napi::Function::New(env, BindVector3Min));
+  exports.Set("BindVector3Max", Napi::Function::New(env, BindVector3Max));
+  exports.Set("BindVector3Barycenter", Napi::Function::New(env, BindVector3Barycenter));
+  exports.Set("BindVector3Unproject", Napi::Function::New(env, BindVector3Unproject));
+  exports.Set("BindMatrixDeterminant", Napi::Function::New(env, BindMatrixDeterminant));
+  exports.Set("BindMatrixTrace", Napi::Function::New(env, BindMatrixTrace));
+  exports.Set("BindMatrixTranspose", Napi::Function::New(env, BindMatrixTranspose));
+  exports.Set("BindMatrixInvert", Napi::Function::New(env, BindMatrixInvert));
+  exports.Set("BindMatrixNormalize", Napi::Function::New(env, BindMatrixNormalize));
+  exports.Set("BindMatrixIdentity", Napi::Function::New(env, BindMatrixIdentity));
+  exports.Set("BindMatrixAdd", Napi::Function::New(env, BindMatrixAdd));
+  exports.Set("BindMatrixSubtract", Napi::Function::New(env, BindMatrixSubtract));
+  exports.Set("BindMatrixMultiply", Napi::Function::New(env, BindMatrixMultiply));
+  exports.Set("BindMatrixTranslate", Napi::Function::New(env, BindMatrixTranslate));
+  exports.Set("BindMatrixRotate", Napi::Function::New(env, BindMatrixRotate));
+  exports.Set("BindMatrixRotateX", Napi::Function::New(env, BindMatrixRotateX));
+  exports.Set("BindMatrixRotateY", Napi::Function::New(env, BindMatrixRotateY));
+  exports.Set("BindMatrixRotateZ", Napi::Function::New(env, BindMatrixRotateZ));
+  exports.Set("BindMatrixRotateXYZ", Napi::Function::New(env, BindMatrixRotateXYZ));
+  exports.Set("BindMatrixRotateZYX", Napi::Function::New(env, BindMatrixRotateZYX));
+  exports.Set("BindMatrixScale", Napi::Function::New(env, BindMatrixScale));
+  exports.Set("BindMatrixFrustum", Napi::Function::New(env, BindMatrixFrustum));
+  exports.Set("BindMatrixPerspective", Napi::Function::New(env, BindMatrixPerspective));
+  exports.Set("BindMatrixOrtho", Napi::Function::New(env, BindMatrixOrtho));
+  exports.Set("BindMatrixLookAt", Napi::Function::New(env, BindMatrixLookAt));
+  exports.Set("BindQuaternionAdd", Napi::Function::New(env, BindQuaternionAdd));
+  exports.Set("BindQuaternionAddValue", Napi::Function::New(env, BindQuaternionAddValue));
+  exports.Set("BindQuaternionSubtract", Napi::Function::New(env, BindQuaternionSubtract));
+  exports.Set("BindQuaternionSubtractValue", Napi::Function::New(env, BindQuaternionSubtractValue));
+  exports.Set("BindQuaternionIdentity", Napi::Function::New(env, BindQuaternionIdentity));
+  exports.Set("BindQuaternionLength", Napi::Function::New(env, BindQuaternionLength));
+  exports.Set("BindQuaternionNormalize", Napi::Function::New(env, BindQuaternionNormalize));
+  exports.Set("BindQuaternionInvert", Napi::Function::New(env, BindQuaternionInvert));
+  exports.Set("BindQuaternionMultiply", Napi::Function::New(env, BindQuaternionMultiply));
+  exports.Set("BindQuaternionScale", Napi::Function::New(env, BindQuaternionScale));
+  exports.Set("BindQuaternionDivide", Napi::Function::New(env, BindQuaternionDivide));
+  exports.Set("BindQuaternionLerp", Napi::Function::New(env, BindQuaternionLerp));
+  exports.Set("BindQuaternionNlerp", Napi::Function::New(env, BindQuaternionNlerp));
+  exports.Set("BindQuaternionSlerp", Napi::Function::New(env, BindQuaternionSlerp));
+  exports.Set("BindQuaternionFromVector3ToVector3", Napi::Function::New(env, BindQuaternionFromVector3ToVector3));
+  exports.Set("BindQuaternionFromMatrix", Napi::Function::New(env, BindQuaternionFromMatrix));
+  exports.Set("BindQuaternionToMatrix", Napi::Function::New(env, BindQuaternionToMatrix));
+  exports.Set("BindQuaternionFromAxisAngle", Napi::Function::New(env, BindQuaternionFromAxisAngle));
+  exports.Set("BindQuaternionToAxisAngle", Napi::Function::New(env, BindQuaternionToAxisAngle));
+  exports.Set("BindQuaternionFromEuler", Napi::Function::New(env, BindQuaternionFromEuler));
+  exports.Set("BindQuaternionToEuler", Napi::Function::New(env, BindQuaternionToEuler));
+  exports.Set("BindQuaternionTransform", Napi::Function::New(env, BindQuaternionTransform));
 
   exports.Set("BindSetShaderFloat", Napi::Function::New(env, BindSetShaderFloat));
   exports.Set("BindSetShaderInt", Napi::Function::New(env, BindSetShaderInt));

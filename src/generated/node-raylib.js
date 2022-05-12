@@ -5194,6 +5194,1105 @@ raylib.EaseElasticInOut = function (t, b, c, d) {
   )
 }
 
+/**  */
+raylib.Clamp = function (value, min, max) {
+  return r.BindClamp(
+    value,
+    min,
+    max
+  )
+}
+
+/**  */
+raylib.Lerp = function (start, end, amount) {
+  return r.BindLerp(
+    start,
+    end,
+    amount
+  )
+}
+
+/**  */
+raylib.Normalize = function (value, start, end) {
+  return r.BindNormalize(
+    value,
+    start,
+    end
+  )
+}
+
+/**  */
+raylib.Remap = function (value, inputStart, inputEnd, outputStart, outputEnd) {
+  return r.BindRemap(
+    value,
+    inputStart,
+    inputEnd,
+    outputStart,
+    outputEnd
+  )
+}
+
+/**  */
+raylib.Vector2Zero = function () {
+  return r.BindVector2Zero()
+}
+
+/**  */
+raylib.Vector2One = function () {
+  return r.BindVector2One()
+}
+
+/**  */
+raylib.Vector2Add = function (v1, v2) {
+  return r.BindVector2Add(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+
+/**  */
+raylib.Vector2AddValue = function (v, add) {
+  return r.BindVector2AddValue(
+    v.x,
+    v.y,
+    add
+  )
+}
+
+/**  */
+raylib.Vector2Subtract = function (v1, v2) {
+  return r.BindVector2Subtract(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+
+/**  */
+raylib.Vector2SubtractValue = function (v, sub) {
+  return r.BindVector2SubtractValue(
+    v.x,
+    v.y,
+    sub
+  )
+}
+
+/**  */
+raylib.Vector2Length = function (v) {
+  return r.BindVector2Length(
+    v.x,
+    v.y
+  )
+}
+
+/**  */
+raylib.Vector2LengthSqr = function (v) {
+  return r.BindVector2LengthSqr(
+    v.x,
+    v.y
+  )
+}
+
+/**  */
+raylib.Vector2DotProduct = function (v1, v2) {
+  return r.BindVector2DotProduct(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+
+/**  */
+raylib.Vector2Distance = function (v1, v2) {
+  return r.BindVector2Distance(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+
+/**  */
+raylib.Vector2Angle = function (v1, v2) {
+  return r.BindVector2Angle(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+
+/**  */
+raylib.Vector2Scale = function (v, scale) {
+  return r.BindVector2Scale(
+    v.x,
+    v.y,
+    scale
+  )
+}
+
+/**  */
+raylib.Vector2Multiply = function (v1, v2) {
+  return r.BindVector2Multiply(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+
+/**  */
+raylib.Vector2Negate = function (v) {
+  return r.BindVector2Negate(
+    v.x,
+    v.y
+  )
+}
+
+/**  */
+raylib.Vector2Divide = function (v1, v2) {
+  return r.BindVector2Divide(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+
+/**  */
+raylib.Vector2Normalize = function (v) {
+  return r.BindVector2Normalize(
+    v.x,
+    v.y
+  )
+}
+
+/**  */
+raylib.Vector2Lerp = function (v1, v2, amount) {
+  return r.BindVector2Lerp(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y,
+    amount
+  )
+}
+
+/**  */
+raylib.Vector2Reflect = function (v, normal) {
+  return r.BindVector2Reflect(
+    v.x,
+    v.y,
+    normal.x,
+    normal.y
+  )
+}
+
+/**  */
+raylib.Vector2Rotate = function (v, angle) {
+  return r.BindVector2Rotate(
+    v.x,
+    v.y,
+    angle
+  )
+}
+
+/**  */
+raylib.Vector2MoveTowards = function (v, target, maxDistance) {
+  return r.BindVector2MoveTowards(
+    v.x,
+    v.y,
+    target.x,
+    target.y,
+    maxDistance
+  )
+}
+
+/**  */
+raylib.Vector3Zero = function () {
+  return r.BindVector3Zero()
+}
+
+/**  */
+raylib.Vector3One = function () {
+  return r.BindVector3One()
+}
+
+/**  */
+raylib.Vector3Add = function (v1, v2) {
+  return r.BindVector3Add(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3AddValue = function (v, add) {
+  return r.BindVector3AddValue(
+    v.x,
+    v.y,
+    v.z,
+    add
+  )
+}
+
+/**  */
+raylib.Vector3Subtract = function (v1, v2) {
+  return r.BindVector3Subtract(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3SubtractValue = function (v, sub) {
+  return r.BindVector3SubtractValue(
+    v.x,
+    v.y,
+    v.z,
+    sub
+  )
+}
+
+/**  */
+raylib.Vector3Scale = function (v, scalar) {
+  return r.BindVector3Scale(
+    v.x,
+    v.y,
+    v.z,
+    scalar
+  )
+}
+
+/**  */
+raylib.Vector3Multiply = function (v1, v2) {
+  return r.BindVector3Multiply(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3CrossProduct = function (v1, v2) {
+  return r.BindVector3CrossProduct(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3Perpendicular = function (v) {
+  return r.BindVector3Perpendicular(
+    v.x,
+    v.y,
+    v.z
+  )
+}
+
+/**  */
+raylib.Vector3Length = function (v) {
+  return r.BindVector3Length(
+    v
+  )
+}
+
+/**  */
+raylib.Vector3LengthSqr = function (v) {
+  return r.BindVector3LengthSqr(
+    v
+  )
+}
+
+/**  */
+raylib.Vector3DotProduct = function (v1, v2) {
+  return r.BindVector3DotProduct(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3Distance = function (v1, v2) {
+  return r.BindVector3Distance(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3Angle = function (v1, v2) {
+  return r.BindVector3Angle(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3Negate = function (v) {
+  return r.BindVector3Negate(
+    v.x,
+    v.y,
+    v.z
+  )
+}
+
+/**  */
+raylib.Vector3Divide = function (v1, v2) {
+  return r.BindVector3Divide(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3Normalize = function (v) {
+  return r.BindVector3Normalize(
+    v.x,
+    v.y,
+    v.z
+  )
+}
+
+/**  */
+raylib.Vector3OrthoNormalize = function (v1, v2) {
+  return r.BindVector3OrthoNormalize(
+    v1,
+    v2
+  )
+}
+
+/**  */
+raylib.Vector3Transform = function (v, mat) {
+  return r.BindVector3Transform(
+    v.x,
+    v.y,
+    v.z,
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+
+/**  */
+raylib.Vector3RotateByQuaternion = function (v, q) {
+  return r.BindVector3RotateByQuaternion(
+    v.x,
+    v.y,
+    v.z,
+    q
+  )
+}
+
+/**  */
+raylib.Vector3Lerp = function (v1, v2, amount) {
+  return r.BindVector3Lerp(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z,
+    amount
+  )
+}
+
+/**  */
+raylib.Vector3Reflect = function (v, normal) {
+  return r.BindVector3Reflect(
+    v.x,
+    v.y,
+    v.z,
+    normal.x,
+    normal.y,
+    normal.z
+  )
+}
+
+/**  */
+raylib.Vector3Min = function (v1, v2) {
+  return r.BindVector3Min(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3Max = function (v1, v2) {
+  return r.BindVector3Max(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+
+/**  */
+raylib.Vector3Barycenter = function (p, a, b, c) {
+  return r.BindVector3Barycenter(
+    p.x,
+    p.y,
+    p.z,
+    a.x,
+    a.y,
+    a.z,
+    b.x,
+    b.y,
+    b.z,
+    c.x,
+    c.y,
+    c.z
+  )
+}
+
+/**  */
+raylib.Vector3Unproject = function (source, projection, view) {
+  return r.BindVector3Unproject(
+    source.x,
+    source.y,
+    source.z,
+    projection.m0,
+    projection.m4,
+    projection.m8,
+    projection.m12,
+    projection.m1,
+    projection.m5,
+    projection.m9,
+    projection.m13,
+    projection.m2,
+    projection.m6,
+    projection.m10,
+    projection.m14,
+    projection.m3,
+    projection.m7,
+    projection.m11,
+    projection.m15,
+    view.m0,
+    view.m4,
+    view.m8,
+    view.m12,
+    view.m1,
+    view.m5,
+    view.m9,
+    view.m13,
+    view.m2,
+    view.m6,
+    view.m10,
+    view.m14,
+    view.m3,
+    view.m7,
+    view.m11,
+    view.m15
+  )
+}
+
+/**  */
+raylib.MatrixDeterminant = function (mat) {
+  return r.BindMatrixDeterminant(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+
+/**  */
+raylib.MatrixTrace = function (mat) {
+  return r.BindMatrixTrace(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+
+/**  */
+raylib.MatrixTranspose = function (mat) {
+  return r.BindMatrixTranspose(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+
+/**  */
+raylib.MatrixInvert = function (mat) {
+  return r.BindMatrixInvert(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+
+/**  */
+raylib.MatrixNormalize = function (mat) {
+  return r.BindMatrixNormalize(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+
+/**  */
+raylib.MatrixIdentity = function () {
+  return r.BindMatrixIdentity()
+}
+
+/**  */
+raylib.MatrixAdd = function (left, right) {
+  return r.BindMatrixAdd(
+    left.m0,
+    left.m4,
+    left.m8,
+    left.m12,
+    left.m1,
+    left.m5,
+    left.m9,
+    left.m13,
+    left.m2,
+    left.m6,
+    left.m10,
+    left.m14,
+    left.m3,
+    left.m7,
+    left.m11,
+    left.m15,
+    right.m0,
+    right.m4,
+    right.m8,
+    right.m12,
+    right.m1,
+    right.m5,
+    right.m9,
+    right.m13,
+    right.m2,
+    right.m6,
+    right.m10,
+    right.m14,
+    right.m3,
+    right.m7,
+    right.m11,
+    right.m15
+  )
+}
+
+/**  */
+raylib.MatrixSubtract = function (left, right) {
+  return r.BindMatrixSubtract(
+    left.m0,
+    left.m4,
+    left.m8,
+    left.m12,
+    left.m1,
+    left.m5,
+    left.m9,
+    left.m13,
+    left.m2,
+    left.m6,
+    left.m10,
+    left.m14,
+    left.m3,
+    left.m7,
+    left.m11,
+    left.m15,
+    right.m0,
+    right.m4,
+    right.m8,
+    right.m12,
+    right.m1,
+    right.m5,
+    right.m9,
+    right.m13,
+    right.m2,
+    right.m6,
+    right.m10,
+    right.m14,
+    right.m3,
+    right.m7,
+    right.m11,
+    right.m15
+  )
+}
+
+/**  */
+raylib.MatrixMultiply = function (left, right) {
+  return r.BindMatrixMultiply(
+    left.m0,
+    left.m4,
+    left.m8,
+    left.m12,
+    left.m1,
+    left.m5,
+    left.m9,
+    left.m13,
+    left.m2,
+    left.m6,
+    left.m10,
+    left.m14,
+    left.m3,
+    left.m7,
+    left.m11,
+    left.m15,
+    right.m0,
+    right.m4,
+    right.m8,
+    right.m12,
+    right.m1,
+    right.m5,
+    right.m9,
+    right.m13,
+    right.m2,
+    right.m6,
+    right.m10,
+    right.m14,
+    right.m3,
+    right.m7,
+    right.m11,
+    right.m15
+  )
+}
+
+/**  */
+raylib.MatrixTranslate = function (x, y, z) {
+  return r.BindMatrixTranslate(
+    x,
+    y,
+    z
+  )
+}
+
+/**  */
+raylib.MatrixRotate = function (axis, angle) {
+  return r.BindMatrixRotate(
+    axis.x,
+    axis.y,
+    axis.z,
+    angle
+  )
+}
+
+/**  */
+raylib.MatrixRotateX = function (angle) {
+  return r.BindMatrixRotateX(
+    angle
+  )
+}
+
+/**  */
+raylib.MatrixRotateY = function (angle) {
+  return r.BindMatrixRotateY(
+    angle
+  )
+}
+
+/**  */
+raylib.MatrixRotateZ = function (angle) {
+  return r.BindMatrixRotateZ(
+    angle
+  )
+}
+
+/**  */
+raylib.MatrixRotateXYZ = function (ang) {
+  return r.BindMatrixRotateXYZ(
+    ang.x,
+    ang.y,
+    ang.z
+  )
+}
+
+/**  */
+raylib.MatrixRotateZYX = function (ang) {
+  return r.BindMatrixRotateZYX(
+    ang.x,
+    ang.y,
+    ang.z
+  )
+}
+
+/**  */
+raylib.MatrixScale = function (x, y, z) {
+  return r.BindMatrixScale(
+    x,
+    y,
+    z
+  )
+}
+
+/**  */
+raylib.MatrixFrustum = function (left, right, bottom, top, near, far) {
+  return r.BindMatrixFrustum(
+    left,
+    right,
+    bottom,
+    top,
+    near,
+    far
+  )
+}
+
+/**  */
+raylib.MatrixPerspective = function (fovy, aspect, near, far) {
+  return r.BindMatrixPerspective(
+    fovy,
+    aspect,
+    near,
+    far
+  )
+}
+
+/**  */
+raylib.MatrixOrtho = function (left, right, bottom, top, near, far) {
+  return r.BindMatrixOrtho(
+    left,
+    right,
+    bottom,
+    top,
+    near,
+    far
+  )
+}
+
+/**  */
+raylib.MatrixLookAt = function (eye, target, up) {
+  return r.BindMatrixLookAt(
+    eye.x,
+    eye.y,
+    eye.z,
+    target.x,
+    target.y,
+    target.z,
+    up.x,
+    up.y,
+    up.z
+  )
+}
+
+/**  */
+raylib.QuaternionAdd = function (q1, q2) {
+  return r.BindQuaternionAdd(
+    q1,
+    q2
+  )
+}
+
+/**  */
+raylib.QuaternionAddValue = function (q, add) {
+  return r.BindQuaternionAddValue(
+    q,
+    add
+  )
+}
+
+/**  */
+raylib.QuaternionSubtract = function (q1, q2) {
+  return r.BindQuaternionSubtract(
+    q1,
+    q2
+  )
+}
+
+/**  */
+raylib.QuaternionSubtractValue = function (q, sub) {
+  return r.BindQuaternionSubtractValue(
+    q,
+    sub
+  )
+}
+
+/**  */
+raylib.QuaternionIdentity = function () {
+  return r.BindQuaternionIdentity()
+}
+
+/**  */
+raylib.QuaternionLength = function (q) {
+  return r.BindQuaternionLength(
+    q
+  )
+}
+
+/**  */
+raylib.QuaternionNormalize = function (q) {
+  return r.BindQuaternionNormalize(
+    q
+  )
+}
+
+/**  */
+raylib.QuaternionInvert = function (q) {
+  return r.BindQuaternionInvert(
+    q
+  )
+}
+
+/**  */
+raylib.QuaternionMultiply = function (q1, q2) {
+  return r.BindQuaternionMultiply(
+    q1,
+    q2
+  )
+}
+
+/**  */
+raylib.QuaternionScale = function (q, mul) {
+  return r.BindQuaternionScale(
+    q,
+    mul
+  )
+}
+
+/**  */
+raylib.QuaternionDivide = function (q1, q2) {
+  return r.BindQuaternionDivide(
+    q1,
+    q2
+  )
+}
+
+/**  */
+raylib.QuaternionLerp = function (q1, q2, amount) {
+  return r.BindQuaternionLerp(
+    q1,
+    q2,
+    amount
+  )
+}
+
+/**  */
+raylib.QuaternionNlerp = function (q1, q2, amount) {
+  return r.BindQuaternionNlerp(
+    q1,
+    q2,
+    amount
+  )
+}
+
+/**  */
+raylib.QuaternionSlerp = function (q1, q2, amount) {
+  return r.BindQuaternionSlerp(
+    q1,
+    q2,
+    amount
+  )
+}
+
+/**  */
+raylib.QuaternionFromVector3ToVector3 = function (from, to) {
+  return r.BindQuaternionFromVector3ToVector3(
+    from.x,
+    from.y,
+    from.z,
+    to.x,
+    to.y,
+    to.z
+  )
+}
+
+/**  */
+raylib.QuaternionFromMatrix = function (mat) {
+  return r.BindQuaternionFromMatrix(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+
+/**  */
+raylib.QuaternionToMatrix = function (q) {
+  return r.BindQuaternionToMatrix(
+    q
+  )
+}
+
+/**  */
+raylib.QuaternionFromAxisAngle = function (axis, angle) {
+  return r.BindQuaternionFromAxisAngle(
+    axis.x,
+    axis.y,
+    axis.z,
+    angle
+  )
+}
+
+/**  */
+raylib.QuaternionToAxisAngle = function (q, outAxis, outAngle) {
+  return r.BindQuaternionToAxisAngle(
+    q,
+    outAxis,
+    outAngle
+  )
+}
+
+/**  */
+raylib.QuaternionFromEuler = function (pitch, yaw, roll) {
+  return r.BindQuaternionFromEuler(
+    pitch,
+    yaw,
+    roll
+  )
+}
+
+/**  */
+raylib.QuaternionToEuler = function (q) {
+  return r.BindQuaternionToEuler(
+    q
+  )
+}
+
+/**  */
+raylib.QuaternionTransform = function (q, mat) {
+  return r.BindQuaternionTransform(
+    q,
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+
 /** Update camera position for selected mode */
 raylib.UpdateCamera = function (camera) {
   const obj = r.BindUpdateCamera(

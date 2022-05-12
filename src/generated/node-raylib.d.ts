@@ -1907,6 +1907,288 @@ declare module "raylib" {
   /**  */
   export function EaseElasticInOut(t: number, b: number, c: number, d: number): number
   
+  /**  */
+  export function Clamp(value: number, min: number, max: number): number
+  
+  /**  */
+  export function Lerp(start: number, end: number, amount: number): number
+  
+  /**  */
+  export function Normalize(value: number, start: number, end: number): number
+  
+  /**  */
+  export function Remap(value: number, inputStart: number, inputEnd: number, outputStart: number, outputEnd: number): number
+  
+  /**  */
+  export function Vector2Zero(): Vector2
+  
+  /**  */
+  export function Vector2One(): Vector2
+  
+  /**  */
+  export function Vector2Add(v1: Vector2, v2: Vector2): Vector2
+  
+  /**  */
+  export function Vector2AddValue(v: Vector2, add: number): Vector2
+  
+  /**  */
+  export function Vector2Subtract(v1: Vector2, v2: Vector2): Vector2
+  
+  /**  */
+  export function Vector2SubtractValue(v: Vector2, sub: number): Vector2
+  
+  /**  */
+  export function Vector2Length(v: Vector2): number
+  
+  /**  */
+  export function Vector2LengthSqr(v: Vector2): number
+  
+  /**  */
+  export function Vector2DotProduct(v1: Vector2, v2: Vector2): number
+  
+  /**  */
+  export function Vector2Distance(v1: Vector2, v2: Vector2): number
+  
+  /**  */
+  export function Vector2Angle(v1: Vector2, v2: Vector2): number
+  
+  /**  */
+  export function Vector2Scale(v: Vector2, scale: number): Vector2
+  
+  /**  */
+  export function Vector2Multiply(v1: Vector2, v2: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Negate(v: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Divide(v1: Vector2, v2: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Normalize(v: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Lerp(v1: Vector2, v2: Vector2, amount: number): Vector2
+  
+  /**  */
+  export function Vector2Reflect(v: Vector2, normal: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Rotate(v: Vector2, angle: number): Vector2
+  
+  /**  */
+  export function Vector2MoveTowards(v: Vector2, target: Vector2, maxDistance: number): Vector2
+  
+  /**  */
+  export function Vector3Zero(): Vector3
+  
+  /**  */
+  export function Vector3One(): Vector3
+  
+  /**  */
+  export function Vector3Add(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3AddValue(v: Vector3, add: number): Vector3
+  
+  /**  */
+  export function Vector3Subtract(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3SubtractValue(v: Vector3, sub: number): Vector3
+  
+  /**  */
+  export function Vector3Scale(v: Vector3, scalar: number): Vector3
+  
+  /**  */
+  export function Vector3Multiply(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3CrossProduct(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Perpendicular(v: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Length(v: Vector3): number
+  
+  /**  */
+  export function Vector3LengthSqr(v: Vector3): number
+  
+  /**  */
+  export function Vector3DotProduct(v1: Vector3, v2: Vector3): number
+  
+  /**  */
+  export function Vector3Distance(v1: Vector3, v2: Vector3): number
+  
+  /**  */
+  export function Vector3Angle(v1: Vector3, v2: Vector3): Vector2
+  
+  /**  */
+  export function Vector3Negate(v: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Divide(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Normalize(v: Vector3): Vector3
+  
+  /**  */
+  export function Vector3OrthoNormalize(v1: number, v2: number): void
+  
+  /**  */
+  export function Vector3Transform(v: Vector3, mat: Matrix): Vector3
+  
+  /**  */
+  export function Vector3RotateByQuaternion(v: Vector3, q: Quaternion): Vector3
+  
+  /**  */
+  export function Vector3Lerp(v1: Vector3, v2: Vector3, amount: number): Vector3
+  
+  /**  */
+  export function Vector3Reflect(v: Vector3, normal: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Min(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Max(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Barycenter(p: Vector3, a: Vector3, b: Vector3, c: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Unproject(source: Vector3, projection: Matrix, view: Matrix): Vector3
+  
+  /**  */
+  export function MatrixDeterminant(mat: Matrix): number
+  
+  /**  */
+  export function MatrixTrace(mat: Matrix): number
+  
+  /**  */
+  export function MatrixTranspose(mat: Matrix): Matrix
+  
+  /**  */
+  export function MatrixInvert(mat: Matrix): Matrix
+  
+  /**  */
+  export function MatrixNormalize(mat: Matrix): Matrix
+  
+  /**  */
+  export function MatrixIdentity(): Matrix
+  
+  /**  */
+  export function MatrixAdd(left: Matrix, right: Matrix): Matrix
+  
+  /**  */
+  export function MatrixSubtract(left: Matrix, right: Matrix): Matrix
+  
+  /**  */
+  export function MatrixMultiply(left: Matrix, right: Matrix): Matrix
+  
+  /**  */
+  export function MatrixTranslate(x: number, y: number, z: number): Matrix
+  
+  /**  */
+  export function MatrixRotate(axis: Vector3, angle: number): Matrix
+  
+  /**  */
+  export function MatrixRotateX(angle: number): Matrix
+  
+  /**  */
+  export function MatrixRotateY(angle: number): Matrix
+  
+  /**  */
+  export function MatrixRotateZ(angle: number): Matrix
+  
+  /**  */
+  export function MatrixRotateXYZ(ang: Vector3): Matrix
+  
+  /**  */
+  export function MatrixRotateZYX(ang: Vector3): Matrix
+  
+  /**  */
+  export function MatrixScale(x: number, y: number, z: number): Matrix
+  
+  /**  */
+  export function MatrixFrustum(left: number, right: number, bottom: number, top: number, near: number, far: number): Matrix
+  
+  /**  */
+  export function MatrixPerspective(fovy: number, aspect: number, near: number, far: number): Matrix
+  
+  /**  */
+  export function MatrixOrtho(left: number, right: number, bottom: number, top: number, near: number, far: number): Matrix
+  
+  /**  */
+  export function MatrixLookAt(eye: Vector3, target: Vector3, up: Vector3): Matrix
+  
+  /**  */
+  export function QuaternionAdd(q1: Quaternion, q2: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionAddValue(q: Quaternion, add: number): Quaternion
+  
+  /**  */
+  export function QuaternionSubtract(q1: Quaternion, q2: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionSubtractValue(q: Quaternion, sub: number): Quaternion
+  
+  /**  */
+  export function QuaternionIdentity(): Quaternion
+  
+  /**  */
+  export function QuaternionLength(q: Quaternion): number
+  
+  /**  */
+  export function QuaternionNormalize(q: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionInvert(q: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionMultiply(q1: Quaternion, q2: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionScale(q: Quaternion, mul: number): Quaternion
+  
+  /**  */
+  export function QuaternionDivide(q1: Quaternion, q2: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionLerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
+  
+  /**  */
+  export function QuaternionNlerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
+  
+  /**  */
+  export function QuaternionSlerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
+  
+  /**  */
+  export function QuaternionFromVector3ToVector3(from: Vector3, to: Vector3): Quaternion
+  
+  /**  */
+  export function QuaternionFromMatrix(mat: Matrix): Quaternion
+  
+  /**  */
+  export function QuaternionToMatrix(q: Quaternion): Matrix
+  
+  /**  */
+  export function QuaternionFromAxisAngle(axis: Vector3, angle: number): Quaternion
+  
+  /**  */
+  export function QuaternionToAxisAngle(q: Quaternion, outAxis: number, outAngle: number): void
+  
+  /**  */
+  export function QuaternionFromEuler(pitch: number, yaw: number, roll: number): Quaternion
+  
+  /**  */
+  export function QuaternionToEuler(q: Quaternion): Vector3
+  
+  /**  */
+  export function QuaternionTransform(q: Quaternion, mat: Matrix): Quaternion
+  
 
   /** Set shader uniform float */
   export function SetShaderFloat(shader: Shader, locIndex: number, value: number): void
