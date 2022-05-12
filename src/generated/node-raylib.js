@@ -411,9 +411,53 @@ raylib.EndScissorMode = function () {
   return r.BindEndScissorMode()
 }
 
+/** Begin stereo rendering (requires VR simulator) */
+raylib.BeginVrStereoMode = function (config) {
+  return r.BindBeginVrStereoMode(
+    config.projection,
+    config.viewOffset,
+    config.leftLensCenter,
+    config.rightLensCenter,
+    config.leftScreenCenter,
+    config.rightScreenCenter,
+    config.scale,
+    config.scaleIn
+  )
+}
+
 /** End stereo rendering (requires VR simulator) */
 raylib.EndVrStereoMode = function () {
   return r.BindEndVrStereoMode()
+}
+
+/** Load VR stereo config for VR simulator device parameters */
+raylib.LoadVrStereoConfig = function (device) {
+  return r.BindLoadVrStereoConfig(
+    device.hResolution,
+    device.vResolution,
+    device.hScreenSize,
+    device.vScreenSize,
+    device.vScreenCenter,
+    device.eyeToScreenDistance,
+    device.lensSeparationDistance,
+    device.interpupillaryDistance,
+    device.lensDistortionValues,
+    device.chromaAbCorrection
+  )
+}
+
+/** Unload VR stereo config */
+raylib.UnloadVrStereoConfig = function (config) {
+  return r.BindUnloadVrStereoConfig(
+    config.projection,
+    config.viewOffset,
+    config.leftLensCenter,
+    config.rightLensCenter,
+    config.leftScreenCenter,
+    config.rightScreenCenter,
+    config.scale,
+    config.scaleIn
+  )
 }
 
 /** Load shader from files and bind default locations */
@@ -3908,6 +3952,74 @@ raylib.UnloadMesh = function (mesh) {
   )
 }
 
+/** Draw a 3d mesh with material and transform */
+raylib.DrawMesh = function (mesh, material, transform) {
+  return r.BindDrawMesh(
+    mesh.vertexCount,
+    mesh.triangleCount,
+    mesh.vertices,
+    mesh.texcoords,
+    mesh.texcoords2,
+    mesh.normals,
+    mesh.tangents,
+    mesh.colors,
+    mesh.indices,
+    mesh.animVertices,
+    mesh.animNormals,
+    mesh.boneIds,
+    mesh.boneWeights,
+    mesh.vaoId,
+    mesh.vboId,
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params,
+    transform.m0,
+    transform.m4,
+    transform.m8,
+    transform.m12,
+    transform.m1,
+    transform.m5,
+    transform.m9,
+    transform.m13,
+    transform.m2,
+    transform.m6,
+    transform.m10,
+    transform.m14,
+    transform.m3,
+    transform.m7,
+    transform.m11,
+    transform.m15
+  )
+}
+
+/** Draw multiple mesh instances with material and different transforms */
+raylib.DrawMeshInstanced = function (mesh, material, transforms, instances) {
+  return r.BindDrawMeshInstanced(
+    mesh.vertexCount,
+    mesh.triangleCount,
+    mesh.vertices,
+    mesh.texcoords,
+    mesh.texcoords2,
+    mesh.normals,
+    mesh.tangents,
+    mesh.colors,
+    mesh.indices,
+    mesh.animVertices,
+    mesh.animNormals,
+    mesh.boneIds,
+    mesh.boneWeights,
+    mesh.vaoId,
+    mesh.vboId,
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params,
+    transforms,
+    instances
+  )
+}
+
 /** Export mesh data to file, returns true on success */
 raylib.ExportMesh = function (mesh, fileName) {
   return r.BindExportMesh(
@@ -4059,6 +4171,29 @@ raylib.GenMeshCubicmap = function (cubicmap, cubeSize) {
     cubeSize.x,
     cubeSize.y,
     cubeSize.z
+  )
+}
+
+/** Load materials from model file */
+raylib.LoadMaterials = function (fileName, materialCount) {
+  return r.BindLoadMaterials(
+    fileName,
+    materialCount
+  )
+}
+
+/** Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps) */
+raylib.LoadMaterialDefault = function () {
+  return r.BindLoadMaterialDefault()
+}
+
+/** Unload material from GPU memory (VRAM) */
+raylib.UnloadMaterial = function (material) {
+  return r.BindUnloadMaterial(
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params
   )
 }
 
@@ -7236,6 +7371,29 @@ raylib.GenMeshBinormals = function (mesh) {
     for (const key in obj) {
       if (Object.hasOwnProperty.call(mesh, key)) {
         mesh[key] = obj[key]
+      }
+    }
+  }
+}
+
+/** Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...) */
+raylib.SetMaterialTexture = function (material, mapType, texture) {
+  const obj = r.BindSetMaterialTexture(
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params,
+    mapType,
+    texture.id,
+    texture.width,
+    texture.height,
+    texture.mipmaps,
+    texture.format
+  )
+  if (obj) {
+    for (const key in obj) {
+      if (Object.hasOwnProperty.call(material, key)) {
+        material[key] = obj[key]
       }
     }
   }

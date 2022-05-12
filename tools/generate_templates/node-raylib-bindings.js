@@ -9,16 +9,16 @@ const SanitizeTypeName = name => {
     return 'Vector3'
   }
   if (name === 'float[2]') {
-    return 'float2'
+    return 'pointer'
   }
   if (name === 'char[32]') {
-    return 'char32'
+    return 'pointer'
   }
   if (name === 'float[4]') {
-    return 'float4'
+    return 'pointer'
   }
   if (name === 'Matrix[2]') {
-    return 'Matrix2'
+    return 'pointer'
   }
   if (name === 'const char *') {
     return 'string'
@@ -236,6 +236,13 @@ inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int i
 inline unsigned int unsignedintFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
+// inline float* float4FromValue(const Napi::CallbackInfo& info, int index) {
+//   Napi::Float32Array array = info[index].As<Napi::Float32Array>();
+//   size_t size = array.ElementLength();
+//   float* buffer = new float[size];
+//   memcpy(buffer, array.Data(), size);
+//   return buffer;
+// }
 inline bool boolFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Boolean>();
 }

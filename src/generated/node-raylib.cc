@@ -59,6 +59,13 @@ inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int i
 inline unsigned int unsignedintFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
+// inline float* float4FromValue(const Napi::CallbackInfo& info, int index) {
+//   Napi::Float32Array array = info[index].As<Napi::Float32Array>();
+//   size_t size = array.ElementLength();
+//   float* buffer = new float[size];
+//   memcpy(buffer, array.Data(), size);
+//   return buffer;
+// }
 inline bool boolFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Boolean>();
 }
@@ -252,11 +259,26 @@ inline MaterialMap MaterialMapFromValue(const Napi::CallbackInfo& info, int inde
   };
 }
 
+inline Material MaterialFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     ShaderFromValue(info, index + 0),
+     (MaterialMap *) pointerFromValue(info, index + 2),
+     pointerFromValue(info, index + 3)
+  };
+}
+
 inline Transform TransformFromValue(const Napi::CallbackInfo& info, int index) {
   return {
      Vector3FromValue(info, index + 0),
      Vector4FromValue(info, index + 3),
      Vector3FromValue(info, index + 7)
+  };
+}
+
+inline BoneInfo BoneInfoFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     pointerFromValue(info, index + 0),
+     charFromValue(info, index + 1)
   };
 }
 
@@ -339,6 +361,34 @@ inline Music MusicFromValue(const Napi::CallbackInfo& info, int index) {
      boolFromValue(info, index + 5),
      intFromValue(info, index + 6),
      (void *) pointerFromValue(info, index + 7)
+  };
+}
+
+inline VrDeviceInfo VrDeviceInfoFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     intFromValue(info, index + 0),
+     intFromValue(info, index + 1),
+     floatFromValue(info, index + 2),
+     floatFromValue(info, index + 3),
+     floatFromValue(info, index + 4),
+     floatFromValue(info, index + 5),
+     floatFromValue(info, index + 6),
+     floatFromValue(info, index + 7),
+     pointerFromValue(info, index + 8),
+     pointerFromValue(info, index + 9)
+  };
+}
+
+inline VrStereoConfig VrStereoConfigFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     pointerFromValue(info, index + 0),
+     pointerFromValue(info, index + 1),
+     pointerFromValue(info, index + 2),
+     pointerFromValue(info, index + 3),
+     pointerFromValue(info, index + 4),
+     pointerFromValue(info, index + 5),
+     pointerFromValue(info, index + 6),
+     pointerFromValue(info, index + 7)
   };
 }
 // Convert structs to Napi::Objects for output to JS
@@ -520,11 +570,26 @@ inline Napi::Value ToValue(Napi::Env env, MaterialMap obj) {
   return out;
 }
 
+inline Napi::Value ToValue(Napi::Env env, Material obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("shader", ToValue(env, obj.shader));
+  out.Set("maps", ToValue(env, obj.maps));
+  out.Set("params", ToValue(env, obj.params));
+  return out;
+}
+
 inline Napi::Value ToValue(Napi::Env env, Transform obj) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("translation", ToValue(env, obj.translation));
   out.Set("rotation", ToValue(env, obj.rotation));
   out.Set("scale", ToValue(env, obj.scale));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, BoneInfo obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("name", ToValue(env, obj.name));
+  out.Set("parent", ToValue(env, obj.parent));
   return out;
 }
 
@@ -607,6 +672,34 @@ inline Napi::Value ToValue(Napi::Env env, Music obj) {
   out.Set("looping", ToValue(env, obj.looping));
   out.Set("ctxType", ToValue(env, obj.ctxType));
   out.Set("ctxData", ToValue(env, obj.ctxData));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, VrDeviceInfo obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("hResolution", ToValue(env, obj.hResolution));
+  out.Set("vResolution", ToValue(env, obj.vResolution));
+  out.Set("hScreenSize", ToValue(env, obj.hScreenSize));
+  out.Set("vScreenSize", ToValue(env, obj.vScreenSize));
+  out.Set("vScreenCenter", ToValue(env, obj.vScreenCenter));
+  out.Set("eyeToScreenDistance", ToValue(env, obj.eyeToScreenDistance));
+  out.Set("lensSeparationDistance", ToValue(env, obj.lensSeparationDistance));
+  out.Set("interpupillaryDistance", ToValue(env, obj.interpupillaryDistance));
+  out.Set("lensDistortionValues", ToValue(env, obj.lensDistortionValues));
+  out.Set("chromaAbCorrection", ToValue(env, obj.chromaAbCorrection));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, VrStereoConfig obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("projection", ToValue(env, obj.projection));
+  out.Set("viewOffset", ToValue(env, obj.viewOffset));
+  out.Set("leftLensCenter", ToValue(env, obj.leftLensCenter));
+  out.Set("rightLensCenter", ToValue(env, obj.rightLensCenter));
+  out.Set("leftScreenCenter", ToValue(env, obj.leftScreenCenter));
+  out.Set("rightScreenCenter", ToValue(env, obj.rightScreenCenter));
+  out.Set("scale", ToValue(env, obj.scale));
+  out.Set("scaleIn", ToValue(env, obj.scaleIn));
   return out;
 }
 
@@ -826,6 +919,14 @@ Napi::Value BindIsCursorOnScreen(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     IsCursorOnScreen(
       
+    )
+  );
+}
+
+Napi::Value BindLoadVrStereoConfig(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    LoadVrStereoConfig(
+       VrDeviceInfoFromValue(info, 0)
     )
   );
 }
@@ -2366,6 +2467,23 @@ Napi::Value BindGenMeshCubicmap(const Napi::CallbackInfo& info) {
     GenMeshCubicmap(
        ImageFromValue(info, 0),
        Vector3FromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindLoadMaterials(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    LoadMaterials(
+       (const char *) stringFromValue(info, 0),
+       (int *) pointerFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindLoadMaterialDefault(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    LoadMaterialDefault(
+      
     )
   );
 }
@@ -4003,9 +4121,21 @@ void BindEndScissorMode(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindBeginVrStereoMode(const Napi::CallbackInfo& info) {
+  BeginVrStereoMode(
+     VrStereoConfigFromValue(info, 0)
+  );
+}
+
 void BindEndVrStereoMode(const Napi::CallbackInfo& info) {
   EndVrStereoMode(
     
+  );
+}
+
+void BindUnloadVrStereoConfig(const Napi::CallbackInfo& info) {
+  UnloadVrStereoConfig(
+     VrStereoConfigFromValue(info, 0)
   );
 }
 
@@ -5070,6 +5200,29 @@ void BindUnloadMesh(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindDrawMesh(const Napi::CallbackInfo& info) {
+  DrawMesh(
+     MeshFromValue(info, 0),
+       MaterialFromValue(info, 15),
+       MatrixFromValue(info, 19)
+  );
+}
+
+void BindDrawMeshInstanced(const Napi::CallbackInfo& info) {
+  DrawMeshInstanced(
+     MeshFromValue(info, 0),
+       MaterialFromValue(info, 15),
+       (Matrix *) pointerFromValue(info, 19),
+       intFromValue(info, 20)
+  );
+}
+
+void BindUnloadMaterial(const Napi::CallbackInfo& info) {
+  UnloadMaterial(
+     MaterialFromValue(info, 0)
+  );
+}
+
 void BindUpdateModelAnimation(const Napi::CallbackInfo& info) {
   UpdateModelAnimation(
      ModelFromValue(info, 0),
@@ -5702,6 +5855,15 @@ Napi::Value BindGenMeshBinormals(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
+Napi::Value BindSetMaterialTexture(const Napi::CallbackInfo& info) {
+  Material obj = MaterialFromValue(info, 0);
+  SetMaterialTexture(
+    &obj, intFromValue(info, 1),
+       TextureFromValue(info, 2)
+  );
+  return ToValue(info.Env(), obj);
+}
+
 Napi::Value BindSetModelMeshMaterial(const Napi::CallbackInfo& info) {
   Model obj = ModelFromValue(info, 0);
   SetModelMeshMaterial(
@@ -5852,7 +6014,10 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindEndBlendMode", Napi::Function::New(env, BindEndBlendMode));
   exports.Set("BindBeginScissorMode", Napi::Function::New(env, BindBeginScissorMode));
   exports.Set("BindEndScissorMode", Napi::Function::New(env, BindEndScissorMode));
+  exports.Set("BindBeginVrStereoMode", Napi::Function::New(env, BindBeginVrStereoMode));
   exports.Set("BindEndVrStereoMode", Napi::Function::New(env, BindEndVrStereoMode));
+  exports.Set("BindLoadVrStereoConfig", Napi::Function::New(env, BindLoadVrStereoConfig));
+  exports.Set("BindUnloadVrStereoConfig", Napi::Function::New(env, BindUnloadVrStereoConfig));
   exports.Set("BindLoadShader", Napi::Function::New(env, BindLoadShader));
   exports.Set("BindLoadShaderFromMemory", Napi::Function::New(env, BindLoadShaderFromMemory));
   exports.Set("BindGetShaderLocation", Napi::Function::New(env, BindGetShaderLocation));
@@ -6174,6 +6339,8 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindUploadMesh", Napi::Function::New(env, BindUploadMesh));
   exports.Set("BindUpdateMeshBuffer", Napi::Function::New(env, BindUpdateMeshBuffer));
   exports.Set("BindUnloadMesh", Napi::Function::New(env, BindUnloadMesh));
+  exports.Set("BindDrawMesh", Napi::Function::New(env, BindDrawMesh));
+  exports.Set("BindDrawMeshInstanced", Napi::Function::New(env, BindDrawMeshInstanced));
   exports.Set("BindExportMesh", Napi::Function::New(env, BindExportMesh));
   exports.Set("BindGetMeshBoundingBox", Napi::Function::New(env, BindGetMeshBoundingBox));
   exports.Set("BindGenMeshTangents", Napi::Function::New(env, BindGenMeshTangents));
@@ -6189,6 +6356,10 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGenMeshKnot", Napi::Function::New(env, BindGenMeshKnot));
   exports.Set("BindGenMeshHeightmap", Napi::Function::New(env, BindGenMeshHeightmap));
   exports.Set("BindGenMeshCubicmap", Napi::Function::New(env, BindGenMeshCubicmap));
+  exports.Set("BindLoadMaterials", Napi::Function::New(env, BindLoadMaterials));
+  exports.Set("BindLoadMaterialDefault", Napi::Function::New(env, BindLoadMaterialDefault));
+  exports.Set("BindUnloadMaterial", Napi::Function::New(env, BindUnloadMaterial));
+  exports.Set("BindSetMaterialTexture", Napi::Function::New(env, BindSetMaterialTexture));
   exports.Set("BindSetModelMeshMaterial", Napi::Function::New(env, BindSetModelMeshMaterial));
   exports.Set("BindLoadModelAnimations", Napi::Function::New(env, BindLoadModelAnimations));
   exports.Set("BindUpdateModelAnimation", Napi::Function::New(env, BindUpdateModelAnimation));

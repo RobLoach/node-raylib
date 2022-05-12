@@ -28,11 +28,11 @@ const blocklist = [
   'ExportFontAsCode',
 
   // Structs
-  // @todo Fix Structs that are problematic
-  'VrStereoConfig', // Matrix[2], float[2]
-  'BoneInfo', // char[32]
-  'VrDeviceInfo', // float[4]
-  'Material', // float[4]
+  // @todo Verify Structs that have array properties
+  // 'VrStereoConfig', // Matrix[2], float[2]
+  // 'BoneInfo', // char[32]
+  // 'VrDeviceInfo', // float[4]
+  // 'Material', // float[4]
 
   // raymath
   // @todo Fix helper structs for float arrays
