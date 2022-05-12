@@ -62,6 +62,7 @@
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
+    "@raylib/api": "^4.0.0",
     "archiver": "^5.3.1",
     "jest": "^28.0.2",
     "pkg": "^5.6.0",

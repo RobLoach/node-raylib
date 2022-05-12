@@ -1,6 +1,7 @@
 // this will generate the wrappers & type-adapters in src/generated
 
 const { writeFileSync } = require('fs')
+const raylibApi = require('@raylib/api')
 const path = require('path')
 const fetch = require('cross-fetch')
 
@@ -93,7 +94,7 @@ const rSize = /\[([0-9]+)\]/g
 
 // pre-process the data for later analysis
 function getDefs () {
-  const { structs, enums, functions } = require('./raylib_api.json')
+  const { structs, enums, functions } = raylibApi.raylib
 
       // Structs
       for (const struct of structs) {
