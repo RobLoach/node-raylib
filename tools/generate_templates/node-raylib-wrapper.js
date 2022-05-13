@@ -57,10 +57,13 @@ const JSDocsForFunction = (structs, func) => {
     returnType = '\n *\n * @return {undefined}'
   }
 
-  return `
+  if (description) {
+    return `
 /**
  * ${description}${params}${returnType}
  */`
+  }
+  return ''
 }
 
 const WrapFunction = (structs, func) => {
