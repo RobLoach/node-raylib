@@ -16,7 +16,8 @@
     "compile": "cmake-js compile",
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
-    "gen:code": "node tools/generate.js"
+    "gen:code": "node tools/generate.js",
+    "gen:docs": "jsdoc2md > docs/API.md"
   },
   "repository": "github:RobLoach/node-raylib",
   "engines": {
@@ -64,7 +65,13 @@
   "devDependencies": {
     "archiver": "^5.3.1",
     "jest": "^28.0.2",
+    "jsdoc-to-markdown": "^7.1.1",
     "pkg": "^5.6.0",
     "standard": "^17.0.0"
+  },
+  "jsdoc2md": {
+    "files": [
+      "src/generated/node-raylib.js"
+    ]
   }
 }

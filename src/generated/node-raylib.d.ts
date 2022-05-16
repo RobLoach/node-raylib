@@ -403,7 +403,7 @@ declare module "raylib" {
     /** VR distortion scale in */
     scaleIn: number
   }
-  
+
   /** RenderTexture, fbo for texture rendering */
   export type RenderTexture2D = RenderTexture
 
