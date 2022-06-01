@@ -8883,7 +8883,6 @@ function UpdateCamera (camera) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       camera[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -8909,7 +8908,6 @@ function ImageFormat (image, newFormat) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -8938,7 +8936,6 @@ function ImageToPOT (image, fill) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -8967,7 +8964,6 @@ function ImageCrop (image, crop) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -8993,7 +8989,6 @@ function ImageAlphaCrop (image, threshold) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9024,7 +9019,6 @@ function ImageAlphaClear (image, color, threshold) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9054,7 +9048,6 @@ function ImageAlphaMask (image, alphaMask) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9078,7 +9071,6 @@ function ImageAlphaPremultiply (image) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9106,7 +9098,6 @@ function ImageResize (image, newWidth, newHeight) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9134,7 +9125,6 @@ function ImageResizeNN (image, newWidth, newHeight) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9171,7 +9161,6 @@ function ImageResizeCanvas (image, newWidth, newHeight, offsetX, offsetY, fill) 
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9195,7 +9184,6 @@ function ImageMipmaps (image) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9227,7 +9215,6 @@ function ImageDither (image, rBpp, gBpp, bBpp, aBpp) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9251,7 +9238,6 @@ function ImageFlipVertical (image) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9275,7 +9261,6 @@ function ImageFlipHorizontal (image) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9299,7 +9284,6 @@ function ImageRotateCW (image) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9323,7 +9307,6 @@ function ImageRotateCCW (image) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9352,7 +9335,6 @@ function ImageColorTint (image, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9376,7 +9358,6 @@ function ImageColorInvert (image) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9400,7 +9381,6 @@ function ImageColorGrayscale (image) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9426,7 +9406,6 @@ function ImageColorContrast (image, contrast) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9452,7 +9431,6 @@ function ImageColorBrightness (image, brightness) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9486,7 +9464,6 @@ function ImageColorReplace (image, color, replace) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       image[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9515,7 +9492,6 @@ function ImageClearBackground (dst, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9548,7 +9524,6 @@ function ImageDrawPixel (dst, posX, posY, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9580,7 +9555,6 @@ function ImageDrawPixelV (dst, position, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9617,7 +9591,6 @@ function ImageDrawLine (dst, startPosX, startPosY, endPosX, endPosY, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9652,7 +9625,6 @@ function ImageDrawLineV (dst, start, end, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9687,7 +9659,6 @@ function ImageDrawCircle (dst, centerX, centerY, radius, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9721,7 +9692,6 @@ function ImageDrawCircleV (dst, center, radius, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9758,7 +9728,6 @@ function ImageDrawRectangle (dst, posX, posY, width, height, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9793,7 +9762,6 @@ function ImageDrawRectangleV (dst, position, size, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9827,7 +9795,6 @@ function ImageDrawRectangleRec (dst, rec, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9863,7 +9830,6 @@ function ImageDrawRectangleLines (dst, rec, thick, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9908,7 +9874,6 @@ function ImageDraw (dst, src, srcRec, dstRec, tint) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9945,7 +9910,6 @@ function ImageDrawText (dst, text, posX, posY, fontSize, color) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -9994,7 +9958,6 @@ function ImageDrawTextEx (dst, font, text, position, fontSize, spacing, tint) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       dst[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -10018,7 +9981,6 @@ function GenTextureMipmaps (texture) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       texture[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -10054,7 +10016,6 @@ function UploadMesh (mesh, dynamic) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       mesh[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -10088,7 +10049,6 @@ function GenMeshTangents (mesh) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       mesh[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -10122,7 +10082,6 @@ function GenMeshBinormals (mesh) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       mesh[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -10169,7 +10128,6 @@ function SetModelMeshMaterial (model, meshId, materialId) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       model[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -10199,7 +10157,6 @@ function WaveFormat (wave, sampleRate, sampleSize, channels) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       wave[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
@@ -10227,7 +10184,6 @@ function WaveCrop (wave, initSample, finalSample) {
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
       wave[key] = obj[key]
-      console.log(obj[key])
     }
   }
 }
