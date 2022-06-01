@@ -4568,7 +4568,7 @@ Napi::Value BindUpdateCamera(const Napi::CallbackInfo& info) {
 Napi::Value BindImageFormat(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageFormat(
-    &obj, intFromValue(info, 1)
+    &obj, intFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4576,7 +4576,7 @@ Napi::Value BindImageFormat(const Napi::CallbackInfo& info) {
 Napi::Value BindImageToPOT(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageToPOT(
-    &obj, ColorFromValue(info, 1)
+    &obj, ColorFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4584,7 +4584,7 @@ Napi::Value BindImageToPOT(const Napi::CallbackInfo& info) {
 Napi::Value BindImageCrop(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageCrop(
-    &obj, RectangleFromValue(info, 1)
+    &obj, RectangleFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4592,7 +4592,7 @@ Napi::Value BindImageCrop(const Napi::CallbackInfo& info) {
 Napi::Value BindImageAlphaCrop(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageAlphaCrop(
-    &obj, floatFromValue(info, 1)
+    &obj, floatFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4600,8 +4600,8 @@ Napi::Value BindImageAlphaCrop(const Napi::CallbackInfo& info) {
 Napi::Value BindImageAlphaClear(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageAlphaClear(
-    &obj, ColorFromValue(info, 1),
-       floatFromValue(info, 5)
+    &obj, ColorFromValue(info, 5),
+       floatFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4609,7 +4609,7 @@ Napi::Value BindImageAlphaClear(const Napi::CallbackInfo& info) {
 Napi::Value BindImageAlphaMask(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageAlphaMask(
-    &obj, ImageFromValue(info, 1)
+    &obj, ImageFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4626,8 +4626,8 @@ Napi::Value BindImageAlphaPremultiply(const Napi::CallbackInfo& info) {
 Napi::Value BindImageResize(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageResize(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4635,8 +4635,8 @@ Napi::Value BindImageResize(const Napi::CallbackInfo& info) {
 Napi::Value BindImageResizeNN(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageResizeNN(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4644,11 +4644,11 @@ Napi::Value BindImageResizeNN(const Napi::CallbackInfo& info) {
 Napi::Value BindImageResizeCanvas(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageResizeCanvas(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4),
-       ColorFromValue(info, 5)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       intFromValue(info, 8),
+       ColorFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4665,10 +4665,10 @@ Napi::Value BindImageMipmaps(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDither(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDither(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       intFromValue(info, 8)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4712,7 +4712,7 @@ Napi::Value BindImageRotateCCW(const Napi::CallbackInfo& info) {
 Napi::Value BindImageColorTint(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorTint(
-    &obj, ColorFromValue(info, 1)
+    &obj, ColorFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4738,7 +4738,7 @@ Napi::Value BindImageColorGrayscale(const Napi::CallbackInfo& info) {
 Napi::Value BindImageColorContrast(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorContrast(
-    &obj, floatFromValue(info, 1)
+    &obj, floatFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4746,7 +4746,7 @@ Napi::Value BindImageColorContrast(const Napi::CallbackInfo& info) {
 Napi::Value BindImageColorBrightness(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorBrightness(
-    &obj, intFromValue(info, 1)
+    &obj, intFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4754,8 +4754,8 @@ Napi::Value BindImageColorBrightness(const Napi::CallbackInfo& info) {
 Napi::Value BindImageColorReplace(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorReplace(
-    &obj, ColorFromValue(info, 1),
-       ColorFromValue(info, 5)
+    &obj, ColorFromValue(info, 5),
+       ColorFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4763,7 +4763,7 @@ Napi::Value BindImageColorReplace(const Napi::CallbackInfo& info) {
 Napi::Value BindImageClearBackground(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageClearBackground(
-    &obj, ColorFromValue(info, 1)
+    &obj, ColorFromValue(info, 5)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4771,9 +4771,9 @@ Napi::Value BindImageClearBackground(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawPixel(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawPixel(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2),
-       ColorFromValue(info, 3)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6),
+       ColorFromValue(info, 7)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4781,8 +4781,8 @@ Napi::Value BindImageDrawPixel(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawPixelV(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawPixelV(
-    &obj, Vector2FromValue(info, 1),
-       ColorFromValue(info, 3)
+    &obj, Vector2FromValue(info, 5),
+       ColorFromValue(info, 7)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4790,11 +4790,11 @@ Napi::Value BindImageDrawPixelV(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawLine(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawLine(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4),
-       ColorFromValue(info, 5)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       intFromValue(info, 8),
+       ColorFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4802,9 +4802,9 @@ Napi::Value BindImageDrawLine(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawLineV(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawLineV(
-    &obj, Vector2FromValue(info, 1),
-       Vector2FromValue(info, 3),
-       ColorFromValue(info, 5)
+    &obj, Vector2FromValue(info, 5),
+       Vector2FromValue(info, 7),
+       ColorFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4812,10 +4812,10 @@ Napi::Value BindImageDrawLineV(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawCircle(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawCircle(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       ColorFromValue(info, 8)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4823,9 +4823,9 @@ Napi::Value BindImageDrawCircle(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawCircleV(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawCircleV(
-    &obj, Vector2FromValue(info, 1),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
+    &obj, Vector2FromValue(info, 5),
+       intFromValue(info, 7),
+       ColorFromValue(info, 8)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4833,11 +4833,11 @@ Napi::Value BindImageDrawCircleV(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawRectangle(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawRectangle(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4),
-       ColorFromValue(info, 5)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       intFromValue(info, 8),
+       ColorFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4845,9 +4845,9 @@ Napi::Value BindImageDrawRectangle(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawRectangleV(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawRectangleV(
-    &obj, Vector2FromValue(info, 1),
-       Vector2FromValue(info, 3),
-       ColorFromValue(info, 5)
+    &obj, Vector2FromValue(info, 5),
+       Vector2FromValue(info, 7),
+       ColorFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4855,8 +4855,8 @@ Napi::Value BindImageDrawRectangleV(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawRectangleRec(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawRectangleRec(
-    &obj, RectangleFromValue(info, 1),
-       ColorFromValue(info, 5)
+    &obj, RectangleFromValue(info, 5),
+       ColorFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4864,9 +4864,9 @@ Napi::Value BindImageDrawRectangleRec(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawRectangleLines(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawRectangleLines(
-    &obj, RectangleFromValue(info, 1),
-       intFromValue(info, 5),
-       ColorFromValue(info, 6)
+    &obj, RectangleFromValue(info, 5),
+       intFromValue(info, 9),
+       ColorFromValue(info, 10)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4874,10 +4874,10 @@ Napi::Value BindImageDrawRectangleLines(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDraw(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDraw(
-    &obj, ImageFromValue(info, 1),
-       RectangleFromValue(info, 6),
+    &obj, ImageFromValue(info, 5),
        RectangleFromValue(info, 10),
-       ColorFromValue(info, 14)
+       RectangleFromValue(info, 14),
+       ColorFromValue(info, 18)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4885,11 +4885,11 @@ Napi::Value BindImageDraw(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawText(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawText(
-    &obj, (const char *) stringFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4),
-       ColorFromValue(info, 5)
+    &obj, (const char *) stringFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       intFromValue(info, 8),
+       ColorFromValue(info, 9)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4897,12 +4897,12 @@ Napi::Value BindImageDrawText(const Napi::CallbackInfo& info) {
 Napi::Value BindImageDrawTextEx(const Napi::CallbackInfo& info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawTextEx(
-    &obj, FontFromValue(info, 1),
-       (const char *) stringFromValue(info, 11),
-       Vector2FromValue(info, 12),
-       floatFromValue(info, 14),
-       floatFromValue(info, 15),
-       ColorFromValue(info, 16)
+    &obj, FontFromValue(info, 5),
+       (const char *) stringFromValue(info, 15),
+       Vector2FromValue(info, 16),
+       floatFromValue(info, 18),
+       floatFromValue(info, 19),
+       ColorFromValue(info, 20)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4919,7 +4919,7 @@ Napi::Value BindGenTextureMipmaps(const Napi::CallbackInfo& info) {
 Napi::Value BindUploadMesh(const Napi::CallbackInfo& info) {
   Mesh obj = MeshFromValue(info, 0);
   UploadMesh(
-    &obj, boolFromValue(info, 1)
+    &obj, boolFromValue(info, 15)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4945,8 +4945,8 @@ Napi::Value BindGenMeshBinormals(const Napi::CallbackInfo& info) {
 Napi::Value BindSetModelMeshMaterial(const Napi::CallbackInfo& info) {
   Model obj = ModelFromValue(info, 0);
   SetModelMeshMaterial(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2)
+    &obj, intFromValue(info, 24),
+       intFromValue(info, 25)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4954,9 +4954,9 @@ Napi::Value BindSetModelMeshMaterial(const Napi::CallbackInfo& info) {
 Napi::Value BindWaveFormat(const Napi::CallbackInfo& info) {
   Wave obj = WaveFromValue(info, 0);
   WaveFormat(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7)
   );
   return ToValue(info.Env(), obj);
 }
@@ -4964,8 +4964,8 @@ Napi::Value BindWaveFormat(const Napi::CallbackInfo& info) {
 Napi::Value BindWaveCrop(const Napi::CallbackInfo& info) {
   Wave obj = WaveFromValue(info, 0);
   WaveCrop(
-    &obj, intFromValue(info, 1),
-       intFromValue(info, 2)
+    &obj, intFromValue(info, 5),
+       intFromValue(info, 6)
   );
   return ToValue(info.Env(), obj);
 }

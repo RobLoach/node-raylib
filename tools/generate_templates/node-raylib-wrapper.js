@@ -103,11 +103,10 @@ function ${func.name}(${!params ? '' : params.map(param => param.name).join(', '
       .map(param => { return FlattenArgument(structs, param) })
       .join(',\n    ') + '\n  '
   })
-  if (obj) {
+  if (typeof obj !== "undefined") {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(${params[0].name}, key)) {
-        ${params[0].name}[key] = obj[key]
-      }
+      ${params[0].name}[key] = obj[key]
+      console.log(obj[key])
     }
   }
 }
