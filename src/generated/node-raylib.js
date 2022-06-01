@@ -9699,11 +9699,9 @@ function UpdateCamera(camera) {
     camera.fovy,
     camera.projection
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(camera, key)) {
-        camera[key] = obj[key]
-      }
+      camera[key] = obj[key]
     }
   }
 }
@@ -9726,11 +9724,9 @@ function ImageFormat(image, newFormat) {
     image.format,
     newFormat
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9756,11 +9752,9 @@ function ImageToPOT(image, fill) {
     fill.b,
     fill.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9786,11 +9780,9 @@ function ImageCrop(image, crop) {
     crop.width,
     crop.height
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9813,11 +9805,9 @@ function ImageAlphaCrop(image, threshold) {
     image.format,
     threshold
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9845,11 +9835,9 @@ function ImageAlphaClear(image, color, threshold) {
     color.a,
     threshold
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9876,11 +9864,9 @@ function ImageAlphaMask(image, alphaMask) {
     alphaMask.mipmaps,
     alphaMask.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9901,11 +9887,9 @@ function ImageAlphaPremultiply(image) {
     image.mipmaps,
     image.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9930,11 +9914,9 @@ function ImageResize(image, newWidth, newHeight) {
     newWidth,
     newHeight
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9959,11 +9941,9 @@ function ImageResizeNN(image, newWidth, newHeight) {
     newWidth,
     newHeight
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -9997,11 +9977,9 @@ function ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill) {
     fill.b,
     fill.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10022,11 +10000,9 @@ function ImageMipmaps(image) {
     image.mipmaps,
     image.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10055,11 +10031,9 @@ function ImageDither(image, rBpp, gBpp, bBpp, aBpp) {
     bBpp,
     aBpp
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10080,11 +10054,9 @@ function ImageFlipVertical(image) {
     image.mipmaps,
     image.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10105,11 +10077,9 @@ function ImageFlipHorizontal(image) {
     image.mipmaps,
     image.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10130,11 +10100,9 @@ function ImageRotateCW(image) {
     image.mipmaps,
     image.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10155,11 +10123,9 @@ function ImageRotateCCW(image) {
     image.mipmaps,
     image.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10185,11 +10151,9 @@ function ImageColorTint(image, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10210,11 +10174,9 @@ function ImageColorInvert(image) {
     image.mipmaps,
     image.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10235,11 +10197,9 @@ function ImageColorGrayscale(image) {
     image.mipmaps,
     image.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10262,11 +10222,9 @@ function ImageColorContrast(image, contrast) {
     image.format,
     contrast
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10289,11 +10247,9 @@ function ImageColorBrightness(image, brightness) {
     image.format,
     brightness
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10324,11 +10280,9 @@ function ImageColorReplace(image, color, replace) {
     replace.b,
     replace.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(image, key)) {
-        image[key] = obj[key]
-      }
+      image[key] = obj[key]
     }
   }
 }
@@ -10354,11 +10308,9 @@ function ImageClearBackground(dst, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10388,11 +10340,9 @@ function ImageDrawPixel(dst, posX, posY, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10421,11 +10371,9 @@ function ImageDrawPixelV(dst, position, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10459,11 +10407,9 @@ function ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10495,11 +10441,9 @@ function ImageDrawLineV(dst, start, end, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10531,11 +10475,9 @@ function ImageDrawCircle(dst, centerX, centerY, radius, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10566,11 +10508,9 @@ function ImageDrawCircleV(dst, center, radius, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10604,11 +10544,9 @@ function ImageDrawRectangle(dst, posX, posY, width, height, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10640,11 +10578,9 @@ function ImageDrawRectangleV(dst, position, size, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10675,11 +10611,9 @@ function ImageDrawRectangleRec(dst, rec, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10712,11 +10646,9 @@ function ImageDrawRectangleLines(dst, rec, thick, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10758,11 +10690,9 @@ function ImageDraw(dst, src, srcRec, dstRec, tint) {
     tint.b,
     tint.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10796,11 +10726,9 @@ function ImageDrawText(dst, text, posX, posY, fontSize, color) {
     color.b,
     color.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10846,11 +10774,9 @@ function ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint) {
     tint.b,
     tint.a
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(dst, key)) {
-        dst[key] = obj[key]
-      }
+      dst[key] = obj[key]
     }
   }
 }
@@ -10871,11 +10797,9 @@ function GenTextureMipmaps(texture) {
     texture.mipmaps,
     texture.format
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(texture, key)) {
-        texture[key] = obj[key]
-      }
+      texture[key] = obj[key]
     }
   }
 }
@@ -10908,11 +10832,9 @@ function UploadMesh(mesh, dynamic) {
     mesh.vboId,
     dynamic
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(mesh, key)) {
-        mesh[key] = obj[key]
-      }
+      mesh[key] = obj[key]
     }
   }
 }
@@ -10943,11 +10865,9 @@ function GenMeshTangents(mesh) {
     mesh.vaoId,
     mesh.vboId
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(mesh, key)) {
-        mesh[key] = obj[key]
-      }
+      mesh[key] = obj[key]
     }
   }
 }
@@ -10978,11 +10898,9 @@ function GenMeshBinormals(mesh) {
     mesh.vaoId,
     mesh.vboId
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(mesh, key)) {
-        mesh[key] = obj[key]
-      }
+      mesh[key] = obj[key]
     }
   }
 }
@@ -11026,11 +10944,9 @@ function SetModelMeshMaterial(model, meshId, materialId) {
     meshId,
     materialId
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(model, key)) {
-        model[key] = obj[key]
-      }
+      model[key] = obj[key]
     }
   }
 }
@@ -11057,11 +10973,9 @@ function WaveFormat(wave, sampleRate, sampleSize, channels) {
     sampleSize,
     channels
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(wave, key)) {
-        wave[key] = obj[key]
-      }
+      wave[key] = obj[key]
     }
   }
 }
@@ -11086,11 +11000,9 @@ function WaveCrop(wave, initSample, finalSample) {
     initSample,
     finalSample
   )
-  if (obj) {
+  if (typeof obj !== 'undefined') {
     for (const key in obj) {
-      if (Object.hasOwnProperty.call(wave, key)) {
-        wave[key] = obj[key]
-      }
+      wave[key] = obj[key]
     }
   }
 }

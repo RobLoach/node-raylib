@@ -146,8 +146,8 @@ void Bind${func.name}(const Napi::CallbackInfo& info) {
  */
 const BindFunctionPassByRef = (structs, func) => {
   let returnType = func.params[0].type
-  let length = 1
   returnType = returnType.replace(' *', '')
+  let length = TypeUnwrappedLength(structs, returnType)
   return `
 Napi::Value Bind${func.name}(const Napi::CallbackInfo& info) {
   ${returnType} obj = ${returnType}FromValue(info, 0);
