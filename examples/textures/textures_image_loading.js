@@ -11,31 +11,8 @@
 *
 ********************************************************************************************/
 
-const ray = require('../../index.js')
+const r = require('raylib')
 const { join } = require('path')
-
-
-ray.InitWindow(300, 300, "Image Draw Test");
-ray.SetTargetFPS(60);
-
-var MapImage = ray.GenImageColor(200, 200, ray.RED);
-console.log(MapImage)
-ray.ImageDrawPixel(MapImage, 5, 5, ray.YELLOW);
-ray.ImageDrawRectangle(MapImage, 10, 10, 10, 10, ray.GREEN);
-ray.ImageDrawCircle(MapImage, 50, 50, 10, ray.PINK);
-ray.ImageDrawRectangleLines(MapImage, ray.Rectangle(50,10,10,5), 1, ray.BLUE);
-console.log(MapImage)
-let MapTexture = ray.LoadTextureFromImage(MapImage);
-
-while(!ray.WindowShouldClose()){
-	ray.BeginDrawing();
-	ray.ClearBackground(ray.BLACK);
-
-	ray.DrawTexture(MapTexture, 50, 50, ray.WHITE);
-
-	ray.EndDrawing();
-}
-ray.CloseWindow();
 
 // Initialization
 // --------------------------------------------------------------------------------------
