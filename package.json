@@ -44,7 +44,6 @@
   ],
   "license": "Zlib",
   "files": [
-    "docs/*",
     "bin/*",
     "man/node-raylib.1",
     "src/*",
