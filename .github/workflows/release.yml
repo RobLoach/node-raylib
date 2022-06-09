@@ -21,6 +21,66 @@ jobs:
           body: This is an automated release for ${{ github.ref }}. It will be used to speed up `npm install`.
         env:
           GITHUB_TOKEN: ${{ github.token }}
+  linux-arm:
+    runs-on: ubuntu-latest
+    needs: create_release
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Cache Node Dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - name: Install Node Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
+      - name: Build for arm
+        run: docker run --platform linux/arm -it --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
+      - name: upload linux artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ./build/Release/node-raylib.node
+          asset_name: node-raylib-4.0-linux-arm.node
+          asset_content_type: application/octet-stream
+  linux-arm64:
+    runs-on: ubuntu-latest
+    needs: create_release
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Cache Node Dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - name: Install Node Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
+      - name: Build for arm
+        run: docker run --platform linux/arm64 -it --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
+      - name: upload linux artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ./build/Release/node-raylib.node
+          asset_name: node-raylib-4.0-linux-arm64.node
+          asset_content_type: application/octet-stream
   linux:
     runs-on: ubuntu-latest
     needs: create_release
