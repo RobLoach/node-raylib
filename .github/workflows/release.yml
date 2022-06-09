@@ -37,9 +37,6 @@ jobs:
         with:
           path: ./node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
-      - name: Install Node Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci --ignore-scripts
       - name: Build for arm
         run: docker run --platform linux/arm -it --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
       - name: upload linux artifact
@@ -67,9 +64,6 @@ jobs:
         with:
           path: ./node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
-      - name: Install Node Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci --ignore-scripts
       - name: Build for arm
         run: docker run --platform linux/arm64 -it --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
       - name: upload linux artifact
