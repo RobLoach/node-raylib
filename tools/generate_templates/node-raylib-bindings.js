@@ -236,13 +236,6 @@ inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int i
 inline unsigned int unsignedintFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
-// inline float* float4FromValue(const Napi::CallbackInfo& info, int index) {
-//   Napi::Float32Array array = info[index].As<Napi::Float32Array>();
-//   size_t size = array.ElementLength();
-//   float* buffer = new float[size];
-//   memcpy(buffer, array.Data(), size);
-//   return buffer;
-// }
 inline bool boolFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Boolean>();
 }
