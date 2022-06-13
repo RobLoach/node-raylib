@@ -1,6 +1,6 @@
 {
   "name": "raylib",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Node.js bindings for raylib.",
   "main": "index.js",
   "types": "src/generated/node-raylib.d.ts",
@@ -44,7 +44,6 @@
   ],
   "license": "Zlib",
   "files": [
-    "docs/*",
     "bin/*",
     "man/node-raylib.1",
     "src/*",
@@ -65,9 +64,9 @@
   "devDependencies": {
     "@raylib/api": "^4.0.0",
     "archiver": "^5.3.1",
-    "jest": "^28.0.2",
+    "jest": "^28.1.0",
     "jsdoc-to-markdown": "^7.1.1",
-    "pkg": "^5.6.0",
+    "pkg": "^5.7.0",
     "standard": "^17.0.0"
   },
   "jsdoc2md": {
