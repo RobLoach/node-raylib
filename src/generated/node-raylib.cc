@@ -263,6 +263,13 @@ inline Transform TransformFromValue(const Napi::CallbackInfo& info, int index) {
   };
 }
 
+inline BoneInfo BoneInfoFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     pointerFromValue(info, index + 0),
+     charFromValue(info, index + 1)
+  };
+}
+
 inline Model ModelFromValue(const Napi::CallbackInfo& info, int index) {
   return {
      MatrixFromValue(info, index + 0),
@@ -528,6 +535,13 @@ inline Napi::Value ToValue(Napi::Env env, Transform obj) {
   out.Set("translation", ToValue(env, obj.translation));
   out.Set("rotation", ToValue(env, obj.rotation));
   out.Set("scale", ToValue(env, obj.scale));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, BoneInfo obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("name", ToValue(env, obj.name));
+  out.Set("parent", ToValue(env, obj.parent));
   return out;
 }
 

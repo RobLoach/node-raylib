@@ -6,31 +6,24 @@ const path = require('path')
 
 // use this to keep from wrapping things
 const blocklist = [
-  // error: invalid conversion from ‘void (*)(int, const char*, ...)’ to ‘void (*)()’ [-fpermissive]
+  // Error: invalid conversion from ‘void (*)(int, const char*, ...)’ to ‘void (*)()’ [-fpermissive]
   'TraceLog',
   'TextFormat',
 
-  // edge case: need additional wrapping to function
+  // Edge case: need additional wrapping to function
   'SetShaderValue',
   'SetShaderValueV',
 
-  // DataCallback types not implemented in JSON?
+  // Callbacks: Not supported yet
   'SetTraceLogCallback',
   'SetLoadFileDataCallback',
   'SetSaveFileDataCallback',
   'SetLoadFileTextCallback',
   'SetSaveFileTextCallback',
 
-  // these appear to not be defined, even though they are in JSON
-  'SetWindowOpacity',
-  'GetRenderWidth',
-  'GetRenderHeight',
-  'ExportFontAsCode',
-
   // Structs
   // @todo Verify Structs that have array properties
   'VrStereoConfig', // Matrix[2], float[2]
-  'BoneInfo', // char[32]
   'VrDeviceInfo', // float[4]
   'Material', // float[4]
 

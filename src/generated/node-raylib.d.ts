@@ -256,7 +256,7 @@ declare module "raylib" {
   /** Bone, skeletal animation bone */
   export interface BoneInfo {
     /** Bone name */
-    name: char[32]
+    name: string
     /** Bone parent */
     parent: string
   }

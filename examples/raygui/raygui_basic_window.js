@@ -17,7 +17,7 @@ const screenHeight = 450
 let showMessageBox = false
 let backgroundColor = r.RAYWHITE
 
-r.InitWindow(screenWidth, screenHeight, 'raylib [core] example - basic window')
+r.InitWindow(screenWidth, screenHeight, 'raylib [raygui] example - basic window')
 
 r.SetTargetFPS(60)
 
