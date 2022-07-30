@@ -37,7 +37,11 @@ const blocklist = [
   // raymath
   // @todo Fix helper structs for float arrays
   'Vector3ToFloatV', // float3
-  'MatrixToFloatV' // float16
+  'MatrixToFloatV', // float16
+
+  // raygui
+  'UnloadGuiStyle', // Commented out
+  'LoadGuiStyle', // Commented out
 ]
 
 // these functions expect the first argument to be passed as a reference in C++
@@ -183,6 +187,11 @@ function getDefs () {
       // Add Raymath
       const raymath = raylibApi.raymath
       functions.push(...raymath.functions)
+
+      // Add Raygui
+      const raygui = raylibApi.raygui
+      functions.push(...raygui.functions)
+      enums.push(...raygui.enums)
 
       return { structs, enums, functions }
 }

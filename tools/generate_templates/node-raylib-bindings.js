@@ -185,6 +185,9 @@ module.exports = ({ functions, structs, enums, blocklist, byreflist }) => `
 #include "extras/easings.h"
 #include "raymath.h"
 
+#define RAYGUI_IMPLEMENTATION
+#include "extras/raygui.h"
+
 using namespace Napi;
 
 inline Napi::Value ToValue(Napi::Env env, bool value) {

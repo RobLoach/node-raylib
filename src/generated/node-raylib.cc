@@ -8,6 +8,9 @@
 #include "extras/easings.h"
 #include "raymath.h"
 
+#define RAYGUI_IMPLEMENTATION
+#include "extras/raygui.h"
+
 using namespace Napi;
 
 inline Napi::Value ToValue(Napi::Env env, bool value) {
@@ -3773,6 +3776,353 @@ Napi::Value BindQuaternionTransform(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindGuiIsLocked(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiIsLocked(
+      
+    )
+  );
+}
+
+Napi::Value BindGuiGetState(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiGetState(
+      
+    )
+  );
+}
+
+Napi::Value BindGuiGetFont(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiGetFont(
+      
+    )
+  );
+}
+
+Napi::Value BindGuiGetStyle(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiGetStyle(
+       intFromValue(info, 0),
+       intFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindGuiWindowBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiWindowBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiScrollPanel(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiScrollPanel(
+       RectangleFromValue(info, 0),
+       RectangleFromValue(info, 4),
+       (Vector2 *) pointerFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGuiButton(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiButton(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiLabelButton(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiLabelButton(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiToggle(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiToggle(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       boolFromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindGuiToggleGroup(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiToggleGroup(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       intFromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindGuiCheckBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiCheckBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       boolFromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindGuiComboBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiComboBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       intFromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindGuiDropdownBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiDropdownBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (int *) pointerFromValue(info, 5),
+       boolFromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindGuiSpinner(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiSpinner(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (int *) pointerFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       boolFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGuiValueBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiValueBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (int *) pointerFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       boolFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGuiTextBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiTextBox(
+       RectangleFromValue(info, 0),
+       (char *) pointerFromValue(info, 4),
+       intFromValue(info, 5),
+       boolFromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindGuiTextBoxMulti(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiTextBoxMulti(
+       RectangleFromValue(info, 0),
+       (char *) pointerFromValue(info, 4),
+       intFromValue(info, 5),
+       boolFromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindGuiSlider(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiSlider(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (const char *) stringFromValue(info, 5),
+       floatFromValue(info, 6),
+       floatFromValue(info, 7),
+       floatFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGuiSliderBar(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiSliderBar(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (const char *) stringFromValue(info, 5),
+       floatFromValue(info, 6),
+       floatFromValue(info, 7),
+       floatFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGuiProgressBar(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiProgressBar(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (const char *) stringFromValue(info, 5),
+       floatFromValue(info, 6),
+       floatFromValue(info, 7),
+       floatFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGuiScrollBar(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiScrollBar(
+       RectangleFromValue(info, 0),
+       intFromValue(info, 4),
+       intFromValue(info, 5),
+       intFromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindGuiGrid(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiGrid(
+       RectangleFromValue(info, 0),
+       floatFromValue(info, 4),
+       intFromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindGuiListView(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiListView(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (int *) pointerFromValue(info, 5),
+       intFromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindGuiListViewEx(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiListViewEx(
+       RectangleFromValue(info, 0),
+       (const char **) pointerFromValue(info, 4),
+       intFromValue(info, 5),
+       (int *) pointerFromValue(info, 6),
+       (int *) pointerFromValue(info, 7),
+       intFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGuiMessageBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiMessageBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (const char *) stringFromValue(info, 5),
+       (const char *) stringFromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindGuiTextInputBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiTextInputBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (const char *) stringFromValue(info, 5),
+       (const char *) stringFromValue(info, 6),
+       (char *) pointerFromValue(info, 7)
+    )
+  );
+}
+
+Napi::Value BindGuiColorPicker(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiColorPicker(
+       RectangleFromValue(info, 0),
+       ColorFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiColorPanel(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiColorPanel(
+       RectangleFromValue(info, 0),
+       ColorFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiColorBarAlpha(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiColorBarAlpha(
+       RectangleFromValue(info, 0),
+       floatFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiColorBarHue(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiColorBarHue(
+       RectangleFromValue(info, 0),
+       floatFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiIconText(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiIconText(
+       intFromValue(info, 0),
+       (const char *) stringFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindGuiGetIcons(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiGetIcons(
+      
+    )
+  );
+}
+
+Napi::Value BindGuiGetIconData(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiGetIconData(
+       intFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindGuiCheckIconPixel(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiCheckIconPixel(
+       intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+    )
+  );
+}
+
 void BindInitWindow(const Napi::CallbackInfo& info) {
   InitWindow(
      intFromValue(info, 0),
@@ -5314,6 +5664,142 @@ void BindQuaternionToAxisAngle(const Napi::CallbackInfo& info) {
        (float *) pointerFromValue(info, 2)
   );
 }
+
+void BindGuiEnable(const Napi::CallbackInfo& info) {
+  GuiEnable(
+    
+  );
+}
+
+void BindGuiDisable(const Napi::CallbackInfo& info) {
+  GuiDisable(
+    
+  );
+}
+
+void BindGuiLock(const Napi::CallbackInfo& info) {
+  GuiLock(
+    
+  );
+}
+
+void BindGuiUnlock(const Napi::CallbackInfo& info) {
+  GuiUnlock(
+    
+  );
+}
+
+void BindGuiFade(const Napi::CallbackInfo& info) {
+  GuiFade(
+     floatFromValue(info, 0)
+  );
+}
+
+void BindGuiSetState(const Napi::CallbackInfo& info) {
+  GuiSetState(
+     intFromValue(info, 0)
+  );
+}
+
+void BindGuiSetFont(const Napi::CallbackInfo& info) {
+  GuiSetFont(
+     FontFromValue(info, 0)
+  );
+}
+
+void BindGuiSetStyle(const Napi::CallbackInfo& info) {
+  GuiSetStyle(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+  );
+}
+
+void BindGuiGroupBox(const Napi::CallbackInfo& info) {
+  GuiGroupBox(
+     RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+  );
+}
+
+void BindGuiLine(const Napi::CallbackInfo& info) {
+  GuiLine(
+     RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+  );
+}
+
+void BindGuiPanel(const Napi::CallbackInfo& info) {
+  GuiPanel(
+     RectangleFromValue(info, 0)
+  );
+}
+
+void BindGuiLabel(const Napi::CallbackInfo& info) {
+  GuiLabel(
+     RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+  );
+}
+
+void BindGuiStatusBar(const Napi::CallbackInfo& info) {
+  GuiStatusBar(
+     RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+  );
+}
+
+void BindGuiDummyRec(const Napi::CallbackInfo& info) {
+  GuiDummyRec(
+     RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+  );
+}
+
+void BindGuiLoadStyle(const Napi::CallbackInfo& info) {
+  GuiLoadStyle(
+     (const char *) stringFromValue(info, 0)
+  );
+}
+
+void BindGuiLoadStyleDefault(const Napi::CallbackInfo& info) {
+  GuiLoadStyleDefault(
+    
+  );
+}
+
+void BindGuiDrawIcon(const Napi::CallbackInfo& info) {
+  GuiDrawIcon(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3),
+       ColorFromValue(info, 4)
+  );
+}
+
+void BindGuiSetIconData(const Napi::CallbackInfo& info) {
+  GuiSetIconData(
+     intFromValue(info, 0),
+       (unsigned int *) pointerFromValue(info, 1)
+  );
+}
+
+void BindGuiSetIconPixel(const Napi::CallbackInfo& info) {
+  GuiSetIconPixel(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+  );
+}
+
+void BindGuiClearIconPixel(const Napi::CallbackInfo& info) {
+  GuiClearIconPixel(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+  );
+}
 // By-Reference function bindings
 
 Napi::Value BindUpdateCamera(const Napi::CallbackInfo& info) {
@@ -6380,6 +6866,60 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindQuaternionFromEuler", Napi::Function::New(env, BindQuaternionFromEuler));
   exports.Set("BindQuaternionToEuler", Napi::Function::New(env, BindQuaternionToEuler));
   exports.Set("BindQuaternionTransform", Napi::Function::New(env, BindQuaternionTransform));
+  exports.Set("BindGuiEnable", Napi::Function::New(env, BindGuiEnable));
+  exports.Set("BindGuiDisable", Napi::Function::New(env, BindGuiDisable));
+  exports.Set("BindGuiLock", Napi::Function::New(env, BindGuiLock));
+  exports.Set("BindGuiUnlock", Napi::Function::New(env, BindGuiUnlock));
+  exports.Set("BindGuiIsLocked", Napi::Function::New(env, BindGuiIsLocked));
+  exports.Set("BindGuiFade", Napi::Function::New(env, BindGuiFade));
+  exports.Set("BindGuiSetState", Napi::Function::New(env, BindGuiSetState));
+  exports.Set("BindGuiGetState", Napi::Function::New(env, BindGuiGetState));
+  exports.Set("BindGuiSetFont", Napi::Function::New(env, BindGuiSetFont));
+  exports.Set("BindGuiGetFont", Napi::Function::New(env, BindGuiGetFont));
+  exports.Set("BindGuiSetStyle", Napi::Function::New(env, BindGuiSetStyle));
+  exports.Set("BindGuiGetStyle", Napi::Function::New(env, BindGuiGetStyle));
+  exports.Set("BindGuiWindowBox", Napi::Function::New(env, BindGuiWindowBox));
+  exports.Set("BindGuiGroupBox", Napi::Function::New(env, BindGuiGroupBox));
+  exports.Set("BindGuiLine", Napi::Function::New(env, BindGuiLine));
+  exports.Set("BindGuiPanel", Napi::Function::New(env, BindGuiPanel));
+  exports.Set("BindGuiScrollPanel", Napi::Function::New(env, BindGuiScrollPanel));
+  exports.Set("BindGuiLabel", Napi::Function::New(env, BindGuiLabel));
+  exports.Set("BindGuiButton", Napi::Function::New(env, BindGuiButton));
+  exports.Set("BindGuiLabelButton", Napi::Function::New(env, BindGuiLabelButton));
+  exports.Set("BindGuiToggle", Napi::Function::New(env, BindGuiToggle));
+  exports.Set("BindGuiToggleGroup", Napi::Function::New(env, BindGuiToggleGroup));
+  exports.Set("BindGuiCheckBox", Napi::Function::New(env, BindGuiCheckBox));
+  exports.Set("BindGuiComboBox", Napi::Function::New(env, BindGuiComboBox));
+  exports.Set("BindGuiDropdownBox", Napi::Function::New(env, BindGuiDropdownBox));
+  exports.Set("BindGuiSpinner", Napi::Function::New(env, BindGuiSpinner));
+  exports.Set("BindGuiValueBox", Napi::Function::New(env, BindGuiValueBox));
+  exports.Set("BindGuiTextBox", Napi::Function::New(env, BindGuiTextBox));
+  exports.Set("BindGuiTextBoxMulti", Napi::Function::New(env, BindGuiTextBoxMulti));
+  exports.Set("BindGuiSlider", Napi::Function::New(env, BindGuiSlider));
+  exports.Set("BindGuiSliderBar", Napi::Function::New(env, BindGuiSliderBar));
+  exports.Set("BindGuiProgressBar", Napi::Function::New(env, BindGuiProgressBar));
+  exports.Set("BindGuiStatusBar", Napi::Function::New(env, BindGuiStatusBar));
+  exports.Set("BindGuiDummyRec", Napi::Function::New(env, BindGuiDummyRec));
+  exports.Set("BindGuiScrollBar", Napi::Function::New(env, BindGuiScrollBar));
+  exports.Set("BindGuiGrid", Napi::Function::New(env, BindGuiGrid));
+  exports.Set("BindGuiListView", Napi::Function::New(env, BindGuiListView));
+  exports.Set("BindGuiListViewEx", Napi::Function::New(env, BindGuiListViewEx));
+  exports.Set("BindGuiMessageBox", Napi::Function::New(env, BindGuiMessageBox));
+  exports.Set("BindGuiTextInputBox", Napi::Function::New(env, BindGuiTextInputBox));
+  exports.Set("BindGuiColorPicker", Napi::Function::New(env, BindGuiColorPicker));
+  exports.Set("BindGuiColorPanel", Napi::Function::New(env, BindGuiColorPanel));
+  exports.Set("BindGuiColorBarAlpha", Napi::Function::New(env, BindGuiColorBarAlpha));
+  exports.Set("BindGuiColorBarHue", Napi::Function::New(env, BindGuiColorBarHue));
+  exports.Set("BindGuiLoadStyle", Napi::Function::New(env, BindGuiLoadStyle));
+  exports.Set("BindGuiLoadStyleDefault", Napi::Function::New(env, BindGuiLoadStyleDefault));
+  exports.Set("BindGuiIconText", Napi::Function::New(env, BindGuiIconText));
+  exports.Set("BindGuiDrawIcon", Napi::Function::New(env, BindGuiDrawIcon));
+  exports.Set("BindGuiGetIcons", Napi::Function::New(env, BindGuiGetIcons));
+  exports.Set("BindGuiGetIconData", Napi::Function::New(env, BindGuiGetIconData));
+  exports.Set("BindGuiSetIconData", Napi::Function::New(env, BindGuiSetIconData));
+  exports.Set("BindGuiSetIconPixel", Napi::Function::New(env, BindGuiSetIconPixel));
+  exports.Set("BindGuiClearIconPixel", Napi::Function::New(env, BindGuiClearIconPixel));
+  exports.Set("BindGuiCheckIconPixel", Napi::Function::New(env, BindGuiCheckIconPixel));
 
   exports.Set("BindSetShaderFloat", Napi::Function::New(env, BindSetShaderFloat));
   exports.Set("BindSetShaderInt", Napi::Function::New(env, BindSetShaderInt));
