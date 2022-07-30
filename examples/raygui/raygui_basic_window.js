@@ -1,10 +1,10 @@
 /*******************************************************************************************
 *
-*   raylib [core] example - Basic window
+*   raylib [raygui] example - Basic window
 *
 *   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
 *
-*   Copyright (c) 2018 Rob Loach (@RobLoach)
+*   Copyright (c) 2022 Rob Loach (@RobLoach)
 *
 ********************************************************************************************/
 
@@ -21,7 +21,7 @@ r.InitWindow(screenWidth, screenHeight, 'raylib [core] example - basic window')
 
 r.SetTargetFPS(60)
 
-//r.GuiLoadStyleDefault()
+// r.GuiLoadStyleDefault()
 // --------------------------------------------------------------------------------------
 
 // Main game loop
@@ -37,12 +37,12 @@ while (!r.WindowShouldClose()) { // Detect window close button or ESC key
 
   r.ClearBackground(backgroundColor)
 
-  if (r.GuiButton(r.Rectangle(30, 100, 200, 30), "Change Background Color")) {
+  if (r.GuiButton(r.Rectangle(30, 100, 200, 30), 'Change Background Color')) {
     showMessageBox = true
   }
 
   if (showMessageBox) {
-    switch (r.GuiMessageBox(r.Rectangle(r.GetScreenWidth() / 2 - 200, r.GetScreenHeight() / 2 - 50, 400, 100), "Change Background Color", "Do you really want to change the background?", "Yes;No")) {
+    switch (r.GuiMessageBox(r.Rectangle(r.GetScreenWidth() / 2 - 200, r.GetScreenHeight() / 2 - 50, 400, 100), 'Change Background Color', 'Do you really want to change the background?', 'Yes;No')) {
       case 0:
       case 2:
         showMessageBox = false
@@ -52,7 +52,7 @@ while (!r.WindowShouldClose()) { // Detect window close button or ESC key
           r.GetRandomValue(0, 255),
           r.GetRandomValue(0, 255),
           r.GetRandomValue(0, 255),
-          255,
+          255
         )
         showMessageBox = false
     }

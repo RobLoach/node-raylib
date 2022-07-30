@@ -35,7 +35,7 @@
 <dd><p>Check if one specific window flag is enabled</p>
 </dd>
 <dt><a href="#SetWindowState">SetWindowState(flags)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set window configuration state using flags (only PLATFORM_DESKTOP)</p>
+<dd><p>Set window configuration state using flags</p>
 </dd>
 <dt><a href="#ClearWindowState">ClearWindowState(flags)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Clear window configuration state flags</p>
@@ -821,7 +821,7 @@
 <dd><p>Load font from file into GPU memory (VRAM)</p>
 </dd>
 <dt><a href="#LoadFontEx">LoadFontEx(fileName, fontSize, fontChars, glyphCount)</a> ⇒ <code>Font</code></dt>
-<dd><p>Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set</p>
+<dd><p>Load font from file with extended parameters</p>
 </dd>
 <dt><a href="#LoadFontFromImage">LoadFontFromImage(image, key, firstChar)</a> ⇒ <code>Font</code></dt>
 <dd><p>Load font from Image (XNA style)</p>
@@ -839,7 +839,7 @@
 <dd><p>Unload font chars info data (RAM)</p>
 </dd>
 <dt><a href="#UnloadFont">UnloadFont(font)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Unload font from GPU memory (VRAM)</p>
+<dd><p>Unload Font from GPU memory (VRAM)</p>
 </dd>
 <dt><a href="#DrawFPS">DrawFPS(posX, posY)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw current FPS</p>
@@ -1276,89 +1276,164 @@
 <dt><a href="#SetAudioStreamBufferSizeDefault">SetAudioStreamBufferSizeDefault(size)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Default size for new audio streams</p>
 </dd>
-<dt><a href="#EaseLinearNone">EaseLinearNone(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseLinearNone.</p>
+<dt><a href="#GuiEnable">GuiEnable()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable gui controls (global state)</p>
 </dd>
-<dt><a href="#EaseLinearIn">EaseLinearIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseLinearIn.</p>
+<dt><a href="#GuiDisable">GuiDisable()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable gui controls (global state)</p>
 </dd>
-<dt><a href="#EaseLinearOut">EaseLinearOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseLinearOut.</p>
+<dt><a href="#GuiLock">GuiLock()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Lock gui controls (global state)</p>
 </dd>
-<dt><a href="#EaseLinearInOut">EaseLinearInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseLinearInOut.</p>
+<dt><a href="#GuiUnlock">GuiUnlock()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unlock gui controls (global state)</p>
 </dd>
-<dt><a href="#EaseSineIn">EaseSineIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseSineIn.</p>
+<dt><a href="#GuiIsLocked">GuiIsLocked()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if gui is locked (global state)</p>
 </dd>
-<dt><a href="#EaseSineOut">EaseSineOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseSineOut.</p>
+<dt><a href="#GuiFade">GuiFade(alpha)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f</p>
 </dd>
-<dt><a href="#EaseSineInOut">EaseSineInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseSineInOut.</p>
+<dt><a href="#GuiSetState">GuiSetState(state)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set gui state (global state)</p>
 </dd>
-<dt><a href="#EaseCircIn">EaseCircIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseCircIn.</p>
+<dt><a href="#GuiGetState">GuiGetState()</a> ⇒ <code>number</code></dt>
+<dd><p>Get gui state (global state)</p>
 </dd>
-<dt><a href="#EaseCircOut">EaseCircOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseCircOut.</p>
+<dt><a href="#GuiSetFont">GuiSetFont(font)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set gui custom font (global state)</p>
 </dd>
-<dt><a href="#EaseCircInOut">EaseCircInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseCircInOut.</p>
+<dt><a href="#GuiGetFont">GuiGetFont()</a> ⇒ <code>Font</code></dt>
+<dd><p>Get gui custom font (global state)</p>
 </dd>
-<dt><a href="#EaseCubicIn">EaseCubicIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseCubicIn.</p>
+<dt><a href="#GuiSetStyle">GuiSetStyle(control, property, value)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set one style property</p>
 </dd>
-<dt><a href="#EaseCubicOut">EaseCubicOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseCubicOut.</p>
+<dt><a href="#GuiGetStyle">GuiGetStyle(control, property)</a> ⇒ <code>number</code></dt>
+<dd><p>Get one style property</p>
 </dd>
-<dt><a href="#EaseCubicInOut">EaseCubicInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseCubicInOut.</p>
+<dt><a href="#GuiWindowBox">GuiWindowBox(bounds, title)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Window Box control, shows a window that can be closed</p>
 </dd>
-<dt><a href="#EaseQuadIn">EaseQuadIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseQuadIn.</p>
+<dt><a href="#GuiGroupBox">GuiGroupBox(bounds, text)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Group Box control with text name</p>
 </dd>
-<dt><a href="#EaseQuadOut">EaseQuadOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseQuadOut.</p>
+<dt><a href="#GuiLine">GuiLine(bounds, text)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Line separator control, could contain text</p>
 </dd>
-<dt><a href="#EaseQuadInOut">EaseQuadInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseQuadInOut.</p>
+<dt><a href="#GuiPanel">GuiPanel(bounds)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Panel control, useful to group controls</p>
 </dd>
-<dt><a href="#EaseExpoIn">EaseExpoIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseExpoIn.</p>
+<dt><a href="#GuiScrollPanel">GuiScrollPanel(bounds, content, scroll)</a> ⇒ <code><a href="#Rectangle">Rectangle</a></code></dt>
+<dd><p>Scroll Panel control</p>
 </dd>
-<dt><a href="#EaseExpoOut">EaseExpoOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseExpoOut.</p>
+<dt><a href="#GuiLabel">GuiLabel(bounds, text)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Label control, shows text</p>
 </dd>
-<dt><a href="#EaseExpoInOut">EaseExpoInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseExpoInOut.</p>
+<dt><a href="#GuiButton">GuiButton(bounds, text)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Button control, returns true when clicked</p>
 </dd>
-<dt><a href="#EaseBackIn">EaseBackIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseBackIn.</p>
+<dt><a href="#GuiLabelButton">GuiLabelButton(bounds, text)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Label button control, show true when clicked</p>
 </dd>
-<dt><a href="#EaseBackOut">EaseBackOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseBackOut.</p>
+<dt><a href="#GuiToggle">GuiToggle(bounds, text, active)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Toggle Button control, returns true when active</p>
 </dd>
-<dt><a href="#EaseBackInOut">EaseBackInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseBackInOut.</p>
+<dt><a href="#GuiToggleGroup">GuiToggleGroup(bounds, text, active)</a> ⇒ <code>number</code></dt>
+<dd><p>Toggle Group control, returns active toggle index</p>
 </dd>
-<dt><a href="#EaseBounceOut">EaseBounceOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseBounceOut.</p>
+<dt><a href="#GuiCheckBox">GuiCheckBox(bounds, text, checked)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check Box control, returns true when active</p>
 </dd>
-<dt><a href="#EaseBounceIn">EaseBounceIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseBounceIn.</p>
+<dt><a href="#GuiComboBox">GuiComboBox(bounds, text, active)</a> ⇒ <code>number</code></dt>
+<dd><p>Combo Box control, returns selected item index</p>
 </dd>
-<dt><a href="#EaseBounceInOut">EaseBounceInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseBounceInOut.</p>
+<dt><a href="#GuiDropdownBox">GuiDropdownBox(bounds, text, active, editMode)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Dropdown Box control, returns selected item</p>
 </dd>
-<dt><a href="#EaseElasticIn">EaseElasticIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseElasticIn.</p>
+<dt><a href="#GuiSpinner">GuiSpinner(bounds, text, value, minValue, maxValue, editMode)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Spinner control, returns selected value</p>
 </dd>
-<dt><a href="#EaseElasticOut">EaseElasticOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseElasticOut.</p>
+<dt><a href="#GuiValueBox">GuiValueBox(bounds, text, value, minValue, maxValue, editMode)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Value Box control, updates input text with numbers</p>
 </dd>
-<dt><a href="#EaseElasticInOut">EaseElasticInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
-<dd><p>Easing: EaseElasticInOut.</p>
+<dt><a href="#GuiTextBox">GuiTextBox(bounds, text, textSize, editMode)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Text Box control, updates input text</p>
+</dd>
+<dt><a href="#GuiTextBoxMulti">GuiTextBoxMulti(bounds, text, textSize, editMode)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Text Box control with multiple lines</p>
+</dd>
+<dt><a href="#GuiSlider">GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
+<dd><p>Slider control, returns selected value</p>
+</dd>
+<dt><a href="#GuiSliderBar">GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
+<dd><p>Slider Bar control, returns selected value</p>
+</dd>
+<dt><a href="#GuiProgressBar">GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
+<dd><p>Progress Bar control, shows current progress value</p>
+</dd>
+<dt><a href="#GuiStatusBar">GuiStatusBar(bounds, text)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Status Bar control, shows info text</p>
+</dd>
+<dt><a href="#GuiDummyRec">GuiDummyRec(bounds, text)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Dummy control for placeholders</p>
+</dd>
+<dt><a href="#GuiScrollBar">GuiScrollBar(bounds, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
+<dd><p>Scroll Bar control</p>
+</dd>
+<dt><a href="#GuiGrid">GuiGrid(bounds, spacing, subdivs)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Grid control</p>
+</dd>
+<dt><a href="#GuiListView">GuiListView(bounds, text, scrollIndex, active)</a> ⇒ <code>number</code></dt>
+<dd><p>List View control, returns selected list item index</p>
+</dd>
+<dt><a href="#GuiListViewEx">GuiListViewEx(bounds, text, count, focus, scrollIndex, active)</a> ⇒ <code>number</code></dt>
+<dd><p>List View with extended parameters</p>
+</dd>
+<dt><a href="#GuiMessageBox">GuiMessageBox(bounds, title, message, buttons)</a> ⇒ <code>number</code></dt>
+<dd><p>Message Box control, displays a message</p>
+</dd>
+<dt><a href="#GuiTextInputBox">GuiTextInputBox(bounds, title, message, buttons, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Text Input Box control, ask for text</p>
+</dd>
+<dt><a href="#GuiColorPicker">GuiColorPicker(bounds, color)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
+<dd><p>Color Picker control (multiple color controls)</p>
+</dd>
+<dt><a href="#GuiColorPanel">GuiColorPanel(bounds, color)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
+<dd><p>Color Panel control</p>
+</dd>
+<dt><a href="#GuiColorBarAlpha">GuiColorBarAlpha(bounds, alpha)</a> ⇒ <code>number</code></dt>
+<dd><p>Color Bar Alpha control</p>
+</dd>
+<dt><a href="#GuiColorBarHue">GuiColorBarHue(bounds, value)</a> ⇒ <code>number</code></dt>
+<dd><p>Color Bar Hue control</p>
+</dd>
+<dt><a href="#GuiLoadStyle">GuiLoadStyle(fileName)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Load style file over global style variable (.rgs)</p>
+</dd>
+<dt><a href="#GuiLoadStyleDefault">GuiLoadStyleDefault()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Load style default over global style</p>
+</dd>
+<dt><a href="#GuiIconText">GuiIconText(iconId, text)</a> ⇒ <code>string</code></dt>
+<dd><p>Get text with icon id prepended (if supported)</p>
+</dd>
+<dt><a href="#GuiGetIcons">GuiGetIcons()</a> ⇒ <code>number</code></dt>
+<dd><p>Get full icons data pointer</p>
+</dd>
+<dt><a href="#GuiGetIconData">GuiGetIconData(iconId)</a> ⇒ <code>number</code></dt>
+<dd><p>Get icon bit data</p>
+</dd>
+<dt><a href="#GuiSetIconData">GuiSetIconData(iconId, data)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set icon bit data</p>
+</dd>
+<dt><a href="#GuiSetIconPixel">GuiSetIconPixel(iconId, x, y)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set icon pixel value</p>
+</dd>
+<dt><a href="#GuiClearIconPixel">GuiClearIconPixel(iconId, x, y)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Clear icon pixel value</p>
+</dd>
+<dt><a href="#GuiCheckIconPixel">GuiCheckIconPixel(iconId, x, y)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check icon pixel value</p>
 </dd>
 <dt><a href="#UpdateCamera">UpdateCamera(camera)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Update camera position for selected mode</p>
@@ -1620,7 +1695,7 @@ Check if one specific window flag is enabled
 <a name="SetWindowState"></a>
 
 ## SetWindowState(flags) ⇒ <code>undefined</code>
-Set window configuration state using flags (only PLATFORM_DESKTOP)
+Set window configuration state using flags
 
 **Kind**: global function  
 
@@ -4668,7 +4743,7 @@ Load font from file into GPU memory (VRAM)
 <a name="LoadFontEx"></a>
 
 ## LoadFontEx(fileName, fontSize, fontChars, glyphCount) ⇒ <code>Font</code>
-Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
+Load font from file with extended parameters
 
 **Kind**: global function  
 **Returns**: <code>Font</code> - The resulting Font.  
@@ -4760,7 +4835,7 @@ Unload font chars info data (RAM)
 <a name="UnloadFont"></a>
 
 ## UnloadFont(font) ⇒ <code>undefined</code>
-Unload font from GPU memory (VRAM)
+Unload Font from GPU memory (VRAM)
 
 **Kind**: global function  
 
@@ -6627,425 +6702,664 @@ Default size for new audio streams
 | --- | --- |
 | size | <code>number</code> | 
 
-<a name="EaseLinearNone"></a>
+<a name="GuiEnable"></a>
 
-## EaseLinearNone(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseLinearNone.
+## GuiEnable() ⇒ <code>undefined</code>
+Enable gui controls (global state)
+
+**Kind**: global function  
+<a name="GuiDisable"></a>
+
+## GuiDisable() ⇒ <code>undefined</code>
+Disable gui controls (global state)
+
+**Kind**: global function  
+<a name="GuiLock"></a>
+
+## GuiLock() ⇒ <code>undefined</code>
+Lock gui controls (global state)
+
+**Kind**: global function  
+<a name="GuiUnlock"></a>
+
+## GuiUnlock() ⇒ <code>undefined</code>
+Unlock gui controls (global state)
+
+**Kind**: global function  
+<a name="GuiIsLocked"></a>
+
+## GuiIsLocked() ⇒ <code>boolean</code>
+Check if gui is locked (global state)
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+<a name="GuiFade"></a>
+
+## GuiFade(alpha) ⇒ <code>undefined</code>
+Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| alpha | <code>number</code> | 
+
+<a name="GuiSetState"></a>
+
+## GuiSetState(state) ⇒ <code>undefined</code>
+Set gui state (global state)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| state | <code>number</code> | 
+
+<a name="GuiGetState"></a>
+
+## GuiGetState() ⇒ <code>number</code>
+Get gui state (global state)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+<a name="GuiSetFont"></a>
+
+## GuiSetFont(font) ⇒ <code>undefined</code>
+Set gui custom font (global state)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| font | <code>Font</code> | 
+
+<a name="GuiGetFont"></a>
+
+## GuiGetFont() ⇒ <code>Font</code>
+Get gui custom font (global state)
+
+**Kind**: global function  
+**Returns**: <code>Font</code> - The resulting Font.  
+<a name="GuiSetStyle"></a>
+
+## GuiSetStyle(control, property, value) ⇒ <code>undefined</code>
+Set one style property
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| control | <code>number</code> | 
+| property | <code>number</code> | 
+| value | <code>number</code> | 
+
+<a name="GuiGetStyle"></a>
+
+## GuiGetStyle(control, property) ⇒ <code>number</code>
+Get one style property
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| control | <code>number</code> | 
+| property | <code>number</code> | 
+
+<a name="GuiWindowBox"></a>
+
+## GuiWindowBox(bounds, title) ⇒ <code>boolean</code>
+Window Box control, shows a window that can be closed
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| title | <code>string</code> | 
+
+<a name="GuiGroupBox"></a>
+
+## GuiGroupBox(bounds, text) ⇒ <code>undefined</code>
+Group Box control with text name
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiLine"></a>
+
+## GuiLine(bounds, text) ⇒ <code>undefined</code>
+Line separator control, could contain text
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiPanel"></a>
+
+## GuiPanel(bounds) ⇒ <code>undefined</code>
+Panel control, useful to group controls
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+
+<a name="GuiScrollPanel"></a>
+
+## GuiScrollPanel(bounds, content, scroll) ⇒ [<code>Rectangle</code>](#Rectangle)
+Scroll Panel control
+
+**Kind**: global function  
+**Returns**: [<code>Rectangle</code>](#Rectangle) - The resulting Rectangle.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| content | [<code>Rectangle</code>](#Rectangle) | 
+| scroll | <code>number</code> | 
+
+<a name="GuiLabel"></a>
+
+## GuiLabel(bounds, text) ⇒ <code>undefined</code>
+Label control, shows text
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiButton"></a>
+
+## GuiButton(bounds, text) ⇒ <code>boolean</code>
+Button control, returns true when clicked
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiLabelButton"></a>
+
+## GuiLabelButton(bounds, text) ⇒ <code>boolean</code>
+Label button control, show true when clicked
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiToggle"></a>
+
+## GuiToggle(bounds, text, active) ⇒ <code>boolean</code>
+Toggle Button control, returns true when active
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>boolean</code> | 
+
+<a name="GuiToggleGroup"></a>
+
+## GuiToggleGroup(bounds, text, active) ⇒ <code>number</code>
+Toggle Group control, returns active toggle index
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiCheckBox"></a>
+
+## GuiCheckBox(bounds, text, checked) ⇒ <code>boolean</code>
+Check Box control, returns true when active
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| checked | <code>boolean</code> | 
+
+<a name="GuiComboBox"></a>
+
+## GuiComboBox(bounds, text, active) ⇒ <code>number</code>
+Combo Box control, returns selected item index
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiDropdownBox"></a>
+
+## GuiDropdownBox(bounds, text, active, editMode) ⇒ <code>boolean</code>
+Dropdown Box control, returns selected item
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiSpinner"></a>
+
+## GuiSpinner(bounds, text, value, minValue, maxValue, editMode) ⇒ <code>boolean</code>
+Spinner control, returns selected value
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiValueBox"></a>
+
+## GuiValueBox(bounds, text, value, minValue, maxValue, editMode) ⇒ <code>boolean</code>
+Value Box control, updates input text with numbers
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiTextBox"></a>
+
+## GuiTextBox(bounds, text, textSize, editMode) ⇒ <code>boolean</code>
+Text Box control, updates input text
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| textSize | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiTextBoxMulti"></a>
+
+## GuiTextBoxMulti(bounds, text, textSize, editMode) ⇒ <code>boolean</code>
+Text Box control with multiple lines
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| textSize | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiSlider"></a>
+
+## GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
+Slider control, returns selected value
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| textLeft | <code>string</code> | 
+| textRight | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
 
-<a name="EaseLinearIn"></a>
+<a name="GuiSliderBar"></a>
 
-## EaseLinearIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseLinearIn.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseLinearOut"></a>
-
-## EaseLinearOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseLinearOut.
+## GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
+Slider Bar control, returns selected value
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| textLeft | <code>string</code> | 
+| textRight | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
 
-<a name="EaseLinearInOut"></a>
+<a name="GuiProgressBar"></a>
 
-## EaseLinearInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseLinearInOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseSineIn"></a>
-
-## EaseSineIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseSineIn.
+## GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
+Progress Bar control, shows current progress value
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| textLeft | <code>string</code> | 
+| textRight | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
 
-<a name="EaseSineOut"></a>
+<a name="GuiStatusBar"></a>
 
-## EaseSineOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseSineOut.
+## GuiStatusBar(bounds, text) ⇒ <code>undefined</code>
+Status Bar control, shows info text
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiDummyRec"></a>
+
+## GuiDummyRec(bounds, text) ⇒ <code>undefined</code>
+Dummy control for placeholders
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiScrollBar"></a>
+
+## GuiScrollBar(bounds, value, minValue, maxValue) ⇒ <code>number</code>
+Scroll Bar control
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
+
+<a name="GuiGrid"></a>
+
+## GuiGrid(bounds, spacing, subdivs) ⇒ [<code>Vector2</code>](#Vector2)
+Grid control
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| spacing | <code>number</code> | 
+| subdivs | <code>number</code> | 
+
+<a name="GuiListView"></a>
+
+## GuiListView(bounds, text, scrollIndex, active) ⇒ <code>number</code>
+List View control, returns selected list item index
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| scrollIndex | <code>number</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiListViewEx"></a>
+
+## GuiListViewEx(bounds, text, count, focus, scrollIndex, active) ⇒ <code>number</code>
+List View with extended parameters
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>number</code> | 
+| count | <code>number</code> | 
+| focus | <code>number</code> | 
+| scrollIndex | <code>number</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiMessageBox"></a>
+
+## GuiMessageBox(bounds, title, message, buttons) ⇒ <code>number</code>
+Message Box control, displays a message
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| title | <code>string</code> | 
+| message | <code>string</code> | 
+| buttons | <code>string</code> | 
+
+<a name="GuiTextInputBox"></a>
+
+## GuiTextInputBox(bounds, title, message, buttons, text) ⇒ <code>number</code>
+Text Input Box control, ask for text
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| title | <code>string</code> | 
+| message | <code>string</code> | 
+| buttons | <code>string</code> | 
+| text | <code>string</code> | 
+
+<a name="GuiColorPicker"></a>
+
+## GuiColorPicker(bounds, color) ⇒ [<code>Color</code>](#Color)
+Color Picker control (multiple color controls)
+
+**Kind**: global function  
+**Returns**: [<code>Color</code>](#Color) - The resulting Color.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="GuiColorPanel"></a>
+
+## GuiColorPanel(bounds, color) ⇒ [<code>Color</code>](#Color)
+Color Panel control
+
+**Kind**: global function  
+**Returns**: [<code>Color</code>](#Color) - The resulting Color.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="GuiColorBarAlpha"></a>
+
+## GuiColorBarAlpha(bounds, alpha) ⇒ <code>number</code>
+Color Bar Alpha control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| alpha | <code>number</code> | 
 
-<a name="EaseSineInOut"></a>
+<a name="GuiColorBarHue"></a>
 
-## EaseSineInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseSineInOut.
+## GuiColorBarHue(bounds, value) ⇒ <code>number</code>
+Color Bar Hue control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| value | <code>number</code> | 
 
-<a name="EaseCircIn"></a>
+<a name="GuiLoadStyle"></a>
 
-## EaseCircIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseCircIn.
+## GuiLoadStyle(fileName) ⇒ <code>undefined</code>
+Load style file over global style variable (.rgs)
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| fileName | <code>string</code> | 
 
-<a name="EaseCircOut"></a>
+<a name="GuiLoadStyleDefault"></a>
 
-## EaseCircOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseCircOut.
+## GuiLoadStyleDefault() ⇒ <code>undefined</code>
+Load style default over global style
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
+<a name="GuiIconText"></a>
+
+## GuiIconText(iconId, text) ⇒ <code>string</code>
+Get text with icon id prepended (if supported)
+
+**Kind**: global function  
+**Returns**: <code>string</code> - The resulting const char *.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| iconId | <code>number</code> | 
+| text | <code>string</code> | 
 
-<a name="EaseCircInOut"></a>
+<a name="GuiGetIcons"></a>
 
-## EaseCircInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseCircInOut.
+## GuiGetIcons() ⇒ <code>number</code>
+Get full icons data pointer
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
+**Returns**: <code>number</code> - The resulting unsigned int *.  
+<a name="GuiGetIconData"></a>
+
+## GuiGetIconData(iconId) ⇒ <code>number</code>
+Get icon bit data
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int *.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| iconId | <code>number</code> | 
 
-<a name="EaseCubicIn"></a>
+<a name="GuiSetIconData"></a>
 
-## EaseCubicIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseCubicIn.
+## GuiSetIconData(iconId, data) ⇒ <code>undefined</code>
+Set icon bit data
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| iconId | <code>number</code> | 
+| data | <code>number</code> | 
 
-<a name="EaseCubicOut"></a>
+<a name="GuiSetIconPixel"></a>
 
-## EaseCubicOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseCubicOut.
+## GuiSetIconPixel(iconId, x, y) ⇒ <code>undefined</code>
+Set icon pixel value
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| iconId | <code>number</code> | 
+| x | <code>number</code> | 
+| y | <code>number</code> | 
 
-<a name="EaseCubicInOut"></a>
+<a name="GuiClearIconPixel"></a>
 
-## EaseCubicInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseCubicInOut.
+## GuiClearIconPixel(iconId, x, y) ⇒ <code>undefined</code>
+Clear icon pixel value
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| iconId | <code>number</code> | 
+| x | <code>number</code> | 
+| y | <code>number</code> | 
 
-<a name="EaseQuadIn"></a>
+<a name="GuiCheckIconPixel"></a>
 
-## EaseQuadIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseQuadIn.
+## GuiCheckIconPixel(iconId, x, y) ⇒ <code>boolean</code>
+Check icon pixel value
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
+**Returns**: <code>boolean</code> - The resulting bool.  
 
 | Param | Type |
 | --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseQuadOut"></a>
-
-## EaseQuadOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseQuadOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseQuadInOut"></a>
-
-## EaseQuadInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseQuadInOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseExpoIn"></a>
-
-## EaseExpoIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseExpoIn.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseExpoOut"></a>
-
-## EaseExpoOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseExpoOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseExpoInOut"></a>
-
-## EaseExpoInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseExpoInOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseBackIn"></a>
-
-## EaseBackIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseBackIn.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseBackOut"></a>
-
-## EaseBackOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseBackOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseBackInOut"></a>
-
-## EaseBackInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseBackInOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseBounceOut"></a>
-
-## EaseBounceOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseBounceOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseBounceIn"></a>
-
-## EaseBounceIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseBounceIn.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseBounceInOut"></a>
-
-## EaseBounceInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseBounceInOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseElasticIn"></a>
-
-## EaseElasticIn(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseElasticIn.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseElasticOut"></a>
-
-## EaseElasticOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseElasticOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
-
-<a name="EaseElasticInOut"></a>
-
-## EaseElasticInOut(t, b, c, d) ⇒ <code>number</code>
-Easing: EaseElasticInOut.
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| t | <code>number</code> | 
-| b | <code>number</code> | 
-| c | <code>number</code> | 
-| d | <code>number</code> | 
+| iconId | <code>number</code> | 
+| x | <code>number</code> | 
+| y | <code>number</code> | 
 
 <a name="UpdateCamera"></a>
 
