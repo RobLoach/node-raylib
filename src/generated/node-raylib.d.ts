@@ -31,34 +31,34 @@ declare module "raylib" {
   export interface Matrix {
     /** Matrix first row (4 components) */
     m0: number
-    /** Matrix second row (4 components) */
-    m1: number
-    /** Matrix third row (4 components) */
-    m2: number
-    /** Matrix fourth row (4 components) */
-    m3: number
     /** Matrix first row (4 components) */
     m4: number
-    /** Matrix second row (4 components) */
-    m5: number
-    /** Matrix third row (4 components) */
-    m6: number
-    /** Matrix fourth row (4 components) */
-    m7: number
     /** Matrix first row (4 components) */
     m8: number
-    /** Matrix second row (4 components) */
-    m9: number
-    /** Matrix third row (4 components) */
-    m10: number
-    /** Matrix fourth row (4 components) */
-    m11: number
     /** Matrix first row (4 components) */
     m12: number
     /** Matrix second row (4 components) */
+    m1: number
+    /** Matrix second row (4 components) */
+    m5: number
+    /** Matrix second row (4 components) */
+    m9: number
+    /** Matrix second row (4 components) */
     m13: number
     /** Matrix third row (4 components) */
+    m2: number
+    /** Matrix third row (4 components) */
+    m6: number
+    /** Matrix third row (4 components) */
+    m10: number
+    /** Matrix third row (4 components) */
     m14: number
+    /** Matrix fourth row (4 components) */
+    m3: number
+    /** Matrix fourth row (4 components) */
+    m7: number
+    /** Matrix fourth row (4 components) */
+    m11: number
     /** Matrix fourth row (4 components) */
     m15: number
   }
@@ -242,7 +242,7 @@ declare module "raylib" {
     /** Material maps array (MAX_MATERIAL_MAPS) */
     maps: number
     /** Material generic parameters (if required) */
-    params: number
+    params: float[4]
   }
   /** Transform, vectex transformation data */
   export interface Transform {
@@ -380,28 +380,28 @@ declare module "raylib" {
     /** IPD (distance between pupils) in meters */
     interpupillaryDistance: number
     /** Lens distortion constant parameters */
-    lensDistortionValues: number
+    lensDistortionValues: float[4]
     /** Chromatic aberration correction parameters */
-    chromaAbCorrection: number
+    chromaAbCorrection: float[4]
   }
   /** VrStereoConfig, VR stereo rendering configuration for simulator */
   export interface VrStereoConfig {
     /** VR projection matrices (per eye) */
-    projection: Matrix
+    projection: Matrix[2]
     /** VR view offset matrices (per eye) */
-    viewOffset: Matrix
+    viewOffset: Matrix[2]
     /** VR left lens center */
-    leftLensCenter: number
+    leftLensCenter: float[2]
     /** VR right lens center */
-    rightLensCenter: number
+    rightLensCenter: float[2]
     /** VR left screen center */
-    leftScreenCenter: number
+    leftScreenCenter: float[2]
     /** VR right screen center */
-    rightScreenCenter: number
+    rightScreenCenter: float[2]
     /** VR distortion scale */
-    scale: number
+    scale: float[2]
     /** VR distortion scale in */
-    scaleIn: number
+    scaleIn: float[2]
   }
 
   /** RenderTexture, fbo for texture rendering */
@@ -449,7 +449,7 @@ declare module "raylib" {
   /** Check if one specific window flag is enabled */
   export function IsWindowState(flag: number): boolean
   
-  /** Set window configuration state using flags (only PLATFORM_DESKTOP) */
+  /** Set window configuration state using flags */
   export function SetWindowState(flags: number): void
   
   /** Clear window configuration state flags */
@@ -1349,7 +1349,7 @@ declare module "raylib" {
   /** Load font from file into GPU memory (VRAM) */
   export function LoadFont(fileName: string): Font
   
-  /** Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set */
+  /** Load font from file with extended parameters */
   export function LoadFontEx(fileName: string, fontSize: number, fontChars: number, glyphCount: number): Font
   
   /** Load font from Image (XNA style) */
@@ -1367,7 +1367,7 @@ declare module "raylib" {
   /** Unload font chars info data (RAM) */
   export function UnloadFontData(chars: number, glyphCount: number): void
   
-  /** Unload font from GPU memory (VRAM) */
+  /** Unload Font from GPU memory (VRAM) */
   export function UnloadFont(font: Font): void
   
   /** Draw current FPS */
@@ -1823,89 +1823,533 @@ declare module "raylib" {
   /** Default size for new audio streams */
   export function SetAudioStreamBufferSizeDefault(size: number): void
   
-  /** Easing: EaseLinearNone. */
+  /**  */
   export function EaseLinearNone(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseLinearIn. */
+  /**  */
   export function EaseLinearIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseLinearOut. */
+  /**  */
   export function EaseLinearOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseLinearInOut. */
+  /**  */
   export function EaseLinearInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseSineIn. */
+  /**  */
   export function EaseSineIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseSineOut. */
+  /**  */
   export function EaseSineOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseSineInOut. */
+  /**  */
   export function EaseSineInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCircIn. */
+  /**  */
   export function EaseCircIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCircOut. */
+  /**  */
   export function EaseCircOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCircInOut. */
+  /**  */
   export function EaseCircInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCubicIn. */
+  /**  */
   export function EaseCubicIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCubicOut. */
+  /**  */
   export function EaseCubicOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseCubicInOut. */
+  /**  */
   export function EaseCubicInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseQuadIn. */
+  /**  */
   export function EaseQuadIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseQuadOut. */
+  /**  */
   export function EaseQuadOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseQuadInOut. */
+  /**  */
   export function EaseQuadInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseExpoIn. */
+  /**  */
   export function EaseExpoIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseExpoOut. */
+  /**  */
   export function EaseExpoOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseExpoInOut. */
+  /**  */
   export function EaseExpoInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBackIn. */
+  /**  */
   export function EaseBackIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBackOut. */
+  /**  */
   export function EaseBackOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBackInOut. */
+  /**  */
   export function EaseBackInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBounceOut. */
+  /**  */
   export function EaseBounceOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBounceIn. */
+  /**  */
   export function EaseBounceIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseBounceInOut. */
+  /**  */
   export function EaseBounceInOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseElasticIn. */
+  /**  */
   export function EaseElasticIn(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseElasticOut. */
+  /**  */
   export function EaseElasticOut(t: number, b: number, c: number, d: number): number
   
-  /** Easing: EaseElasticInOut. */
+  /**  */
   export function EaseElasticInOut(t: number, b: number, c: number, d: number): number
+  
+  /**  */
+  export function Clamp(value: number, min: number, max: number): number
+  
+  /**  */
+  export function Lerp(start: number, end: number, amount: number): number
+  
+  /**  */
+  export function Normalize(value: number, start: number, end: number): number
+  
+  /**  */
+  export function Remap(value: number, inputStart: number, inputEnd: number, outputStart: number, outputEnd: number): number
+  
+  /**  */
+  export function Vector2Zero(): Vector2
+  
+  /**  */
+  export function Vector2One(): Vector2
+  
+  /**  */
+  export function Vector2Add(v1: Vector2, v2: Vector2): Vector2
+  
+  /**  */
+  export function Vector2AddValue(v: Vector2, add: number): Vector2
+  
+  /**  */
+  export function Vector2Subtract(v1: Vector2, v2: Vector2): Vector2
+  
+  /**  */
+  export function Vector2SubtractValue(v: Vector2, sub: number): Vector2
+  
+  /**  */
+  export function Vector2Length(v: Vector2): number
+  
+  /**  */
+  export function Vector2LengthSqr(v: Vector2): number
+  
+  /**  */
+  export function Vector2DotProduct(v1: Vector2, v2: Vector2): number
+  
+  /**  */
+  export function Vector2Distance(v1: Vector2, v2: Vector2): number
+  
+  /**  */
+  export function Vector2Angle(v1: Vector2, v2: Vector2): number
+  
+  /**  */
+  export function Vector2Scale(v: Vector2, scale: number): Vector2
+  
+  /**  */
+  export function Vector2Multiply(v1: Vector2, v2: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Negate(v: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Divide(v1: Vector2, v2: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Normalize(v: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Lerp(v1: Vector2, v2: Vector2, amount: number): Vector2
+  
+  /**  */
+  export function Vector2Reflect(v: Vector2, normal: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Rotate(v: Vector2, angle: number): Vector2
+  
+  /**  */
+  export function Vector2MoveTowards(v: Vector2, target: Vector2, maxDistance: number): Vector2
+  
+  /**  */
+  export function Vector3Zero(): Vector3
+  
+  /**  */
+  export function Vector3One(): Vector3
+  
+  /**  */
+  export function Vector3Add(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3AddValue(v: Vector3, add: number): Vector3
+  
+  /**  */
+  export function Vector3Subtract(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3SubtractValue(v: Vector3, sub: number): Vector3
+  
+  /**  */
+  export function Vector3Scale(v: Vector3, scalar: number): Vector3
+  
+  /**  */
+  export function Vector3Multiply(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3CrossProduct(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Perpendicular(v: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Length(v: Vector3): number
+  
+  /**  */
+  export function Vector3LengthSqr(v: Vector3): number
+  
+  /**  */
+  export function Vector3DotProduct(v1: Vector3, v2: Vector3): number
+  
+  /**  */
+  export function Vector3Distance(v1: Vector3, v2: Vector3): number
+  
+  /**  */
+  export function Vector3Angle(v1: Vector3, v2: Vector3): Vector2
+  
+  /**  */
+  export function Vector3Negate(v: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Divide(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Normalize(v: Vector3): Vector3
+  
+  /**  */
+  export function Vector3OrthoNormalize(v1: number, v2: number): void
+  
+  /**  */
+  export function Vector3Transform(v: Vector3, mat: Matrix): Vector3
+  
+  /**  */
+  export function Vector3RotateByQuaternion(v: Vector3, q: Quaternion): Vector3
+  
+  /**  */
+  export function Vector3Lerp(v1: Vector3, v2: Vector3, amount: number): Vector3
+  
+  /**  */
+  export function Vector3Reflect(v: Vector3, normal: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Min(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Max(v1: Vector3, v2: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Barycenter(p: Vector3, a: Vector3, b: Vector3, c: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Unproject(source: Vector3, projection: Matrix, view: Matrix): Vector3
+  
+  /**  */
+  export function MatrixDeterminant(mat: Matrix): number
+  
+  /**  */
+  export function MatrixTrace(mat: Matrix): number
+  
+  /**  */
+  export function MatrixTranspose(mat: Matrix): Matrix
+  
+  /**  */
+  export function MatrixInvert(mat: Matrix): Matrix
+  
+  /**  */
+  export function MatrixNormalize(mat: Matrix): Matrix
+  
+  /**  */
+  export function MatrixIdentity(): Matrix
+  
+  /**  */
+  export function MatrixAdd(left: Matrix, right: Matrix): Matrix
+  
+  /**  */
+  export function MatrixSubtract(left: Matrix, right: Matrix): Matrix
+  
+  /**  */
+  export function MatrixMultiply(left: Matrix, right: Matrix): Matrix
+  
+  /**  */
+  export function MatrixTranslate(x: number, y: number, z: number): Matrix
+  
+  /**  */
+  export function MatrixRotate(axis: Vector3, angle: number): Matrix
+  
+  /**  */
+  export function MatrixRotateX(angle: number): Matrix
+  
+  /**  */
+  export function MatrixRotateY(angle: number): Matrix
+  
+  /**  */
+  export function MatrixRotateZ(angle: number): Matrix
+  
+  /**  */
+  export function MatrixRotateXYZ(ang: Vector3): Matrix
+  
+  /**  */
+  export function MatrixRotateZYX(ang: Vector3): Matrix
+  
+  /**  */
+  export function MatrixScale(x: number, y: number, z: number): Matrix
+  
+  /**  */
+  export function MatrixFrustum(left: number, right: number, bottom: number, top: number, near: number, far: number): Matrix
+  
+  /**  */
+  export function MatrixPerspective(fovy: number, aspect: number, near: number, far: number): Matrix
+  
+  /**  */
+  export function MatrixOrtho(left: number, right: number, bottom: number, top: number, near: number, far: number): Matrix
+  
+  /**  */
+  export function MatrixLookAt(eye: Vector3, target: Vector3, up: Vector3): Matrix
+  
+  /**  */
+  export function QuaternionAdd(q1: Quaternion, q2: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionAddValue(q: Quaternion, add: number): Quaternion
+  
+  /**  */
+  export function QuaternionSubtract(q1: Quaternion, q2: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionSubtractValue(q: Quaternion, sub: number): Quaternion
+  
+  /**  */
+  export function QuaternionIdentity(): Quaternion
+  
+  /**  */
+  export function QuaternionLength(q: Quaternion): number
+  
+  /**  */
+  export function QuaternionNormalize(q: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionInvert(q: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionMultiply(q1: Quaternion, q2: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionScale(q: Quaternion, mul: number): Quaternion
+  
+  /**  */
+  export function QuaternionDivide(q1: Quaternion, q2: Quaternion): Quaternion
+  
+  /**  */
+  export function QuaternionLerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
+  
+  /**  */
+  export function QuaternionNlerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
+  
+  /**  */
+  export function QuaternionSlerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
+  
+  /**  */
+  export function QuaternionFromVector3ToVector3(from: Vector3, to: Vector3): Quaternion
+  
+  /**  */
+  export function QuaternionFromMatrix(mat: Matrix): Quaternion
+  
+  /**  */
+  export function QuaternionToMatrix(q: Quaternion): Matrix
+  
+  /**  */
+  export function QuaternionFromAxisAngle(axis: Vector3, angle: number): Quaternion
+  
+  /**  */
+  export function QuaternionToAxisAngle(q: Quaternion, outAxis: number, outAngle: number): void
+  
+  /**  */
+  export function QuaternionFromEuler(pitch: number, yaw: number, roll: number): Quaternion
+  
+  /**  */
+  export function QuaternionToEuler(q: Quaternion): Vector3
+  
+  /**  */
+  export function QuaternionTransform(q: Quaternion, mat: Matrix): Quaternion
+  
+  /** Enable gui controls (global state) */
+  export function GuiEnable(): void
+  
+  /** Disable gui controls (global state) */
+  export function GuiDisable(): void
+  
+  /** Lock gui controls (global state) */
+  export function GuiLock(): void
+  
+  /** Unlock gui controls (global state) */
+  export function GuiUnlock(): void
+  
+  /** Check if gui is locked (global state) */
+  export function GuiIsLocked(): boolean
+  
+  /** Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f */
+  export function GuiFade(alpha: number): void
+  
+  /** Set gui state (global state) */
+  export function GuiSetState(state: number): void
+  
+  /** Get gui state (global state) */
+  export function GuiGetState(): number
+  
+  /** Set gui custom font (global state) */
+  export function GuiSetFont(font: Font): void
+  
+  /** Get gui custom font (global state) */
+  export function GuiGetFont(): Font
+  
+  /** Set one style property */
+  export function GuiSetStyle(control: number, property: number, value: number): void
+  
+  /** Get one style property */
+  export function GuiGetStyle(control: number, property: number): number
+  
+  /** Window Box control, shows a window that can be closed */
+  export function GuiWindowBox(bounds: Rectangle, title: string): boolean
+  
+  /** Group Box control with text name */
+  export function GuiGroupBox(bounds: Rectangle, text: string): void
+  
+  /** Line separator control, could contain text */
+  export function GuiLine(bounds: Rectangle, text: string): void
+  
+  /** Panel control, useful to group controls */
+  export function GuiPanel(bounds: Rectangle): void
+  
+  /** Scroll Panel control */
+  export function GuiScrollPanel(bounds: Rectangle, content: Rectangle, scroll: number): Rectangle
+  
+  /** Label control, shows text */
+  export function GuiLabel(bounds: Rectangle, text: string): void
+  
+  /** Button control, returns true when clicked */
+  export function GuiButton(bounds: Rectangle, text: string): boolean
+  
+  /** Label button control, show true when clicked */
+  export function GuiLabelButton(bounds: Rectangle, text: string): boolean
+  
+  /** Toggle Button control, returns true when active */
+  export function GuiToggle(bounds: Rectangle, text: string, active: boolean): boolean
+  
+  /** Toggle Group control, returns active toggle index */
+  export function GuiToggleGroup(bounds: Rectangle, text: string, active: number): number
+  
+  /** Check Box control, returns true when active */
+  export function GuiCheckBox(bounds: Rectangle, text: string, checked: boolean): boolean
+  
+  /** Combo Box control, returns selected item index */
+  export function GuiComboBox(bounds: Rectangle, text: string, active: number): number
+  
+  /** Dropdown Box control, returns selected item */
+  export function GuiDropdownBox(bounds: Rectangle, text: string, active: number, editMode: boolean): boolean
+  
+  /** Spinner control, returns selected value */
+  export function GuiSpinner(bounds: Rectangle, text: string, value: number, minValue: number, maxValue: number, editMode: boolean): boolean
+  
+  /** Value Box control, updates input text with numbers */
+  export function GuiValueBox(bounds: Rectangle, text: string, value: number, minValue: number, maxValue: number, editMode: boolean): boolean
+  
+  /** Text Box control, updates input text */
+  export function GuiTextBox(bounds: Rectangle, text: string, textSize: number, editMode: boolean): boolean
+  
+  /** Text Box control with multiple lines */
+  export function GuiTextBoxMulti(bounds: Rectangle, text: string, textSize: number, editMode: boolean): boolean
+  
+  /** Slider control, returns selected value */
+  export function GuiSlider(bounds: Rectangle, textLeft: string, textRight: string, value: number, minValue: number, maxValue: number): number
+  
+  /** Slider Bar control, returns selected value */
+  export function GuiSliderBar(bounds: Rectangle, textLeft: string, textRight: string, value: number, minValue: number, maxValue: number): number
+  
+  /** Progress Bar control, shows current progress value */
+  export function GuiProgressBar(bounds: Rectangle, textLeft: string, textRight: string, value: number, minValue: number, maxValue: number): number
+  
+  /** Status Bar control, shows info text */
+  export function GuiStatusBar(bounds: Rectangle, text: string): void
+  
+  /** Dummy control for placeholders */
+  export function GuiDummyRec(bounds: Rectangle, text: string): void
+  
+  /** Scroll Bar control */
+  export function GuiScrollBar(bounds: Rectangle, value: number, minValue: number, maxValue: number): number
+  
+  /** Grid control */
+  export function GuiGrid(bounds: Rectangle, spacing: number, subdivs: number): Vector2
+  
+  /** List View control, returns selected list item index */
+  export function GuiListView(bounds: Rectangle, text: string, scrollIndex: number, active: number): number
+  
+  /** List View with extended parameters */
+  export function GuiListViewEx(bounds: Rectangle, text: number, count: number, focus: number, scrollIndex: number, active: number): number
+  
+  /** Message Box control, displays a message */
+  export function GuiMessageBox(bounds: Rectangle, title: string, message: string, buttons: string): number
+  
+  /** Text Input Box control, ask for text */
+  export function GuiTextInputBox(bounds: Rectangle, title: string, message: string, buttons: string, text: string): number
+  
+  /** Color Picker control (multiple color controls) */
+  export function GuiColorPicker(bounds: Rectangle, color: Color): Color
+  
+  /** Color Panel control */
+  export function GuiColorPanel(bounds: Rectangle, color: Color): Color
+  
+  /** Color Bar Alpha control */
+  export function GuiColorBarAlpha(bounds: Rectangle, alpha: number): number
+  
+  /** Color Bar Hue control */
+  export function GuiColorBarHue(bounds: Rectangle, value: number): number
+  
+  /** Load style file over global style variable (.rgs) */
+  export function GuiLoadStyle(fileName: string): void
+  
+  /** Load style default over global style */
+  export function GuiLoadStyleDefault(): void
+  
+  /** Get text with icon id prepended (if supported) */
+  export function GuiIconText(iconId: number, text: string): string
+  
+  /**  */
+  export function GuiDrawIcon(iconId: number, posX: number, posY: number, pixelSize: number, color: Color): void
+  
+  /** Get full icons data pointer */
+  export function GuiGetIcons(): number
+  
+  /** Get icon bit data */
+  export function GuiGetIconData(iconId: number): number
+  
+  /** Set icon bit data */
+  export function GuiSetIconData(iconId: number, data: number): void
+  
+  /** Set icon pixel value */
+  export function GuiSetIconPixel(iconId: number, x: number, y: number): void
+  
+  /** Clear icon pixel value */
+  export function GuiClearIconPixel(iconId: number, x: number, y: number): void
+  
+  /** Check icon pixel value */
+  export function GuiCheckIconPixel(iconId: number, x: number, y: number): boolean
   
 
   /** Set shader uniform float */
@@ -2409,7 +2853,7 @@ declare module "raylib" {
   export const PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
   /** 2 bpp */
   export const PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
-  /** No filter, just pixel approximation */
+  /** No filter, just pixel aproximation */
   export const TEXTURE_FILTER_POINT = 0
   /** Linear filtering */
   export const TEXTURE_FILTER_BILINEAR = 1
@@ -2501,6 +2945,156 @@ declare module "raylib" {
   export const NPATCH_THREE_PATCH_VERTICAL = 1
   /** Npatch layout: 3x1 tiles */
   export const NPATCH_THREE_PATCH_HORIZONTAL = 2
+  /**  */
+  export const GUI_STATE_NORMAL = 0
+  /**  */
+  export const GUI_STATE_FOCUSED = 1
+  /**  */
+  export const GUI_STATE_PRESSED = 2
+  /**  */
+  export const GUI_STATE_DISABLED = 3
+  /**  */
+  export const GUI_TEXT_ALIGN_LEFT = 0
+  /**  */
+  export const GUI_TEXT_ALIGN_CENTER = 1
+  /**  */
+  export const GUI_TEXT_ALIGN_RIGHT = 2
+  /** Generic control -> populates to all controls when set */
+  export const DEFAULT = 0
+  /** Used also for: LABELBUTTON */
+  export const LABEL = 1
+  /**  */
+  export const BUTTON = 2
+  /** Used also for: TOGGLEGROUP */
+  export const TOGGLE = 3
+  /** Used also for: SLIDERBAR */
+  export const SLIDER = 4
+  /**  */
+  export const PROGRESSBAR = 5
+  /**  */
+  export const CHECKBOX = 6
+  /**  */
+  export const COMBOBOX = 7
+  /**  */
+  export const DROPDOWNBOX = 8
+  /** Used also for: TEXTBOXMULTI */
+  export const TEXTBOX = 9
+  /**  */
+  export const VALUEBOX = 10
+  /**  */
+  export const SPINNER = 11
+  /**  */
+  export const LISTVIEW = 12
+  /**  */
+  export const COLORPICKER = 13
+  /**  */
+  export const SCROLLBAR = 14
+  /**  */
+  export const STATUSBAR = 15
+  /**  */
+  export const BORDER_COLOR_NORMAL = 0
+  /**  */
+  export const BASE_COLOR_NORMAL = 1
+  /**  */
+  export const TEXT_COLOR_NORMAL = 2
+  /**  */
+  export const BORDER_COLOR_FOCUSED = 3
+  /**  */
+  export const BASE_COLOR_FOCUSED = 4
+  /**  */
+  export const TEXT_COLOR_FOCUSED = 5
+  /**  */
+  export const BORDER_COLOR_PRESSED = 6
+  /**  */
+  export const BASE_COLOR_PRESSED = 7
+  /**  */
+  export const TEXT_COLOR_PRESSED = 8
+  /**  */
+  export const BORDER_COLOR_DISABLED = 9
+  /**  */
+  export const BASE_COLOR_DISABLED = 10
+  /**  */
+  export const TEXT_COLOR_DISABLED = 11
+  /**  */
+  export const BORDER_WIDTH = 12
+  /**  */
+  export const TEXT_PADDING = 13
+  /**  */
+  export const TEXT_ALIGNMENT = 14
+  /**  */
+  export const RESERVED = 15
+  /**  */
+  export const TEXT_SIZE = 16
+  /**  */
+  export const TEXT_SPACING = 17
+  /**  */
+  export const LINE_COLOR = 18
+  /**  */
+  export const BACKGROUND_COLOR = 19
+  /**  */
+  export const GROUP_PADDING = 16
+  /**  */
+  export const SLIDER_WIDTH = 16
+  /**  */
+  export const SLIDER_PADDING = 17
+  /**  */
+  export const PROGRESS_PADDING = 16
+  /**  */
+  export const CHECK_PADDING = 16
+  /**  */
+  export const COMBO_BUTTON_WIDTH = 16
+  /**  */
+  export const COMBO_BUTTON_PADDING = 17
+  /**  */
+  export const ARROW_PADDING = 16
+  /**  */
+  export const DROPDOWN_ITEMS_PADDING = 17
+  /**  */
+  export const TEXT_INNER_PADDING = 16
+  /**  */
+  export const TEXT_LINES_PADDING = 17
+  /**  */
+  export const COLOR_SELECTED_FG = 18
+  /**  */
+  export const COLOR_SELECTED_BG = 19
+  /**  */
+  export const SPIN_BUTTON_WIDTH = 16
+  /**  */
+  export const SPIN_BUTTON_PADDING = 17
+  /**  */
+  export const ARROWS_SIZE = 16
+  /**  */
+  export const ARROWS_VISIBLE = 17
+  /**  */
+  export const SCROLL_SLIDER_PADDING = 18
+  /**  */
+  export const SCROLL_SLIDER_SIZE = 19
+  /**  */
+  export const SCROLL_PADDING = 20
+  /**  */
+  export const SCROLL_SPEED = 21
+  /**  */
+  export const SCROLLBAR_LEFT_SIDE = 0
+  /**  */
+  export const SCROLLBAR_RIGHT_SIDE = 1
+  /**  */
+  export const LIST_ITEMS_HEIGHT = 16
+  /**  */
+  export const LIST_ITEMS_PADDING = 17
+  /**  */
+  export const SCROLLBAR_WIDTH = 18
+  /**  */
+  export const SCROLLBAR_SIDE = 19
+  /**  */
+  export const COLOR_SELECTOR_SIZE = 16
+  /** Right hue bar width */
+  export const HUEBAR_WIDTH = 17
+  /** Right hue bar separation from panel */
+  export const HUEBAR_PADDING = 18
+  /** Right hue bar selector height */
+  export const HUEBAR_SELECTOR_HEIGHT = 19
+  /** Right hue bar selector overflow */
+  export const HUEBAR_SELECTOR_OVERFLOW = 20
 
   export const LIGHTGRAY: { r: 200, g: 200, b: 200, a: 255 }
   export const GRAY: { r: 130, g: 130, b: 130, a: 255 }

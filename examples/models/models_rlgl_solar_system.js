@@ -73,6 +73,7 @@ camera.target = r.Vector3(0, 0, 0)
 camera.up = r.Vector3(0, 1, 0)
 camera.fovy = 45
 camera.type = r.CAMERA_PERSPECTIVE
+camera.projection = r.CAMERA_PERSPECTIVE
 
 r.SetCameraMode(camera, r.CAMERA_FREE)
 

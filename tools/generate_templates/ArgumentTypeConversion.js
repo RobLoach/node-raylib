@@ -5,6 +5,7 @@ function ArgumentTypeConversion (arg) {
   if (arg === 'char') { return 'string' }
   if (arg === 'char *') { return 'string' }
   if (arg === 'const char *') { return 'string' }
+  if (arg === 'char[32]') { return 'string' }
 
   if (arg === 'int') { return 'number' }
   if (arg === 'float') { return 'number' }

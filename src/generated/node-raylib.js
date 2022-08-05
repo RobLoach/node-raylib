@@ -134,7 +134,7 @@ function IsWindowState(flag) {
 raylib.IsWindowState = IsWindowState
 
 /**
- * Set window configuration state using flags (only PLATFORM_DESKTOP)
+ * Set window configuration state using flags
  *
  * @param {number} flags
  *
@@ -885,20 +885,20 @@ function SetShaderValueMatrix(shader, locIndex, mat) {
     shader.locs,
     locIndex,
     mat.m0,
-    mat.m1,
-    mat.m2,
-    mat.m3,
     mat.m4,
-    mat.m5,
-    mat.m6,
-    mat.m7,
     mat.m8,
-    mat.m9,
-    mat.m10,
-    mat.m11,
     mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
     mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
     mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
     mat.m15
   )
 }
@@ -4782,7 +4782,7 @@ function LoadFont(fileName) {
 raylib.LoadFont = LoadFont
 
 /**
- * Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
+ * Load font from file with extended parameters
  *
  * @param {string} fileName
  * @param {number} fontSize
@@ -4915,7 +4915,7 @@ function UnloadFontData(chars, glyphCount) {
 raylib.UnloadFontData = UnloadFontData
 
 /**
- * Unload font from GPU memory (VRAM)
+ * Unload Font from GPU memory (VRAM)
  *
  * @param {Font} font
  *
@@ -6143,20 +6143,20 @@ raylib.LoadModelFromMesh = LoadModelFromMesh
 function UnloadModel(model) {
   return r.BindUnloadModel(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -6180,20 +6180,20 @@ raylib.UnloadModel = UnloadModel
 function UnloadModelKeepMeshes(model) {
   return r.BindUnloadModelKeepMeshes(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -6217,20 +6217,20 @@ raylib.UnloadModelKeepMeshes = UnloadModelKeepMeshes
 function GetModelBoundingBox(model) {
   return r.BindGetModelBoundingBox(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -6257,20 +6257,20 @@ raylib.GetModelBoundingBox = GetModelBoundingBox
 function DrawModel(model, position, scale, tint) {
   return r.BindDrawModel(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -6307,20 +6307,20 @@ raylib.DrawModel = DrawModel
 function DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint) {
   return r.BindDrawModelEx(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -6361,20 +6361,20 @@ raylib.DrawModelEx = DrawModelEx
 function DrawModelWires(model, position, scale, tint) {
   return r.BindDrawModelWires(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -6411,20 +6411,20 @@ raylib.DrawModelWires = DrawModelWires
 function DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint) {
   return r.BindDrawModelWiresEx(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -6980,20 +6980,20 @@ raylib.LoadModelAnimations = LoadModelAnimations
 function UpdateModelAnimation(model, anim, frame) {
   return r.BindUpdateModelAnimation(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -7056,20 +7056,20 @@ raylib.UnloadModelAnimations = UnloadModelAnimations
 function IsModelAnimationValid(model, anim) {
   return r.BindIsModelAnimationValid(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -7230,20 +7230,20 @@ function GetRayCollisionModel(ray, model) {
     ray.direction.y,
     ray.direction.z,
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -7290,20 +7290,20 @@ function GetRayCollisionMesh(ray, mesh, transform) {
     mesh.vaoId,
     mesh.vboId,
     transform.m0,
-    transform.m1,
-    transform.m2,
-    transform.m3,
     transform.m4,
-    transform.m5,
-    transform.m6,
-    transform.m7,
     transform.m8,
-    transform.m9,
-    transform.m10,
-    transform.m11,
     transform.m12,
+    transform.m1,
+    transform.m5,
+    transform.m9,
     transform.m13,
+    transform.m2,
+    transform.m6,
+    transform.m10,
     transform.m14,
+    transform.m3,
+    transform.m7,
+    transform.m11,
     transform.m15
   )
 }
@@ -8299,16 +8299,6 @@ function SetAudioStreamBufferSizeDefault(size) {
 }
 raylib.SetAudioStreamBufferSizeDefault = SetAudioStreamBufferSizeDefault
 
-/**
- * Easing: EaseLinearNone.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseLinearNone(t, b, c, d) {
   return r.BindEaseLinearNone(
     t,
@@ -8319,16 +8309,6 @@ function EaseLinearNone(t, b, c, d) {
 }
 raylib.EaseLinearNone = EaseLinearNone
 
-/**
- * Easing: EaseLinearIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseLinearIn(t, b, c, d) {
   return r.BindEaseLinearIn(
     t,
@@ -8339,16 +8319,6 @@ function EaseLinearIn(t, b, c, d) {
 }
 raylib.EaseLinearIn = EaseLinearIn
 
-/**
- * Easing: EaseLinearOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseLinearOut(t, b, c, d) {
   return r.BindEaseLinearOut(
     t,
@@ -8359,16 +8329,6 @@ function EaseLinearOut(t, b, c, d) {
 }
 raylib.EaseLinearOut = EaseLinearOut
 
-/**
- * Easing: EaseLinearInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseLinearInOut(t, b, c, d) {
   return r.BindEaseLinearInOut(
     t,
@@ -8379,16 +8339,6 @@ function EaseLinearInOut(t, b, c, d) {
 }
 raylib.EaseLinearInOut = EaseLinearInOut
 
-/**
- * Easing: EaseSineIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseSineIn(t, b, c, d) {
   return r.BindEaseSineIn(
     t,
@@ -8399,16 +8349,6 @@ function EaseSineIn(t, b, c, d) {
 }
 raylib.EaseSineIn = EaseSineIn
 
-/**
- * Easing: EaseSineOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseSineOut(t, b, c, d) {
   return r.BindEaseSineOut(
     t,
@@ -8419,16 +8359,6 @@ function EaseSineOut(t, b, c, d) {
 }
 raylib.EaseSineOut = EaseSineOut
 
-/**
- * Easing: EaseSineInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseSineInOut(t, b, c, d) {
   return r.BindEaseSineInOut(
     t,
@@ -8439,16 +8369,6 @@ function EaseSineInOut(t, b, c, d) {
 }
 raylib.EaseSineInOut = EaseSineInOut
 
-/**
- * Easing: EaseCircIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseCircIn(t, b, c, d) {
   return r.BindEaseCircIn(
     t,
@@ -8459,16 +8379,6 @@ function EaseCircIn(t, b, c, d) {
 }
 raylib.EaseCircIn = EaseCircIn
 
-/**
- * Easing: EaseCircOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseCircOut(t, b, c, d) {
   return r.BindEaseCircOut(
     t,
@@ -8479,16 +8389,6 @@ function EaseCircOut(t, b, c, d) {
 }
 raylib.EaseCircOut = EaseCircOut
 
-/**
- * Easing: EaseCircInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseCircInOut(t, b, c, d) {
   return r.BindEaseCircInOut(
     t,
@@ -8499,16 +8399,6 @@ function EaseCircInOut(t, b, c, d) {
 }
 raylib.EaseCircInOut = EaseCircInOut
 
-/**
- * Easing: EaseCubicIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseCubicIn(t, b, c, d) {
   return r.BindEaseCubicIn(
     t,
@@ -8519,16 +8409,6 @@ function EaseCubicIn(t, b, c, d) {
 }
 raylib.EaseCubicIn = EaseCubicIn
 
-/**
- * Easing: EaseCubicOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseCubicOut(t, b, c, d) {
   return r.BindEaseCubicOut(
     t,
@@ -8539,16 +8419,6 @@ function EaseCubicOut(t, b, c, d) {
 }
 raylib.EaseCubicOut = EaseCubicOut
 
-/**
- * Easing: EaseCubicInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseCubicInOut(t, b, c, d) {
   return r.BindEaseCubicInOut(
     t,
@@ -8559,16 +8429,6 @@ function EaseCubicInOut(t, b, c, d) {
 }
 raylib.EaseCubicInOut = EaseCubicInOut
 
-/**
- * Easing: EaseQuadIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseQuadIn(t, b, c, d) {
   return r.BindEaseQuadIn(
     t,
@@ -8579,16 +8439,6 @@ function EaseQuadIn(t, b, c, d) {
 }
 raylib.EaseQuadIn = EaseQuadIn
 
-/**
- * Easing: EaseQuadOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseQuadOut(t, b, c, d) {
   return r.BindEaseQuadOut(
     t,
@@ -8599,16 +8449,6 @@ function EaseQuadOut(t, b, c, d) {
 }
 raylib.EaseQuadOut = EaseQuadOut
 
-/**
- * Easing: EaseQuadInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseQuadInOut(t, b, c, d) {
   return r.BindEaseQuadInOut(
     t,
@@ -8619,16 +8459,6 @@ function EaseQuadInOut(t, b, c, d) {
 }
 raylib.EaseQuadInOut = EaseQuadInOut
 
-/**
- * Easing: EaseExpoIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseExpoIn(t, b, c, d) {
   return r.BindEaseExpoIn(
     t,
@@ -8639,16 +8469,6 @@ function EaseExpoIn(t, b, c, d) {
 }
 raylib.EaseExpoIn = EaseExpoIn
 
-/**
- * Easing: EaseExpoOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseExpoOut(t, b, c, d) {
   return r.BindEaseExpoOut(
     t,
@@ -8659,16 +8479,6 @@ function EaseExpoOut(t, b, c, d) {
 }
 raylib.EaseExpoOut = EaseExpoOut
 
-/**
- * Easing: EaseExpoInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseExpoInOut(t, b, c, d) {
   return r.BindEaseExpoInOut(
     t,
@@ -8679,16 +8489,6 @@ function EaseExpoInOut(t, b, c, d) {
 }
 raylib.EaseExpoInOut = EaseExpoInOut
 
-/**
- * Easing: EaseBackIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseBackIn(t, b, c, d) {
   return r.BindEaseBackIn(
     t,
@@ -8699,16 +8499,6 @@ function EaseBackIn(t, b, c, d) {
 }
 raylib.EaseBackIn = EaseBackIn
 
-/**
- * Easing: EaseBackOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseBackOut(t, b, c, d) {
   return r.BindEaseBackOut(
     t,
@@ -8719,16 +8509,6 @@ function EaseBackOut(t, b, c, d) {
 }
 raylib.EaseBackOut = EaseBackOut
 
-/**
- * Easing: EaseBackInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseBackInOut(t, b, c, d) {
   return r.BindEaseBackInOut(
     t,
@@ -8739,16 +8519,6 @@ function EaseBackInOut(t, b, c, d) {
 }
 raylib.EaseBackInOut = EaseBackInOut
 
-/**
- * Easing: EaseBounceOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseBounceOut(t, b, c, d) {
   return r.BindEaseBounceOut(
     t,
@@ -8759,16 +8529,6 @@ function EaseBounceOut(t, b, c, d) {
 }
 raylib.EaseBounceOut = EaseBounceOut
 
-/**
- * Easing: EaseBounceIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseBounceIn(t, b, c, d) {
   return r.BindEaseBounceIn(
     t,
@@ -8779,16 +8539,6 @@ function EaseBounceIn(t, b, c, d) {
 }
 raylib.EaseBounceIn = EaseBounceIn
 
-/**
- * Easing: EaseBounceInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseBounceInOut(t, b, c, d) {
   return r.BindEaseBounceInOut(
     t,
@@ -8799,16 +8549,6 @@ function EaseBounceInOut(t, b, c, d) {
 }
 raylib.EaseBounceInOut = EaseBounceInOut
 
-/**
- * Easing: EaseElasticIn.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseElasticIn(t, b, c, d) {
   return r.BindEaseElasticIn(
     t,
@@ -8819,16 +8559,6 @@ function EaseElasticIn(t, b, c, d) {
 }
 raylib.EaseElasticIn = EaseElasticIn
 
-/**
- * Easing: EaseElasticOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseElasticOut(t, b, c, d) {
   return r.BindEaseElasticOut(
     t,
@@ -8839,16 +8569,6 @@ function EaseElasticOut(t, b, c, d) {
 }
 raylib.EaseElasticOut = EaseElasticOut
 
-/**
- * Easing: EaseElasticInOut.
- *
- * @param {number} t
- * @param {number} b
- * @param {number} c
- * @param {number} d
- *
- * @return {number} The resulting float.
- */
 function EaseElasticInOut(t, b, c, d) {
   return r.BindEaseElasticInOut(
     t,
@@ -8858,6 +8578,2113 @@ function EaseElasticInOut(t, b, c, d) {
   )
 }
 raylib.EaseElasticInOut = EaseElasticInOut
+
+function Clamp(value, min, max) {
+  return r.BindClamp(
+    value,
+    min,
+    max
+  )
+}
+raylib.Clamp = Clamp
+
+function Lerp(start, end, amount) {
+  return r.BindLerp(
+    start,
+    end,
+    amount
+  )
+}
+raylib.Lerp = Lerp
+
+function Normalize(value, start, end) {
+  return r.BindNormalize(
+    value,
+    start,
+    end
+  )
+}
+raylib.Normalize = Normalize
+
+function Remap(value, inputStart, inputEnd, outputStart, outputEnd) {
+  return r.BindRemap(
+    value,
+    inputStart,
+    inputEnd,
+    outputStart,
+    outputEnd
+  )
+}
+raylib.Remap = Remap
+
+function Vector2Zero() {
+  return r.BindVector2Zero()
+}
+raylib.Vector2Zero = Vector2Zero
+
+function Vector2One() {
+  return r.BindVector2One()
+}
+raylib.Vector2One = Vector2One
+
+function Vector2Add(v1, v2) {
+  return r.BindVector2Add(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+raylib.Vector2Add = Vector2Add
+
+function Vector2AddValue(v, add) {
+  return r.BindVector2AddValue(
+    v.x,
+    v.y,
+    add
+  )
+}
+raylib.Vector2AddValue = Vector2AddValue
+
+function Vector2Subtract(v1, v2) {
+  return r.BindVector2Subtract(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+raylib.Vector2Subtract = Vector2Subtract
+
+function Vector2SubtractValue(v, sub) {
+  return r.BindVector2SubtractValue(
+    v.x,
+    v.y,
+    sub
+  )
+}
+raylib.Vector2SubtractValue = Vector2SubtractValue
+
+function Vector2Length(v) {
+  return r.BindVector2Length(
+    v.x,
+    v.y
+  )
+}
+raylib.Vector2Length = Vector2Length
+
+function Vector2LengthSqr(v) {
+  return r.BindVector2LengthSqr(
+    v.x,
+    v.y
+  )
+}
+raylib.Vector2LengthSqr = Vector2LengthSqr
+
+function Vector2DotProduct(v1, v2) {
+  return r.BindVector2DotProduct(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+raylib.Vector2DotProduct = Vector2DotProduct
+
+function Vector2Distance(v1, v2) {
+  return r.BindVector2Distance(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+raylib.Vector2Distance = Vector2Distance
+
+function Vector2Angle(v1, v2) {
+  return r.BindVector2Angle(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+raylib.Vector2Angle = Vector2Angle
+
+function Vector2Scale(v, scale) {
+  return r.BindVector2Scale(
+    v.x,
+    v.y,
+    scale
+  )
+}
+raylib.Vector2Scale = Vector2Scale
+
+function Vector2Multiply(v1, v2) {
+  return r.BindVector2Multiply(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+raylib.Vector2Multiply = Vector2Multiply
+
+function Vector2Negate(v) {
+  return r.BindVector2Negate(
+    v.x,
+    v.y
+  )
+}
+raylib.Vector2Negate = Vector2Negate
+
+function Vector2Divide(v1, v2) {
+  return r.BindVector2Divide(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+raylib.Vector2Divide = Vector2Divide
+
+function Vector2Normalize(v) {
+  return r.BindVector2Normalize(
+    v.x,
+    v.y
+  )
+}
+raylib.Vector2Normalize = Vector2Normalize
+
+function Vector2Lerp(v1, v2, amount) {
+  return r.BindVector2Lerp(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y,
+    amount
+  )
+}
+raylib.Vector2Lerp = Vector2Lerp
+
+function Vector2Reflect(v, normal) {
+  return r.BindVector2Reflect(
+    v.x,
+    v.y,
+    normal.x,
+    normal.y
+  )
+}
+raylib.Vector2Reflect = Vector2Reflect
+
+function Vector2Rotate(v, angle) {
+  return r.BindVector2Rotate(
+    v.x,
+    v.y,
+    angle
+  )
+}
+raylib.Vector2Rotate = Vector2Rotate
+
+function Vector2MoveTowards(v, target, maxDistance) {
+  return r.BindVector2MoveTowards(
+    v.x,
+    v.y,
+    target.x,
+    target.y,
+    maxDistance
+  )
+}
+raylib.Vector2MoveTowards = Vector2MoveTowards
+
+function Vector3Zero() {
+  return r.BindVector3Zero()
+}
+raylib.Vector3Zero = Vector3Zero
+
+function Vector3One() {
+  return r.BindVector3One()
+}
+raylib.Vector3One = Vector3One
+
+function Vector3Add(v1, v2) {
+  return r.BindVector3Add(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Add = Vector3Add
+
+function Vector3AddValue(v, add) {
+  return r.BindVector3AddValue(
+    v.x,
+    v.y,
+    v.z,
+    add
+  )
+}
+raylib.Vector3AddValue = Vector3AddValue
+
+function Vector3Subtract(v1, v2) {
+  return r.BindVector3Subtract(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Subtract = Vector3Subtract
+
+function Vector3SubtractValue(v, sub) {
+  return r.BindVector3SubtractValue(
+    v.x,
+    v.y,
+    v.z,
+    sub
+  )
+}
+raylib.Vector3SubtractValue = Vector3SubtractValue
+
+function Vector3Scale(v, scalar) {
+  return r.BindVector3Scale(
+    v.x,
+    v.y,
+    v.z,
+    scalar
+  )
+}
+raylib.Vector3Scale = Vector3Scale
+
+function Vector3Multiply(v1, v2) {
+  return r.BindVector3Multiply(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Multiply = Vector3Multiply
+
+function Vector3CrossProduct(v1, v2) {
+  return r.BindVector3CrossProduct(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3CrossProduct = Vector3CrossProduct
+
+function Vector3Perpendicular(v) {
+  return r.BindVector3Perpendicular(
+    v.x,
+    v.y,
+    v.z
+  )
+}
+raylib.Vector3Perpendicular = Vector3Perpendicular
+
+function Vector3Length(v) {
+  return r.BindVector3Length(
+    v
+  )
+}
+raylib.Vector3Length = Vector3Length
+
+function Vector3LengthSqr(v) {
+  return r.BindVector3LengthSqr(
+    v
+  )
+}
+raylib.Vector3LengthSqr = Vector3LengthSqr
+
+function Vector3DotProduct(v1, v2) {
+  return r.BindVector3DotProduct(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3DotProduct = Vector3DotProduct
+
+function Vector3Distance(v1, v2) {
+  return r.BindVector3Distance(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Distance = Vector3Distance
+
+function Vector3Angle(v1, v2) {
+  return r.BindVector3Angle(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Angle = Vector3Angle
+
+function Vector3Negate(v) {
+  return r.BindVector3Negate(
+    v.x,
+    v.y,
+    v.z
+  )
+}
+raylib.Vector3Negate = Vector3Negate
+
+function Vector3Divide(v1, v2) {
+  return r.BindVector3Divide(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Divide = Vector3Divide
+
+function Vector3Normalize(v) {
+  return r.BindVector3Normalize(
+    v.x,
+    v.y,
+    v.z
+  )
+}
+raylib.Vector3Normalize = Vector3Normalize
+
+function Vector3OrthoNormalize(v1, v2) {
+  return r.BindVector3OrthoNormalize(
+    v1,
+    v2
+  )
+}
+raylib.Vector3OrthoNormalize = Vector3OrthoNormalize
+
+function Vector3Transform(v, mat) {
+  return r.BindVector3Transform(
+    v.x,
+    v.y,
+    v.z,
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.Vector3Transform = Vector3Transform
+
+function Vector3RotateByQuaternion(v, q) {
+  return r.BindVector3RotateByQuaternion(
+    v.x,
+    v.y,
+    v.z,
+    q
+  )
+}
+raylib.Vector3RotateByQuaternion = Vector3RotateByQuaternion
+
+function Vector3Lerp(v1, v2, amount) {
+  return r.BindVector3Lerp(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z,
+    amount
+  )
+}
+raylib.Vector3Lerp = Vector3Lerp
+
+function Vector3Reflect(v, normal) {
+  return r.BindVector3Reflect(
+    v.x,
+    v.y,
+    v.z,
+    normal.x,
+    normal.y,
+    normal.z
+  )
+}
+raylib.Vector3Reflect = Vector3Reflect
+
+function Vector3Min(v1, v2) {
+  return r.BindVector3Min(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Min = Vector3Min
+
+function Vector3Max(v1, v2) {
+  return r.BindVector3Max(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Max = Vector3Max
+
+function Vector3Barycenter(p, a, b, c) {
+  return r.BindVector3Barycenter(
+    p.x,
+    p.y,
+    p.z,
+    a.x,
+    a.y,
+    a.z,
+    b.x,
+    b.y,
+    b.z,
+    c.x,
+    c.y,
+    c.z
+  )
+}
+raylib.Vector3Barycenter = Vector3Barycenter
+
+function Vector3Unproject(source, projection, view) {
+  return r.BindVector3Unproject(
+    source.x,
+    source.y,
+    source.z,
+    projection.m0,
+    projection.m4,
+    projection.m8,
+    projection.m12,
+    projection.m1,
+    projection.m5,
+    projection.m9,
+    projection.m13,
+    projection.m2,
+    projection.m6,
+    projection.m10,
+    projection.m14,
+    projection.m3,
+    projection.m7,
+    projection.m11,
+    projection.m15,
+    view.m0,
+    view.m4,
+    view.m8,
+    view.m12,
+    view.m1,
+    view.m5,
+    view.m9,
+    view.m13,
+    view.m2,
+    view.m6,
+    view.m10,
+    view.m14,
+    view.m3,
+    view.m7,
+    view.m11,
+    view.m15
+  )
+}
+raylib.Vector3Unproject = Vector3Unproject
+
+function MatrixDeterminant(mat) {
+  return r.BindMatrixDeterminant(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.MatrixDeterminant = MatrixDeterminant
+
+function MatrixTrace(mat) {
+  return r.BindMatrixTrace(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.MatrixTrace = MatrixTrace
+
+function MatrixTranspose(mat) {
+  return r.BindMatrixTranspose(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.MatrixTranspose = MatrixTranspose
+
+function MatrixInvert(mat) {
+  return r.BindMatrixInvert(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.MatrixInvert = MatrixInvert
+
+function MatrixNormalize(mat) {
+  return r.BindMatrixNormalize(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.MatrixNormalize = MatrixNormalize
+
+function MatrixIdentity() {
+  return r.BindMatrixIdentity()
+}
+raylib.MatrixIdentity = MatrixIdentity
+
+function MatrixAdd(left, right) {
+  return r.BindMatrixAdd(
+    left.m0,
+    left.m4,
+    left.m8,
+    left.m12,
+    left.m1,
+    left.m5,
+    left.m9,
+    left.m13,
+    left.m2,
+    left.m6,
+    left.m10,
+    left.m14,
+    left.m3,
+    left.m7,
+    left.m11,
+    left.m15,
+    right.m0,
+    right.m4,
+    right.m8,
+    right.m12,
+    right.m1,
+    right.m5,
+    right.m9,
+    right.m13,
+    right.m2,
+    right.m6,
+    right.m10,
+    right.m14,
+    right.m3,
+    right.m7,
+    right.m11,
+    right.m15
+  )
+}
+raylib.MatrixAdd = MatrixAdd
+
+function MatrixSubtract(left, right) {
+  return r.BindMatrixSubtract(
+    left.m0,
+    left.m4,
+    left.m8,
+    left.m12,
+    left.m1,
+    left.m5,
+    left.m9,
+    left.m13,
+    left.m2,
+    left.m6,
+    left.m10,
+    left.m14,
+    left.m3,
+    left.m7,
+    left.m11,
+    left.m15,
+    right.m0,
+    right.m4,
+    right.m8,
+    right.m12,
+    right.m1,
+    right.m5,
+    right.m9,
+    right.m13,
+    right.m2,
+    right.m6,
+    right.m10,
+    right.m14,
+    right.m3,
+    right.m7,
+    right.m11,
+    right.m15
+  )
+}
+raylib.MatrixSubtract = MatrixSubtract
+
+function MatrixMultiply(left, right) {
+  return r.BindMatrixMultiply(
+    left.m0,
+    left.m4,
+    left.m8,
+    left.m12,
+    left.m1,
+    left.m5,
+    left.m9,
+    left.m13,
+    left.m2,
+    left.m6,
+    left.m10,
+    left.m14,
+    left.m3,
+    left.m7,
+    left.m11,
+    left.m15,
+    right.m0,
+    right.m4,
+    right.m8,
+    right.m12,
+    right.m1,
+    right.m5,
+    right.m9,
+    right.m13,
+    right.m2,
+    right.m6,
+    right.m10,
+    right.m14,
+    right.m3,
+    right.m7,
+    right.m11,
+    right.m15
+  )
+}
+raylib.MatrixMultiply = MatrixMultiply
+
+function MatrixTranslate(x, y, z) {
+  return r.BindMatrixTranslate(
+    x,
+    y,
+    z
+  )
+}
+raylib.MatrixTranslate = MatrixTranslate
+
+function MatrixRotate(axis, angle) {
+  return r.BindMatrixRotate(
+    axis.x,
+    axis.y,
+    axis.z,
+    angle
+  )
+}
+raylib.MatrixRotate = MatrixRotate
+
+function MatrixRotateX(angle) {
+  return r.BindMatrixRotateX(
+    angle
+  )
+}
+raylib.MatrixRotateX = MatrixRotateX
+
+function MatrixRotateY(angle) {
+  return r.BindMatrixRotateY(
+    angle
+  )
+}
+raylib.MatrixRotateY = MatrixRotateY
+
+function MatrixRotateZ(angle) {
+  return r.BindMatrixRotateZ(
+    angle
+  )
+}
+raylib.MatrixRotateZ = MatrixRotateZ
+
+function MatrixRotateXYZ(ang) {
+  return r.BindMatrixRotateXYZ(
+    ang.x,
+    ang.y,
+    ang.z
+  )
+}
+raylib.MatrixRotateXYZ = MatrixRotateXYZ
+
+function MatrixRotateZYX(ang) {
+  return r.BindMatrixRotateZYX(
+    ang.x,
+    ang.y,
+    ang.z
+  )
+}
+raylib.MatrixRotateZYX = MatrixRotateZYX
+
+function MatrixScale(x, y, z) {
+  return r.BindMatrixScale(
+    x,
+    y,
+    z
+  )
+}
+raylib.MatrixScale = MatrixScale
+
+function MatrixFrustum(left, right, bottom, top, near, far) {
+  return r.BindMatrixFrustum(
+    left,
+    right,
+    bottom,
+    top,
+    near,
+    far
+  )
+}
+raylib.MatrixFrustum = MatrixFrustum
+
+function MatrixPerspective(fovy, aspect, near, far) {
+  return r.BindMatrixPerspective(
+    fovy,
+    aspect,
+    near,
+    far
+  )
+}
+raylib.MatrixPerspective = MatrixPerspective
+
+function MatrixOrtho(left, right, bottom, top, near, far) {
+  return r.BindMatrixOrtho(
+    left,
+    right,
+    bottom,
+    top,
+    near,
+    far
+  )
+}
+raylib.MatrixOrtho = MatrixOrtho
+
+function MatrixLookAt(eye, target, up) {
+  return r.BindMatrixLookAt(
+    eye.x,
+    eye.y,
+    eye.z,
+    target.x,
+    target.y,
+    target.z,
+    up.x,
+    up.y,
+    up.z
+  )
+}
+raylib.MatrixLookAt = MatrixLookAt
+
+function QuaternionAdd(q1, q2) {
+  return r.BindQuaternionAdd(
+    q1,
+    q2
+  )
+}
+raylib.QuaternionAdd = QuaternionAdd
+
+function QuaternionAddValue(q, add) {
+  return r.BindQuaternionAddValue(
+    q,
+    add
+  )
+}
+raylib.QuaternionAddValue = QuaternionAddValue
+
+function QuaternionSubtract(q1, q2) {
+  return r.BindQuaternionSubtract(
+    q1,
+    q2
+  )
+}
+raylib.QuaternionSubtract = QuaternionSubtract
+
+function QuaternionSubtractValue(q, sub) {
+  return r.BindQuaternionSubtractValue(
+    q,
+    sub
+  )
+}
+raylib.QuaternionSubtractValue = QuaternionSubtractValue
+
+function QuaternionIdentity() {
+  return r.BindQuaternionIdentity()
+}
+raylib.QuaternionIdentity = QuaternionIdentity
+
+function QuaternionLength(q) {
+  return r.BindQuaternionLength(
+    q
+  )
+}
+raylib.QuaternionLength = QuaternionLength
+
+function QuaternionNormalize(q) {
+  return r.BindQuaternionNormalize(
+    q
+  )
+}
+raylib.QuaternionNormalize = QuaternionNormalize
+
+function QuaternionInvert(q) {
+  return r.BindQuaternionInvert(
+    q
+  )
+}
+raylib.QuaternionInvert = QuaternionInvert
+
+function QuaternionMultiply(q1, q2) {
+  return r.BindQuaternionMultiply(
+    q1,
+    q2
+  )
+}
+raylib.QuaternionMultiply = QuaternionMultiply
+
+function QuaternionScale(q, mul) {
+  return r.BindQuaternionScale(
+    q,
+    mul
+  )
+}
+raylib.QuaternionScale = QuaternionScale
+
+function QuaternionDivide(q1, q2) {
+  return r.BindQuaternionDivide(
+    q1,
+    q2
+  )
+}
+raylib.QuaternionDivide = QuaternionDivide
+
+function QuaternionLerp(q1, q2, amount) {
+  return r.BindQuaternionLerp(
+    q1,
+    q2,
+    amount
+  )
+}
+raylib.QuaternionLerp = QuaternionLerp
+
+function QuaternionNlerp(q1, q2, amount) {
+  return r.BindQuaternionNlerp(
+    q1,
+    q2,
+    amount
+  )
+}
+raylib.QuaternionNlerp = QuaternionNlerp
+
+function QuaternionSlerp(q1, q2, amount) {
+  return r.BindQuaternionSlerp(
+    q1,
+    q2,
+    amount
+  )
+}
+raylib.QuaternionSlerp = QuaternionSlerp
+
+function QuaternionFromVector3ToVector3(from, to) {
+  return r.BindQuaternionFromVector3ToVector3(
+    from.x,
+    from.y,
+    from.z,
+    to.x,
+    to.y,
+    to.z
+  )
+}
+raylib.QuaternionFromVector3ToVector3 = QuaternionFromVector3ToVector3
+
+function QuaternionFromMatrix(mat) {
+  return r.BindQuaternionFromMatrix(
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.QuaternionFromMatrix = QuaternionFromMatrix
+
+function QuaternionToMatrix(q) {
+  return r.BindQuaternionToMatrix(
+    q
+  )
+}
+raylib.QuaternionToMatrix = QuaternionToMatrix
+
+function QuaternionFromAxisAngle(axis, angle) {
+  return r.BindQuaternionFromAxisAngle(
+    axis.x,
+    axis.y,
+    axis.z,
+    angle
+  )
+}
+raylib.QuaternionFromAxisAngle = QuaternionFromAxisAngle
+
+function QuaternionToAxisAngle(q, outAxis, outAngle) {
+  return r.BindQuaternionToAxisAngle(
+    q,
+    outAxis,
+    outAngle
+  )
+}
+raylib.QuaternionToAxisAngle = QuaternionToAxisAngle
+
+function QuaternionFromEuler(pitch, yaw, roll) {
+  return r.BindQuaternionFromEuler(
+    pitch,
+    yaw,
+    roll
+  )
+}
+raylib.QuaternionFromEuler = QuaternionFromEuler
+
+function QuaternionToEuler(q) {
+  return r.BindQuaternionToEuler(
+    q
+  )
+}
+raylib.QuaternionToEuler = QuaternionToEuler
+
+function QuaternionTransform(q, mat) {
+  return r.BindQuaternionTransform(
+    q,
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.QuaternionTransform = QuaternionTransform
+
+/**
+ * Enable gui controls (global state)
+ *
+ * @return {undefined}
+ */
+function GuiEnable() {
+  return r.BindGuiEnable()
+}
+raylib.GuiEnable = GuiEnable
+
+/**
+ * Disable gui controls (global state)
+ *
+ * @return {undefined}
+ */
+function GuiDisable() {
+  return r.BindGuiDisable()
+}
+raylib.GuiDisable = GuiDisable
+
+/**
+ * Lock gui controls (global state)
+ *
+ * @return {undefined}
+ */
+function GuiLock() {
+  return r.BindGuiLock()
+}
+raylib.GuiLock = GuiLock
+
+/**
+ * Unlock gui controls (global state)
+ *
+ * @return {undefined}
+ */
+function GuiUnlock() {
+  return r.BindGuiUnlock()
+}
+raylib.GuiUnlock = GuiUnlock
+
+/**
+ * Check if gui is locked (global state)
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiIsLocked() {
+  return r.BindGuiIsLocked()
+}
+raylib.GuiIsLocked = GuiIsLocked
+
+/**
+ * Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
+ *
+ * @param {number} alpha
+ *
+ * @return {undefined}
+ */
+function GuiFade(alpha) {
+  return r.BindGuiFade(
+    alpha
+  )
+}
+raylib.GuiFade = GuiFade
+
+/**
+ * Set gui state (global state)
+ *
+ * @param {number} state
+ *
+ * @return {undefined}
+ */
+function GuiSetState(state) {
+  return r.BindGuiSetState(
+    state
+  )
+}
+raylib.GuiSetState = GuiSetState
+
+/**
+ * Get gui state (global state)
+ *
+ * @return {number} The resulting int.
+ */
+function GuiGetState() {
+  return r.BindGuiGetState()
+}
+raylib.GuiGetState = GuiGetState
+
+/**
+ * Set gui custom font (global state)
+ *
+ * @param {Font} font
+ *
+ * @return {undefined}
+ */
+function GuiSetFont(font) {
+  return r.BindGuiSetFont(
+    font.baseSize,
+    font.glyphCount,
+    font.glyphPadding,
+    font.texture.id,
+    font.texture.width,
+    font.texture.height,
+    font.texture.mipmaps,
+    font.texture.format,
+    font.recs,
+    font.glyphs
+  )
+}
+raylib.GuiSetFont = GuiSetFont
+
+/**
+ * Get gui custom font (global state)
+ *
+ * @return {Font} The resulting Font.
+ */
+function GuiGetFont() {
+  return r.BindGuiGetFont()
+}
+raylib.GuiGetFont = GuiGetFont
+
+/**
+ * Set one style property
+ *
+ * @param {number} control
+ * @param {number} property
+ * @param {number} value
+ *
+ * @return {undefined}
+ */
+function GuiSetStyle(control, property, value) {
+  return r.BindGuiSetStyle(
+    control,
+    property,
+    value
+  )
+}
+raylib.GuiSetStyle = GuiSetStyle
+
+/**
+ * Get one style property
+ *
+ * @param {number} control
+ * @param {number} property
+ *
+ * @return {number} The resulting int.
+ */
+function GuiGetStyle(control, property) {
+  return r.BindGuiGetStyle(
+    control,
+    property
+  )
+}
+raylib.GuiGetStyle = GuiGetStyle
+
+/**
+ * Window Box control, shows a window that can be closed
+ *
+ * @param {Rectangle} bounds
+ * @param {string} title
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiWindowBox(bounds, title) {
+  return r.BindGuiWindowBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    title
+  )
+}
+raylib.GuiWindowBox = GuiWindowBox
+
+/**
+ * Group Box control with text name
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {undefined}
+ */
+function GuiGroupBox(bounds, text) {
+  return r.BindGuiGroupBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiGroupBox = GuiGroupBox
+
+/**
+ * Line separator control, could contain text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {undefined}
+ */
+function GuiLine(bounds, text) {
+  return r.BindGuiLine(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiLine = GuiLine
+
+/**
+ * Panel control, useful to group controls
+ *
+ * @param {Rectangle} bounds
+ *
+ * @return {undefined}
+ */
+function GuiPanel(bounds) {
+  return r.BindGuiPanel(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height
+  )
+}
+raylib.GuiPanel = GuiPanel
+
+/**
+ * Scroll Panel control
+ *
+ * @param {Rectangle} bounds
+ * @param {Rectangle} content
+ * @param {number} scroll
+ *
+ * @return {Rectangle} The resulting Rectangle.
+ */
+function GuiScrollPanel(bounds, content, scroll) {
+  return r.BindGuiScrollPanel(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    content.x,
+    content.y,
+    content.width,
+    content.height,
+    scroll
+  )
+}
+raylib.GuiScrollPanel = GuiScrollPanel
+
+/**
+ * Label control, shows text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {undefined}
+ */
+function GuiLabel(bounds, text) {
+  return r.BindGuiLabel(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiLabel = GuiLabel
+
+/**
+ * Button control, returns true when clicked
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiButton(bounds, text) {
+  return r.BindGuiButton(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiButton = GuiButton
+
+/**
+ * Label button control, show true when clicked
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiLabelButton(bounds, text) {
+  return r.BindGuiLabelButton(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiLabelButton = GuiLabelButton
+
+/**
+ * Toggle Button control, returns true when active
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {boolean} active
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiToggle(bounds, text, active) {
+  return r.BindGuiToggle(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active
+  )
+}
+raylib.GuiToggle = GuiToggle
+
+/**
+ * Toggle Group control, returns active toggle index
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiToggleGroup(bounds, text, active) {
+  return r.BindGuiToggleGroup(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active
+  )
+}
+raylib.GuiToggleGroup = GuiToggleGroup
+
+/**
+ * Check Box control, returns true when active
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {boolean} checked
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiCheckBox(bounds, text, checked) {
+  return r.BindGuiCheckBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    checked
+  )
+}
+raylib.GuiCheckBox = GuiCheckBox
+
+/**
+ * Combo Box control, returns selected item index
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiComboBox(bounds, text, active) {
+  return r.BindGuiComboBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active
+  )
+}
+raylib.GuiComboBox = GuiComboBox
+
+/**
+ * Dropdown Box control, returns selected item
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ * @param {boolean} editMode
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiDropdownBox(bounds, text, active, editMode) {
+  return r.BindGuiDropdownBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active,
+    editMode
+  )
+}
+raylib.GuiDropdownBox = GuiDropdownBox
+
+/**
+ * Spinner control, returns selected value
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @param {boolean} editMode
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiSpinner(bounds, text, value, minValue, maxValue, editMode) {
+  return r.BindGuiSpinner(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    value,
+    minValue,
+    maxValue,
+    editMode
+  )
+}
+raylib.GuiSpinner = GuiSpinner
+
+/**
+ * Value Box control, updates input text with numbers
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @param {boolean} editMode
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiValueBox(bounds, text, value, minValue, maxValue, editMode) {
+  return r.BindGuiValueBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    value,
+    minValue,
+    maxValue,
+    editMode
+  )
+}
+raylib.GuiValueBox = GuiValueBox
+
+/**
+ * Text Box control, updates input text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} textSize
+ * @param {boolean} editMode
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiTextBox(bounds, text, textSize, editMode) {
+  return r.BindGuiTextBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    textSize,
+    editMode
+  )
+}
+raylib.GuiTextBox = GuiTextBox
+
+/**
+ * Text Box control with multiple lines
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} textSize
+ * @param {boolean} editMode
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiTextBoxMulti(bounds, text, textSize, editMode) {
+  return r.BindGuiTextBoxMulti(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    textSize,
+    editMode
+  )
+}
+raylib.GuiTextBoxMulti = GuiTextBoxMulti
+
+/**
+ * Slider control, returns selected value
+ *
+ * @param {Rectangle} bounds
+ * @param {string} textLeft
+ * @param {string} textRight
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ *
+ * @return {number} The resulting float.
+ */
+function GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue) {
+  return r.BindGuiSlider(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    textLeft,
+    textRight,
+    value,
+    minValue,
+    maxValue
+  )
+}
+raylib.GuiSlider = GuiSlider
+
+/**
+ * Slider Bar control, returns selected value
+ *
+ * @param {Rectangle} bounds
+ * @param {string} textLeft
+ * @param {string} textRight
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ *
+ * @return {number} The resulting float.
+ */
+function GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue) {
+  return r.BindGuiSliderBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    textLeft,
+    textRight,
+    value,
+    minValue,
+    maxValue
+  )
+}
+raylib.GuiSliderBar = GuiSliderBar
+
+/**
+ * Progress Bar control, shows current progress value
+ *
+ * @param {Rectangle} bounds
+ * @param {string} textLeft
+ * @param {string} textRight
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ *
+ * @return {number} The resulting float.
+ */
+function GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue) {
+  return r.BindGuiProgressBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    textLeft,
+    textRight,
+    value,
+    minValue,
+    maxValue
+  )
+}
+raylib.GuiProgressBar = GuiProgressBar
+
+/**
+ * Status Bar control, shows info text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {undefined}
+ */
+function GuiStatusBar(bounds, text) {
+  return r.BindGuiStatusBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiStatusBar = GuiStatusBar
+
+/**
+ * Dummy control for placeholders
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {undefined}
+ */
+function GuiDummyRec(bounds, text) {
+  return r.BindGuiDummyRec(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiDummyRec = GuiDummyRec
+
+/**
+ * Scroll Bar control
+ *
+ * @param {Rectangle} bounds
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ *
+ * @return {number} The resulting int.
+ */
+function GuiScrollBar(bounds, value, minValue, maxValue) {
+  return r.BindGuiScrollBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    value,
+    minValue,
+    maxValue
+  )
+}
+raylib.GuiScrollBar = GuiScrollBar
+
+/**
+ * Grid control
+ *
+ * @param {Rectangle} bounds
+ * @param {number} spacing
+ * @param {number} subdivs
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GuiGrid(bounds, spacing, subdivs) {
+  return r.BindGuiGrid(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    spacing,
+    subdivs
+  )
+}
+raylib.GuiGrid = GuiGrid
+
+/**
+ * List View control, returns selected list item index
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} scrollIndex
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiListView(bounds, text, scrollIndex, active) {
+  return r.BindGuiListView(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    scrollIndex,
+    active
+  )
+}
+raylib.GuiListView = GuiListView
+
+/**
+ * List View with extended parameters
+ *
+ * @param {Rectangle} bounds
+ * @param {number} text
+ * @param {number} count
+ * @param {number} focus
+ * @param {number} scrollIndex
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiListViewEx(bounds, text, count, focus, scrollIndex, active) {
+  return r.BindGuiListViewEx(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    count,
+    focus,
+    scrollIndex,
+    active
+  )
+}
+raylib.GuiListViewEx = GuiListViewEx
+
+/**
+ * Message Box control, displays a message
+ *
+ * @param {Rectangle} bounds
+ * @param {string} title
+ * @param {string} message
+ * @param {string} buttons
+ *
+ * @return {number} The resulting int.
+ */
+function GuiMessageBox(bounds, title, message, buttons) {
+  return r.BindGuiMessageBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    title,
+    message,
+    buttons
+  )
+}
+raylib.GuiMessageBox = GuiMessageBox
+
+/**
+ * Text Input Box control, ask for text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} title
+ * @param {string} message
+ * @param {string} buttons
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiTextInputBox(bounds, title, message, buttons, text) {
+  return r.BindGuiTextInputBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    title,
+    message,
+    buttons,
+    text
+  )
+}
+raylib.GuiTextInputBox = GuiTextInputBox
+
+/**
+ * Color Picker control (multiple color controls)
+ *
+ * @param {Rectangle} bounds
+ * @param {Color} color
+ *
+ * @return {Color} The resulting Color.
+ */
+function GuiColorPicker(bounds, color) {
+  return r.BindGuiColorPicker(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.GuiColorPicker = GuiColorPicker
+
+/**
+ * Color Panel control
+ *
+ * @param {Rectangle} bounds
+ * @param {Color} color
+ *
+ * @return {Color} The resulting Color.
+ */
+function GuiColorPanel(bounds, color) {
+  return r.BindGuiColorPanel(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.GuiColorPanel = GuiColorPanel
+
+/**
+ * Color Bar Alpha control
+ *
+ * @param {Rectangle} bounds
+ * @param {number} alpha
+ *
+ * @return {number} The resulting float.
+ */
+function GuiColorBarAlpha(bounds, alpha) {
+  return r.BindGuiColorBarAlpha(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    alpha
+  )
+}
+raylib.GuiColorBarAlpha = GuiColorBarAlpha
+
+/**
+ * Color Bar Hue control
+ *
+ * @param {Rectangle} bounds
+ * @param {number} value
+ *
+ * @return {number} The resulting float.
+ */
+function GuiColorBarHue(bounds, value) {
+  return r.BindGuiColorBarHue(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    value
+  )
+}
+raylib.GuiColorBarHue = GuiColorBarHue
+
+/**
+ * Load style file over global style variable (.rgs)
+ *
+ * @param {string} fileName
+ *
+ * @return {undefined}
+ */
+function GuiLoadStyle(fileName) {
+  return r.BindGuiLoadStyle(
+    fileName
+  )
+}
+raylib.GuiLoadStyle = GuiLoadStyle
+
+/**
+ * Load style default over global style
+ *
+ * @return {undefined}
+ */
+function GuiLoadStyleDefault() {
+  return r.BindGuiLoadStyleDefault()
+}
+raylib.GuiLoadStyleDefault = GuiLoadStyleDefault
+
+/**
+ * Get text with icon id prepended (if supported)
+ *
+ * @param {number} iconId
+ * @param {string} text
+ *
+ * @return {string} The resulting const char *.
+ */
+function GuiIconText(iconId, text) {
+  return r.BindGuiIconText(
+    iconId,
+    text
+  )
+}
+raylib.GuiIconText = GuiIconText
+
+function GuiDrawIcon(iconId, posX, posY, pixelSize, color) {
+  return r.BindGuiDrawIcon(
+    iconId,
+    posX,
+    posY,
+    pixelSize,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.GuiDrawIcon = GuiDrawIcon
+
+/**
+ * Get full icons data pointer
+ *
+ * @return {number} The resulting unsigned int *.
+ */
+function GuiGetIcons() {
+  return r.BindGuiGetIcons()
+}
+raylib.GuiGetIcons = GuiGetIcons
+
+/**
+ * Get icon bit data
+ *
+ * @param {number} iconId
+ *
+ * @return {number} The resulting unsigned int *.
+ */
+function GuiGetIconData(iconId) {
+  return r.BindGuiGetIconData(
+    iconId
+  )
+}
+raylib.GuiGetIconData = GuiGetIconData
+
+/**
+ * Set icon bit data
+ *
+ * @param {number} iconId
+ * @param {number} data
+ *
+ * @return {undefined}
+ */
+function GuiSetIconData(iconId, data) {
+  return r.BindGuiSetIconData(
+    iconId,
+    data
+  )
+}
+raylib.GuiSetIconData = GuiSetIconData
+
+/**
+ * Set icon pixel value
+ *
+ * @param {number} iconId
+ * @param {number} x
+ * @param {number} y
+ *
+ * @return {undefined}
+ */
+function GuiSetIconPixel(iconId, x, y) {
+  return r.BindGuiSetIconPixel(
+    iconId,
+    x,
+    y
+  )
+}
+raylib.GuiSetIconPixel = GuiSetIconPixel
+
+/**
+ * Clear icon pixel value
+ *
+ * @param {number} iconId
+ * @param {number} x
+ * @param {number} y
+ *
+ * @return {undefined}
+ */
+function GuiClearIconPixel(iconId, x, y) {
+  return r.BindGuiClearIconPixel(
+    iconId,
+    x,
+    y
+  )
+}
+raylib.GuiClearIconPixel = GuiClearIconPixel
+
+/**
+ * Check icon pixel value
+ *
+ * @param {number} iconId
+ * @param {number} x
+ * @param {number} y
+ *
+ * @return {boolean} The resulting bool.
+ */
+function GuiCheckIconPixel(iconId, x, y) {
+  return r.BindGuiCheckIconPixel(
+    iconId,
+    x,
+    y
+  )
+}
+raylib.GuiCheckIconPixel = GuiCheckIconPixel
 
 /**
  * Update camera position for selected mode
@@ -10099,20 +11926,20 @@ raylib.GenMeshBinormals = GenMeshBinormals
 function SetModelMeshMaterial(model, meshId, materialId) {
   const obj = r.BindSetModelMeshMaterial(
     model.transform.m0,
-    model.transform.m1,
-    model.transform.m2,
-    model.transform.m3,
     model.transform.m4,
-    model.transform.m5,
-    model.transform.m6,
-    model.transform.m7,
     model.transform.m8,
-    model.transform.m9,
-    model.transform.m10,
-    model.transform.m11,
     model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
     model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
     model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
     model.transform.m15,
     model.meshCount,
     model.materialCount,
@@ -12357,7 +14184,7 @@ raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
 raylib.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
 
 /**
- * No filter, just pixel approximation
+ * No filter, just pixel aproximation
  *
  * @type {number}
  * @constant
@@ -12723,6 +14550,606 @@ raylib.NPATCH_THREE_PATCH_VERTICAL = 1
  * @constant
  */
 raylib.NPATCH_THREE_PATCH_HORIZONTAL = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.GUI_STATE_NORMAL = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.GUI_STATE_FOCUSED = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.GUI_STATE_PRESSED = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.GUI_STATE_DISABLED = 3
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.GUI_TEXT_ALIGN_LEFT = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.GUI_TEXT_ALIGN_CENTER = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.GUI_TEXT_ALIGN_RIGHT = 2
+
+/**
+ * Generic control -> populates to all controls when set
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.DEFAULT = 0
+
+/**
+ * Used also for: LABELBUTTON
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.LABEL = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BUTTON = 2
+
+/**
+ * Used also for: TOGGLEGROUP
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TOGGLE = 3
+
+/**
+ * Used also for: SLIDERBAR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SLIDER = 4
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.PROGRESSBAR = 5
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.CHECKBOX = 6
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.COMBOBOX = 7
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.DROPDOWNBOX = 8
+
+/**
+ * Used also for: TEXTBOXMULTI
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXTBOX = 9
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.VALUEBOX = 10
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SPINNER = 11
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.LISTVIEW = 12
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.COLORPICKER = 13
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLLBAR = 14
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.STATUSBAR = 15
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BORDER_COLOR_NORMAL = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BASE_COLOR_NORMAL = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_COLOR_NORMAL = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BORDER_COLOR_FOCUSED = 3
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BASE_COLOR_FOCUSED = 4
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_COLOR_FOCUSED = 5
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BORDER_COLOR_PRESSED = 6
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BASE_COLOR_PRESSED = 7
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_COLOR_PRESSED = 8
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BORDER_COLOR_DISABLED = 9
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BASE_COLOR_DISABLED = 10
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_COLOR_DISABLED = 11
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BORDER_WIDTH = 12
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_PADDING = 13
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_ALIGNMENT = 14
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RESERVED = 15
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_SIZE = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_SPACING = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.LINE_COLOR = 18
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BACKGROUND_COLOR = 19
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.GROUP_PADDING = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SLIDER_WIDTH = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SLIDER_PADDING = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.PROGRESS_PADDING = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.CHECK_PADDING = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.COMBO_BUTTON_WIDTH = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.COMBO_BUTTON_PADDING = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ARROW_PADDING = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.DROPDOWN_ITEMS_PADDING = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_INNER_PADDING = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_LINES_PADDING = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.COLOR_SELECTED_FG = 18
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.COLOR_SELECTED_BG = 19
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SPIN_BUTTON_WIDTH = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SPIN_BUTTON_PADDING = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ARROWS_SIZE = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ARROWS_VISIBLE = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLL_SLIDER_PADDING = 18
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLL_SLIDER_SIZE = 19
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLL_PADDING = 20
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLL_SPEED = 21
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLLBAR_LEFT_SIDE = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLLBAR_RIGHT_SIDE = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.LIST_ITEMS_HEIGHT = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.LIST_ITEMS_PADDING = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLLBAR_WIDTH = 18
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SCROLLBAR_SIDE = 19
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.COLOR_SELECTOR_SIZE = 16
+
+/**
+ * Right hue bar width
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.HUEBAR_WIDTH = 17
+
+/**
+ * Right hue bar separation from panel
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.HUEBAR_PADDING = 18
+
+/**
+ * Right hue bar selector height
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.HUEBAR_SELECTOR_HEIGHT = 19
+
+/**
+ * Right hue bar selector overflow
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.HUEBAR_SELECTOR_OVERFLOW = 20
 
 raylib.LIGHTGRAY = { r: 200, g: 200, b: 200, a: 255 }
 raylib.GRAY = { r: 130, g: 130, b: 130, a: 255 }
