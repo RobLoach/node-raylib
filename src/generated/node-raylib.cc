@@ -265,7 +265,7 @@ inline Transform TransformFromValue(const Napi::CallbackInfo& info, int index) {
 
 inline BoneInfo BoneInfoFromValue(const Napi::CallbackInfo& info, int index) {
   return {
-     pointerFromValue(info, index + 0),
+     charFromValue(info, index + 0),
      charFromValue(info, index + 1)
   };
 }

@@ -107,6 +107,7 @@ function getDefs () {
 
     // temporary fix for building on Mac/Win? Wonder why this is necessary
     if (struct.name === 'BoneInfo') {
+      struct.fields[0].type = 'char'
       struct.fields[1].type = 'char'
     }
 
