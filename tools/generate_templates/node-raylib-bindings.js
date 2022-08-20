@@ -182,11 +182,12 @@ module.exports = ({ functions, structs, enums, blocklist, byreflist }) => `
 #include <iostream>
 #include <cstring>
 #include "raylib.h"
-#include "extras/easings.h"
 #include "raymath.h"
 
+#include "../extras/reasings.h"
+
 #define RAYGUI_IMPLEMENTATION
-#include "extras/raygui.h"
+#include "../extras/raygui.h"
 
 using namespace Napi;
 

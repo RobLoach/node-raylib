@@ -21,6 +21,11 @@ const blocklist = [
   'SetLoadFileTextCallback',
   'SetSaveFileTextCallback',
 
+  // Callbacks: AudioStream
+  'SetAudioStreamCallback',
+  'AttachAudioStreamProcessor',
+  'DetachAudioStreamProcessor',
+
   // Structs
   // @todo Verify Structs that have array properties
   'VrStereoConfig', // Matrix[2], float[2]
@@ -174,8 +179,8 @@ function getDefs () {
   }
 
   // Add the Easings API
-  const easings = raylibApi.easings
-  functions.push(...easings.functions)
+  const reasings = raylibApi.reasings
+  functions.push(...reasings.functions)
 
   // Add Raymath
   const raymath = raylibApi.raymath

@@ -134,7 +134,7 @@ function IsWindowState(flag) {
 raylib.IsWindowState = IsWindowState
 
 /**
- * Set window configuration state using flags
+ * Set window configuration state using flags (only PLATFORM_DESKTOP)
  *
  * @param {number} flags
  *
@@ -296,6 +296,20 @@ function SetWindowSize(width, height) {
 raylib.SetWindowSize = SetWindowSize
 
 /**
+ * Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)
+ *
+ * @param {number} opacity
+ *
+ * @return {undefined}
+ */
+function SetWindowOpacity(opacity) {
+  return r.BindSetWindowOpacity(
+    opacity
+  )
+}
+raylib.SetWindowOpacity = SetWindowOpacity
+
+/**
  * Get native window handle
  *
  * @return {number} The resulting void *.
@@ -324,6 +338,26 @@ function GetScreenHeight() {
   return r.BindGetScreenHeight()
 }
 raylib.GetScreenHeight = GetScreenHeight
+
+/**
+ * Get current render width (it considers HiDPI)
+ *
+ * @return {number} The resulting int.
+ */
+function GetRenderWidth() {
+  return r.BindGetRenderWidth()
+}
+raylib.GetRenderWidth = GetRenderWidth
+
+/**
+ * Get current render height (it considers HiDPI)
+ *
+ * @return {number} The resulting int.
+ */
+function GetRenderHeight() {
+  return r.BindGetRenderHeight()
+}
+raylib.GetRenderHeight = GetRenderHeight
 
 /**
  * Get number of connected monitors
@@ -360,7 +394,7 @@ function GetMonitorPosition(monitor) {
 raylib.GetMonitorPosition = GetMonitorPosition
 
 /**
- * Get specified monitor width (max available by monitor)
+ * Get specified monitor width (current video mode used by monitor)
  *
  * @param {number} monitor
  *
@@ -374,7 +408,7 @@ function GetMonitorWidth(monitor) {
 raylib.GetMonitorWidth = GetMonitorWidth
 
 /**
- * Get specified monitor height (max available by monitor)
+ * Get specified monitor height (current video mode used by monitor)
  *
  * @param {number} monitor
  *
@@ -488,6 +522,26 @@ function GetClipboardText() {
 raylib.GetClipboardText = GetClipboardText
 
 /**
+ * Enable waiting for events on EndDrawing(), no automatic event polling
+ *
+ * @return {undefined}
+ */
+function EnableEventWaiting() {
+  return r.BindEnableEventWaiting()
+}
+raylib.EnableEventWaiting = EnableEventWaiting
+
+/**
+ * Disable waiting for events on EndDrawing(), automatic events polling
+ *
+ * @return {undefined}
+ */
+function DisableEventWaiting() {
+  return r.BindDisableEventWaiting()
+}
+raylib.DisableEventWaiting = DisableEventWaiting
+
+/**
  * Swap back buffer with front buffer (screen drawing)
  *
  * @return {undefined}
@@ -508,15 +562,15 @@ function PollInputEvents() {
 raylib.PollInputEvents = PollInputEvents
 
 /**
- * Wait for some milliseconds (halt program execution)
+ * Wait for some time (halt program execution)
  *
- * @param {number} ms
+ * @param {number} seconds
  *
  * @return {undefined}
  */
-function WaitTime(ms) {
+function WaitTime(seconds) {
   return r.BindWaitTime(
-    ms
+    seconds
   )
 }
 raylib.WaitTime = WaitTime
@@ -1041,6 +1095,28 @@ function GetWorldToScreen(position, camera) {
 raylib.GetWorldToScreen = GetWorldToScreen
 
 /**
+ * Get the world space position for a 2d camera screen space position
+ *
+ * @param {Vector2} position
+ * @param {Camera2D} camera
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetScreenToWorld2D(position, camera) {
+  return r.BindGetScreenToWorld2D(
+    position.x,
+    position.y,
+    camera.offset.x,
+    camera.offset.y,
+    camera.target.x,
+    camera.target.y,
+    camera.rotation,
+    camera.zoom
+  )
+}
+raylib.GetScreenToWorld2D = GetScreenToWorld2D
+
+/**
  * Get size position for a 3d world space position
  *
  * @param {Vector3} position
@@ -1093,28 +1169,6 @@ function GetWorldToScreen2D(position, camera) {
   )
 }
 raylib.GetWorldToScreen2D = GetWorldToScreen2D
-
-/**
- * Get the world space position for a 2d camera screen space position
- *
- * @param {Vector2} position
- * @param {Camera2D} camera
- *
- * @return {Vector2} The resulting Vector2.
- */
-function GetScreenToWorld2D(position, camera) {
-  return r.BindGetScreenToWorld2D(
-    position.x,
-    position.y,
-    camera.offset.x,
-    camera.offset.y,
-    camera.target.x,
-    camera.target.y,
-    camera.rotation,
-    camera.zoom
-  )
-}
-raylib.GetScreenToWorld2D = GetScreenToWorld2D
 
 /**
  * Set target FPS (maximum)
@@ -1277,6 +1331,20 @@ function MemFree(ptr) {
 raylib.MemFree = MemFree
 
 /**
+ * Open URL with default system browser (if available)
+ *
+ * @param {string} url
+ *
+ * @return {undefined}
+ */
+function OpenURL(url) {
+  return r.BindOpenURL(
+    url
+  )
+}
+raylib.OpenURL = OpenURL
+
+/**
  * Load file data as byte array (read)
  *
  * @param {string} fileName
@@ -1323,6 +1391,24 @@ function SaveFileData(fileName, data, bytesToWrite) {
   )
 }
 raylib.SaveFileData = SaveFileData
+
+/**
+ * Export data to code (.h), returns true on success
+ *
+ * @param {string} data
+ * @param {number} size
+ * @param {string} fileName
+ *
+ * @return {boolean} The resulting bool.
+ */
+function ExportDataAsCode(data, size, fileName) {
+  return r.BindExportDataAsCode(
+    data,
+    size,
+    fileName
+  )
+}
+raylib.ExportDataAsCode = ExportDataAsCode
 
 /**
  * Load text data from file (read), returns a '\0' terminated string
@@ -1413,6 +1499,20 @@ function IsFileExtension(fileName, ext) {
 raylib.IsFileExtension = IsFileExtension
 
 /**
+ * Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h)
+ *
+ * @param {string} fileName
+ *
+ * @return {number} The resulting int.
+ */
+function GetFileLength(fileName) {
+  return r.BindGetFileLength(
+    fileName
+  )
+}
+raylib.GetFileLength = GetFileLength
+
+/**
  * Get pointer to extension for a filename string (includes dot: '.png')
  *
  * @param {string} fileName
@@ -1493,30 +1593,14 @@ function GetWorkingDirectory() {
 raylib.GetWorkingDirectory = GetWorkingDirectory
 
 /**
- * Get filenames in a directory path (memory should be freed)
+ * Get the directory if the running application (uses static string)
  *
- * @param {string} dirPath
- * @param {number} count
- *
- * @return {number} The resulting char **.
+ * @return {string} The resulting const char *.
  */
-function GetDirectoryFiles(dirPath, count) {
-  return r.BindGetDirectoryFiles(
-    dirPath,
-    count
-  )
+function GetApplicationDirectory() {
+  return r.BindGetApplicationDirectory()
 }
-raylib.GetDirectoryFiles = GetDirectoryFiles
-
-/**
- * Clear directory files paths buffers (free memory)
- *
- * @return {undefined}
- */
-function ClearDirectoryFiles() {
-  return r.BindClearDirectoryFiles()
-}
-raylib.ClearDirectoryFiles = ClearDirectoryFiles
+raylib.GetApplicationDirectory = GetApplicationDirectory
 
 /**
  * Change working directory, return true on success
@@ -1533,6 +1617,68 @@ function ChangeDirectory(dir) {
 raylib.ChangeDirectory = ChangeDirectory
 
 /**
+ * Check if a given path is a file or a directory
+ *
+ * @param {string} path
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsPathFile(path) {
+  return r.BindIsPathFile(
+    path
+  )
+}
+raylib.IsPathFile = IsPathFile
+
+/**
+ * Load directory filepaths
+ *
+ * @param {string} dirPath
+ *
+ * @return {FilePathList} The resulting FilePathList.
+ */
+function LoadDirectoryFiles(dirPath) {
+  return r.BindLoadDirectoryFiles(
+    dirPath
+  )
+}
+raylib.LoadDirectoryFiles = LoadDirectoryFiles
+
+/**
+ * Load directory filepaths with extension filtering and recursive directory scan
+ *
+ * @param {string} basePath
+ * @param {string} filter
+ * @param {boolean} scanSubdirs
+ *
+ * @return {FilePathList} The resulting FilePathList.
+ */
+function LoadDirectoryFilesEx(basePath, filter, scanSubdirs) {
+  return r.BindLoadDirectoryFilesEx(
+    basePath,
+    filter,
+    scanSubdirs
+  )
+}
+raylib.LoadDirectoryFilesEx = LoadDirectoryFilesEx
+
+/**
+ * Unload filepaths
+ *
+ * @param {FilePathList} files
+ *
+ * @return {undefined}
+ */
+function UnloadDirectoryFiles(files) {
+  return r.BindUnloadDirectoryFiles(
+    files.capacity,
+    files.count,
+    files.paths
+  )
+}
+raylib.UnloadDirectoryFiles = UnloadDirectoryFiles
+
+/**
  * Check if a file has been dropped into window
  *
  * @return {boolean} The resulting bool.
@@ -1543,28 +1689,30 @@ function IsFileDropped() {
 raylib.IsFileDropped = IsFileDropped
 
 /**
- * Get dropped files names (memory should be freed)
+ * Load dropped filepaths
  *
- * @param {number} count
- *
- * @return {number} The resulting char **.
+ * @return {FilePathList} The resulting FilePathList.
  */
-function GetDroppedFiles(count) {
-  return r.BindGetDroppedFiles(
-    count
-  )
+function LoadDroppedFiles() {
+  return r.BindLoadDroppedFiles()
 }
-raylib.GetDroppedFiles = GetDroppedFiles
+raylib.LoadDroppedFiles = LoadDroppedFiles
 
 /**
- * Clear dropped files paths buffer (free memory)
+ * Unload dropped filepaths
+ *
+ * @param {FilePathList} files
  *
  * @return {undefined}
  */
-function ClearDroppedFiles() {
-  return r.BindClearDroppedFiles()
+function UnloadDroppedFiles(files) {
+  return r.BindUnloadDroppedFiles(
+    files.capacity,
+    files.count,
+    files.paths
+  )
 }
-raylib.ClearDroppedFiles = ClearDroppedFiles
+raylib.UnloadDroppedFiles = UnloadDroppedFiles
 
 /**
  * Get file modification time (last write time)
@@ -1581,118 +1729,74 @@ function GetFileModTime(fileName) {
 raylib.GetFileModTime = GetFileModTime
 
 /**
- * Compress data (DEFLATE algorithm)
+ * Compress data (DEFLATE algorithm), memory must be MemFree()
  *
  * @param {Buffer} data
- * @param {number} dataLength
- * @param {number} compDataLength
+ * @param {number} dataSize
+ * @param {number} compDataSize
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function CompressData(data, dataLength, compDataLength) {
+function CompressData(data, dataSize, compDataSize) {
   return r.BindCompressData(
     data,
-    dataLength,
-    compDataLength
+    dataSize,
+    compDataSize
   )
 }
 raylib.CompressData = CompressData
 
 /**
- * Decompress data (DEFLATE algorithm)
+ * Decompress data (DEFLATE algorithm), memory must be MemFree()
  *
  * @param {Buffer} compData
- * @param {number} compDataLength
- * @param {number} dataLength
+ * @param {number} compDataSize
+ * @param {number} dataSize
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function DecompressData(compData, compDataLength, dataLength) {
+function DecompressData(compData, compDataSize, dataSize) {
   return r.BindDecompressData(
     compData,
-    compDataLength,
-    dataLength
+    compDataSize,
+    dataSize
   )
 }
 raylib.DecompressData = DecompressData
 
 /**
- * Encode data to Base64 string
+ * Encode data to Base64 string, memory must be MemFree()
  *
  * @param {Buffer} data
- * @param {number} dataLength
- * @param {number} outputLength
+ * @param {number} dataSize
+ * @param {number} outputSize
  *
  * @return {string} The resulting char *.
  */
-function EncodeDataBase64(data, dataLength, outputLength) {
+function EncodeDataBase64(data, dataSize, outputSize) {
   return r.BindEncodeDataBase64(
     data,
-    dataLength,
-    outputLength
+    dataSize,
+    outputSize
   )
 }
 raylib.EncodeDataBase64 = EncodeDataBase64
 
 /**
- * Decode Base64 string data
+ * Decode Base64 string data, memory must be MemFree()
  *
  * @param {Buffer} data
- * @param {number} outputLength
+ * @param {number} outputSize
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function DecodeDataBase64(data, outputLength) {
+function DecodeDataBase64(data, outputSize) {
   return r.BindDecodeDataBase64(
     data,
-    outputLength
+    outputSize
   )
 }
 raylib.DecodeDataBase64 = DecodeDataBase64
-
-/**
- * Save integer value to storage file (to defined position), returns true on success
- *
- * @param {number} position
- * @param {number} value
- *
- * @return {boolean} The resulting bool.
- */
-function SaveStorageValue(position, value) {
-  return r.BindSaveStorageValue(
-    position,
-    value
-  )
-}
-raylib.SaveStorageValue = SaveStorageValue
-
-/**
- * Load integer value from storage file (from defined position)
- *
- * @param {number} position
- *
- * @return {number} The resulting int.
- */
-function LoadStorageValue(position) {
-  return r.BindLoadStorageValue(
-    position
-  )
-}
-raylib.LoadStorageValue = LoadStorageValue
-
-/**
- * Open URL with default system browser (if available)
- *
- * @param {string} url
- *
- * @return {undefined}
- */
-function OpenURL(url) {
-  return r.BindOpenURL(
-    url
-  )
-}
-raylib.OpenURL = OpenURL
 
 /**
  * Check if a key has been pressed once
@@ -2075,7 +2179,7 @@ function SetMouseScale(scaleX, scaleY) {
 raylib.SetMouseScale = SetMouseScale
 
 /**
- * Get mouse wheel movement Y
+ * Get mouse wheel movement for X or Y, whichever is larger
  *
  * @return {number} The resulting float.
  */
@@ -2083,6 +2187,16 @@ function GetMouseWheelMove() {
   return r.BindGetMouseWheelMove()
 }
 raylib.GetMouseWheelMove = GetMouseWheelMove
+
+/**
+ * Get mouse wheel movement for both X and Y
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetMouseWheelMoveV() {
+  return r.BindGetMouseWheelMoveV()
+}
+raylib.GetMouseWheelMoveV = GetMouseWheelMoveV
 
 /**
  * Set mouse cursor
@@ -4782,7 +4896,7 @@ function LoadFont(fileName) {
 raylib.LoadFont = LoadFont
 
 /**
- * Load font from file with extended parameters
+ * Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
  *
  * @param {string} fileName
  * @param {number} fontSize
@@ -4915,7 +5029,7 @@ function UnloadFontData(chars, glyphCount) {
 raylib.UnloadFontData = UnloadFontData
 
 /**
- * Unload Font from GPU memory (VRAM)
+ * Unload font from GPU memory (VRAM)
  *
  * @param {Font} font
  *
@@ -4936,6 +5050,31 @@ function UnloadFont(font) {
   )
 }
 raylib.UnloadFont = UnloadFont
+
+/**
+ * Export font as code file, returns true on success
+ *
+ * @param {Font} font
+ * @param {string} fileName
+ *
+ * @return {boolean} The resulting bool.
+ */
+function ExportFontAsCode(font, fileName) {
+  return r.BindExportFontAsCode(
+    font.baseSize,
+    font.glyphCount,
+    font.glyphPadding,
+    font.texture.id,
+    font.texture.width,
+    font.texture.height,
+    font.texture.mipmaps,
+    font.texture.format,
+    font.recs,
+    font.glyphs,
+    fileName
+  )
+}
+raylib.ExportFontAsCode = ExportFontAsCode
 
 /**
  * Draw current FPS
@@ -5091,6 +5230,45 @@ function DrawTextCodepoint(font, codepoint, position, fontSize, tint) {
   )
 }
 raylib.DrawTextCodepoint = DrawTextCodepoint
+
+/**
+ * Draw multiple character (codepoint)
+ *
+ * @param {Font} font
+ * @param {number} codepoints
+ * @param {number} count
+ * @param {Vector2} position
+ * @param {number} fontSize
+ * @param {number} spacing
+ * @param {Color} tint
+ *
+ * @return {undefined}
+ */
+function DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing, tint) {
+  return r.BindDrawTextCodepoints(
+    font.baseSize,
+    font.glyphCount,
+    font.glyphPadding,
+    font.texture.id,
+    font.texture.width,
+    font.texture.height,
+    font.texture.mipmaps,
+    font.texture.format,
+    font.recs,
+    font.glyphs,
+    codepoints,
+    count,
+    position.x,
+    position.y,
+    fontSize,
+    spacing,
+    tint.r,
+    tint.g,
+    tint.b,
+    tint.a
+  )
+}
+raylib.DrawTextCodepoints = DrawTextCodepoints
 
 /**
  * Measure string width for default font
@@ -7214,50 +7392,6 @@ function GetRayCollisionBox(ray, box) {
 raylib.GetRayCollisionBox = GetRayCollisionBox
 
 /**
- * Get collision info between ray and model
- *
- * @param {Ray} ray
- * @param {Model} model
- *
- * @return {RayCollision} The resulting RayCollision.
- */
-function GetRayCollisionModel(ray, model) {
-  return r.BindGetRayCollisionModel(
-    ray.position.x,
-    ray.position.y,
-    ray.position.z,
-    ray.direction.x,
-    ray.direction.y,
-    ray.direction.z,
-    model.transform.m0,
-    model.transform.m4,
-    model.transform.m8,
-    model.transform.m12,
-    model.transform.m1,
-    model.transform.m5,
-    model.transform.m9,
-    model.transform.m13,
-    model.transform.m2,
-    model.transform.m6,
-    model.transform.m10,
-    model.transform.m14,
-    model.transform.m3,
-    model.transform.m7,
-    model.transform.m11,
-    model.transform.m15,
-    model.meshCount,
-    model.materialCount,
-    model.meshes,
-    model.materials,
-    model.meshMaterial,
-    model.boneCount,
-    model.bones,
-    model.bindPose
-  )
-}
-raylib.GetRayCollisionModel = GetRayCollisionModel
-
-/**
  * Get collision info between ray and mesh
  *
  * @param {Ray} ray
@@ -7495,6 +7629,7 @@ raylib.LoadSoundFromWave = LoadSoundFromWave
 function UpdateSound(sound, data, sampleCount) {
   return r.BindUpdateSound(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7533,6 +7668,7 @@ raylib.UnloadWave = UnloadWave
 function UnloadSound(sound) {
   return r.BindUnloadSound(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7591,6 +7727,7 @@ raylib.ExportWaveAsCode = ExportWaveAsCode
 function PlaySound(sound) {
   return r.BindPlaySound(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7609,6 +7746,7 @@ raylib.PlaySound = PlaySound
 function StopSound(sound) {
   return r.BindStopSound(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7627,6 +7765,7 @@ raylib.StopSound = StopSound
 function PauseSound(sound) {
   return r.BindPauseSound(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7645,6 +7784,7 @@ raylib.PauseSound = PauseSound
 function ResumeSound(sound) {
   return r.BindResumeSound(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7663,6 +7803,7 @@ raylib.ResumeSound = ResumeSound
 function PlaySoundMulti(sound) {
   return r.BindPlaySoundMulti(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7701,6 +7842,7 @@ raylib.GetSoundsPlaying = GetSoundsPlaying
 function IsSoundPlaying(sound) {
   return r.BindIsSoundPlaying(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7720,6 +7862,7 @@ raylib.IsSoundPlaying = IsSoundPlaying
 function SetSoundVolume(sound, volume) {
   return r.BindSetSoundVolume(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7740,6 +7883,7 @@ raylib.SetSoundVolume = SetSoundVolume
 function SetSoundPitch(sound, pitch) {
   return r.BindSetSoundPitch(
     sound.stream.buffer,
+    sound.stream.processor,
     sound.stream.sampleRate,
     sound.stream.sampleSize,
     sound.stream.channels,
@@ -7748,6 +7892,27 @@ function SetSoundPitch(sound, pitch) {
   )
 }
 raylib.SetSoundPitch = SetSoundPitch
+
+/**
+ * Set pan for a sound (0.5 is center)
+ *
+ * @param {Sound} sound
+ * @param {number} pan
+ *
+ * @return {undefined}
+ */
+function SetSoundPan(sound, pan) {
+  return r.BindSetSoundPan(
+    sound.stream.buffer,
+    sound.stream.processor,
+    sound.stream.sampleRate,
+    sound.stream.sampleSize,
+    sound.stream.channels,
+    sound.frameCount,
+    pan
+  )
+}
+raylib.SetSoundPan = SetSoundPan
 
 /**
  * Copy a wave to a new wave
@@ -7768,7 +7933,7 @@ function WaveCopy(wave) {
 raylib.WaveCopy = WaveCopy
 
 /**
- * Load samples data from wave as a floats array
+ * Load samples data from wave as a 32bit float data array
  *
  * @param {Wave} wave
  *
@@ -7841,6 +8006,7 @@ raylib.LoadMusicStreamFromMemory = LoadMusicStreamFromMemory
 function UnloadMusicStream(music) {
   return r.BindUnloadMusicStream(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -7862,6 +8028,7 @@ raylib.UnloadMusicStream = UnloadMusicStream
 function PlayMusicStream(music) {
   return r.BindPlayMusicStream(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -7883,6 +8050,7 @@ raylib.PlayMusicStream = PlayMusicStream
 function IsMusicStreamPlaying(music) {
   return r.BindIsMusicStreamPlaying(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -7904,6 +8072,7 @@ raylib.IsMusicStreamPlaying = IsMusicStreamPlaying
 function UpdateMusicStream(music) {
   return r.BindUpdateMusicStream(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -7925,6 +8094,7 @@ raylib.UpdateMusicStream = UpdateMusicStream
 function StopMusicStream(music) {
   return r.BindStopMusicStream(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -7946,6 +8116,7 @@ raylib.StopMusicStream = StopMusicStream
 function PauseMusicStream(music) {
   return r.BindPauseMusicStream(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -7967,6 +8138,7 @@ raylib.PauseMusicStream = PauseMusicStream
 function ResumeMusicStream(music) {
   return r.BindResumeMusicStream(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -7989,6 +8161,7 @@ raylib.ResumeMusicStream = ResumeMusicStream
 function SeekMusicStream(music, position) {
   return r.BindSeekMusicStream(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -8012,6 +8185,7 @@ raylib.SeekMusicStream = SeekMusicStream
 function SetMusicVolume(music, volume) {
   return r.BindSetMusicVolume(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -8035,6 +8209,7 @@ raylib.SetMusicVolume = SetMusicVolume
 function SetMusicPitch(music, pitch) {
   return r.BindSetMusicPitch(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -8048,6 +8223,30 @@ function SetMusicPitch(music, pitch) {
 raylib.SetMusicPitch = SetMusicPitch
 
 /**
+ * Set pan for a music (0.5 is center)
+ *
+ * @param {Music} music
+ * @param {number} pan
+ *
+ * @return {undefined}
+ */
+function SetMusicPan(music, pan) {
+  return r.BindSetMusicPan(
+    music.stream.buffer,
+    music.stream.processor,
+    music.stream.sampleRate,
+    music.stream.sampleSize,
+    music.stream.channels,
+    music.frameCount,
+    music.looping,
+    music.ctxType,
+    music.ctxData,
+    pan
+  )
+}
+raylib.SetMusicPan = SetMusicPan
+
+/**
  * Get music time length (in seconds)
  *
  * @param {Music} music
@@ -8057,6 +8256,7 @@ raylib.SetMusicPitch = SetMusicPitch
 function GetMusicTimeLength(music) {
   return r.BindGetMusicTimeLength(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -8078,6 +8278,7 @@ raylib.GetMusicTimeLength = GetMusicTimeLength
 function GetMusicTimePlayed(music) {
   return r.BindGetMusicTimePlayed(
     music.stream.buffer,
+    music.stream.processor,
     music.stream.sampleRate,
     music.stream.sampleSize,
     music.stream.channels,
@@ -8117,6 +8318,7 @@ raylib.LoadAudioStream = LoadAudioStream
 function UnloadAudioStream(stream) {
   return r.BindUnloadAudioStream(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels
@@ -8136,6 +8338,7 @@ raylib.UnloadAudioStream = UnloadAudioStream
 function UpdateAudioStream(stream, data, frameCount) {
   return r.BindUpdateAudioStream(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels,
@@ -8155,6 +8358,7 @@ raylib.UpdateAudioStream = UpdateAudioStream
 function IsAudioStreamProcessed(stream) {
   return r.BindIsAudioStreamProcessed(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels
@@ -8172,6 +8376,7 @@ raylib.IsAudioStreamProcessed = IsAudioStreamProcessed
 function PlayAudioStream(stream) {
   return r.BindPlayAudioStream(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels
@@ -8189,6 +8394,7 @@ raylib.PlayAudioStream = PlayAudioStream
 function PauseAudioStream(stream) {
   return r.BindPauseAudioStream(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels
@@ -8206,6 +8412,7 @@ raylib.PauseAudioStream = PauseAudioStream
 function ResumeAudioStream(stream) {
   return r.BindResumeAudioStream(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels
@@ -8223,6 +8430,7 @@ raylib.ResumeAudioStream = ResumeAudioStream
 function IsAudioStreamPlaying(stream) {
   return r.BindIsAudioStreamPlaying(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels
@@ -8240,6 +8448,7 @@ raylib.IsAudioStreamPlaying = IsAudioStreamPlaying
 function StopAudioStream(stream) {
   return r.BindStopAudioStream(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels
@@ -8258,6 +8467,7 @@ raylib.StopAudioStream = StopAudioStream
 function SetAudioStreamVolume(stream, volume) {
   return r.BindSetAudioStreamVolume(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels,
@@ -8277,6 +8487,7 @@ raylib.SetAudioStreamVolume = SetAudioStreamVolume
 function SetAudioStreamPitch(stream, pitch) {
   return r.BindSetAudioStreamPitch(
     stream.buffer,
+    stream.processor,
     stream.sampleRate,
     stream.sampleSize,
     stream.channels,
@@ -8284,6 +8495,26 @@ function SetAudioStreamPitch(stream, pitch) {
   )
 }
 raylib.SetAudioStreamPitch = SetAudioStreamPitch
+
+/**
+ * Set pan for audio stream (0.5 is centered)
+ *
+ * @param {AudioStream} stream
+ * @param {number} pan
+ *
+ * @return {undefined}
+ */
+function SetAudioStreamPan(stream, pan) {
+  return r.BindSetAudioStreamPan(
+    stream.buffer,
+    stream.processor,
+    stream.sampleRate,
+    stream.sampleSize,
+    stream.channels,
+    pan
+  )
+}
+raylib.SetAudioStreamPan = SetAudioStreamPan
 
 /**
  * Default size for new audio streams
@@ -8299,6 +8530,16 @@ function SetAudioStreamBufferSizeDefault(size) {
 }
 raylib.SetAudioStreamBufferSizeDefault = SetAudioStreamBufferSizeDefault
 
+/**
+ * Ease: Linear
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseLinearNone(t, b, c, d) {
   return r.BindEaseLinearNone(
     t,
@@ -8309,6 +8550,16 @@ function EaseLinearNone(t, b, c, d) {
 }
 raylib.EaseLinearNone = EaseLinearNone
 
+/**
+ * Ease: Linear In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseLinearIn(t, b, c, d) {
   return r.BindEaseLinearIn(
     t,
@@ -8319,6 +8570,16 @@ function EaseLinearIn(t, b, c, d) {
 }
 raylib.EaseLinearIn = EaseLinearIn
 
+/**
+ * Ease: Linear Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseLinearOut(t, b, c, d) {
   return r.BindEaseLinearOut(
     t,
@@ -8329,6 +8590,16 @@ function EaseLinearOut(t, b, c, d) {
 }
 raylib.EaseLinearOut = EaseLinearOut
 
+/**
+ * Ease: Linear In Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseLinearInOut(t, b, c, d) {
   return r.BindEaseLinearInOut(
     t,
@@ -8339,6 +8610,16 @@ function EaseLinearInOut(t, b, c, d) {
 }
 raylib.EaseLinearInOut = EaseLinearInOut
 
+/**
+ * Ease: Sine In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseSineIn(t, b, c, d) {
   return r.BindEaseSineIn(
     t,
@@ -8349,6 +8630,16 @@ function EaseSineIn(t, b, c, d) {
 }
 raylib.EaseSineIn = EaseSineIn
 
+/**
+ * Ease: Sine Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseSineOut(t, b, c, d) {
   return r.BindEaseSineOut(
     t,
@@ -8359,6 +8650,16 @@ function EaseSineOut(t, b, c, d) {
 }
 raylib.EaseSineOut = EaseSineOut
 
+/**
+ * Ease: Sine Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseSineInOut(t, b, c, d) {
   return r.BindEaseSineInOut(
     t,
@@ -8369,6 +8670,16 @@ function EaseSineInOut(t, b, c, d) {
 }
 raylib.EaseSineInOut = EaseSineInOut
 
+/**
+ * Ease: Circular In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseCircIn(t, b, c, d) {
   return r.BindEaseCircIn(
     t,
@@ -8379,6 +8690,16 @@ function EaseCircIn(t, b, c, d) {
 }
 raylib.EaseCircIn = EaseCircIn
 
+/**
+ * Ease: Circular Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseCircOut(t, b, c, d) {
   return r.BindEaseCircOut(
     t,
@@ -8389,6 +8710,16 @@ function EaseCircOut(t, b, c, d) {
 }
 raylib.EaseCircOut = EaseCircOut
 
+/**
+ * Ease: Circular In Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseCircInOut(t, b, c, d) {
   return r.BindEaseCircInOut(
     t,
@@ -8399,6 +8730,16 @@ function EaseCircInOut(t, b, c, d) {
 }
 raylib.EaseCircInOut = EaseCircInOut
 
+/**
+ * Ease: Cubic In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseCubicIn(t, b, c, d) {
   return r.BindEaseCubicIn(
     t,
@@ -8409,6 +8750,16 @@ function EaseCubicIn(t, b, c, d) {
 }
 raylib.EaseCubicIn = EaseCubicIn
 
+/**
+ * Ease: Cubic Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseCubicOut(t, b, c, d) {
   return r.BindEaseCubicOut(
     t,
@@ -8419,6 +8770,16 @@ function EaseCubicOut(t, b, c, d) {
 }
 raylib.EaseCubicOut = EaseCubicOut
 
+/**
+ * Ease: Cubic In Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseCubicInOut(t, b, c, d) {
   return r.BindEaseCubicInOut(
     t,
@@ -8429,6 +8790,16 @@ function EaseCubicInOut(t, b, c, d) {
 }
 raylib.EaseCubicInOut = EaseCubicInOut
 
+/**
+ * Ease: Quadratic In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseQuadIn(t, b, c, d) {
   return r.BindEaseQuadIn(
     t,
@@ -8439,6 +8810,16 @@ function EaseQuadIn(t, b, c, d) {
 }
 raylib.EaseQuadIn = EaseQuadIn
 
+/**
+ * Ease: Quadratic Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseQuadOut(t, b, c, d) {
   return r.BindEaseQuadOut(
     t,
@@ -8449,6 +8830,16 @@ function EaseQuadOut(t, b, c, d) {
 }
 raylib.EaseQuadOut = EaseQuadOut
 
+/**
+ * Ease: Quadratic In Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseQuadInOut(t, b, c, d) {
   return r.BindEaseQuadInOut(
     t,
@@ -8459,6 +8850,16 @@ function EaseQuadInOut(t, b, c, d) {
 }
 raylib.EaseQuadInOut = EaseQuadInOut
 
+/**
+ * Ease: Exponential In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseExpoIn(t, b, c, d) {
   return r.BindEaseExpoIn(
     t,
@@ -8469,6 +8870,16 @@ function EaseExpoIn(t, b, c, d) {
 }
 raylib.EaseExpoIn = EaseExpoIn
 
+/**
+ * Ease: Exponential Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseExpoOut(t, b, c, d) {
   return r.BindEaseExpoOut(
     t,
@@ -8479,6 +8890,16 @@ function EaseExpoOut(t, b, c, d) {
 }
 raylib.EaseExpoOut = EaseExpoOut
 
+/**
+ * Ease: Exponential In Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseExpoInOut(t, b, c, d) {
   return r.BindEaseExpoInOut(
     t,
@@ -8489,6 +8910,16 @@ function EaseExpoInOut(t, b, c, d) {
 }
 raylib.EaseExpoInOut = EaseExpoInOut
 
+/**
+ * Ease: Back In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseBackIn(t, b, c, d) {
   return r.BindEaseBackIn(
     t,
@@ -8499,6 +8930,16 @@ function EaseBackIn(t, b, c, d) {
 }
 raylib.EaseBackIn = EaseBackIn
 
+/**
+ * Ease: Back Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseBackOut(t, b, c, d) {
   return r.BindEaseBackOut(
     t,
@@ -8509,6 +8950,16 @@ function EaseBackOut(t, b, c, d) {
 }
 raylib.EaseBackOut = EaseBackOut
 
+/**
+ * Ease: Back In Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseBackInOut(t, b, c, d) {
   return r.BindEaseBackInOut(
     t,
@@ -8519,6 +8970,16 @@ function EaseBackInOut(t, b, c, d) {
 }
 raylib.EaseBackInOut = EaseBackInOut
 
+/**
+ * Ease: Bounce Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseBounceOut(t, b, c, d) {
   return r.BindEaseBounceOut(
     t,
@@ -8529,6 +8990,16 @@ function EaseBounceOut(t, b, c, d) {
 }
 raylib.EaseBounceOut = EaseBounceOut
 
+/**
+ * Ease: Bounce In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseBounceIn(t, b, c, d) {
   return r.BindEaseBounceIn(
     t,
@@ -8539,6 +9010,16 @@ function EaseBounceIn(t, b, c, d) {
 }
 raylib.EaseBounceIn = EaseBounceIn
 
+/**
+ * Ease: Bounce In Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseBounceInOut(t, b, c, d) {
   return r.BindEaseBounceInOut(
     t,
@@ -8549,6 +9030,16 @@ function EaseBounceInOut(t, b, c, d) {
 }
 raylib.EaseBounceInOut = EaseBounceInOut
 
+/**
+ * Ease: Elastic In
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseElasticIn(t, b, c, d) {
   return r.BindEaseElasticIn(
     t,
@@ -8559,6 +9050,16 @@ function EaseElasticIn(t, b, c, d) {
 }
 raylib.EaseElasticIn = EaseElasticIn
 
+/**
+ * Ease: Elastic Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseElasticOut(t, b, c, d) {
   return r.BindEaseElasticOut(
     t,
@@ -8569,6 +9070,16 @@ function EaseElasticOut(t, b, c, d) {
 }
 raylib.EaseElasticOut = EaseElasticOut
 
+/**
+ * Ease: Elastic In Out
+ *
+ * @param {number} t
+ * @param {number} b
+ * @param {number} c
+ * @param {number} d
+ *
+ * @return {number} The resulting float.
+ */
 function EaseElasticInOut(t, b, c, d) {
   return r.BindEaseElasticInOut(
     t,
@@ -8616,6 +9127,23 @@ function Remap(value, inputStart, inputEnd, outputStart, outputEnd) {
   )
 }
 raylib.Remap = Remap
+
+function Wrap(value, min, max) {
+  return r.BindWrap(
+    value,
+    min,
+    max
+  )
+}
+raylib.Wrap = Wrap
+
+function FloatEquals(x, y) {
+  return r.BindFloatEquals(
+    x,
+    y
+  )
+}
+raylib.FloatEquals = FloatEquals
 
 function Vector2Zero() {
   return r.BindVector2Zero()
@@ -8701,6 +9229,16 @@ function Vector2Distance(v1, v2) {
 }
 raylib.Vector2Distance = Vector2Distance
 
+function Vector2DistanceSqr(v1, v2) {
+  return r.BindVector2DistanceSqr(
+    v1.x,
+    v1.y,
+    v2.x,
+    v2.y
+  )
+}
+raylib.Vector2DistanceSqr = Vector2DistanceSqr
+
 function Vector2Angle(v1, v2) {
   return r.BindVector2Angle(
     v1.x,
@@ -8756,6 +9294,30 @@ function Vector2Normalize(v) {
 }
 raylib.Vector2Normalize = Vector2Normalize
 
+function Vector2Transform(v, mat) {
+  return r.BindVector2Transform(
+    v.x,
+    v.y,
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.Vector2Transform = Vector2Transform
+
 function Vector2Lerp(v1, v2, amount) {
   return r.BindVector2Lerp(
     v1.x,
@@ -8796,6 +9358,46 @@ function Vector2MoveTowards(v, target, maxDistance) {
   )
 }
 raylib.Vector2MoveTowards = Vector2MoveTowards
+
+function Vector2Invert(v) {
+  return r.BindVector2Invert(
+    v.x,
+    v.y
+  )
+}
+raylib.Vector2Invert = Vector2Invert
+
+function Vector2Clamp(v, min, max) {
+  return r.BindVector2Clamp(
+    v.x,
+    v.y,
+    min.x,
+    min.y,
+    max.x,
+    max.y
+  )
+}
+raylib.Vector2Clamp = Vector2Clamp
+
+function Vector2ClampValue(v, min, max) {
+  return r.BindVector2ClampValue(
+    v.x,
+    v.y,
+    min,
+    max
+  )
+}
+raylib.Vector2ClampValue = Vector2ClampValue
+
+function Vector2Equals(p, q) {
+  return r.BindVector2Equals(
+    p.x,
+    p.y,
+    q.x,
+    q.y
+  )
+}
+raylib.Vector2Equals = Vector2Equals
 
 function Vector3Zero() {
   return r.BindVector3Zero()
@@ -8932,6 +9534,18 @@ function Vector3Distance(v1, v2) {
 }
 raylib.Vector3Distance = Vector3Distance
 
+function Vector3DistanceSqr(v1, v2) {
+  return r.BindVector3DistanceSqr(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3DistanceSqr = Vector3DistanceSqr
+
 function Vector3Angle(v1, v2) {
   return r.BindVector3Angle(
     v1.x,
@@ -9016,6 +9630,19 @@ function Vector3RotateByQuaternion(v, q) {
   )
 }
 raylib.Vector3RotateByQuaternion = Vector3RotateByQuaternion
+
+function Vector3RotateByAxisAngle(v, axis, angle) {
+  return r.BindVector3RotateByAxisAngle(
+    v.x,
+    v.y,
+    v.z,
+    axis.x,
+    axis.y,
+    axis.z,
+    angle
+  )
+}
+raylib.Vector3RotateByAxisAngle = Vector3RotateByAxisAngle
 
 function Vector3Lerp(v1, v2, amount) {
   return r.BindVector3Lerp(
@@ -9125,6 +9752,66 @@ function Vector3Unproject(source, projection, view) {
 }
 raylib.Vector3Unproject = Vector3Unproject
 
+function Vector3Invert(v) {
+  return r.BindVector3Invert(
+    v.x,
+    v.y,
+    v.z
+  )
+}
+raylib.Vector3Invert = Vector3Invert
+
+function Vector3Clamp(v, min, max) {
+  return r.BindVector3Clamp(
+    v.x,
+    v.y,
+    v.z,
+    min.x,
+    min.y,
+    min.z,
+    max.x,
+    max.y,
+    max.z
+  )
+}
+raylib.Vector3Clamp = Vector3Clamp
+
+function Vector3ClampValue(v, min, max) {
+  return r.BindVector3ClampValue(
+    v.x,
+    v.y,
+    v.z,
+    min,
+    max
+  )
+}
+raylib.Vector3ClampValue = Vector3ClampValue
+
+function Vector3Equals(p, q) {
+  return r.BindVector3Equals(
+    p.x,
+    p.y,
+    p.z,
+    q.x,
+    q.y,
+    q.z
+  )
+}
+raylib.Vector3Equals = Vector3Equals
+
+function Vector3Refract(v, n, r) {
+  return r.BindVector3Refract(
+    v.x,
+    v.y,
+    v.z,
+    n.x,
+    n.y,
+    n.z,
+    r
+  )
+}
+raylib.Vector3Refract = Vector3Refract
+
 function MatrixDeterminant(mat) {
   return r.BindMatrixDeterminant(
     mat.m0,
@@ -9212,28 +9899,6 @@ function MatrixInvert(mat) {
   )
 }
 raylib.MatrixInvert = MatrixInvert
-
-function MatrixNormalize(mat) {
-  return r.BindMatrixNormalize(
-    mat.m0,
-    mat.m4,
-    mat.m8,
-    mat.m12,
-    mat.m1,
-    mat.m5,
-    mat.m9,
-    mat.m13,
-    mat.m2,
-    mat.m6,
-    mat.m10,
-    mat.m14,
-    mat.m3,
-    mat.m7,
-    mat.m11,
-    mat.m15
-  )
-}
-raylib.MatrixNormalize = MatrixNormalize
 
 function MatrixIdentity() {
   return r.BindMatrixIdentity()
@@ -9394,20 +10059,20 @@ function MatrixRotateZ(angle) {
 }
 raylib.MatrixRotateZ = MatrixRotateZ
 
-function MatrixRotateXYZ(ang) {
+function MatrixRotateXYZ(angle) {
   return r.BindMatrixRotateXYZ(
-    ang.x,
-    ang.y,
-    ang.z
+    angle.x,
+    angle.y,
+    angle.z
   )
 }
 raylib.MatrixRotateXYZ = MatrixRotateXYZ
 
-function MatrixRotateZYX(ang) {
+function MatrixRotateZYX(angle) {
   return r.BindMatrixRotateZYX(
-    ang.x,
-    ang.y,
-    ang.z
+    angle.x,
+    angle.y,
+    angle.z
   )
 }
 raylib.MatrixRotateZYX = MatrixRotateZYX
@@ -9678,6 +10343,14 @@ function QuaternionTransform(q, mat) {
 }
 raylib.QuaternionTransform = QuaternionTransform
 
+function QuaternionEquals(p, q) {
+  return r.BindQuaternionEquals(
+    p,
+    q
+  )
+}
+raylib.QuaternionEquals = QuaternionEquals
+
 /**
  * Enable gui controls (global state)
  *
@@ -9894,15 +10567,17 @@ raylib.GuiLine = GuiLine
  * Panel control, useful to group controls
  *
  * @param {Rectangle} bounds
+ * @param {string} text
  *
  * @return {undefined}
  */
-function GuiPanel(bounds) {
+function GuiPanel(bounds, text) {
   return r.BindGuiPanel(
     bounds.x,
     bounds.y,
     bounds.width,
-    bounds.height
+    bounds.height,
+    text
   )
 }
 raylib.GuiPanel = GuiPanel
@@ -9911,17 +10586,19 @@ raylib.GuiPanel = GuiPanel
  * Scroll Panel control
  *
  * @param {Rectangle} bounds
+ * @param {string} text
  * @param {Rectangle} content
  * @param {number} scroll
  *
  * @return {Rectangle} The resulting Rectangle.
  */
-function GuiScrollPanel(bounds, content, scroll) {
+function GuiScrollPanel(bounds, text, content, scroll) {
   return r.BindGuiScrollPanel(
     bounds.x,
     bounds.y,
     bounds.width,
     bounds.height,
+    text,
     content.x,
     content.y,
     content.width,
@@ -10315,43 +10992,22 @@ function GuiDummyRec(bounds, text) {
 raylib.GuiDummyRec = GuiDummyRec
 
 /**
- * Scroll Bar control
+ * Grid control, returns mouse cell position
  *
  * @param {Rectangle} bounds
- * @param {number} value
- * @param {number} minValue
- * @param {number} maxValue
- *
- * @return {number} The resulting int.
- */
-function GuiScrollBar(bounds, value, minValue, maxValue) {
-  return r.BindGuiScrollBar(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    value,
-    minValue,
-    maxValue
-  )
-}
-raylib.GuiScrollBar = GuiScrollBar
-
-/**
- * Grid control
- *
- * @param {Rectangle} bounds
+ * @param {string} text
  * @param {number} spacing
  * @param {number} subdivs
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GuiGrid(bounds, spacing, subdivs) {
+function GuiGrid(bounds, text, spacing, subdivs) {
   return r.BindGuiGrid(
     bounds.x,
     bounds.y,
     bounds.width,
     bounds.height,
+    text,
     spacing,
     subdivs
   )
@@ -10432,17 +11088,19 @@ function GuiMessageBox(bounds, title, message, buttons) {
 raylib.GuiMessageBox = GuiMessageBox
 
 /**
- * Text Input Box control, ask for text
+ * Text Input Box control, ask for text, supports secret
  *
  * @param {Rectangle} bounds
  * @param {string} title
  * @param {string} message
  * @param {string} buttons
  * @param {string} text
+ * @param {number} textMaxSize
+ * @param {number} secretViewActive
  *
  * @return {number} The resulting int.
  */
-function GuiTextInputBox(bounds, title, message, buttons, text) {
+function GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive) {
   return r.BindGuiTextInputBox(
     bounds.x,
     bounds.y,
@@ -10451,7 +11109,9 @@ function GuiTextInputBox(bounds, title, message, buttons, text) {
     title,
     message,
     buttons,
-    text
+    text,
+    textMaxSize,
+    secretViewActive
   )
 }
 raylib.GuiTextInputBox = GuiTextInputBox
@@ -10460,16 +11120,18 @@ raylib.GuiTextInputBox = GuiTextInputBox
  * Color Picker control (multiple color controls)
  *
  * @param {Rectangle} bounds
+ * @param {string} text
  * @param {Color} color
  *
  * @return {Color} The resulting Color.
  */
-function GuiColorPicker(bounds, color) {
+function GuiColorPicker(bounds, text, color) {
   return r.BindGuiColorPicker(
     bounds.x,
     bounds.y,
     bounds.width,
     bounds.height,
+    text,
     color.r,
     color.g,
     color.b,
@@ -10482,16 +11144,18 @@ raylib.GuiColorPicker = GuiColorPicker
  * Color Panel control
  *
  * @param {Rectangle} bounds
+ * @param {string} text
  * @param {Color} color
  *
  * @return {Color} The resulting Color.
  */
-function GuiColorPanel(bounds, color) {
+function GuiColorPanel(bounds, text, color) {
   return r.BindGuiColorPanel(
     bounds.x,
     bounds.y,
     bounds.width,
     bounds.height,
+    text,
     color.r,
     color.g,
     color.b,
@@ -10504,16 +11168,18 @@ raylib.GuiColorPanel = GuiColorPanel
  * Color Bar Alpha control
  *
  * @param {Rectangle} bounds
+ * @param {string} text
  * @param {number} alpha
  *
  * @return {number} The resulting float.
  */
-function GuiColorBarAlpha(bounds, alpha) {
+function GuiColorBarAlpha(bounds, text, alpha) {
   return r.BindGuiColorBarAlpha(
     bounds.x,
     bounds.y,
     bounds.width,
     bounds.height,
+    text,
     alpha
   )
 }
@@ -10523,16 +11189,18 @@ raylib.GuiColorBarAlpha = GuiColorBarAlpha
  * Color Bar Hue control
  *
  * @param {Rectangle} bounds
+ * @param {string} text
  * @param {number} value
  *
  * @return {number} The resulting float.
  */
-function GuiColorBarHue(bounds, value) {
+function GuiColorBarHue(bounds, text, value) {
   return r.BindGuiColorBarHue(
     bounds.x,
     bounds.y,
     bounds.width,
     bounds.height,
+    text,
     value
   )
 }
@@ -10631,6 +11299,20 @@ function GuiSetIconData(iconId, data) {
   )
 }
 raylib.GuiSetIconData = GuiSetIconData
+
+/**
+ * Set icon scale (1 by default)
+ *
+ * @param {number} scale
+ *
+ * @return {undefined}
+ */
+function GuiSetIconScale(scale) {
+  return r.BindGuiSetIconScale(
+    scale
+  )
+}
+raylib.GuiSetIconScale = GuiSetIconScale
 
 /**
  * Set icon pixel value
@@ -11882,39 +12564,6 @@ function GenMeshTangents(mesh) {
 raylib.GenMeshTangents = GenMeshTangents
 
 /**
- * Compute mesh binormals
- *
- * @param {Mesh} mesh
- *
- * @return {undefined}
- */
-function GenMeshBinormals(mesh) {
-  const obj = r.BindGenMeshBinormals(
-    mesh.vertexCount,
-    mesh.triangleCount,
-    mesh.vertices,
-    mesh.texcoords,
-    mesh.texcoords2,
-    mesh.normals,
-    mesh.tangents,
-    mesh.colors,
-    mesh.indices,
-    mesh.animVertices,
-    mesh.animNormals,
-    mesh.boneIds,
-    mesh.boneWeights,
-    mesh.vaoId,
-    mesh.vboId
-  )
-  if (typeof obj !== 'undefined') {
-    for (const key in obj) {
-      mesh[key] = obj[key]
-    }
-  }
-}
-raylib.GenMeshBinormals = GenMeshBinormals
-
-/**
  * Set material for a mesh
  *
  * @param {Model} model
@@ -11961,6 +12610,33 @@ function SetModelMeshMaterial(model, meshId, materialId) {
 raylib.SetModelMeshMaterial = SetModelMeshMaterial
 
 /**
+ * Crop a wave to defined samples range
+ *
+ * @param {Wave} wave
+ * @param {number} initSample
+ * @param {number} finalSample
+ *
+ * @return {undefined}
+ */
+function WaveCrop(wave, initSample, finalSample) {
+  const obj = r.BindWaveCrop(
+    wave.frameCount,
+    wave.sampleRate,
+    wave.sampleSize,
+    wave.channels,
+    wave.data,
+    initSample,
+    finalSample
+  )
+  if (typeof obj !== 'undefined') {
+    for (const key in obj) {
+      wave[key] = obj[key]
+    }
+  }
+}
+raylib.WaveCrop = WaveCrop
+
+/**
  * Convert wave data to desired format
  *
  * @param {Wave} wave
@@ -11988,33 +12664,6 @@ function WaveFormat(wave, sampleRate, sampleSize, channels) {
   }
 }
 raylib.WaveFormat = WaveFormat
-
-/**
- * Crop a wave to defined samples range
- *
- * @param {Wave} wave
- * @param {number} initSample
- * @param {number} finalSample
- *
- * @return {undefined}
- */
-function WaveCrop(wave, initSample, finalSample) {
-  const obj = r.BindWaveCrop(
-    wave.frameCount,
-    wave.sampleRate,
-    wave.sampleSize,
-    wave.channels,
-    wave.data,
-    initSample,
-    finalSample
-  )
-  if (typeof obj !== 'undefined') {
-    for (const key in obj) {
-      wave[key] = obj[key]
-    }
-  }
-}
-raylib.WaveCrop = WaveCrop
 
 /**
  * Color, 4 components, R8G8B8A8 (32bit)
@@ -12318,6 +12967,14 @@ raylib.FLAG_WINDOW_TRANSPARENT = 16
  * @constant
  */
 raylib.FLAG_WINDOW_HIGHDPI = 8192
+
+/**
+ * Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384
 
 /**
  * Set to try enabling MSAA 4X
@@ -14184,7 +14841,7 @@ raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
 raylib.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
 
 /**
- * No filter, just pixel aproximation
+ * No filter, just pixel approximation
  *
  * @type {number}
  * @constant
@@ -14376,12 +15033,20 @@ raylib.BLEND_ADD_COLORS = 3
 raylib.BLEND_SUBTRACT_COLORS = 4
 
 /**
- * Belnd textures using custom src/dst factors (use rlSetBlendMode())
+ * Blend premultiplied textures considering alpha
  *
  * @type {number}
  * @constant
  */
-raylib.BLEND_CUSTOM = 5
+raylib.BLEND_ALPHA_PREMULTIPLY = 5
+
+/**
+ * Blend textures using custom src/dst factors (use rlSetBlendMode())
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BLEND_CUSTOM = 6
 
 /**
  * No gesture
@@ -14557,7 +15222,7 @@ raylib.NPATCH_THREE_PATCH_HORIZONTAL = 2
  * @type {number}
  * @constant
  */
-raylib.GUI_STATE_NORMAL = 0
+raylib.STATE_NORMAL = 0
 
 /**
  * 
@@ -14565,7 +15230,7 @@ raylib.GUI_STATE_NORMAL = 0
  * @type {number}
  * @constant
  */
-raylib.GUI_STATE_FOCUSED = 1
+raylib.STATE_FOCUSED = 1
 
 /**
  * 
@@ -14573,7 +15238,7 @@ raylib.GUI_STATE_FOCUSED = 1
  * @type {number}
  * @constant
  */
-raylib.GUI_STATE_PRESSED = 2
+raylib.STATE_PRESSED = 2
 
 /**
  * 
@@ -14581,7 +15246,7 @@ raylib.GUI_STATE_PRESSED = 2
  * @type {number}
  * @constant
  */
-raylib.GUI_STATE_DISABLED = 3
+raylib.STATE_DISABLED = 3
 
 /**
  * 
@@ -14589,7 +15254,7 @@ raylib.GUI_STATE_DISABLED = 3
  * @type {number}
  * @constant
  */
-raylib.GUI_TEXT_ALIGN_LEFT = 0
+raylib.TEXT_ALIGN_LEFT = 0
 
 /**
  * 
@@ -14597,7 +15262,7 @@ raylib.GUI_TEXT_ALIGN_LEFT = 0
  * @type {number}
  * @constant
  */
-raylib.GUI_TEXT_ALIGN_CENTER = 1
+raylib.TEXT_ALIGN_CENTER = 1
 
 /**
  * 
@@ -14605,10 +15270,10 @@ raylib.GUI_TEXT_ALIGN_CENTER = 1
  * @type {number}
  * @constant
  */
-raylib.GUI_TEXT_ALIGN_RIGHT = 2
+raylib.TEXT_ALIGN_RIGHT = 2
 
 /**
- * Generic control -> populates to all controls when set
+ * 
  *
  * @type {number}
  * @constant
@@ -14696,7 +15361,7 @@ raylib.TEXTBOX = 9
 raylib.VALUEBOX = 10
 
 /**
- * 
+ * Uses: BUTTON, VALUEBOX
  *
  * @type {number}
  * @constant
@@ -14864,7 +15529,7 @@ raylib.TEXT_ALIGNMENT = 14
 raylib.RESERVED = 15
 
 /**
- * 
+ * Text size (glyphs max height)
  *
  * @type {number}
  * @constant
@@ -14872,7 +15537,7 @@ raylib.RESERVED = 15
 raylib.TEXT_SIZE = 16
 
 /**
- * 
+ * Text spacing between glyphs
  *
  * @type {number}
  * @constant
@@ -14880,7 +15545,7 @@ raylib.TEXT_SIZE = 16
 raylib.TEXT_SPACING = 17
 
 /**
- * 
+ * Line control color
  *
  * @type {number}
  * @constant
@@ -14888,7 +15553,7 @@ raylib.TEXT_SPACING = 17
 raylib.LINE_COLOR = 18
 
 /**
- * 
+ * Background color
  *
  * @type {number}
  * @constant
@@ -14896,7 +15561,7 @@ raylib.LINE_COLOR = 18
 raylib.BACKGROUND_COLOR = 19
 
 /**
- * 
+ * ToggleGroup separation between toggles
  *
  * @type {number}
  * @constant
@@ -14904,7 +15569,7 @@ raylib.BACKGROUND_COLOR = 19
 raylib.GROUP_PADDING = 16
 
 /**
- * 
+ * Slider size of internal bar
  *
  * @type {number}
  * @constant
@@ -14912,7 +15577,7 @@ raylib.GROUP_PADDING = 16
 raylib.SLIDER_WIDTH = 16
 
 /**
- * 
+ * Slider/SliderBar internal bar padding
  *
  * @type {number}
  * @constant
@@ -14920,100 +15585,12 @@ raylib.SLIDER_WIDTH = 16
 raylib.SLIDER_PADDING = 17
 
 /**
- * 
+ * ProgressBar internal padding
  *
  * @type {number}
  * @constant
  */
 raylib.PROGRESS_PADDING = 16
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.CHECK_PADDING = 16
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.COMBO_BUTTON_WIDTH = 16
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.COMBO_BUTTON_PADDING = 17
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.ARROW_PADDING = 16
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.DROPDOWN_ITEMS_PADDING = 17
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.TEXT_INNER_PADDING = 16
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.TEXT_LINES_PADDING = 17
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.COLOR_SELECTED_FG = 18
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.COLOR_SELECTED_BG = 19
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.SPIN_BUTTON_WIDTH = 16
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.SPIN_BUTTON_PADDING = 17
 
 /**
  * 
@@ -15032,7 +15609,7 @@ raylib.ARROWS_SIZE = 16
 raylib.ARROWS_VISIBLE = 17
 
 /**
- * 
+ * (SLIDERBAR, SLIDER_PADDING)
  *
  * @type {number}
  * @constant
@@ -15064,23 +15641,79 @@ raylib.SCROLL_PADDING = 20
 raylib.SCROLL_SPEED = 21
 
 /**
- * 
+ * CheckBox internal check padding
  *
  * @type {number}
  * @constant
  */
-raylib.SCROLLBAR_LEFT_SIDE = 0
+raylib.CHECK_PADDING = 16
 
 /**
- * 
+ * ComboBox right button width
  *
  * @type {number}
  * @constant
  */
-raylib.SCROLLBAR_RIGHT_SIDE = 1
+raylib.COMBO_BUTTON_WIDTH = 16
 
 /**
- * 
+ * ComboBox button separation
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.COMBO_BUTTON_SPACING = 17
+
+/**
+ * DropdownBox arrow separation from border and items
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ARROW_PADDING = 16
+
+/**
+ * DropdownBox items separation
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.DROPDOWN_ITEMS_SPACING = 17
+
+/**
+ * TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_INNER_PADDING = 16
+
+/**
+ * TextBoxMulti lines separation
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_LINES_SPACING = 17
+
+/**
+ * Spinner left/right buttons width
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SPIN_BUTTON_WIDTH = 16
+
+/**
+ * Spinner buttons separation
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.SPIN_BUTTON_SPACING = 17
+
+/**
+ * ListView items height
  *
  * @type {number}
  * @constant
@@ -15088,15 +15721,15 @@ raylib.SCROLLBAR_RIGHT_SIDE = 1
 raylib.LIST_ITEMS_HEIGHT = 16
 
 /**
- * 
+ * ListView items separation
  *
  * @type {number}
  * @constant
  */
-raylib.LIST_ITEMS_PADDING = 17
+raylib.LIST_ITEMS_SPACING = 17
 
 /**
- * 
+ * ListView scrollbar size (usually width)
  *
  * @type {number}
  * @constant
@@ -15104,7 +15737,7 @@ raylib.LIST_ITEMS_PADDING = 17
 raylib.SCROLLBAR_WIDTH = 18
 
 /**
- * 
+ * ListView scrollbar side (0-left, 1-right)
  *
  * @type {number}
  * @constant
@@ -15120,7 +15753,7 @@ raylib.SCROLLBAR_SIDE = 19
 raylib.COLOR_SELECTOR_SIZE = 16
 
 /**
- * Right hue bar width
+ * ColorPicker right hue bar width
  *
  * @type {number}
  * @constant
@@ -15128,7 +15761,7 @@ raylib.COLOR_SELECTOR_SIZE = 16
 raylib.HUEBAR_WIDTH = 17
 
 /**
- * Right hue bar separation from panel
+ * ColorPicker right hue bar separation from panel
  *
  * @type {number}
  * @constant
@@ -15136,7 +15769,7 @@ raylib.HUEBAR_WIDTH = 17
 raylib.HUEBAR_PADDING = 18
 
 /**
- * Right hue bar selector height
+ * ColorPicker right hue bar selector height
  *
  * @type {number}
  * @constant
@@ -15144,12 +15777,2060 @@ raylib.HUEBAR_PADDING = 18
 raylib.HUEBAR_SELECTOR_HEIGHT = 19
 
 /**
- * Right hue bar selector overflow
+ * ColorPicker right hue bar selector overflow
  *
  * @type {number}
  * @constant
  */
 raylib.HUEBAR_SELECTOR_OVERFLOW = 20
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_NONE = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FOLDER_FILE_OPEN = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_SAVE_CLASSIC = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FOLDER_OPEN = 3
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FOLDER_SAVE = 4
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_OPEN = 5
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_SAVE = 6
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_EXPORT = 7
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_ADD = 8
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_DELETE = 9
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_TEXT = 10
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_AUDIO = 11
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_IMAGE = 12
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_PLAY = 13
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_VIDEO = 14
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_INFO = 15
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_COPY = 16
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_CUT = 17
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_PASTE = 18
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_HAND = 19
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_POINTER = 20
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_CLASSIC = 21
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PENCIL = 22
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PENCIL_BIG = 23
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BRUSH_CLASSIC = 24
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BRUSH_PAINTER = 25
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_WATER_DROP = 26
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_COLOR_PICKER = 27
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_RUBBER = 28
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_COLOR_BUCKET = 29
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TEXT_T = 30
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TEXT_A = 31
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SCALE = 32
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_RESIZE = 33
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILTER_POINT = 34
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILTER_BILINEAR = 35
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CROP = 36
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CROP_ALPHA = 37
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SQUARE_TOGGLE = 38
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SYMMETRY = 39
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SYMMETRY_HORIZONTAL = 40
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SYMMETRY_VERTICAL = 41
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LENS = 42
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LENS_BIG = 43
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_EYE_ON = 44
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_EYE_OFF = 45
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILTER_TOP = 46
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILTER = 47
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TARGET_POINT = 48
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TARGET_SMALL = 49
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TARGET_BIG = 50
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TARGET_MOVE = 51
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_MOVE = 52
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_SCALE = 53
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_SCALE_RIGHT = 54
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_SCALE_LEFT = 55
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_UNDO = 56
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_REDO = 57
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_REREDO = 58
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_MUTATE = 59
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ROTATE = 60
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_REPEAT = 61
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SHUFFLE = 62
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_EMPTYBOX = 63
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TARGET = 64
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TARGET_SMALL_FILL = 65
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TARGET_BIG_FILL = 66
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TARGET_MOVE_FILL = 67
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_MOVE_FILL = 68
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_SCALE_FILL = 69
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_SCALE_RIGHT_FILL = 70
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CURSOR_SCALE_LEFT_FILL = 71
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_UNDO_FILL = 72
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_REDO_FILL = 73
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_REREDO_FILL = 74
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_MUTATE_FILL = 75
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ROTATE_FILL = 76
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_REPEAT_FILL = 77
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SHUFFLE_FILL = 78
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_EMPTYBOX_SMALL = 79
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX = 80
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_TOP = 81
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_TOP_RIGHT = 82
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_RIGHT = 83
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_BOTTOM_RIGHT = 84
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_BOTTOM = 85
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_BOTTOM_LEFT = 86
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_LEFT = 87
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_TOP_LEFT = 88
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_CENTER = 89
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_CIRCLE_MASK = 90
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_POT = 91
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ALPHA_MULTIPLY = 92
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ALPHA_CLEAR = 93
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_DITHERING = 94
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_MIPMAPS = 95
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_GRID = 96
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_GRID = 97
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_CORNERS_SMALL = 98
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_CORNERS_BIG = 99
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FOUR_BOXES = 100
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_GRID_FILL = 101
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_MULTISIZE = 102
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ZOOM_SMALL = 103
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ZOOM_MEDIUM = 104
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ZOOM_BIG = 105
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ZOOM_ALL = 106
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ZOOM_CENTER = 107
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_DOTS_SMALL = 108
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_DOTS_BIG = 109
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_CONCENTRIC = 110
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BOX_GRID_BIG = 111
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_OK_TICK = 112
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CROSS = 113
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ARROW_LEFT = 114
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ARROW_RIGHT = 115
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ARROW_DOWN = 116
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ARROW_UP = 117
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ARROW_LEFT_FILL = 118
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ARROW_RIGHT_FILL = 119
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ARROW_DOWN_FILL = 120
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ARROW_UP_FILL = 121
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_AUDIO = 122
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FX = 123
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_WAVE = 124
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_WAVE_SINUS = 125
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_WAVE_SQUARE = 126
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_WAVE_TRIANGULAR = 127
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CROSS_SMALL = 128
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER_PREVIOUS = 129
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER_PLAY_BACK = 130
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER_PLAY = 131
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER_PAUSE = 132
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER_STOP = 133
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER_NEXT = 134
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER_RECORD = 135
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_MAGNET = 136
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LOCK_CLOSE = 137
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LOCK_OPEN = 138
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CLOCK = 139
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TOOLS = 140
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_GEAR = 141
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_GEAR_BIG = 142
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_BIN = 143
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_HAND_POINTER = 144
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LASER = 145
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_COIN = 146
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_EXPLOSION = 147
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_1UP = 148
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER = 149
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PLAYER_JUMP = 150
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_KEY = 151
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_DEMON = 152
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TEXT_POPUP = 153
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_GEAR_EX = 154
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CRACK = 155
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CRACK_POINTS = 156
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_STAR = 157
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_DOOR = 158
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_EXIT = 159
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_MODE_2D = 160
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_MODE_3D = 161
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CUBE = 162
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CUBE_FACE_TOP = 163
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CUBE_FACE_LEFT = 164
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CUBE_FACE_FRONT = 165
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CUBE_FACE_BOTTOM = 166
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CUBE_FACE_RIGHT = 167
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CUBE_FACE_BACK = 168
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CAMERA = 169
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SPECIAL = 170
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LINK_NET = 171
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LINK_BOXES = 172
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LINK_MULTI = 173
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LINK = 174
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LINK_BROKE = 175
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_TEXT_NOTES = 176
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_NOTEBOOK = 177
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SUITCASE = 178
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SUITCASE_ZIP = 179
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_MAILBOX = 180
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_MONITOR = 181
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PRINTER = 182
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PHOTO_CAMERA = 183
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_PHOTO_CAMERA_FLASH = 184
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_HOUSE = 185
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_HEART = 186
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CORNER = 187
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_VERTICAL_BARS = 188
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_VERTICAL_BARS_FILL = 189
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LIFE_BARS = 190
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_INFO = 191
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_CROSSLINE = 192
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_HELP = 193
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_ALPHA = 194
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_HOME = 195
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LAYERS_VISIBLE = 196
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_LAYERS = 197
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_WINDOW = 198
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_HIDPI = 199
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILETYPE_BINARY = 200
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_HEX = 201
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_SHIELD = 202
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FILE_NEW = 203
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_FOLDER_ADD = 204
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_ALARM = 205
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_206 = 206
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_207 = 207
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_208 = 208
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_209 = 209
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_210 = 210
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_211 = 211
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_212 = 212
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_213 = 213
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_214 = 214
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_215 = 215
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_216 = 216
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_217 = 217
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_218 = 218
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_219 = 219
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_220 = 220
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_221 = 221
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_222 = 222
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_223 = 223
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_224 = 224
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_225 = 225
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_226 = 226
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_227 = 227
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_228 = 228
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_229 = 229
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_230 = 230
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_231 = 231
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_232 = 232
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_233 = 233
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_234 = 234
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_235 = 235
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_236 = 236
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_237 = 237
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_238 = 238
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_239 = 239
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_240 = 240
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_241 = 241
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_242 = 242
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_243 = 243
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_244 = 244
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_245 = 245
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_246 = 246
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_247 = 247
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_248 = 248
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_249 = 249
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_250 = 250
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_251 = 251
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_252 = 252
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_253 = 253
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_254 = 254
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.ICON_255 = 255
 
 raylib.LIGHTGRAY = { r: 200, g: 200, b: 200, a: 255 }
 raylib.GRAY = { r: 130, g: 130, b: 130, a: 255 }

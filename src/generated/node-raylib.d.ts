@@ -196,7 +196,7 @@ declare module "raylib" {
     vertices: number
     /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1) */
     texcoords: number
-    /** Vertex second texture coordinates (useful for lightmaps) (shader-location = 5) */
+    /** Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5) */
     texcoords2: number
     /** Vertex normals (XYZ - 3 components per vertex) (shader-location = 2) */
     normals: number
@@ -334,6 +334,8 @@ declare module "raylib" {
   export interface AudioStream {
     /** Pointer to internal data used by the audio system */
     buffer: number
+    /** Pointer to internal data processor, useful for audio effects */
+    processor: number
     /** Frequency (samples per second) */
     sampleRate: number
     /** Bit depth (bits per sample): 8, 16, 32 (24 not supported) */
@@ -403,6 +405,15 @@ declare module "raylib" {
     /** VR distortion scale in */
     scaleIn: float[2]
   }
+  /** File path list */
+  export interface FilePathList {
+    /** Filepaths max entries */
+    capacity: number
+    /** Filepaths entries count */
+    count: number
+    /** Filepaths entries */
+    paths: number
+  }
 
   /** RenderTexture, fbo for texture rendering */
   export type RenderTexture2D = RenderTexture
@@ -449,7 +460,7 @@ declare module "raylib" {
   /** Check if one specific window flag is enabled */
   export function IsWindowState(flag: number): boolean
   
-  /** Set window configuration state using flags */
+  /** Set window configuration state using flags (only PLATFORM_DESKTOP) */
   export function SetWindowState(flags: number): void
   
   /** Clear window configuration state flags */
@@ -485,6 +496,9 @@ declare module "raylib" {
   /** Set window dimensions */
   export function SetWindowSize(width: number, height: number): void
   
+  /** Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP) */
+  export function SetWindowOpacity(opacity: number): void
+  
   /** Get native window handle */
   export function GetWindowHandle(): number
   
@@ -493,6 +507,12 @@ declare module "raylib" {
   
   /** Get current screen height */
   export function GetScreenHeight(): number
+  
+  /** Get current render width (it considers HiDPI) */
+  export function GetRenderWidth(): number
+  
+  /** Get current render height (it considers HiDPI) */
+  export function GetRenderHeight(): number
   
   /** Get number of connected monitors */
   export function GetMonitorCount(): number
@@ -503,10 +523,10 @@ declare module "raylib" {
   /** Get specified monitor position */
   export function GetMonitorPosition(monitor: number): Vector2
   
-  /** Get specified monitor width (max available by monitor) */
+  /** Get specified monitor width (current video mode used by monitor) */
   export function GetMonitorWidth(monitor: number): number
   
-  /** Get specified monitor height (max available by monitor) */
+  /** Get specified monitor height (current video mode used by monitor) */
   export function GetMonitorHeight(monitor: number): number
   
   /** Get specified monitor physical width in millimetres */
@@ -533,14 +553,20 @@ declare module "raylib" {
   /** Get clipboard text content */
   export function GetClipboardText(): string
   
+  /** Enable waiting for events on EndDrawing(), no automatic event polling */
+  export function EnableEventWaiting(): void
+  
+  /** Disable waiting for events on EndDrawing(), automatic events polling */
+  export function DisableEventWaiting(): void
+  
   /** Swap back buffer with front buffer (screen drawing) */
   export function SwapScreenBuffer(): void
   
   /** Register all input events */
   export function PollInputEvents(): void
   
-  /** Wait for some milliseconds (halt program execution) */
-  export function WaitTime(ms: number): void
+  /** Wait for some time (halt program execution) */
+  export function WaitTime(seconds: number): void
   
   /** Shows cursor */
   export function ShowCursor(): void
@@ -641,14 +667,14 @@ declare module "raylib" {
   /** Get the screen space position for a 3d world space position */
   export function GetWorldToScreen(position: Vector3, camera: Camera3D): Vector2
   
+  /** Get the world space position for a 2d camera screen space position */
+  export function GetScreenToWorld2D(position: Vector2, camera: Camera2D): Vector2
+  
   /** Get size position for a 3d world space position */
   export function GetWorldToScreenEx(position: Vector3, camera: Camera3D, width: number, height: number): Vector2
   
   /** Get the screen space position for a 2d camera world space position */
   export function GetWorldToScreen2D(position: Vector2, camera: Camera2D): Vector2
-  
-  /** Get the world space position for a 2d camera screen space position */
-  export function GetScreenToWorld2D(position: Vector2, camera: Camera2D): Vector2
   
   /** Set target FPS (maximum) */
   export function SetTargetFPS(fps: number): void
@@ -686,6 +712,9 @@ declare module "raylib" {
   /** Internal memory free */
   export function MemFree(ptr: number): void
   
+  /** Open URL with default system browser (if available) */
+  export function OpenURL(url: string): void
+  
   /** Load file data as byte array (read) */
   export function LoadFileData(fileName: string, bytesRead: number): Buffer
   
@@ -694,6 +723,9 @@ declare module "raylib" {
   
   /** Save data to file from byte array (write), returns true on success */
   export function SaveFileData(fileName: string, data: number, bytesToWrite: number): boolean
+  
+  /** Export data to code (.h), returns true on success */
+  export function ExportDataAsCode(data: string, size: number, fileName: string): boolean
   
   /** Load text data from file (read), returns a '\0' terminated string */
   export function LoadFileText(fileName: string): string
@@ -713,6 +745,9 @@ declare module "raylib" {
   /** Check file extension (including point: .png, .wav) */
   export function IsFileExtension(fileName: string, ext: string): boolean
   
+  /** Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h) */
+  export function GetFileLength(fileName: string): number
+  
   /** Get pointer to extension for a filename string (includes dot: '.png') */
   export function GetFileExtension(fileName: string): string
   
@@ -731,47 +766,47 @@ declare module "raylib" {
   /** Get current working directory (uses static string) */
   export function GetWorkingDirectory(): string
   
-  /** Get filenames in a directory path (memory should be freed) */
-  export function GetDirectoryFiles(dirPath: string, count: number): number
-  
-  /** Clear directory files paths buffers (free memory) */
-  export function ClearDirectoryFiles(): void
+  /** Get the directory if the running application (uses static string) */
+  export function GetApplicationDirectory(): string
   
   /** Change working directory, return true on success */
   export function ChangeDirectory(dir: string): boolean
   
+  /** Check if a given path is a file or a directory */
+  export function IsPathFile(path: string): boolean
+  
+  /** Load directory filepaths */
+  export function LoadDirectoryFiles(dirPath: string): FilePathList
+  
+  /** Load directory filepaths with extension filtering and recursive directory scan */
+  export function LoadDirectoryFilesEx(basePath: string, filter: string, scanSubdirs: boolean): FilePathList
+  
+  /** Unload filepaths */
+  export function UnloadDirectoryFiles(files: FilePathList): void
+  
   /** Check if a file has been dropped into window */
   export function IsFileDropped(): boolean
   
-  /** Get dropped files names (memory should be freed) */
-  export function GetDroppedFiles(count: number): number
+  /** Load dropped filepaths */
+  export function LoadDroppedFiles(): FilePathList
   
-  /** Clear dropped files paths buffer (free memory) */
-  export function ClearDroppedFiles(): void
+  /** Unload dropped filepaths */
+  export function UnloadDroppedFiles(files: FilePathList): void
   
   /** Get file modification time (last write time) */
   export function GetFileModTime(fileName: string): number
   
-  /** Compress data (DEFLATE algorithm) */
-  export function CompressData(data: Buffer, dataLength: number, compDataLength: number): Buffer
+  /** Compress data (DEFLATE algorithm), memory must be MemFree() */
+  export function CompressData(data: Buffer, dataSize: number, compDataSize: number): Buffer
   
-  /** Decompress data (DEFLATE algorithm) */
-  export function DecompressData(compData: Buffer, compDataLength: number, dataLength: number): Buffer
+  /** Decompress data (DEFLATE algorithm), memory must be MemFree() */
+  export function DecompressData(compData: Buffer, compDataSize: number, dataSize: number): Buffer
   
-  /** Encode data to Base64 string */
-  export function EncodeDataBase64(data: Buffer, dataLength: number, outputLength: number): string
+  /** Encode data to Base64 string, memory must be MemFree() */
+  export function EncodeDataBase64(data: Buffer, dataSize: number, outputSize: number): string
   
-  /** Decode Base64 string data */
-  export function DecodeDataBase64(data: Buffer, outputLength: number): Buffer
-  
-  /** Save integer value to storage file (to defined position), returns true on success */
-  export function SaveStorageValue(position: number, value: number): boolean
-  
-  /** Load integer value from storage file (from defined position) */
-  export function LoadStorageValue(position: number): number
-  
-  /** Open URL with default system browser (if available) */
-  export function OpenURL(url: string): void
+  /** Decode Base64 string data, memory must be MemFree() */
+  export function DecodeDataBase64(data: Buffer, outputSize: number): Buffer
   
   /** Check if a key has been pressed once */
   export function IsKeyPressed(key: number): boolean
@@ -857,8 +892,11 @@ declare module "raylib" {
   /** Set mouse scaling */
   export function SetMouseScale(scaleX: number, scaleY: number): void
   
-  /** Get mouse wheel movement Y */
+  /** Get mouse wheel movement for X or Y, whichever is larger */
   export function GetMouseWheelMove(): number
+  
+  /** Get mouse wheel movement for both X and Y */
+  export function GetMouseWheelMoveV(): Vector2
   
   /** Set mouse cursor */
   export function SetMouseCursor(cursor: number): void
@@ -1349,7 +1387,7 @@ declare module "raylib" {
   /** Load font from file into GPU memory (VRAM) */
   export function LoadFont(fileName: string): Font
   
-  /** Load font from file with extended parameters */
+  /** Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set */
   export function LoadFontEx(fileName: string, fontSize: number, fontChars: number, glyphCount: number): Font
   
   /** Load font from Image (XNA style) */
@@ -1367,8 +1405,11 @@ declare module "raylib" {
   /** Unload font chars info data (RAM) */
   export function UnloadFontData(chars: number, glyphCount: number): void
   
-  /** Unload Font from GPU memory (VRAM) */
+  /** Unload font from GPU memory (VRAM) */
   export function UnloadFont(font: Font): void
+  
+  /** Export font as code file, returns true on success */
+  export function ExportFontAsCode(font: Font, fileName: string): boolean
   
   /** Draw current FPS */
   export function DrawFPS(posX: number, posY: number): void
@@ -1384,6 +1425,9 @@ declare module "raylib" {
   
   /** Draw one character (codepoint) */
   export function DrawTextCodepoint(font: Font, codepoint: number, position: Vector2, fontSize: number, tint: Color): void
+  
+  /** Draw multiple character (codepoint) */
+  export function DrawTextCodepoints(font: Font, codepoints: number, count: number, position: Vector2, fontSize: number, spacing: number, tint: Color): void
   
   /** Measure string width for default font */
   export function MeasureText(text: string, fontSize: number): number
@@ -1580,9 +1624,6 @@ declare module "raylib" {
   /** Compute mesh tangents */
   export function GenMeshTangents(mesh: Mesh): void
   
-  /** Compute mesh binormals */
-  export function GenMeshBinormals(mesh: Mesh): void
-  
   /** Generate polygonal mesh */
   export function GenMeshPoly(sides: number, radius: number): Mesh
   
@@ -1648,9 +1689,6 @@ declare module "raylib" {
   
   /** Get collision info between ray and box */
   export function GetRayCollisionBox(ray: Ray, box: BoundingBox): RayCollision
-  
-  /** Get collision info between ray and model */
-  export function GetRayCollisionModel(ray: Ray, model: Model): RayCollision
   
   /** Get collision info between ray and mesh */
   export function GetRayCollisionMesh(ray: Ray, mesh: Mesh, transform: Matrix): RayCollision
@@ -1730,8 +1768,8 @@ declare module "raylib" {
   /** Set pitch for a sound (1.0 is base level) */
   export function SetSoundPitch(sound: Sound, pitch: number): void
   
-  /** Convert wave data to desired format */
-  export function WaveFormat(wave: Wave, sampleRate: number, sampleSize: number, channels: number): void
+  /** Set pan for a sound (0.5 is center) */
+  export function SetSoundPan(sound: Sound, pan: number): void
   
   /** Copy a wave to a new wave */
   export function WaveCopy(wave: Wave): Wave
@@ -1739,7 +1777,10 @@ declare module "raylib" {
   /** Crop a wave to defined samples range */
   export function WaveCrop(wave: Wave, initSample: number, finalSample: number): void
   
-  /** Load samples data from wave as a floats array */
+  /** Convert wave data to desired format */
+  export function WaveFormat(wave: Wave, sampleRate: number, sampleSize: number, channels: number): void
+  
+  /** Load samples data from wave as a 32bit float data array */
   export function LoadWaveSamples(wave: Wave): number
   
   /** Unload samples data loaded with LoadWaveSamples() */
@@ -1781,6 +1822,9 @@ declare module "raylib" {
   /** Set pitch for a music (1.0 is base level) */
   export function SetMusicPitch(music: Music, pitch: number): void
   
+  /** Set pan for a music (0.5 is center) */
+  export function SetMusicPan(music: Music, pan: number): void
+  
   /** Get music time length (in seconds) */
   export function GetMusicTimeLength(music: Music): number
   
@@ -1820,91 +1864,94 @@ declare module "raylib" {
   /** Set pitch for audio stream (1.0 is base level) */
   export function SetAudioStreamPitch(stream: AudioStream, pitch: number): void
   
+  /** Set pan for audio stream (0.5 is centered) */
+  export function SetAudioStreamPan(stream: AudioStream, pan: number): void
+  
   /** Default size for new audio streams */
   export function SetAudioStreamBufferSizeDefault(size: number): void
   
-  /**  */
+  /** Ease: Linear */
   export function EaseLinearNone(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Linear In */
   export function EaseLinearIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Linear Out */
   export function EaseLinearOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Linear In Out */
   export function EaseLinearInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Sine In */
   export function EaseSineIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Sine Out */
   export function EaseSineOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Sine Out */
   export function EaseSineInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Circular In */
   export function EaseCircIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Circular Out */
   export function EaseCircOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Circular In Out */
   export function EaseCircInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Cubic In */
   export function EaseCubicIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Cubic Out */
   export function EaseCubicOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Cubic In Out */
   export function EaseCubicInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Quadratic In */
   export function EaseQuadIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Quadratic Out */
   export function EaseQuadOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Quadratic In Out */
   export function EaseQuadInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Exponential In */
   export function EaseExpoIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Exponential Out */
   export function EaseExpoOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Exponential In Out */
   export function EaseExpoInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Back In */
   export function EaseBackIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Back Out */
   export function EaseBackOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Back In Out */
   export function EaseBackInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Bounce Out */
   export function EaseBounceOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Bounce In */
   export function EaseBounceIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Bounce In Out */
   export function EaseBounceInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Elastic In */
   export function EaseElasticIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Elastic Out */
   export function EaseElasticOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Elastic In Out */
   export function EaseElasticInOut(t: number, b: number, c: number, d: number): number
   
   /**  */
@@ -1918,6 +1965,12 @@ declare module "raylib" {
   
   /**  */
   export function Remap(value: number, inputStart: number, inputEnd: number, outputStart: number, outputEnd: number): number
+  
+  /**  */
+  export function Wrap(value: number, min: number, max: number): number
+  
+  /**  */
+  export function FloatEquals(x: number, y: number): number
   
   /**  */
   export function Vector2Zero(): Vector2
@@ -1950,6 +2003,9 @@ declare module "raylib" {
   export function Vector2Distance(v1: Vector2, v2: Vector2): number
   
   /**  */
+  export function Vector2DistanceSqr(v1: Vector2, v2: Vector2): number
+  
+  /**  */
   export function Vector2Angle(v1: Vector2, v2: Vector2): number
   
   /**  */
@@ -1968,6 +2024,9 @@ declare module "raylib" {
   export function Vector2Normalize(v: Vector2): Vector2
   
   /**  */
+  export function Vector2Transform(v: Vector2, mat: Matrix): Vector2
+  
+  /**  */
   export function Vector2Lerp(v1: Vector2, v2: Vector2, amount: number): Vector2
   
   /**  */
@@ -1978,6 +2037,18 @@ declare module "raylib" {
   
   /**  */
   export function Vector2MoveTowards(v: Vector2, target: Vector2, maxDistance: number): Vector2
+  
+  /**  */
+  export function Vector2Invert(v: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Clamp(v: Vector2, min: Vector2, max: Vector2): Vector2
+  
+  /**  */
+  export function Vector2ClampValue(v: Vector2, min: number, max: number): Vector2
+  
+  /**  */
+  export function Vector2Equals(p: Vector2, q: Vector2): number
   
   /**  */
   export function Vector3Zero(): Vector3
@@ -2022,7 +2093,10 @@ declare module "raylib" {
   export function Vector3Distance(v1: Vector3, v2: Vector3): number
   
   /**  */
-  export function Vector3Angle(v1: Vector3, v2: Vector3): Vector2
+  export function Vector3DistanceSqr(v1: Vector3, v2: Vector3): number
+  
+  /**  */
+  export function Vector3Angle(v1: Vector3, v2: Vector3): number
   
   /**  */
   export function Vector3Negate(v: Vector3): Vector3
@@ -2043,6 +2117,9 @@ declare module "raylib" {
   export function Vector3RotateByQuaternion(v: Vector3, q: Quaternion): Vector3
   
   /**  */
+  export function Vector3RotateByAxisAngle(v: Vector3, axis: Vector3, angle: number): Vector3
+  
+  /**  */
   export function Vector3Lerp(v1: Vector3, v2: Vector3, amount: number): Vector3
   
   /**  */
@@ -2061,6 +2138,21 @@ declare module "raylib" {
   export function Vector3Unproject(source: Vector3, projection: Matrix, view: Matrix): Vector3
   
   /**  */
+  export function Vector3Invert(v: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Clamp(v: Vector3, min: Vector3, max: Vector3): Vector3
+  
+  /**  */
+  export function Vector3ClampValue(v: Vector3, min: number, max: number): Vector3
+  
+  /**  */
+  export function Vector3Equals(p: Vector3, q: Vector3): number
+  
+  /**  */
+  export function Vector3Refract(v: Vector3, n: Vector3, r: number): Vector3
+  
+  /**  */
   export function MatrixDeterminant(mat: Matrix): number
   
   /**  */
@@ -2071,9 +2163,6 @@ declare module "raylib" {
   
   /**  */
   export function MatrixInvert(mat: Matrix): Matrix
-  
-  /**  */
-  export function MatrixNormalize(mat: Matrix): Matrix
   
   /**  */
   export function MatrixIdentity(): Matrix
@@ -2103,10 +2192,10 @@ declare module "raylib" {
   export function MatrixRotateZ(angle: number): Matrix
   
   /**  */
-  export function MatrixRotateXYZ(ang: Vector3): Matrix
+  export function MatrixRotateXYZ(angle: Vector3): Matrix
   
   /**  */
-  export function MatrixRotateZYX(ang: Vector3): Matrix
+  export function MatrixRotateZYX(angle: Vector3): Matrix
   
   /**  */
   export function MatrixScale(x: number, y: number, z: number): Matrix
@@ -2189,6 +2278,9 @@ declare module "raylib" {
   /**  */
   export function QuaternionTransform(q: Quaternion, mat: Matrix): Quaternion
   
+  /**  */
+  export function QuaternionEquals(p: Quaternion, q: Quaternion): number
+  
   /** Enable gui controls (global state) */
   export function GuiEnable(): void
   
@@ -2235,10 +2327,10 @@ declare module "raylib" {
   export function GuiLine(bounds: Rectangle, text: string): void
   
   /** Panel control, useful to group controls */
-  export function GuiPanel(bounds: Rectangle): void
+  export function GuiPanel(bounds: Rectangle, text: string): void
   
   /** Scroll Panel control */
-  export function GuiScrollPanel(bounds: Rectangle, content: Rectangle, scroll: number): Rectangle
+  export function GuiScrollPanel(bounds: Rectangle, text: string, content: Rectangle, scroll: number): Rectangle
   
   /** Label control, shows text */
   export function GuiLabel(bounds: Rectangle, text: string): void
@@ -2291,11 +2383,8 @@ declare module "raylib" {
   /** Dummy control for placeholders */
   export function GuiDummyRec(bounds: Rectangle, text: string): void
   
-  /** Scroll Bar control */
-  export function GuiScrollBar(bounds: Rectangle, value: number, minValue: number, maxValue: number): number
-  
-  /** Grid control */
-  export function GuiGrid(bounds: Rectangle, spacing: number, subdivs: number): Vector2
+  /** Grid control, returns mouse cell position */
+  export function GuiGrid(bounds: Rectangle, text: string, spacing: number, subdivs: number): Vector2
   
   /** List View control, returns selected list item index */
   export function GuiListView(bounds: Rectangle, text: string, scrollIndex: number, active: number): number
@@ -2306,20 +2395,20 @@ declare module "raylib" {
   /** Message Box control, displays a message */
   export function GuiMessageBox(bounds: Rectangle, title: string, message: string, buttons: string): number
   
-  /** Text Input Box control, ask for text */
-  export function GuiTextInputBox(bounds: Rectangle, title: string, message: string, buttons: string, text: string): number
+  /** Text Input Box control, ask for text, supports secret */
+  export function GuiTextInputBox(bounds: Rectangle, title: string, message: string, buttons: string, text: string, textMaxSize: number, secretViewActive: number): number
   
   /** Color Picker control (multiple color controls) */
-  export function GuiColorPicker(bounds: Rectangle, color: Color): Color
+  export function GuiColorPicker(bounds: Rectangle, text: string, color: Color): Color
   
   /** Color Panel control */
-  export function GuiColorPanel(bounds: Rectangle, color: Color): Color
+  export function GuiColorPanel(bounds: Rectangle, text: string, color: Color): Color
   
   /** Color Bar Alpha control */
-  export function GuiColorBarAlpha(bounds: Rectangle, alpha: number): number
+  export function GuiColorBarAlpha(bounds: Rectangle, text: string, alpha: number): number
   
   /** Color Bar Hue control */
-  export function GuiColorBarHue(bounds: Rectangle, value: number): number
+  export function GuiColorBarHue(bounds: Rectangle, text: string, value: number): number
   
   /** Load style file over global style variable (.rgs) */
   export function GuiLoadStyle(fileName: string): void
@@ -2341,6 +2430,9 @@ declare module "raylib" {
   
   /** Set icon bit data */
   export function GuiSetIconData(iconId: number, data: number): void
+  
+  /** Set icon scale (1 by default) */
+  export function GuiSetIconScale(scale: number): void
   
   /** Set icon pixel value */
   export function GuiSetIconPixel(iconId: number, x: number, y: number): void
@@ -2387,6 +2479,8 @@ declare module "raylib" {
   export const FLAG_WINDOW_TRANSPARENT = 16
   /** Set to support HighDPI */
   export const FLAG_WINDOW_HIGHDPI = 8192
+  /** Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED */
+  export const FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384
   /** Set to try enabling MSAA 4X */
   export const FLAG_MSAA_4X_HINT = 32
   /** Set to try enabling interlaced video format (for V3D) */
@@ -2853,7 +2947,7 @@ declare module "raylib" {
   export const PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
   /** 2 bpp */
   export const PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
-  /** No filter, just pixel aproximation */
+  /** No filter, just pixel approximation */
   export const TEXTURE_FILTER_POINT = 0
   /** Linear filtering */
   export const TEXTURE_FILTER_BILINEAR = 1
@@ -2901,8 +2995,10 @@ declare module "raylib" {
   export const BLEND_ADD_COLORS = 3
   /** Blend textures subtracting colors (alternative) */
   export const BLEND_SUBTRACT_COLORS = 4
-  /** Belnd textures using custom src/dst factors (use rlSetBlendMode()) */
-  export const BLEND_CUSTOM = 5
+  /** Blend premultiplied textures considering alpha */
+  export const BLEND_ALPHA_PREMULTIPLY = 5
+  /** Blend textures using custom src/dst factors (use rlSetBlendMode()) */
+  export const BLEND_CUSTOM = 6
   /** No gesture */
   export const GESTURE_NONE = 0
   /** Tap gesture */
@@ -2946,20 +3042,20 @@ declare module "raylib" {
   /** Npatch layout: 3x1 tiles */
   export const NPATCH_THREE_PATCH_HORIZONTAL = 2
   /**  */
-  export const GUI_STATE_NORMAL = 0
+  export const STATE_NORMAL = 0
   /**  */
-  export const GUI_STATE_FOCUSED = 1
+  export const STATE_FOCUSED = 1
   /**  */
-  export const GUI_STATE_PRESSED = 2
+  export const STATE_PRESSED = 2
   /**  */
-  export const GUI_STATE_DISABLED = 3
+  export const STATE_DISABLED = 3
   /**  */
-  export const GUI_TEXT_ALIGN_LEFT = 0
+  export const TEXT_ALIGN_LEFT = 0
   /**  */
-  export const GUI_TEXT_ALIGN_CENTER = 1
+  export const TEXT_ALIGN_CENTER = 1
   /**  */
-  export const GUI_TEXT_ALIGN_RIGHT = 2
-  /** Generic control -> populates to all controls when set */
+  export const TEXT_ALIGN_RIGHT = 2
+  /**  */
   export const DEFAULT = 0
   /** Used also for: LABELBUTTON */
   export const LABEL = 1
@@ -2981,7 +3077,7 @@ declare module "raylib" {
   export const TEXTBOX = 9
   /**  */
   export const VALUEBOX = 10
-  /**  */
+  /** Uses: BUTTON, VALUEBOX */
   export const SPINNER = 11
   /**  */
   export const LISTVIEW = 12
@@ -3023,49 +3119,27 @@ declare module "raylib" {
   export const TEXT_ALIGNMENT = 14
   /**  */
   export const RESERVED = 15
-  /**  */
+  /** Text size (glyphs max height) */
   export const TEXT_SIZE = 16
-  /**  */
+  /** Text spacing between glyphs */
   export const TEXT_SPACING = 17
-  /**  */
+  /** Line control color */
   export const LINE_COLOR = 18
-  /**  */
+  /** Background color */
   export const BACKGROUND_COLOR = 19
-  /**  */
+  /** ToggleGroup separation between toggles */
   export const GROUP_PADDING = 16
-  /**  */
+  /** Slider size of internal bar */
   export const SLIDER_WIDTH = 16
-  /**  */
+  /** Slider/SliderBar internal bar padding */
   export const SLIDER_PADDING = 17
-  /**  */
+  /** ProgressBar internal padding */
   export const PROGRESS_PADDING = 16
-  /**  */
-  export const CHECK_PADDING = 16
-  /**  */
-  export const COMBO_BUTTON_WIDTH = 16
-  /**  */
-  export const COMBO_BUTTON_PADDING = 17
-  /**  */
-  export const ARROW_PADDING = 16
-  /**  */
-  export const DROPDOWN_ITEMS_PADDING = 17
-  /**  */
-  export const TEXT_INNER_PADDING = 16
-  /**  */
-  export const TEXT_LINES_PADDING = 17
-  /**  */
-  export const COLOR_SELECTED_FG = 18
-  /**  */
-  export const COLOR_SELECTED_BG = 19
-  /**  */
-  export const SPIN_BUTTON_WIDTH = 16
-  /**  */
-  export const SPIN_BUTTON_PADDING = 17
   /**  */
   export const ARROWS_SIZE = 16
   /**  */
   export const ARROWS_VISIBLE = 17
-  /**  */
+  /** (SLIDERBAR, SLIDER_PADDING) */
   export const SCROLL_SLIDER_PADDING = 18
   /**  */
   export const SCROLL_SLIDER_SIZE = 19
@@ -3073,28 +3147,554 @@ declare module "raylib" {
   export const SCROLL_PADDING = 20
   /**  */
   export const SCROLL_SPEED = 21
-  /**  */
-  export const SCROLLBAR_LEFT_SIDE = 0
-  /**  */
-  export const SCROLLBAR_RIGHT_SIDE = 1
-  /**  */
+  /** CheckBox internal check padding */
+  export const CHECK_PADDING = 16
+  /** ComboBox right button width */
+  export const COMBO_BUTTON_WIDTH = 16
+  /** ComboBox button separation */
+  export const COMBO_BUTTON_SPACING = 17
+  /** DropdownBox arrow separation from border and items */
+  export const ARROW_PADDING = 16
+  /** DropdownBox items separation */
+  export const DROPDOWN_ITEMS_SPACING = 17
+  /** TextBox/TextBoxMulti/ValueBox/Spinner inner text padding */
+  export const TEXT_INNER_PADDING = 16
+  /** TextBoxMulti lines separation */
+  export const TEXT_LINES_SPACING = 17
+  /** Spinner left/right buttons width */
+  export const SPIN_BUTTON_WIDTH = 16
+  /** Spinner buttons separation */
+  export const SPIN_BUTTON_SPACING = 17
+  /** ListView items height */
   export const LIST_ITEMS_HEIGHT = 16
-  /**  */
-  export const LIST_ITEMS_PADDING = 17
-  /**  */
+  /** ListView items separation */
+  export const LIST_ITEMS_SPACING = 17
+  /** ListView scrollbar size (usually width) */
   export const SCROLLBAR_WIDTH = 18
-  /**  */
+  /** ListView scrollbar side (0-left, 1-right) */
   export const SCROLLBAR_SIDE = 19
   /**  */
   export const COLOR_SELECTOR_SIZE = 16
-  /** Right hue bar width */
+  /** ColorPicker right hue bar width */
   export const HUEBAR_WIDTH = 17
-  /** Right hue bar separation from panel */
+  /** ColorPicker right hue bar separation from panel */
   export const HUEBAR_PADDING = 18
-  /** Right hue bar selector height */
+  /** ColorPicker right hue bar selector height */
   export const HUEBAR_SELECTOR_HEIGHT = 19
-  /** Right hue bar selector overflow */
+  /** ColorPicker right hue bar selector overflow */
   export const HUEBAR_SELECTOR_OVERFLOW = 20
+  /**  */
+  export const ICON_NONE = 0
+  /**  */
+  export const ICON_FOLDER_FILE_OPEN = 1
+  /**  */
+  export const ICON_FILE_SAVE_CLASSIC = 2
+  /**  */
+  export const ICON_FOLDER_OPEN = 3
+  /**  */
+  export const ICON_FOLDER_SAVE = 4
+  /**  */
+  export const ICON_FILE_OPEN = 5
+  /**  */
+  export const ICON_FILE_SAVE = 6
+  /**  */
+  export const ICON_FILE_EXPORT = 7
+  /**  */
+  export const ICON_FILE_ADD = 8
+  /**  */
+  export const ICON_FILE_DELETE = 9
+  /**  */
+  export const ICON_FILETYPE_TEXT = 10
+  /**  */
+  export const ICON_FILETYPE_AUDIO = 11
+  /**  */
+  export const ICON_FILETYPE_IMAGE = 12
+  /**  */
+  export const ICON_FILETYPE_PLAY = 13
+  /**  */
+  export const ICON_FILETYPE_VIDEO = 14
+  /**  */
+  export const ICON_FILETYPE_INFO = 15
+  /**  */
+  export const ICON_FILE_COPY = 16
+  /**  */
+  export const ICON_FILE_CUT = 17
+  /**  */
+  export const ICON_FILE_PASTE = 18
+  /**  */
+  export const ICON_CURSOR_HAND = 19
+  /**  */
+  export const ICON_CURSOR_POINTER = 20
+  /**  */
+  export const ICON_CURSOR_CLASSIC = 21
+  /**  */
+  export const ICON_PENCIL = 22
+  /**  */
+  export const ICON_PENCIL_BIG = 23
+  /**  */
+  export const ICON_BRUSH_CLASSIC = 24
+  /**  */
+  export const ICON_BRUSH_PAINTER = 25
+  /**  */
+  export const ICON_WATER_DROP = 26
+  /**  */
+  export const ICON_COLOR_PICKER = 27
+  /**  */
+  export const ICON_RUBBER = 28
+  /**  */
+  export const ICON_COLOR_BUCKET = 29
+  /**  */
+  export const ICON_TEXT_T = 30
+  /**  */
+  export const ICON_TEXT_A = 31
+  /**  */
+  export const ICON_SCALE = 32
+  /**  */
+  export const ICON_RESIZE = 33
+  /**  */
+  export const ICON_FILTER_POINT = 34
+  /**  */
+  export const ICON_FILTER_BILINEAR = 35
+  /**  */
+  export const ICON_CROP = 36
+  /**  */
+  export const ICON_CROP_ALPHA = 37
+  /**  */
+  export const ICON_SQUARE_TOGGLE = 38
+  /**  */
+  export const ICON_SYMMETRY = 39
+  /**  */
+  export const ICON_SYMMETRY_HORIZONTAL = 40
+  /**  */
+  export const ICON_SYMMETRY_VERTICAL = 41
+  /**  */
+  export const ICON_LENS = 42
+  /**  */
+  export const ICON_LENS_BIG = 43
+  /**  */
+  export const ICON_EYE_ON = 44
+  /**  */
+  export const ICON_EYE_OFF = 45
+  /**  */
+  export const ICON_FILTER_TOP = 46
+  /**  */
+  export const ICON_FILTER = 47
+  /**  */
+  export const ICON_TARGET_POINT = 48
+  /**  */
+  export const ICON_TARGET_SMALL = 49
+  /**  */
+  export const ICON_TARGET_BIG = 50
+  /**  */
+  export const ICON_TARGET_MOVE = 51
+  /**  */
+  export const ICON_CURSOR_MOVE = 52
+  /**  */
+  export const ICON_CURSOR_SCALE = 53
+  /**  */
+  export const ICON_CURSOR_SCALE_RIGHT = 54
+  /**  */
+  export const ICON_CURSOR_SCALE_LEFT = 55
+  /**  */
+  export const ICON_UNDO = 56
+  /**  */
+  export const ICON_REDO = 57
+  /**  */
+  export const ICON_REREDO = 58
+  /**  */
+  export const ICON_MUTATE = 59
+  /**  */
+  export const ICON_ROTATE = 60
+  /**  */
+  export const ICON_REPEAT = 61
+  /**  */
+  export const ICON_SHUFFLE = 62
+  /**  */
+  export const ICON_EMPTYBOX = 63
+  /**  */
+  export const ICON_TARGET = 64
+  /**  */
+  export const ICON_TARGET_SMALL_FILL = 65
+  /**  */
+  export const ICON_TARGET_BIG_FILL = 66
+  /**  */
+  export const ICON_TARGET_MOVE_FILL = 67
+  /**  */
+  export const ICON_CURSOR_MOVE_FILL = 68
+  /**  */
+  export const ICON_CURSOR_SCALE_FILL = 69
+  /**  */
+  export const ICON_CURSOR_SCALE_RIGHT_FILL = 70
+  /**  */
+  export const ICON_CURSOR_SCALE_LEFT_FILL = 71
+  /**  */
+  export const ICON_UNDO_FILL = 72
+  /**  */
+  export const ICON_REDO_FILL = 73
+  /**  */
+  export const ICON_REREDO_FILL = 74
+  /**  */
+  export const ICON_MUTATE_FILL = 75
+  /**  */
+  export const ICON_ROTATE_FILL = 76
+  /**  */
+  export const ICON_REPEAT_FILL = 77
+  /**  */
+  export const ICON_SHUFFLE_FILL = 78
+  /**  */
+  export const ICON_EMPTYBOX_SMALL = 79
+  /**  */
+  export const ICON_BOX = 80
+  /**  */
+  export const ICON_BOX_TOP = 81
+  /**  */
+  export const ICON_BOX_TOP_RIGHT = 82
+  /**  */
+  export const ICON_BOX_RIGHT = 83
+  /**  */
+  export const ICON_BOX_BOTTOM_RIGHT = 84
+  /**  */
+  export const ICON_BOX_BOTTOM = 85
+  /**  */
+  export const ICON_BOX_BOTTOM_LEFT = 86
+  /**  */
+  export const ICON_BOX_LEFT = 87
+  /**  */
+  export const ICON_BOX_TOP_LEFT = 88
+  /**  */
+  export const ICON_BOX_CENTER = 89
+  /**  */
+  export const ICON_BOX_CIRCLE_MASK = 90
+  /**  */
+  export const ICON_POT = 91
+  /**  */
+  export const ICON_ALPHA_MULTIPLY = 92
+  /**  */
+  export const ICON_ALPHA_CLEAR = 93
+  /**  */
+  export const ICON_DITHERING = 94
+  /**  */
+  export const ICON_MIPMAPS = 95
+  /**  */
+  export const ICON_BOX_GRID = 96
+  /**  */
+  export const ICON_GRID = 97
+  /**  */
+  export const ICON_BOX_CORNERS_SMALL = 98
+  /**  */
+  export const ICON_BOX_CORNERS_BIG = 99
+  /**  */
+  export const ICON_FOUR_BOXES = 100
+  /**  */
+  export const ICON_GRID_FILL = 101
+  /**  */
+  export const ICON_BOX_MULTISIZE = 102
+  /**  */
+  export const ICON_ZOOM_SMALL = 103
+  /**  */
+  export const ICON_ZOOM_MEDIUM = 104
+  /**  */
+  export const ICON_ZOOM_BIG = 105
+  /**  */
+  export const ICON_ZOOM_ALL = 106
+  /**  */
+  export const ICON_ZOOM_CENTER = 107
+  /**  */
+  export const ICON_BOX_DOTS_SMALL = 108
+  /**  */
+  export const ICON_BOX_DOTS_BIG = 109
+  /**  */
+  export const ICON_BOX_CONCENTRIC = 110
+  /**  */
+  export const ICON_BOX_GRID_BIG = 111
+  /**  */
+  export const ICON_OK_TICK = 112
+  /**  */
+  export const ICON_CROSS = 113
+  /**  */
+  export const ICON_ARROW_LEFT = 114
+  /**  */
+  export const ICON_ARROW_RIGHT = 115
+  /**  */
+  export const ICON_ARROW_DOWN = 116
+  /**  */
+  export const ICON_ARROW_UP = 117
+  /**  */
+  export const ICON_ARROW_LEFT_FILL = 118
+  /**  */
+  export const ICON_ARROW_RIGHT_FILL = 119
+  /**  */
+  export const ICON_ARROW_DOWN_FILL = 120
+  /**  */
+  export const ICON_ARROW_UP_FILL = 121
+  /**  */
+  export const ICON_AUDIO = 122
+  /**  */
+  export const ICON_FX = 123
+  /**  */
+  export const ICON_WAVE = 124
+  /**  */
+  export const ICON_WAVE_SINUS = 125
+  /**  */
+  export const ICON_WAVE_SQUARE = 126
+  /**  */
+  export const ICON_WAVE_TRIANGULAR = 127
+  /**  */
+  export const ICON_CROSS_SMALL = 128
+  /**  */
+  export const ICON_PLAYER_PREVIOUS = 129
+  /**  */
+  export const ICON_PLAYER_PLAY_BACK = 130
+  /**  */
+  export const ICON_PLAYER_PLAY = 131
+  /**  */
+  export const ICON_PLAYER_PAUSE = 132
+  /**  */
+  export const ICON_PLAYER_STOP = 133
+  /**  */
+  export const ICON_PLAYER_NEXT = 134
+  /**  */
+  export const ICON_PLAYER_RECORD = 135
+  /**  */
+  export const ICON_MAGNET = 136
+  /**  */
+  export const ICON_LOCK_CLOSE = 137
+  /**  */
+  export const ICON_LOCK_OPEN = 138
+  /**  */
+  export const ICON_CLOCK = 139
+  /**  */
+  export const ICON_TOOLS = 140
+  /**  */
+  export const ICON_GEAR = 141
+  /**  */
+  export const ICON_GEAR_BIG = 142
+  /**  */
+  export const ICON_BIN = 143
+  /**  */
+  export const ICON_HAND_POINTER = 144
+  /**  */
+  export const ICON_LASER = 145
+  /**  */
+  export const ICON_COIN = 146
+  /**  */
+  export const ICON_EXPLOSION = 147
+  /**  */
+  export const ICON_1UP = 148
+  /**  */
+  export const ICON_PLAYER = 149
+  /**  */
+  export const ICON_PLAYER_JUMP = 150
+  /**  */
+  export const ICON_KEY = 151
+  /**  */
+  export const ICON_DEMON = 152
+  /**  */
+  export const ICON_TEXT_POPUP = 153
+  /**  */
+  export const ICON_GEAR_EX = 154
+  /**  */
+  export const ICON_CRACK = 155
+  /**  */
+  export const ICON_CRACK_POINTS = 156
+  /**  */
+  export const ICON_STAR = 157
+  /**  */
+  export const ICON_DOOR = 158
+  /**  */
+  export const ICON_EXIT = 159
+  /**  */
+  export const ICON_MODE_2D = 160
+  /**  */
+  export const ICON_MODE_3D = 161
+  /**  */
+  export const ICON_CUBE = 162
+  /**  */
+  export const ICON_CUBE_FACE_TOP = 163
+  /**  */
+  export const ICON_CUBE_FACE_LEFT = 164
+  /**  */
+  export const ICON_CUBE_FACE_FRONT = 165
+  /**  */
+  export const ICON_CUBE_FACE_BOTTOM = 166
+  /**  */
+  export const ICON_CUBE_FACE_RIGHT = 167
+  /**  */
+  export const ICON_CUBE_FACE_BACK = 168
+  /**  */
+  export const ICON_CAMERA = 169
+  /**  */
+  export const ICON_SPECIAL = 170
+  /**  */
+  export const ICON_LINK_NET = 171
+  /**  */
+  export const ICON_LINK_BOXES = 172
+  /**  */
+  export const ICON_LINK_MULTI = 173
+  /**  */
+  export const ICON_LINK = 174
+  /**  */
+  export const ICON_LINK_BROKE = 175
+  /**  */
+  export const ICON_TEXT_NOTES = 176
+  /**  */
+  export const ICON_NOTEBOOK = 177
+  /**  */
+  export const ICON_SUITCASE = 178
+  /**  */
+  export const ICON_SUITCASE_ZIP = 179
+  /**  */
+  export const ICON_MAILBOX = 180
+  /**  */
+  export const ICON_MONITOR = 181
+  /**  */
+  export const ICON_PRINTER = 182
+  /**  */
+  export const ICON_PHOTO_CAMERA = 183
+  /**  */
+  export const ICON_PHOTO_CAMERA_FLASH = 184
+  /**  */
+  export const ICON_HOUSE = 185
+  /**  */
+  export const ICON_HEART = 186
+  /**  */
+  export const ICON_CORNER = 187
+  /**  */
+  export const ICON_VERTICAL_BARS = 188
+  /**  */
+  export const ICON_VERTICAL_BARS_FILL = 189
+  /**  */
+  export const ICON_LIFE_BARS = 190
+  /**  */
+  export const ICON_INFO = 191
+  /**  */
+  export const ICON_CROSSLINE = 192
+  /**  */
+  export const ICON_HELP = 193
+  /**  */
+  export const ICON_FILETYPE_ALPHA = 194
+  /**  */
+  export const ICON_FILETYPE_HOME = 195
+  /**  */
+  export const ICON_LAYERS_VISIBLE = 196
+  /**  */
+  export const ICON_LAYERS = 197
+  /**  */
+  export const ICON_WINDOW = 198
+  /**  */
+  export const ICON_HIDPI = 199
+  /**  */
+  export const ICON_FILETYPE_BINARY = 200
+  /**  */
+  export const ICON_HEX = 201
+  /**  */
+  export const ICON_SHIELD = 202
+  /**  */
+  export const ICON_FILE_NEW = 203
+  /**  */
+  export const ICON_FOLDER_ADD = 204
+  /**  */
+  export const ICON_ALARM = 205
+  /**  */
+  export const ICON_206 = 206
+  /**  */
+  export const ICON_207 = 207
+  /**  */
+  export const ICON_208 = 208
+  /**  */
+  export const ICON_209 = 209
+  /**  */
+  export const ICON_210 = 210
+  /**  */
+  export const ICON_211 = 211
+  /**  */
+  export const ICON_212 = 212
+  /**  */
+  export const ICON_213 = 213
+  /**  */
+  export const ICON_214 = 214
+  /**  */
+  export const ICON_215 = 215
+  /**  */
+  export const ICON_216 = 216
+  /**  */
+  export const ICON_217 = 217
+  /**  */
+  export const ICON_218 = 218
+  /**  */
+  export const ICON_219 = 219
+  /**  */
+  export const ICON_220 = 220
+  /**  */
+  export const ICON_221 = 221
+  /**  */
+  export const ICON_222 = 222
+  /**  */
+  export const ICON_223 = 223
+  /**  */
+  export const ICON_224 = 224
+  /**  */
+  export const ICON_225 = 225
+  /**  */
+  export const ICON_226 = 226
+  /**  */
+  export const ICON_227 = 227
+  /**  */
+  export const ICON_228 = 228
+  /**  */
+  export const ICON_229 = 229
+  /**  */
+  export const ICON_230 = 230
+  /**  */
+  export const ICON_231 = 231
+  /**  */
+  export const ICON_232 = 232
+  /**  */
+  export const ICON_233 = 233
+  /**  */
+  export const ICON_234 = 234
+  /**  */
+  export const ICON_235 = 235
+  /**  */
+  export const ICON_236 = 236
+  /**  */
+  export const ICON_237 = 237
+  /**  */
+  export const ICON_238 = 238
+  /**  */
+  export const ICON_239 = 239
+  /**  */
+  export const ICON_240 = 240
+  /**  */
+  export const ICON_241 = 241
+  /**  */
+  export const ICON_242 = 242
+  /**  */
+  export const ICON_243 = 243
+  /**  */
+  export const ICON_244 = 244
+  /**  */
+  export const ICON_245 = 245
+  /**  */
+  export const ICON_246 = 246
+  /**  */
+  export const ICON_247 = 247
+  /**  */
+  export const ICON_248 = 248
+  /**  */
+  export const ICON_249 = 249
+  /**  */
+  export const ICON_250 = 250
+  /**  */
+  export const ICON_251 = 251
+  /**  */
+  export const ICON_252 = 252
+  /**  */
+  export const ICON_253 = 253
+  /**  */
+  export const ICON_254 = 254
+  /**  */
+  export const ICON_255 = 255
 
   export const LIGHTGRAY: { r: 200, g: 200, b: 200, a: 255 }
   export const GRAY: { r: 130, g: 130, b: 130, a: 255 }
