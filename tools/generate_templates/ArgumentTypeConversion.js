@@ -21,6 +21,10 @@ function ArgumentTypeConversion (arg) {
   if (arg.includes('*')) {
     return 'number'
   }
+  // float[2], float[4] etc. should be converted to pointers as well
+  if (arg.includes(']')) {
+    return 'number'
+  }
 
   return arg
 }

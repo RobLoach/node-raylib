@@ -2,416 +2,416 @@
 declare module "raylib" {
   /** Vector2, 2 components */
   export interface Vector2 {
-    /** Vector x component */
+    /** Vector x component. (float) */
     x: number
-    /** Vector y component */
+    /** Vector y component. (float) */
     y: number
   }
   /** Vector3, 3 components */
   export interface Vector3 {
-    /** Vector x component */
+    /** Vector x component. (float) */
     x: number
-    /** Vector y component */
+    /** Vector y component. (float) */
     y: number
-    /** Vector z component */
+    /** Vector z component. (float) */
     z: number
   }
   /** Vector4, 4 components */
   export interface Vector4 {
-    /** Vector x component */
+    /** Vector x component. (float) */
     x: number
-    /** Vector y component */
+    /** Vector y component. (float) */
     y: number
-    /** Vector z component */
+    /** Vector z component. (float) */
     z: number
-    /** Vector w component */
+    /** Vector w component. (float) */
     w: number
   }
   /** Matrix, 4x4 components, column major, OpenGL style, right handed */
   export interface Matrix {
-    /** Matrix first row (4 components) */
+    /** Matrix first row (4 components). (float) */
     m0: number
-    /** Matrix first row (4 components) */
+    /** Matrix first row (4 components). (float) */
     m4: number
-    /** Matrix first row (4 components) */
+    /** Matrix first row (4 components). (float) */
     m8: number
-    /** Matrix first row (4 components) */
+    /** Matrix first row (4 components). (float) */
     m12: number
-    /** Matrix second row (4 components) */
+    /** Matrix second row (4 components). (float) */
     m1: number
-    /** Matrix second row (4 components) */
+    /** Matrix second row (4 components). (float) */
     m5: number
-    /** Matrix second row (4 components) */
+    /** Matrix second row (4 components). (float) */
     m9: number
-    /** Matrix second row (4 components) */
+    /** Matrix second row (4 components). (float) */
     m13: number
-    /** Matrix third row (4 components) */
+    /** Matrix third row (4 components). (float) */
     m2: number
-    /** Matrix third row (4 components) */
+    /** Matrix third row (4 components). (float) */
     m6: number
-    /** Matrix third row (4 components) */
+    /** Matrix third row (4 components). (float) */
     m10: number
-    /** Matrix third row (4 components) */
+    /** Matrix third row (4 components). (float) */
     m14: number
-    /** Matrix fourth row (4 components) */
+    /** Matrix fourth row (4 components). (float) */
     m3: number
-    /** Matrix fourth row (4 components) */
+    /** Matrix fourth row (4 components). (float) */
     m7: number
-    /** Matrix fourth row (4 components) */
+    /** Matrix fourth row (4 components). (float) */
     m11: number
-    /** Matrix fourth row (4 components) */
+    /** Matrix fourth row (4 components). (float) */
     m15: number
   }
   /** Color, 4 components, R8G8B8A8 (32bit) */
   export interface Color {
-    /** Color red value */
+    /** Color red value. (unsigned char) */
     r: number
-    /** Color green value */
+    /** Color green value. (unsigned char) */
     g: number
-    /** Color blue value */
+    /** Color blue value. (unsigned char) */
     b: number
-    /** Color alpha value */
+    /** Color alpha value. (unsigned char) */
     a: number
   }
   /** Rectangle, 4 components */
   export interface Rectangle {
-    /** Rectangle top-left corner position x */
+    /** Rectangle top-left corner position x. (float) */
     x: number
-    /** Rectangle top-left corner position y */
+    /** Rectangle top-left corner position y. (float) */
     y: number
-    /** Rectangle width */
+    /** Rectangle width. (float) */
     width: number
-    /** Rectangle height */
+    /** Rectangle height. (float) */
     height: number
   }
   /** Image, pixel data stored in CPU memory (RAM) */
   export interface Image {
-    /** Image raw data */
+    /** Image raw data. (void *) */
     data: number
-    /** Image base width */
+    /** Image base width. (int) */
     width: number
-    /** Image base height */
+    /** Image base height. (int) */
     height: number
-    /** Mipmap levels, 1 by default */
+    /** Mipmap levels, 1 by default. (int) */
     mipmaps: number
-    /** Data format (PixelFormat type) */
+    /** Data format (PixelFormat type). (int) */
     format: number
   }
   /** Texture, tex data stored in GPU memory (VRAM) */
   export interface Texture {
-    /** OpenGL texture id */
+    /** OpenGL texture id. (unsigned int) */
     id: number
-    /** Texture base width */
+    /** Texture base width. (int) */
     width: number
-    /** Texture base height */
+    /** Texture base height. (int) */
     height: number
-    /** Mipmap levels, 1 by default */
+    /** Mipmap levels, 1 by default. (int) */
     mipmaps: number
-    /** Data format (PixelFormat type) */
+    /** Data format (PixelFormat type). (int) */
     format: number
   }
   /** RenderTexture, fbo for texture rendering */
   export interface RenderTexture {
-    /** OpenGL framebuffer object id */
+    /** OpenGL framebuffer object id. (unsigned int) */
     id: number
-    /** Color buffer attachment texture */
+    /** Color buffer attachment texture. (Texture) */
     texture: Texture
-    /** Depth buffer attachment texture */
+    /** Depth buffer attachment texture. (Texture) */
     depth: Texture
   }
   /** NPatchInfo, n-patch layout info */
   export interface NPatchInfo {
-    /** Texture source rectangle */
+    /** Texture source rectangle. (Rectangle) */
     source: Rectangle
-    /** Left border offset */
+    /** Left border offset. (int) */
     left: number
-    /** Top border offset */
+    /** Top border offset. (int) */
     top: number
-    /** Right border offset */
+    /** Right border offset. (int) */
     right: number
-    /** Bottom border offset */
+    /** Bottom border offset. (int) */
     bottom: number
-    /** Layout of the n-patch: 3x3, 1x3 or 3x1 */
+    /** Layout of the n-patch: 3x3, 1x3 or 3x1. (int) */
     layout: number
   }
   /** GlyphInfo, font characters glyphs info */
   export interface GlyphInfo {
-    /** Character value (Unicode) */
+    /** Character value (Unicode). (int) */
     value: number
-    /** Character offset X when drawing */
+    /** Character offset X when drawing. (int) */
     offsetX: number
-    /** Character offset Y when drawing */
+    /** Character offset Y when drawing. (int) */
     offsetY: number
-    /** Character advance position X */
+    /** Character advance position X. (int) */
     advanceX: number
-    /** Character image data */
+    /** Character image data. (Image) */
     image: Image
   }
   /** Font, font texture and GlyphInfo array data */
   export interface Font {
-    /** Base size (default chars height) */
+    /** Base size (default chars height). (int) */
     baseSize: number
-    /** Number of glyph characters */
+    /** Number of glyph characters. (int) */
     glyphCount: number
-    /** Padding around the glyph characters */
+    /** Padding around the glyph characters. (int) */
     glyphPadding: number
-    /** Texture atlas containing the glyphs */
+    /** Texture atlas containing the glyphs. (Texture) */
     texture: Texture
-    /** Rectangles in texture for the glyphs */
+    /** Rectangles in texture for the glyphs. (Rectangle *) */
     recs: number
-    /** Glyphs info data */
+    /** Glyphs info data. (GlyphInfo *) */
     glyphs: number
   }
   /** Camera, defines position/orientation in 3d space */
   export interface Camera3D {
-    /** Camera position */
+    /** Camera position. (Vector3) */
     position: Vector3
-    /** Camera target it looks-at */
+    /** Camera target it looks-at. (Vector3) */
     target: Vector3
-    /** Camera up vector (rotation over its axis) */
+    /** Camera up vector (rotation over its axis). (Vector3) */
     up: Vector3
-    /** Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic */
+    /** Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic. (float) */
     fovy: number
-    /** Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC */
+    /** Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC. (int) */
     projection: number
   }
   /** Camera2D, defines position/orientation in 2d space */
   export interface Camera2D {
-    /** Camera offset (displacement from target) */
+    /** Camera offset (displacement from target). (Vector2) */
     offset: Vector2
-    /** Camera target (rotation and zoom origin) */
+    /** Camera target (rotation and zoom origin). (Vector2) */
     target: Vector2
-    /** Camera rotation in degrees */
+    /** Camera rotation in degrees. (float) */
     rotation: number
-    /** Camera zoom (scaling), should be 1.0f by default */
+    /** Camera zoom (scaling), should be 1.0f by default. (float) */
     zoom: number
   }
   /** Mesh, vertex data and vao/vbo */
   export interface Mesh {
-    /** Number of vertices stored in arrays */
+    /** Number of vertices stored in arrays. (int) */
     vertexCount: number
-    /** Number of triangles stored (indexed or not) */
+    /** Number of triangles stored (indexed or not). (int) */
     triangleCount: number
-    /** Vertex position (XYZ - 3 components per vertex) (shader-location = 0) */
+    /** Vertex position (XYZ - 3 components per vertex) (shader-location = 0). (float *) */
     vertices: number
-    /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1) */
+    /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1). (float *) */
     texcoords: number
-    /** Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5) */
+    /** Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5). (float *) */
     texcoords2: number
-    /** Vertex normals (XYZ - 3 components per vertex) (shader-location = 2) */
+    /** Vertex normals (XYZ - 3 components per vertex) (shader-location = 2). (float *) */
     normals: number
-    /** Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4) */
+    /** Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4). (float *) */
     tangents: number
-    /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3) */
+    /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
     colors: Buffer
-    /** Vertex indices (in case vertex data comes indexed) */
+    /** Vertex indices (in case vertex data comes indexed). (unsigned short *) */
     indices: number
-    /** Animated vertex positions (after bones transformations) */
+    /** Animated vertex positions (after bones transformations). (float *) */
     animVertices: number
-    /** Animated normals (after bones transformations) */
+    /** Animated normals (after bones transformations). (float *) */
     animNormals: number
-    /** Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning) */
+    /** Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning). (unsigned char *) */
     boneIds: Buffer
-    /** Vertex bone weight, up to 4 bones influence by vertex (skinning) */
+    /** Vertex bone weight, up to 4 bones influence by vertex (skinning). (float *) */
     boneWeights: number
-    /** OpenGL Vertex Array Object id */
+    /** OpenGL Vertex Array Object id. (unsigned int) */
     vaoId: number
-    /** OpenGL Vertex Buffer Objects id (default vertex data) */
+    /** OpenGL Vertex Buffer Objects id (default vertex data). (unsigned int *) */
     vboId: number
   }
   /** Shader */
   export interface Shader {
-    /** Shader program id */
+    /** Shader program id. (unsigned int) */
     id: number
-    /** Shader locations array (RL_MAX_SHADER_LOCATIONS) */
+    /** Shader locations array (RL_MAX_SHADER_LOCATIONS). (int *) */
     locs: number
   }
   /** MaterialMap */
   export interface MaterialMap {
-    /** Material map texture */
+    /** Material map texture. (Texture) */
     texture: Texture
-    /** Material map color */
+    /** Material map color. (Color) */
     color: Color
-    /** Material map value */
+    /** Material map value. (float) */
     value: number
   }
   /** Material, includes shader and maps */
   export interface Material {
-    /** Material shader */
+    /** Material shader. (Shader) */
     shader: Shader
-    /** Material maps array (MAX_MATERIAL_MAPS) */
+    /** Material maps array (MAX_MATERIAL_MAPS). (MaterialMap *) */
     maps: number
-    /** Material generic parameters (if required) */
-    params: float[4]
+    /** Material generic parameters (if required). (float[4]) */
+    params: number
   }
   /** Transform, vectex transformation data */
   export interface Transform {
-    /** Translation */
+    /** Translation. (Vector3) */
     translation: Vector3
-    /** Rotation */
+    /** Rotation. (Vector4) */
     rotation: Vector4
-    /** Scale */
+    /** Scale. (Vector3) */
     scale: Vector3
   }
   /** Bone, skeletal animation bone */
   export interface BoneInfo {
-    /** Bone name */
+    /** Bone name. (char) */
     name: string
-    /** Bone parent */
+    /** Bone parent. (char) */
     parent: string
   }
   /** Model, meshes, materials and animation data */
   export interface Model {
-    /** Local transform matrix */
+    /** Local transform matrix. (Matrix) */
     transform: Matrix
-    /** Number of meshes */
+    /** Number of meshes. (int) */
     meshCount: number
-    /** Number of materials */
+    /** Number of materials. (int) */
     materialCount: number
-    /** Meshes array */
+    /** Meshes array. (Mesh *) */
     meshes: number
-    /** Materials array */
+    /** Materials array. (Material *) */
     materials: number
-    /** Mesh material number */
+    /** Mesh material number. (int *) */
     meshMaterial: number
-    /** Number of bones */
+    /** Number of bones. (int) */
     boneCount: number
-    /** Bones information (skeleton) */
+    /** Bones information (skeleton). (BoneInfo *) */
     bones: number
-    /** Bones base transformation (pose) */
+    /** Bones base transformation (pose). (Transform *) */
     bindPose: number
   }
   /** ModelAnimation */
   export interface ModelAnimation {
-    /** Number of bones */
+    /** Number of bones. (int) */
     boneCount: number
-    /** Number of animation frames */
+    /** Number of animation frames. (int) */
     frameCount: number
-    /** Bones information (skeleton) */
+    /** Bones information (skeleton). (BoneInfo *) */
     bones: number
-    /** Poses array by frame */
+    /** Poses array by frame. (Transform **) */
     framePoses: number
   }
   /** Ray, ray for raycasting */
   export interface Ray {
-    /** Ray position (origin) */
+    /** Ray position (origin). (Vector3) */
     position: Vector3
-    /** Ray direction */
+    /** Ray direction. (Vector3) */
     direction: Vector3
   }
   /** RayCollision, ray hit information */
   export interface RayCollision {
-    /** Did the ray hit something? */
+    /** Did the ray hit something?. (bool) */
     hit: boolean
-    /** Distance to nearest hit */
+    /** Distance to nearest hit. (float) */
     distance: number
-    /** Point of nearest hit */
+    /** Point of nearest hit. (Vector3) */
     point: Vector3
-    /** Surface normal of hit */
+    /** Surface normal of hit. (Vector3) */
     normal: Vector3
   }
   /** BoundingBox */
   export interface BoundingBox {
-    /** Minimum vertex box-corner */
+    /** Minimum vertex box-corner. (Vector3) */
     min: Vector3
-    /** Maximum vertex box-corner */
+    /** Maximum vertex box-corner. (Vector3) */
     max: Vector3
   }
   /** Wave, audio wave data */
   export interface Wave {
-    /** Total number of frames (considering channels) */
+    /** Total number of frames (considering channels). (unsigned int) */
     frameCount: number
-    /** Frequency (samples per second) */
+    /** Frequency (samples per second). (unsigned int) */
     sampleRate: number
-    /** Bit depth (bits per sample): 8, 16, 32 (24 not supported) */
+    /** Bit depth (bits per sample): 8, 16, 32 (24 not supported). (unsigned int) */
     sampleSize: number
-    /** Number of channels (1-mono, 2-stereo, ...) */
+    /** Number of channels (1-mono, 2-stereo, ...). (unsigned int) */
     channels: number
-    /** Buffer data pointer */
+    /** Buffer data pointer. (void *) */
     data: number
   }
   /** AudioStream, custom audio stream */
   export interface AudioStream {
-    /** Pointer to internal data used by the audio system */
+    /** Pointer to internal data used by the audio system. (rAudioBuffer *) */
     buffer: number
-    /** Pointer to internal data processor, useful for audio effects */
+    /** Pointer to internal data processor, useful for audio effects. (rAudioProcessor *) */
     processor: number
-    /** Frequency (samples per second) */
+    /** Frequency (samples per second). (unsigned int) */
     sampleRate: number
-    /** Bit depth (bits per sample): 8, 16, 32 (24 not supported) */
+    /** Bit depth (bits per sample): 8, 16, 32 (24 not supported). (unsigned int) */
     sampleSize: number
-    /** Number of channels (1-mono, 2-stereo, ...) */
+    /** Number of channels (1-mono, 2-stereo, ...). (unsigned int) */
     channels: number
   }
   /** Sound */
   export interface Sound {
-    /** Audio stream */
+    /** Audio stream. (AudioStream) */
     stream: AudioStream
-    /** Total number of frames (considering channels) */
+    /** Total number of frames (considering channels). (unsigned int) */
     frameCount: number
   }
   /** Music, audio stream, anything longer than ~10 seconds should be streamed */
   export interface Music {
-    /** Audio stream */
+    /** Audio stream. (AudioStream) */
     stream: AudioStream
-    /** Total number of frames (considering channels) */
+    /** Total number of frames (considering channels). (unsigned int) */
     frameCount: number
-    /** Music looping enable */
+    /** Music looping enable. (bool) */
     looping: boolean
-    /** Type of music context (audio filetype) */
+    /** Type of music context (audio filetype). (int) */
     ctxType: number
-    /** Audio context data, depends on type */
+    /** Audio context data, depends on type. (void *) */
     ctxData: number
   }
   /** VrDeviceInfo, Head-Mounted-Display device parameters */
   export interface VrDeviceInfo {
-    /** Horizontal resolution in pixels */
+    /** Horizontal resolution in pixels. (int) */
     hResolution: number
-    /** Vertical resolution in pixels */
+    /** Vertical resolution in pixels. (int) */
     vResolution: number
-    /** Horizontal size in meters */
+    /** Horizontal size in meters. (float) */
     hScreenSize: number
-    /** Vertical size in meters */
+    /** Vertical size in meters. (float) */
     vScreenSize: number
-    /** Screen center in meters */
+    /** Screen center in meters. (float) */
     vScreenCenter: number
-    /** Distance between eye and display in meters */
+    /** Distance between eye and display in meters. (float) */
     eyeToScreenDistance: number
-    /** Lens separation distance in meters */
+    /** Lens separation distance in meters. (float) */
     lensSeparationDistance: number
-    /** IPD (distance between pupils) in meters */
+    /** IPD (distance between pupils) in meters. (float) */
     interpupillaryDistance: number
-    /** Lens distortion constant parameters */
-    lensDistortionValues: float[4]
-    /** Chromatic aberration correction parameters */
-    chromaAbCorrection: float[4]
+    /** Lens distortion constant parameters. (float[4]) */
+    lensDistortionValues: number
+    /** Chromatic aberration correction parameters. (float[4]) */
+    chromaAbCorrection: number
   }
   /** VrStereoConfig, VR stereo rendering configuration for simulator */
   export interface VrStereoConfig {
-    /** VR projection matrices (per eye) */
-    projection: Matrix[2]
-    /** VR view offset matrices (per eye) */
-    viewOffset: Matrix[2]
-    /** VR left lens center */
-    leftLensCenter: float[2]
-    /** VR right lens center */
-    rightLensCenter: float[2]
-    /** VR left screen center */
-    leftScreenCenter: float[2]
-    /** VR right screen center */
-    rightScreenCenter: float[2]
-    /** VR distortion scale */
-    scale: float[2]
-    /** VR distortion scale in */
-    scaleIn: float[2]
+    /** VR projection matrices (per eye). (Matrix[2]) */
+    projection: number
+    /** VR view offset matrices (per eye). (Matrix[2]) */
+    viewOffset: number
+    /** VR left lens center. (float[2]) */
+    leftLensCenter: number
+    /** VR right lens center. (float[2]) */
+    rightLensCenter: number
+    /** VR left screen center. (float[2]) */
+    leftScreenCenter: number
+    /** VR right screen center. (float[2]) */
+    rightScreenCenter: number
+    /** VR distortion scale. (float[2]) */
+    scale: number
+    /** VR distortion scale in. (float[2]) */
+    scaleIn: number
   }
   /** File path list */
   export interface FilePathList {
-    /** Filepaths max entries */
+    /** Filepaths max entries. (unsigned int) */
     capacity: number
-    /** Filepaths entries count */
+    /** Filepaths entries count. (unsigned int) */
     count: number
-    /** Filepaths entries */
+    /** Filepaths entries. (char **) */
     paths: number
   }
 
@@ -427,6 +427,8 @@ declare module "raylib" {
   /** Camera, defines position/orientation in 3d space */
   export type Camera = Camera3D | Camera2D
 
+  /** Quaternion, same as Vector4 */
+  export type Quaternion = Vector4
   /** Initialize window and OpenGL context */
   export function InitWindow(width: number, height: number, title: string): void
   

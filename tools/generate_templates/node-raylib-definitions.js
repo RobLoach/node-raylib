@@ -15,7 +15,7 @@ const StructInterface = (struct) => {
   return `/** ${struct.description} */
   export interface ${struct.name} {
     ${struct.fields
-      .map(field => `/** ${field.description} */\n    ${field.name}: ${ArgumentTypeConversion(field.type)}`)
+      .map(field => `/** ${field.description}. (${field.type}) */\n    ${field.name}: ${ArgumentTypeConversion(field.type)}`)
       .join('\n    ')
     }
   }`
@@ -41,6 +41,8 @@ declare module "raylib" {
   /** Camera, defines position/orientation in 3d space */
   export type Camera = Camera3D | Camera2D
 
+  /** Quaternion, same as Vector4 */
+  export type Quaternion = Vector4
   ${functions
       .filter(({ name }) => !blocklist.includes(name))
       .map(FunctionDefinition)

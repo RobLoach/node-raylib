@@ -35,7 +35,7 @@
 <dd><p>Check if one specific window flag is enabled</p>
 </dd>
 <dt><a href="#SetWindowState">SetWindowState(flags)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set window configuration state using flags</p>
+<dd><p>Set window configuration state using flags (only PLATFORM_DESKTOP)</p>
 </dd>
 <dt><a href="#ClearWindowState">ClearWindowState(flags)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Clear window configuration state flags</p>
@@ -70,6 +70,9 @@
 <dt><a href="#SetWindowSize">SetWindowSize(width, height)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set window dimensions</p>
 </dd>
+<dt><a href="#SetWindowOpacity">SetWindowOpacity(opacity)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)</p>
+</dd>
 <dt><a href="#GetWindowHandle">GetWindowHandle()</a> ⇒ <code>number</code></dt>
 <dd><p>Get native window handle</p>
 </dd>
@@ -78,6 +81,12 @@
 </dd>
 <dt><a href="#GetScreenHeight">GetScreenHeight()</a> ⇒ <code>number</code></dt>
 <dd><p>Get current screen height</p>
+</dd>
+<dt><a href="#GetRenderWidth">GetRenderWidth()</a> ⇒ <code>number</code></dt>
+<dd><p>Get current render width (it considers HiDPI)</p>
+</dd>
+<dt><a href="#GetRenderHeight">GetRenderHeight()</a> ⇒ <code>number</code></dt>
+<dd><p>Get current render height (it considers HiDPI)</p>
 </dd>
 <dt><a href="#GetMonitorCount">GetMonitorCount()</a> ⇒ <code>number</code></dt>
 <dd><p>Get number of connected monitors</p>
@@ -89,10 +98,10 @@
 <dd><p>Get specified monitor position</p>
 </dd>
 <dt><a href="#GetMonitorWidth">GetMonitorWidth(monitor)</a> ⇒ <code>number</code></dt>
-<dd><p>Get specified monitor width (max available by monitor)</p>
+<dd><p>Get specified monitor width (current video mode used by monitor)</p>
 </dd>
 <dt><a href="#GetMonitorHeight">GetMonitorHeight(monitor)</a> ⇒ <code>number</code></dt>
-<dd><p>Get specified monitor height (max available by monitor)</p>
+<dd><p>Get specified monitor height (current video mode used by monitor)</p>
 </dd>
 <dt><a href="#GetMonitorPhysicalWidth">GetMonitorPhysicalWidth(monitor)</a> ⇒ <code>number</code></dt>
 <dd><p>Get specified monitor physical width in millimetres</p>
@@ -118,14 +127,20 @@
 <dt><a href="#GetClipboardText">GetClipboardText()</a> ⇒ <code>string</code></dt>
 <dd><p>Get clipboard text content</p>
 </dd>
+<dt><a href="#EnableEventWaiting">EnableEventWaiting()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable waiting for events on EndDrawing(), no automatic event polling</p>
+</dd>
+<dt><a href="#DisableEventWaiting">DisableEventWaiting()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable waiting for events on EndDrawing(), automatic events polling</p>
+</dd>
 <dt><a href="#SwapScreenBuffer">SwapScreenBuffer()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Swap back buffer with front buffer (screen drawing)</p>
 </dd>
 <dt><a href="#PollInputEvents">PollInputEvents()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Register all input events</p>
 </dd>
-<dt><a href="#WaitTime">WaitTime(ms)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Wait for some milliseconds (halt program execution)</p>
+<dt><a href="#WaitTime">WaitTime(seconds)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Wait for some time (halt program execution)</p>
 </dd>
 <dt><a href="#ShowCursor">ShowCursor()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Shows cursor</p>
@@ -226,14 +241,14 @@
 <dt><a href="#GetWorldToScreen">GetWorldToScreen(position, camera)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
 <dd><p>Get the screen space position for a 3d world space position</p>
 </dd>
+<dt><a href="#GetScreenToWorld2D">GetScreenToWorld2D(position, camera)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Get the world space position for a 2d camera screen space position</p>
+</dd>
 <dt><a href="#GetWorldToScreenEx">GetWorldToScreenEx(position, camera, width, height)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
 <dd><p>Get size position for a 3d world space position</p>
 </dd>
 <dt><a href="#GetWorldToScreen2D">GetWorldToScreen2D(position, camera)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
 <dd><p>Get the screen space position for a 2d camera world space position</p>
-</dd>
-<dt><a href="#GetScreenToWorld2D">GetScreenToWorld2D(position, camera)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
-<dd><p>Get the world space position for a 2d camera screen space position</p>
 </dd>
 <dt><a href="#SetTargetFPS">SetTargetFPS(fps)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set target FPS (maximum)</p>
@@ -271,6 +286,9 @@
 <dt><a href="#MemFree">MemFree(ptr)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Internal memory free</p>
 </dd>
+<dt><a href="#OpenURL">OpenURL(url)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Open URL with default system browser (if available)</p>
+</dd>
 <dt><a href="#LoadFileData">LoadFileData(fileName, bytesRead)</a> ⇒ <code>Buffer</code></dt>
 <dd><p>Load file data as byte array (read)</p>
 </dd>
@@ -279,6 +297,9 @@
 </dd>
 <dt><a href="#SaveFileData">SaveFileData(fileName, data, bytesToWrite)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Save data to file from byte array (write), returns true on success</p>
+</dd>
+<dt><a href="#ExportDataAsCode">ExportDataAsCode(data, size, fileName)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Export data to code (.h), returns true on success</p>
 </dd>
 <dt><a href="#LoadFileText">LoadFileText(fileName)</a> ⇒ <code>string</code></dt>
 <dd><p>Load text data from file (read), returns a &#39;\0&#39; terminated string</p>
@@ -298,6 +319,9 @@
 <dt><a href="#IsFileExtension">IsFileExtension(fileName, ext)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check file extension (including point: .png, .wav)</p>
 </dd>
+<dt><a href="#GetFileLength">GetFileLength(fileName)</a> ⇒ <code>number</code></dt>
+<dd><p>Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h)</p>
+</dd>
 <dt><a href="#GetFileExtension">GetFileExtension(fileName)</a> ⇒ <code>string</code></dt>
 <dd><p>Get pointer to extension for a filename string (includes dot: &#39;.png&#39;)</p>
 </dd>
@@ -316,47 +340,47 @@
 <dt><a href="#GetWorkingDirectory">GetWorkingDirectory()</a> ⇒ <code>string</code></dt>
 <dd><p>Get current working directory (uses static string)</p>
 </dd>
-<dt><a href="#GetDirectoryFiles">GetDirectoryFiles(dirPath, count)</a> ⇒ <code>number</code></dt>
-<dd><p>Get filenames in a directory path (memory should be freed)</p>
-</dd>
-<dt><a href="#ClearDirectoryFiles">ClearDirectoryFiles()</a> ⇒ <code>undefined</code></dt>
-<dd><p>Clear directory files paths buffers (free memory)</p>
+<dt><a href="#GetApplicationDirectory">GetApplicationDirectory()</a> ⇒ <code>string</code></dt>
+<dd><p>Get the directory if the running application (uses static string)</p>
 </dd>
 <dt><a href="#ChangeDirectory">ChangeDirectory(dir)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Change working directory, return true on success</p>
 </dd>
+<dt><a href="#IsPathFile">IsPathFile(path)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a given path is a file or a directory</p>
+</dd>
+<dt><a href="#LoadDirectoryFiles">LoadDirectoryFiles(dirPath)</a> ⇒ <code>FilePathList</code></dt>
+<dd><p>Load directory filepaths</p>
+</dd>
+<dt><a href="#LoadDirectoryFilesEx">LoadDirectoryFilesEx(basePath, filter, scanSubdirs)</a> ⇒ <code>FilePathList</code></dt>
+<dd><p>Load directory filepaths with extension filtering and recursive directory scan</p>
+</dd>
+<dt><a href="#UnloadDirectoryFiles">UnloadDirectoryFiles(files)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload filepaths</p>
+</dd>
 <dt><a href="#IsFileDropped">IsFileDropped()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a file has been dropped into window</p>
 </dd>
-<dt><a href="#GetDroppedFiles">GetDroppedFiles(count)</a> ⇒ <code>number</code></dt>
-<dd><p>Get dropped files names (memory should be freed)</p>
+<dt><a href="#LoadDroppedFiles">LoadDroppedFiles()</a> ⇒ <code>FilePathList</code></dt>
+<dd><p>Load dropped filepaths</p>
 </dd>
-<dt><a href="#ClearDroppedFiles">ClearDroppedFiles()</a> ⇒ <code>undefined</code></dt>
-<dd><p>Clear dropped files paths buffer (free memory)</p>
+<dt><a href="#UnloadDroppedFiles">UnloadDroppedFiles(files)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload dropped filepaths</p>
 </dd>
 <dt><a href="#GetFileModTime">GetFileModTime(fileName)</a> ⇒ <code>number</code></dt>
 <dd><p>Get file modification time (last write time)</p>
 </dd>
-<dt><a href="#CompressData">CompressData(data, dataLength, compDataLength)</a> ⇒ <code>Buffer</code></dt>
-<dd><p>Compress data (DEFLATE algorithm)</p>
+<dt><a href="#CompressData">CompressData(data, dataSize, compDataSize)</a> ⇒ <code>Buffer</code></dt>
+<dd><p>Compress data (DEFLATE algorithm), memory must be MemFree()</p>
 </dd>
-<dt><a href="#DecompressData">DecompressData(compData, compDataLength, dataLength)</a> ⇒ <code>Buffer</code></dt>
-<dd><p>Decompress data (DEFLATE algorithm)</p>
+<dt><a href="#DecompressData">DecompressData(compData, compDataSize, dataSize)</a> ⇒ <code>Buffer</code></dt>
+<dd><p>Decompress data (DEFLATE algorithm), memory must be MemFree()</p>
 </dd>
-<dt><a href="#EncodeDataBase64">EncodeDataBase64(data, dataLength, outputLength)</a> ⇒ <code>string</code></dt>
-<dd><p>Encode data to Base64 string</p>
+<dt><a href="#EncodeDataBase64">EncodeDataBase64(data, dataSize, outputSize)</a> ⇒ <code>string</code></dt>
+<dd><p>Encode data to Base64 string, memory must be MemFree()</p>
 </dd>
-<dt><a href="#DecodeDataBase64">DecodeDataBase64(data, outputLength)</a> ⇒ <code>Buffer</code></dt>
-<dd><p>Decode Base64 string data</p>
-</dd>
-<dt><a href="#SaveStorageValue">SaveStorageValue(position, value)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Save integer value to storage file (to defined position), returns true on success</p>
-</dd>
-<dt><a href="#LoadStorageValue">LoadStorageValue(position)</a> ⇒ <code>number</code></dt>
-<dd><p>Load integer value from storage file (from defined position)</p>
-</dd>
-<dt><a href="#OpenURL">OpenURL(url)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Open URL with default system browser (if available)</p>
+<dt><a href="#DecodeDataBase64">DecodeDataBase64(data, outputSize)</a> ⇒ <code>Buffer</code></dt>
+<dd><p>Decode Base64 string data, memory must be MemFree()</p>
 </dd>
 <dt><a href="#IsKeyPressed">IsKeyPressed(key)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a key has been pressed once</p>
@@ -443,7 +467,10 @@
 <dd><p>Set mouse scaling</p>
 </dd>
 <dt><a href="#GetMouseWheelMove">GetMouseWheelMove()</a> ⇒ <code>number</code></dt>
-<dd><p>Get mouse wheel movement Y</p>
+<dd><p>Get mouse wheel movement for X or Y, whichever is larger</p>
+</dd>
+<dt><a href="#GetMouseWheelMoveV">GetMouseWheelMoveV()</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Get mouse wheel movement for both X and Y</p>
 </dd>
 <dt><a href="#SetMouseCursor">SetMouseCursor(cursor)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set mouse cursor</p>
@@ -821,7 +848,7 @@
 <dd><p>Load font from file into GPU memory (VRAM)</p>
 </dd>
 <dt><a href="#LoadFontEx">LoadFontEx(fileName, fontSize, fontChars, glyphCount)</a> ⇒ <code>Font</code></dt>
-<dd><p>Load font from file with extended parameters</p>
+<dd><p>Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set</p>
 </dd>
 <dt><a href="#LoadFontFromImage">LoadFontFromImage(image, key, firstChar)</a> ⇒ <code>Font</code></dt>
 <dd><p>Load font from Image (XNA style)</p>
@@ -839,7 +866,10 @@
 <dd><p>Unload font chars info data (RAM)</p>
 </dd>
 <dt><a href="#UnloadFont">UnloadFont(font)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Unload Font from GPU memory (VRAM)</p>
+<dd><p>Unload font from GPU memory (VRAM)</p>
+</dd>
+<dt><a href="#ExportFontAsCode">ExportFontAsCode(font, fileName)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Export font as code file, returns true on success</p>
 </dd>
 <dt><a href="#DrawFPS">DrawFPS(posX, posY)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw current FPS</p>
@@ -855,6 +885,9 @@
 </dd>
 <dt><a href="#DrawTextCodepoint">DrawTextCodepoint(font, codepoint, position, fontSize, tint)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw one character (codepoint)</p>
+</dd>
+<dt><a href="#DrawTextCodepoints">DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing, tint)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw multiple character (codepoint)</p>
 </dd>
 <dt><a href="#MeasureText">MeasureText(text, fontSize)</a> ⇒ <code>number</code></dt>
 <dd><p>Measure string width for default font</p>
@@ -1108,9 +1141,6 @@
 <dt><a href="#GetRayCollisionBox">GetRayCollisionBox(ray, box)</a> ⇒ <code>RayCollision</code></dt>
 <dd><p>Get collision info between ray and box</p>
 </dd>
-<dt><a href="#GetRayCollisionModel">GetRayCollisionModel(ray, model)</a> ⇒ <code>RayCollision</code></dt>
-<dd><p>Get collision info between ray and model</p>
-</dd>
 <dt><a href="#GetRayCollisionMesh">GetRayCollisionMesh(ray, mesh, transform)</a> ⇒ <code>RayCollision</code></dt>
 <dd><p>Get collision info between ray and mesh</p>
 </dd>
@@ -1189,11 +1219,14 @@
 <dt><a href="#SetSoundPitch">SetSoundPitch(sound, pitch)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set pitch for a sound (1.0 is base level)</p>
 </dd>
+<dt><a href="#SetSoundPan">SetSoundPan(sound, pan)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set pan for a sound (0.5 is center)</p>
+</dd>
 <dt><a href="#WaveCopy">WaveCopy(wave)</a> ⇒ <code>Wave</code></dt>
 <dd><p>Copy a wave to a new wave</p>
 </dd>
 <dt><a href="#LoadWaveSamples">LoadWaveSamples(wave)</a> ⇒ <code>number</code></dt>
-<dd><p>Load samples data from wave as a floats array</p>
+<dd><p>Load samples data from wave as a 32bit float data array</p>
 </dd>
 <dt><a href="#UnloadWaveSamples">UnloadWaveSamples(samples)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload samples data loaded with LoadWaveSamples()</p>
@@ -1234,6 +1267,9 @@
 <dt><a href="#SetMusicPitch">SetMusicPitch(music, pitch)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set pitch for a music (1.0 is base level)</p>
 </dd>
+<dt><a href="#SetMusicPan">SetMusicPan(music, pan)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set pan for a music (0.5 is center)</p>
+</dd>
 <dt><a href="#GetMusicTimeLength">GetMusicTimeLength(music)</a> ⇒ <code>number</code></dt>
 <dd><p>Get music time length (in seconds)</p>
 </dd>
@@ -1273,8 +1309,95 @@
 <dt><a href="#SetAudioStreamPitch">SetAudioStreamPitch(stream, pitch)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set pitch for audio stream (1.0 is base level)</p>
 </dd>
+<dt><a href="#SetAudioStreamPan">SetAudioStreamPan(stream, pan)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set pan for audio stream (0.5 is centered)</p>
+</dd>
 <dt><a href="#SetAudioStreamBufferSizeDefault">SetAudioStreamBufferSizeDefault(size)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Default size for new audio streams</p>
+</dd>
+<dt><a href="#EaseLinearNone">EaseLinearNone(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Linear</p>
+</dd>
+<dt><a href="#EaseLinearIn">EaseLinearIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Linear In</p>
+</dd>
+<dt><a href="#EaseLinearOut">EaseLinearOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Linear Out</p>
+</dd>
+<dt><a href="#EaseLinearInOut">EaseLinearInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Linear In Out</p>
+</dd>
+<dt><a href="#EaseSineIn">EaseSineIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Sine In</p>
+</dd>
+<dt><a href="#EaseSineOut">EaseSineOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Sine Out</p>
+</dd>
+<dt><a href="#EaseSineInOut">EaseSineInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Sine Out</p>
+</dd>
+<dt><a href="#EaseCircIn">EaseCircIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Circular In</p>
+</dd>
+<dt><a href="#EaseCircOut">EaseCircOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Circular Out</p>
+</dd>
+<dt><a href="#EaseCircInOut">EaseCircInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Circular In Out</p>
+</dd>
+<dt><a href="#EaseCubicIn">EaseCubicIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Cubic In</p>
+</dd>
+<dt><a href="#EaseCubicOut">EaseCubicOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Cubic Out</p>
+</dd>
+<dt><a href="#EaseCubicInOut">EaseCubicInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Cubic In Out</p>
+</dd>
+<dt><a href="#EaseQuadIn">EaseQuadIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Quadratic In</p>
+</dd>
+<dt><a href="#EaseQuadOut">EaseQuadOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Quadratic Out</p>
+</dd>
+<dt><a href="#EaseQuadInOut">EaseQuadInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Quadratic In Out</p>
+</dd>
+<dt><a href="#EaseExpoIn">EaseExpoIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Exponential In</p>
+</dd>
+<dt><a href="#EaseExpoOut">EaseExpoOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Exponential Out</p>
+</dd>
+<dt><a href="#EaseExpoInOut">EaseExpoInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Exponential In Out</p>
+</dd>
+<dt><a href="#EaseBackIn">EaseBackIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Back In</p>
+</dd>
+<dt><a href="#EaseBackOut">EaseBackOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Back Out</p>
+</dd>
+<dt><a href="#EaseBackInOut">EaseBackInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Back In Out</p>
+</dd>
+<dt><a href="#EaseBounceOut">EaseBounceOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Bounce Out</p>
+</dd>
+<dt><a href="#EaseBounceIn">EaseBounceIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Bounce In</p>
+</dd>
+<dt><a href="#EaseBounceInOut">EaseBounceInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Bounce In Out</p>
+</dd>
+<dt><a href="#EaseElasticIn">EaseElasticIn(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Elastic In</p>
+</dd>
+<dt><a href="#EaseElasticOut">EaseElasticOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Elastic Out</p>
+</dd>
+<dt><a href="#EaseElasticInOut">EaseElasticInOut(t, b, c, d)</a> ⇒ <code>number</code></dt>
+<dd><p>Ease: Elastic In Out</p>
 </dd>
 <dt><a href="#GuiEnable">GuiEnable()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Enable gui controls (global state)</p>
@@ -1321,10 +1444,10 @@
 <dt><a href="#GuiLine">GuiLine(bounds, text)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Line separator control, could contain text</p>
 </dd>
-<dt><a href="#GuiPanel">GuiPanel(bounds)</a> ⇒ <code>undefined</code></dt>
+<dt><a href="#GuiPanel">GuiPanel(bounds, text)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Panel control, useful to group controls</p>
 </dd>
-<dt><a href="#GuiScrollPanel">GuiScrollPanel(bounds, content, scroll)</a> ⇒ <code><a href="#Rectangle">Rectangle</a></code></dt>
+<dt><a href="#GuiScrollPanel">GuiScrollPanel(bounds, text, content, scroll)</a> ⇒ <code><a href="#Rectangle">Rectangle</a></code></dt>
 <dd><p>Scroll Panel control</p>
 </dd>
 <dt><a href="#GuiLabel">GuiLabel(bounds, text)</a> ⇒ <code>undefined</code></dt>
@@ -1378,11 +1501,8 @@
 <dt><a href="#GuiDummyRec">GuiDummyRec(bounds, text)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Dummy control for placeholders</p>
 </dd>
-<dt><a href="#GuiScrollBar">GuiScrollBar(bounds, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
-<dd><p>Scroll Bar control</p>
-</dd>
-<dt><a href="#GuiGrid">GuiGrid(bounds, spacing, subdivs)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
-<dd><p>Grid control</p>
+<dt><a href="#GuiGrid">GuiGrid(bounds, text, spacing, subdivs)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Grid control, returns mouse cell position</p>
 </dd>
 <dt><a href="#GuiListView">GuiListView(bounds, text, scrollIndex, active)</a> ⇒ <code>number</code></dt>
 <dd><p>List View control, returns selected list item index</p>
@@ -1393,19 +1513,19 @@
 <dt><a href="#GuiMessageBox">GuiMessageBox(bounds, title, message, buttons)</a> ⇒ <code>number</code></dt>
 <dd><p>Message Box control, displays a message</p>
 </dd>
-<dt><a href="#GuiTextInputBox">GuiTextInputBox(bounds, title, message, buttons, text)</a> ⇒ <code>number</code></dt>
-<dd><p>Text Input Box control, ask for text</p>
+<dt><a href="#GuiTextInputBox">GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive)</a> ⇒ <code>number</code></dt>
+<dd><p>Text Input Box control, ask for text, supports secret</p>
 </dd>
-<dt><a href="#GuiColorPicker">GuiColorPicker(bounds, color)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
+<dt><a href="#GuiColorPicker">GuiColorPicker(bounds, text, color)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
 <dd><p>Color Picker control (multiple color controls)</p>
 </dd>
-<dt><a href="#GuiColorPanel">GuiColorPanel(bounds, color)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
+<dt><a href="#GuiColorPanel">GuiColorPanel(bounds, text, color)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
 <dd><p>Color Panel control</p>
 </dd>
-<dt><a href="#GuiColorBarAlpha">GuiColorBarAlpha(bounds, alpha)</a> ⇒ <code>number</code></dt>
+<dt><a href="#GuiColorBarAlpha">GuiColorBarAlpha(bounds, text, alpha)</a> ⇒ <code>number</code></dt>
 <dd><p>Color Bar Alpha control</p>
 </dd>
-<dt><a href="#GuiColorBarHue">GuiColorBarHue(bounds, value)</a> ⇒ <code>number</code></dt>
+<dt><a href="#GuiColorBarHue">GuiColorBarHue(bounds, text, value)</a> ⇒ <code>number</code></dt>
 <dd><p>Color Bar Hue control</p>
 </dd>
 <dt><a href="#GuiLoadStyle">GuiLoadStyle(fileName)</a> ⇒ <code>undefined</code></dt>
@@ -1425,6 +1545,9 @@
 </dd>
 <dt><a href="#GuiSetIconData">GuiSetIconData(iconId, data)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set icon bit data</p>
+</dd>
+<dt><a href="#GuiSetIconScale">GuiSetIconScale(scale)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set icon scale (1 by default)</p>
 </dd>
 <dt><a href="#GuiSetIconPixel">GuiSetIconPixel(iconId, x, y)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set icon pixel value</p>
@@ -1555,17 +1678,14 @@
 <dt><a href="#GenMeshTangents">GenMeshTangents(mesh)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Compute mesh tangents</p>
 </dd>
-<dt><a href="#GenMeshBinormals">GenMeshBinormals(mesh)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Compute mesh binormals</p>
-</dd>
 <dt><a href="#SetModelMeshMaterial">SetModelMeshMaterial(model, meshId, materialId)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set material for a mesh</p>
 </dd>
-<dt><a href="#WaveFormat">WaveFormat(wave, sampleRate, sampleSize, channels)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Convert wave data to desired format</p>
-</dd>
 <dt><a href="#WaveCrop">WaveCrop(wave, initSample, finalSample)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Crop a wave to defined samples range</p>
+</dd>
+<dt><a href="#WaveFormat">WaveFormat(wave, sampleRate, sampleSize, channels)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Convert wave data to desired format</p>
 </dd>
 <dt><a href="#Color">Color(r, g, b, a)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
 <dd><p>Color, 4 components, R8G8B8A8 (32bit)</p>
@@ -1695,7 +1815,7 @@ Check if one specific window flag is enabled
 <a name="SetWindowState"></a>
 
 ## SetWindowState(flags) ⇒ <code>undefined</code>
-Set window configuration state using flags
+Set window configuration state using flags (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
 
@@ -1807,6 +1927,17 @@ Set window dimensions
 | width | <code>number</code> | 
 | height | <code>number</code> | 
 
+<a name="SetWindowOpacity"></a>
+
+## SetWindowOpacity(opacity) ⇒ <code>undefined</code>
+Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| opacity | <code>number</code> | 
+
 <a name="GetWindowHandle"></a>
 
 ## GetWindowHandle() ⇒ <code>number</code>
@@ -1825,6 +1956,20 @@ Get current screen width
 
 ## GetScreenHeight() ⇒ <code>number</code>
 Get current screen height
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+<a name="GetRenderWidth"></a>
+
+## GetRenderWidth() ⇒ <code>number</code>
+Get current render width (it considers HiDPI)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+<a name="GetRenderHeight"></a>
+
+## GetRenderHeight() ⇒ <code>number</code>
+Get current render height (it considers HiDPI)
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -1857,7 +2002,7 @@ Get specified monitor position
 <a name="GetMonitorWidth"></a>
 
 ## GetMonitorWidth(monitor) ⇒ <code>number</code>
-Get specified monitor width (max available by monitor)
+Get specified monitor width (current video mode used by monitor)
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -1869,7 +2014,7 @@ Get specified monitor width (max available by monitor)
 <a name="GetMonitorHeight"></a>
 
 ## GetMonitorHeight(monitor) ⇒ <code>number</code>
-Get specified monitor height (max available by monitor)
+Get specified monitor height (current video mode used by monitor)
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -1958,6 +2103,18 @@ Get clipboard text content
 
 **Kind**: global function  
 **Returns**: <code>string</code> - The resulting const char *.  
+<a name="EnableEventWaiting"></a>
+
+## EnableEventWaiting() ⇒ <code>undefined</code>
+Enable waiting for events on EndDrawing(), no automatic event polling
+
+**Kind**: global function  
+<a name="DisableEventWaiting"></a>
+
+## DisableEventWaiting() ⇒ <code>undefined</code>
+Disable waiting for events on EndDrawing(), automatic events polling
+
+**Kind**: global function  
 <a name="SwapScreenBuffer"></a>
 
 ## SwapScreenBuffer() ⇒ <code>undefined</code>
@@ -1972,14 +2129,14 @@ Register all input events
 **Kind**: global function  
 <a name="WaitTime"></a>
 
-## WaitTime(ms) ⇒ <code>undefined</code>
-Wait for some milliseconds (halt program execution)
+## WaitTime(seconds) ⇒ <code>undefined</code>
+Wait for some time (halt program execution)
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| ms | <code>number</code> | 
+| seconds | <code>number</code> | 
 
 <a name="ShowCursor"></a>
 
@@ -2292,6 +2449,19 @@ Get the screen space position for a 3d world space position
 | position | [<code>Vector3</code>](#Vector3) | 
 | camera | <code>Camera</code> | 
 
+<a name="GetScreenToWorld2D"></a>
+
+## GetScreenToWorld2D(position, camera) ⇒ [<code>Vector2</code>](#Vector2)
+Get the world space position for a 2d camera screen space position
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
+
+| Param | Type |
+| --- | --- |
+| position | [<code>Vector2</code>](#Vector2) | 
+| camera | [<code>Camera2D</code>](#Camera2D) | 
+
 <a name="GetWorldToScreenEx"></a>
 
 ## GetWorldToScreenEx(position, camera, width, height) ⇒ [<code>Vector2</code>](#Vector2)
@@ -2311,19 +2481,6 @@ Get size position for a 3d world space position
 
 ## GetWorldToScreen2D(position, camera) ⇒ [<code>Vector2</code>](#Vector2)
 Get the screen space position for a 2d camera world space position
-
-**Kind**: global function  
-**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
-
-| Param | Type |
-| --- | --- |
-| position | [<code>Vector2</code>](#Vector2) | 
-| camera | [<code>Camera2D</code>](#Camera2D) | 
-
-<a name="GetScreenToWorld2D"></a>
-
-## GetScreenToWorld2D(position, camera) ⇒ [<code>Vector2</code>](#Vector2)
-Get the world space position for a 2d camera screen space position
 
 **Kind**: global function  
 **Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
@@ -2458,6 +2615,17 @@ Internal memory free
 | --- | --- |
 | ptr | <code>number</code> | 
 
+<a name="OpenURL"></a>
+
+## OpenURL(url) ⇒ <code>undefined</code>
+Open URL with default system browser (if available)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| url | <code>string</code> | 
+
 <a name="LoadFileData"></a>
 
 ## LoadFileData(fileName, bytesRead) ⇒ <code>Buffer</code>
@@ -2495,6 +2663,20 @@ Save data to file from byte array (write), returns true on success
 | fileName | <code>string</code> | 
 | data | <code>number</code> | 
 | bytesToWrite | <code>number</code> | 
+
+<a name="ExportDataAsCode"></a>
+
+## ExportDataAsCode(data, size, fileName) ⇒ <code>boolean</code>
+Export data to code (.h), returns true on success
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| data | <code>string</code> | 
+| size | <code>number</code> | 
+| fileName | <code>string</code> | 
 
 <a name="LoadFileText"></a>
 
@@ -2569,6 +2751,18 @@ Check file extension (including point: .png, .wav)
 | fileName | <code>string</code> | 
 | ext | <code>string</code> | 
 
+<a name="GetFileLength"></a>
+
+## GetFileLength(fileName) ⇒ <code>number</code>
+Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| fileName | <code>string</code> | 
+
 <a name="GetFileExtension"></a>
 
 ## GetFileExtension(fileName) ⇒ <code>string</code>
@@ -2636,25 +2830,13 @@ Get current working directory (uses static string)
 
 **Kind**: global function  
 **Returns**: <code>string</code> - The resulting const char *.  
-<a name="GetDirectoryFiles"></a>
+<a name="GetApplicationDirectory"></a>
 
-## GetDirectoryFiles(dirPath, count) ⇒ <code>number</code>
-Get filenames in a directory path (memory should be freed)
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting char **.  
-
-| Param | Type |
-| --- | --- |
-| dirPath | <code>string</code> | 
-| count | <code>number</code> | 
-
-<a name="ClearDirectoryFiles"></a>
-
-## ClearDirectoryFiles() ⇒ <code>undefined</code>
-Clear directory files paths buffers (free memory)
+## GetApplicationDirectory() ⇒ <code>string</code>
+Get the directory if the running application (uses static string)
 
 **Kind**: global function  
+**Returns**: <code>string</code> - The resulting const char *.  
 <a name="ChangeDirectory"></a>
 
 ## ChangeDirectory(dir) ⇒ <code>boolean</code>
@@ -2667,6 +2849,55 @@ Change working directory, return true on success
 | --- | --- |
 | dir | <code>string</code> | 
 
+<a name="IsPathFile"></a>
+
+## IsPathFile(path) ⇒ <code>boolean</code>
+Check if a given path is a file or a directory
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| path | <code>string</code> | 
+
+<a name="LoadDirectoryFiles"></a>
+
+## LoadDirectoryFiles(dirPath) ⇒ <code>FilePathList</code>
+Load directory filepaths
+
+**Kind**: global function  
+**Returns**: <code>FilePathList</code> - The resulting FilePathList.  
+
+| Param | Type |
+| --- | --- |
+| dirPath | <code>string</code> | 
+
+<a name="LoadDirectoryFilesEx"></a>
+
+## LoadDirectoryFilesEx(basePath, filter, scanSubdirs) ⇒ <code>FilePathList</code>
+Load directory filepaths with extension filtering and recursive directory scan
+
+**Kind**: global function  
+**Returns**: <code>FilePathList</code> - The resulting FilePathList.  
+
+| Param | Type |
+| --- | --- |
+| basePath | <code>string</code> | 
+| filter | <code>string</code> | 
+| scanSubdirs | <code>boolean</code> | 
+
+<a name="UnloadDirectoryFiles"></a>
+
+## UnloadDirectoryFiles(files) ⇒ <code>undefined</code>
+Unload filepaths
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| files | <code>FilePathList</code> | 
+
 <a name="IsFileDropped"></a>
 
 ## IsFileDropped() ⇒ <code>boolean</code>
@@ -2674,24 +2905,24 @@ Check if a file has been dropped into window
 
 **Kind**: global function  
 **Returns**: <code>boolean</code> - The resulting bool.  
-<a name="GetDroppedFiles"></a>
+<a name="LoadDroppedFiles"></a>
 
-## GetDroppedFiles(count) ⇒ <code>number</code>
-Get dropped files names (memory should be freed)
+## LoadDroppedFiles() ⇒ <code>FilePathList</code>
+Load dropped filepaths
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting char **.  
+**Returns**: <code>FilePathList</code> - The resulting FilePathList.  
+<a name="UnloadDroppedFiles"></a>
+
+## UnloadDroppedFiles(files) ⇒ <code>undefined</code>
+Unload dropped filepaths
+
+**Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| count | <code>number</code> | 
+| files | <code>FilePathList</code> | 
 
-<a name="ClearDroppedFiles"></a>
-
-## ClearDroppedFiles() ⇒ <code>undefined</code>
-Clear dropped files paths buffer (free memory)
-
-**Kind**: global function  
 <a name="GetFileModTime"></a>
 
 ## GetFileModTime(fileName) ⇒ <code>number</code>
@@ -2706,8 +2937,8 @@ Get file modification time (last write time)
 
 <a name="CompressData"></a>
 
-## CompressData(data, dataLength, compDataLength) ⇒ <code>Buffer</code>
-Compress data (DEFLATE algorithm)
+## CompressData(data, dataSize, compDataSize) ⇒ <code>Buffer</code>
+Compress data (DEFLATE algorithm), memory must be MemFree()
 
 **Kind**: global function  
 **Returns**: <code>Buffer</code> - The resulting unsigned char *.  
@@ -2715,13 +2946,13 @@ Compress data (DEFLATE algorithm)
 | Param | Type |
 | --- | --- |
 | data | <code>Buffer</code> | 
-| dataLength | <code>number</code> | 
-| compDataLength | <code>number</code> | 
+| dataSize | <code>number</code> | 
+| compDataSize | <code>number</code> | 
 
 <a name="DecompressData"></a>
 
-## DecompressData(compData, compDataLength, dataLength) ⇒ <code>Buffer</code>
-Decompress data (DEFLATE algorithm)
+## DecompressData(compData, compDataSize, dataSize) ⇒ <code>Buffer</code>
+Decompress data (DEFLATE algorithm), memory must be MemFree()
 
 **Kind**: global function  
 **Returns**: <code>Buffer</code> - The resulting unsigned char *.  
@@ -2729,13 +2960,13 @@ Decompress data (DEFLATE algorithm)
 | Param | Type |
 | --- | --- |
 | compData | <code>Buffer</code> | 
-| compDataLength | <code>number</code> | 
-| dataLength | <code>number</code> | 
+| compDataSize | <code>number</code> | 
+| dataSize | <code>number</code> | 
 
 <a name="EncodeDataBase64"></a>
 
-## EncodeDataBase64(data, dataLength, outputLength) ⇒ <code>string</code>
-Encode data to Base64 string
+## EncodeDataBase64(data, dataSize, outputSize) ⇒ <code>string</code>
+Encode data to Base64 string, memory must be MemFree()
 
 **Kind**: global function  
 **Returns**: <code>string</code> - The resulting char *.  
@@ -2743,13 +2974,13 @@ Encode data to Base64 string
 | Param | Type |
 | --- | --- |
 | data | <code>Buffer</code> | 
-| dataLength | <code>number</code> | 
-| outputLength | <code>number</code> | 
+| dataSize | <code>number</code> | 
+| outputSize | <code>number</code> | 
 
 <a name="DecodeDataBase64"></a>
 
-## DecodeDataBase64(data, outputLength) ⇒ <code>Buffer</code>
-Decode Base64 string data
+## DecodeDataBase64(data, outputSize) ⇒ <code>Buffer</code>
+Decode Base64 string data, memory must be MemFree()
 
 **Kind**: global function  
 **Returns**: <code>Buffer</code> - The resulting unsigned char *.  
@@ -2757,43 +2988,7 @@ Decode Base64 string data
 | Param | Type |
 | --- | --- |
 | data | <code>Buffer</code> | 
-| outputLength | <code>number</code> | 
-
-<a name="SaveStorageValue"></a>
-
-## SaveStorageValue(position, value) ⇒ <code>boolean</code>
-Save integer value to storage file (to defined position), returns true on success
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| position | <code>number</code> | 
-| value | <code>number</code> | 
-
-<a name="LoadStorageValue"></a>
-
-## LoadStorageValue(position) ⇒ <code>number</code>
-Load integer value from storage file (from defined position)
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| position | <code>number</code> | 
-
-<a name="OpenURL"></a>
-
-## OpenURL(url) ⇒ <code>undefined</code>
-Open URL with default system browser (if available)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| url | <code>string</code> | 
+| outputSize | <code>number</code> | 
 
 <a name="IsKeyPressed"></a>
 
@@ -3103,10 +3298,17 @@ Set mouse scaling
 <a name="GetMouseWheelMove"></a>
 
 ## GetMouseWheelMove() ⇒ <code>number</code>
-Get mouse wheel movement Y
+Get mouse wheel movement for X or Y, whichever is larger
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting float.  
+<a name="GetMouseWheelMoveV"></a>
+
+## GetMouseWheelMoveV() ⇒ [<code>Vector2</code>](#Vector2)
+Get mouse wheel movement for both X and Y
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
 <a name="SetMouseCursor"></a>
 
 ## SetMouseCursor(cursor) ⇒ <code>undefined</code>
@@ -4743,7 +4945,7 @@ Load font from file into GPU memory (VRAM)
 <a name="LoadFontEx"></a>
 
 ## LoadFontEx(fileName, fontSize, fontChars, glyphCount) ⇒ <code>Font</code>
-Load font from file with extended parameters
+Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
 
 **Kind**: global function  
 **Returns**: <code>Font</code> - The resulting Font.  
@@ -4835,13 +5037,26 @@ Unload font chars info data (RAM)
 <a name="UnloadFont"></a>
 
 ## UnloadFont(font) ⇒ <code>undefined</code>
-Unload Font from GPU memory (VRAM)
+Unload font from GPU memory (VRAM)
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
 | font | <code>Font</code> | 
+
+<a name="ExportFontAsCode"></a>
+
+## ExportFontAsCode(font, fileName) ⇒ <code>boolean</code>
+Export font as code file, returns true on success
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| font | <code>Font</code> | 
+| fileName | <code>string</code> | 
 
 <a name="DrawFPS"></a>
 
@@ -4917,6 +5132,23 @@ Draw one character (codepoint)
 | codepoint | <code>number</code> | 
 | position | [<code>Vector2</code>](#Vector2) | 
 | fontSize | <code>number</code> | 
+| tint | [<code>Color</code>](#Color) | 
+
+<a name="DrawTextCodepoints"></a>
+
+## DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing, tint) ⇒ <code>undefined</code>
+Draw multiple character (codepoint)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| font | <code>Font</code> | 
+| codepoints | <code>number</code> | 
+| count | <code>number</code> | 
+| position | [<code>Vector2</code>](#Vector2) | 
+| fontSize | <code>number</code> | 
+| spacing | <code>number</code> | 
 | tint | [<code>Color</code>](#Color) | 
 
 <a name="MeasureText"></a>
@@ -6059,19 +6291,6 @@ Get collision info between ray and box
 | ray | <code>Ray</code> | 
 | box | <code>BoundingBox</code> | 
 
-<a name="GetRayCollisionModel"></a>
-
-## GetRayCollisionModel(ray, model) ⇒ <code>RayCollision</code>
-Get collision info between ray and model
-
-**Kind**: global function  
-**Returns**: <code>RayCollision</code> - The resulting RayCollision.  
-
-| Param | Type |
-| --- | --- |
-| ray | <code>Ray</code> | 
-| model | <code>Model</code> | 
-
 <a name="GetRayCollisionMesh"></a>
 
 ## GetRayCollisionMesh(ray, mesh, transform) ⇒ <code>RayCollision</code>
@@ -6362,6 +6581,18 @@ Set pitch for a sound (1.0 is base level)
 | sound | <code>Sound</code> | 
 | pitch | <code>number</code> | 
 
+<a name="SetSoundPan"></a>
+
+## SetSoundPan(sound, pan) ⇒ <code>undefined</code>
+Set pan for a sound (0.5 is center)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| sound | <code>Sound</code> | 
+| pan | <code>number</code> | 
+
 <a name="WaveCopy"></a>
 
 ## WaveCopy(wave) ⇒ <code>Wave</code>
@@ -6377,7 +6608,7 @@ Copy a wave to a new wave
 <a name="LoadWaveSamples"></a>
 
 ## LoadWaveSamples(wave) ⇒ <code>number</code>
-Load samples data from wave as a floats array
+Load samples data from wave as a 32bit float data array
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting float *.  
@@ -6537,6 +6768,18 @@ Set pitch for a music (1.0 is base level)
 | music | <code>Music</code> | 
 | pitch | <code>number</code> | 
 
+<a name="SetMusicPan"></a>
+
+## SetMusicPan(music, pan) ⇒ <code>undefined</code>
+Set pan for a music (0.5 is center)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| music | <code>Music</code> | 
+| pan | <code>number</code> | 
+
 <a name="GetMusicTimeLength"></a>
 
 ## GetMusicTimeLength(music) ⇒ <code>number</code>
@@ -6691,6 +6934,18 @@ Set pitch for audio stream (1.0 is base level)
 | stream | <code>AudioStream</code> | 
 | pitch | <code>number</code> | 
 
+<a name="SetAudioStreamPan"></a>
+
+## SetAudioStreamPan(stream, pan) ⇒ <code>undefined</code>
+Set pan for audio stream (0.5 is centered)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| stream | <code>AudioStream</code> | 
+| pan | <code>number</code> | 
+
 <a name="SetAudioStreamBufferSizeDefault"></a>
 
 ## SetAudioStreamBufferSizeDefault(size) ⇒ <code>undefined</code>
@@ -6701,6 +6956,426 @@ Default size for new audio streams
 | Param | Type |
 | --- | --- |
 | size | <code>number</code> | 
+
+<a name="EaseLinearNone"></a>
+
+## EaseLinearNone(t, b, c, d) ⇒ <code>number</code>
+Ease: Linear
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseLinearIn"></a>
+
+## EaseLinearIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Linear In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseLinearOut"></a>
+
+## EaseLinearOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Linear Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseLinearInOut"></a>
+
+## EaseLinearInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Linear In Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseSineIn"></a>
+
+## EaseSineIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Sine In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseSineOut"></a>
+
+## EaseSineOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Sine Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseSineInOut"></a>
+
+## EaseSineInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Sine Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseCircIn"></a>
+
+## EaseCircIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Circular In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseCircOut"></a>
+
+## EaseCircOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Circular Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseCircInOut"></a>
+
+## EaseCircInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Circular In Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseCubicIn"></a>
+
+## EaseCubicIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Cubic In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseCubicOut"></a>
+
+## EaseCubicOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Cubic Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseCubicInOut"></a>
+
+## EaseCubicInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Cubic In Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseQuadIn"></a>
+
+## EaseQuadIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Quadratic In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseQuadOut"></a>
+
+## EaseQuadOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Quadratic Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseQuadInOut"></a>
+
+## EaseQuadInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Quadratic In Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseExpoIn"></a>
+
+## EaseExpoIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Exponential In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseExpoOut"></a>
+
+## EaseExpoOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Exponential Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseExpoInOut"></a>
+
+## EaseExpoInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Exponential In Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseBackIn"></a>
+
+## EaseBackIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Back In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseBackOut"></a>
+
+## EaseBackOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Back Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseBackInOut"></a>
+
+## EaseBackInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Back In Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseBounceOut"></a>
+
+## EaseBounceOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Bounce Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseBounceIn"></a>
+
+## EaseBounceIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Bounce In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseBounceInOut"></a>
+
+## EaseBounceInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Bounce In Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseElasticIn"></a>
+
+## EaseElasticIn(t, b, c, d) ⇒ <code>number</code>
+Ease: Elastic In
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseElasticOut"></a>
+
+## EaseElasticOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Elastic Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
+
+<a name="EaseElasticInOut"></a>
+
+## EaseElasticInOut(t, b, c, d) ⇒ <code>number</code>
+Ease: Elastic In Out
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+
+| Param | Type |
+| --- | --- |
+| t | <code>number</code> | 
+| b | <code>number</code> | 
+| c | <code>number</code> | 
+| d | <code>number</code> | 
 
 <a name="GuiEnable"></a>
 
@@ -6845,7 +7520,7 @@ Line separator control, could contain text
 
 <a name="GuiPanel"></a>
 
-## GuiPanel(bounds) ⇒ <code>undefined</code>
+## GuiPanel(bounds, text) ⇒ <code>undefined</code>
 Panel control, useful to group controls
 
 **Kind**: global function  
@@ -6853,10 +7528,11 @@ Panel control, useful to group controls
 | Param | Type |
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
 
 <a name="GuiScrollPanel"></a>
 
-## GuiScrollPanel(bounds, content, scroll) ⇒ [<code>Rectangle</code>](#Rectangle)
+## GuiScrollPanel(bounds, text, content, scroll) ⇒ [<code>Rectangle</code>](#Rectangle)
 Scroll Panel control
 
 **Kind**: global function  
@@ -6865,6 +7541,7 @@ Scroll Panel control
 | Param | Type |
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
 | content | [<code>Rectangle</code>](#Rectangle) | 
 | scroll | <code>number</code> | 
 
@@ -7116,25 +7793,10 @@ Dummy control for placeholders
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
 
-<a name="GuiScrollBar"></a>
-
-## GuiScrollBar(bounds, value, minValue, maxValue) ⇒ <code>number</code>
-Scroll Bar control
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| value | <code>number</code> | 
-| minValue | <code>number</code> | 
-| maxValue | <code>number</code> | 
-
 <a name="GuiGrid"></a>
 
-## GuiGrid(bounds, spacing, subdivs) ⇒ [<code>Vector2</code>](#Vector2)
-Grid control
+## GuiGrid(bounds, text, spacing, subdivs) ⇒ [<code>Vector2</code>](#Vector2)
+Grid control, returns mouse cell position
 
 **Kind**: global function  
 **Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
@@ -7142,6 +7804,7 @@ Grid control
 | Param | Type |
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
 | spacing | <code>number</code> | 
 | subdivs | <code>number</code> | 
 
@@ -7194,8 +7857,8 @@ Message Box control, displays a message
 
 <a name="GuiTextInputBox"></a>
 
-## GuiTextInputBox(bounds, title, message, buttons, text) ⇒ <code>number</code>
-Text Input Box control, ask for text
+## GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive) ⇒ <code>number</code>
+Text Input Box control, ask for text, supports secret
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -7207,10 +7870,12 @@ Text Input Box control, ask for text
 | message | <code>string</code> | 
 | buttons | <code>string</code> | 
 | text | <code>string</code> | 
+| textMaxSize | <code>number</code> | 
+| secretViewActive | <code>number</code> | 
 
 <a name="GuiColorPicker"></a>
 
-## GuiColorPicker(bounds, color) ⇒ [<code>Color</code>](#Color)
+## GuiColorPicker(bounds, text, color) ⇒ [<code>Color</code>](#Color)
 Color Picker control (multiple color controls)
 
 **Kind**: global function  
@@ -7219,11 +7884,12 @@ Color Picker control (multiple color controls)
 | Param | Type |
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
 | color | [<code>Color</code>](#Color) | 
 
 <a name="GuiColorPanel"></a>
 
-## GuiColorPanel(bounds, color) ⇒ [<code>Color</code>](#Color)
+## GuiColorPanel(bounds, text, color) ⇒ [<code>Color</code>](#Color)
 Color Panel control
 
 **Kind**: global function  
@@ -7232,11 +7898,12 @@ Color Panel control
 | Param | Type |
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
 | color | [<code>Color</code>](#Color) | 
 
 <a name="GuiColorBarAlpha"></a>
 
-## GuiColorBarAlpha(bounds, alpha) ⇒ <code>number</code>
+## GuiColorBarAlpha(bounds, text, alpha) ⇒ <code>number</code>
 Color Bar Alpha control
 
 **Kind**: global function  
@@ -7245,11 +7912,12 @@ Color Bar Alpha control
 | Param | Type |
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
 | alpha | <code>number</code> | 
 
 <a name="GuiColorBarHue"></a>
 
-## GuiColorBarHue(bounds, value) ⇒ <code>number</code>
+## GuiColorBarHue(bounds, text, value) ⇒ <code>number</code>
 Color Bar Hue control
 
 **Kind**: global function  
@@ -7258,6 +7926,7 @@ Color Bar Hue control
 | Param | Type |
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
 | value | <code>number</code> | 
 
 <a name="GuiLoadStyle"></a>
@@ -7320,6 +7989,17 @@ Set icon bit data
 | --- | --- |
 | iconId | <code>number</code> | 
 | data | <code>number</code> | 
+
+<a name="GuiSetIconScale"></a>
+
+## GuiSetIconScale(scale) ⇒ <code>undefined</code>
+Set icon scale (1 by default)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| scale | <code>number</code> | 
 
 <a name="GuiSetIconPixel"></a>
 
@@ -7876,17 +8556,6 @@ Compute mesh tangents
 | --- | --- |
 | mesh | <code>Mesh</code> | 
 
-<a name="GenMeshBinormals"></a>
-
-## GenMeshBinormals(mesh) ⇒ <code>undefined</code>
-Compute mesh binormals
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| mesh | <code>Mesh</code> | 
-
 <a name="SetModelMeshMaterial"></a>
 
 ## SetModelMeshMaterial(model, meshId, materialId) ⇒ <code>undefined</code>
@@ -7899,6 +8568,19 @@ Set material for a mesh
 | model | <code>Model</code> | 
 | meshId | <code>number</code> | 
 | materialId | <code>number</code> | 
+
+<a name="WaveCrop"></a>
+
+## WaveCrop(wave, initSample, finalSample) ⇒ <code>undefined</code>
+Crop a wave to defined samples range
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| wave | <code>Wave</code> | 
+| initSample | <code>number</code> | 
+| finalSample | <code>number</code> | 
 
 <a name="WaveFormat"></a>
 
@@ -7913,19 +8595,6 @@ Convert wave data to desired format
 | sampleRate | <code>number</code> | 
 | sampleSize | <code>number</code> | 
 | channels | <code>number</code> | 
-
-<a name="WaveCrop"></a>
-
-## WaveCrop(wave, initSample, finalSample) ⇒ <code>undefined</code>
-Crop a wave to defined samples range
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| wave | <code>Wave</code> | 
-| initSample | <code>number</code> | 
-| finalSample | <code>number</code> | 
 
 <a name="Color"></a>
 
