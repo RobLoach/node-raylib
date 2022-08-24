@@ -17,6 +17,9 @@ const SanitizeTypeName = name => {
   if (name === 'float[4]') {
     return 'pointer'
   }
+  if (name === 'unsigned int[4]') {
+    return '(unsigned int) pointer'
+  }
   if (name === 'Matrix[2]') {
     return 'pointer'
   }
@@ -185,6 +188,7 @@ module.exports = ({ functions, structs, enums, blocklist, byreflist }) => `
 #include "raymath.h"
 
 #include "../extras/reasings.h"
+#include "../extras/rlgl.h"
 
 #define RAYGUI_IMPLEMENTATION
 #include "../extras/raygui.h"
@@ -221,6 +225,9 @@ inline Napi::Value ToValue(Napi::Env env, float value) {
 inline Napi::Value ToValue(Napi::Env env, void * value) {
   return Napi::Number::New(env, (int64_t) value);
 }
+inline Napi::Value ToValue(Napi::Env env, unsigned long long value) {
+  return Napi::BigInt::New(env, (uint64_t) value);
+}
 
 inline float floatFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().FloatValue();
@@ -239,6 +246,9 @@ inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int i
 }
 inline unsigned int unsignedintFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
+}
+inline unsigned long long unsignedlonglongFromValue(const Napi::CallbackInfo& info, int index) {
+  return (unsigned long long) info[index].As<Napi::BigInt>().Uint64Value(0);
 }
 inline bool boolFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Boolean>();

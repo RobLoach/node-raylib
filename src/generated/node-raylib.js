@@ -11369,6 +11369,2100 @@ function GuiCheckIconPixel(iconId, x, y) {
 raylib.GuiCheckIconPixel = GuiCheckIconPixel
 
 /**
+ * Choose the current matrix to be transformed
+ *
+ * @param {number} mode
+ *
+ * @return {undefined}
+ */
+function rlMatrixMode(mode) {
+  return r.BindrlMatrixMode(
+    mode
+  )
+}
+raylib.rlMatrixMode = rlMatrixMode
+
+/**
+ * Push the current matrix to stack
+ *
+ * @return {undefined}
+ */
+function rlPushMatrix() {
+  return r.BindrlPushMatrix()
+}
+raylib.rlPushMatrix = rlPushMatrix
+
+/**
+ * Pop lattest inserted matrix from stack
+ *
+ * @return {undefined}
+ */
+function rlPopMatrix() {
+  return r.BindrlPopMatrix()
+}
+raylib.rlPopMatrix = rlPopMatrix
+
+/**
+ * Reset current matrix to identity matrix
+ *
+ * @return {undefined}
+ */
+function rlLoadIdentity() {
+  return r.BindrlLoadIdentity()
+}
+raylib.rlLoadIdentity = rlLoadIdentity
+
+/**
+ * Multiply the current matrix by a translation matrix
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ *
+ * @return {undefined}
+ */
+function rlTranslatef(x, y, z) {
+  return r.BindrlTranslatef(
+    x,
+    y,
+    z
+  )
+}
+raylib.rlTranslatef = rlTranslatef
+
+/**
+ * Multiply the current matrix by a rotation matrix
+ *
+ * @param {number} angle
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ *
+ * @return {undefined}
+ */
+function rlRotatef(angle, x, y, z) {
+  return r.BindrlRotatef(
+    angle,
+    x,
+    y,
+    z
+  )
+}
+raylib.rlRotatef = rlRotatef
+
+/**
+ * Multiply the current matrix by a scaling matrix
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ *
+ * @return {undefined}
+ */
+function rlScalef(x, y, z) {
+  return r.BindrlScalef(
+    x,
+    y,
+    z
+  )
+}
+raylib.rlScalef = rlScalef
+
+/**
+ * Multiply the current matrix by another matrix
+ *
+ * @param {number} matf
+ *
+ * @return {undefined}
+ */
+function rlMultMatrixf(matf) {
+  return r.BindrlMultMatrixf(
+    matf
+  )
+}
+raylib.rlMultMatrixf = rlMultMatrixf
+
+function rlFrustum(left, right, bottom, top, znear, zfar) {
+  return r.BindrlFrustum(
+    left,
+    right,
+    bottom,
+    top,
+    znear,
+    zfar
+  )
+}
+raylib.rlFrustum = rlFrustum
+
+function rlOrtho(left, right, bottom, top, znear, zfar) {
+  return r.BindrlOrtho(
+    left,
+    right,
+    bottom,
+    top,
+    znear,
+    zfar
+  )
+}
+raylib.rlOrtho = rlOrtho
+
+/**
+ * Set the viewport area
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {undefined}
+ */
+function rlViewport(x, y, width, height) {
+  return r.BindrlViewport(
+    x,
+    y,
+    width,
+    height
+  )
+}
+raylib.rlViewport = rlViewport
+
+/**
+ * Initialize drawing mode (how to organize vertex)
+ *
+ * @param {number} mode
+ *
+ * @return {undefined}
+ */
+function rlBegin(mode) {
+  return r.BindrlBegin(
+    mode
+  )
+}
+raylib.rlBegin = rlBegin
+
+/**
+ * Finish vertex providing
+ *
+ * @return {undefined}
+ */
+function rlEnd() {
+  return r.BindrlEnd()
+}
+raylib.rlEnd = rlEnd
+
+/**
+ * Define one vertex (position) - 2 int
+ *
+ * @param {number} x
+ * @param {number} y
+ *
+ * @return {undefined}
+ */
+function rlVertex2i(x, y) {
+  return r.BindrlVertex2i(
+    x,
+    y
+  )
+}
+raylib.rlVertex2i = rlVertex2i
+
+/**
+ * Define one vertex (position) - 2 float
+ *
+ * @param {number} x
+ * @param {number} y
+ *
+ * @return {undefined}
+ */
+function rlVertex2f(x, y) {
+  return r.BindrlVertex2f(
+    x,
+    y
+  )
+}
+raylib.rlVertex2f = rlVertex2f
+
+/**
+ * Define one vertex (position) - 3 float
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ *
+ * @return {undefined}
+ */
+function rlVertex3f(x, y, z) {
+  return r.BindrlVertex3f(
+    x,
+    y,
+    z
+  )
+}
+raylib.rlVertex3f = rlVertex3f
+
+/**
+ * Define one vertex (texture coordinate) - 2 float
+ *
+ * @param {number} x
+ * @param {number} y
+ *
+ * @return {undefined}
+ */
+function rlTexCoord2f(x, y) {
+  return r.BindrlTexCoord2f(
+    x,
+    y
+  )
+}
+raylib.rlTexCoord2f = rlTexCoord2f
+
+/**
+ * Define one vertex (normal) - 3 float
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ *
+ * @return {undefined}
+ */
+function rlNormal3f(x, y, z) {
+  return r.BindrlNormal3f(
+    x,
+    y,
+    z
+  )
+}
+raylib.rlNormal3f = rlNormal3f
+
+/**
+ * Define one vertex (color) - 4 byte
+ *
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @param {number} a
+ *
+ * @return {undefined}
+ */
+function rlColor4ub(r, g, b, a) {
+  return r.BindrlColor4ub(
+    r,
+    g,
+    b,
+    a
+  )
+}
+raylib.rlColor4ub = rlColor4ub
+
+/**
+ * Define one vertex (color) - 3 float
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ *
+ * @return {undefined}
+ */
+function rlColor3f(x, y, z) {
+  return r.BindrlColor3f(
+    x,
+    y,
+    z
+  )
+}
+raylib.rlColor3f = rlColor3f
+
+/**
+ * Define one vertex (color) - 4 float
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} z
+ * @param {number} w
+ *
+ * @return {undefined}
+ */
+function rlColor4f(x, y, z, w) {
+  return r.BindrlColor4f(
+    x,
+    y,
+    z,
+    w
+  )
+}
+raylib.rlColor4f = rlColor4f
+
+/**
+ * Enable vertex array (VAO, if supported)
+ *
+ * @param {number} vaoId
+ *
+ * @return {boolean} The resulting bool.
+ */
+function rlEnableVertexArray(vaoId) {
+  return r.BindrlEnableVertexArray(
+    vaoId
+  )
+}
+raylib.rlEnableVertexArray = rlEnableVertexArray
+
+/**
+ * Disable vertex array (VAO, if supported)
+ *
+ * @return {undefined}
+ */
+function rlDisableVertexArray() {
+  return r.BindrlDisableVertexArray()
+}
+raylib.rlDisableVertexArray = rlDisableVertexArray
+
+/**
+ * Enable vertex buffer (VBO)
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlEnableVertexBuffer(id) {
+  return r.BindrlEnableVertexBuffer(
+    id
+  )
+}
+raylib.rlEnableVertexBuffer = rlEnableVertexBuffer
+
+/**
+ * Disable vertex buffer (VBO)
+ *
+ * @return {undefined}
+ */
+function rlDisableVertexBuffer() {
+  return r.BindrlDisableVertexBuffer()
+}
+raylib.rlDisableVertexBuffer = rlDisableVertexBuffer
+
+/**
+ * Enable vertex buffer element (VBO element)
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlEnableVertexBufferElement(id) {
+  return r.BindrlEnableVertexBufferElement(
+    id
+  )
+}
+raylib.rlEnableVertexBufferElement = rlEnableVertexBufferElement
+
+/**
+ * Disable vertex buffer element (VBO element)
+ *
+ * @return {undefined}
+ */
+function rlDisableVertexBufferElement() {
+  return r.BindrlDisableVertexBufferElement()
+}
+raylib.rlDisableVertexBufferElement = rlDisableVertexBufferElement
+
+/**
+ * Enable vertex attribute index
+ *
+ * @param {number} index
+ *
+ * @return {undefined}
+ */
+function rlEnableVertexAttribute(index) {
+  return r.BindrlEnableVertexAttribute(
+    index
+  )
+}
+raylib.rlEnableVertexAttribute = rlEnableVertexAttribute
+
+/**
+ * Disable vertex attribute index
+ *
+ * @param {number} index
+ *
+ * @return {undefined}
+ */
+function rlDisableVertexAttribute(index) {
+  return r.BindrlDisableVertexAttribute(
+    index
+  )
+}
+raylib.rlDisableVertexAttribute = rlDisableVertexAttribute
+
+/**
+ * Select and active a texture slot
+ *
+ * @param {number} slot
+ *
+ * @return {undefined}
+ */
+function rlActiveTextureSlot(slot) {
+  return r.BindrlActiveTextureSlot(
+    slot
+  )
+}
+raylib.rlActiveTextureSlot = rlActiveTextureSlot
+
+/**
+ * Enable texture
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlEnableTexture(id) {
+  return r.BindrlEnableTexture(
+    id
+  )
+}
+raylib.rlEnableTexture = rlEnableTexture
+
+/**
+ * Disable texture
+ *
+ * @return {undefined}
+ */
+function rlDisableTexture() {
+  return r.BindrlDisableTexture()
+}
+raylib.rlDisableTexture = rlDisableTexture
+
+/**
+ * Enable texture cubemap
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlEnableTextureCubemap(id) {
+  return r.BindrlEnableTextureCubemap(
+    id
+  )
+}
+raylib.rlEnableTextureCubemap = rlEnableTextureCubemap
+
+/**
+ * Disable texture cubemap
+ *
+ * @return {undefined}
+ */
+function rlDisableTextureCubemap() {
+  return r.BindrlDisableTextureCubemap()
+}
+raylib.rlDisableTextureCubemap = rlDisableTextureCubemap
+
+/**
+ * Set texture parameters (filter, wrap)
+ *
+ * @param {number} id
+ * @param {number} param
+ * @param {number} value
+ *
+ * @return {undefined}
+ */
+function rlTextureParameters(id, param, value) {
+  return r.BindrlTextureParameters(
+    id,
+    param,
+    value
+  )
+}
+raylib.rlTextureParameters = rlTextureParameters
+
+/**
+ * Enable shader program
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlEnableShader(id) {
+  return r.BindrlEnableShader(
+    id
+  )
+}
+raylib.rlEnableShader = rlEnableShader
+
+/**
+ * Disable shader program
+ *
+ * @return {undefined}
+ */
+function rlDisableShader() {
+  return r.BindrlDisableShader()
+}
+raylib.rlDisableShader = rlDisableShader
+
+/**
+ * Enable render texture (fbo)
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlEnableFramebuffer(id) {
+  return r.BindrlEnableFramebuffer(
+    id
+  )
+}
+raylib.rlEnableFramebuffer = rlEnableFramebuffer
+
+/**
+ * Disable render texture (fbo), return to default framebuffer
+ *
+ * @return {undefined}
+ */
+function rlDisableFramebuffer() {
+  return r.BindrlDisableFramebuffer()
+}
+raylib.rlDisableFramebuffer = rlDisableFramebuffer
+
+/**
+ * Activate multiple draw color buffers
+ *
+ * @param {number} count
+ *
+ * @return {undefined}
+ */
+function rlActiveDrawBuffers(count) {
+  return r.BindrlActiveDrawBuffers(
+    count
+  )
+}
+raylib.rlActiveDrawBuffers = rlActiveDrawBuffers
+
+/**
+ * Enable color blending
+ *
+ * @return {undefined}
+ */
+function rlEnableColorBlend() {
+  return r.BindrlEnableColorBlend()
+}
+raylib.rlEnableColorBlend = rlEnableColorBlend
+
+/**
+ * Disable color blending
+ *
+ * @return {undefined}
+ */
+function rlDisableColorBlend() {
+  return r.BindrlDisableColorBlend()
+}
+raylib.rlDisableColorBlend = rlDisableColorBlend
+
+/**
+ * Enable depth test
+ *
+ * @return {undefined}
+ */
+function rlEnableDepthTest() {
+  return r.BindrlEnableDepthTest()
+}
+raylib.rlEnableDepthTest = rlEnableDepthTest
+
+/**
+ * Disable depth test
+ *
+ * @return {undefined}
+ */
+function rlDisableDepthTest() {
+  return r.BindrlDisableDepthTest()
+}
+raylib.rlDisableDepthTest = rlDisableDepthTest
+
+/**
+ * Enable depth write
+ *
+ * @return {undefined}
+ */
+function rlEnableDepthMask() {
+  return r.BindrlEnableDepthMask()
+}
+raylib.rlEnableDepthMask = rlEnableDepthMask
+
+/**
+ * Disable depth write
+ *
+ * @return {undefined}
+ */
+function rlDisableDepthMask() {
+  return r.BindrlDisableDepthMask()
+}
+raylib.rlDisableDepthMask = rlDisableDepthMask
+
+/**
+ * Enable backface culling
+ *
+ * @return {undefined}
+ */
+function rlEnableBackfaceCulling() {
+  return r.BindrlEnableBackfaceCulling()
+}
+raylib.rlEnableBackfaceCulling = rlEnableBackfaceCulling
+
+/**
+ * Disable backface culling
+ *
+ * @return {undefined}
+ */
+function rlDisableBackfaceCulling() {
+  return r.BindrlDisableBackfaceCulling()
+}
+raylib.rlDisableBackfaceCulling = rlDisableBackfaceCulling
+
+/**
+ * Enable scissor test
+ *
+ * @return {undefined}
+ */
+function rlEnableScissorTest() {
+  return r.BindrlEnableScissorTest()
+}
+raylib.rlEnableScissorTest = rlEnableScissorTest
+
+/**
+ * Disable scissor test
+ *
+ * @return {undefined}
+ */
+function rlDisableScissorTest() {
+  return r.BindrlDisableScissorTest()
+}
+raylib.rlDisableScissorTest = rlDisableScissorTest
+
+/**
+ * Scissor test
+ *
+ * @param {number} x
+ * @param {number} y
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {undefined}
+ */
+function rlScissor(x, y, width, height) {
+  return r.BindrlScissor(
+    x,
+    y,
+    width,
+    height
+  )
+}
+raylib.rlScissor = rlScissor
+
+/**
+ * Enable wire mode
+ *
+ * @return {undefined}
+ */
+function rlEnableWireMode() {
+  return r.BindrlEnableWireMode()
+}
+raylib.rlEnableWireMode = rlEnableWireMode
+
+/**
+ * Disable wire mode
+ *
+ * @return {undefined}
+ */
+function rlDisableWireMode() {
+  return r.BindrlDisableWireMode()
+}
+raylib.rlDisableWireMode = rlDisableWireMode
+
+/**
+ * Set the line drawing width
+ *
+ * @param {number} width
+ *
+ * @return {undefined}
+ */
+function rlSetLineWidth(width) {
+  return r.BindrlSetLineWidth(
+    width
+  )
+}
+raylib.rlSetLineWidth = rlSetLineWidth
+
+/**
+ * Get the line drawing width
+ *
+ * @return {number} The resulting float.
+ */
+function rlGetLineWidth() {
+  return r.BindrlGetLineWidth()
+}
+raylib.rlGetLineWidth = rlGetLineWidth
+
+/**
+ * Enable line aliasing
+ *
+ * @return {undefined}
+ */
+function rlEnableSmoothLines() {
+  return r.BindrlEnableSmoothLines()
+}
+raylib.rlEnableSmoothLines = rlEnableSmoothLines
+
+/**
+ * Disable line aliasing
+ *
+ * @return {undefined}
+ */
+function rlDisableSmoothLines() {
+  return r.BindrlDisableSmoothLines()
+}
+raylib.rlDisableSmoothLines = rlDisableSmoothLines
+
+/**
+ * Enable stereo rendering
+ *
+ * @return {undefined}
+ */
+function rlEnableStereoRender() {
+  return r.BindrlEnableStereoRender()
+}
+raylib.rlEnableStereoRender = rlEnableStereoRender
+
+/**
+ * Disable stereo rendering
+ *
+ * @return {undefined}
+ */
+function rlDisableStereoRender() {
+  return r.BindrlDisableStereoRender()
+}
+raylib.rlDisableStereoRender = rlDisableStereoRender
+
+/**
+ * Check if stereo render is enabled
+ *
+ * @return {boolean} The resulting bool.
+ */
+function rlIsStereoRenderEnabled() {
+  return r.BindrlIsStereoRenderEnabled()
+}
+raylib.rlIsStereoRenderEnabled = rlIsStereoRenderEnabled
+
+/**
+ * Clear color buffer with color
+ *
+ * @param {number} r
+ * @param {number} g
+ * @param {number} b
+ * @param {number} a
+ *
+ * @return {undefined}
+ */
+function rlClearColor(r, g, b, a) {
+  return r.BindrlClearColor(
+    r,
+    g,
+    b,
+    a
+  )
+}
+raylib.rlClearColor = rlClearColor
+
+/**
+ * Clear used screen buffers (color and depth)
+ *
+ * @return {undefined}
+ */
+function rlClearScreenBuffers() {
+  return r.BindrlClearScreenBuffers()
+}
+raylib.rlClearScreenBuffers = rlClearScreenBuffers
+
+/**
+ * Check and log OpenGL error codes
+ *
+ * @return {undefined}
+ */
+function rlCheckErrors() {
+  return r.BindrlCheckErrors()
+}
+raylib.rlCheckErrors = rlCheckErrors
+
+/**
+ * Set blending mode
+ *
+ * @param {number} mode
+ *
+ * @return {undefined}
+ */
+function rlSetBlendMode(mode) {
+  return r.BindrlSetBlendMode(
+    mode
+  )
+}
+raylib.rlSetBlendMode = rlSetBlendMode
+
+/**
+ * Set blending mode factor and equation (using OpenGL factors)
+ *
+ * @param {number} glSrcFactor
+ * @param {number} glDstFactor
+ * @param {number} glEquation
+ *
+ * @return {undefined}
+ */
+function rlSetBlendFactors(glSrcFactor, glDstFactor, glEquation) {
+  return r.BindrlSetBlendFactors(
+    glSrcFactor,
+    glDstFactor,
+    glEquation
+  )
+}
+raylib.rlSetBlendFactors = rlSetBlendFactors
+
+/**
+ * Initialize rlgl (buffers, shaders, textures, states)
+ *
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {undefined}
+ */
+function rlglInit(width, height) {
+  return r.BindrlglInit(
+    width,
+    height
+  )
+}
+raylib.rlglInit = rlglInit
+
+/**
+ * De-inititialize rlgl (buffers, shaders, textures)
+ *
+ * @return {undefined}
+ */
+function rlglClose() {
+  return r.BindrlglClose()
+}
+raylib.rlglClose = rlglClose
+
+/**
+ * Load OpenGL extensions (loader function required)
+ *
+ * @param {number} loader
+ *
+ * @return {undefined}
+ */
+function rlLoadExtensions(loader) {
+  return r.BindrlLoadExtensions(
+    loader
+  )
+}
+raylib.rlLoadExtensions = rlLoadExtensions
+
+/**
+ * Get current OpenGL version
+ *
+ * @return {number} The resulting int.
+ */
+function rlGetVersion() {
+  return r.BindrlGetVersion()
+}
+raylib.rlGetVersion = rlGetVersion
+
+/**
+ * Set current framebuffer width
+ *
+ * @param {number} width
+ *
+ * @return {undefined}
+ */
+function rlSetFramebufferWidth(width) {
+  return r.BindrlSetFramebufferWidth(
+    width
+  )
+}
+raylib.rlSetFramebufferWidth = rlSetFramebufferWidth
+
+/**
+ * Get default framebuffer width
+ *
+ * @return {number} The resulting int.
+ */
+function rlGetFramebufferWidth() {
+  return r.BindrlGetFramebufferWidth()
+}
+raylib.rlGetFramebufferWidth = rlGetFramebufferWidth
+
+/**
+ * Set current framebuffer height
+ *
+ * @param {number} height
+ *
+ * @return {undefined}
+ */
+function rlSetFramebufferHeight(height) {
+  return r.BindrlSetFramebufferHeight(
+    height
+  )
+}
+raylib.rlSetFramebufferHeight = rlSetFramebufferHeight
+
+/**
+ * Get default framebuffer height
+ *
+ * @return {number} The resulting int.
+ */
+function rlGetFramebufferHeight() {
+  return r.BindrlGetFramebufferHeight()
+}
+raylib.rlGetFramebufferHeight = rlGetFramebufferHeight
+
+/**
+ * Get default texture id
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlGetTextureIdDefault() {
+  return r.BindrlGetTextureIdDefault()
+}
+raylib.rlGetTextureIdDefault = rlGetTextureIdDefault
+
+/**
+ * Get default shader id
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlGetShaderIdDefault() {
+  return r.BindrlGetShaderIdDefault()
+}
+raylib.rlGetShaderIdDefault = rlGetShaderIdDefault
+
+/**
+ * Get default shader locations
+ *
+ * @return {number} The resulting int *.
+ */
+function rlGetShaderLocsDefault() {
+  return r.BindrlGetShaderLocsDefault()
+}
+raylib.rlGetShaderLocsDefault = rlGetShaderLocsDefault
+
+/**
+ * Load a render batch system
+ *
+ * @param {number} numBuffers
+ * @param {number} bufferElements
+ *
+ * @return {rlRenderBatch} The resulting rlRenderBatch.
+ */
+function rlLoadRenderBatch(numBuffers, bufferElements) {
+  return r.BindrlLoadRenderBatch(
+    numBuffers,
+    bufferElements
+  )
+}
+raylib.rlLoadRenderBatch = rlLoadRenderBatch
+
+/**
+ * Unload render batch system
+ *
+ * @param {rlRenderBatch} batch
+ *
+ * @return {undefined}
+ */
+function rlUnloadRenderBatch(batch) {
+  return r.BindrlUnloadRenderBatch(
+    batch.bufferCount,
+    batch.currentBuffer,
+    batch.vertexBuffer,
+    batch.draws,
+    batch.drawCounter,
+    batch.currentDepth
+  )
+}
+raylib.rlUnloadRenderBatch = rlUnloadRenderBatch
+
+/**
+ * Draw render batch data (Update->Draw->Reset)
+ *
+ * @param {number} batch
+ *
+ * @return {undefined}
+ */
+function rlDrawRenderBatch(batch) {
+  return r.BindrlDrawRenderBatch(
+    batch
+  )
+}
+raylib.rlDrawRenderBatch = rlDrawRenderBatch
+
+/**
+ * Set the active render batch for rlgl (NULL for default internal)
+ *
+ * @param {number} batch
+ *
+ * @return {undefined}
+ */
+function rlSetRenderBatchActive(batch) {
+  return r.BindrlSetRenderBatchActive(
+    batch
+  )
+}
+raylib.rlSetRenderBatchActive = rlSetRenderBatchActive
+
+/**
+ * Update and draw internal render batch
+ *
+ * @return {undefined}
+ */
+function rlDrawRenderBatchActive() {
+  return r.BindrlDrawRenderBatchActive()
+}
+raylib.rlDrawRenderBatchActive = rlDrawRenderBatchActive
+
+/**
+ * Check internal buffer overflow for a given number of vertex
+ *
+ * @param {number} vCount
+ *
+ * @return {boolean} The resulting bool.
+ */
+function rlCheckRenderBatchLimit(vCount) {
+  return r.BindrlCheckRenderBatchLimit(
+    vCount
+  )
+}
+raylib.rlCheckRenderBatchLimit = rlCheckRenderBatchLimit
+
+/**
+ * Set current texture for render batch and check buffers limits
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlSetTexture(id) {
+  return r.BindrlSetTexture(
+    id
+  )
+}
+raylib.rlSetTexture = rlSetTexture
+
+/**
+ * Load vertex array (vao) if supported
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadVertexArray() {
+  return r.BindrlLoadVertexArray()
+}
+raylib.rlLoadVertexArray = rlLoadVertexArray
+
+/**
+ * Load a vertex buffer attribute
+ *
+ * @param {number} buffer
+ * @param {number} size
+ * @param {boolean} dynamic
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadVertexBuffer(buffer, size, dynamic) {
+  return r.BindrlLoadVertexBuffer(
+    buffer,
+    size,
+    dynamic
+  )
+}
+raylib.rlLoadVertexBuffer = rlLoadVertexBuffer
+
+/**
+ * Load a new attributes element buffer
+ *
+ * @param {number} buffer
+ * @param {number} size
+ * @param {boolean} dynamic
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadVertexBufferElement(buffer, size, dynamic) {
+  return r.BindrlLoadVertexBufferElement(
+    buffer,
+    size,
+    dynamic
+  )
+}
+raylib.rlLoadVertexBufferElement = rlLoadVertexBufferElement
+
+/**
+ * Update GPU buffer with new data
+ *
+ * @param {number} bufferId
+ * @param {number} data
+ * @param {number} dataSize
+ * @param {number} offset
+ *
+ * @return {undefined}
+ */
+function rlUpdateVertexBuffer(bufferId, data, dataSize, offset) {
+  return r.BindrlUpdateVertexBuffer(
+    bufferId,
+    data,
+    dataSize,
+    offset
+  )
+}
+raylib.rlUpdateVertexBuffer = rlUpdateVertexBuffer
+
+/**
+ * Update vertex buffer elements with new data
+ *
+ * @param {number} id
+ * @param {number} data
+ * @param {number} dataSize
+ * @param {number} offset
+ *
+ * @return {undefined}
+ */
+function rlUpdateVertexBufferElements(id, data, dataSize, offset) {
+  return r.BindrlUpdateVertexBufferElements(
+    id,
+    data,
+    dataSize,
+    offset
+  )
+}
+raylib.rlUpdateVertexBufferElements = rlUpdateVertexBufferElements
+
+function rlUnloadVertexArray(vaoId) {
+  return r.BindrlUnloadVertexArray(
+    vaoId
+  )
+}
+raylib.rlUnloadVertexArray = rlUnloadVertexArray
+
+function rlUnloadVertexBuffer(vboId) {
+  return r.BindrlUnloadVertexBuffer(
+    vboId
+  )
+}
+raylib.rlUnloadVertexBuffer = rlUnloadVertexBuffer
+
+function rlSetVertexAttribute(index, compSize, type, normalized, stride, pointer) {
+  return r.BindrlSetVertexAttribute(
+    index,
+    compSize,
+    type,
+    normalized,
+    stride,
+    pointer
+  )
+}
+raylib.rlSetVertexAttribute = rlSetVertexAttribute
+
+function rlSetVertexAttributeDivisor(index, divisor) {
+  return r.BindrlSetVertexAttributeDivisor(
+    index,
+    divisor
+  )
+}
+raylib.rlSetVertexAttributeDivisor = rlSetVertexAttributeDivisor
+
+/**
+ * Set vertex attribute default value
+ *
+ * @param {number} locIndex
+ * @param {number} value
+ * @param {number} attribType
+ * @param {number} count
+ *
+ * @return {undefined}
+ */
+function rlSetVertexAttributeDefault(locIndex, value, attribType, count) {
+  return r.BindrlSetVertexAttributeDefault(
+    locIndex,
+    value,
+    attribType,
+    count
+  )
+}
+raylib.rlSetVertexAttributeDefault = rlSetVertexAttributeDefault
+
+function rlDrawVertexArray(offset, count) {
+  return r.BindrlDrawVertexArray(
+    offset,
+    count
+  )
+}
+raylib.rlDrawVertexArray = rlDrawVertexArray
+
+function rlDrawVertexArrayElements(offset, count, buffer) {
+  return r.BindrlDrawVertexArrayElements(
+    offset,
+    count,
+    buffer
+  )
+}
+raylib.rlDrawVertexArrayElements = rlDrawVertexArrayElements
+
+function rlDrawVertexArrayInstanced(offset, count, instances) {
+  return r.BindrlDrawVertexArrayInstanced(
+    offset,
+    count,
+    instances
+  )
+}
+raylib.rlDrawVertexArrayInstanced = rlDrawVertexArrayInstanced
+
+function rlDrawVertexArrayElementsInstanced(offset, count, buffer, instances) {
+  return r.BindrlDrawVertexArrayElementsInstanced(
+    offset,
+    count,
+    buffer,
+    instances
+  )
+}
+raylib.rlDrawVertexArrayElementsInstanced = rlDrawVertexArrayElementsInstanced
+
+/**
+ * Load texture in GPU
+ *
+ * @param {number} data
+ * @param {number} width
+ * @param {number} height
+ * @param {number} format
+ * @param {number} mipmapCount
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadTexture(data, width, height, format, mipmapCount) {
+  return r.BindrlLoadTexture(
+    data,
+    width,
+    height,
+    format,
+    mipmapCount
+  )
+}
+raylib.rlLoadTexture = rlLoadTexture
+
+/**
+ * Load depth texture/renderbuffer (to be attached to fbo)
+ *
+ * @param {number} width
+ * @param {number} height
+ * @param {boolean} useRenderBuffer
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadTextureDepth(width, height, useRenderBuffer) {
+  return r.BindrlLoadTextureDepth(
+    width,
+    height,
+    useRenderBuffer
+  )
+}
+raylib.rlLoadTextureDepth = rlLoadTextureDepth
+
+/**
+ * Load texture cubemap
+ *
+ * @param {number} data
+ * @param {number} size
+ * @param {number} format
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadTextureCubemap(data, size, format) {
+  return r.BindrlLoadTextureCubemap(
+    data,
+    size,
+    format
+  )
+}
+raylib.rlLoadTextureCubemap = rlLoadTextureCubemap
+
+/**
+ * Update GPU texture with new data
+ *
+ * @param {number} id
+ * @param {number} offsetX
+ * @param {number} offsetY
+ * @param {number} width
+ * @param {number} height
+ * @param {number} format
+ * @param {number} data
+ *
+ * @return {undefined}
+ */
+function rlUpdateTexture(id, offsetX, offsetY, width, height, format, data) {
+  return r.BindrlUpdateTexture(
+    id,
+    offsetX,
+    offsetY,
+    width,
+    height,
+    format,
+    data
+  )
+}
+raylib.rlUpdateTexture = rlUpdateTexture
+
+/**
+ * Get OpenGL internal formats
+ *
+ * @param {number} format
+ * @param {number} glInternalFormat
+ * @param {number} glFormat
+ * @param {number} glType
+ *
+ * @return {undefined}
+ */
+function rlGetGlTextureFormats(format, glInternalFormat, glFormat, glType) {
+  return r.BindrlGetGlTextureFormats(
+    format,
+    glInternalFormat,
+    glFormat,
+    glType
+  )
+}
+raylib.rlGetGlTextureFormats = rlGetGlTextureFormats
+
+/**
+ * Get name string for pixel format
+ *
+ * @param {number} format
+ *
+ * @return {string} The resulting const char *.
+ */
+function rlGetPixelFormatName(format) {
+  return r.BindrlGetPixelFormatName(
+    format
+  )
+}
+raylib.rlGetPixelFormatName = rlGetPixelFormatName
+
+/**
+ * Unload texture from GPU memory
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlUnloadTexture(id) {
+  return r.BindrlUnloadTexture(
+    id
+  )
+}
+raylib.rlUnloadTexture = rlUnloadTexture
+
+/**
+ * Generate mipmap data for selected texture
+ *
+ * @param {number} id
+ * @param {number} width
+ * @param {number} height
+ * @param {number} format
+ * @param {number} mipmaps
+ *
+ * @return {undefined}
+ */
+function rlGenTextureMipmaps(id, width, height, format, mipmaps) {
+  return r.BindrlGenTextureMipmaps(
+    id,
+    width,
+    height,
+    format,
+    mipmaps
+  )
+}
+raylib.rlGenTextureMipmaps = rlGenTextureMipmaps
+
+/**
+ * Read texture pixel data
+ *
+ * @param {number} id
+ * @param {number} width
+ * @param {number} height
+ * @param {number} format
+ *
+ * @return {number} The resulting void *.
+ */
+function rlReadTexturePixels(id, width, height, format) {
+  return r.BindrlReadTexturePixels(
+    id,
+    width,
+    height,
+    format
+  )
+}
+raylib.rlReadTexturePixels = rlReadTexturePixels
+
+/**
+ * Read screen pixel data (color buffer)
+ *
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {Buffer} The resulting unsigned char *.
+ */
+function rlReadScreenPixels(width, height) {
+  return r.BindrlReadScreenPixels(
+    width,
+    height
+  )
+}
+raylib.rlReadScreenPixels = rlReadScreenPixels
+
+/**
+ * Load an empty framebuffer
+ *
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadFramebuffer(width, height) {
+  return r.BindrlLoadFramebuffer(
+    width,
+    height
+  )
+}
+raylib.rlLoadFramebuffer = rlLoadFramebuffer
+
+/**
+ * Attach texture/renderbuffer to a framebuffer
+ *
+ * @param {number} fboId
+ * @param {number} texId
+ * @param {number} attachType
+ * @param {number} texType
+ * @param {number} mipLevel
+ *
+ * @return {undefined}
+ */
+function rlFramebufferAttach(fboId, texId, attachType, texType, mipLevel) {
+  return r.BindrlFramebufferAttach(
+    fboId,
+    texId,
+    attachType,
+    texType,
+    mipLevel
+  )
+}
+raylib.rlFramebufferAttach = rlFramebufferAttach
+
+/**
+ * Verify framebuffer is complete
+ *
+ * @param {number} id
+ *
+ * @return {boolean} The resulting bool.
+ */
+function rlFramebufferComplete(id) {
+  return r.BindrlFramebufferComplete(
+    id
+  )
+}
+raylib.rlFramebufferComplete = rlFramebufferComplete
+
+/**
+ * Delete framebuffer from GPU
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlUnloadFramebuffer(id) {
+  return r.BindrlUnloadFramebuffer(
+    id
+  )
+}
+raylib.rlUnloadFramebuffer = rlUnloadFramebuffer
+
+/**
+ * Load shader from code strings
+ *
+ * @param {string} vsCode
+ * @param {string} fsCode
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadShaderCode(vsCode, fsCode) {
+  return r.BindrlLoadShaderCode(
+    vsCode,
+    fsCode
+  )
+}
+raylib.rlLoadShaderCode = rlLoadShaderCode
+
+/**
+ * Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)
+ *
+ * @param {string} shaderCode
+ * @param {number} type
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlCompileShader(shaderCode, type) {
+  return r.BindrlCompileShader(
+    shaderCode,
+    type
+  )
+}
+raylib.rlCompileShader = rlCompileShader
+
+/**
+ * Load custom shader program
+ *
+ * @param {number} vShaderId
+ * @param {number} fShaderId
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadShaderProgram(vShaderId, fShaderId) {
+  return r.BindrlLoadShaderProgram(
+    vShaderId,
+    fShaderId
+  )
+}
+raylib.rlLoadShaderProgram = rlLoadShaderProgram
+
+/**
+ * Unload shader program
+ *
+ * @param {number} id
+ *
+ * @return {undefined}
+ */
+function rlUnloadShaderProgram(id) {
+  return r.BindrlUnloadShaderProgram(
+    id
+  )
+}
+raylib.rlUnloadShaderProgram = rlUnloadShaderProgram
+
+/**
+ * Get shader location uniform
+ *
+ * @param {number} shaderId
+ * @param {string} uniformName
+ *
+ * @return {number} The resulting int.
+ */
+function rlGetLocationUniform(shaderId, uniformName) {
+  return r.BindrlGetLocationUniform(
+    shaderId,
+    uniformName
+  )
+}
+raylib.rlGetLocationUniform = rlGetLocationUniform
+
+/**
+ * Get shader location attribute
+ *
+ * @param {number} shaderId
+ * @param {string} attribName
+ *
+ * @return {number} The resulting int.
+ */
+function rlGetLocationAttrib(shaderId, attribName) {
+  return r.BindrlGetLocationAttrib(
+    shaderId,
+    attribName
+  )
+}
+raylib.rlGetLocationAttrib = rlGetLocationAttrib
+
+/**
+ * Set shader value uniform
+ *
+ * @param {number} locIndex
+ * @param {number} value
+ * @param {number} uniformType
+ * @param {number} count
+ *
+ * @return {undefined}
+ */
+function rlSetUniform(locIndex, value, uniformType, count) {
+  return r.BindrlSetUniform(
+    locIndex,
+    value,
+    uniformType,
+    count
+  )
+}
+raylib.rlSetUniform = rlSetUniform
+
+/**
+ * Set shader value matrix
+ *
+ * @param {number} locIndex
+ * @param {Matrix} mat
+ *
+ * @return {undefined}
+ */
+function rlSetUniformMatrix(locIndex, mat) {
+  return r.BindrlSetUniformMatrix(
+    locIndex,
+    mat.m0,
+    mat.m4,
+    mat.m8,
+    mat.m12,
+    mat.m1,
+    mat.m5,
+    mat.m9,
+    mat.m13,
+    mat.m2,
+    mat.m6,
+    mat.m10,
+    mat.m14,
+    mat.m3,
+    mat.m7,
+    mat.m11,
+    mat.m15
+  )
+}
+raylib.rlSetUniformMatrix = rlSetUniformMatrix
+
+/**
+ * Set shader value sampler
+ *
+ * @param {number} locIndex
+ * @param {number} textureId
+ *
+ * @return {undefined}
+ */
+function rlSetUniformSampler(locIndex, textureId) {
+  return r.BindrlSetUniformSampler(
+    locIndex,
+    textureId
+  )
+}
+raylib.rlSetUniformSampler = rlSetUniformSampler
+
+/**
+ * Set shader currently active (id and locations)
+ *
+ * @param {number} id
+ * @param {number} locs
+ *
+ * @return {undefined}
+ */
+function rlSetShader(id, locs) {
+  return r.BindrlSetShader(
+    id,
+    locs
+  )
+}
+raylib.rlSetShader = rlSetShader
+
+/**
+ * Load compute shader program
+ *
+ * @param {number} shaderId
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadComputeShaderProgram(shaderId) {
+  return r.BindrlLoadComputeShaderProgram(
+    shaderId
+  )
+}
+raylib.rlLoadComputeShaderProgram = rlLoadComputeShaderProgram
+
+/**
+ * Dispatch compute shader (equivalent to *draw* for graphics pilepine)
+ *
+ * @param {number} groupX
+ * @param {number} groupY
+ * @param {number} groupZ
+ *
+ * @return {undefined}
+ */
+function rlComputeShaderDispatch(groupX, groupY, groupZ) {
+  return r.BindrlComputeShaderDispatch(
+    groupX,
+    groupY,
+    groupZ
+  )
+}
+raylib.rlComputeShaderDispatch = rlComputeShaderDispatch
+
+/**
+ * Load shader storage buffer object (SSBO)
+ *
+ * @param {BigInt} size
+ * @param {number} data
+ * @param {number} usageHint
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlLoadShaderBuffer(size, data, usageHint) {
+  return r.BindrlLoadShaderBuffer(
+    size,
+    data,
+    usageHint
+  )
+}
+raylib.rlLoadShaderBuffer = rlLoadShaderBuffer
+
+/**
+ * Unload shader storage buffer object (SSBO)
+ *
+ * @param {number} ssboId
+ *
+ * @return {undefined}
+ */
+function rlUnloadShaderBuffer(ssboId) {
+  return r.BindrlUnloadShaderBuffer(
+    ssboId
+  )
+}
+raylib.rlUnloadShaderBuffer = rlUnloadShaderBuffer
+
+/**
+ * Update SSBO buffer data
+ *
+ * @param {number} id
+ * @param {number} data
+ * @param {BigInt} dataSize
+ * @param {BigInt} offset
+ *
+ * @return {undefined}
+ */
+function rlUpdateShaderBufferElements(id, data, dataSize, offset) {
+  return r.BindrlUpdateShaderBufferElements(
+    id,
+    data,
+    dataSize,
+    offset
+  )
+}
+raylib.rlUpdateShaderBufferElements = rlUpdateShaderBufferElements
+
+/**
+ * Get SSBO buffer size
+ *
+ * @param {number} id
+ *
+ * @return {BigInt} The resulting unsigned long long.
+ */
+function rlGetShaderBufferSize(id) {
+  return r.BindrlGetShaderBufferSize(
+    id
+  )
+}
+raylib.rlGetShaderBufferSize = rlGetShaderBufferSize
+
+/**
+ * Bind SSBO buffer
+ *
+ * @param {number} id
+ * @param {number} dest
+ * @param {BigInt} count
+ * @param {BigInt} offset
+ *
+ * @return {undefined}
+ */
+function rlReadShaderBufferElements(id, dest, count, offset) {
+  return r.BindrlReadShaderBufferElements(
+    id,
+    dest,
+    count,
+    offset
+  )
+}
+raylib.rlReadShaderBufferElements = rlReadShaderBufferElements
+
+/**
+ * Copy SSBO buffer data
+ *
+ * @param {number} id
+ * @param {number} index
+ *
+ * @return {undefined}
+ */
+function rlBindShaderBuffer(id, index) {
+  return r.BindrlBindShaderBuffer(
+    id,
+    index
+  )
+}
+raylib.rlBindShaderBuffer = rlBindShaderBuffer
+
+/**
+ * Copy SSBO buffer data
+ *
+ * @param {number} destId
+ * @param {number} srcId
+ * @param {BigInt} destOffset
+ * @param {BigInt} srcOffset
+ * @param {BigInt} count
+ *
+ * @return {undefined}
+ */
+function rlCopyBuffersElements(destId, srcId, destOffset, srcOffset, count) {
+  return r.BindrlCopyBuffersElements(
+    destId,
+    srcId,
+    destOffset,
+    srcOffset,
+    count
+  )
+}
+raylib.rlCopyBuffersElements = rlCopyBuffersElements
+
+/**
+ * Bind image texture
+ *
+ * @param {number} id
+ * @param {number} index
+ * @param {number} format
+ * @param {number} readonly
+ *
+ * @return {undefined}
+ */
+function rlBindImageTexture(id, index, format, readonly) {
+  return r.BindrlBindImageTexture(
+    id,
+    index,
+    format,
+    readonly
+  )
+}
+raylib.rlBindImageTexture = rlBindImageTexture
+
+/**
+ * Get internal modelview matrix
+ *
+ * @return {Matrix} The resulting Matrix.
+ */
+function rlGetMatrixModelview() {
+  return r.BindrlGetMatrixModelview()
+}
+raylib.rlGetMatrixModelview = rlGetMatrixModelview
+
+/**
+ * Get internal projection matrix
+ *
+ * @return {Matrix} The resulting Matrix.
+ */
+function rlGetMatrixProjection() {
+  return r.BindrlGetMatrixProjection()
+}
+raylib.rlGetMatrixProjection = rlGetMatrixProjection
+
+/**
+ * Get internal accumulated transform matrix
+ *
+ * @return {Matrix} The resulting Matrix.
+ */
+function rlGetMatrixTransform() {
+  return r.BindrlGetMatrixTransform()
+}
+raylib.rlGetMatrixTransform = rlGetMatrixTransform
+
+/**
+ * Get internal projection matrix for stereo render (selected eye)
+ *
+ * @param {number} eye
+ *
+ * @return {Matrix} The resulting Matrix.
+ */
+function rlGetMatrixProjectionStereo(eye) {
+  return r.BindrlGetMatrixProjectionStereo(
+    eye
+  )
+}
+raylib.rlGetMatrixProjectionStereo = rlGetMatrixProjectionStereo
+
+/**
+ * Get internal view offset matrix for stereo render (selected eye)
+ *
+ * @param {number} eye
+ *
+ * @return {Matrix} The resulting Matrix.
+ */
+function rlGetMatrixViewOffsetStereo(eye) {
+  return r.BindrlGetMatrixViewOffsetStereo(
+    eye
+  )
+}
+raylib.rlGetMatrixViewOffsetStereo = rlGetMatrixViewOffsetStereo
+
+/**
+ * Set a custom projection matrix (replaces internal projection matrix)
+ *
+ * @param {Matrix} proj
+ *
+ * @return {undefined}
+ */
+function rlSetMatrixProjection(proj) {
+  return r.BindrlSetMatrixProjection(
+    proj.m0,
+    proj.m4,
+    proj.m8,
+    proj.m12,
+    proj.m1,
+    proj.m5,
+    proj.m9,
+    proj.m13,
+    proj.m2,
+    proj.m6,
+    proj.m10,
+    proj.m14,
+    proj.m3,
+    proj.m7,
+    proj.m11,
+    proj.m15
+  )
+}
+raylib.rlSetMatrixProjection = rlSetMatrixProjection
+
+/**
+ * Set a custom modelview matrix (replaces internal modelview matrix)
+ *
+ * @param {Matrix} view
+ *
+ * @return {undefined}
+ */
+function rlSetMatrixModelview(view) {
+  return r.BindrlSetMatrixModelview(
+    view.m0,
+    view.m4,
+    view.m8,
+    view.m12,
+    view.m1,
+    view.m5,
+    view.m9,
+    view.m13,
+    view.m2,
+    view.m6,
+    view.m10,
+    view.m14,
+    view.m3,
+    view.m7,
+    view.m11,
+    view.m15
+  )
+}
+raylib.rlSetMatrixModelview = rlSetMatrixModelview
+
+/**
+ * Set eyes projection matrices for stereo rendering
+ *
+ * @param {Matrix} right
+ * @param {Matrix} left
+ *
+ * @return {undefined}
+ */
+function rlSetMatrixProjectionStereo(right, left) {
+  return r.BindrlSetMatrixProjectionStereo(
+    right.m0,
+    right.m4,
+    right.m8,
+    right.m12,
+    right.m1,
+    right.m5,
+    right.m9,
+    right.m13,
+    right.m2,
+    right.m6,
+    right.m10,
+    right.m14,
+    right.m3,
+    right.m7,
+    right.m11,
+    right.m15,
+    left.m0,
+    left.m4,
+    left.m8,
+    left.m12,
+    left.m1,
+    left.m5,
+    left.m9,
+    left.m13,
+    left.m2,
+    left.m6,
+    left.m10,
+    left.m14,
+    left.m3,
+    left.m7,
+    left.m11,
+    left.m15
+  )
+}
+raylib.rlSetMatrixProjectionStereo = rlSetMatrixProjectionStereo
+
+/**
+ * Set eyes view offsets matrices for stereo rendering
+ *
+ * @param {Matrix} right
+ * @param {Matrix} left
+ *
+ * @return {undefined}
+ */
+function rlSetMatrixViewOffsetStereo(right, left) {
+  return r.BindrlSetMatrixViewOffsetStereo(
+    right.m0,
+    right.m4,
+    right.m8,
+    right.m12,
+    right.m1,
+    right.m5,
+    right.m9,
+    right.m13,
+    right.m2,
+    right.m6,
+    right.m10,
+    right.m14,
+    right.m3,
+    right.m7,
+    right.m11,
+    right.m15,
+    left.m0,
+    left.m4,
+    left.m8,
+    left.m12,
+    left.m1,
+    left.m5,
+    left.m9,
+    left.m13,
+    left.m2,
+    left.m6,
+    left.m10,
+    left.m14,
+    left.m3,
+    left.m7,
+    left.m11,
+    left.m15
+  )
+}
+raylib.rlSetMatrixViewOffsetStereo = rlSetMatrixViewOffsetStereo
+
+/**
+ * Load and draw a cube
+ *
+ * @return {undefined}
+ */
+function rlLoadDrawCube() {
+  return r.BindrlLoadDrawCube()
+}
+raylib.rlLoadDrawCube = rlLoadDrawCube
+
+/**
+ * Load and draw a quad
+ *
+ * @return {undefined}
+ */
+function rlLoadDrawQuad() {
+  return r.BindrlLoadDrawQuad()
+}
+raylib.rlLoadDrawQuad = rlLoadDrawQuad
+
+/**
  * Update camera position for selected mode
  *
  * @param {Camera} camera
@@ -17831,6 +19925,1166 @@ raylib.ICON_254 = 254
  * @constant
  */
 raylib.ICON_255 = 255
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.OPENGL_11 = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.OPENGL_21 = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.OPENGL_33 = 3
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.OPENGL_43 = 4
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.OPENGL_ES_20 = 5
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL0 = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL1 = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL2 = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL3 = 3
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL4 = 4
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL5 = 5
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL6 = 6
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL7 = 7
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_DEPTH = 100
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_STENCIL = 200
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_TEXTURE2D = 100
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_RENDERBUFFER = 200
+
+/**
+ * Display all logs
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LOG_ALL = 0
+
+/**
+ * Trace logging, intended for internal use only
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LOG_TRACE = 1
+
+/**
+ * Debug logging, used for internal debugging, it should be disabled on release builds
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LOG_DEBUG = 2
+
+/**
+ * Info logging, used for program execution info
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LOG_INFO = 3
+
+/**
+ * Warning logging, used on recoverable failures
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LOG_WARNING = 4
+
+/**
+ * Error logging, used on unrecoverable failures
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LOG_ERROR = 5
+
+/**
+ * Fatal logging, used to abort program: exit(EXIT_FAILURE)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LOG_FATAL = 6
+
+/**
+ * Disable logging
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LOG_NONE = 7
+
+/**
+ * 8 bit per pixel (no alpha)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1
+
+/**
+ * 8*2 bpp (2 channels)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2
+
+/**
+ * 16 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3
+
+/**
+ * 24 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4
+
+/**
+ * 16 bpp (1 bit alpha)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5
+
+/**
+ * 16 bpp (4 bit alpha)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6
+
+/**
+ * 32 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7
+
+/**
+ * 32 bpp (1 channel - float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8
+
+/**
+ * 32*3 bpp (3 channels - float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
+
+/**
+ * 32*4 bpp (4 channels - float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
+
+/**
+ * 4 bpp (no alpha)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+
+/**
+ * 4 bpp (1 bit alpha)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+
+/**
+ * 8 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+
+/**
+ * 8 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+
+/**
+ * 4 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+
+/**
+ * 4 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+
+/**
+ * 8 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+
+/**
+ * 4 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+
+/**
+ * 4 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+
+/**
+ * 8 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+
+/**
+ * 2 bpp
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
+
+/**
+ * No filter, just pixel approximation
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_POINT = 0
+
+/**
+ * Linear filtering
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_BILINEAR = 1
+
+/**
+ * Trilinear filtering (linear with mipmaps)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_TRILINEAR = 2
+
+/**
+ * Anisotropic filtering 4x
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3
+
+/**
+ * Anisotropic filtering 8x
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4
+
+/**
+ * Anisotropic filtering 16x
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5
+
+/**
+ * Blend textures considering alpha (default)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_ALPHA = 0
+
+/**
+ * Blend textures adding colors
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_ADDITIVE = 1
+
+/**
+ * Blend textures multiplying colors
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_MULTIPLIED = 2
+
+/**
+ * Blend textures adding colors (alternative)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_ADD_COLORS = 3
+
+/**
+ * Blend textures subtracting colors (alternative)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_SUBTRACT_COLORS = 4
+
+/**
+ * Blend premultiplied textures considering alpha
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_ALPHA_PREMULTIPLY = 5
+
+/**
+ * Blend textures using custom src/dst factors (use rlSetBlendFactors())
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_CUSTOM = 6
+
+/**
+ * Shader location: vertex attribute: position
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_VERTEX_POSITION = 0
+
+/**
+ * Shader location: vertex attribute: texcoord01
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1
+
+/**
+ * Shader location: vertex attribute: texcoord02
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2
+
+/**
+ * Shader location: vertex attribute: normal
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_VERTEX_NORMAL = 3
+
+/**
+ * Shader location: vertex attribute: tangent
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_VERTEX_TANGENT = 4
+
+/**
+ * Shader location: vertex attribute: color
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_VERTEX_COLOR = 5
+
+/**
+ * Shader location: matrix uniform: model-view-projection
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MATRIX_MVP = 6
+
+/**
+ * Shader location: matrix uniform: view (camera transform)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MATRIX_VIEW = 7
+
+/**
+ * Shader location: matrix uniform: projection
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MATRIX_PROJECTION = 8
+
+/**
+ * Shader location: matrix uniform: model (transform)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MATRIX_MODEL = 9
+
+/**
+ * Shader location: matrix uniform: normal
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MATRIX_NORMAL = 10
+
+/**
+ * Shader location: vector uniform: view
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_VECTOR_VIEW = 11
+
+/**
+ * Shader location: vector uniform: diffuse color
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_COLOR_DIFFUSE = 12
+
+/**
+ * Shader location: vector uniform: specular color
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_COLOR_SPECULAR = 13
+
+/**
+ * Shader location: vector uniform: ambient color
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_COLOR_AMBIENT = 14
+
+/**
+ * Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_ALBEDO = 15
+
+/**
+ * Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_METALNESS = 16
+
+/**
+ * Shader location: sampler2d texture: normal
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_NORMAL = 17
+
+/**
+ * Shader location: sampler2d texture: roughness
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_ROUGHNESS = 18
+
+/**
+ * Shader location: sampler2d texture: occlusion
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_OCCLUSION = 19
+
+/**
+ * Shader location: sampler2d texture: emission
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_EMISSION = 20
+
+/**
+ * Shader location: sampler2d texture: height
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_HEIGHT = 21
+
+/**
+ * Shader location: samplerCube texture: cubemap
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_CUBEMAP = 22
+
+/**
+ * Shader location: samplerCube texture: irradiance
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_IRRADIANCE = 23
+
+/**
+ * Shader location: samplerCube texture: prefilter
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_PREFILTER = 24
+
+/**
+ * Shader location: sampler2d texture: brdf
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_LOC_MAP_BRDF = 25
+
+/**
+ * Shader uniform type: float
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_FLOAT = 0
+
+/**
+ * Shader uniform type: vec2 (2 float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_VEC2 = 1
+
+/**
+ * Shader uniform type: vec3 (3 float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_VEC3 = 2
+
+/**
+ * Shader uniform type: vec4 (4 float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_VEC4 = 3
+
+/**
+ * Shader uniform type: int
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_INT = 4
+
+/**
+ * Shader uniform type: ivec2 (2 int)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_IVEC2 = 5
+
+/**
+ * Shader uniform type: ivec3 (3 int)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_IVEC3 = 6
+
+/**
+ * Shader uniform type: ivec4 (4 int)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_IVEC4 = 7
+
+/**
+ * Shader uniform type: sampler2d
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_UNIFORM_SAMPLER2D = 8
+
+/**
+ * Shader attribute type: float
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_ATTRIB_FLOAT = 0
+
+/**
+ * Shader attribute type: vec2 (2 float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_ATTRIB_VEC2 = 1
+
+/**
+ * Shader attribute type: vec3 (3 float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_ATTRIB_VEC3 = 2
+
+/**
+ * Shader attribute type: vec4 (4 float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SHADER_ATTRIB_VEC4 = 3
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
+
+/**
+ * Default number of batch buffers (multi-buffering)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DEFAULT_BATCH_BUFFERS = 1
+
+/**
+ * Default number of batch draw calls (by state changes: mode, texture)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DEFAULT_BATCH_DRAWCALLS = 256
+
+/**
+ * Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4
+
+/**
+ * Maximum size of Matrix stack
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_MAX_MATRIX_STACK_SIZE = 32
+
+/**
+ * Maximum number of shader locations supported
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_MAX_SHADER_LOCATIONS = 32
+
+/**
+ * GL_TEXTURE_WRAP_S
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_WRAP_S = 10242
+
+/**
+ * GL_TEXTURE_WRAP_T
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_WRAP_T = 10243
+
+/**
+ * GL_TEXTURE_MAG_FILTER
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_MAG_FILTER = 10240
+
+/**
+ * GL_TEXTURE_MIN_FILTER
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_MIN_FILTER = 10241
+
+/**
+ * GL_NEAREST
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_NEAREST = 9728
+
+/**
+ * GL_LINEAR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_LINEAR = 9729
+
+/**
+ * GL_NEAREST_MIPMAP_NEAREST
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_MIP_NEAREST = 9984
+
+/**
+ * GL_NEAREST_MIPMAP_LINEAR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 9986
+
+/**
+ * GL_LINEAR_MIPMAP_NEAREST
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 9985
+
+/**
+ * GL_LINEAR_MIPMAP_LINEAR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_MIP_LINEAR = 9987
+
+/**
+ * Anisotropic filter (custom identifier)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_FILTER_ANISOTROPIC = 12288
+
+/**
+ * GL_REPEAT
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_WRAP_REPEAT = 10497
+
+/**
+ * GL_CLAMP_TO_EDGE
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_WRAP_CLAMP = 33071
+
+/**
+ * GL_MIRRORED_REPEAT
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_WRAP_MIRROR_REPEAT = 33648
+
+/**
+ * GL_MIRROR_CLAMP_EXT
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_WRAP_MIRROR_CLAMP = 34626
+
+/**
+ * GL_MODELVIEW
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_MODELVIEW = 5888
+
+/**
+ * GL_PROJECTION
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PROJECTION = 5889
+
+/**
+ * GL_TEXTURE
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE = 5890
+
+/**
+ * GL_LINES
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_LINES = 1
+
+/**
+ * GL_TRIANGLES
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TRIANGLES = 4
+
+/**
+ * GL_QUADS
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_QUADS = 7
+
+/**
+ * GL_UNSIGNED_BYTE
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_UNSIGNED_BYTE = 5121
+
+/**
+ * GL_FLOAT
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_FLOAT = 5126
+
+/**
+ * GL_STREAM_DRAW
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_STREAM_DRAW = 35040
+
+/**
+ * GL_STREAM_READ
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_STREAM_READ = 35041
+
+/**
+ * GL_STREAM_COPY
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_STREAM_COPY = 35042
+
+/**
+ * GL_STATIC_DRAW
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_STATIC_DRAW = 35044
+
+/**
+ * GL_STATIC_READ
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_STATIC_READ = 35045
+
+/**
+ * GL_STATIC_COPY
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_STATIC_COPY = 35046
+
+/**
+ * GL_DYNAMIC_DRAW
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DYNAMIC_DRAW = 35048
+
+/**
+ * GL_DYNAMIC_READ
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DYNAMIC_READ = 35049
+
+/**
+ * GL_DYNAMIC_COPY
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DYNAMIC_COPY = 35050
+
+/**
+ * GL_FRAGMENT_SHADER
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_FRAGMENT_SHADER = 35632
+
+/**
+ * GL_VERTEX_SHADER
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_VERTEX_SHADER = 35633
+
+/**
+ * GL_COMPUTE_SHADER
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_COMPUTE_SHADER = 37305
 
 raylib.LIGHTGRAY = { r: 200, g: 200, b: 200, a: 255 }
 raylib.GRAY = { r: 130, g: 130, b: 130, a: 255 }

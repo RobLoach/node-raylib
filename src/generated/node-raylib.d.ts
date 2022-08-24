@@ -414,6 +414,49 @@ declare module "raylib" {
     /** Filepaths entries. (char **) */
     paths: number
   }
+  /** Dynamic vertex buffers (position + texcoords + colors + indices arrays) */
+  export interface rlVertexBuffer {
+    /** Number of elements in the buffer (QUADS). (int) */
+    elementCount: number
+    /** Vertex position (XYZ - 3 components per vertex) (shader-location = 0). (float *) */
+    vertices: number
+    /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1). (float *) */
+    texcoords: number
+    /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
+    colors: Buffer
+    /** Vertex indices (in case vertex data comes indexed) (6 indices per quad). (unsigned int *) */
+    indices: number
+    /** OpenGL Vertex Array Object id. (unsigned int) */
+    vaoId: number
+    /** OpenGL Vertex Buffer Objects id (4 types of vertex data). (unsigned int[4]) */
+    vboId: number
+  }
+  /** of those state-change happens (this is done in core module) */
+  export interface rlDrawCall {
+    /** Drawing mode: LINES, TRIANGLES, QUADS. (int) */
+    mode: number
+    /** Number of vertex of the draw. (int) */
+    vertexCount: number
+    /** Number of vertex required for index alignment (LINES, TRIANGLES). (int) */
+    vertexAlignment: number
+    /** Texture id to be used on the draw -> Use to create new draw call if changes. (unsigned int) */
+    textureId: number
+  }
+  /** rlRenderBatch type */
+  export interface rlRenderBatch {
+    /** Number of vertex buffers (multi-buffering support). (int) */
+    bufferCount: number
+    /** Current buffer tracking in case of multi-buffering. (int) */
+    currentBuffer: number
+    /** Dynamic buffer(s) for vertex data. (rlVertexBuffer *) */
+    vertexBuffer: number
+    /** Draw calls array, depends on textureId. (rlDrawCall *) */
+    draws: number
+    /** Draw calls counter. (int) */
+    drawCounter: number
+    /** Current depth value for next draw. (float) */
+    currentDepth: number
+  }
 
   /** RenderTexture, fbo for texture rendering */
   export type RenderTexture2D = RenderTexture
@@ -2445,6 +2488,432 @@ declare module "raylib" {
   /** Check icon pixel value */
   export function GuiCheckIconPixel(iconId: number, x: number, y: number): boolean
   
+  /** Choose the current matrix to be transformed */
+  export function rlMatrixMode(mode: number): void
+  
+  /** Push the current matrix to stack */
+  export function rlPushMatrix(): void
+  
+  /** Pop lattest inserted matrix from stack */
+  export function rlPopMatrix(): void
+  
+  /** Reset current matrix to identity matrix */
+  export function rlLoadIdentity(): void
+  
+  /** Multiply the current matrix by a translation matrix */
+  export function rlTranslatef(x: number, y: number, z: number): void
+  
+  /** Multiply the current matrix by a rotation matrix */
+  export function rlRotatef(angle: number, x: number, y: number, z: number): void
+  
+  /** Multiply the current matrix by a scaling matrix */
+  export function rlScalef(x: number, y: number, z: number): void
+  
+  /** Multiply the current matrix by another matrix */
+  export function rlMultMatrixf(matf: number): void
+  
+  /**  */
+  export function rlFrustum(left: number, right: number, bottom: number, top: number, znear: number, zfar: number): void
+  
+  /**  */
+  export function rlOrtho(left: number, right: number, bottom: number, top: number, znear: number, zfar: number): void
+  
+  /** Set the viewport area */
+  export function rlViewport(x: number, y: number, width: number, height: number): void
+  
+  /** Initialize drawing mode (how to organize vertex) */
+  export function rlBegin(mode: number): void
+  
+  /** Finish vertex providing */
+  export function rlEnd(): void
+  
+  /** Define one vertex (position) - 2 int */
+  export function rlVertex2i(x: number, y: number): void
+  
+  /** Define one vertex (position) - 2 float */
+  export function rlVertex2f(x: number, y: number): void
+  
+  /** Define one vertex (position) - 3 float */
+  export function rlVertex3f(x: number, y: number, z: number): void
+  
+  /** Define one vertex (texture coordinate) - 2 float */
+  export function rlTexCoord2f(x: number, y: number): void
+  
+  /** Define one vertex (normal) - 3 float */
+  export function rlNormal3f(x: number, y: number, z: number): void
+  
+  /** Define one vertex (color) - 4 byte */
+  export function rlColor4ub(r: number, g: number, b: number, a: number): void
+  
+  /** Define one vertex (color) - 3 float */
+  export function rlColor3f(x: number, y: number, z: number): void
+  
+  /** Define one vertex (color) - 4 float */
+  export function rlColor4f(x: number, y: number, z: number, w: number): void
+  
+  /** Enable vertex array (VAO, if supported) */
+  export function rlEnableVertexArray(vaoId: number): boolean
+  
+  /** Disable vertex array (VAO, if supported) */
+  export function rlDisableVertexArray(): void
+  
+  /** Enable vertex buffer (VBO) */
+  export function rlEnableVertexBuffer(id: number): void
+  
+  /** Disable vertex buffer (VBO) */
+  export function rlDisableVertexBuffer(): void
+  
+  /** Enable vertex buffer element (VBO element) */
+  export function rlEnableVertexBufferElement(id: number): void
+  
+  /** Disable vertex buffer element (VBO element) */
+  export function rlDisableVertexBufferElement(): void
+  
+  /** Enable vertex attribute index */
+  export function rlEnableVertexAttribute(index: number): void
+  
+  /** Disable vertex attribute index */
+  export function rlDisableVertexAttribute(index: number): void
+  
+  /** Select and active a texture slot */
+  export function rlActiveTextureSlot(slot: number): void
+  
+  /** Enable texture */
+  export function rlEnableTexture(id: number): void
+  
+  /** Disable texture */
+  export function rlDisableTexture(): void
+  
+  /** Enable texture cubemap */
+  export function rlEnableTextureCubemap(id: number): void
+  
+  /** Disable texture cubemap */
+  export function rlDisableTextureCubemap(): void
+  
+  /** Set texture parameters (filter, wrap) */
+  export function rlTextureParameters(id: number, param: number, value: number): void
+  
+  /** Enable shader program */
+  export function rlEnableShader(id: number): void
+  
+  /** Disable shader program */
+  export function rlDisableShader(): void
+  
+  /** Enable render texture (fbo) */
+  export function rlEnableFramebuffer(id: number): void
+  
+  /** Disable render texture (fbo), return to default framebuffer */
+  export function rlDisableFramebuffer(): void
+  
+  /** Activate multiple draw color buffers */
+  export function rlActiveDrawBuffers(count: number): void
+  
+  /** Enable color blending */
+  export function rlEnableColorBlend(): void
+  
+  /** Disable color blending */
+  export function rlDisableColorBlend(): void
+  
+  /** Enable depth test */
+  export function rlEnableDepthTest(): void
+  
+  /** Disable depth test */
+  export function rlDisableDepthTest(): void
+  
+  /** Enable depth write */
+  export function rlEnableDepthMask(): void
+  
+  /** Disable depth write */
+  export function rlDisableDepthMask(): void
+  
+  /** Enable backface culling */
+  export function rlEnableBackfaceCulling(): void
+  
+  /** Disable backface culling */
+  export function rlDisableBackfaceCulling(): void
+  
+  /** Enable scissor test */
+  export function rlEnableScissorTest(): void
+  
+  /** Disable scissor test */
+  export function rlDisableScissorTest(): void
+  
+  /** Scissor test */
+  export function rlScissor(x: number, y: number, width: number, height: number): void
+  
+  /** Enable wire mode */
+  export function rlEnableWireMode(): void
+  
+  /** Disable wire mode */
+  export function rlDisableWireMode(): void
+  
+  /** Set the line drawing width */
+  export function rlSetLineWidth(width: number): void
+  
+  /** Get the line drawing width */
+  export function rlGetLineWidth(): number
+  
+  /** Enable line aliasing */
+  export function rlEnableSmoothLines(): void
+  
+  /** Disable line aliasing */
+  export function rlDisableSmoothLines(): void
+  
+  /** Enable stereo rendering */
+  export function rlEnableStereoRender(): void
+  
+  /** Disable stereo rendering */
+  export function rlDisableStereoRender(): void
+  
+  /** Check if stereo render is enabled */
+  export function rlIsStereoRenderEnabled(): boolean
+  
+  /** Clear color buffer with color */
+  export function rlClearColor(r: number, g: number, b: number, a: number): void
+  
+  /** Clear used screen buffers (color and depth) */
+  export function rlClearScreenBuffers(): void
+  
+  /** Check and log OpenGL error codes */
+  export function rlCheckErrors(): void
+  
+  /** Set blending mode */
+  export function rlSetBlendMode(mode: number): void
+  
+  /** Set blending mode factor and equation (using OpenGL factors) */
+  export function rlSetBlendFactors(glSrcFactor: number, glDstFactor: number, glEquation: number): void
+  
+  /** Initialize rlgl (buffers, shaders, textures, states) */
+  export function rlglInit(width: number, height: number): void
+  
+  /** De-inititialize rlgl (buffers, shaders, textures) */
+  export function rlglClose(): void
+  
+  /** Load OpenGL extensions (loader function required) */
+  export function rlLoadExtensions(loader: number): void
+  
+  /** Get current OpenGL version */
+  export function rlGetVersion(): number
+  
+  /** Set current framebuffer width */
+  export function rlSetFramebufferWidth(width: number): void
+  
+  /** Get default framebuffer width */
+  export function rlGetFramebufferWidth(): number
+  
+  /** Set current framebuffer height */
+  export function rlSetFramebufferHeight(height: number): void
+  
+  /** Get default framebuffer height */
+  export function rlGetFramebufferHeight(): number
+  
+  /** Get default texture id */
+  export function rlGetTextureIdDefault(): number
+  
+  /** Get default shader id */
+  export function rlGetShaderIdDefault(): number
+  
+  /** Get default shader locations */
+  export function rlGetShaderLocsDefault(): number
+  
+  /** Load a render batch system */
+  export function rlLoadRenderBatch(numBuffers: number, bufferElements: number): rlRenderBatch
+  
+  /** Unload render batch system */
+  export function rlUnloadRenderBatch(batch: rlRenderBatch): void
+  
+  /** Draw render batch data (Update->Draw->Reset) */
+  export function rlDrawRenderBatch(batch: number): void
+  
+  /** Set the active render batch for rlgl (NULL for default internal) */
+  export function rlSetRenderBatchActive(batch: number): void
+  
+  /** Update and draw internal render batch */
+  export function rlDrawRenderBatchActive(): void
+  
+  /** Check internal buffer overflow for a given number of vertex */
+  export function rlCheckRenderBatchLimit(vCount: number): boolean
+  
+  /** Set current texture for render batch and check buffers limits */
+  export function rlSetTexture(id: number): void
+  
+  /** Load vertex array (vao) if supported */
+  export function rlLoadVertexArray(): number
+  
+  /** Load a vertex buffer attribute */
+  export function rlLoadVertexBuffer(buffer: number, size: number, dynamic: boolean): number
+  
+  /** Load a new attributes element buffer */
+  export function rlLoadVertexBufferElement(buffer: number, size: number, dynamic: boolean): number
+  
+  /** Update GPU buffer with new data */
+  export function rlUpdateVertexBuffer(bufferId: number, data: number, dataSize: number, offset: number): void
+  
+  /** Update vertex buffer elements with new data */
+  export function rlUpdateVertexBufferElements(id: number, data: number, dataSize: number, offset: number): void
+  
+  /**  */
+  export function rlUnloadVertexArray(vaoId: number): void
+  
+  /**  */
+  export function rlUnloadVertexBuffer(vboId: number): void
+  
+  /**  */
+  export function rlSetVertexAttribute(index: number, compSize: number, type: number, normalized: boolean, stride: number, pointer: number): void
+  
+  /**  */
+  export function rlSetVertexAttributeDivisor(index: number, divisor: number): void
+  
+  /** Set vertex attribute default value */
+  export function rlSetVertexAttributeDefault(locIndex: number, value: number, attribType: number, count: number): void
+  
+  /**  */
+  export function rlDrawVertexArray(offset: number, count: number): void
+  
+  /**  */
+  export function rlDrawVertexArrayElements(offset: number, count: number, buffer: number): void
+  
+  /**  */
+  export function rlDrawVertexArrayInstanced(offset: number, count: number, instances: number): void
+  
+  /**  */
+  export function rlDrawVertexArrayElementsInstanced(offset: number, count: number, buffer: number, instances: number): void
+  
+  /** Load texture in GPU */
+  export function rlLoadTexture(data: number, width: number, height: number, format: number, mipmapCount: number): number
+  
+  /** Load depth texture/renderbuffer (to be attached to fbo) */
+  export function rlLoadTextureDepth(width: number, height: number, useRenderBuffer: boolean): number
+  
+  /** Load texture cubemap */
+  export function rlLoadTextureCubemap(data: number, size: number, format: number): number
+  
+  /** Update GPU texture with new data */
+  export function rlUpdateTexture(id: number, offsetX: number, offsetY: number, width: number, height: number, format: number, data: number): void
+  
+  /** Get OpenGL internal formats */
+  export function rlGetGlTextureFormats(format: number, glInternalFormat: number, glFormat: number, glType: number): void
+  
+  /** Get name string for pixel format */
+  export function rlGetPixelFormatName(format: number): string
+  
+  /** Unload texture from GPU memory */
+  export function rlUnloadTexture(id: number): void
+  
+  /** Generate mipmap data for selected texture */
+  export function rlGenTextureMipmaps(id: number, width: number, height: number, format: number, mipmaps: number): void
+  
+  /** Read texture pixel data */
+  export function rlReadTexturePixels(id: number, width: number, height: number, format: number): number
+  
+  /** Read screen pixel data (color buffer) */
+  export function rlReadScreenPixels(width: number, height: number): Buffer
+  
+  /** Load an empty framebuffer */
+  export function rlLoadFramebuffer(width: number, height: number): number
+  
+  /** Attach texture/renderbuffer to a framebuffer */
+  export function rlFramebufferAttach(fboId: number, texId: number, attachType: number, texType: number, mipLevel: number): void
+  
+  /** Verify framebuffer is complete */
+  export function rlFramebufferComplete(id: number): boolean
+  
+  /** Delete framebuffer from GPU */
+  export function rlUnloadFramebuffer(id: number): void
+  
+  /** Load shader from code strings */
+  export function rlLoadShaderCode(vsCode: string, fsCode: string): number
+  
+  /** Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER) */
+  export function rlCompileShader(shaderCode: string, type: number): number
+  
+  /** Load custom shader program */
+  export function rlLoadShaderProgram(vShaderId: number, fShaderId: number): number
+  
+  /** Unload shader program */
+  export function rlUnloadShaderProgram(id: number): void
+  
+  /** Get shader location uniform */
+  export function rlGetLocationUniform(shaderId: number, uniformName: string): number
+  
+  /** Get shader location attribute */
+  export function rlGetLocationAttrib(shaderId: number, attribName: string): number
+  
+  /** Set shader value uniform */
+  export function rlSetUniform(locIndex: number, value: number, uniformType: number, count: number): void
+  
+  /** Set shader value matrix */
+  export function rlSetUniformMatrix(locIndex: number, mat: Matrix): void
+  
+  /** Set shader value sampler */
+  export function rlSetUniformSampler(locIndex: number, textureId: number): void
+  
+  /** Set shader currently active (id and locations) */
+  export function rlSetShader(id: number, locs: number): void
+  
+  /** Load compute shader program */
+  export function rlLoadComputeShaderProgram(shaderId: number): number
+  
+  /** Dispatch compute shader (equivalent to *draw* for graphics pilepine) */
+  export function rlComputeShaderDispatch(groupX: number, groupY: number, groupZ: number): void
+  
+  /** Load shader storage buffer object (SSBO) */
+  export function rlLoadShaderBuffer(size: BigInt, data: number, usageHint: number): number
+  
+  /** Unload shader storage buffer object (SSBO) */
+  export function rlUnloadShaderBuffer(ssboId: number): void
+  
+  /** Update SSBO buffer data */
+  export function rlUpdateShaderBufferElements(id: number, data: number, dataSize: BigInt, offset: BigInt): void
+  
+  /** Get SSBO buffer size */
+  export function rlGetShaderBufferSize(id: number): BigInt
+  
+  /** Bind SSBO buffer */
+  export function rlReadShaderBufferElements(id: number, dest: number, count: BigInt, offset: BigInt): void
+  
+  /** Copy SSBO buffer data */
+  export function rlBindShaderBuffer(id: number, index: number): void
+  
+  /** Copy SSBO buffer data */
+  export function rlCopyBuffersElements(destId: number, srcId: number, destOffset: BigInt, srcOffset: BigInt, count: BigInt): void
+  
+  /** Bind image texture */
+  export function rlBindImageTexture(id: number, index: number, format: number, readonly: number): void
+  
+  /** Get internal modelview matrix */
+  export function rlGetMatrixModelview(): Matrix
+  
+  /** Get internal projection matrix */
+  export function rlGetMatrixProjection(): Matrix
+  
+  /** Get internal accumulated transform matrix */
+  export function rlGetMatrixTransform(): Matrix
+  
+  /** Get internal projection matrix for stereo render (selected eye) */
+  export function rlGetMatrixProjectionStereo(eye: number): Matrix
+  
+  /** Get internal view offset matrix for stereo render (selected eye) */
+  export function rlGetMatrixViewOffsetStereo(eye: number): Matrix
+  
+  /** Set a custom projection matrix (replaces internal projection matrix) */
+  export function rlSetMatrixProjection(proj: Matrix): void
+  
+  /** Set a custom modelview matrix (replaces internal modelview matrix) */
+  export function rlSetMatrixModelview(view: Matrix): void
+  
+  /** Set eyes projection matrices for stereo rendering */
+  export function rlSetMatrixProjectionStereo(right: Matrix, left: Matrix): void
+  
+  /** Set eyes view offsets matrices for stereo rendering */
+  export function rlSetMatrixViewOffsetStereo(right: Matrix, left: Matrix): void
+  
+  /** Load and draw a cube */
+  export function rlLoadDrawCube(): void
+  
+  /** Load and draw a quad */
+  export function rlLoadDrawQuad(): void
+  
 
   /** Set shader uniform float */
   export function SetShaderFloat(shader: Shader, locIndex: number, value: number): void
@@ -3697,6 +4166,296 @@ declare module "raylib" {
   export const ICON_254 = 254
   /**  */
   export const ICON_255 = 255
+  /**  */
+  export const OPENGL_11 = 1
+  /**  */
+  export const OPENGL_21 = 2
+  /**  */
+  export const OPENGL_33 = 3
+  /**  */
+  export const OPENGL_43 = 4
+  /**  */
+  export const OPENGL_ES_20 = 5
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL0 = 0
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL1 = 1
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL2 = 2
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL3 = 3
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL4 = 4
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL5 = 5
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL6 = 6
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL7 = 7
+  /**  */
+  export const RL_ATTACHMENT_DEPTH = 100
+  /**  */
+  export const RL_ATTACHMENT_STENCIL = 200
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
+  /**  */
+  export const RL_ATTACHMENT_TEXTURE2D = 100
+  /**  */
+  export const RL_ATTACHMENT_RENDERBUFFER = 200
+  /** Display all logs */
+  export const RL_LOG_ALL = 0
+  /** Trace logging, intended for internal use only */
+  export const RL_LOG_TRACE = 1
+  /** Debug logging, used for internal debugging, it should be disabled on release builds */
+  export const RL_LOG_DEBUG = 2
+  /** Info logging, used for program execution info */
+  export const RL_LOG_INFO = 3
+  /** Warning logging, used on recoverable failures */
+  export const RL_LOG_WARNING = 4
+  /** Error logging, used on unrecoverable failures */
+  export const RL_LOG_ERROR = 5
+  /** Fatal logging, used to abort program: exit(EXIT_FAILURE) */
+  export const RL_LOG_FATAL = 6
+  /** Disable logging */
+  export const RL_LOG_NONE = 7
+  /** 8 bit per pixel (no alpha) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1
+  /** 8*2 bpp (2 channels) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2
+  /** 16 bpp */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3
+  /** 24 bpp */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4
+  /** 16 bpp (1 bit alpha) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5
+  /** 16 bpp (4 bit alpha) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6
+  /** 32 bpp */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7
+  /** 32 bpp (1 channel - float) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8
+  /** 32*3 bpp (3 channels - float) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
+  /** 32*4 bpp (4 channels - float) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
+  /** 4 bpp (no alpha) */
+  export const RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+  /** 4 bpp (1 bit alpha) */
+  export const RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+  /** 8 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+  /** 8 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+  /** 4 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+  /** 4 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+  /** 8 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+  /** 4 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+  /** 4 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+  /** 8 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+  /** 2 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
+  /** No filter, just pixel approximation */
+  export const RL_TEXTURE_FILTER_POINT = 0
+  /** Linear filtering */
+  export const RL_TEXTURE_FILTER_BILINEAR = 1
+  /** Trilinear filtering (linear with mipmaps) */
+  export const RL_TEXTURE_FILTER_TRILINEAR = 2
+  /** Anisotropic filtering 4x */
+  export const RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3
+  /** Anisotropic filtering 8x */
+  export const RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4
+  /** Anisotropic filtering 16x */
+  export const RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5
+  /** Blend textures considering alpha (default) */
+  export const RL_BLEND_ALPHA = 0
+  /** Blend textures adding colors */
+  export const RL_BLEND_ADDITIVE = 1
+  /** Blend textures multiplying colors */
+  export const RL_BLEND_MULTIPLIED = 2
+  /** Blend textures adding colors (alternative) */
+  export const RL_BLEND_ADD_COLORS = 3
+  /** Blend textures subtracting colors (alternative) */
+  export const RL_BLEND_SUBTRACT_COLORS = 4
+  /** Blend premultiplied textures considering alpha */
+  export const RL_BLEND_ALPHA_PREMULTIPLY = 5
+  /** Blend textures using custom src/dst factors (use rlSetBlendFactors()) */
+  export const RL_BLEND_CUSTOM = 6
+  /** Shader location: vertex attribute: position */
+  export const RL_SHADER_LOC_VERTEX_POSITION = 0
+  /** Shader location: vertex attribute: texcoord01 */
+  export const RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1
+  /** Shader location: vertex attribute: texcoord02 */
+  export const RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2
+  /** Shader location: vertex attribute: normal */
+  export const RL_SHADER_LOC_VERTEX_NORMAL = 3
+  /** Shader location: vertex attribute: tangent */
+  export const RL_SHADER_LOC_VERTEX_TANGENT = 4
+  /** Shader location: vertex attribute: color */
+  export const RL_SHADER_LOC_VERTEX_COLOR = 5
+  /** Shader location: matrix uniform: model-view-projection */
+  export const RL_SHADER_LOC_MATRIX_MVP = 6
+  /** Shader location: matrix uniform: view (camera transform) */
+  export const RL_SHADER_LOC_MATRIX_VIEW = 7
+  /** Shader location: matrix uniform: projection */
+  export const RL_SHADER_LOC_MATRIX_PROJECTION = 8
+  /** Shader location: matrix uniform: model (transform) */
+  export const RL_SHADER_LOC_MATRIX_MODEL = 9
+  /** Shader location: matrix uniform: normal */
+  export const RL_SHADER_LOC_MATRIX_NORMAL = 10
+  /** Shader location: vector uniform: view */
+  export const RL_SHADER_LOC_VECTOR_VIEW = 11
+  /** Shader location: vector uniform: diffuse color */
+  export const RL_SHADER_LOC_COLOR_DIFFUSE = 12
+  /** Shader location: vector uniform: specular color */
+  export const RL_SHADER_LOC_COLOR_SPECULAR = 13
+  /** Shader location: vector uniform: ambient color */
+  export const RL_SHADER_LOC_COLOR_AMBIENT = 14
+  /** Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE) */
+  export const RL_SHADER_LOC_MAP_ALBEDO = 15
+  /** Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR) */
+  export const RL_SHADER_LOC_MAP_METALNESS = 16
+  /** Shader location: sampler2d texture: normal */
+  export const RL_SHADER_LOC_MAP_NORMAL = 17
+  /** Shader location: sampler2d texture: roughness */
+  export const RL_SHADER_LOC_MAP_ROUGHNESS = 18
+  /** Shader location: sampler2d texture: occlusion */
+  export const RL_SHADER_LOC_MAP_OCCLUSION = 19
+  /** Shader location: sampler2d texture: emission */
+  export const RL_SHADER_LOC_MAP_EMISSION = 20
+  /** Shader location: sampler2d texture: height */
+  export const RL_SHADER_LOC_MAP_HEIGHT = 21
+  /** Shader location: samplerCube texture: cubemap */
+  export const RL_SHADER_LOC_MAP_CUBEMAP = 22
+  /** Shader location: samplerCube texture: irradiance */
+  export const RL_SHADER_LOC_MAP_IRRADIANCE = 23
+  /** Shader location: samplerCube texture: prefilter */
+  export const RL_SHADER_LOC_MAP_PREFILTER = 24
+  /** Shader location: sampler2d texture: brdf */
+  export const RL_SHADER_LOC_MAP_BRDF = 25
+  /** Shader uniform type: float */
+  export const RL_SHADER_UNIFORM_FLOAT = 0
+  /** Shader uniform type: vec2 (2 float) */
+  export const RL_SHADER_UNIFORM_VEC2 = 1
+  /** Shader uniform type: vec3 (3 float) */
+  export const RL_SHADER_UNIFORM_VEC3 = 2
+  /** Shader uniform type: vec4 (4 float) */
+  export const RL_SHADER_UNIFORM_VEC4 = 3
+  /** Shader uniform type: int */
+  export const RL_SHADER_UNIFORM_INT = 4
+  /** Shader uniform type: ivec2 (2 int) */
+  export const RL_SHADER_UNIFORM_IVEC2 = 5
+  /** Shader uniform type: ivec3 (3 int) */
+  export const RL_SHADER_UNIFORM_IVEC3 = 6
+  /** Shader uniform type: ivec4 (4 int) */
+  export const RL_SHADER_UNIFORM_IVEC4 = 7
+  /** Shader uniform type: sampler2d */
+  export const RL_SHADER_UNIFORM_SAMPLER2D = 8
+  /** Shader attribute type: float */
+  export const RL_SHADER_ATTRIB_FLOAT = 0
+  /** Shader attribute type: vec2 (2 float) */
+  export const RL_SHADER_ATTRIB_VEC2 = 1
+  /** Shader attribute type: vec3 (3 float) */
+  export const RL_SHADER_ATTRIB_VEC3 = 2
+  /** Shader attribute type: vec4 (4 float) */
+  export const RL_SHADER_ATTRIB_VEC4 = 3
+  /**  */
+  export const RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
+  /** Default number of batch buffers (multi-buffering) */
+  export const RL_DEFAULT_BATCH_BUFFERS = 1
+  /** Default number of batch draw calls (by state changes: mode, texture) */
+  export const RL_DEFAULT_BATCH_DRAWCALLS = 256
+  /** Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture()) */
+  export const RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4
+  /** Maximum size of Matrix stack */
+  export const RL_MAX_MATRIX_STACK_SIZE = 32
+  /** Maximum number of shader locations supported */
+  export const RL_MAX_SHADER_LOCATIONS = 32
+  /** GL_TEXTURE_WRAP_S */
+  export const RL_TEXTURE_WRAP_S = 10242
+  /** GL_TEXTURE_WRAP_T */
+  export const RL_TEXTURE_WRAP_T = 10243
+  /** GL_TEXTURE_MAG_FILTER */
+  export const RL_TEXTURE_MAG_FILTER = 10240
+  /** GL_TEXTURE_MIN_FILTER */
+  export const RL_TEXTURE_MIN_FILTER = 10241
+  /** GL_NEAREST */
+  export const RL_TEXTURE_FILTER_NEAREST = 9728
+  /** GL_LINEAR */
+  export const RL_TEXTURE_FILTER_LINEAR = 9729
+  /** GL_NEAREST_MIPMAP_NEAREST */
+  export const RL_TEXTURE_FILTER_MIP_NEAREST = 9984
+  /** GL_NEAREST_MIPMAP_LINEAR */
+  export const RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 9986
+  /** GL_LINEAR_MIPMAP_NEAREST */
+  export const RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 9985
+  /** GL_LINEAR_MIPMAP_LINEAR */
+  export const RL_TEXTURE_FILTER_MIP_LINEAR = 9987
+  /** Anisotropic filter (custom identifier) */
+  export const RL_TEXTURE_FILTER_ANISOTROPIC = 12288
+  /** GL_REPEAT */
+  export const RL_TEXTURE_WRAP_REPEAT = 10497
+  /** GL_CLAMP_TO_EDGE */
+  export const RL_TEXTURE_WRAP_CLAMP = 33071
+  /** GL_MIRRORED_REPEAT */
+  export const RL_TEXTURE_WRAP_MIRROR_REPEAT = 33648
+  /** GL_MIRROR_CLAMP_EXT */
+  export const RL_TEXTURE_WRAP_MIRROR_CLAMP = 34626
+  /** GL_MODELVIEW */
+  export const RL_MODELVIEW = 5888
+  /** GL_PROJECTION */
+  export const RL_PROJECTION = 5889
+  /** GL_TEXTURE */
+  export const RL_TEXTURE = 5890
+  /** GL_LINES */
+  export const RL_LINES = 1
+  /** GL_TRIANGLES */
+  export const RL_TRIANGLES = 4
+  /** GL_QUADS */
+  export const RL_QUADS = 7
+  /** GL_UNSIGNED_BYTE */
+  export const RL_UNSIGNED_BYTE = 5121
+  /** GL_FLOAT */
+  export const RL_FLOAT = 5126
+  /** GL_STREAM_DRAW */
+  export const RL_STREAM_DRAW = 35040
+  /** GL_STREAM_READ */
+  export const RL_STREAM_READ = 35041
+  /** GL_STREAM_COPY */
+  export const RL_STREAM_COPY = 35042
+  /** GL_STATIC_DRAW */
+  export const RL_STATIC_DRAW = 35044
+  /** GL_STATIC_READ */
+  export const RL_STATIC_READ = 35045
+  /** GL_STATIC_COPY */
+  export const RL_STATIC_COPY = 35046
+  /** GL_DYNAMIC_DRAW */
+  export const RL_DYNAMIC_DRAW = 35048
+  /** GL_DYNAMIC_READ */
+  export const RL_DYNAMIC_READ = 35049
+  /** GL_DYNAMIC_COPY */
+  export const RL_DYNAMIC_COPY = 35050
+  /** GL_FRAGMENT_SHADER */
+  export const RL_FRAGMENT_SHADER = 35632
+  /** GL_VERTEX_SHADER */
+  export const RL_VERTEX_SHADER = 35633
+  /** GL_COMPUTE_SHADER */
+  export const RL_COMPUTE_SHADER = 37305
 
   export const LIGHTGRAY: { r: 200, g: 200, b: 200, a: 255 }
   export const GRAY: { r: 130, g: 130, b: 130, a: 255 }

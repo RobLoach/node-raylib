@@ -8,6 +8,7 @@
 #include "raymath.h"
 
 #include "../extras/reasings.h"
+#include "../extras/rlgl.h"
 
 #define RAYGUI_IMPLEMENTATION
 #include "../extras/raygui.h"
@@ -44,6 +45,9 @@ inline Napi::Value ToValue(Napi::Env env, float value) {
 inline Napi::Value ToValue(Napi::Env env, void * value) {
   return Napi::Number::New(env, (int64_t) value);
 }
+inline Napi::Value ToValue(Napi::Env env, unsigned long long value) {
+  return Napi::BigInt::New(env, (uint64_t) value);
+}
 
 inline float floatFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().FloatValue();
@@ -62,6 +66,9 @@ inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int i
 }
 inline unsigned int unsignedintFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
+}
+inline unsigned long long unsignedlonglongFromValue(const Napi::CallbackInfo& info, int index) {
+  return (unsigned long long) info[index].As<Napi::BigInt>().Uint64Value(0);
 }
 inline bool boolFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Boolean>();
@@ -361,6 +368,38 @@ inline FilePathList FilePathListFromValue(const Napi::CallbackInfo& info, int in
      (char **) pointerFromValue(info, index + 2)
   };
 }
+
+inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     intFromValue(info, index + 0),
+     (float *) pointerFromValue(info, index + 1),
+     (float *) pointerFromValue(info, index + 2),
+     (unsigned char *) pointerFromValue(info, index + 3),
+     (unsigned int *) pointerFromValue(info, index + 4),
+     unsignedintFromValue(info, index + 5),
+     (unsigned int) pointerFromValue(info, index + 6)
+  };
+}
+
+inline rlDrawCall rlDrawCallFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     intFromValue(info, index + 0),
+     intFromValue(info, index + 1),
+     intFromValue(info, index + 2),
+     unsignedintFromValue(info, index + 3)
+  };
+}
+
+inline rlRenderBatch rlRenderBatchFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     intFromValue(info, index + 0),
+     intFromValue(info, index + 1),
+     (rlVertexBuffer *) pointerFromValue(info, index + 2),
+     (rlDrawCall *) pointerFromValue(info, index + 3),
+     intFromValue(info, index + 4),
+     floatFromValue(info, index + 5)
+  };
+}
 // Convert structs to Napi::Objects for output to JS
 
 inline Napi::Value ToValue(Napi::Env env, Vector2 obj) {
@@ -643,6 +682,38 @@ inline Napi::Value ToValue(Napi::Env env, FilePathList obj) {
   out.Set("capacity", ToValue(env, obj.capacity));
   out.Set("count", ToValue(env, obj.count));
   out.Set("paths", ToValue(env, obj.paths));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, rlVertexBuffer obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("elementCount", ToValue(env, obj.elementCount));
+  out.Set("vertices", ToValue(env, obj.vertices));
+  out.Set("texcoords", ToValue(env, obj.texcoords));
+  out.Set("colors", ToValue(env, obj.colors));
+  out.Set("indices", ToValue(env, obj.indices));
+  out.Set("vaoId", ToValue(env, obj.vaoId));
+  out.Set("vboId", ToValue(env, obj.vboId));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, rlDrawCall obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("mode", ToValue(env, obj.mode));
+  out.Set("vertexCount", ToValue(env, obj.vertexCount));
+  out.Set("vertexAlignment", ToValue(env, obj.vertexAlignment));
+  out.Set("textureId", ToValue(env, obj.textureId));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, rlRenderBatch obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("bufferCount", ToValue(env, obj.bufferCount));
+  out.Set("currentBuffer", ToValue(env, obj.currentBuffer));
+  out.Set("vertexBuffer", ToValue(env, obj.vertexBuffer));
+  out.Set("draws", ToValue(env, obj.draws));
+  out.Set("drawCounter", ToValue(env, obj.drawCounter));
+  out.Set("currentDepth", ToValue(env, obj.currentDepth));
   return out;
 }
 
@@ -4344,6 +4415,311 @@ Napi::Value BindGuiCheckIconPixel(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindrlEnableVertexArray(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlEnableVertexArray(
+       unsignedintFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindrlGetLineWidth(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetLineWidth(
+      
+    )
+  );
+}
+
+Napi::Value BindrlIsStereoRenderEnabled(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlIsStereoRenderEnabled(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetVersion(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetVersion(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetFramebufferWidth(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetFramebufferWidth(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetFramebufferHeight(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetFramebufferHeight(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetTextureIdDefault(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetTextureIdDefault(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetShaderIdDefault(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetShaderIdDefault(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetShaderLocsDefault(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetShaderLocsDefault(
+      
+    )
+  );
+}
+
+Napi::Value BindrlLoadRenderBatch(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadRenderBatch(
+       intFromValue(info, 0),
+       intFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindrlCheckRenderBatchLimit(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlCheckRenderBatchLimit(
+       intFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindrlLoadVertexArray(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadVertexArray(
+      
+    )
+  );
+}
+
+Napi::Value BindrlLoadVertexBuffer(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadVertexBuffer(
+       (const void *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       boolFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindrlLoadVertexBufferElement(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadVertexBufferElement(
+       (const void *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       boolFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindrlLoadTexture(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadTexture(
+       (const void *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3),
+       intFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindrlLoadTextureDepth(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadTextureDepth(
+       intFromValue(info, 0),
+       intFromValue(info, 1),
+       boolFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindrlLoadTextureCubemap(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadTextureCubemap(
+       (const void *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindrlGetPixelFormatName(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetPixelFormatName(
+       unsignedintFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindrlReadTexturePixels(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlReadTexturePixels(
+       unsignedintFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindrlReadScreenPixels(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlReadScreenPixels(
+       intFromValue(info, 0),
+       intFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindrlLoadFramebuffer(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadFramebuffer(
+       intFromValue(info, 0),
+       intFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindrlFramebufferComplete(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlFramebufferComplete(
+       unsignedintFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindrlLoadShaderCode(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadShaderCode(
+       (const char *) stringFromValue(info, 0),
+       (const char *) stringFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindrlCompileShader(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlCompileShader(
+       (const char *) stringFromValue(info, 0),
+       intFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindrlLoadShaderProgram(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadShaderProgram(
+       unsignedintFromValue(info, 0),
+       unsignedintFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindrlGetLocationUniform(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetLocationUniform(
+       unsignedintFromValue(info, 0),
+       (const char *) stringFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindrlGetLocationAttrib(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetLocationAttrib(
+       unsignedintFromValue(info, 0),
+       (const char *) stringFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindrlLoadComputeShaderProgram(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadComputeShaderProgram(
+       unsignedintFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindrlLoadShaderBuffer(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlLoadShaderBuffer(
+       unsignedlonglongFromValue(info, 0),
+       (const void *) pointerFromValue(info, 1),
+       intFromValue(info, 2)
+    )
+  );
+}
+
+Napi::Value BindrlGetShaderBufferSize(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetShaderBufferSize(
+       unsignedintFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindrlGetMatrixModelview(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetMatrixModelview(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetMatrixProjection(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetMatrixProjection(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetMatrixTransform(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetMatrixTransform(
+      
+    )
+  );
+}
+
+Napi::Value BindrlGetMatrixProjectionStereo(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetMatrixProjectionStereo(
+       intFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindrlGetMatrixViewOffsetStereo(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    rlGetMatrixViewOffsetStereo(
+       intFromValue(info, 0)
+    )
+  );
+}
+
 void BindInitWindow(const Napi::CallbackInfo& info) {
   InitWindow(
      intFromValue(info, 0),
@@ -6079,6 +6455,758 @@ void BindGuiClearIconPixel(const Napi::CallbackInfo& info) {
        intFromValue(info, 2)
   );
 }
+
+void BindrlMatrixMode(const Napi::CallbackInfo& info) {
+  rlMatrixMode(
+     intFromValue(info, 0)
+  );
+}
+
+void BindrlPushMatrix(const Napi::CallbackInfo& info) {
+  rlPushMatrix(
+    
+  );
+}
+
+void BindrlPopMatrix(const Napi::CallbackInfo& info) {
+  rlPopMatrix(
+    
+  );
+}
+
+void BindrlLoadIdentity(const Napi::CallbackInfo& info) {
+  rlLoadIdentity(
+    
+  );
+}
+
+void BindrlTranslatef(const Napi::CallbackInfo& info) {
+  rlTranslatef(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+  );
+}
+
+void BindrlRotatef(const Napi::CallbackInfo& info) {
+  rlRotatef(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2),
+       floatFromValue(info, 3)
+  );
+}
+
+void BindrlScalef(const Napi::CallbackInfo& info) {
+  rlScalef(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+  );
+}
+
+void BindrlMultMatrixf(const Napi::CallbackInfo& info) {
+  rlMultMatrixf(
+     (float *) pointerFromValue(info, 0)
+  );
+}
+
+void BindrlFrustum(const Napi::CallbackInfo& info) {
+  rlFrustum(
+     doubleFromValue(info, 0),
+       doubleFromValue(info, 1),
+       doubleFromValue(info, 2),
+       doubleFromValue(info, 3),
+       doubleFromValue(info, 4),
+       doubleFromValue(info, 5)
+  );
+}
+
+void BindrlOrtho(const Napi::CallbackInfo& info) {
+  rlOrtho(
+     doubleFromValue(info, 0),
+       doubleFromValue(info, 1),
+       doubleFromValue(info, 2),
+       doubleFromValue(info, 3),
+       doubleFromValue(info, 4),
+       doubleFromValue(info, 5)
+  );
+}
+
+void BindrlViewport(const Napi::CallbackInfo& info) {
+  rlViewport(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3)
+  );
+}
+
+void BindrlBegin(const Napi::CallbackInfo& info) {
+  rlBegin(
+     intFromValue(info, 0)
+  );
+}
+
+void BindrlEnd(const Napi::CallbackInfo& info) {
+  rlEnd(
+    
+  );
+}
+
+void BindrlVertex2i(const Napi::CallbackInfo& info) {
+  rlVertex2i(
+     intFromValue(info, 0),
+       intFromValue(info, 1)
+  );
+}
+
+void BindrlVertex2f(const Napi::CallbackInfo& info) {
+  rlVertex2f(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1)
+  );
+}
+
+void BindrlVertex3f(const Napi::CallbackInfo& info) {
+  rlVertex3f(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+  );
+}
+
+void BindrlTexCoord2f(const Napi::CallbackInfo& info) {
+  rlTexCoord2f(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1)
+  );
+}
+
+void BindrlNormal3f(const Napi::CallbackInfo& info) {
+  rlNormal3f(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+  );
+}
+
+void BindrlColor4ub(const Napi::CallbackInfo& info) {
+  rlColor4ub(
+     unsignedcharFromValue(info, 0),
+       unsignedcharFromValue(info, 1),
+       unsignedcharFromValue(info, 2),
+       unsignedcharFromValue(info, 3)
+  );
+}
+
+void BindrlColor3f(const Napi::CallbackInfo& info) {
+  rlColor3f(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2)
+  );
+}
+
+void BindrlColor4f(const Napi::CallbackInfo& info) {
+  rlColor4f(
+     floatFromValue(info, 0),
+       floatFromValue(info, 1),
+       floatFromValue(info, 2),
+       floatFromValue(info, 3)
+  );
+}
+
+void BindrlDisableVertexArray(const Napi::CallbackInfo& info) {
+  rlDisableVertexArray(
+    
+  );
+}
+
+void BindrlEnableVertexBuffer(const Napi::CallbackInfo& info) {
+  rlEnableVertexBuffer(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlDisableVertexBuffer(const Napi::CallbackInfo& info) {
+  rlDisableVertexBuffer(
+    
+  );
+}
+
+void BindrlEnableVertexBufferElement(const Napi::CallbackInfo& info) {
+  rlEnableVertexBufferElement(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlDisableVertexBufferElement(const Napi::CallbackInfo& info) {
+  rlDisableVertexBufferElement(
+    
+  );
+}
+
+void BindrlEnableVertexAttribute(const Napi::CallbackInfo& info) {
+  rlEnableVertexAttribute(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlDisableVertexAttribute(const Napi::CallbackInfo& info) {
+  rlDisableVertexAttribute(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlActiveTextureSlot(const Napi::CallbackInfo& info) {
+  rlActiveTextureSlot(
+     intFromValue(info, 0)
+  );
+}
+
+void BindrlEnableTexture(const Napi::CallbackInfo& info) {
+  rlEnableTexture(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlDisableTexture(const Napi::CallbackInfo& info) {
+  rlDisableTexture(
+    
+  );
+}
+
+void BindrlEnableTextureCubemap(const Napi::CallbackInfo& info) {
+  rlEnableTextureCubemap(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlDisableTextureCubemap(const Napi::CallbackInfo& info) {
+  rlDisableTextureCubemap(
+    
+  );
+}
+
+void BindrlTextureParameters(const Napi::CallbackInfo& info) {
+  rlTextureParameters(
+     unsignedintFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+  );
+}
+
+void BindrlEnableShader(const Napi::CallbackInfo& info) {
+  rlEnableShader(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlDisableShader(const Napi::CallbackInfo& info) {
+  rlDisableShader(
+    
+  );
+}
+
+void BindrlEnableFramebuffer(const Napi::CallbackInfo& info) {
+  rlEnableFramebuffer(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlDisableFramebuffer(const Napi::CallbackInfo& info) {
+  rlDisableFramebuffer(
+    
+  );
+}
+
+void BindrlActiveDrawBuffers(const Napi::CallbackInfo& info) {
+  rlActiveDrawBuffers(
+     intFromValue(info, 0)
+  );
+}
+
+void BindrlEnableColorBlend(const Napi::CallbackInfo& info) {
+  rlEnableColorBlend(
+    
+  );
+}
+
+void BindrlDisableColorBlend(const Napi::CallbackInfo& info) {
+  rlDisableColorBlend(
+    
+  );
+}
+
+void BindrlEnableDepthTest(const Napi::CallbackInfo& info) {
+  rlEnableDepthTest(
+    
+  );
+}
+
+void BindrlDisableDepthTest(const Napi::CallbackInfo& info) {
+  rlDisableDepthTest(
+    
+  );
+}
+
+void BindrlEnableDepthMask(const Napi::CallbackInfo& info) {
+  rlEnableDepthMask(
+    
+  );
+}
+
+void BindrlDisableDepthMask(const Napi::CallbackInfo& info) {
+  rlDisableDepthMask(
+    
+  );
+}
+
+void BindrlEnableBackfaceCulling(const Napi::CallbackInfo& info) {
+  rlEnableBackfaceCulling(
+    
+  );
+}
+
+void BindrlDisableBackfaceCulling(const Napi::CallbackInfo& info) {
+  rlDisableBackfaceCulling(
+    
+  );
+}
+
+void BindrlEnableScissorTest(const Napi::CallbackInfo& info) {
+  rlEnableScissorTest(
+    
+  );
+}
+
+void BindrlDisableScissorTest(const Napi::CallbackInfo& info) {
+  rlDisableScissorTest(
+    
+  );
+}
+
+void BindrlScissor(const Napi::CallbackInfo& info) {
+  rlScissor(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3)
+  );
+}
+
+void BindrlEnableWireMode(const Napi::CallbackInfo& info) {
+  rlEnableWireMode(
+    
+  );
+}
+
+void BindrlDisableWireMode(const Napi::CallbackInfo& info) {
+  rlDisableWireMode(
+    
+  );
+}
+
+void BindrlSetLineWidth(const Napi::CallbackInfo& info) {
+  rlSetLineWidth(
+     floatFromValue(info, 0)
+  );
+}
+
+void BindrlEnableSmoothLines(const Napi::CallbackInfo& info) {
+  rlEnableSmoothLines(
+    
+  );
+}
+
+void BindrlDisableSmoothLines(const Napi::CallbackInfo& info) {
+  rlDisableSmoothLines(
+    
+  );
+}
+
+void BindrlEnableStereoRender(const Napi::CallbackInfo& info) {
+  rlEnableStereoRender(
+    
+  );
+}
+
+void BindrlDisableStereoRender(const Napi::CallbackInfo& info) {
+  rlDisableStereoRender(
+    
+  );
+}
+
+void BindrlClearColor(const Napi::CallbackInfo& info) {
+  rlClearColor(
+     unsignedcharFromValue(info, 0),
+       unsignedcharFromValue(info, 1),
+       unsignedcharFromValue(info, 2),
+       unsignedcharFromValue(info, 3)
+  );
+}
+
+void BindrlClearScreenBuffers(const Napi::CallbackInfo& info) {
+  rlClearScreenBuffers(
+    
+  );
+}
+
+void BindrlCheckErrors(const Napi::CallbackInfo& info) {
+  rlCheckErrors(
+    
+  );
+}
+
+void BindrlSetBlendMode(const Napi::CallbackInfo& info) {
+  rlSetBlendMode(
+     intFromValue(info, 0)
+  );
+}
+
+void BindrlSetBlendFactors(const Napi::CallbackInfo& info) {
+  rlSetBlendFactors(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+  );
+}
+
+void BindrlglInit(const Napi::CallbackInfo& info) {
+  rlglInit(
+     intFromValue(info, 0),
+       intFromValue(info, 1)
+  );
+}
+
+void BindrlglClose(const Napi::CallbackInfo& info) {
+  rlglClose(
+    
+  );
+}
+
+void BindrlLoadExtensions(const Napi::CallbackInfo& info) {
+  rlLoadExtensions(
+     (void *) pointerFromValue(info, 0)
+  );
+}
+
+void BindrlSetFramebufferWidth(const Napi::CallbackInfo& info) {
+  rlSetFramebufferWidth(
+     intFromValue(info, 0)
+  );
+}
+
+void BindrlSetFramebufferHeight(const Napi::CallbackInfo& info) {
+  rlSetFramebufferHeight(
+     intFromValue(info, 0)
+  );
+}
+
+void BindrlUnloadRenderBatch(const Napi::CallbackInfo& info) {
+  rlUnloadRenderBatch(
+     rlRenderBatchFromValue(info, 0)
+  );
+}
+
+void BindrlDrawRenderBatch(const Napi::CallbackInfo& info) {
+  rlDrawRenderBatch(
+     (rlRenderBatch *) pointerFromValue(info, 0)
+  );
+}
+
+void BindrlSetRenderBatchActive(const Napi::CallbackInfo& info) {
+  rlSetRenderBatchActive(
+     (rlRenderBatch *) pointerFromValue(info, 0)
+  );
+}
+
+void BindrlDrawRenderBatchActive(const Napi::CallbackInfo& info) {
+  rlDrawRenderBatchActive(
+    
+  );
+}
+
+void BindrlSetTexture(const Napi::CallbackInfo& info) {
+  rlSetTexture(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlUpdateVertexBuffer(const Napi::CallbackInfo& info) {
+  rlUpdateVertexBuffer(
+     unsignedintFromValue(info, 0),
+       (const void *) pointerFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3)
+  );
+}
+
+void BindrlUpdateVertexBufferElements(const Napi::CallbackInfo& info) {
+  rlUpdateVertexBufferElements(
+     unsignedintFromValue(info, 0),
+       (const void *) pointerFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3)
+  );
+}
+
+void BindrlUnloadVertexArray(const Napi::CallbackInfo& info) {
+  rlUnloadVertexArray(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlUnloadVertexBuffer(const Napi::CallbackInfo& info) {
+  rlUnloadVertexBuffer(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlSetVertexAttribute(const Napi::CallbackInfo& info) {
+  rlSetVertexAttribute(
+     unsignedintFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       boolFromValue(info, 3),
+       intFromValue(info, 4),
+       (const void *) pointerFromValue(info, 5)
+  );
+}
+
+void BindrlSetVertexAttributeDivisor(const Napi::CallbackInfo& info) {
+  rlSetVertexAttributeDivisor(
+     unsignedintFromValue(info, 0),
+       intFromValue(info, 1)
+  );
+}
+
+void BindrlSetVertexAttributeDefault(const Napi::CallbackInfo& info) {
+  rlSetVertexAttributeDefault(
+     intFromValue(info, 0),
+       (const void *) pointerFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3)
+  );
+}
+
+void BindrlDrawVertexArray(const Napi::CallbackInfo& info) {
+  rlDrawVertexArray(
+     intFromValue(info, 0),
+       intFromValue(info, 1)
+  );
+}
+
+void BindrlDrawVertexArrayElements(const Napi::CallbackInfo& info) {
+  rlDrawVertexArrayElements(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       (const void *) pointerFromValue(info, 2)
+  );
+}
+
+void BindrlDrawVertexArrayInstanced(const Napi::CallbackInfo& info) {
+  rlDrawVertexArrayInstanced(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+  );
+}
+
+void BindrlDrawVertexArrayElementsInstanced(const Napi::CallbackInfo& info) {
+  rlDrawVertexArrayElementsInstanced(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       (const void *) pointerFromValue(info, 2),
+       intFromValue(info, 3)
+  );
+}
+
+void BindrlUpdateTexture(const Napi::CallbackInfo& info) {
+  rlUpdateTexture(
+     unsignedintFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3),
+       intFromValue(info, 4),
+       intFromValue(info, 5),
+       (const void *) pointerFromValue(info, 6)
+  );
+}
+
+void BindrlGetGlTextureFormats(const Napi::CallbackInfo& info) {
+  rlGetGlTextureFormats(
+     intFromValue(info, 0),
+       (unsigned int *) pointerFromValue(info, 1),
+       (unsigned int *) pointerFromValue(info, 2),
+       (unsigned int *) pointerFromValue(info, 3)
+  );
+}
+
+void BindrlUnloadTexture(const Napi::CallbackInfo& info) {
+  rlUnloadTexture(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlGenTextureMipmaps(const Napi::CallbackInfo& info) {
+  rlGenTextureMipmaps(
+     unsignedintFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3),
+       (int *) pointerFromValue(info, 4)
+  );
+}
+
+void BindrlFramebufferAttach(const Napi::CallbackInfo& info) {
+  rlFramebufferAttach(
+     unsignedintFromValue(info, 0),
+       unsignedintFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3),
+       intFromValue(info, 4)
+  );
+}
+
+void BindrlUnloadFramebuffer(const Napi::CallbackInfo& info) {
+  rlUnloadFramebuffer(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlUnloadShaderProgram(const Napi::CallbackInfo& info) {
+  rlUnloadShaderProgram(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlSetUniform(const Napi::CallbackInfo& info) {
+  rlSetUniform(
+     intFromValue(info, 0),
+       (const void *) pointerFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3)
+  );
+}
+
+void BindrlSetUniformMatrix(const Napi::CallbackInfo& info) {
+  rlSetUniformMatrix(
+     intFromValue(info, 0),
+       MatrixFromValue(info, 1)
+  );
+}
+
+void BindrlSetUniformSampler(const Napi::CallbackInfo& info) {
+  rlSetUniformSampler(
+     intFromValue(info, 0),
+       unsignedintFromValue(info, 1)
+  );
+}
+
+void BindrlSetShader(const Napi::CallbackInfo& info) {
+  rlSetShader(
+     unsignedintFromValue(info, 0),
+       (int *) pointerFromValue(info, 1)
+  );
+}
+
+void BindrlComputeShaderDispatch(const Napi::CallbackInfo& info) {
+  rlComputeShaderDispatch(
+     unsignedintFromValue(info, 0),
+       unsignedintFromValue(info, 1),
+       unsignedintFromValue(info, 2)
+  );
+}
+
+void BindrlUnloadShaderBuffer(const Napi::CallbackInfo& info) {
+  rlUnloadShaderBuffer(
+     unsignedintFromValue(info, 0)
+  );
+}
+
+void BindrlUpdateShaderBufferElements(const Napi::CallbackInfo& info) {
+  rlUpdateShaderBufferElements(
+     unsignedintFromValue(info, 0),
+       (const void *) pointerFromValue(info, 1),
+       unsignedlonglongFromValue(info, 2),
+       unsignedlonglongFromValue(info, 3)
+  );
+}
+
+void BindrlReadShaderBufferElements(const Napi::CallbackInfo& info) {
+  rlReadShaderBufferElements(
+     unsignedintFromValue(info, 0),
+       (void *) pointerFromValue(info, 1),
+       unsignedlonglongFromValue(info, 2),
+       unsignedlonglongFromValue(info, 3)
+  );
+}
+
+void BindrlBindShaderBuffer(const Napi::CallbackInfo& info) {
+  rlBindShaderBuffer(
+     unsignedintFromValue(info, 0),
+       unsignedintFromValue(info, 1)
+  );
+}
+
+void BindrlCopyBuffersElements(const Napi::CallbackInfo& info) {
+  rlCopyBuffersElements(
+     unsignedintFromValue(info, 0),
+       unsignedintFromValue(info, 1),
+       unsignedlonglongFromValue(info, 2),
+       unsignedlonglongFromValue(info, 3),
+       unsignedlonglongFromValue(info, 4)
+  );
+}
+
+void BindrlBindImageTexture(const Napi::CallbackInfo& info) {
+  rlBindImageTexture(
+     unsignedintFromValue(info, 0),
+       unsignedintFromValue(info, 1),
+       unsignedintFromValue(info, 2),
+       intFromValue(info, 3)
+  );
+}
+
+void BindrlSetMatrixProjection(const Napi::CallbackInfo& info) {
+  rlSetMatrixProjection(
+     MatrixFromValue(info, 0)
+  );
+}
+
+void BindrlSetMatrixModelview(const Napi::CallbackInfo& info) {
+  rlSetMatrixModelview(
+     MatrixFromValue(info, 0)
+  );
+}
+
+void BindrlSetMatrixProjectionStereo(const Napi::CallbackInfo& info) {
+  rlSetMatrixProjectionStereo(
+     MatrixFromValue(info, 0),
+       MatrixFromValue(info, 16)
+  );
+}
+
+void BindrlSetMatrixViewOffsetStereo(const Napi::CallbackInfo& info) {
+  rlSetMatrixViewOffsetStereo(
+     MatrixFromValue(info, 0),
+       MatrixFromValue(info, 16)
+  );
+}
+
+void BindrlLoadDrawCube(const Napi::CallbackInfo& info) {
+  rlLoadDrawCube(
+    
+  );
+}
+
+void BindrlLoadDrawQuad(const Napi::CallbackInfo& info) {
+  rlLoadDrawQuad(
+    
+  );
+}
 // By-Reference function bindings
 
 Napi::Value BindUpdateCamera(const Napi::CallbackInfo& info) {
@@ -7217,6 +8345,148 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGuiSetIconPixel", Napi::Function::New(env, BindGuiSetIconPixel));
   exports.Set("BindGuiClearIconPixel", Napi::Function::New(env, BindGuiClearIconPixel));
   exports.Set("BindGuiCheckIconPixel", Napi::Function::New(env, BindGuiCheckIconPixel));
+  exports.Set("BindrlMatrixMode", Napi::Function::New(env, BindrlMatrixMode));
+  exports.Set("BindrlPushMatrix", Napi::Function::New(env, BindrlPushMatrix));
+  exports.Set("BindrlPopMatrix", Napi::Function::New(env, BindrlPopMatrix));
+  exports.Set("BindrlLoadIdentity", Napi::Function::New(env, BindrlLoadIdentity));
+  exports.Set("BindrlTranslatef", Napi::Function::New(env, BindrlTranslatef));
+  exports.Set("BindrlRotatef", Napi::Function::New(env, BindrlRotatef));
+  exports.Set("BindrlScalef", Napi::Function::New(env, BindrlScalef));
+  exports.Set("BindrlMultMatrixf", Napi::Function::New(env, BindrlMultMatrixf));
+  exports.Set("BindrlFrustum", Napi::Function::New(env, BindrlFrustum));
+  exports.Set("BindrlOrtho", Napi::Function::New(env, BindrlOrtho));
+  exports.Set("BindrlViewport", Napi::Function::New(env, BindrlViewport));
+  exports.Set("BindrlBegin", Napi::Function::New(env, BindrlBegin));
+  exports.Set("BindrlEnd", Napi::Function::New(env, BindrlEnd));
+  exports.Set("BindrlVertex2i", Napi::Function::New(env, BindrlVertex2i));
+  exports.Set("BindrlVertex2f", Napi::Function::New(env, BindrlVertex2f));
+  exports.Set("BindrlVertex3f", Napi::Function::New(env, BindrlVertex3f));
+  exports.Set("BindrlTexCoord2f", Napi::Function::New(env, BindrlTexCoord2f));
+  exports.Set("BindrlNormal3f", Napi::Function::New(env, BindrlNormal3f));
+  exports.Set("BindrlColor4ub", Napi::Function::New(env, BindrlColor4ub));
+  exports.Set("BindrlColor3f", Napi::Function::New(env, BindrlColor3f));
+  exports.Set("BindrlColor4f", Napi::Function::New(env, BindrlColor4f));
+  exports.Set("BindrlEnableVertexArray", Napi::Function::New(env, BindrlEnableVertexArray));
+  exports.Set("BindrlDisableVertexArray", Napi::Function::New(env, BindrlDisableVertexArray));
+  exports.Set("BindrlEnableVertexBuffer", Napi::Function::New(env, BindrlEnableVertexBuffer));
+  exports.Set("BindrlDisableVertexBuffer", Napi::Function::New(env, BindrlDisableVertexBuffer));
+  exports.Set("BindrlEnableVertexBufferElement", Napi::Function::New(env, BindrlEnableVertexBufferElement));
+  exports.Set("BindrlDisableVertexBufferElement", Napi::Function::New(env, BindrlDisableVertexBufferElement));
+  exports.Set("BindrlEnableVertexAttribute", Napi::Function::New(env, BindrlEnableVertexAttribute));
+  exports.Set("BindrlDisableVertexAttribute", Napi::Function::New(env, BindrlDisableVertexAttribute));
+  exports.Set("BindrlActiveTextureSlot", Napi::Function::New(env, BindrlActiveTextureSlot));
+  exports.Set("BindrlEnableTexture", Napi::Function::New(env, BindrlEnableTexture));
+  exports.Set("BindrlDisableTexture", Napi::Function::New(env, BindrlDisableTexture));
+  exports.Set("BindrlEnableTextureCubemap", Napi::Function::New(env, BindrlEnableTextureCubemap));
+  exports.Set("BindrlDisableTextureCubemap", Napi::Function::New(env, BindrlDisableTextureCubemap));
+  exports.Set("BindrlTextureParameters", Napi::Function::New(env, BindrlTextureParameters));
+  exports.Set("BindrlEnableShader", Napi::Function::New(env, BindrlEnableShader));
+  exports.Set("BindrlDisableShader", Napi::Function::New(env, BindrlDisableShader));
+  exports.Set("BindrlEnableFramebuffer", Napi::Function::New(env, BindrlEnableFramebuffer));
+  exports.Set("BindrlDisableFramebuffer", Napi::Function::New(env, BindrlDisableFramebuffer));
+  exports.Set("BindrlActiveDrawBuffers", Napi::Function::New(env, BindrlActiveDrawBuffers));
+  exports.Set("BindrlEnableColorBlend", Napi::Function::New(env, BindrlEnableColorBlend));
+  exports.Set("BindrlDisableColorBlend", Napi::Function::New(env, BindrlDisableColorBlend));
+  exports.Set("BindrlEnableDepthTest", Napi::Function::New(env, BindrlEnableDepthTest));
+  exports.Set("BindrlDisableDepthTest", Napi::Function::New(env, BindrlDisableDepthTest));
+  exports.Set("BindrlEnableDepthMask", Napi::Function::New(env, BindrlEnableDepthMask));
+  exports.Set("BindrlDisableDepthMask", Napi::Function::New(env, BindrlDisableDepthMask));
+  exports.Set("BindrlEnableBackfaceCulling", Napi::Function::New(env, BindrlEnableBackfaceCulling));
+  exports.Set("BindrlDisableBackfaceCulling", Napi::Function::New(env, BindrlDisableBackfaceCulling));
+  exports.Set("BindrlEnableScissorTest", Napi::Function::New(env, BindrlEnableScissorTest));
+  exports.Set("BindrlDisableScissorTest", Napi::Function::New(env, BindrlDisableScissorTest));
+  exports.Set("BindrlScissor", Napi::Function::New(env, BindrlScissor));
+  exports.Set("BindrlEnableWireMode", Napi::Function::New(env, BindrlEnableWireMode));
+  exports.Set("BindrlDisableWireMode", Napi::Function::New(env, BindrlDisableWireMode));
+  exports.Set("BindrlSetLineWidth", Napi::Function::New(env, BindrlSetLineWidth));
+  exports.Set("BindrlGetLineWidth", Napi::Function::New(env, BindrlGetLineWidth));
+  exports.Set("BindrlEnableSmoothLines", Napi::Function::New(env, BindrlEnableSmoothLines));
+  exports.Set("BindrlDisableSmoothLines", Napi::Function::New(env, BindrlDisableSmoothLines));
+  exports.Set("BindrlEnableStereoRender", Napi::Function::New(env, BindrlEnableStereoRender));
+  exports.Set("BindrlDisableStereoRender", Napi::Function::New(env, BindrlDisableStereoRender));
+  exports.Set("BindrlIsStereoRenderEnabled", Napi::Function::New(env, BindrlIsStereoRenderEnabled));
+  exports.Set("BindrlClearColor", Napi::Function::New(env, BindrlClearColor));
+  exports.Set("BindrlClearScreenBuffers", Napi::Function::New(env, BindrlClearScreenBuffers));
+  exports.Set("BindrlCheckErrors", Napi::Function::New(env, BindrlCheckErrors));
+  exports.Set("BindrlSetBlendMode", Napi::Function::New(env, BindrlSetBlendMode));
+  exports.Set("BindrlSetBlendFactors", Napi::Function::New(env, BindrlSetBlendFactors));
+  exports.Set("BindrlglInit", Napi::Function::New(env, BindrlglInit));
+  exports.Set("BindrlglClose", Napi::Function::New(env, BindrlglClose));
+  exports.Set("BindrlLoadExtensions", Napi::Function::New(env, BindrlLoadExtensions));
+  exports.Set("BindrlGetVersion", Napi::Function::New(env, BindrlGetVersion));
+  exports.Set("BindrlSetFramebufferWidth", Napi::Function::New(env, BindrlSetFramebufferWidth));
+  exports.Set("BindrlGetFramebufferWidth", Napi::Function::New(env, BindrlGetFramebufferWidth));
+  exports.Set("BindrlSetFramebufferHeight", Napi::Function::New(env, BindrlSetFramebufferHeight));
+  exports.Set("BindrlGetFramebufferHeight", Napi::Function::New(env, BindrlGetFramebufferHeight));
+  exports.Set("BindrlGetTextureIdDefault", Napi::Function::New(env, BindrlGetTextureIdDefault));
+  exports.Set("BindrlGetShaderIdDefault", Napi::Function::New(env, BindrlGetShaderIdDefault));
+  exports.Set("BindrlGetShaderLocsDefault", Napi::Function::New(env, BindrlGetShaderLocsDefault));
+  exports.Set("BindrlLoadRenderBatch", Napi::Function::New(env, BindrlLoadRenderBatch));
+  exports.Set("BindrlUnloadRenderBatch", Napi::Function::New(env, BindrlUnloadRenderBatch));
+  exports.Set("BindrlDrawRenderBatch", Napi::Function::New(env, BindrlDrawRenderBatch));
+  exports.Set("BindrlSetRenderBatchActive", Napi::Function::New(env, BindrlSetRenderBatchActive));
+  exports.Set("BindrlDrawRenderBatchActive", Napi::Function::New(env, BindrlDrawRenderBatchActive));
+  exports.Set("BindrlCheckRenderBatchLimit", Napi::Function::New(env, BindrlCheckRenderBatchLimit));
+  exports.Set("BindrlSetTexture", Napi::Function::New(env, BindrlSetTexture));
+  exports.Set("BindrlLoadVertexArray", Napi::Function::New(env, BindrlLoadVertexArray));
+  exports.Set("BindrlLoadVertexBuffer", Napi::Function::New(env, BindrlLoadVertexBuffer));
+  exports.Set("BindrlLoadVertexBufferElement", Napi::Function::New(env, BindrlLoadVertexBufferElement));
+  exports.Set("BindrlUpdateVertexBuffer", Napi::Function::New(env, BindrlUpdateVertexBuffer));
+  exports.Set("BindrlUpdateVertexBufferElements", Napi::Function::New(env, BindrlUpdateVertexBufferElements));
+  exports.Set("BindrlUnloadVertexArray", Napi::Function::New(env, BindrlUnloadVertexArray));
+  exports.Set("BindrlUnloadVertexBuffer", Napi::Function::New(env, BindrlUnloadVertexBuffer));
+  exports.Set("BindrlSetVertexAttribute", Napi::Function::New(env, BindrlSetVertexAttribute));
+  exports.Set("BindrlSetVertexAttributeDivisor", Napi::Function::New(env, BindrlSetVertexAttributeDivisor));
+  exports.Set("BindrlSetVertexAttributeDefault", Napi::Function::New(env, BindrlSetVertexAttributeDefault));
+  exports.Set("BindrlDrawVertexArray", Napi::Function::New(env, BindrlDrawVertexArray));
+  exports.Set("BindrlDrawVertexArrayElements", Napi::Function::New(env, BindrlDrawVertexArrayElements));
+  exports.Set("BindrlDrawVertexArrayInstanced", Napi::Function::New(env, BindrlDrawVertexArrayInstanced));
+  exports.Set("BindrlDrawVertexArrayElementsInstanced", Napi::Function::New(env, BindrlDrawVertexArrayElementsInstanced));
+  exports.Set("BindrlLoadTexture", Napi::Function::New(env, BindrlLoadTexture));
+  exports.Set("BindrlLoadTextureDepth", Napi::Function::New(env, BindrlLoadTextureDepth));
+  exports.Set("BindrlLoadTextureCubemap", Napi::Function::New(env, BindrlLoadTextureCubemap));
+  exports.Set("BindrlUpdateTexture", Napi::Function::New(env, BindrlUpdateTexture));
+  exports.Set("BindrlGetGlTextureFormats", Napi::Function::New(env, BindrlGetGlTextureFormats));
+  exports.Set("BindrlGetPixelFormatName", Napi::Function::New(env, BindrlGetPixelFormatName));
+  exports.Set("BindrlUnloadTexture", Napi::Function::New(env, BindrlUnloadTexture));
+  exports.Set("BindrlGenTextureMipmaps", Napi::Function::New(env, BindrlGenTextureMipmaps));
+  exports.Set("BindrlReadTexturePixels", Napi::Function::New(env, BindrlReadTexturePixels));
+  exports.Set("BindrlReadScreenPixels", Napi::Function::New(env, BindrlReadScreenPixels));
+  exports.Set("BindrlLoadFramebuffer", Napi::Function::New(env, BindrlLoadFramebuffer));
+  exports.Set("BindrlFramebufferAttach", Napi::Function::New(env, BindrlFramebufferAttach));
+  exports.Set("BindrlFramebufferComplete", Napi::Function::New(env, BindrlFramebufferComplete));
+  exports.Set("BindrlUnloadFramebuffer", Napi::Function::New(env, BindrlUnloadFramebuffer));
+  exports.Set("BindrlLoadShaderCode", Napi::Function::New(env, BindrlLoadShaderCode));
+  exports.Set("BindrlCompileShader", Napi::Function::New(env, BindrlCompileShader));
+  exports.Set("BindrlLoadShaderProgram", Napi::Function::New(env, BindrlLoadShaderProgram));
+  exports.Set("BindrlUnloadShaderProgram", Napi::Function::New(env, BindrlUnloadShaderProgram));
+  exports.Set("BindrlGetLocationUniform", Napi::Function::New(env, BindrlGetLocationUniform));
+  exports.Set("BindrlGetLocationAttrib", Napi::Function::New(env, BindrlGetLocationAttrib));
+  exports.Set("BindrlSetUniform", Napi::Function::New(env, BindrlSetUniform));
+  exports.Set("BindrlSetUniformMatrix", Napi::Function::New(env, BindrlSetUniformMatrix));
+  exports.Set("BindrlSetUniformSampler", Napi::Function::New(env, BindrlSetUniformSampler));
+  exports.Set("BindrlSetShader", Napi::Function::New(env, BindrlSetShader));
+  exports.Set("BindrlLoadComputeShaderProgram", Napi::Function::New(env, BindrlLoadComputeShaderProgram));
+  exports.Set("BindrlComputeShaderDispatch", Napi::Function::New(env, BindrlComputeShaderDispatch));
+  exports.Set("BindrlLoadShaderBuffer", Napi::Function::New(env, BindrlLoadShaderBuffer));
+  exports.Set("BindrlUnloadShaderBuffer", Napi::Function::New(env, BindrlUnloadShaderBuffer));
+  exports.Set("BindrlUpdateShaderBufferElements", Napi::Function::New(env, BindrlUpdateShaderBufferElements));
+  exports.Set("BindrlGetShaderBufferSize", Napi::Function::New(env, BindrlGetShaderBufferSize));
+  exports.Set("BindrlReadShaderBufferElements", Napi::Function::New(env, BindrlReadShaderBufferElements));
+  exports.Set("BindrlBindShaderBuffer", Napi::Function::New(env, BindrlBindShaderBuffer));
+  exports.Set("BindrlCopyBuffersElements", Napi::Function::New(env, BindrlCopyBuffersElements));
+  exports.Set("BindrlBindImageTexture", Napi::Function::New(env, BindrlBindImageTexture));
+  exports.Set("BindrlGetMatrixModelview", Napi::Function::New(env, BindrlGetMatrixModelview));
+  exports.Set("BindrlGetMatrixProjection", Napi::Function::New(env, BindrlGetMatrixProjection));
+  exports.Set("BindrlGetMatrixTransform", Napi::Function::New(env, BindrlGetMatrixTransform));
+  exports.Set("BindrlGetMatrixProjectionStereo", Napi::Function::New(env, BindrlGetMatrixProjectionStereo));
+  exports.Set("BindrlGetMatrixViewOffsetStereo", Napi::Function::New(env, BindrlGetMatrixViewOffsetStereo));
+  exports.Set("BindrlSetMatrixProjection", Napi::Function::New(env, BindrlSetMatrixProjection));
+  exports.Set("BindrlSetMatrixModelview", Napi::Function::New(env, BindrlSetMatrixModelview));
+  exports.Set("BindrlSetMatrixProjectionStereo", Napi::Function::New(env, BindrlSetMatrixProjectionStereo));
+  exports.Set("BindrlSetMatrixViewOffsetStereo", Napi::Function::New(env, BindrlSetMatrixViewOffsetStereo));
+  exports.Set("BindrlLoadDrawCube", Napi::Function::New(env, BindrlLoadDrawCube));
+  exports.Set("BindrlLoadDrawQuad", Napi::Function::New(env, BindrlLoadDrawQuad));
 
   exports.Set("BindSetShaderFloat", Napi::Function::New(env, BindSetShaderFloat));
   exports.Set("BindSetShaderInt", Napi::Function::New(env, BindSetShaderInt));

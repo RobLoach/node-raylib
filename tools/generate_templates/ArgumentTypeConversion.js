@@ -13,6 +13,7 @@ function ArgumentTypeConversion (arg) {
   if (arg === 'unsigned char') { return 'number' }
   if (arg === 'long') { return 'number' }
   if (arg === 'double') { return 'number' }
+  if (arg === 'unsigned long long') { return 'BigInt' }
 
   if (arg === 'bool') { return 'boolean' }
 

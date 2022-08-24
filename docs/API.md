@@ -1558,6 +1558,402 @@
 <dt><a href="#GuiCheckIconPixel">GuiCheckIconPixel(iconId, x, y)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check icon pixel value</p>
 </dd>
+<dt><a href="#rlMatrixMode">rlMatrixMode(mode)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Choose the current matrix to be transformed</p>
+</dd>
+<dt><a href="#rlPushMatrix">rlPushMatrix()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Push the current matrix to stack</p>
+</dd>
+<dt><a href="#rlPopMatrix">rlPopMatrix()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Pop lattest inserted matrix from stack</p>
+</dd>
+<dt><a href="#rlLoadIdentity">rlLoadIdentity()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Reset current matrix to identity matrix</p>
+</dd>
+<dt><a href="#rlTranslatef">rlTranslatef(x, y, z)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Multiply the current matrix by a translation matrix</p>
+</dd>
+<dt><a href="#rlRotatef">rlRotatef(angle, x, y, z)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Multiply the current matrix by a rotation matrix</p>
+</dd>
+<dt><a href="#rlScalef">rlScalef(x, y, z)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Multiply the current matrix by a scaling matrix</p>
+</dd>
+<dt><a href="#rlMultMatrixf">rlMultMatrixf(matf)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Multiply the current matrix by another matrix</p>
+</dd>
+<dt><a href="#rlViewport">rlViewport(x, y, width, height)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set the viewport area</p>
+</dd>
+<dt><a href="#rlBegin">rlBegin(mode)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Initialize drawing mode (how to organize vertex)</p>
+</dd>
+<dt><a href="#rlEnd">rlEnd()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Finish vertex providing</p>
+</dd>
+<dt><a href="#rlVertex2i">rlVertex2i(x, y)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Define one vertex (position) - 2 int</p>
+</dd>
+<dt><a href="#rlVertex2f">rlVertex2f(x, y)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Define one vertex (position) - 2 float</p>
+</dd>
+<dt><a href="#rlVertex3f">rlVertex3f(x, y, z)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Define one vertex (position) - 3 float</p>
+</dd>
+<dt><a href="#rlTexCoord2f">rlTexCoord2f(x, y)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Define one vertex (texture coordinate) - 2 float</p>
+</dd>
+<dt><a href="#rlNormal3f">rlNormal3f(x, y, z)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Define one vertex (normal) - 3 float</p>
+</dd>
+<dt><a href="#rlColor4ub">rlColor4ub(r, g, b, a)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Define one vertex (color) - 4 byte</p>
+</dd>
+<dt><a href="#rlColor3f">rlColor3f(x, y, z)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Define one vertex (color) - 3 float</p>
+</dd>
+<dt><a href="#rlColor4f">rlColor4f(x, y, z, w)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Define one vertex (color) - 4 float</p>
+</dd>
+<dt><a href="#rlEnableVertexArray">rlEnableVertexArray(vaoId)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Enable vertex array (VAO, if supported)</p>
+</dd>
+<dt><a href="#rlDisableVertexArray">rlDisableVertexArray()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable vertex array (VAO, if supported)</p>
+</dd>
+<dt><a href="#rlEnableVertexBuffer">rlEnableVertexBuffer(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable vertex buffer (VBO)</p>
+</dd>
+<dt><a href="#rlDisableVertexBuffer">rlDisableVertexBuffer()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable vertex buffer (VBO)</p>
+</dd>
+<dt><a href="#rlEnableVertexBufferElement">rlEnableVertexBufferElement(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable vertex buffer element (VBO element)</p>
+</dd>
+<dt><a href="#rlDisableVertexBufferElement">rlDisableVertexBufferElement()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable vertex buffer element (VBO element)</p>
+</dd>
+<dt><a href="#rlEnableVertexAttribute">rlEnableVertexAttribute(index)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable vertex attribute index</p>
+</dd>
+<dt><a href="#rlDisableVertexAttribute">rlDisableVertexAttribute(index)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable vertex attribute index</p>
+</dd>
+<dt><a href="#rlActiveTextureSlot">rlActiveTextureSlot(slot)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Select and active a texture slot</p>
+</dd>
+<dt><a href="#rlEnableTexture">rlEnableTexture(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable texture</p>
+</dd>
+<dt><a href="#rlDisableTexture">rlDisableTexture()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable texture</p>
+</dd>
+<dt><a href="#rlEnableTextureCubemap">rlEnableTextureCubemap(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable texture cubemap</p>
+</dd>
+<dt><a href="#rlDisableTextureCubemap">rlDisableTextureCubemap()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable texture cubemap</p>
+</dd>
+<dt><a href="#rlTextureParameters">rlTextureParameters(id, param, value)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set texture parameters (filter, wrap)</p>
+</dd>
+<dt><a href="#rlEnableShader">rlEnableShader(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable shader program</p>
+</dd>
+<dt><a href="#rlDisableShader">rlDisableShader()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable shader program</p>
+</dd>
+<dt><a href="#rlEnableFramebuffer">rlEnableFramebuffer(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable render texture (fbo)</p>
+</dd>
+<dt><a href="#rlDisableFramebuffer">rlDisableFramebuffer()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable render texture (fbo), return to default framebuffer</p>
+</dd>
+<dt><a href="#rlActiveDrawBuffers">rlActiveDrawBuffers(count)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Activate multiple draw color buffers</p>
+</dd>
+<dt><a href="#rlEnableColorBlend">rlEnableColorBlend()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable color blending</p>
+</dd>
+<dt><a href="#rlDisableColorBlend">rlDisableColorBlend()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable color blending</p>
+</dd>
+<dt><a href="#rlEnableDepthTest">rlEnableDepthTest()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable depth test</p>
+</dd>
+<dt><a href="#rlDisableDepthTest">rlDisableDepthTest()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable depth test</p>
+</dd>
+<dt><a href="#rlEnableDepthMask">rlEnableDepthMask()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable depth write</p>
+</dd>
+<dt><a href="#rlDisableDepthMask">rlDisableDepthMask()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable depth write</p>
+</dd>
+<dt><a href="#rlEnableBackfaceCulling">rlEnableBackfaceCulling()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable backface culling</p>
+</dd>
+<dt><a href="#rlDisableBackfaceCulling">rlDisableBackfaceCulling()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable backface culling</p>
+</dd>
+<dt><a href="#rlEnableScissorTest">rlEnableScissorTest()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable scissor test</p>
+</dd>
+<dt><a href="#rlDisableScissorTest">rlDisableScissorTest()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable scissor test</p>
+</dd>
+<dt><a href="#rlScissor">rlScissor(x, y, width, height)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Scissor test</p>
+</dd>
+<dt><a href="#rlEnableWireMode">rlEnableWireMode()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable wire mode</p>
+</dd>
+<dt><a href="#rlDisableWireMode">rlDisableWireMode()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable wire mode</p>
+</dd>
+<dt><a href="#rlSetLineWidth">rlSetLineWidth(width)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set the line drawing width</p>
+</dd>
+<dt><a href="#rlGetLineWidth">rlGetLineWidth()</a> ⇒ <code>number</code></dt>
+<dd><p>Get the line drawing width</p>
+</dd>
+<dt><a href="#rlEnableSmoothLines">rlEnableSmoothLines()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable line aliasing</p>
+</dd>
+<dt><a href="#rlDisableSmoothLines">rlDisableSmoothLines()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable line aliasing</p>
+</dd>
+<dt><a href="#rlEnableStereoRender">rlEnableStereoRender()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable stereo rendering</p>
+</dd>
+<dt><a href="#rlDisableStereoRender">rlDisableStereoRender()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable stereo rendering</p>
+</dd>
+<dt><a href="#rlIsStereoRenderEnabled">rlIsStereoRenderEnabled()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if stereo render is enabled</p>
+</dd>
+<dt><a href="#rlClearColor">rlClearColor(r, g, b, a)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Clear color buffer with color</p>
+</dd>
+<dt><a href="#rlClearScreenBuffers">rlClearScreenBuffers()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Clear used screen buffers (color and depth)</p>
+</dd>
+<dt><a href="#rlCheckErrors">rlCheckErrors()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Check and log OpenGL error codes</p>
+</dd>
+<dt><a href="#rlSetBlendMode">rlSetBlendMode(mode)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set blending mode</p>
+</dd>
+<dt><a href="#rlSetBlendFactors">rlSetBlendFactors(glSrcFactor, glDstFactor, glEquation)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set blending mode factor and equation (using OpenGL factors)</p>
+</dd>
+<dt><a href="#rlglInit">rlglInit(width, height)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Initialize rlgl (buffers, shaders, textures, states)</p>
+</dd>
+<dt><a href="#rlglClose">rlglClose()</a> ⇒ <code>undefined</code></dt>
+<dd><p>De-inititialize rlgl (buffers, shaders, textures)</p>
+</dd>
+<dt><a href="#rlLoadExtensions">rlLoadExtensions(loader)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Load OpenGL extensions (loader function required)</p>
+</dd>
+<dt><a href="#rlGetVersion">rlGetVersion()</a> ⇒ <code>number</code></dt>
+<dd><p>Get current OpenGL version</p>
+</dd>
+<dt><a href="#rlSetFramebufferWidth">rlSetFramebufferWidth(width)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set current framebuffer width</p>
+</dd>
+<dt><a href="#rlGetFramebufferWidth">rlGetFramebufferWidth()</a> ⇒ <code>number</code></dt>
+<dd><p>Get default framebuffer width</p>
+</dd>
+<dt><a href="#rlSetFramebufferHeight">rlSetFramebufferHeight(height)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set current framebuffer height</p>
+</dd>
+<dt><a href="#rlGetFramebufferHeight">rlGetFramebufferHeight()</a> ⇒ <code>number</code></dt>
+<dd><p>Get default framebuffer height</p>
+</dd>
+<dt><a href="#rlGetTextureIdDefault">rlGetTextureIdDefault()</a> ⇒ <code>number</code></dt>
+<dd><p>Get default texture id</p>
+</dd>
+<dt><a href="#rlGetShaderIdDefault">rlGetShaderIdDefault()</a> ⇒ <code>number</code></dt>
+<dd><p>Get default shader id</p>
+</dd>
+<dt><a href="#rlGetShaderLocsDefault">rlGetShaderLocsDefault()</a> ⇒ <code>number</code></dt>
+<dd><p>Get default shader locations</p>
+</dd>
+<dt><a href="#rlLoadRenderBatch">rlLoadRenderBatch(numBuffers, bufferElements)</a> ⇒ <code>rlRenderBatch</code></dt>
+<dd><p>Load a render batch system</p>
+</dd>
+<dt><a href="#rlUnloadRenderBatch">rlUnloadRenderBatch(batch)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload render batch system</p>
+</dd>
+<dt><a href="#rlDrawRenderBatch">rlDrawRenderBatch(batch)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw render batch data (Update-&gt;Draw-&gt;Reset)</p>
+</dd>
+<dt><a href="#rlSetRenderBatchActive">rlSetRenderBatchActive(batch)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set the active render batch for rlgl (NULL for default internal)</p>
+</dd>
+<dt><a href="#rlDrawRenderBatchActive">rlDrawRenderBatchActive()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Update and draw internal render batch</p>
+</dd>
+<dt><a href="#rlCheckRenderBatchLimit">rlCheckRenderBatchLimit(vCount)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check internal buffer overflow for a given number of vertex</p>
+</dd>
+<dt><a href="#rlSetTexture">rlSetTexture(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set current texture for render batch and check buffers limits</p>
+</dd>
+<dt><a href="#rlLoadVertexArray">rlLoadVertexArray()</a> ⇒ <code>number</code></dt>
+<dd><p>Load vertex array (vao) if supported</p>
+</dd>
+<dt><a href="#rlLoadVertexBuffer">rlLoadVertexBuffer(buffer, size, dynamic)</a> ⇒ <code>number</code></dt>
+<dd><p>Load a vertex buffer attribute</p>
+</dd>
+<dt><a href="#rlLoadVertexBufferElement">rlLoadVertexBufferElement(buffer, size, dynamic)</a> ⇒ <code>number</code></dt>
+<dd><p>Load a new attributes element buffer</p>
+</dd>
+<dt><a href="#rlUpdateVertexBuffer">rlUpdateVertexBuffer(bufferId, data, dataSize, offset)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Update GPU buffer with new data</p>
+</dd>
+<dt><a href="#rlUpdateVertexBufferElements">rlUpdateVertexBufferElements(id, data, dataSize, offset)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Update vertex buffer elements with new data</p>
+</dd>
+<dt><a href="#rlSetVertexAttributeDefault">rlSetVertexAttributeDefault(locIndex, value, attribType, count)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set vertex attribute default value</p>
+</dd>
+<dt><a href="#rlLoadTexture">rlLoadTexture(data, width, height, format, mipmapCount)</a> ⇒ <code>number</code></dt>
+<dd><p>Load texture in GPU</p>
+</dd>
+<dt><a href="#rlLoadTextureDepth">rlLoadTextureDepth(width, height, useRenderBuffer)</a> ⇒ <code>number</code></dt>
+<dd><p>Load depth texture/renderbuffer (to be attached to fbo)</p>
+</dd>
+<dt><a href="#rlLoadTextureCubemap">rlLoadTextureCubemap(data, size, format)</a> ⇒ <code>number</code></dt>
+<dd><p>Load texture cubemap</p>
+</dd>
+<dt><a href="#rlUpdateTexture">rlUpdateTexture(id, offsetX, offsetY, width, height, format, data)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Update GPU texture with new data</p>
+</dd>
+<dt><a href="#rlGetGlTextureFormats">rlGetGlTextureFormats(format, glInternalFormat, glFormat, glType)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Get OpenGL internal formats</p>
+</dd>
+<dt><a href="#rlGetPixelFormatName">rlGetPixelFormatName(format)</a> ⇒ <code>string</code></dt>
+<dd><p>Get name string for pixel format</p>
+</dd>
+<dt><a href="#rlUnloadTexture">rlUnloadTexture(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload texture from GPU memory</p>
+</dd>
+<dt><a href="#rlGenTextureMipmaps">rlGenTextureMipmaps(id, width, height, format, mipmaps)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Generate mipmap data for selected texture</p>
+</dd>
+<dt><a href="#rlReadTexturePixels">rlReadTexturePixels(id, width, height, format)</a> ⇒ <code>number</code></dt>
+<dd><p>Read texture pixel data</p>
+</dd>
+<dt><a href="#rlReadScreenPixels">rlReadScreenPixels(width, height)</a> ⇒ <code>Buffer</code></dt>
+<dd><p>Read screen pixel data (color buffer)</p>
+</dd>
+<dt><a href="#rlLoadFramebuffer">rlLoadFramebuffer(width, height)</a> ⇒ <code>number</code></dt>
+<dd><p>Load an empty framebuffer</p>
+</dd>
+<dt><a href="#rlFramebufferAttach">rlFramebufferAttach(fboId, texId, attachType, texType, mipLevel)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Attach texture/renderbuffer to a framebuffer</p>
+</dd>
+<dt><a href="#rlFramebufferComplete">rlFramebufferComplete(id)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Verify framebuffer is complete</p>
+</dd>
+<dt><a href="#rlUnloadFramebuffer">rlUnloadFramebuffer(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Delete framebuffer from GPU</p>
+</dd>
+<dt><a href="#rlLoadShaderCode">rlLoadShaderCode(vsCode, fsCode)</a> ⇒ <code>number</code></dt>
+<dd><p>Load shader from code strings</p>
+</dd>
+<dt><a href="#rlCompileShader">rlCompileShader(shaderCode, type)</a> ⇒ <code>number</code></dt>
+<dd><p>Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)</p>
+</dd>
+<dt><a href="#rlLoadShaderProgram">rlLoadShaderProgram(vShaderId, fShaderId)</a> ⇒ <code>number</code></dt>
+<dd><p>Load custom shader program</p>
+</dd>
+<dt><a href="#rlUnloadShaderProgram">rlUnloadShaderProgram(id)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload shader program</p>
+</dd>
+<dt><a href="#rlGetLocationUniform">rlGetLocationUniform(shaderId, uniformName)</a> ⇒ <code>number</code></dt>
+<dd><p>Get shader location uniform</p>
+</dd>
+<dt><a href="#rlGetLocationAttrib">rlGetLocationAttrib(shaderId, attribName)</a> ⇒ <code>number</code></dt>
+<dd><p>Get shader location attribute</p>
+</dd>
+<dt><a href="#rlSetUniform">rlSetUniform(locIndex, value, uniformType, count)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set shader value uniform</p>
+</dd>
+<dt><a href="#rlSetUniformMatrix">rlSetUniformMatrix(locIndex, mat)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set shader value matrix</p>
+</dd>
+<dt><a href="#rlSetUniformSampler">rlSetUniformSampler(locIndex, textureId)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set shader value sampler</p>
+</dd>
+<dt><a href="#rlSetShader">rlSetShader(id, locs)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set shader currently active (id and locations)</p>
+</dd>
+<dt><a href="#rlLoadComputeShaderProgram">rlLoadComputeShaderProgram(shaderId)</a> ⇒ <code>number</code></dt>
+<dd><p>Load compute shader program</p>
+</dd>
+<dt><a href="#rlComputeShaderDispatch">rlComputeShaderDispatch(groupX, groupY, groupZ)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Dispatch compute shader (equivalent to <em>draw</em> for graphics pilepine)</p>
+</dd>
+<dt><a href="#rlLoadShaderBuffer">rlLoadShaderBuffer(size, data, usageHint)</a> ⇒ <code>number</code></dt>
+<dd><p>Load shader storage buffer object (SSBO)</p>
+</dd>
+<dt><a href="#rlUnloadShaderBuffer">rlUnloadShaderBuffer(ssboId)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload shader storage buffer object (SSBO)</p>
+</dd>
+<dt><a href="#rlUpdateShaderBufferElements">rlUpdateShaderBufferElements(id, data, dataSize, offset)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Update SSBO buffer data</p>
+</dd>
+<dt><a href="#rlGetShaderBufferSize">rlGetShaderBufferSize(id)</a> ⇒ <code>BigInt</code></dt>
+<dd><p>Get SSBO buffer size</p>
+</dd>
+<dt><a href="#rlReadShaderBufferElements">rlReadShaderBufferElements(id, dest, count, offset)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Bind SSBO buffer</p>
+</dd>
+<dt><a href="#rlBindShaderBuffer">rlBindShaderBuffer(id, index)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Copy SSBO buffer data</p>
+</dd>
+<dt><a href="#rlCopyBuffersElements">rlCopyBuffersElements(destId, srcId, destOffset, srcOffset, count)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Copy SSBO buffer data</p>
+</dd>
+<dt><a href="#rlBindImageTexture">rlBindImageTexture(id, index, format, readonly)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Bind image texture</p>
+</dd>
+<dt><a href="#rlGetMatrixModelview">rlGetMatrixModelview()</a> ⇒ <code>Matrix</code></dt>
+<dd><p>Get internal modelview matrix</p>
+</dd>
+<dt><a href="#rlGetMatrixProjection">rlGetMatrixProjection()</a> ⇒ <code>Matrix</code></dt>
+<dd><p>Get internal projection matrix</p>
+</dd>
+<dt><a href="#rlGetMatrixTransform">rlGetMatrixTransform()</a> ⇒ <code>Matrix</code></dt>
+<dd><p>Get internal accumulated transform matrix</p>
+</dd>
+<dt><a href="#rlGetMatrixProjectionStereo">rlGetMatrixProjectionStereo(eye)</a> ⇒ <code>Matrix</code></dt>
+<dd><p>Get internal projection matrix for stereo render (selected eye)</p>
+</dd>
+<dt><a href="#rlGetMatrixViewOffsetStereo">rlGetMatrixViewOffsetStereo(eye)</a> ⇒ <code>Matrix</code></dt>
+<dd><p>Get internal view offset matrix for stereo render (selected eye)</p>
+</dd>
+<dt><a href="#rlSetMatrixProjection">rlSetMatrixProjection(proj)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set a custom projection matrix (replaces internal projection matrix)</p>
+</dd>
+<dt><a href="#rlSetMatrixModelview">rlSetMatrixModelview(view)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set a custom modelview matrix (replaces internal modelview matrix)</p>
+</dd>
+<dt><a href="#rlSetMatrixProjectionStereo">rlSetMatrixProjectionStereo(right, left)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set eyes projection matrices for stereo rendering</p>
+</dd>
+<dt><a href="#rlSetMatrixViewOffsetStereo">rlSetMatrixViewOffsetStereo(right, left)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set eyes view offsets matrices for stereo rendering</p>
+</dd>
+<dt><a href="#rlLoadDrawCube">rlLoadDrawCube()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Load and draw a cube</p>
+</dd>
+<dt><a href="#rlLoadDrawQuad">rlLoadDrawQuad()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Load and draw a quad</p>
+</dd>
 <dt><a href="#UpdateCamera">UpdateCamera(camera)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Update camera position for selected mode</p>
 </dd>
@@ -8041,6 +8437,1379 @@ Check icon pixel value
 | x | <code>number</code> | 
 | y | <code>number</code> | 
 
+<a name="rlMatrixMode"></a>
+
+## rlMatrixMode(mode) ⇒ <code>undefined</code>
+Choose the current matrix to be transformed
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| mode | <code>number</code> | 
+
+<a name="rlPushMatrix"></a>
+
+## rlPushMatrix() ⇒ <code>undefined</code>
+Push the current matrix to stack
+
+**Kind**: global function  
+<a name="rlPopMatrix"></a>
+
+## rlPopMatrix() ⇒ <code>undefined</code>
+Pop lattest inserted matrix from stack
+
+**Kind**: global function  
+<a name="rlLoadIdentity"></a>
+
+## rlLoadIdentity() ⇒ <code>undefined</code>
+Reset current matrix to identity matrix
+
+**Kind**: global function  
+<a name="rlTranslatef"></a>
+
+## rlTranslatef(x, y, z) ⇒ <code>undefined</code>
+Multiply the current matrix by a translation matrix
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| z | <code>number</code> | 
+
+<a name="rlRotatef"></a>
+
+## rlRotatef(angle, x, y, z) ⇒ <code>undefined</code>
+Multiply the current matrix by a rotation matrix
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| angle | <code>number</code> | 
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| z | <code>number</code> | 
+
+<a name="rlScalef"></a>
+
+## rlScalef(x, y, z) ⇒ <code>undefined</code>
+Multiply the current matrix by a scaling matrix
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| z | <code>number</code> | 
+
+<a name="rlMultMatrixf"></a>
+
+## rlMultMatrixf(matf) ⇒ <code>undefined</code>
+Multiply the current matrix by another matrix
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| matf | <code>number</code> | 
+
+<a name="rlViewport"></a>
+
+## rlViewport(x, y, width, height) ⇒ <code>undefined</code>
+Set the viewport area
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+
+<a name="rlBegin"></a>
+
+## rlBegin(mode) ⇒ <code>undefined</code>
+Initialize drawing mode (how to organize vertex)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| mode | <code>number</code> | 
+
+<a name="rlEnd"></a>
+
+## rlEnd() ⇒ <code>undefined</code>
+Finish vertex providing
+
+**Kind**: global function  
+<a name="rlVertex2i"></a>
+
+## rlVertex2i(x, y) ⇒ <code>undefined</code>
+Define one vertex (position) - 2 int
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+
+<a name="rlVertex2f"></a>
+
+## rlVertex2f(x, y) ⇒ <code>undefined</code>
+Define one vertex (position) - 2 float
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+
+<a name="rlVertex3f"></a>
+
+## rlVertex3f(x, y, z) ⇒ <code>undefined</code>
+Define one vertex (position) - 3 float
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| z | <code>number</code> | 
+
+<a name="rlTexCoord2f"></a>
+
+## rlTexCoord2f(x, y) ⇒ <code>undefined</code>
+Define one vertex (texture coordinate) - 2 float
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+
+<a name="rlNormal3f"></a>
+
+## rlNormal3f(x, y, z) ⇒ <code>undefined</code>
+Define one vertex (normal) - 3 float
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| z | <code>number</code> | 
+
+<a name="rlColor4ub"></a>
+
+## rlColor4ub(r, g, b, a) ⇒ <code>undefined</code>
+Define one vertex (color) - 4 byte
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| r | <code>number</code> | 
+| g | <code>number</code> | 
+| b | <code>number</code> | 
+| a | <code>number</code> | 
+
+<a name="rlColor3f"></a>
+
+## rlColor3f(x, y, z) ⇒ <code>undefined</code>
+Define one vertex (color) - 3 float
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| z | <code>number</code> | 
+
+<a name="rlColor4f"></a>
+
+## rlColor4f(x, y, z, w) ⇒ <code>undefined</code>
+Define one vertex (color) - 4 float
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| z | <code>number</code> | 
+| w | <code>number</code> | 
+
+<a name="rlEnableVertexArray"></a>
+
+## rlEnableVertexArray(vaoId) ⇒ <code>boolean</code>
+Enable vertex array (VAO, if supported)
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| vaoId | <code>number</code> | 
+
+<a name="rlDisableVertexArray"></a>
+
+## rlDisableVertexArray() ⇒ <code>undefined</code>
+Disable vertex array (VAO, if supported)
+
+**Kind**: global function  
+<a name="rlEnableVertexBuffer"></a>
+
+## rlEnableVertexBuffer(id) ⇒ <code>undefined</code>
+Enable vertex buffer (VBO)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlDisableVertexBuffer"></a>
+
+## rlDisableVertexBuffer() ⇒ <code>undefined</code>
+Disable vertex buffer (VBO)
+
+**Kind**: global function  
+<a name="rlEnableVertexBufferElement"></a>
+
+## rlEnableVertexBufferElement(id) ⇒ <code>undefined</code>
+Enable vertex buffer element (VBO element)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlDisableVertexBufferElement"></a>
+
+## rlDisableVertexBufferElement() ⇒ <code>undefined</code>
+Disable vertex buffer element (VBO element)
+
+**Kind**: global function  
+<a name="rlEnableVertexAttribute"></a>
+
+## rlEnableVertexAttribute(index) ⇒ <code>undefined</code>
+Enable vertex attribute index
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| index | <code>number</code> | 
+
+<a name="rlDisableVertexAttribute"></a>
+
+## rlDisableVertexAttribute(index) ⇒ <code>undefined</code>
+Disable vertex attribute index
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| index | <code>number</code> | 
+
+<a name="rlActiveTextureSlot"></a>
+
+## rlActiveTextureSlot(slot) ⇒ <code>undefined</code>
+Select and active a texture slot
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| slot | <code>number</code> | 
+
+<a name="rlEnableTexture"></a>
+
+## rlEnableTexture(id) ⇒ <code>undefined</code>
+Enable texture
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlDisableTexture"></a>
+
+## rlDisableTexture() ⇒ <code>undefined</code>
+Disable texture
+
+**Kind**: global function  
+<a name="rlEnableTextureCubemap"></a>
+
+## rlEnableTextureCubemap(id) ⇒ <code>undefined</code>
+Enable texture cubemap
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlDisableTextureCubemap"></a>
+
+## rlDisableTextureCubemap() ⇒ <code>undefined</code>
+Disable texture cubemap
+
+**Kind**: global function  
+<a name="rlTextureParameters"></a>
+
+## rlTextureParameters(id, param, value) ⇒ <code>undefined</code>
+Set texture parameters (filter, wrap)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| param | <code>number</code> | 
+| value | <code>number</code> | 
+
+<a name="rlEnableShader"></a>
+
+## rlEnableShader(id) ⇒ <code>undefined</code>
+Enable shader program
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlDisableShader"></a>
+
+## rlDisableShader() ⇒ <code>undefined</code>
+Disable shader program
+
+**Kind**: global function  
+<a name="rlEnableFramebuffer"></a>
+
+## rlEnableFramebuffer(id) ⇒ <code>undefined</code>
+Enable render texture (fbo)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlDisableFramebuffer"></a>
+
+## rlDisableFramebuffer() ⇒ <code>undefined</code>
+Disable render texture (fbo), return to default framebuffer
+
+**Kind**: global function  
+<a name="rlActiveDrawBuffers"></a>
+
+## rlActiveDrawBuffers(count) ⇒ <code>undefined</code>
+Activate multiple draw color buffers
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| count | <code>number</code> | 
+
+<a name="rlEnableColorBlend"></a>
+
+## rlEnableColorBlend() ⇒ <code>undefined</code>
+Enable color blending
+
+**Kind**: global function  
+<a name="rlDisableColorBlend"></a>
+
+## rlDisableColorBlend() ⇒ <code>undefined</code>
+Disable color blending
+
+**Kind**: global function  
+<a name="rlEnableDepthTest"></a>
+
+## rlEnableDepthTest() ⇒ <code>undefined</code>
+Enable depth test
+
+**Kind**: global function  
+<a name="rlDisableDepthTest"></a>
+
+## rlDisableDepthTest() ⇒ <code>undefined</code>
+Disable depth test
+
+**Kind**: global function  
+<a name="rlEnableDepthMask"></a>
+
+## rlEnableDepthMask() ⇒ <code>undefined</code>
+Enable depth write
+
+**Kind**: global function  
+<a name="rlDisableDepthMask"></a>
+
+## rlDisableDepthMask() ⇒ <code>undefined</code>
+Disable depth write
+
+**Kind**: global function  
+<a name="rlEnableBackfaceCulling"></a>
+
+## rlEnableBackfaceCulling() ⇒ <code>undefined</code>
+Enable backface culling
+
+**Kind**: global function  
+<a name="rlDisableBackfaceCulling"></a>
+
+## rlDisableBackfaceCulling() ⇒ <code>undefined</code>
+Disable backface culling
+
+**Kind**: global function  
+<a name="rlEnableScissorTest"></a>
+
+## rlEnableScissorTest() ⇒ <code>undefined</code>
+Enable scissor test
+
+**Kind**: global function  
+<a name="rlDisableScissorTest"></a>
+
+## rlDisableScissorTest() ⇒ <code>undefined</code>
+Disable scissor test
+
+**Kind**: global function  
+<a name="rlScissor"></a>
+
+## rlScissor(x, y, width, height) ⇒ <code>undefined</code>
+Scissor test
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+| y | <code>number</code> | 
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+
+<a name="rlEnableWireMode"></a>
+
+## rlEnableWireMode() ⇒ <code>undefined</code>
+Enable wire mode
+
+**Kind**: global function  
+<a name="rlDisableWireMode"></a>
+
+## rlDisableWireMode() ⇒ <code>undefined</code>
+Disable wire mode
+
+**Kind**: global function  
+<a name="rlSetLineWidth"></a>
+
+## rlSetLineWidth(width) ⇒ <code>undefined</code>
+Set the line drawing width
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+
+<a name="rlGetLineWidth"></a>
+
+## rlGetLineWidth() ⇒ <code>number</code>
+Get the line drawing width
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
+<a name="rlEnableSmoothLines"></a>
+
+## rlEnableSmoothLines() ⇒ <code>undefined</code>
+Enable line aliasing
+
+**Kind**: global function  
+<a name="rlDisableSmoothLines"></a>
+
+## rlDisableSmoothLines() ⇒ <code>undefined</code>
+Disable line aliasing
+
+**Kind**: global function  
+<a name="rlEnableStereoRender"></a>
+
+## rlEnableStereoRender() ⇒ <code>undefined</code>
+Enable stereo rendering
+
+**Kind**: global function  
+<a name="rlDisableStereoRender"></a>
+
+## rlDisableStereoRender() ⇒ <code>undefined</code>
+Disable stereo rendering
+
+**Kind**: global function  
+<a name="rlIsStereoRenderEnabled"></a>
+
+## rlIsStereoRenderEnabled() ⇒ <code>boolean</code>
+Check if stereo render is enabled
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+<a name="rlClearColor"></a>
+
+## rlClearColor(r, g, b, a) ⇒ <code>undefined</code>
+Clear color buffer with color
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| r | <code>number</code> | 
+| g | <code>number</code> | 
+| b | <code>number</code> | 
+| a | <code>number</code> | 
+
+<a name="rlClearScreenBuffers"></a>
+
+## rlClearScreenBuffers() ⇒ <code>undefined</code>
+Clear used screen buffers (color and depth)
+
+**Kind**: global function  
+<a name="rlCheckErrors"></a>
+
+## rlCheckErrors() ⇒ <code>undefined</code>
+Check and log OpenGL error codes
+
+**Kind**: global function  
+<a name="rlSetBlendMode"></a>
+
+## rlSetBlendMode(mode) ⇒ <code>undefined</code>
+Set blending mode
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| mode | <code>number</code> | 
+
+<a name="rlSetBlendFactors"></a>
+
+## rlSetBlendFactors(glSrcFactor, glDstFactor, glEquation) ⇒ <code>undefined</code>
+Set blending mode factor and equation (using OpenGL factors)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| glSrcFactor | <code>number</code> | 
+| glDstFactor | <code>number</code> | 
+| glEquation | <code>number</code> | 
+
+<a name="rlglInit"></a>
+
+## rlglInit(width, height) ⇒ <code>undefined</code>
+Initialize rlgl (buffers, shaders, textures, states)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+
+<a name="rlglClose"></a>
+
+## rlglClose() ⇒ <code>undefined</code>
+De-inititialize rlgl (buffers, shaders, textures)
+
+**Kind**: global function  
+<a name="rlLoadExtensions"></a>
+
+## rlLoadExtensions(loader) ⇒ <code>undefined</code>
+Load OpenGL extensions (loader function required)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| loader | <code>number</code> | 
+
+<a name="rlGetVersion"></a>
+
+## rlGetVersion() ⇒ <code>number</code>
+Get current OpenGL version
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+<a name="rlSetFramebufferWidth"></a>
+
+## rlSetFramebufferWidth(width) ⇒ <code>undefined</code>
+Set current framebuffer width
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+
+<a name="rlGetFramebufferWidth"></a>
+
+## rlGetFramebufferWidth() ⇒ <code>number</code>
+Get default framebuffer width
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+<a name="rlSetFramebufferHeight"></a>
+
+## rlSetFramebufferHeight(height) ⇒ <code>undefined</code>
+Set current framebuffer height
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| height | <code>number</code> | 
+
+<a name="rlGetFramebufferHeight"></a>
+
+## rlGetFramebufferHeight() ⇒ <code>number</code>
+Get default framebuffer height
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+<a name="rlGetTextureIdDefault"></a>
+
+## rlGetTextureIdDefault() ⇒ <code>number</code>
+Get default texture id
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+<a name="rlGetShaderIdDefault"></a>
+
+## rlGetShaderIdDefault() ⇒ <code>number</code>
+Get default shader id
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+<a name="rlGetShaderLocsDefault"></a>
+
+## rlGetShaderLocsDefault() ⇒ <code>number</code>
+Get default shader locations
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int *.  
+<a name="rlLoadRenderBatch"></a>
+
+## rlLoadRenderBatch(numBuffers, bufferElements) ⇒ <code>rlRenderBatch</code>
+Load a render batch system
+
+**Kind**: global function  
+**Returns**: <code>rlRenderBatch</code> - The resulting rlRenderBatch.  
+
+| Param | Type |
+| --- | --- |
+| numBuffers | <code>number</code> | 
+| bufferElements | <code>number</code> | 
+
+<a name="rlUnloadRenderBatch"></a>
+
+## rlUnloadRenderBatch(batch) ⇒ <code>undefined</code>
+Unload render batch system
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| batch | <code>rlRenderBatch</code> | 
+
+<a name="rlDrawRenderBatch"></a>
+
+## rlDrawRenderBatch(batch) ⇒ <code>undefined</code>
+Draw render batch data (Update->Draw->Reset)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| batch | <code>number</code> | 
+
+<a name="rlSetRenderBatchActive"></a>
+
+## rlSetRenderBatchActive(batch) ⇒ <code>undefined</code>
+Set the active render batch for rlgl (NULL for default internal)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| batch | <code>number</code> | 
+
+<a name="rlDrawRenderBatchActive"></a>
+
+## rlDrawRenderBatchActive() ⇒ <code>undefined</code>
+Update and draw internal render batch
+
+**Kind**: global function  
+<a name="rlCheckRenderBatchLimit"></a>
+
+## rlCheckRenderBatchLimit(vCount) ⇒ <code>boolean</code>
+Check internal buffer overflow for a given number of vertex
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| vCount | <code>number</code> | 
+
+<a name="rlSetTexture"></a>
+
+## rlSetTexture(id) ⇒ <code>undefined</code>
+Set current texture for render batch and check buffers limits
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlLoadVertexArray"></a>
+
+## rlLoadVertexArray() ⇒ <code>number</code>
+Load vertex array (vao) if supported
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+<a name="rlLoadVertexBuffer"></a>
+
+## rlLoadVertexBuffer(buffer, size, dynamic) ⇒ <code>number</code>
+Load a vertex buffer attribute
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| buffer | <code>number</code> | 
+| size | <code>number</code> | 
+| dynamic | <code>boolean</code> | 
+
+<a name="rlLoadVertexBufferElement"></a>
+
+## rlLoadVertexBufferElement(buffer, size, dynamic) ⇒ <code>number</code>
+Load a new attributes element buffer
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| buffer | <code>number</code> | 
+| size | <code>number</code> | 
+| dynamic | <code>boolean</code> | 
+
+<a name="rlUpdateVertexBuffer"></a>
+
+## rlUpdateVertexBuffer(bufferId, data, dataSize, offset) ⇒ <code>undefined</code>
+Update GPU buffer with new data
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| bufferId | <code>number</code> | 
+| data | <code>number</code> | 
+| dataSize | <code>number</code> | 
+| offset | <code>number</code> | 
+
+<a name="rlUpdateVertexBufferElements"></a>
+
+## rlUpdateVertexBufferElements(id, data, dataSize, offset) ⇒ <code>undefined</code>
+Update vertex buffer elements with new data
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| data | <code>number</code> | 
+| dataSize | <code>number</code> | 
+| offset | <code>number</code> | 
+
+<a name="rlSetVertexAttributeDefault"></a>
+
+## rlSetVertexAttributeDefault(locIndex, value, attribType, count) ⇒ <code>undefined</code>
+Set vertex attribute default value
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| locIndex | <code>number</code> | 
+| value | <code>number</code> | 
+| attribType | <code>number</code> | 
+| count | <code>number</code> | 
+
+<a name="rlLoadTexture"></a>
+
+## rlLoadTexture(data, width, height, format, mipmapCount) ⇒ <code>number</code>
+Load texture in GPU
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| data | <code>number</code> | 
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+| format | <code>number</code> | 
+| mipmapCount | <code>number</code> | 
+
+<a name="rlLoadTextureDepth"></a>
+
+## rlLoadTextureDepth(width, height, useRenderBuffer) ⇒ <code>number</code>
+Load depth texture/renderbuffer (to be attached to fbo)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+| useRenderBuffer | <code>boolean</code> | 
+
+<a name="rlLoadTextureCubemap"></a>
+
+## rlLoadTextureCubemap(data, size, format) ⇒ <code>number</code>
+Load texture cubemap
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| data | <code>number</code> | 
+| size | <code>number</code> | 
+| format | <code>number</code> | 
+
+<a name="rlUpdateTexture"></a>
+
+## rlUpdateTexture(id, offsetX, offsetY, width, height, format, data) ⇒ <code>undefined</code>
+Update GPU texture with new data
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| offsetX | <code>number</code> | 
+| offsetY | <code>number</code> | 
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+| format | <code>number</code> | 
+| data | <code>number</code> | 
+
+<a name="rlGetGlTextureFormats"></a>
+
+## rlGetGlTextureFormats(format, glInternalFormat, glFormat, glType) ⇒ <code>undefined</code>
+Get OpenGL internal formats
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| format | <code>number</code> | 
+| glInternalFormat | <code>number</code> | 
+| glFormat | <code>number</code> | 
+| glType | <code>number</code> | 
+
+<a name="rlGetPixelFormatName"></a>
+
+## rlGetPixelFormatName(format) ⇒ <code>string</code>
+Get name string for pixel format
+
+**Kind**: global function  
+**Returns**: <code>string</code> - The resulting const char *.  
+
+| Param | Type |
+| --- | --- |
+| format | <code>number</code> | 
+
+<a name="rlUnloadTexture"></a>
+
+## rlUnloadTexture(id) ⇒ <code>undefined</code>
+Unload texture from GPU memory
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlGenTextureMipmaps"></a>
+
+## rlGenTextureMipmaps(id, width, height, format, mipmaps) ⇒ <code>undefined</code>
+Generate mipmap data for selected texture
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+| format | <code>number</code> | 
+| mipmaps | <code>number</code> | 
+
+<a name="rlReadTexturePixels"></a>
+
+## rlReadTexturePixels(id, width, height, format) ⇒ <code>number</code>
+Read texture pixel data
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting void *.  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+| format | <code>number</code> | 
+
+<a name="rlReadScreenPixels"></a>
+
+## rlReadScreenPixels(width, height) ⇒ <code>Buffer</code>
+Read screen pixel data (color buffer)
+
+**Kind**: global function  
+**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+
+<a name="rlLoadFramebuffer"></a>
+
+## rlLoadFramebuffer(width, height) ⇒ <code>number</code>
+Load an empty framebuffer
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+
+<a name="rlFramebufferAttach"></a>
+
+## rlFramebufferAttach(fboId, texId, attachType, texType, mipLevel) ⇒ <code>undefined</code>
+Attach texture/renderbuffer to a framebuffer
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| fboId | <code>number</code> | 
+| texId | <code>number</code> | 
+| attachType | <code>number</code> | 
+| texType | <code>number</code> | 
+| mipLevel | <code>number</code> | 
+
+<a name="rlFramebufferComplete"></a>
+
+## rlFramebufferComplete(id) ⇒ <code>boolean</code>
+Verify framebuffer is complete
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlUnloadFramebuffer"></a>
+
+## rlUnloadFramebuffer(id) ⇒ <code>undefined</code>
+Delete framebuffer from GPU
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlLoadShaderCode"></a>
+
+## rlLoadShaderCode(vsCode, fsCode) ⇒ <code>number</code>
+Load shader from code strings
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| vsCode | <code>string</code> | 
+| fsCode | <code>string</code> | 
+
+<a name="rlCompileShader"></a>
+
+## rlCompileShader(shaderCode, type) ⇒ <code>number</code>
+Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| shaderCode | <code>string</code> | 
+| type | <code>number</code> | 
+
+<a name="rlLoadShaderProgram"></a>
+
+## rlLoadShaderProgram(vShaderId, fShaderId) ⇒ <code>number</code>
+Load custom shader program
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| vShaderId | <code>number</code> | 
+| fShaderId | <code>number</code> | 
+
+<a name="rlUnloadShaderProgram"></a>
+
+## rlUnloadShaderProgram(id) ⇒ <code>undefined</code>
+Unload shader program
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlGetLocationUniform"></a>
+
+## rlGetLocationUniform(shaderId, uniformName) ⇒ <code>number</code>
+Get shader location uniform
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| shaderId | <code>number</code> | 
+| uniformName | <code>string</code> | 
+
+<a name="rlGetLocationAttrib"></a>
+
+## rlGetLocationAttrib(shaderId, attribName) ⇒ <code>number</code>
+Get shader location attribute
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| shaderId | <code>number</code> | 
+| attribName | <code>string</code> | 
+
+<a name="rlSetUniform"></a>
+
+## rlSetUniform(locIndex, value, uniformType, count) ⇒ <code>undefined</code>
+Set shader value uniform
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| locIndex | <code>number</code> | 
+| value | <code>number</code> | 
+| uniformType | <code>number</code> | 
+| count | <code>number</code> | 
+
+<a name="rlSetUniformMatrix"></a>
+
+## rlSetUniformMatrix(locIndex, mat) ⇒ <code>undefined</code>
+Set shader value matrix
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| locIndex | <code>number</code> | 
+| mat | <code>Matrix</code> | 
+
+<a name="rlSetUniformSampler"></a>
+
+## rlSetUniformSampler(locIndex, textureId) ⇒ <code>undefined</code>
+Set shader value sampler
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| locIndex | <code>number</code> | 
+| textureId | <code>number</code> | 
+
+<a name="rlSetShader"></a>
+
+## rlSetShader(id, locs) ⇒ <code>undefined</code>
+Set shader currently active (id and locations)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| locs | <code>number</code> | 
+
+<a name="rlLoadComputeShaderProgram"></a>
+
+## rlLoadComputeShaderProgram(shaderId) ⇒ <code>number</code>
+Load compute shader program
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| shaderId | <code>number</code> | 
+
+<a name="rlComputeShaderDispatch"></a>
+
+## rlComputeShaderDispatch(groupX, groupY, groupZ) ⇒ <code>undefined</code>
+Dispatch compute shader (equivalent to *draw* for graphics pilepine)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| groupX | <code>number</code> | 
+| groupY | <code>number</code> | 
+| groupZ | <code>number</code> | 
+
+<a name="rlLoadShaderBuffer"></a>
+
+## rlLoadShaderBuffer(size, data, usageHint) ⇒ <code>number</code>
+Load shader storage buffer object (SSBO)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| size | <code>BigInt</code> | 
+| data | <code>number</code> | 
+| usageHint | <code>number</code> | 
+
+<a name="rlUnloadShaderBuffer"></a>
+
+## rlUnloadShaderBuffer(ssboId) ⇒ <code>undefined</code>
+Unload shader storage buffer object (SSBO)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| ssboId | <code>number</code> | 
+
+<a name="rlUpdateShaderBufferElements"></a>
+
+## rlUpdateShaderBufferElements(id, data, dataSize, offset) ⇒ <code>undefined</code>
+Update SSBO buffer data
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| data | <code>number</code> | 
+| dataSize | <code>BigInt</code> | 
+| offset | <code>BigInt</code> | 
+
+<a name="rlGetShaderBufferSize"></a>
+
+## rlGetShaderBufferSize(id) ⇒ <code>BigInt</code>
+Get SSBO buffer size
+
+**Kind**: global function  
+**Returns**: <code>BigInt</code> - The resulting unsigned long long.  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+
+<a name="rlReadShaderBufferElements"></a>
+
+## rlReadShaderBufferElements(id, dest, count, offset) ⇒ <code>undefined</code>
+Bind SSBO buffer
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| dest | <code>number</code> | 
+| count | <code>BigInt</code> | 
+| offset | <code>BigInt</code> | 
+
+<a name="rlBindShaderBuffer"></a>
+
+## rlBindShaderBuffer(id, index) ⇒ <code>undefined</code>
+Copy SSBO buffer data
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| index | <code>number</code> | 
+
+<a name="rlCopyBuffersElements"></a>
+
+## rlCopyBuffersElements(destId, srcId, destOffset, srcOffset, count) ⇒ <code>undefined</code>
+Copy SSBO buffer data
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| destId | <code>number</code> | 
+| srcId | <code>number</code> | 
+| destOffset | <code>BigInt</code> | 
+| srcOffset | <code>BigInt</code> | 
+| count | <code>BigInt</code> | 
+
+<a name="rlBindImageTexture"></a>
+
+## rlBindImageTexture(id, index, format, readonly) ⇒ <code>undefined</code>
+Bind image texture
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| index | <code>number</code> | 
+| format | <code>number</code> | 
+| readonly | <code>number</code> | 
+
+<a name="rlGetMatrixModelview"></a>
+
+## rlGetMatrixModelview() ⇒ <code>Matrix</code>
+Get internal modelview matrix
+
+**Kind**: global function  
+**Returns**: <code>Matrix</code> - The resulting Matrix.  
+<a name="rlGetMatrixProjection"></a>
+
+## rlGetMatrixProjection() ⇒ <code>Matrix</code>
+Get internal projection matrix
+
+**Kind**: global function  
+**Returns**: <code>Matrix</code> - The resulting Matrix.  
+<a name="rlGetMatrixTransform"></a>
+
+## rlGetMatrixTransform() ⇒ <code>Matrix</code>
+Get internal accumulated transform matrix
+
+**Kind**: global function  
+**Returns**: <code>Matrix</code> - The resulting Matrix.  
+<a name="rlGetMatrixProjectionStereo"></a>
+
+## rlGetMatrixProjectionStereo(eye) ⇒ <code>Matrix</code>
+Get internal projection matrix for stereo render (selected eye)
+
+**Kind**: global function  
+**Returns**: <code>Matrix</code> - The resulting Matrix.  
+
+| Param | Type |
+| --- | --- |
+| eye | <code>number</code> | 
+
+<a name="rlGetMatrixViewOffsetStereo"></a>
+
+## rlGetMatrixViewOffsetStereo(eye) ⇒ <code>Matrix</code>
+Get internal view offset matrix for stereo render (selected eye)
+
+**Kind**: global function  
+**Returns**: <code>Matrix</code> - The resulting Matrix.  
+
+| Param | Type |
+| --- | --- |
+| eye | <code>number</code> | 
+
+<a name="rlSetMatrixProjection"></a>
+
+## rlSetMatrixProjection(proj) ⇒ <code>undefined</code>
+Set a custom projection matrix (replaces internal projection matrix)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| proj | <code>Matrix</code> | 
+
+<a name="rlSetMatrixModelview"></a>
+
+## rlSetMatrixModelview(view) ⇒ <code>undefined</code>
+Set a custom modelview matrix (replaces internal modelview matrix)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| view | <code>Matrix</code> | 
+
+<a name="rlSetMatrixProjectionStereo"></a>
+
+## rlSetMatrixProjectionStereo(right, left) ⇒ <code>undefined</code>
+Set eyes projection matrices for stereo rendering
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| right | <code>Matrix</code> | 
+| left | <code>Matrix</code> | 
+
+<a name="rlSetMatrixViewOffsetStereo"></a>
+
+## rlSetMatrixViewOffsetStereo(right, left) ⇒ <code>undefined</code>
+Set eyes view offsets matrices for stereo rendering
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| right | <code>Matrix</code> | 
+| left | <code>Matrix</code> | 
+
+<a name="rlLoadDrawCube"></a>
+
+## rlLoadDrawCube() ⇒ <code>undefined</code>
+Load and draw a cube
+
+**Kind**: global function  
+<a name="rlLoadDrawQuad"></a>
+
+## rlLoadDrawQuad() ⇒ <code>undefined</code>
+Load and draw a quad
+
+**Kind**: global function  
 <a name="UpdateCamera"></a>
 
 ## UpdateCamera(camera) ⇒ <code>undefined</code>
