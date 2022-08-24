@@ -13,12 +13,17 @@ function ArgumentTypeConversion (arg) {
   if (arg === 'unsigned char') { return 'number' }
   if (arg === 'long') { return 'number' }
   if (arg === 'double') { return 'number' }
+  if (arg === 'unsigned long long') { return 'BigInt' }
 
   if (arg === 'bool') { return 'boolean' }
 
   // pointers
   arg = arg.replace('const ', '')
   if (arg.includes('*')) {
+    return 'number'
+  }
+  // float[2], float[4] etc. should be converted to pointers as well
+  if (arg.includes(']')) {
     return 'number'
   }
 

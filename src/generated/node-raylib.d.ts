@@ -2,406 +2,460 @@
 declare module "raylib" {
   /** Vector2, 2 components */
   export interface Vector2 {
-    /** Vector x component */
+    /** Vector x component. (float) */
     x: number
-    /** Vector y component */
+    /** Vector y component. (float) */
     y: number
   }
   /** Vector3, 3 components */
   export interface Vector3 {
-    /** Vector x component */
+    /** Vector x component. (float) */
     x: number
-    /** Vector y component */
+    /** Vector y component. (float) */
     y: number
-    /** Vector z component */
+    /** Vector z component. (float) */
     z: number
   }
   /** Vector4, 4 components */
   export interface Vector4 {
-    /** Vector x component */
+    /** Vector x component. (float) */
     x: number
-    /** Vector y component */
+    /** Vector y component. (float) */
     y: number
-    /** Vector z component */
+    /** Vector z component. (float) */
     z: number
-    /** Vector w component */
+    /** Vector w component. (float) */
     w: number
   }
   /** Matrix, 4x4 components, column major, OpenGL style, right handed */
   export interface Matrix {
-    /** Matrix first row (4 components) */
+    /** Matrix first row (4 components). (float) */
     m0: number
-    /** Matrix first row (4 components) */
+    /** Matrix first row (4 components). (float) */
     m4: number
-    /** Matrix first row (4 components) */
+    /** Matrix first row (4 components). (float) */
     m8: number
-    /** Matrix first row (4 components) */
+    /** Matrix first row (4 components). (float) */
     m12: number
-    /** Matrix second row (4 components) */
+    /** Matrix second row (4 components). (float) */
     m1: number
-    /** Matrix second row (4 components) */
+    /** Matrix second row (4 components). (float) */
     m5: number
-    /** Matrix second row (4 components) */
+    /** Matrix second row (4 components). (float) */
     m9: number
-    /** Matrix second row (4 components) */
+    /** Matrix second row (4 components). (float) */
     m13: number
-    /** Matrix third row (4 components) */
+    /** Matrix third row (4 components). (float) */
     m2: number
-    /** Matrix third row (4 components) */
+    /** Matrix third row (4 components). (float) */
     m6: number
-    /** Matrix third row (4 components) */
+    /** Matrix third row (4 components). (float) */
     m10: number
-    /** Matrix third row (4 components) */
+    /** Matrix third row (4 components). (float) */
     m14: number
-    /** Matrix fourth row (4 components) */
+    /** Matrix fourth row (4 components). (float) */
     m3: number
-    /** Matrix fourth row (4 components) */
+    /** Matrix fourth row (4 components). (float) */
     m7: number
-    /** Matrix fourth row (4 components) */
+    /** Matrix fourth row (4 components). (float) */
     m11: number
-    /** Matrix fourth row (4 components) */
+    /** Matrix fourth row (4 components). (float) */
     m15: number
   }
   /** Color, 4 components, R8G8B8A8 (32bit) */
   export interface Color {
-    /** Color red value */
+    /** Color red value. (unsigned char) */
     r: number
-    /** Color green value */
+    /** Color green value. (unsigned char) */
     g: number
-    /** Color blue value */
+    /** Color blue value. (unsigned char) */
     b: number
-    /** Color alpha value */
+    /** Color alpha value. (unsigned char) */
     a: number
   }
   /** Rectangle, 4 components */
   export interface Rectangle {
-    /** Rectangle top-left corner position x */
+    /** Rectangle top-left corner position x. (float) */
     x: number
-    /** Rectangle top-left corner position y */
+    /** Rectangle top-left corner position y. (float) */
     y: number
-    /** Rectangle width */
+    /** Rectangle width. (float) */
     width: number
-    /** Rectangle height */
+    /** Rectangle height. (float) */
     height: number
   }
   /** Image, pixel data stored in CPU memory (RAM) */
   export interface Image {
-    /** Image raw data */
+    /** Image raw data. (void *) */
     data: number
-    /** Image base width */
+    /** Image base width. (int) */
     width: number
-    /** Image base height */
+    /** Image base height. (int) */
     height: number
-    /** Mipmap levels, 1 by default */
+    /** Mipmap levels, 1 by default. (int) */
     mipmaps: number
-    /** Data format (PixelFormat type) */
+    /** Data format (PixelFormat type). (int) */
     format: number
   }
   /** Texture, tex data stored in GPU memory (VRAM) */
   export interface Texture {
-    /** OpenGL texture id */
+    /** OpenGL texture id. (unsigned int) */
     id: number
-    /** Texture base width */
+    /** Texture base width. (int) */
     width: number
-    /** Texture base height */
+    /** Texture base height. (int) */
     height: number
-    /** Mipmap levels, 1 by default */
+    /** Mipmap levels, 1 by default. (int) */
     mipmaps: number
-    /** Data format (PixelFormat type) */
+    /** Data format (PixelFormat type). (int) */
     format: number
   }
   /** RenderTexture, fbo for texture rendering */
   export interface RenderTexture {
-    /** OpenGL framebuffer object id */
+    /** OpenGL framebuffer object id. (unsigned int) */
     id: number
-    /** Color buffer attachment texture */
+    /** Color buffer attachment texture. (Texture) */
     texture: Texture
-    /** Depth buffer attachment texture */
+    /** Depth buffer attachment texture. (Texture) */
     depth: Texture
   }
   /** NPatchInfo, n-patch layout info */
   export interface NPatchInfo {
-    /** Texture source rectangle */
+    /** Texture source rectangle. (Rectangle) */
     source: Rectangle
-    /** Left border offset */
+    /** Left border offset. (int) */
     left: number
-    /** Top border offset */
+    /** Top border offset. (int) */
     top: number
-    /** Right border offset */
+    /** Right border offset. (int) */
     right: number
-    /** Bottom border offset */
+    /** Bottom border offset. (int) */
     bottom: number
-    /** Layout of the n-patch: 3x3, 1x3 or 3x1 */
+    /** Layout of the n-patch: 3x3, 1x3 or 3x1. (int) */
     layout: number
   }
   /** GlyphInfo, font characters glyphs info */
   export interface GlyphInfo {
-    /** Character value (Unicode) */
+    /** Character value (Unicode). (int) */
     value: number
-    /** Character offset X when drawing */
+    /** Character offset X when drawing. (int) */
     offsetX: number
-    /** Character offset Y when drawing */
+    /** Character offset Y when drawing. (int) */
     offsetY: number
-    /** Character advance position X */
+    /** Character advance position X. (int) */
     advanceX: number
-    /** Character image data */
+    /** Character image data. (Image) */
     image: Image
   }
   /** Font, font texture and GlyphInfo array data */
   export interface Font {
-    /** Base size (default chars height) */
+    /** Base size (default chars height). (int) */
     baseSize: number
-    /** Number of glyph characters */
+    /** Number of glyph characters. (int) */
     glyphCount: number
-    /** Padding around the glyph characters */
+    /** Padding around the glyph characters. (int) */
     glyphPadding: number
-    /** Texture atlas containing the glyphs */
+    /** Texture atlas containing the glyphs. (Texture) */
     texture: Texture
-    /** Rectangles in texture for the glyphs */
+    /** Rectangles in texture for the glyphs. (Rectangle *) */
     recs: number
-    /** Glyphs info data */
+    /** Glyphs info data. (GlyphInfo *) */
     glyphs: number
   }
   /** Camera, defines position/orientation in 3d space */
   export interface Camera3D {
-    /** Camera position */
+    /** Camera position. (Vector3) */
     position: Vector3
-    /** Camera target it looks-at */
+    /** Camera target it looks-at. (Vector3) */
     target: Vector3
-    /** Camera up vector (rotation over its axis) */
+    /** Camera up vector (rotation over its axis). (Vector3) */
     up: Vector3
-    /** Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic */
+    /** Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic. (float) */
     fovy: number
-    /** Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC */
+    /** Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC. (int) */
     projection: number
   }
   /** Camera2D, defines position/orientation in 2d space */
   export interface Camera2D {
-    /** Camera offset (displacement from target) */
+    /** Camera offset (displacement from target). (Vector2) */
     offset: Vector2
-    /** Camera target (rotation and zoom origin) */
+    /** Camera target (rotation and zoom origin). (Vector2) */
     target: Vector2
-    /** Camera rotation in degrees */
+    /** Camera rotation in degrees. (float) */
     rotation: number
-    /** Camera zoom (scaling), should be 1.0f by default */
+    /** Camera zoom (scaling), should be 1.0f by default. (float) */
     zoom: number
   }
   /** Mesh, vertex data and vao/vbo */
   export interface Mesh {
-    /** Number of vertices stored in arrays */
+    /** Number of vertices stored in arrays. (int) */
     vertexCount: number
-    /** Number of triangles stored (indexed or not) */
+    /** Number of triangles stored (indexed or not). (int) */
     triangleCount: number
-    /** Vertex position (XYZ - 3 components per vertex) (shader-location = 0) */
+    /** Vertex position (XYZ - 3 components per vertex) (shader-location = 0). (float *) */
     vertices: number
-    /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1) */
+    /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1). (float *) */
     texcoords: number
-    /** Vertex second texture coordinates (useful for lightmaps) (shader-location = 5) */
+    /** Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5). (float *) */
     texcoords2: number
-    /** Vertex normals (XYZ - 3 components per vertex) (shader-location = 2) */
+    /** Vertex normals (XYZ - 3 components per vertex) (shader-location = 2). (float *) */
     normals: number
-    /** Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4) */
+    /** Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4). (float *) */
     tangents: number
-    /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3) */
+    /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
     colors: Buffer
-    /** Vertex indices (in case vertex data comes indexed) */
+    /** Vertex indices (in case vertex data comes indexed). (unsigned short *) */
     indices: number
-    /** Animated vertex positions (after bones transformations) */
+    /** Animated vertex positions (after bones transformations). (float *) */
     animVertices: number
-    /** Animated normals (after bones transformations) */
+    /** Animated normals (after bones transformations). (float *) */
     animNormals: number
-    /** Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning) */
+    /** Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning). (unsigned char *) */
     boneIds: Buffer
-    /** Vertex bone weight, up to 4 bones influence by vertex (skinning) */
+    /** Vertex bone weight, up to 4 bones influence by vertex (skinning). (float *) */
     boneWeights: number
-    /** OpenGL Vertex Array Object id */
+    /** OpenGL Vertex Array Object id. (unsigned int) */
     vaoId: number
-    /** OpenGL Vertex Buffer Objects id (default vertex data) */
+    /** OpenGL Vertex Buffer Objects id (default vertex data). (unsigned int *) */
     vboId: number
   }
   /** Shader */
   export interface Shader {
-    /** Shader program id */
+    /** Shader program id. (unsigned int) */
     id: number
-    /** Shader locations array (RL_MAX_SHADER_LOCATIONS) */
+    /** Shader locations array (RL_MAX_SHADER_LOCATIONS). (int *) */
     locs: number
   }
   /** MaterialMap */
   export interface MaterialMap {
-    /** Material map texture */
+    /** Material map texture. (Texture) */
     texture: Texture
-    /** Material map color */
+    /** Material map color. (Color) */
     color: Color
-    /** Material map value */
+    /** Material map value. (float) */
     value: number
   }
   /** Material, includes shader and maps */
   export interface Material {
-    /** Material shader */
+    /** Material shader. (Shader) */
     shader: Shader
-    /** Material maps array (MAX_MATERIAL_MAPS) */
+    /** Material maps array (MAX_MATERIAL_MAPS). (MaterialMap *) */
     maps: number
-    /** Material generic parameters (if required) */
-    params: float[4]
+    /** Material generic parameters (if required). (float[4]) */
+    params: number
   }
   /** Transform, vectex transformation data */
   export interface Transform {
-    /** Translation */
+    /** Translation. (Vector3) */
     translation: Vector3
-    /** Rotation */
+    /** Rotation. (Vector4) */
     rotation: Vector4
-    /** Scale */
+    /** Scale. (Vector3) */
     scale: Vector3
   }
   /** Bone, skeletal animation bone */
   export interface BoneInfo {
-    /** Bone name */
+    /** Bone name. (char) */
     name: string
-    /** Bone parent */
+    /** Bone parent. (char) */
     parent: string
   }
   /** Model, meshes, materials and animation data */
   export interface Model {
-    /** Local transform matrix */
+    /** Local transform matrix. (Matrix) */
     transform: Matrix
-    /** Number of meshes */
+    /** Number of meshes. (int) */
     meshCount: number
-    /** Number of materials */
+    /** Number of materials. (int) */
     materialCount: number
-    /** Meshes array */
+    /** Meshes array. (Mesh *) */
     meshes: number
-    /** Materials array */
+    /** Materials array. (Material *) */
     materials: number
-    /** Mesh material number */
+    /** Mesh material number. (int *) */
     meshMaterial: number
-    /** Number of bones */
+    /** Number of bones. (int) */
     boneCount: number
-    /** Bones information (skeleton) */
+    /** Bones information (skeleton). (BoneInfo *) */
     bones: number
-    /** Bones base transformation (pose) */
+    /** Bones base transformation (pose). (Transform *) */
     bindPose: number
   }
   /** ModelAnimation */
   export interface ModelAnimation {
-    /** Number of bones */
+    /** Number of bones. (int) */
     boneCount: number
-    /** Number of animation frames */
+    /** Number of animation frames. (int) */
     frameCount: number
-    /** Bones information (skeleton) */
+    /** Bones information (skeleton). (BoneInfo *) */
     bones: number
-    /** Poses array by frame */
+    /** Poses array by frame. (Transform **) */
     framePoses: number
   }
   /** Ray, ray for raycasting */
   export interface Ray {
-    /** Ray position (origin) */
+    /** Ray position (origin). (Vector3) */
     position: Vector3
-    /** Ray direction */
+    /** Ray direction. (Vector3) */
     direction: Vector3
   }
   /** RayCollision, ray hit information */
   export interface RayCollision {
-    /** Did the ray hit something? */
+    /** Did the ray hit something?. (bool) */
     hit: boolean
-    /** Distance to nearest hit */
+    /** Distance to nearest hit. (float) */
     distance: number
-    /** Point of nearest hit */
+    /** Point of nearest hit. (Vector3) */
     point: Vector3
-    /** Surface normal of hit */
+    /** Surface normal of hit. (Vector3) */
     normal: Vector3
   }
   /** BoundingBox */
   export interface BoundingBox {
-    /** Minimum vertex box-corner */
+    /** Minimum vertex box-corner. (Vector3) */
     min: Vector3
-    /** Maximum vertex box-corner */
+    /** Maximum vertex box-corner. (Vector3) */
     max: Vector3
   }
   /** Wave, audio wave data */
   export interface Wave {
-    /** Total number of frames (considering channels) */
+    /** Total number of frames (considering channels). (unsigned int) */
     frameCount: number
-    /** Frequency (samples per second) */
+    /** Frequency (samples per second). (unsigned int) */
     sampleRate: number
-    /** Bit depth (bits per sample): 8, 16, 32 (24 not supported) */
+    /** Bit depth (bits per sample): 8, 16, 32 (24 not supported). (unsigned int) */
     sampleSize: number
-    /** Number of channels (1-mono, 2-stereo, ...) */
+    /** Number of channels (1-mono, 2-stereo, ...). (unsigned int) */
     channels: number
-    /** Buffer data pointer */
+    /** Buffer data pointer. (void *) */
     data: number
   }
   /** AudioStream, custom audio stream */
   export interface AudioStream {
-    /** Pointer to internal data used by the audio system */
+    /** Pointer to internal data used by the audio system. (rAudioBuffer *) */
     buffer: number
-    /** Frequency (samples per second) */
+    /** Pointer to internal data processor, useful for audio effects. (rAudioProcessor *) */
+    processor: number
+    /** Frequency (samples per second). (unsigned int) */
     sampleRate: number
-    /** Bit depth (bits per sample): 8, 16, 32 (24 not supported) */
+    /** Bit depth (bits per sample): 8, 16, 32 (24 not supported). (unsigned int) */
     sampleSize: number
-    /** Number of channels (1-mono, 2-stereo, ...) */
+    /** Number of channels (1-mono, 2-stereo, ...). (unsigned int) */
     channels: number
   }
   /** Sound */
   export interface Sound {
-    /** Audio stream */
+    /** Audio stream. (AudioStream) */
     stream: AudioStream
-    /** Total number of frames (considering channels) */
+    /** Total number of frames (considering channels). (unsigned int) */
     frameCount: number
   }
   /** Music, audio stream, anything longer than ~10 seconds should be streamed */
   export interface Music {
-    /** Audio stream */
+    /** Audio stream. (AudioStream) */
     stream: AudioStream
-    /** Total number of frames (considering channels) */
+    /** Total number of frames (considering channels). (unsigned int) */
     frameCount: number
-    /** Music looping enable */
+    /** Music looping enable. (bool) */
     looping: boolean
-    /** Type of music context (audio filetype) */
+    /** Type of music context (audio filetype). (int) */
     ctxType: number
-    /** Audio context data, depends on type */
+    /** Audio context data, depends on type. (void *) */
     ctxData: number
   }
   /** VrDeviceInfo, Head-Mounted-Display device parameters */
   export interface VrDeviceInfo {
-    /** Horizontal resolution in pixels */
+    /** Horizontal resolution in pixels. (int) */
     hResolution: number
-    /** Vertical resolution in pixels */
+    /** Vertical resolution in pixels. (int) */
     vResolution: number
-    /** Horizontal size in meters */
+    /** Horizontal size in meters. (float) */
     hScreenSize: number
-    /** Vertical size in meters */
+    /** Vertical size in meters. (float) */
     vScreenSize: number
-    /** Screen center in meters */
+    /** Screen center in meters. (float) */
     vScreenCenter: number
-    /** Distance between eye and display in meters */
+    /** Distance between eye and display in meters. (float) */
     eyeToScreenDistance: number
-    /** Lens separation distance in meters */
+    /** Lens separation distance in meters. (float) */
     lensSeparationDistance: number
-    /** IPD (distance between pupils) in meters */
+    /** IPD (distance between pupils) in meters. (float) */
     interpupillaryDistance: number
-    /** Lens distortion constant parameters */
-    lensDistortionValues: float[4]
-    /** Chromatic aberration correction parameters */
-    chromaAbCorrection: float[4]
+    /** Lens distortion constant parameters. (float[4]) */
+    lensDistortionValues: number
+    /** Chromatic aberration correction parameters. (float[4]) */
+    chromaAbCorrection: number
   }
   /** VrStereoConfig, VR stereo rendering configuration for simulator */
   export interface VrStereoConfig {
-    /** VR projection matrices (per eye) */
-    projection: Matrix[2]
-    /** VR view offset matrices (per eye) */
-    viewOffset: Matrix[2]
-    /** VR left lens center */
-    leftLensCenter: float[2]
-    /** VR right lens center */
-    rightLensCenter: float[2]
-    /** VR left screen center */
-    leftScreenCenter: float[2]
-    /** VR right screen center */
-    rightScreenCenter: float[2]
-    /** VR distortion scale */
-    scale: float[2]
-    /** VR distortion scale in */
-    scaleIn: float[2]
+    /** VR projection matrices (per eye). (Matrix[2]) */
+    projection: number
+    /** VR view offset matrices (per eye). (Matrix[2]) */
+    viewOffset: number
+    /** VR left lens center. (float[2]) */
+    leftLensCenter: number
+    /** VR right lens center. (float[2]) */
+    rightLensCenter: number
+    /** VR left screen center. (float[2]) */
+    leftScreenCenter: number
+    /** VR right screen center. (float[2]) */
+    rightScreenCenter: number
+    /** VR distortion scale. (float[2]) */
+    scale: number
+    /** VR distortion scale in. (float[2]) */
+    scaleIn: number
+  }
+  /** File path list */
+  export interface FilePathList {
+    /** Filepaths max entries. (unsigned int) */
+    capacity: number
+    /** Filepaths entries count. (unsigned int) */
+    count: number
+    /** Filepaths entries. (char **) */
+    paths: number
+  }
+  /** Dynamic vertex buffers (position + texcoords + colors + indices arrays) */
+  export interface rlVertexBuffer {
+    /** Number of elements in the buffer (QUADS). (int) */
+    elementCount: number
+    /** Vertex position (XYZ - 3 components per vertex) (shader-location = 0). (float *) */
+    vertices: number
+    /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1). (float *) */
+    texcoords: number
+    /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
+    colors: Buffer
+    /** Vertex indices (in case vertex data comes indexed) (6 indices per quad). (unsigned int *) */
+    indices: number
+    /** OpenGL Vertex Array Object id. (unsigned int) */
+    vaoId: number
+    /** OpenGL Vertex Buffer Objects id (4 types of vertex data). (unsigned int[4]) */
+    vboId: number
+  }
+  /** of those state-change happens (this is done in core module) */
+  export interface rlDrawCall {
+    /** Drawing mode: LINES, TRIANGLES, QUADS. (int) */
+    mode: number
+    /** Number of vertex of the draw. (int) */
+    vertexCount: number
+    /** Number of vertex required for index alignment (LINES, TRIANGLES). (int) */
+    vertexAlignment: number
+    /** Texture id to be used on the draw -> Use to create new draw call if changes. (unsigned int) */
+    textureId: number
+  }
+  /** rlRenderBatch type */
+  export interface rlRenderBatch {
+    /** Number of vertex buffers (multi-buffering support). (int) */
+    bufferCount: number
+    /** Current buffer tracking in case of multi-buffering. (int) */
+    currentBuffer: number
+    /** Dynamic buffer(s) for vertex data. (rlVertexBuffer *) */
+    vertexBuffer: number
+    /** Draw calls array, depends on textureId. (rlDrawCall *) */
+    draws: number
+    /** Draw calls counter. (int) */
+    drawCounter: number
+    /** Current depth value for next draw. (float) */
+    currentDepth: number
   }
 
   /** RenderTexture, fbo for texture rendering */
@@ -416,6 +470,8 @@ declare module "raylib" {
   /** Camera, defines position/orientation in 3d space */
   export type Camera = Camera3D | Camera2D
 
+  /** Quaternion, same as Vector4 */
+  export type Quaternion = Vector4
   /** Initialize window and OpenGL context */
   export function InitWindow(width: number, height: number, title: string): void
   
@@ -449,7 +505,7 @@ declare module "raylib" {
   /** Check if one specific window flag is enabled */
   export function IsWindowState(flag: number): boolean
   
-  /** Set window configuration state using flags */
+  /** Set window configuration state using flags (only PLATFORM_DESKTOP) */
   export function SetWindowState(flags: number): void
   
   /** Clear window configuration state flags */
@@ -485,6 +541,9 @@ declare module "raylib" {
   /** Set window dimensions */
   export function SetWindowSize(width: number, height: number): void
   
+  /** Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP) */
+  export function SetWindowOpacity(opacity: number): void
+  
   /** Get native window handle */
   export function GetWindowHandle(): number
   
@@ -493,6 +552,12 @@ declare module "raylib" {
   
   /** Get current screen height */
   export function GetScreenHeight(): number
+  
+  /** Get current render width (it considers HiDPI) */
+  export function GetRenderWidth(): number
+  
+  /** Get current render height (it considers HiDPI) */
+  export function GetRenderHeight(): number
   
   /** Get number of connected monitors */
   export function GetMonitorCount(): number
@@ -503,10 +568,10 @@ declare module "raylib" {
   /** Get specified monitor position */
   export function GetMonitorPosition(monitor: number): Vector2
   
-  /** Get specified monitor width (max available by monitor) */
+  /** Get specified monitor width (current video mode used by monitor) */
   export function GetMonitorWidth(monitor: number): number
   
-  /** Get specified monitor height (max available by monitor) */
+  /** Get specified monitor height (current video mode used by monitor) */
   export function GetMonitorHeight(monitor: number): number
   
   /** Get specified monitor physical width in millimetres */
@@ -533,14 +598,20 @@ declare module "raylib" {
   /** Get clipboard text content */
   export function GetClipboardText(): string
   
+  /** Enable waiting for events on EndDrawing(), no automatic event polling */
+  export function EnableEventWaiting(): void
+  
+  /** Disable waiting for events on EndDrawing(), automatic events polling */
+  export function DisableEventWaiting(): void
+  
   /** Swap back buffer with front buffer (screen drawing) */
   export function SwapScreenBuffer(): void
   
   /** Register all input events */
   export function PollInputEvents(): void
   
-  /** Wait for some milliseconds (halt program execution) */
-  export function WaitTime(ms: number): void
+  /** Wait for some time (halt program execution) */
+  export function WaitTime(seconds: number): void
   
   /** Shows cursor */
   export function ShowCursor(): void
@@ -641,14 +712,14 @@ declare module "raylib" {
   /** Get the screen space position for a 3d world space position */
   export function GetWorldToScreen(position: Vector3, camera: Camera3D): Vector2
   
+  /** Get the world space position for a 2d camera screen space position */
+  export function GetScreenToWorld2D(position: Vector2, camera: Camera2D): Vector2
+  
   /** Get size position for a 3d world space position */
   export function GetWorldToScreenEx(position: Vector3, camera: Camera3D, width: number, height: number): Vector2
   
   /** Get the screen space position for a 2d camera world space position */
   export function GetWorldToScreen2D(position: Vector2, camera: Camera2D): Vector2
-  
-  /** Get the world space position for a 2d camera screen space position */
-  export function GetScreenToWorld2D(position: Vector2, camera: Camera2D): Vector2
   
   /** Set target FPS (maximum) */
   export function SetTargetFPS(fps: number): void
@@ -686,6 +757,9 @@ declare module "raylib" {
   /** Internal memory free */
   export function MemFree(ptr: number): void
   
+  /** Open URL with default system browser (if available) */
+  export function OpenURL(url: string): void
+  
   /** Load file data as byte array (read) */
   export function LoadFileData(fileName: string, bytesRead: number): Buffer
   
@@ -694,6 +768,9 @@ declare module "raylib" {
   
   /** Save data to file from byte array (write), returns true on success */
   export function SaveFileData(fileName: string, data: number, bytesToWrite: number): boolean
+  
+  /** Export data to code (.h), returns true on success */
+  export function ExportDataAsCode(data: string, size: number, fileName: string): boolean
   
   /** Load text data from file (read), returns a '\0' terminated string */
   export function LoadFileText(fileName: string): string
@@ -713,6 +790,9 @@ declare module "raylib" {
   /** Check file extension (including point: .png, .wav) */
   export function IsFileExtension(fileName: string, ext: string): boolean
   
+  /** Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h) */
+  export function GetFileLength(fileName: string): number
+  
   /** Get pointer to extension for a filename string (includes dot: '.png') */
   export function GetFileExtension(fileName: string): string
   
@@ -731,47 +811,47 @@ declare module "raylib" {
   /** Get current working directory (uses static string) */
   export function GetWorkingDirectory(): string
   
-  /** Get filenames in a directory path (memory should be freed) */
-  export function GetDirectoryFiles(dirPath: string, count: number): number
-  
-  /** Clear directory files paths buffers (free memory) */
-  export function ClearDirectoryFiles(): void
+  /** Get the directory if the running application (uses static string) */
+  export function GetApplicationDirectory(): string
   
   /** Change working directory, return true on success */
   export function ChangeDirectory(dir: string): boolean
   
+  /** Check if a given path is a file or a directory */
+  export function IsPathFile(path: string): boolean
+  
+  /** Load directory filepaths */
+  export function LoadDirectoryFiles(dirPath: string): FilePathList
+  
+  /** Load directory filepaths with extension filtering and recursive directory scan */
+  export function LoadDirectoryFilesEx(basePath: string, filter: string, scanSubdirs: boolean): FilePathList
+  
+  /** Unload filepaths */
+  export function UnloadDirectoryFiles(files: FilePathList): void
+  
   /** Check if a file has been dropped into window */
   export function IsFileDropped(): boolean
   
-  /** Get dropped files names (memory should be freed) */
-  export function GetDroppedFiles(count: number): number
+  /** Load dropped filepaths */
+  export function LoadDroppedFiles(): FilePathList
   
-  /** Clear dropped files paths buffer (free memory) */
-  export function ClearDroppedFiles(): void
+  /** Unload dropped filepaths */
+  export function UnloadDroppedFiles(files: FilePathList): void
   
   /** Get file modification time (last write time) */
   export function GetFileModTime(fileName: string): number
   
-  /** Compress data (DEFLATE algorithm) */
-  export function CompressData(data: Buffer, dataLength: number, compDataLength: number): Buffer
+  /** Compress data (DEFLATE algorithm), memory must be MemFree() */
+  export function CompressData(data: Buffer, dataSize: number, compDataSize: number): Buffer
   
-  /** Decompress data (DEFLATE algorithm) */
-  export function DecompressData(compData: Buffer, compDataLength: number, dataLength: number): Buffer
+  /** Decompress data (DEFLATE algorithm), memory must be MemFree() */
+  export function DecompressData(compData: Buffer, compDataSize: number, dataSize: number): Buffer
   
-  /** Encode data to Base64 string */
-  export function EncodeDataBase64(data: Buffer, dataLength: number, outputLength: number): string
+  /** Encode data to Base64 string, memory must be MemFree() */
+  export function EncodeDataBase64(data: Buffer, dataSize: number, outputSize: number): string
   
-  /** Decode Base64 string data */
-  export function DecodeDataBase64(data: Buffer, outputLength: number): Buffer
-  
-  /** Save integer value to storage file (to defined position), returns true on success */
-  export function SaveStorageValue(position: number, value: number): boolean
-  
-  /** Load integer value from storage file (from defined position) */
-  export function LoadStorageValue(position: number): number
-  
-  /** Open URL with default system browser (if available) */
-  export function OpenURL(url: string): void
+  /** Decode Base64 string data, memory must be MemFree() */
+  export function DecodeDataBase64(data: Buffer, outputSize: number): Buffer
   
   /** Check if a key has been pressed once */
   export function IsKeyPressed(key: number): boolean
@@ -857,8 +937,11 @@ declare module "raylib" {
   /** Set mouse scaling */
   export function SetMouseScale(scaleX: number, scaleY: number): void
   
-  /** Get mouse wheel movement Y */
+  /** Get mouse wheel movement for X or Y, whichever is larger */
   export function GetMouseWheelMove(): number
+  
+  /** Get mouse wheel movement for both X and Y */
+  export function GetMouseWheelMoveV(): Vector2
   
   /** Set mouse cursor */
   export function SetMouseCursor(cursor: number): void
@@ -1349,7 +1432,7 @@ declare module "raylib" {
   /** Load font from file into GPU memory (VRAM) */
   export function LoadFont(fileName: string): Font
   
-  /** Load font from file with extended parameters */
+  /** Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set */
   export function LoadFontEx(fileName: string, fontSize: number, fontChars: number, glyphCount: number): Font
   
   /** Load font from Image (XNA style) */
@@ -1367,8 +1450,11 @@ declare module "raylib" {
   /** Unload font chars info data (RAM) */
   export function UnloadFontData(chars: number, glyphCount: number): void
   
-  /** Unload Font from GPU memory (VRAM) */
+  /** Unload font from GPU memory (VRAM) */
   export function UnloadFont(font: Font): void
+  
+  /** Export font as code file, returns true on success */
+  export function ExportFontAsCode(font: Font, fileName: string): boolean
   
   /** Draw current FPS */
   export function DrawFPS(posX: number, posY: number): void
@@ -1384,6 +1470,9 @@ declare module "raylib" {
   
   /** Draw one character (codepoint) */
   export function DrawTextCodepoint(font: Font, codepoint: number, position: Vector2, fontSize: number, tint: Color): void
+  
+  /** Draw multiple character (codepoint) */
+  export function DrawTextCodepoints(font: Font, codepoints: number, count: number, position: Vector2, fontSize: number, spacing: number, tint: Color): void
   
   /** Measure string width for default font */
   export function MeasureText(text: string, fontSize: number): number
@@ -1580,9 +1669,6 @@ declare module "raylib" {
   /** Compute mesh tangents */
   export function GenMeshTangents(mesh: Mesh): void
   
-  /** Compute mesh binormals */
-  export function GenMeshBinormals(mesh: Mesh): void
-  
   /** Generate polygonal mesh */
   export function GenMeshPoly(sides: number, radius: number): Mesh
   
@@ -1648,9 +1734,6 @@ declare module "raylib" {
   
   /** Get collision info between ray and box */
   export function GetRayCollisionBox(ray: Ray, box: BoundingBox): RayCollision
-  
-  /** Get collision info between ray and model */
-  export function GetRayCollisionModel(ray: Ray, model: Model): RayCollision
   
   /** Get collision info between ray and mesh */
   export function GetRayCollisionMesh(ray: Ray, mesh: Mesh, transform: Matrix): RayCollision
@@ -1730,8 +1813,8 @@ declare module "raylib" {
   /** Set pitch for a sound (1.0 is base level) */
   export function SetSoundPitch(sound: Sound, pitch: number): void
   
-  /** Convert wave data to desired format */
-  export function WaveFormat(wave: Wave, sampleRate: number, sampleSize: number, channels: number): void
+  /** Set pan for a sound (0.5 is center) */
+  export function SetSoundPan(sound: Sound, pan: number): void
   
   /** Copy a wave to a new wave */
   export function WaveCopy(wave: Wave): Wave
@@ -1739,7 +1822,10 @@ declare module "raylib" {
   /** Crop a wave to defined samples range */
   export function WaveCrop(wave: Wave, initSample: number, finalSample: number): void
   
-  /** Load samples data from wave as a floats array */
+  /** Convert wave data to desired format */
+  export function WaveFormat(wave: Wave, sampleRate: number, sampleSize: number, channels: number): void
+  
+  /** Load samples data from wave as a 32bit float data array */
   export function LoadWaveSamples(wave: Wave): number
   
   /** Unload samples data loaded with LoadWaveSamples() */
@@ -1781,6 +1867,9 @@ declare module "raylib" {
   /** Set pitch for a music (1.0 is base level) */
   export function SetMusicPitch(music: Music, pitch: number): void
   
+  /** Set pan for a music (0.5 is center) */
+  export function SetMusicPan(music: Music, pan: number): void
+  
   /** Get music time length (in seconds) */
   export function GetMusicTimeLength(music: Music): number
   
@@ -1820,91 +1909,94 @@ declare module "raylib" {
   /** Set pitch for audio stream (1.0 is base level) */
   export function SetAudioStreamPitch(stream: AudioStream, pitch: number): void
   
+  /** Set pan for audio stream (0.5 is centered) */
+  export function SetAudioStreamPan(stream: AudioStream, pan: number): void
+  
   /** Default size for new audio streams */
   export function SetAudioStreamBufferSizeDefault(size: number): void
   
-  /**  */
+  /** Ease: Linear */
   export function EaseLinearNone(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Linear In */
   export function EaseLinearIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Linear Out */
   export function EaseLinearOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Linear In Out */
   export function EaseLinearInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Sine In */
   export function EaseSineIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Sine Out */
   export function EaseSineOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Sine Out */
   export function EaseSineInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Circular In */
   export function EaseCircIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Circular Out */
   export function EaseCircOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Circular In Out */
   export function EaseCircInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Cubic In */
   export function EaseCubicIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Cubic Out */
   export function EaseCubicOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Cubic In Out */
   export function EaseCubicInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Quadratic In */
   export function EaseQuadIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Quadratic Out */
   export function EaseQuadOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Quadratic In Out */
   export function EaseQuadInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Exponential In */
   export function EaseExpoIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Exponential Out */
   export function EaseExpoOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Exponential In Out */
   export function EaseExpoInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Back In */
   export function EaseBackIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Back Out */
   export function EaseBackOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Back In Out */
   export function EaseBackInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Bounce Out */
   export function EaseBounceOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Bounce In */
   export function EaseBounceIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Bounce In Out */
   export function EaseBounceInOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Elastic In */
   export function EaseElasticIn(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Elastic Out */
   export function EaseElasticOut(t: number, b: number, c: number, d: number): number
   
-  /**  */
+  /** Ease: Elastic In Out */
   export function EaseElasticInOut(t: number, b: number, c: number, d: number): number
   
   /**  */
@@ -1918,6 +2010,12 @@ declare module "raylib" {
   
   /**  */
   export function Remap(value: number, inputStart: number, inputEnd: number, outputStart: number, outputEnd: number): number
+  
+  /**  */
+  export function Wrap(value: number, min: number, max: number): number
+  
+  /**  */
+  export function FloatEquals(x: number, y: number): number
   
   /**  */
   export function Vector2Zero(): Vector2
@@ -1950,6 +2048,9 @@ declare module "raylib" {
   export function Vector2Distance(v1: Vector2, v2: Vector2): number
   
   /**  */
+  export function Vector2DistanceSqr(v1: Vector2, v2: Vector2): number
+  
+  /**  */
   export function Vector2Angle(v1: Vector2, v2: Vector2): number
   
   /**  */
@@ -1968,6 +2069,9 @@ declare module "raylib" {
   export function Vector2Normalize(v: Vector2): Vector2
   
   /**  */
+  export function Vector2Transform(v: Vector2, mat: Matrix): Vector2
+  
+  /**  */
   export function Vector2Lerp(v1: Vector2, v2: Vector2, amount: number): Vector2
   
   /**  */
@@ -1978,6 +2082,18 @@ declare module "raylib" {
   
   /**  */
   export function Vector2MoveTowards(v: Vector2, target: Vector2, maxDistance: number): Vector2
+  
+  /**  */
+  export function Vector2Invert(v: Vector2): Vector2
+  
+  /**  */
+  export function Vector2Clamp(v: Vector2, min: Vector2, max: Vector2): Vector2
+  
+  /**  */
+  export function Vector2ClampValue(v: Vector2, min: number, max: number): Vector2
+  
+  /**  */
+  export function Vector2Equals(p: Vector2, q: Vector2): number
   
   /**  */
   export function Vector3Zero(): Vector3
@@ -2022,7 +2138,10 @@ declare module "raylib" {
   export function Vector3Distance(v1: Vector3, v2: Vector3): number
   
   /**  */
-  export function Vector3Angle(v1: Vector3, v2: Vector3): Vector2
+  export function Vector3DistanceSqr(v1: Vector3, v2: Vector3): number
+  
+  /**  */
+  export function Vector3Angle(v1: Vector3, v2: Vector3): number
   
   /**  */
   export function Vector3Negate(v: Vector3): Vector3
@@ -2043,6 +2162,9 @@ declare module "raylib" {
   export function Vector3RotateByQuaternion(v: Vector3, q: Quaternion): Vector3
   
   /**  */
+  export function Vector3RotateByAxisAngle(v: Vector3, axis: Vector3, angle: number): Vector3
+  
+  /**  */
   export function Vector3Lerp(v1: Vector3, v2: Vector3, amount: number): Vector3
   
   /**  */
@@ -2061,6 +2183,21 @@ declare module "raylib" {
   export function Vector3Unproject(source: Vector3, projection: Matrix, view: Matrix): Vector3
   
   /**  */
+  export function Vector3Invert(v: Vector3): Vector3
+  
+  /**  */
+  export function Vector3Clamp(v: Vector3, min: Vector3, max: Vector3): Vector3
+  
+  /**  */
+  export function Vector3ClampValue(v: Vector3, min: number, max: number): Vector3
+  
+  /**  */
+  export function Vector3Equals(p: Vector3, q: Vector3): number
+  
+  /**  */
+  export function Vector3Refract(v: Vector3, n: Vector3, r: number): Vector3
+  
+  /**  */
   export function MatrixDeterminant(mat: Matrix): number
   
   /**  */
@@ -2071,9 +2208,6 @@ declare module "raylib" {
   
   /**  */
   export function MatrixInvert(mat: Matrix): Matrix
-  
-  /**  */
-  export function MatrixNormalize(mat: Matrix): Matrix
   
   /**  */
   export function MatrixIdentity(): Matrix
@@ -2103,10 +2237,10 @@ declare module "raylib" {
   export function MatrixRotateZ(angle: number): Matrix
   
   /**  */
-  export function MatrixRotateXYZ(ang: Vector3): Matrix
+  export function MatrixRotateXYZ(angle: Vector3): Matrix
   
   /**  */
-  export function MatrixRotateZYX(ang: Vector3): Matrix
+  export function MatrixRotateZYX(angle: Vector3): Matrix
   
   /**  */
   export function MatrixScale(x: number, y: number, z: number): Matrix
@@ -2189,6 +2323,9 @@ declare module "raylib" {
   /**  */
   export function QuaternionTransform(q: Quaternion, mat: Matrix): Quaternion
   
+  /**  */
+  export function QuaternionEquals(p: Quaternion, q: Quaternion): number
+  
   /** Enable gui controls (global state) */
   export function GuiEnable(): void
   
@@ -2235,10 +2372,10 @@ declare module "raylib" {
   export function GuiLine(bounds: Rectangle, text: string): void
   
   /** Panel control, useful to group controls */
-  export function GuiPanel(bounds: Rectangle): void
+  export function GuiPanel(bounds: Rectangle, text: string): void
   
   /** Scroll Panel control */
-  export function GuiScrollPanel(bounds: Rectangle, content: Rectangle, scroll: number): Rectangle
+  export function GuiScrollPanel(bounds: Rectangle, text: string, content: Rectangle, scroll: number): Rectangle
   
   /** Label control, shows text */
   export function GuiLabel(bounds: Rectangle, text: string): void
@@ -2291,11 +2428,8 @@ declare module "raylib" {
   /** Dummy control for placeholders */
   export function GuiDummyRec(bounds: Rectangle, text: string): void
   
-  /** Scroll Bar control */
-  export function GuiScrollBar(bounds: Rectangle, value: number, minValue: number, maxValue: number): number
-  
-  /** Grid control */
-  export function GuiGrid(bounds: Rectangle, spacing: number, subdivs: number): Vector2
+  /** Grid control, returns mouse cell position */
+  export function GuiGrid(bounds: Rectangle, text: string, spacing: number, subdivs: number): Vector2
   
   /** List View control, returns selected list item index */
   export function GuiListView(bounds: Rectangle, text: string, scrollIndex: number, active: number): number
@@ -2306,20 +2440,20 @@ declare module "raylib" {
   /** Message Box control, displays a message */
   export function GuiMessageBox(bounds: Rectangle, title: string, message: string, buttons: string): number
   
-  /** Text Input Box control, ask for text */
-  export function GuiTextInputBox(bounds: Rectangle, title: string, message: string, buttons: string, text: string): number
+  /** Text Input Box control, ask for text, supports secret */
+  export function GuiTextInputBox(bounds: Rectangle, title: string, message: string, buttons: string, text: string, textMaxSize: number, secretViewActive: number): number
   
   /** Color Picker control (multiple color controls) */
-  export function GuiColorPicker(bounds: Rectangle, color: Color): Color
+  export function GuiColorPicker(bounds: Rectangle, text: string, color: Color): Color
   
   /** Color Panel control */
-  export function GuiColorPanel(bounds: Rectangle, color: Color): Color
+  export function GuiColorPanel(bounds: Rectangle, text: string, color: Color): Color
   
   /** Color Bar Alpha control */
-  export function GuiColorBarAlpha(bounds: Rectangle, alpha: number): number
+  export function GuiColorBarAlpha(bounds: Rectangle, text: string, alpha: number): number
   
   /** Color Bar Hue control */
-  export function GuiColorBarHue(bounds: Rectangle, value: number): number
+  export function GuiColorBarHue(bounds: Rectangle, text: string, value: number): number
   
   /** Load style file over global style variable (.rgs) */
   export function GuiLoadStyle(fileName: string): void
@@ -2342,6 +2476,9 @@ declare module "raylib" {
   /** Set icon bit data */
   export function GuiSetIconData(iconId: number, data: number): void
   
+  /** Set icon scale (1 by default) */
+  export function GuiSetIconScale(scale: number): void
+  
   /** Set icon pixel value */
   export function GuiSetIconPixel(iconId: number, x: number, y: number): void
   
@@ -2350,6 +2487,432 @@ declare module "raylib" {
   
   /** Check icon pixel value */
   export function GuiCheckIconPixel(iconId: number, x: number, y: number): boolean
+  
+  /** Choose the current matrix to be transformed */
+  export function rlMatrixMode(mode: number): void
+  
+  /** Push the current matrix to stack */
+  export function rlPushMatrix(): void
+  
+  /** Pop lattest inserted matrix from stack */
+  export function rlPopMatrix(): void
+  
+  /** Reset current matrix to identity matrix */
+  export function rlLoadIdentity(): void
+  
+  /** Multiply the current matrix by a translation matrix */
+  export function rlTranslatef(x: number, y: number, z: number): void
+  
+  /** Multiply the current matrix by a rotation matrix */
+  export function rlRotatef(angle: number, x: number, y: number, z: number): void
+  
+  /** Multiply the current matrix by a scaling matrix */
+  export function rlScalef(x: number, y: number, z: number): void
+  
+  /** Multiply the current matrix by another matrix */
+  export function rlMultMatrixf(matf: number): void
+  
+  /**  */
+  export function rlFrustum(left: number, right: number, bottom: number, top: number, znear: number, zfar: number): void
+  
+  /**  */
+  export function rlOrtho(left: number, right: number, bottom: number, top: number, znear: number, zfar: number): void
+  
+  /** Set the viewport area */
+  export function rlViewport(x: number, y: number, width: number, height: number): void
+  
+  /** Initialize drawing mode (how to organize vertex) */
+  export function rlBegin(mode: number): void
+  
+  /** Finish vertex providing */
+  export function rlEnd(): void
+  
+  /** Define one vertex (position) - 2 int */
+  export function rlVertex2i(x: number, y: number): void
+  
+  /** Define one vertex (position) - 2 float */
+  export function rlVertex2f(x: number, y: number): void
+  
+  /** Define one vertex (position) - 3 float */
+  export function rlVertex3f(x: number, y: number, z: number): void
+  
+  /** Define one vertex (texture coordinate) - 2 float */
+  export function rlTexCoord2f(x: number, y: number): void
+  
+  /** Define one vertex (normal) - 3 float */
+  export function rlNormal3f(x: number, y: number, z: number): void
+  
+  /** Define one vertex (color) - 4 byte */
+  export function rlColor4ub(r: number, g: number, b: number, a: number): void
+  
+  /** Define one vertex (color) - 3 float */
+  export function rlColor3f(x: number, y: number, z: number): void
+  
+  /** Define one vertex (color) - 4 float */
+  export function rlColor4f(x: number, y: number, z: number, w: number): void
+  
+  /** Enable vertex array (VAO, if supported) */
+  export function rlEnableVertexArray(vaoId: number): boolean
+  
+  /** Disable vertex array (VAO, if supported) */
+  export function rlDisableVertexArray(): void
+  
+  /** Enable vertex buffer (VBO) */
+  export function rlEnableVertexBuffer(id: number): void
+  
+  /** Disable vertex buffer (VBO) */
+  export function rlDisableVertexBuffer(): void
+  
+  /** Enable vertex buffer element (VBO element) */
+  export function rlEnableVertexBufferElement(id: number): void
+  
+  /** Disable vertex buffer element (VBO element) */
+  export function rlDisableVertexBufferElement(): void
+  
+  /** Enable vertex attribute index */
+  export function rlEnableVertexAttribute(index: number): void
+  
+  /** Disable vertex attribute index */
+  export function rlDisableVertexAttribute(index: number): void
+  
+  /** Select and active a texture slot */
+  export function rlActiveTextureSlot(slot: number): void
+  
+  /** Enable texture */
+  export function rlEnableTexture(id: number): void
+  
+  /** Disable texture */
+  export function rlDisableTexture(): void
+  
+  /** Enable texture cubemap */
+  export function rlEnableTextureCubemap(id: number): void
+  
+  /** Disable texture cubemap */
+  export function rlDisableTextureCubemap(): void
+  
+  /** Set texture parameters (filter, wrap) */
+  export function rlTextureParameters(id: number, param: number, value: number): void
+  
+  /** Enable shader program */
+  export function rlEnableShader(id: number): void
+  
+  /** Disable shader program */
+  export function rlDisableShader(): void
+  
+  /** Enable render texture (fbo) */
+  export function rlEnableFramebuffer(id: number): void
+  
+  /** Disable render texture (fbo), return to default framebuffer */
+  export function rlDisableFramebuffer(): void
+  
+  /** Activate multiple draw color buffers */
+  export function rlActiveDrawBuffers(count: number): void
+  
+  /** Enable color blending */
+  export function rlEnableColorBlend(): void
+  
+  /** Disable color blending */
+  export function rlDisableColorBlend(): void
+  
+  /** Enable depth test */
+  export function rlEnableDepthTest(): void
+  
+  /** Disable depth test */
+  export function rlDisableDepthTest(): void
+  
+  /** Enable depth write */
+  export function rlEnableDepthMask(): void
+  
+  /** Disable depth write */
+  export function rlDisableDepthMask(): void
+  
+  /** Enable backface culling */
+  export function rlEnableBackfaceCulling(): void
+  
+  /** Disable backface culling */
+  export function rlDisableBackfaceCulling(): void
+  
+  /** Enable scissor test */
+  export function rlEnableScissorTest(): void
+  
+  /** Disable scissor test */
+  export function rlDisableScissorTest(): void
+  
+  /** Scissor test */
+  export function rlScissor(x: number, y: number, width: number, height: number): void
+  
+  /** Enable wire mode */
+  export function rlEnableWireMode(): void
+  
+  /** Disable wire mode */
+  export function rlDisableWireMode(): void
+  
+  /** Set the line drawing width */
+  export function rlSetLineWidth(width: number): void
+  
+  /** Get the line drawing width */
+  export function rlGetLineWidth(): number
+  
+  /** Enable line aliasing */
+  export function rlEnableSmoothLines(): void
+  
+  /** Disable line aliasing */
+  export function rlDisableSmoothLines(): void
+  
+  /** Enable stereo rendering */
+  export function rlEnableStereoRender(): void
+  
+  /** Disable stereo rendering */
+  export function rlDisableStereoRender(): void
+  
+  /** Check if stereo render is enabled */
+  export function rlIsStereoRenderEnabled(): boolean
+  
+  /** Clear color buffer with color */
+  export function rlClearColor(r: number, g: number, b: number, a: number): void
+  
+  /** Clear used screen buffers (color and depth) */
+  export function rlClearScreenBuffers(): void
+  
+  /** Check and log OpenGL error codes */
+  export function rlCheckErrors(): void
+  
+  /** Set blending mode */
+  export function rlSetBlendMode(mode: number): void
+  
+  /** Set blending mode factor and equation (using OpenGL factors) */
+  export function rlSetBlendFactors(glSrcFactor: number, glDstFactor: number, glEquation: number): void
+  
+  /** Initialize rlgl (buffers, shaders, textures, states) */
+  export function rlglInit(width: number, height: number): void
+  
+  /** De-inititialize rlgl (buffers, shaders, textures) */
+  export function rlglClose(): void
+  
+  /** Load OpenGL extensions (loader function required) */
+  export function rlLoadExtensions(loader: number): void
+  
+  /** Get current OpenGL version */
+  export function rlGetVersion(): number
+  
+  /** Set current framebuffer width */
+  export function rlSetFramebufferWidth(width: number): void
+  
+  /** Get default framebuffer width */
+  export function rlGetFramebufferWidth(): number
+  
+  /** Set current framebuffer height */
+  export function rlSetFramebufferHeight(height: number): void
+  
+  /** Get default framebuffer height */
+  export function rlGetFramebufferHeight(): number
+  
+  /** Get default texture id */
+  export function rlGetTextureIdDefault(): number
+  
+  /** Get default shader id */
+  export function rlGetShaderIdDefault(): number
+  
+  /** Get default shader locations */
+  export function rlGetShaderLocsDefault(): number
+  
+  /** Load a render batch system */
+  export function rlLoadRenderBatch(numBuffers: number, bufferElements: number): rlRenderBatch
+  
+  /** Unload render batch system */
+  export function rlUnloadRenderBatch(batch: rlRenderBatch): void
+  
+  /** Draw render batch data (Update->Draw->Reset) */
+  export function rlDrawRenderBatch(batch: number): void
+  
+  /** Set the active render batch for rlgl (NULL for default internal) */
+  export function rlSetRenderBatchActive(batch: number): void
+  
+  /** Update and draw internal render batch */
+  export function rlDrawRenderBatchActive(): void
+  
+  /** Check internal buffer overflow for a given number of vertex */
+  export function rlCheckRenderBatchLimit(vCount: number): boolean
+  
+  /** Set current texture for render batch and check buffers limits */
+  export function rlSetTexture(id: number): void
+  
+  /** Load vertex array (vao) if supported */
+  export function rlLoadVertexArray(): number
+  
+  /** Load a vertex buffer attribute */
+  export function rlLoadVertexBuffer(buffer: number, size: number, dynamic: boolean): number
+  
+  /** Load a new attributes element buffer */
+  export function rlLoadVertexBufferElement(buffer: number, size: number, dynamic: boolean): number
+  
+  /** Update GPU buffer with new data */
+  export function rlUpdateVertexBuffer(bufferId: number, data: number, dataSize: number, offset: number): void
+  
+  /** Update vertex buffer elements with new data */
+  export function rlUpdateVertexBufferElements(id: number, data: number, dataSize: number, offset: number): void
+  
+  /**  */
+  export function rlUnloadVertexArray(vaoId: number): void
+  
+  /**  */
+  export function rlUnloadVertexBuffer(vboId: number): void
+  
+  /**  */
+  export function rlSetVertexAttribute(index: number, compSize: number, type: number, normalized: boolean, stride: number, pointer: number): void
+  
+  /**  */
+  export function rlSetVertexAttributeDivisor(index: number, divisor: number): void
+  
+  /** Set vertex attribute default value */
+  export function rlSetVertexAttributeDefault(locIndex: number, value: number, attribType: number, count: number): void
+  
+  /**  */
+  export function rlDrawVertexArray(offset: number, count: number): void
+  
+  /**  */
+  export function rlDrawVertexArrayElements(offset: number, count: number, buffer: number): void
+  
+  /**  */
+  export function rlDrawVertexArrayInstanced(offset: number, count: number, instances: number): void
+  
+  /**  */
+  export function rlDrawVertexArrayElementsInstanced(offset: number, count: number, buffer: number, instances: number): void
+  
+  /** Load texture in GPU */
+  export function rlLoadTexture(data: number, width: number, height: number, format: number, mipmapCount: number): number
+  
+  /** Load depth texture/renderbuffer (to be attached to fbo) */
+  export function rlLoadTextureDepth(width: number, height: number, useRenderBuffer: boolean): number
+  
+  /** Load texture cubemap */
+  export function rlLoadTextureCubemap(data: number, size: number, format: number): number
+  
+  /** Update GPU texture with new data */
+  export function rlUpdateTexture(id: number, offsetX: number, offsetY: number, width: number, height: number, format: number, data: number): void
+  
+  /** Get OpenGL internal formats */
+  export function rlGetGlTextureFormats(format: number, glInternalFormat: number, glFormat: number, glType: number): void
+  
+  /** Get name string for pixel format */
+  export function rlGetPixelFormatName(format: number): string
+  
+  /** Unload texture from GPU memory */
+  export function rlUnloadTexture(id: number): void
+  
+  /** Generate mipmap data for selected texture */
+  export function rlGenTextureMipmaps(id: number, width: number, height: number, format: number, mipmaps: number): void
+  
+  /** Read texture pixel data */
+  export function rlReadTexturePixels(id: number, width: number, height: number, format: number): number
+  
+  /** Read screen pixel data (color buffer) */
+  export function rlReadScreenPixels(width: number, height: number): Buffer
+  
+  /** Load an empty framebuffer */
+  export function rlLoadFramebuffer(width: number, height: number): number
+  
+  /** Attach texture/renderbuffer to a framebuffer */
+  export function rlFramebufferAttach(fboId: number, texId: number, attachType: number, texType: number, mipLevel: number): void
+  
+  /** Verify framebuffer is complete */
+  export function rlFramebufferComplete(id: number): boolean
+  
+  /** Delete framebuffer from GPU */
+  export function rlUnloadFramebuffer(id: number): void
+  
+  /** Load shader from code strings */
+  export function rlLoadShaderCode(vsCode: string, fsCode: string): number
+  
+  /** Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER) */
+  export function rlCompileShader(shaderCode: string, type: number): number
+  
+  /** Load custom shader program */
+  export function rlLoadShaderProgram(vShaderId: number, fShaderId: number): number
+  
+  /** Unload shader program */
+  export function rlUnloadShaderProgram(id: number): void
+  
+  /** Get shader location uniform */
+  export function rlGetLocationUniform(shaderId: number, uniformName: string): number
+  
+  /** Get shader location attribute */
+  export function rlGetLocationAttrib(shaderId: number, attribName: string): number
+  
+  /** Set shader value uniform */
+  export function rlSetUniform(locIndex: number, value: number, uniformType: number, count: number): void
+  
+  /** Set shader value matrix */
+  export function rlSetUniformMatrix(locIndex: number, mat: Matrix): void
+  
+  /** Set shader value sampler */
+  export function rlSetUniformSampler(locIndex: number, textureId: number): void
+  
+  /** Set shader currently active (id and locations) */
+  export function rlSetShader(id: number, locs: number): void
+  
+  /** Load compute shader program */
+  export function rlLoadComputeShaderProgram(shaderId: number): number
+  
+  /** Dispatch compute shader (equivalent to *draw* for graphics pilepine) */
+  export function rlComputeShaderDispatch(groupX: number, groupY: number, groupZ: number): void
+  
+  /** Load shader storage buffer object (SSBO) */
+  export function rlLoadShaderBuffer(size: BigInt, data: number, usageHint: number): number
+  
+  /** Unload shader storage buffer object (SSBO) */
+  export function rlUnloadShaderBuffer(ssboId: number): void
+  
+  /** Update SSBO buffer data */
+  export function rlUpdateShaderBufferElements(id: number, data: number, dataSize: BigInt, offset: BigInt): void
+  
+  /** Get SSBO buffer size */
+  export function rlGetShaderBufferSize(id: number): BigInt
+  
+  /** Bind SSBO buffer */
+  export function rlReadShaderBufferElements(id: number, dest: number, count: BigInt, offset: BigInt): void
+  
+  /** Copy SSBO buffer data */
+  export function rlBindShaderBuffer(id: number, index: number): void
+  
+  /** Copy SSBO buffer data */
+  export function rlCopyBuffersElements(destId: number, srcId: number, destOffset: BigInt, srcOffset: BigInt, count: BigInt): void
+  
+  /** Bind image texture */
+  export function rlBindImageTexture(id: number, index: number, format: number, readonly: number): void
+  
+  /** Get internal modelview matrix */
+  export function rlGetMatrixModelview(): Matrix
+  
+  /** Get internal projection matrix */
+  export function rlGetMatrixProjection(): Matrix
+  
+  /** Get internal accumulated transform matrix */
+  export function rlGetMatrixTransform(): Matrix
+  
+  /** Get internal projection matrix for stereo render (selected eye) */
+  export function rlGetMatrixProjectionStereo(eye: number): Matrix
+  
+  /** Get internal view offset matrix for stereo render (selected eye) */
+  export function rlGetMatrixViewOffsetStereo(eye: number): Matrix
+  
+  /** Set a custom projection matrix (replaces internal projection matrix) */
+  export function rlSetMatrixProjection(proj: Matrix): void
+  
+  /** Set a custom modelview matrix (replaces internal modelview matrix) */
+  export function rlSetMatrixModelview(view: Matrix): void
+  
+  /** Set eyes projection matrices for stereo rendering */
+  export function rlSetMatrixProjectionStereo(right: Matrix, left: Matrix): void
+  
+  /** Set eyes view offsets matrices for stereo rendering */
+  export function rlSetMatrixViewOffsetStereo(right: Matrix, left: Matrix): void
+  
+  /** Load and draw a cube */
+  export function rlLoadDrawCube(): void
+  
+  /** Load and draw a quad */
+  export function rlLoadDrawQuad(): void
   
 
   /** Set shader uniform float */
@@ -2387,6 +2950,8 @@ declare module "raylib" {
   export const FLAG_WINDOW_TRANSPARENT = 16
   /** Set to support HighDPI */
   export const FLAG_WINDOW_HIGHDPI = 8192
+  /** Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED */
+  export const FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384
   /** Set to try enabling MSAA 4X */
   export const FLAG_MSAA_4X_HINT = 32
   /** Set to try enabling interlaced video format (for V3D) */
@@ -2853,7 +3418,7 @@ declare module "raylib" {
   export const PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
   /** 2 bpp */
   export const PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
-  /** No filter, just pixel aproximation */
+  /** No filter, just pixel approximation */
   export const TEXTURE_FILTER_POINT = 0
   /** Linear filtering */
   export const TEXTURE_FILTER_BILINEAR = 1
@@ -2901,8 +3466,10 @@ declare module "raylib" {
   export const BLEND_ADD_COLORS = 3
   /** Blend textures subtracting colors (alternative) */
   export const BLEND_SUBTRACT_COLORS = 4
-  /** Belnd textures using custom src/dst factors (use rlSetBlendMode()) */
-  export const BLEND_CUSTOM = 5
+  /** Blend premultiplied textures considering alpha */
+  export const BLEND_ALPHA_PREMULTIPLY = 5
+  /** Blend textures using custom src/dst factors (use rlSetBlendMode()) */
+  export const BLEND_CUSTOM = 6
   /** No gesture */
   export const GESTURE_NONE = 0
   /** Tap gesture */
@@ -2946,20 +3513,20 @@ declare module "raylib" {
   /** Npatch layout: 3x1 tiles */
   export const NPATCH_THREE_PATCH_HORIZONTAL = 2
   /**  */
-  export const GUI_STATE_NORMAL = 0
+  export const STATE_NORMAL = 0
   /**  */
-  export const GUI_STATE_FOCUSED = 1
+  export const STATE_FOCUSED = 1
   /**  */
-  export const GUI_STATE_PRESSED = 2
+  export const STATE_PRESSED = 2
   /**  */
-  export const GUI_STATE_DISABLED = 3
+  export const STATE_DISABLED = 3
   /**  */
-  export const GUI_TEXT_ALIGN_LEFT = 0
+  export const TEXT_ALIGN_LEFT = 0
   /**  */
-  export const GUI_TEXT_ALIGN_CENTER = 1
+  export const TEXT_ALIGN_CENTER = 1
   /**  */
-  export const GUI_TEXT_ALIGN_RIGHT = 2
-  /** Generic control -> populates to all controls when set */
+  export const TEXT_ALIGN_RIGHT = 2
+  /**  */
   export const DEFAULT = 0
   /** Used also for: LABELBUTTON */
   export const LABEL = 1
@@ -2981,7 +3548,7 @@ declare module "raylib" {
   export const TEXTBOX = 9
   /**  */
   export const VALUEBOX = 10
-  /**  */
+  /** Uses: BUTTON, VALUEBOX */
   export const SPINNER = 11
   /**  */
   export const LISTVIEW = 12
@@ -3023,49 +3590,27 @@ declare module "raylib" {
   export const TEXT_ALIGNMENT = 14
   /**  */
   export const RESERVED = 15
-  /**  */
+  /** Text size (glyphs max height) */
   export const TEXT_SIZE = 16
-  /**  */
+  /** Text spacing between glyphs */
   export const TEXT_SPACING = 17
-  /**  */
+  /** Line control color */
   export const LINE_COLOR = 18
-  /**  */
+  /** Background color */
   export const BACKGROUND_COLOR = 19
-  /**  */
+  /** ToggleGroup separation between toggles */
   export const GROUP_PADDING = 16
-  /**  */
+  /** Slider size of internal bar */
   export const SLIDER_WIDTH = 16
-  /**  */
+  /** Slider/SliderBar internal bar padding */
   export const SLIDER_PADDING = 17
-  /**  */
+  /** ProgressBar internal padding */
   export const PROGRESS_PADDING = 16
-  /**  */
-  export const CHECK_PADDING = 16
-  /**  */
-  export const COMBO_BUTTON_WIDTH = 16
-  /**  */
-  export const COMBO_BUTTON_PADDING = 17
-  /**  */
-  export const ARROW_PADDING = 16
-  /**  */
-  export const DROPDOWN_ITEMS_PADDING = 17
-  /**  */
-  export const TEXT_INNER_PADDING = 16
-  /**  */
-  export const TEXT_LINES_PADDING = 17
-  /**  */
-  export const COLOR_SELECTED_FG = 18
-  /**  */
-  export const COLOR_SELECTED_BG = 19
-  /**  */
-  export const SPIN_BUTTON_WIDTH = 16
-  /**  */
-  export const SPIN_BUTTON_PADDING = 17
   /**  */
   export const ARROWS_SIZE = 16
   /**  */
   export const ARROWS_VISIBLE = 17
-  /**  */
+  /** (SLIDERBAR, SLIDER_PADDING) */
   export const SCROLL_SLIDER_PADDING = 18
   /**  */
   export const SCROLL_SLIDER_SIZE = 19
@@ -3073,28 +3618,844 @@ declare module "raylib" {
   export const SCROLL_PADDING = 20
   /**  */
   export const SCROLL_SPEED = 21
-  /**  */
-  export const SCROLLBAR_LEFT_SIDE = 0
-  /**  */
-  export const SCROLLBAR_RIGHT_SIDE = 1
-  /**  */
+  /** CheckBox internal check padding */
+  export const CHECK_PADDING = 16
+  /** ComboBox right button width */
+  export const COMBO_BUTTON_WIDTH = 16
+  /** ComboBox button separation */
+  export const COMBO_BUTTON_SPACING = 17
+  /** DropdownBox arrow separation from border and items */
+  export const ARROW_PADDING = 16
+  /** DropdownBox items separation */
+  export const DROPDOWN_ITEMS_SPACING = 17
+  /** TextBox/TextBoxMulti/ValueBox/Spinner inner text padding */
+  export const TEXT_INNER_PADDING = 16
+  /** TextBoxMulti lines separation */
+  export const TEXT_LINES_SPACING = 17
+  /** Spinner left/right buttons width */
+  export const SPIN_BUTTON_WIDTH = 16
+  /** Spinner buttons separation */
+  export const SPIN_BUTTON_SPACING = 17
+  /** ListView items height */
   export const LIST_ITEMS_HEIGHT = 16
-  /**  */
-  export const LIST_ITEMS_PADDING = 17
-  /**  */
+  /** ListView items separation */
+  export const LIST_ITEMS_SPACING = 17
+  /** ListView scrollbar size (usually width) */
   export const SCROLLBAR_WIDTH = 18
-  /**  */
+  /** ListView scrollbar side (0-left, 1-right) */
   export const SCROLLBAR_SIDE = 19
   /**  */
   export const COLOR_SELECTOR_SIZE = 16
-  /** Right hue bar width */
+  /** ColorPicker right hue bar width */
   export const HUEBAR_WIDTH = 17
-  /** Right hue bar separation from panel */
+  /** ColorPicker right hue bar separation from panel */
   export const HUEBAR_PADDING = 18
-  /** Right hue bar selector height */
+  /** ColorPicker right hue bar selector height */
   export const HUEBAR_SELECTOR_HEIGHT = 19
-  /** Right hue bar selector overflow */
+  /** ColorPicker right hue bar selector overflow */
   export const HUEBAR_SELECTOR_OVERFLOW = 20
+  /**  */
+  export const ICON_NONE = 0
+  /**  */
+  export const ICON_FOLDER_FILE_OPEN = 1
+  /**  */
+  export const ICON_FILE_SAVE_CLASSIC = 2
+  /**  */
+  export const ICON_FOLDER_OPEN = 3
+  /**  */
+  export const ICON_FOLDER_SAVE = 4
+  /**  */
+  export const ICON_FILE_OPEN = 5
+  /**  */
+  export const ICON_FILE_SAVE = 6
+  /**  */
+  export const ICON_FILE_EXPORT = 7
+  /**  */
+  export const ICON_FILE_ADD = 8
+  /**  */
+  export const ICON_FILE_DELETE = 9
+  /**  */
+  export const ICON_FILETYPE_TEXT = 10
+  /**  */
+  export const ICON_FILETYPE_AUDIO = 11
+  /**  */
+  export const ICON_FILETYPE_IMAGE = 12
+  /**  */
+  export const ICON_FILETYPE_PLAY = 13
+  /**  */
+  export const ICON_FILETYPE_VIDEO = 14
+  /**  */
+  export const ICON_FILETYPE_INFO = 15
+  /**  */
+  export const ICON_FILE_COPY = 16
+  /**  */
+  export const ICON_FILE_CUT = 17
+  /**  */
+  export const ICON_FILE_PASTE = 18
+  /**  */
+  export const ICON_CURSOR_HAND = 19
+  /**  */
+  export const ICON_CURSOR_POINTER = 20
+  /**  */
+  export const ICON_CURSOR_CLASSIC = 21
+  /**  */
+  export const ICON_PENCIL = 22
+  /**  */
+  export const ICON_PENCIL_BIG = 23
+  /**  */
+  export const ICON_BRUSH_CLASSIC = 24
+  /**  */
+  export const ICON_BRUSH_PAINTER = 25
+  /**  */
+  export const ICON_WATER_DROP = 26
+  /**  */
+  export const ICON_COLOR_PICKER = 27
+  /**  */
+  export const ICON_RUBBER = 28
+  /**  */
+  export const ICON_COLOR_BUCKET = 29
+  /**  */
+  export const ICON_TEXT_T = 30
+  /**  */
+  export const ICON_TEXT_A = 31
+  /**  */
+  export const ICON_SCALE = 32
+  /**  */
+  export const ICON_RESIZE = 33
+  /**  */
+  export const ICON_FILTER_POINT = 34
+  /**  */
+  export const ICON_FILTER_BILINEAR = 35
+  /**  */
+  export const ICON_CROP = 36
+  /**  */
+  export const ICON_CROP_ALPHA = 37
+  /**  */
+  export const ICON_SQUARE_TOGGLE = 38
+  /**  */
+  export const ICON_SYMMETRY = 39
+  /**  */
+  export const ICON_SYMMETRY_HORIZONTAL = 40
+  /**  */
+  export const ICON_SYMMETRY_VERTICAL = 41
+  /**  */
+  export const ICON_LENS = 42
+  /**  */
+  export const ICON_LENS_BIG = 43
+  /**  */
+  export const ICON_EYE_ON = 44
+  /**  */
+  export const ICON_EYE_OFF = 45
+  /**  */
+  export const ICON_FILTER_TOP = 46
+  /**  */
+  export const ICON_FILTER = 47
+  /**  */
+  export const ICON_TARGET_POINT = 48
+  /**  */
+  export const ICON_TARGET_SMALL = 49
+  /**  */
+  export const ICON_TARGET_BIG = 50
+  /**  */
+  export const ICON_TARGET_MOVE = 51
+  /**  */
+  export const ICON_CURSOR_MOVE = 52
+  /**  */
+  export const ICON_CURSOR_SCALE = 53
+  /**  */
+  export const ICON_CURSOR_SCALE_RIGHT = 54
+  /**  */
+  export const ICON_CURSOR_SCALE_LEFT = 55
+  /**  */
+  export const ICON_UNDO = 56
+  /**  */
+  export const ICON_REDO = 57
+  /**  */
+  export const ICON_REREDO = 58
+  /**  */
+  export const ICON_MUTATE = 59
+  /**  */
+  export const ICON_ROTATE = 60
+  /**  */
+  export const ICON_REPEAT = 61
+  /**  */
+  export const ICON_SHUFFLE = 62
+  /**  */
+  export const ICON_EMPTYBOX = 63
+  /**  */
+  export const ICON_TARGET = 64
+  /**  */
+  export const ICON_TARGET_SMALL_FILL = 65
+  /**  */
+  export const ICON_TARGET_BIG_FILL = 66
+  /**  */
+  export const ICON_TARGET_MOVE_FILL = 67
+  /**  */
+  export const ICON_CURSOR_MOVE_FILL = 68
+  /**  */
+  export const ICON_CURSOR_SCALE_FILL = 69
+  /**  */
+  export const ICON_CURSOR_SCALE_RIGHT_FILL = 70
+  /**  */
+  export const ICON_CURSOR_SCALE_LEFT_FILL = 71
+  /**  */
+  export const ICON_UNDO_FILL = 72
+  /**  */
+  export const ICON_REDO_FILL = 73
+  /**  */
+  export const ICON_REREDO_FILL = 74
+  /**  */
+  export const ICON_MUTATE_FILL = 75
+  /**  */
+  export const ICON_ROTATE_FILL = 76
+  /**  */
+  export const ICON_REPEAT_FILL = 77
+  /**  */
+  export const ICON_SHUFFLE_FILL = 78
+  /**  */
+  export const ICON_EMPTYBOX_SMALL = 79
+  /**  */
+  export const ICON_BOX = 80
+  /**  */
+  export const ICON_BOX_TOP = 81
+  /**  */
+  export const ICON_BOX_TOP_RIGHT = 82
+  /**  */
+  export const ICON_BOX_RIGHT = 83
+  /**  */
+  export const ICON_BOX_BOTTOM_RIGHT = 84
+  /**  */
+  export const ICON_BOX_BOTTOM = 85
+  /**  */
+  export const ICON_BOX_BOTTOM_LEFT = 86
+  /**  */
+  export const ICON_BOX_LEFT = 87
+  /**  */
+  export const ICON_BOX_TOP_LEFT = 88
+  /**  */
+  export const ICON_BOX_CENTER = 89
+  /**  */
+  export const ICON_BOX_CIRCLE_MASK = 90
+  /**  */
+  export const ICON_POT = 91
+  /**  */
+  export const ICON_ALPHA_MULTIPLY = 92
+  /**  */
+  export const ICON_ALPHA_CLEAR = 93
+  /**  */
+  export const ICON_DITHERING = 94
+  /**  */
+  export const ICON_MIPMAPS = 95
+  /**  */
+  export const ICON_BOX_GRID = 96
+  /**  */
+  export const ICON_GRID = 97
+  /**  */
+  export const ICON_BOX_CORNERS_SMALL = 98
+  /**  */
+  export const ICON_BOX_CORNERS_BIG = 99
+  /**  */
+  export const ICON_FOUR_BOXES = 100
+  /**  */
+  export const ICON_GRID_FILL = 101
+  /**  */
+  export const ICON_BOX_MULTISIZE = 102
+  /**  */
+  export const ICON_ZOOM_SMALL = 103
+  /**  */
+  export const ICON_ZOOM_MEDIUM = 104
+  /**  */
+  export const ICON_ZOOM_BIG = 105
+  /**  */
+  export const ICON_ZOOM_ALL = 106
+  /**  */
+  export const ICON_ZOOM_CENTER = 107
+  /**  */
+  export const ICON_BOX_DOTS_SMALL = 108
+  /**  */
+  export const ICON_BOX_DOTS_BIG = 109
+  /**  */
+  export const ICON_BOX_CONCENTRIC = 110
+  /**  */
+  export const ICON_BOX_GRID_BIG = 111
+  /**  */
+  export const ICON_OK_TICK = 112
+  /**  */
+  export const ICON_CROSS = 113
+  /**  */
+  export const ICON_ARROW_LEFT = 114
+  /**  */
+  export const ICON_ARROW_RIGHT = 115
+  /**  */
+  export const ICON_ARROW_DOWN = 116
+  /**  */
+  export const ICON_ARROW_UP = 117
+  /**  */
+  export const ICON_ARROW_LEFT_FILL = 118
+  /**  */
+  export const ICON_ARROW_RIGHT_FILL = 119
+  /**  */
+  export const ICON_ARROW_DOWN_FILL = 120
+  /**  */
+  export const ICON_ARROW_UP_FILL = 121
+  /**  */
+  export const ICON_AUDIO = 122
+  /**  */
+  export const ICON_FX = 123
+  /**  */
+  export const ICON_WAVE = 124
+  /**  */
+  export const ICON_WAVE_SINUS = 125
+  /**  */
+  export const ICON_WAVE_SQUARE = 126
+  /**  */
+  export const ICON_WAVE_TRIANGULAR = 127
+  /**  */
+  export const ICON_CROSS_SMALL = 128
+  /**  */
+  export const ICON_PLAYER_PREVIOUS = 129
+  /**  */
+  export const ICON_PLAYER_PLAY_BACK = 130
+  /**  */
+  export const ICON_PLAYER_PLAY = 131
+  /**  */
+  export const ICON_PLAYER_PAUSE = 132
+  /**  */
+  export const ICON_PLAYER_STOP = 133
+  /**  */
+  export const ICON_PLAYER_NEXT = 134
+  /**  */
+  export const ICON_PLAYER_RECORD = 135
+  /**  */
+  export const ICON_MAGNET = 136
+  /**  */
+  export const ICON_LOCK_CLOSE = 137
+  /**  */
+  export const ICON_LOCK_OPEN = 138
+  /**  */
+  export const ICON_CLOCK = 139
+  /**  */
+  export const ICON_TOOLS = 140
+  /**  */
+  export const ICON_GEAR = 141
+  /**  */
+  export const ICON_GEAR_BIG = 142
+  /**  */
+  export const ICON_BIN = 143
+  /**  */
+  export const ICON_HAND_POINTER = 144
+  /**  */
+  export const ICON_LASER = 145
+  /**  */
+  export const ICON_COIN = 146
+  /**  */
+  export const ICON_EXPLOSION = 147
+  /**  */
+  export const ICON_1UP = 148
+  /**  */
+  export const ICON_PLAYER = 149
+  /**  */
+  export const ICON_PLAYER_JUMP = 150
+  /**  */
+  export const ICON_KEY = 151
+  /**  */
+  export const ICON_DEMON = 152
+  /**  */
+  export const ICON_TEXT_POPUP = 153
+  /**  */
+  export const ICON_GEAR_EX = 154
+  /**  */
+  export const ICON_CRACK = 155
+  /**  */
+  export const ICON_CRACK_POINTS = 156
+  /**  */
+  export const ICON_STAR = 157
+  /**  */
+  export const ICON_DOOR = 158
+  /**  */
+  export const ICON_EXIT = 159
+  /**  */
+  export const ICON_MODE_2D = 160
+  /**  */
+  export const ICON_MODE_3D = 161
+  /**  */
+  export const ICON_CUBE = 162
+  /**  */
+  export const ICON_CUBE_FACE_TOP = 163
+  /**  */
+  export const ICON_CUBE_FACE_LEFT = 164
+  /**  */
+  export const ICON_CUBE_FACE_FRONT = 165
+  /**  */
+  export const ICON_CUBE_FACE_BOTTOM = 166
+  /**  */
+  export const ICON_CUBE_FACE_RIGHT = 167
+  /**  */
+  export const ICON_CUBE_FACE_BACK = 168
+  /**  */
+  export const ICON_CAMERA = 169
+  /**  */
+  export const ICON_SPECIAL = 170
+  /**  */
+  export const ICON_LINK_NET = 171
+  /**  */
+  export const ICON_LINK_BOXES = 172
+  /**  */
+  export const ICON_LINK_MULTI = 173
+  /**  */
+  export const ICON_LINK = 174
+  /**  */
+  export const ICON_LINK_BROKE = 175
+  /**  */
+  export const ICON_TEXT_NOTES = 176
+  /**  */
+  export const ICON_NOTEBOOK = 177
+  /**  */
+  export const ICON_SUITCASE = 178
+  /**  */
+  export const ICON_SUITCASE_ZIP = 179
+  /**  */
+  export const ICON_MAILBOX = 180
+  /**  */
+  export const ICON_MONITOR = 181
+  /**  */
+  export const ICON_PRINTER = 182
+  /**  */
+  export const ICON_PHOTO_CAMERA = 183
+  /**  */
+  export const ICON_PHOTO_CAMERA_FLASH = 184
+  /**  */
+  export const ICON_HOUSE = 185
+  /**  */
+  export const ICON_HEART = 186
+  /**  */
+  export const ICON_CORNER = 187
+  /**  */
+  export const ICON_VERTICAL_BARS = 188
+  /**  */
+  export const ICON_VERTICAL_BARS_FILL = 189
+  /**  */
+  export const ICON_LIFE_BARS = 190
+  /**  */
+  export const ICON_INFO = 191
+  /**  */
+  export const ICON_CROSSLINE = 192
+  /**  */
+  export const ICON_HELP = 193
+  /**  */
+  export const ICON_FILETYPE_ALPHA = 194
+  /**  */
+  export const ICON_FILETYPE_HOME = 195
+  /**  */
+  export const ICON_LAYERS_VISIBLE = 196
+  /**  */
+  export const ICON_LAYERS = 197
+  /**  */
+  export const ICON_WINDOW = 198
+  /**  */
+  export const ICON_HIDPI = 199
+  /**  */
+  export const ICON_FILETYPE_BINARY = 200
+  /**  */
+  export const ICON_HEX = 201
+  /**  */
+  export const ICON_SHIELD = 202
+  /**  */
+  export const ICON_FILE_NEW = 203
+  /**  */
+  export const ICON_FOLDER_ADD = 204
+  /**  */
+  export const ICON_ALARM = 205
+  /**  */
+  export const ICON_206 = 206
+  /**  */
+  export const ICON_207 = 207
+  /**  */
+  export const ICON_208 = 208
+  /**  */
+  export const ICON_209 = 209
+  /**  */
+  export const ICON_210 = 210
+  /**  */
+  export const ICON_211 = 211
+  /**  */
+  export const ICON_212 = 212
+  /**  */
+  export const ICON_213 = 213
+  /**  */
+  export const ICON_214 = 214
+  /**  */
+  export const ICON_215 = 215
+  /**  */
+  export const ICON_216 = 216
+  /**  */
+  export const ICON_217 = 217
+  /**  */
+  export const ICON_218 = 218
+  /**  */
+  export const ICON_219 = 219
+  /**  */
+  export const ICON_220 = 220
+  /**  */
+  export const ICON_221 = 221
+  /**  */
+  export const ICON_222 = 222
+  /**  */
+  export const ICON_223 = 223
+  /**  */
+  export const ICON_224 = 224
+  /**  */
+  export const ICON_225 = 225
+  /**  */
+  export const ICON_226 = 226
+  /**  */
+  export const ICON_227 = 227
+  /**  */
+  export const ICON_228 = 228
+  /**  */
+  export const ICON_229 = 229
+  /**  */
+  export const ICON_230 = 230
+  /**  */
+  export const ICON_231 = 231
+  /**  */
+  export const ICON_232 = 232
+  /**  */
+  export const ICON_233 = 233
+  /**  */
+  export const ICON_234 = 234
+  /**  */
+  export const ICON_235 = 235
+  /**  */
+  export const ICON_236 = 236
+  /**  */
+  export const ICON_237 = 237
+  /**  */
+  export const ICON_238 = 238
+  /**  */
+  export const ICON_239 = 239
+  /**  */
+  export const ICON_240 = 240
+  /**  */
+  export const ICON_241 = 241
+  /**  */
+  export const ICON_242 = 242
+  /**  */
+  export const ICON_243 = 243
+  /**  */
+  export const ICON_244 = 244
+  /**  */
+  export const ICON_245 = 245
+  /**  */
+  export const ICON_246 = 246
+  /**  */
+  export const ICON_247 = 247
+  /**  */
+  export const ICON_248 = 248
+  /**  */
+  export const ICON_249 = 249
+  /**  */
+  export const ICON_250 = 250
+  /**  */
+  export const ICON_251 = 251
+  /**  */
+  export const ICON_252 = 252
+  /**  */
+  export const ICON_253 = 253
+  /**  */
+  export const ICON_254 = 254
+  /**  */
+  export const ICON_255 = 255
+  /**  */
+  export const OPENGL_11 = 1
+  /**  */
+  export const OPENGL_21 = 2
+  /**  */
+  export const OPENGL_33 = 3
+  /**  */
+  export const OPENGL_43 = 4
+  /**  */
+  export const OPENGL_ES_20 = 5
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL0 = 0
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL1 = 1
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL2 = 2
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL3 = 3
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL4 = 4
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL5 = 5
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL6 = 6
+  /**  */
+  export const RL_ATTACHMENT_COLOR_CHANNEL7 = 7
+  /**  */
+  export const RL_ATTACHMENT_DEPTH = 100
+  /**  */
+  export const RL_ATTACHMENT_STENCIL = 200
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4
+  /**  */
+  export const RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
+  /**  */
+  export const RL_ATTACHMENT_TEXTURE2D = 100
+  /**  */
+  export const RL_ATTACHMENT_RENDERBUFFER = 200
+  /** Display all logs */
+  export const RL_LOG_ALL = 0
+  /** Trace logging, intended for internal use only */
+  export const RL_LOG_TRACE = 1
+  /** Debug logging, used for internal debugging, it should be disabled on release builds */
+  export const RL_LOG_DEBUG = 2
+  /** Info logging, used for program execution info */
+  export const RL_LOG_INFO = 3
+  /** Warning logging, used on recoverable failures */
+  export const RL_LOG_WARNING = 4
+  /** Error logging, used on unrecoverable failures */
+  export const RL_LOG_ERROR = 5
+  /** Fatal logging, used to abort program: exit(EXIT_FAILURE) */
+  export const RL_LOG_FATAL = 6
+  /** Disable logging */
+  export const RL_LOG_NONE = 7
+  /** 8 bit per pixel (no alpha) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1
+  /** 8*2 bpp (2 channels) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2
+  /** 16 bpp */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3
+  /** 24 bpp */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4
+  /** 16 bpp (1 bit alpha) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5
+  /** 16 bpp (4 bit alpha) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6
+  /** 32 bpp */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7
+  /** 32 bpp (1 channel - float) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8
+  /** 32*3 bpp (3 channels - float) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
+  /** 32*4 bpp (4 channels - float) */
+  export const RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
+  /** 4 bpp (no alpha) */
+  export const RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+  /** 4 bpp (1 bit alpha) */
+  export const RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+  /** 8 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+  /** 8 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+  /** 4 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+  /** 4 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+  /** 8 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+  /** 4 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+  /** 4 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+  /** 8 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+  /** 2 bpp */
+  export const RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
+  /** No filter, just pixel approximation */
+  export const RL_TEXTURE_FILTER_POINT = 0
+  /** Linear filtering */
+  export const RL_TEXTURE_FILTER_BILINEAR = 1
+  /** Trilinear filtering (linear with mipmaps) */
+  export const RL_TEXTURE_FILTER_TRILINEAR = 2
+  /** Anisotropic filtering 4x */
+  export const RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3
+  /** Anisotropic filtering 8x */
+  export const RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4
+  /** Anisotropic filtering 16x */
+  export const RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5
+  /** Blend textures considering alpha (default) */
+  export const RL_BLEND_ALPHA = 0
+  /** Blend textures adding colors */
+  export const RL_BLEND_ADDITIVE = 1
+  /** Blend textures multiplying colors */
+  export const RL_BLEND_MULTIPLIED = 2
+  /** Blend textures adding colors (alternative) */
+  export const RL_BLEND_ADD_COLORS = 3
+  /** Blend textures subtracting colors (alternative) */
+  export const RL_BLEND_SUBTRACT_COLORS = 4
+  /** Blend premultiplied textures considering alpha */
+  export const RL_BLEND_ALPHA_PREMULTIPLY = 5
+  /** Blend textures using custom src/dst factors (use rlSetBlendFactors()) */
+  export const RL_BLEND_CUSTOM = 6
+  /** Shader location: vertex attribute: position */
+  export const RL_SHADER_LOC_VERTEX_POSITION = 0
+  /** Shader location: vertex attribute: texcoord01 */
+  export const RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1
+  /** Shader location: vertex attribute: texcoord02 */
+  export const RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2
+  /** Shader location: vertex attribute: normal */
+  export const RL_SHADER_LOC_VERTEX_NORMAL = 3
+  /** Shader location: vertex attribute: tangent */
+  export const RL_SHADER_LOC_VERTEX_TANGENT = 4
+  /** Shader location: vertex attribute: color */
+  export const RL_SHADER_LOC_VERTEX_COLOR = 5
+  /** Shader location: matrix uniform: model-view-projection */
+  export const RL_SHADER_LOC_MATRIX_MVP = 6
+  /** Shader location: matrix uniform: view (camera transform) */
+  export const RL_SHADER_LOC_MATRIX_VIEW = 7
+  /** Shader location: matrix uniform: projection */
+  export const RL_SHADER_LOC_MATRIX_PROJECTION = 8
+  /** Shader location: matrix uniform: model (transform) */
+  export const RL_SHADER_LOC_MATRIX_MODEL = 9
+  /** Shader location: matrix uniform: normal */
+  export const RL_SHADER_LOC_MATRIX_NORMAL = 10
+  /** Shader location: vector uniform: view */
+  export const RL_SHADER_LOC_VECTOR_VIEW = 11
+  /** Shader location: vector uniform: diffuse color */
+  export const RL_SHADER_LOC_COLOR_DIFFUSE = 12
+  /** Shader location: vector uniform: specular color */
+  export const RL_SHADER_LOC_COLOR_SPECULAR = 13
+  /** Shader location: vector uniform: ambient color */
+  export const RL_SHADER_LOC_COLOR_AMBIENT = 14
+  /** Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE) */
+  export const RL_SHADER_LOC_MAP_ALBEDO = 15
+  /** Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR) */
+  export const RL_SHADER_LOC_MAP_METALNESS = 16
+  /** Shader location: sampler2d texture: normal */
+  export const RL_SHADER_LOC_MAP_NORMAL = 17
+  /** Shader location: sampler2d texture: roughness */
+  export const RL_SHADER_LOC_MAP_ROUGHNESS = 18
+  /** Shader location: sampler2d texture: occlusion */
+  export const RL_SHADER_LOC_MAP_OCCLUSION = 19
+  /** Shader location: sampler2d texture: emission */
+  export const RL_SHADER_LOC_MAP_EMISSION = 20
+  /** Shader location: sampler2d texture: height */
+  export const RL_SHADER_LOC_MAP_HEIGHT = 21
+  /** Shader location: samplerCube texture: cubemap */
+  export const RL_SHADER_LOC_MAP_CUBEMAP = 22
+  /** Shader location: samplerCube texture: irradiance */
+  export const RL_SHADER_LOC_MAP_IRRADIANCE = 23
+  /** Shader location: samplerCube texture: prefilter */
+  export const RL_SHADER_LOC_MAP_PREFILTER = 24
+  /** Shader location: sampler2d texture: brdf */
+  export const RL_SHADER_LOC_MAP_BRDF = 25
+  /** Shader uniform type: float */
+  export const RL_SHADER_UNIFORM_FLOAT = 0
+  /** Shader uniform type: vec2 (2 float) */
+  export const RL_SHADER_UNIFORM_VEC2 = 1
+  /** Shader uniform type: vec3 (3 float) */
+  export const RL_SHADER_UNIFORM_VEC3 = 2
+  /** Shader uniform type: vec4 (4 float) */
+  export const RL_SHADER_UNIFORM_VEC4 = 3
+  /** Shader uniform type: int */
+  export const RL_SHADER_UNIFORM_INT = 4
+  /** Shader uniform type: ivec2 (2 int) */
+  export const RL_SHADER_UNIFORM_IVEC2 = 5
+  /** Shader uniform type: ivec3 (3 int) */
+  export const RL_SHADER_UNIFORM_IVEC3 = 6
+  /** Shader uniform type: ivec4 (4 int) */
+  export const RL_SHADER_UNIFORM_IVEC4 = 7
+  /** Shader uniform type: sampler2d */
+  export const RL_SHADER_UNIFORM_SAMPLER2D = 8
+  /** Shader attribute type: float */
+  export const RL_SHADER_ATTRIB_FLOAT = 0
+  /** Shader attribute type: vec2 (2 float) */
+  export const RL_SHADER_ATTRIB_VEC2 = 1
+  /** Shader attribute type: vec3 (3 float) */
+  export const RL_SHADER_ATTRIB_VEC3 = 2
+  /** Shader attribute type: vec4 (4 float) */
+  export const RL_SHADER_ATTRIB_VEC4 = 3
+  /**  */
+  export const RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
+  /** Default number of batch buffers (multi-buffering) */
+  export const RL_DEFAULT_BATCH_BUFFERS = 1
+  /** Default number of batch draw calls (by state changes: mode, texture) */
+  export const RL_DEFAULT_BATCH_DRAWCALLS = 256
+  /** Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture()) */
+  export const RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4
+  /** Maximum size of Matrix stack */
+  export const RL_MAX_MATRIX_STACK_SIZE = 32
+  /** Maximum number of shader locations supported */
+  export const RL_MAX_SHADER_LOCATIONS = 32
+  /** GL_TEXTURE_WRAP_S */
+  export const RL_TEXTURE_WRAP_S = 10242
+  /** GL_TEXTURE_WRAP_T */
+  export const RL_TEXTURE_WRAP_T = 10243
+  /** GL_TEXTURE_MAG_FILTER */
+  export const RL_TEXTURE_MAG_FILTER = 10240
+  /** GL_TEXTURE_MIN_FILTER */
+  export const RL_TEXTURE_MIN_FILTER = 10241
+  /** GL_NEAREST */
+  export const RL_TEXTURE_FILTER_NEAREST = 9728
+  /** GL_LINEAR */
+  export const RL_TEXTURE_FILTER_LINEAR = 9729
+  /** GL_NEAREST_MIPMAP_NEAREST */
+  export const RL_TEXTURE_FILTER_MIP_NEAREST = 9984
+  /** GL_NEAREST_MIPMAP_LINEAR */
+  export const RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 9986
+  /** GL_LINEAR_MIPMAP_NEAREST */
+  export const RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 9985
+  /** GL_LINEAR_MIPMAP_LINEAR */
+  export const RL_TEXTURE_FILTER_MIP_LINEAR = 9987
+  /** Anisotropic filter (custom identifier) */
+  export const RL_TEXTURE_FILTER_ANISOTROPIC = 12288
+  /** GL_REPEAT */
+  export const RL_TEXTURE_WRAP_REPEAT = 10497
+  /** GL_CLAMP_TO_EDGE */
+  export const RL_TEXTURE_WRAP_CLAMP = 33071
+  /** GL_MIRRORED_REPEAT */
+  export const RL_TEXTURE_WRAP_MIRROR_REPEAT = 33648
+  /** GL_MIRROR_CLAMP_EXT */
+  export const RL_TEXTURE_WRAP_MIRROR_CLAMP = 34626
+  /** GL_MODELVIEW */
+  export const RL_MODELVIEW = 5888
+  /** GL_PROJECTION */
+  export const RL_PROJECTION = 5889
+  /** GL_TEXTURE */
+  export const RL_TEXTURE = 5890
+  /** GL_LINES */
+  export const RL_LINES = 1
+  /** GL_TRIANGLES */
+  export const RL_TRIANGLES = 4
+  /** GL_QUADS */
+  export const RL_QUADS = 7
+  /** GL_UNSIGNED_BYTE */
+  export const RL_UNSIGNED_BYTE = 5121
+  /** GL_FLOAT */
+  export const RL_FLOAT = 5126
+  /** GL_STREAM_DRAW */
+  export const RL_STREAM_DRAW = 35040
+  /** GL_STREAM_READ */
+  export const RL_STREAM_READ = 35041
+  /** GL_STREAM_COPY */
+  export const RL_STREAM_COPY = 35042
+  /** GL_STATIC_DRAW */
+  export const RL_STATIC_DRAW = 35044
+  /** GL_STATIC_READ */
+  export const RL_STATIC_READ = 35045
+  /** GL_STATIC_COPY */
+  export const RL_STATIC_COPY = 35046
+  /** GL_DYNAMIC_DRAW */
+  export const RL_DYNAMIC_DRAW = 35048
+  /** GL_DYNAMIC_READ */
+  export const RL_DYNAMIC_READ = 35049
+  /** GL_DYNAMIC_COPY */
+  export const RL_DYNAMIC_COPY = 35050
+  /** GL_FRAGMENT_SHADER */
+  export const RL_FRAGMENT_SHADER = 35632
+  /** GL_VERTEX_SHADER */
+  export const RL_VERTEX_SHADER = 35633
+  /** GL_COMPUTE_SHADER */
+  export const RL_COMPUTE_SHADER = 37305
 
   export const LIGHTGRAY: { r: 200, g: 200, b: 200, a: 255 }
   export const GRAY: { r: 130, g: 130, b: 130, a: 255 }

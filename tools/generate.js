@@ -21,6 +21,11 @@ const blocklist = [
   'SetLoadFileTextCallback',
   'SetSaveFileTextCallback',
 
+  // Callbacks: AudioStream
+  'SetAudioStreamCallback',
+  'AttachAudioStreamProcessor',
+  'DetachAudioStreamProcessor',
+
   // Structs
   // @todo Verify Structs that have array properties
   'VrStereoConfig', // Matrix[2], float[2]
@@ -34,7 +39,12 @@ const blocklist = [
 
   // raygui
   'UnloadGuiStyle', // Commented out
-  'LoadGuiStyle' // Commented out
+  'LoadGuiStyle', // Commented out
+
+  // rlgl
+  'rlEnableStatePointer', // undefined
+  'rlDisableStatePointer' // undefined
+
 ]
 
 // these functions expect the first argument to be passed as a reference in C++
@@ -174,8 +184,8 @@ function getDefs () {
   }
 
   // Add the Easings API
-  const easings = raylibApi.easings
-  functions.push(...easings.functions)
+  const reasings = raylibApi.reasings
+  functions.push(...reasings.functions)
 
   // Add Raymath
   const raymath = raylibApi.raymath
@@ -185,6 +195,36 @@ function getDefs () {
   const raygui = raylibApi.raygui
   functions.push(...raygui.functions)
   enums.push(...raygui.enums)
+
+  const rlgl = raylibApi.rlgl
+  functions.push(...rlgl.functions)
+  enums.push(...rlgl.enums)
+  const tmp = {
+    name: 'RLGL Defines',
+    description: '',
+    values: []
+  }
+  for (const define of rlgl.defines) {
+    if (define.type === 'INT') {
+      tmp.values.push({
+        name: define.name,
+        description: define.description,
+        value: define.value
+      })
+    }
+  }
+  enums.push(tmp)
+  for (const struct of rlgl.structs) {
+    if (struct.name === 'rlVertexBuffer') {
+      struct.fields.splice(4, 6)
+      struct.fields.splice(4, 0, {
+        description: 'Vertex indices (in case vertex data comes indexed) (6 indices per quad)',
+        name: 'indices',
+        type: 'unsigned int *'
+      })
+    }
+  }
+  structs.push(...rlgl.structs.filter(s => { return s.name !== 'Matrix' }))
 
   return { structs, enums, functions }
 }
