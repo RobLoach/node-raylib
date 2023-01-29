@@ -14,6 +14,8 @@
     "clean": "rm -rf build",
     "precompile": "npm i --no-save node-addon-api cmake-js",
     "compile": "cmake-js compile",
+    "precompile-drm": "npm i --no-save node-addon-api cmake-js",
+    "compile-drm": "cmake-js compile --CDPLATFORM=DRM",
     "prepkg": "npm run build",
     "pkg": "node tools/pkg.js",
     "gen:code": "node tools/generate.js",
