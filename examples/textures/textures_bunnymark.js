@@ -36,7 +36,7 @@ while (!r.WindowShouldClose()) {
     }
   }
 
-  r.BeginDrawing()  
+  r.BeginDrawing()
   r.ClearBackground(r.RAYWHITE)
 
   for (const bun of bunnies) {
@@ -47,7 +47,7 @@ while (!r.WindowShouldClose()) {
           ((bun.position.x + hWidth) < 0)) bun.speed.x *= -1
     if (((bun.position.y + hHeight) > r.GetScreenHeight()) ||
           ((bun.position.y + hHeight - 40) < 0)) bun.speed.y *= -1
-    
+
     r.DrawTexture(texBunny, bun.position.x, bun.position.y, bun.color)
   }
 
