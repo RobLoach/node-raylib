@@ -24,6 +24,8 @@ const screenHeight = 450
 r.InitWindow(screenWidth, screenHeight, 'raylib [textures] example - bunnymark')
 
 const texBunny = r.LoadTexture(join(__dirname, '..', 'textures', 'resources', 'wabbit_alpha.png'))
+const hWidth = texBunny.width / 2
+const hHeight = texBunny.height / 2
 
 while (!r.WindowShouldClose()) {
   if (r.GetFPS() > 60) {
@@ -34,21 +36,21 @@ while (!r.WindowShouldClose()) {
     }
   }
 
-  for (const i in bunnies) {
-    bunnies[i].position.x += bunnies[i].speed.x
-    bunnies[i].position.y += bunnies[i].speed.y
-
-    if (((bunnies[i].position.x + texBunny.width / 2) > r.GetScreenWidth()) ||
-            ((bunnies[i].position.x + texBunny.width / 2) < 0)) bunnies[i].speed.x *= -1
-    if (((bunnies[i].position.y + texBunny.height / 2) > r.GetScreenHeight()) ||
-            ((bunnies[i].position.y + texBunny.height / 2 - 40) < 0)) bunnies[i].speed.y *= -1
-  }
-
-  r.BeginDrawing()
+  r.BeginDrawing()  
   r.ClearBackground(r.RAYWHITE)
-  for (const bunny of bunnies) {
-    r.DrawTexture(texBunny, bunny.position.x, bunny.position.y, bunny.color)
+
+  for (const bun of bunnies) {
+    bun.position.x += bun.speed.x
+    bun.position.y += bun.speed.y
+
+    if (((bun.position.x + hWidth) > r.GetScreenWidth()) ||
+          ((bun.position.x + hWidth) < 0)) bun.speed.x *= -1
+    if (((bun.position.y + hHeight) > r.GetScreenHeight()) ||
+          ((bun.position.y + hHeight - 40) < 0)) bun.speed.y *= -1
+    
+    r.DrawTexture(texBunny, bun.position.x, bun.position.y, bun.color)
   }
+
   r.DrawRectangle(0, 0, screenWidth, 40, r.BLACK)
   r.DrawText('bunnies: ' + bunnies.length, 120, 10, 20, r.GREEN)
   r.DrawText('batched draw calls: ' + (1 + bunnies.length / MAX_BATCH_ELEMENTS), 320, 10, 20, r.MAROON)
