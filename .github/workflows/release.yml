@@ -38,7 +38,7 @@ jobs:
           path: ./node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
       - name: Build for arm
-        run: docker run --platform linux/arm -it --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
+        run: docker run --platform linux/arm --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
       - name: upload linux artifact
         uses: actions/upload-release-asset@v1
         env:
@@ -65,7 +65,7 @@ jobs:
           path: ./node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
       - name: Build for arm
-        run: docker run --platform linux/arm64 -it --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
+        run: docker run --platform linux/arm64 --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
       - name: upload linux artifact
         uses: actions/upload-release-asset@v1
         env:
