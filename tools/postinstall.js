@@ -57,7 +57,7 @@ async function main () {
     console.error(e.message)
   }
 
-  if (process.arch === 'arm' || process.arch === 'arm64') {
+  if (process.platform === 'linux' && (process.arch === 'arm' || process.arch === 'arm64')) {
     targetPath = path.join(__dirname, '..', 'build', 'Release', 'node-raylib-drm.node')
     url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-${process.platform}-${process.arch}-drm.node`
     try {
