@@ -5,5 +5,6 @@
 
 apt-get update
 apt-get install -y xorg-dev libglu1-mesa-dev cmake
-npm ci
+# npm ci
+# rm -r build
 npm run compile-drm
