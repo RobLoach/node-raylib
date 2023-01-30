@@ -80,6 +80,10 @@ npm install raylib
 ## DRM
 On some ARM devices like Raspberry PI, raylib can be used in a DRM mode instead of rendering to an x11 window. This version requires a seperate
 native addon, and on installation on ARM devices node-raylib will include both. To use the DRM mode, import `raylib/drm` instead.
+```js
+import * as rl from 'raylib/drm'
+const rl = require('raylib/drm')
+```
 
 ### CLI
 
