@@ -264,6 +264,7 @@ inline char charFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
 
+// exception for this constructor, which has different input depending on platform
 inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, int index) {
   return {
      intFromValue(info, index + 0),
