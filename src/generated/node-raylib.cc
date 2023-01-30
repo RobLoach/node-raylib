@@ -4925,7 +4925,7 @@ void BindEndMode3D(const Napi::CallbackInfo& info) {
 
 void BindBeginTextureMode(const Napi::CallbackInfo& info) {
   BeginTextureMode(
-     RenderTexture2DFromValue(info, 0)
+     RenderTextureFromValue(info, 0)
   );
 }
 
@@ -5526,7 +5526,7 @@ void BindUnloadTexture(const Napi::CallbackInfo& info) {
 
 void BindUnloadRenderTexture(const Napi::CallbackInfo& info) {
   UnloadRenderTexture(
-     RenderTexture2DFromValue(info, 0)
+     RenderTextureFromValue(info, 0)
   );
 }
 
@@ -7216,7 +7216,7 @@ void BindrlLoadDrawQuad(const Napi::CallbackInfo& info) {
 // By-Reference function bindings
 
 Napi::Value BindUpdateCamera(const Napi::CallbackInfo& info) {
-  Camera obj = CameraFromValue(info, 0);
+  Camera3D obj = Camera3DFromValue(info, 0);
   UpdateCamera(
     &obj
 
@@ -7567,7 +7567,7 @@ Napi::Value BindImageDrawTextEx(const Napi::CallbackInfo& info) {
 }
 
 Napi::Value BindGenTextureMipmaps(const Napi::CallbackInfo& info) {
-  Texture2D obj = Texture2DFromValue(info, 0);
+  Texture obj = TextureFromValue(info, 0);
   GenTextureMipmaps(
     &obj
 

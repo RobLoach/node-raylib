@@ -7,7 +7,7 @@
  * GENERATED CODE: DO NOT MODIFY
  */
 
-const r = require('../../build/Release/node-raylib.node')
+const r = require('../../build/Release/node-raylib-drm.node')
 
 const raylib = {}
 
@@ -738,7 +738,7 @@ raylib.EndMode3D = EndMode3D
 /**
  * Begin drawing to render texture
  *
- * @param {RenderTexture} target
+ * @param {RenderTexture2D} target
  *
  * @return {undefined}
  */
@@ -963,7 +963,7 @@ raylib.SetShaderValueMatrix = SetShaderValueMatrix
  *
  * @param {Shader} shader
  * @param {number} locIndex
- * @param {Texture} texture
+ * @param {Texture2D} texture
  *
  * @return {undefined}
  */
@@ -1000,7 +1000,7 @@ raylib.UnloadShader = UnloadShader
  * Get a ray trace from mouse position
  *
  * @param {Vector2} mousePosition
- * @param {Camera3D} camera
+ * @param {Camera} camera
  *
  * @return {Ray} The resulting Ray.
  */
@@ -1026,7 +1026,7 @@ raylib.GetMouseRay = GetMouseRay
 /**
  * Get camera transform matrix (view matrix)
  *
- * @param {Camera3D} camera
+ * @param {Camera} camera
  *
  * @return {Matrix} The resulting Matrix.
  */
@@ -1070,7 +1070,7 @@ raylib.GetCameraMatrix2D = GetCameraMatrix2D
  * Get the screen space position for a 3d world space position
  *
  * @param {Vector3} position
- * @param {Camera3D} camera
+ * @param {Camera} camera
  *
  * @return {Vector2} The resulting Vector2.
  */
@@ -1120,7 +1120,7 @@ raylib.GetScreenToWorld2D = GetScreenToWorld2D
  * Get size position for a 3d world space position
  *
  * @param {Vector3} position
- * @param {Camera3D} camera
+ * @param {Camera} camera
  * @param {number} width
  * @param {number} height
  *
@@ -2361,7 +2361,7 @@ raylib.GetGesturePinchAngle = GetGesturePinchAngle
 /**
  * Set camera mode (multiple camera modes available)
  *
- * @param {Camera3D} camera
+ * @param {Camera} camera
  * @param {number} mode
  *
  * @return {undefined}
@@ -2453,7 +2453,7 @@ raylib.SetCameraMoveControls = SetCameraMoveControls
 /**
  * Set texture and rectangle to be used on shapes drawing
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Rectangle} source
  *
  * @return {undefined}
@@ -3699,7 +3699,7 @@ raylib.LoadImageFromMemory = LoadImageFromMemory
 /**
  * Load image from GPU texture data
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  *
  * @return {Image} The resulting Image.
  */
@@ -4226,7 +4226,7 @@ raylib.LoadRenderTexture = LoadRenderTexture
 /**
  * Unload texture from GPU memory (VRAM)
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  *
  * @return {undefined}
  */
@@ -4244,7 +4244,7 @@ raylib.UnloadTexture = UnloadTexture
 /**
  * Unload render texture from GPU memory (VRAM)
  *
- * @param {RenderTexture} target
+ * @param {RenderTexture2D} target
  *
  * @return {undefined}
  */
@@ -4268,7 +4268,7 @@ raylib.UnloadRenderTexture = UnloadRenderTexture
 /**
  * Update GPU texture with new data
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {number} pixels
  *
  * @return {undefined}
@@ -4288,7 +4288,7 @@ raylib.UpdateTexture = UpdateTexture
 /**
  * Update GPU texture rectangle with new data
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Rectangle} rec
  * @param {number} pixels
  *
@@ -4313,7 +4313,7 @@ raylib.UpdateTextureRec = UpdateTextureRec
 /**
  * Set texture scaling filter mode
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {number} filter
  *
  * @return {undefined}
@@ -4333,7 +4333,7 @@ raylib.SetTextureFilter = SetTextureFilter
 /**
  * Set texture wrapping mode
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {number} wrap
  *
  * @return {undefined}
@@ -4353,7 +4353,7 @@ raylib.SetTextureWrap = SetTextureWrap
 /**
  * Draw a Texture2D
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {number} posX
  * @param {number} posY
  * @param {Color} tint
@@ -4380,7 +4380,7 @@ raylib.DrawTexture = DrawTexture
 /**
  * Draw a Texture2D with position defined as Vector2
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Vector2} position
  * @param {Color} tint
  *
@@ -4406,7 +4406,7 @@ raylib.DrawTextureV = DrawTextureV
 /**
  * Draw a Texture2D with extended parameters
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Vector2} position
  * @param {number} rotation
  * @param {number} scale
@@ -4436,7 +4436,7 @@ raylib.DrawTextureEx = DrawTextureEx
 /**
  * Draw a part of a texture defined by a rectangle
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Rectangle} source
  * @param {Vector2} position
  * @param {Color} tint
@@ -4467,7 +4467,7 @@ raylib.DrawTextureRec = DrawTextureRec
 /**
  * Draw texture quad with tiling and offset parameters
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Vector2} tiling
  * @param {Vector2} offset
  * @param {Rectangle} quad
@@ -4501,7 +4501,7 @@ raylib.DrawTextureQuad = DrawTextureQuad
 /**
  * Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Rectangle} source
  * @param {Rectangle} dest
  * @param {Vector2} origin
@@ -4541,7 +4541,7 @@ raylib.DrawTextureTiled = DrawTextureTiled
 /**
  * Draw a part of a texture defined by a rectangle with 'pro' parameters
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Rectangle} source
  * @param {Rectangle} dest
  * @param {Vector2} origin
@@ -4579,7 +4579,7 @@ raylib.DrawTexturePro = DrawTexturePro
 /**
  * Draws a texture (or part of it) that stretches or shrinks nicely
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {NPatchInfo} nPatchInfo
  * @param {Rectangle} dest
  * @param {Vector2} origin
@@ -4622,7 +4622,7 @@ raylib.DrawTextureNPatch = DrawTextureNPatch
 /**
  * Draw a textured polygon
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Vector2} center
  * @param {number} points
  * @param {number} texcoords
@@ -5940,7 +5940,7 @@ raylib.DrawCubeWiresV = DrawCubeWiresV
 /**
  * Draw cube textured
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Vector3} position
  * @param {number} width
  * @param {number} height
@@ -5973,7 +5973,7 @@ raylib.DrawCubeTexture = DrawCubeTexture
 /**
  * Draw cube with a region of a texture
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  * @param {Rectangle} source
  * @param {Vector3} position
  * @param {number} width
@@ -6657,8 +6657,8 @@ raylib.DrawBoundingBox = DrawBoundingBox
 /**
  * Draw a billboard texture
  *
- * @param {Camera3D} camera
- * @param {Texture} texture
+ * @param {Camera} camera
+ * @param {Texture2D} texture
  * @param {Vector3} position
  * @param {number} size
  * @param {Color} tint
@@ -6698,8 +6698,8 @@ raylib.DrawBillboard = DrawBillboard
 /**
  * Draw a billboard texture defined by source
  *
- * @param {Camera3D} camera
- * @param {Texture} texture
+ * @param {Camera} camera
+ * @param {Texture2D} texture
  * @param {Rectangle} source
  * @param {Vector3} position
  * @param {Vector2} size
@@ -6745,8 +6745,8 @@ raylib.DrawBillboardRec = DrawBillboardRec
 /**
  * Draw a billboard texture defined by source and rotation
  *
- * @param {Camera3D} camera
- * @param {Texture} texture
+ * @param {Camera} camera
+ * @param {Texture2D} texture
  * @param {Rectangle} source
  * @param {Vector3} position
  * @param {Vector3} up
@@ -13465,7 +13465,7 @@ raylib.rlLoadDrawQuad = rlLoadDrawQuad
 /**
  * Update camera position for selected mode
  *
- * @param {Camera3D} camera
+ * @param {Camera} camera
  *
  * @return {undefined}
  */
@@ -14569,7 +14569,7 @@ raylib.ImageDrawTextEx = ImageDrawTextEx
 /**
  * Generate GPU mipmaps for a texture
  *
- * @param {Texture} texture
+ * @param {Texture2D} texture
  *
  * @return {undefined}
  */
