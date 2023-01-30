@@ -264,9 +264,26 @@ inline char charFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
 
+inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     intFromValue(info, index + 0),
+     (float *) pointerFromValue(info, index + 1),
+     (float *) pointerFromValue(info, index + 2),
+     (unsigned char *) pointerFromValue(info, index + 3),
+      #if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENGL_33)
+        (unsigned int *) pointerFromValue(info, index + 4),      // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+      #endif
+      #if defined(GRAPHICS_API_OPENGL_ES2)
+        (unsigned short *) pointerFromValue(info, index + 4),    // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+      #endif
+     unsignedintFromValue(info, index + 5),
+     (unsigned int) pointerFromValue(info, index + 6)
+  };
+}
+
 // Convert structs from Napi::Values in info[] arguments
 ${structs
-    .filter(({ name }) => !blocklist.includes(name))
+    .filter(({ name }) => !blocklist.includes(name) && name !== 'rlVertexBuffer')
     .map(struct => { return FromValue(structs, struct) })
     .join('\n')
   }
