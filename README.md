@@ -77,6 +77,10 @@ In general, to install node-raylib locally, use [npm](https://www.npmjs.com/):
 npm install raylib
 ```
 
+## DRM
+On some ARM devices like Raspberry PI, raylib can be used in a DRM mode instead of rendering to an x11 window. This version requires a seperate
+native addon, and on installation on ARM devices node-raylib will include both. To use the DRM mode, import `raylib/drm` instead.
+
 ### CLI
 
 The project comes with a [`node-raylib`](https://github.com/RobLoach/node-raylib/blob/master/bin/node-raylib) command-line tool to run `node-raylib` files directly:
