@@ -5,7 +5,7 @@ const { promises: fs } = require('fs')
 const path = require('path')
 const fetch = require('cross-fetch')
 
-const targetPath = path.join(__dirname, '..', 'build', 'Release', 'node-raylib.node')
+let targetPath = path.join(__dirname, '..', 'build', 'Release', 'node-raylib.node')
 
 function toBuffer (ab) {
   const buf = Buffer.alloc(ab.byteLength)
@@ -31,7 +31,7 @@ async function main () {
     process.exit(0)
   }
 
-  const url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-4.0-${process.platform}-${process.arch}.node`
+  let url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-${process.platform}-${process.arch}.node`
 
   console.log(`Checking for ${url}`)
 
@@ -55,6 +55,24 @@ async function main () {
     process.exit(0)
   } catch (e) {
     console.error(e.message)
+  }
+
+  if (process.arch == 'arm' || process.arch == 'arm64') {
+    targetPath = path.join(__dirname, '..', 'build', 'Release', 'node-raylib-drm.node')
+    url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-${process.platform}-${process.arch}-drm.node`
+    try {
+      const data = await fetch(url).then(r => {
+        if (r.status !== 200) {
+          throw new Error(`Status: ${r.status}`)
+        }
+        return r
+      }).then(r => r.arrayBuffer())
+      await fs.writeFile(targetPath, toBuffer(data))
+      console.log('Found DRM on releases.')
+      process.exit(0)
+    } catch (e) {
+      console.error(e.message)
+    }
   }
 
   // couldn't find it, so tell postinstall to compile it

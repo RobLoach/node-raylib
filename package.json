@@ -53,7 +53,8 @@
     "CMakeLists.txt",
     "index.js",
     "CHANGELOG.md",
-    "tools/postinstall.js"
+    "tools/postinstall.js",
+    "drm/*"
   ],
   "bugs": {
     "url": "https://github.com/RobLoach/node-raylib/issues"
