@@ -43,20 +43,6 @@ async function main () {
     await fs.mkdir(path.join(__dirname, '..', 'build', 'Release'))
   } catch (e) {}
 
-  try {
-    const data = await fetch(url).then(r => {
-      if (r.status !== 200) {
-        throw new Error(`Status: ${r.status}`)
-      }
-      return r
-    }).then(r => r.arrayBuffer())
-    await fs.writeFile(targetPath, toBuffer(data))
-    console.log('Found on releases.')
-    process.exit(0)
-  } catch (e) {
-    console.error(e.message)
-  }
-
   if (process.platform === 'linux' && (process.arch === 'arm' || process.arch === 'arm64')) {
     targetPath = path.join(__dirname, '..', 'build', 'Release', 'node-raylib-drm.node')
     url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-${process.platform}-${process.arch}-drm.node`
@@ -69,10 +55,22 @@ async function main () {
       }).then(r => r.arrayBuffer())
       await fs.writeFile(targetPath, toBuffer(data))
       console.log('Found DRM on releases.')
-      process.exit(0)
     } catch (e) {
-      console.error(e.message)
     }
+  }
+
+  try {
+    const data = await fetch(url).then(r => {
+      if (r.status !== 200) {
+        throw new Error(`Status: ${r.status}`)
+      }
+      return r
+    }).then(r => r.arrayBuffer())
+    await fs.writeFile(targetPath, toBuffer(data))
+    console.log('Found on releases.')
+    process.exit(0)
+  } catch (e) {
+    console.error(e.message)
   }
 
   // couldn't find it, so tell postinstall to compile it
