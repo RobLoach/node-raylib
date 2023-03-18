@@ -43,8 +43,6 @@ const camera = {
   projection: r.CAMERA_PERSPECTIVE
 }
 
-r.SetCameraMode(camera, r.CAMERA_FREE)
-
 const rotationSpeed = 0.2 // General system rotation speed
 
 let earthRotation = 0.0 // Rotation of earth around itself (days) in degrees
@@ -59,7 +57,7 @@ r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 while (!r.WindowShouldClose()) {
   // Update
   // ----------------------------------------------------------------------------------
-  r.UpdateCamera(camera)
+  r.UpdateCamera(camera, r.CAMERA_FREE)
 
   earthRotation += (5.0 * rotationSpeed)
   earthOrbitRotation += (365 / 360.0 * (5.0 * rotationSpeed) * rotationSpeed)

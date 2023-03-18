@@ -41,8 +41,6 @@ for (let i = 0; i < MAX_COLUMNS; i++) {
   colors.push(r.Color(r.GetRandomValue(20, 255), r.GetRandomValue(10, 55), 30, 255))
 }
 
-r.SetCameraMode(camera, r.CAMERA_FIRST_PERSON) // Set a first person camera mode
-
 r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 // --------------------------------------------------------------------------------------
 
@@ -50,7 +48,7 @@ r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
-  r.UpdateCamera(camera) // Update camera
+  r.UpdateCamera(camera, r.CAMERA_FIRST_PERSON) // Update camera
   // ----------------------------------------------------------------------------------
 
   // Draw

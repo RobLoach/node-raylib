@@ -202,7 +202,7 @@ function RestoreWindow () {
 raylib.RestoreWindow = RestoreWindow
 
 /**
- * Set icon for window (only PLATFORM_DESKTOP)
+ * Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
  *
  * @param {Image} image
  *
@@ -218,6 +218,22 @@ function SetWindowIcon (image) {
   )
 }
 raylib.SetWindowIcon = SetWindowIcon
+
+/**
+ * Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)
+ *
+ * @param {number} images
+ * @param {number} count
+ *
+ * @return {undefined}
+ */
+function SetWindowIcons (images, count) {
+  return r.BindSetWindowIcons(
+    images,
+    count
+  )
+}
+raylib.SetWindowIcons = SetWindowIcons
 
 /**
  * Set title for window (only PLATFORM_DESKTOP)
@@ -891,6 +907,21 @@ function LoadShaderFromMemory (vsCode, fsCode) {
 raylib.LoadShaderFromMemory = LoadShaderFromMemory
 
 /**
+ * Check if a shader is ready
+ *
+ * @param {Shader} shader
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsShaderReady (shader) {
+  return r.BindIsShaderReady(
+    shader.id,
+    shader.locs
+  )
+}
+raylib.IsShaderReady = IsShaderReady
+
+/**
  * Get shader uniform location
  *
  * @param {Shader} shader
@@ -1395,7 +1426,7 @@ raylib.SaveFileData = SaveFileData
 /**
  * Export data to code (.h), returns true on success
  *
- * @param {string} data
+ * @param {Buffer} data
  * @param {number} size
  * @param {string} fileName
  *
@@ -2359,96 +2390,28 @@ function GetGesturePinchAngle () {
 raylib.GetGesturePinchAngle = GetGesturePinchAngle
 
 /**
- * Set camera mode (multiple camera modes available)
+ * Update camera movement/rotation
  *
- * @param {Camera3D} camera
- * @param {number} mode
- *
- * @return {undefined}
- */
-function SetCameraMode (camera, mode) {
-  return r.BindSetCameraMode(
-    camera.position.x,
-    camera.position.y,
-    camera.position.z,
-    camera.target.x,
-    camera.target.y,
-    camera.target.z,
-    camera.up.x,
-    camera.up.y,
-    camera.up.z,
-    camera.fovy,
-    camera.projection,
-    mode
-  )
-}
-raylib.SetCameraMode = SetCameraMode
-
-/**
- * Set camera pan key to combine with mouse movement (free camera)
- *
- * @param {number} keyPan
+ * @param {number} camera
+ * @param {Vector3} movement
+ * @param {Vector3} rotation
+ * @param {number} zoom
  *
  * @return {undefined}
  */
-function SetCameraPanControl (keyPan) {
-  return r.BindSetCameraPanControl(
-    keyPan
+function UpdateCameraPro (camera, movement, rotation, zoom) {
+  return r.BindUpdateCameraPro(
+    camera,
+    movement.x,
+    movement.y,
+    movement.z,
+    rotation.x,
+    rotation.y,
+    rotation.z,
+    zoom
   )
 }
-raylib.SetCameraPanControl = SetCameraPanControl
-
-/**
- * Set camera alt key to combine with mouse movement (free camera)
- *
- * @param {number} keyAlt
- *
- * @return {undefined}
- */
-function SetCameraAltControl (keyAlt) {
-  return r.BindSetCameraAltControl(
-    keyAlt
-  )
-}
-raylib.SetCameraAltControl = SetCameraAltControl
-
-/**
- * Set camera smooth zoom key to combine with mouse (free camera)
- *
- * @param {number} keySmoothZoom
- *
- * @return {undefined}
- */
-function SetCameraSmoothZoomControl (keySmoothZoom) {
-  return r.BindSetCameraSmoothZoomControl(
-    keySmoothZoom
-  )
-}
-raylib.SetCameraSmoothZoomControl = SetCameraSmoothZoomControl
-
-/**
- * Set camera move controls (1st person and 3rd person cameras)
- *
- * @param {number} keyFront
- * @param {number} keyBack
- * @param {number} keyRight
- * @param {number} keyLeft
- * @param {number} keyUp
- * @param {number} keyDown
- *
- * @return {undefined}
- */
-function SetCameraMoveControls (keyFront, keyBack, keyRight, keyLeft, keyUp, keyDown) {
-  return r.BindSetCameraMoveControls(
-    keyFront,
-    keyBack,
-    keyRight,
-    keyLeft,
-    keyUp,
-    keyDown
-  )
-}
-raylib.SetCameraMoveControls = SetCameraMoveControls
+raylib.UpdateCameraPro = UpdateCameraPro
 
 /**
  * Set texture and rectangle to be used on shapes drawing
@@ -3556,6 +3519,25 @@ function CheckCollisionPointTriangle (point, p1, p2, p3) {
 raylib.CheckCollisionPointTriangle = CheckCollisionPointTriangle
 
 /**
+ * Check if point is within a polygon described by array of vertices
+ *
+ * @param {Vector2} point
+ * @param {number} points
+ * @param {number} pointCount
+ *
+ * @return {boolean} The resulting bool.
+ */
+function CheckCollisionPointPoly (point, points, pointCount) {
+  return r.BindCheckCollisionPointPoly(
+    point.x,
+    point.y,
+    points,
+    pointCount
+  )
+}
+raylib.CheckCollisionPointPoly = CheckCollisionPointPoly
+
+/**
  * Check the collision between two lines defined by two points each, returns collision point by reference
  *
  * @param {Vector2} startPos1
@@ -3723,6 +3705,24 @@ function LoadImageFromScreen () {
   return r.BindLoadImageFromScreen()
 }
 raylib.LoadImageFromScreen = LoadImageFromScreen
+
+/**
+ * Check if an image is ready
+ *
+ * @param {Image} image
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsImageReady (image) {
+  return r.BindIsImageReady(
+    image.data,
+    image.width,
+    image.height,
+    image.mipmaps,
+    image.format
+  )
+}
+raylib.IsImageReady = IsImageReady
 
 /**
  * Unload image from CPU memory (RAM)
@@ -3932,6 +3932,28 @@ function GenImageWhiteNoise (width, height, factor) {
 raylib.GenImageWhiteNoise = GenImageWhiteNoise
 
 /**
+ * Generate image: perlin noise
+ *
+ * @param {number} width
+ * @param {number} height
+ * @param {number} offsetX
+ * @param {number} offsetY
+ * @param {number} scale
+ *
+ * @return {Image} The resulting Image.
+ */
+function GenImagePerlinNoise (width, height, offsetX, offsetY, scale) {
+  return r.BindGenImagePerlinNoise(
+    width,
+    height,
+    offsetX,
+    offsetY,
+    scale
+  )
+}
+raylib.GenImagePerlinNoise = GenImagePerlinNoise
+
+/**
  * Generate image: cellular algorithm, bigger tileSize means bigger cells
  *
  * @param {number} width
@@ -3948,6 +3970,24 @@ function GenImageCellular (width, height, tileSize) {
   )
 }
 raylib.GenImageCellular = GenImageCellular
+
+/**
+ * Generate image: grayscale image from text data
+ *
+ * @param {number} width
+ * @param {number} height
+ * @param {string} text
+ *
+ * @return {Image} The resulting Image.
+ */
+function GenImageText (width, height, text) {
+  return r.BindGenImageText(
+    width,
+    height,
+    text
+  )
+}
+raylib.GenImageText = GenImageText
 
 /**
  * Create an image duplicate (useful for transformations)
@@ -4044,6 +4084,22 @@ function ImageTextEx (font, text, fontSize, spacing, tint) {
   )
 }
 raylib.ImageTextEx = ImageTextEx
+
+/**
+ * Apply Gaussian blur using a box blur approximation
+ *
+ * @param {number} image
+ * @param {number} blurSize
+ *
+ * @return {undefined}
+ */
+function ImageBlurGaussian (image, blurSize) {
+  return r.BindImageBlurGaussian(
+    image,
+    blurSize
+  )
+}
+raylib.ImageBlurGaussian = ImageBlurGaussian
 
 /**
  * Load color data from image as a Color array (RGBA - 32bit)
@@ -4156,6 +4212,55 @@ function GetImageColor (image, x, y) {
 raylib.GetImageColor = GetImageColor
 
 /**
+ * Draw circle outline within an image
+ *
+ * @param {number} dst
+ * @param {number} centerX
+ * @param {number} centerY
+ * @param {number} radius
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function ImageDrawCircleLines (dst, centerX, centerY, radius, color) {
+  return r.BindImageDrawCircleLines(
+    dst,
+    centerX,
+    centerY,
+    radius,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.ImageDrawCircleLines = ImageDrawCircleLines
+
+/**
+ * Draw circle outline within an image (Vector version)
+ *
+ * @param {number} dst
+ * @param {Vector2} center
+ * @param {number} radius
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function ImageDrawCircleLinesV (dst, center, radius, color) {
+  return r.BindImageDrawCircleLinesV(
+    dst,
+    center.x,
+    center.y,
+    radius,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.ImageDrawCircleLinesV = ImageDrawCircleLinesV
+
+/**
  * Load texture from file into GPU memory (VRAM)
  *
  * @param {string} fileName
@@ -4224,6 +4329,24 @@ function LoadRenderTexture (width, height) {
 raylib.LoadRenderTexture = LoadRenderTexture
 
 /**
+ * Check if a texture is ready
+ *
+ * @param {Texture} texture
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsTextureReady (texture) {
+  return r.BindIsTextureReady(
+    texture.id,
+    texture.width,
+    texture.height,
+    texture.mipmaps,
+    texture.format
+  )
+}
+raylib.IsTextureReady = IsTextureReady
+
+/**
  * Unload texture from GPU memory (VRAM)
  *
  * @param {Texture} texture
@@ -4240,6 +4363,30 @@ function UnloadTexture (texture) {
   )
 }
 raylib.UnloadTexture = UnloadTexture
+
+/**
+ * Check if a render texture is ready
+ *
+ * @param {RenderTexture} target
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsRenderTextureReady (target) {
+  return r.BindIsRenderTextureReady(
+    target.id,
+    target.texture.id,
+    target.texture.width,
+    target.texture.height,
+    target.texture.mipmaps,
+    target.texture.format,
+    target.depth.id,
+    target.depth.width,
+    target.depth.height,
+    target.depth.mipmaps,
+    target.depth.format
+  )
+}
+raylib.IsRenderTextureReady = IsRenderTextureReady
 
 /**
  * Unload render texture from GPU memory (VRAM)
@@ -4465,80 +4612,6 @@ function DrawTextureRec (texture, source, position, tint) {
 raylib.DrawTextureRec = DrawTextureRec
 
 /**
- * Draw texture quad with tiling and offset parameters
- *
- * @param {Texture} texture
- * @param {Vector2} tiling
- * @param {Vector2} offset
- * @param {Rectangle} quad
- * @param {Color} tint
- *
- * @return {undefined}
- */
-function DrawTextureQuad (texture, tiling, offset, quad, tint) {
-  return r.BindDrawTextureQuad(
-    texture.id,
-    texture.width,
-    texture.height,
-    texture.mipmaps,
-    texture.format,
-    tiling.x,
-    tiling.y,
-    offset.x,
-    offset.y,
-    quad.x,
-    quad.y,
-    quad.width,
-    quad.height,
-    tint.r,
-    tint.g,
-    tint.b,
-    tint.a
-  )
-}
-raylib.DrawTextureQuad = DrawTextureQuad
-
-/**
- * Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.
- *
- * @param {Texture} texture
- * @param {Rectangle} source
- * @param {Rectangle} dest
- * @param {Vector2} origin
- * @param {number} rotation
- * @param {number} scale
- * @param {Color} tint
- *
- * @return {undefined}
- */
-function DrawTextureTiled (texture, source, dest, origin, rotation, scale, tint) {
-  return r.BindDrawTextureTiled(
-    texture.id,
-    texture.width,
-    texture.height,
-    texture.mipmaps,
-    texture.format,
-    source.x,
-    source.y,
-    source.width,
-    source.height,
-    dest.x,
-    dest.y,
-    dest.width,
-    dest.height,
-    origin.x,
-    origin.y,
-    rotation,
-    scale,
-    tint.r,
-    tint.g,
-    tint.b,
-    tint.a
-  )
-}
-raylib.DrawTextureTiled = DrawTextureTiled
-
-/**
  * Draw a part of a texture defined by a rectangle with 'pro' parameters
  *
  * @param {Texture} texture
@@ -4618,38 +4691,6 @@ function DrawTextureNPatch (texture, nPatchInfo, dest, origin, rotation, tint) {
   )
 }
 raylib.DrawTextureNPatch = DrawTextureNPatch
-
-/**
- * Draw a textured polygon
- *
- * @param {Texture} texture
- * @param {Vector2} center
- * @param {number} points
- * @param {number} texcoords
- * @param {number} pointCount
- * @param {Color} tint
- *
- * @return {undefined}
- */
-function DrawTexturePoly (texture, center, points, texcoords, pointCount, tint) {
-  return r.BindDrawTexturePoly(
-    texture.id,
-    texture.width,
-    texture.height,
-    texture.mipmaps,
-    texture.format,
-    center.x,
-    center.y,
-    points,
-    texcoords,
-    pointCount,
-    tint.r,
-    tint.g,
-    tint.b,
-    tint.a
-  )
-}
-raylib.DrawTexturePoly = DrawTexturePoly
 
 /**
  * Get color with alpha applied, alpha goes from 0.0f to 1.0f
@@ -4755,6 +4796,66 @@ function ColorFromHSV (hue, saturation, value) {
   )
 }
 raylib.ColorFromHSV = ColorFromHSV
+
+/**
+ * Get color multiplied with another color
+ *
+ * @param {Color} color
+ * @param {Color} tint
+ *
+ * @return {Color} The resulting Color.
+ */
+function ColorTint (color, tint) {
+  return r.BindColorTint(
+    color.r,
+    color.g,
+    color.b,
+    color.a,
+    tint.r,
+    tint.g,
+    tint.b,
+    tint.a
+  )
+}
+raylib.ColorTint = ColorTint
+
+/**
+ * Get color with brightness correction, brightness factor goes from -1.0f to 1.0f
+ *
+ * @param {Color} color
+ * @param {number} factor
+ *
+ * @return {Color} The resulting Color.
+ */
+function ColorBrightness (color, factor) {
+  return r.BindColorBrightness(
+    color.r,
+    color.g,
+    color.b,
+    color.a,
+    factor
+  )
+}
+raylib.ColorBrightness = ColorBrightness
+
+/**
+ * Get color with contrast correction, contrast values between -1.0f and 1.0f
+ *
+ * @param {Color} color
+ * @param {number} contrast
+ *
+ * @return {Color} The resulting Color.
+ */
+function ColorContrast (color, contrast) {
+  return r.BindColorContrast(
+    color.r,
+    color.g,
+    color.b,
+    color.a,
+    contrast
+  )
+}
+raylib.ColorContrast = ColorContrast
 
 /**
  * Get color with alpha applied, alpha goes from 0.0f to 1.0f
@@ -4963,6 +5064,29 @@ function LoadFontFromMemory (fileType, fileData, dataSize, fontSize, fontChars, 
   )
 }
 raylib.LoadFontFromMemory = LoadFontFromMemory
+
+/**
+ * Check if a font is ready
+ *
+ * @param {Font} font
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsFontReady (font) {
+  return r.BindIsFontReady(
+    font.baseSize,
+    font.glyphCount,
+    font.glyphPadding,
+    font.texture.id,
+    font.texture.width,
+    font.texture.height,
+    font.texture.mipmaps,
+    font.texture.format,
+    font.recs,
+    font.glyphs
+  )
+}
+raylib.IsFontReady = IsFontReady
 
 /**
  * Load font data for further use
@@ -5391,6 +5515,36 @@ function GetGlyphAtlasRec (font, codepoint) {
 raylib.GetGlyphAtlasRec = GetGlyphAtlasRec
 
 /**
+ * Load UTF-8 text encoded from codepoints array
+ *
+ * @param {number} codepoints
+ * @param {number} length
+ *
+ * @return {string} The resulting char *.
+ */
+function LoadUTF8 (codepoints, length) {
+  return r.BindLoadUTF8(
+    codepoints,
+    length
+  )
+}
+raylib.LoadUTF8 = LoadUTF8
+
+/**
+ * Unload UTF-8 text encoded from codepoints array
+ *
+ * @param {string} text
+ *
+ * @return {undefined}
+ */
+function UnloadUTF8 (text) {
+  return r.BindUnloadUTF8(
+    text
+  )
+}
+raylib.UnloadUTF8 = UnloadUTF8
+
+/**
  * Load all codepoints from a UTF-8 text string, codepoints count returned by parameter
  *
  * @param {string} text
@@ -5438,49 +5592,65 @@ raylib.GetCodepointCount = GetCodepointCount
  * Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
  *
  * @param {string} text
- * @param {number} bytesProcessed
+ * @param {number} codepointSize
  *
  * @return {number} The resulting int.
  */
-function GetCodepoint (text, bytesProcessed) {
+function GetCodepoint (text, codepointSize) {
   return r.BindGetCodepoint(
     text,
-    bytesProcessed
+    codepointSize
   )
 }
 raylib.GetCodepoint = GetCodepoint
 
 /**
+ * Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
+ *
+ * @param {string} text
+ * @param {number} codepointSize
+ *
+ * @return {number} The resulting int.
+ */
+function GetCodepointNext (text, codepointSize) {
+  return r.BindGetCodepointNext(
+    text,
+    codepointSize
+  )
+}
+raylib.GetCodepointNext = GetCodepointNext
+
+/**
+ * Get previous codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
+ *
+ * @param {string} text
+ * @param {number} codepointSize
+ *
+ * @return {number} The resulting int.
+ */
+function GetCodepointPrevious (text, codepointSize) {
+  return r.BindGetCodepointPrevious(
+    text,
+    codepointSize
+  )
+}
+raylib.GetCodepointPrevious = GetCodepointPrevious
+
+/**
  * Encode one codepoint into UTF-8 byte array (array length returned as parameter)
  *
  * @param {number} codepoint
- * @param {number} byteSize
+ * @param {number} utf8Size
  *
  * @return {string} The resulting const char *.
  */
-function CodepointToUTF8 (codepoint, byteSize) {
+function CodepointToUTF8 (codepoint, utf8Size) {
   return r.BindCodepointToUTF8(
     codepoint,
-    byteSize
+    utf8Size
   )
 }
 raylib.CodepointToUTF8 = CodepointToUTF8
-
-/**
- * Encode text as codepoints array into UTF-8 text string (WARNING: memory must be freed!)
- *
- * @param {number} codepoints
- * @param {number} length
- *
- * @return {string} The resulting char *.
- */
-function TextCodepointsToUTF8 (codepoints, length) {
-  return r.BindTextCodepointsToUTF8(
-    codepoints,
-    length
-  )
-}
-raylib.TextCodepointsToUTF8 = TextCodepointsToUTF8
 
 /**
  * Copy one string to another, returns bytes copied
@@ -5938,77 +6108,6 @@ function DrawCubeWiresV (position, size, color) {
 raylib.DrawCubeWiresV = DrawCubeWiresV
 
 /**
- * Draw cube textured
- *
- * @param {Texture} texture
- * @param {Vector3} position
- * @param {number} width
- * @param {number} height
- * @param {number} length
- * @param {Color} color
- *
- * @return {undefined}
- */
-function DrawCubeTexture (texture, position, width, height, length, color) {
-  return r.BindDrawCubeTexture(
-    texture.id,
-    texture.width,
-    texture.height,
-    texture.mipmaps,
-    texture.format,
-    position.x,
-    position.y,
-    position.z,
-    width,
-    height,
-    length,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.DrawCubeTexture = DrawCubeTexture
-
-/**
- * Draw cube with a region of a texture
- *
- * @param {Texture} texture
- * @param {Rectangle} source
- * @param {Vector3} position
- * @param {number} width
- * @param {number} height
- * @param {number} length
- * @param {Color} color
- *
- * @return {undefined}
- */
-function DrawCubeTextureRec (texture, source, position, width, height, length, color) {
-  return r.BindDrawCubeTextureRec(
-    texture.id,
-    texture.width,
-    texture.height,
-    texture.mipmaps,
-    texture.format,
-    source.x,
-    source.y,
-    source.width,
-    source.height,
-    position.x,
-    position.y,
-    position.z,
-    width,
-    height,
-    length,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.DrawCubeTextureRec = DrawCubeTextureRec
-
-/**
  * Draw sphere
  *
  * @param {Vector3} centerPos
@@ -6206,6 +6305,68 @@ function DrawCylinderWiresEx (startPos, endPos, startRadius, endRadius, sides, c
 raylib.DrawCylinderWiresEx = DrawCylinderWiresEx
 
 /**
+ * Draw a capsule with the center of its sphere caps at startPos and endPos
+ *
+ * @param {Vector3} startPos
+ * @param {Vector3} endPos
+ * @param {number} radius
+ * @param {number} slices
+ * @param {number} rings
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawCapsule (startPos, endPos, radius, slices, rings, color) {
+  return r.BindDrawCapsule(
+    startPos.x,
+    startPos.y,
+    startPos.z,
+    endPos.x,
+    endPos.y,
+    endPos.z,
+    radius,
+    slices,
+    rings,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawCapsule = DrawCapsule
+
+/**
+ * Draw capsule wireframe with the center of its sphere caps at startPos and endPos
+ *
+ * @param {Vector3} startPos
+ * @param {Vector3} endPos
+ * @param {number} radius
+ * @param {number} slices
+ * @param {number} rings
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawCapsuleWires (startPos, endPos, radius, slices, rings, color) {
+  return r.BindDrawCapsuleWires(
+    startPos.x,
+    startPos.y,
+    startPos.z,
+    endPos.x,
+    endPos.y,
+    endPos.z,
+    radius,
+    slices,
+    rings,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawCapsuleWires = DrawCapsuleWires
+
+/**
  * Draw a plane XZ
  *
  * @param {Vector3} centerPos
@@ -6312,6 +6473,43 @@ function LoadModelFromMesh (mesh) {
 raylib.LoadModelFromMesh = LoadModelFromMesh
 
 /**
+ * Check if a model is ready
+ *
+ * @param {Model} model
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsModelReady (model) {
+  return r.BindIsModelReady(
+    model.transform.m0,
+    model.transform.m4,
+    model.transform.m8,
+    model.transform.m12,
+    model.transform.m1,
+    model.transform.m5,
+    model.transform.m9,
+    model.transform.m13,
+    model.transform.m2,
+    model.transform.m6,
+    model.transform.m10,
+    model.transform.m14,
+    model.transform.m3,
+    model.transform.m7,
+    model.transform.m11,
+    model.transform.m15,
+    model.meshCount,
+    model.materialCount,
+    model.meshes,
+    model.materials,
+    model.meshMaterial,
+    model.boneCount,
+    model.bones,
+    model.bindPose
+  )
+}
+raylib.IsModelReady = IsModelReady
+
+/**
  * Unload model (including meshes) from memory (RAM and/or VRAM)
  *
  * @param {Model} model
@@ -6347,43 +6545,6 @@ function UnloadModel (model) {
   )
 }
 raylib.UnloadModel = UnloadModel
-
-/**
- * Unload model (but not meshes) from memory (RAM and/or VRAM)
- *
- * @param {Model} model
- *
- * @return {undefined}
- */
-function UnloadModelKeepMeshes (model) {
-  return r.BindUnloadModelKeepMeshes(
-    model.transform.m0,
-    model.transform.m4,
-    model.transform.m8,
-    model.transform.m12,
-    model.transform.m1,
-    model.transform.m5,
-    model.transform.m9,
-    model.transform.m13,
-    model.transform.m2,
-    model.transform.m6,
-    model.transform.m10,
-    model.transform.m14,
-    model.transform.m3,
-    model.transform.m7,
-    model.transform.m11,
-    model.transform.m15,
-    model.meshCount,
-    model.materialCount,
-    model.meshes,
-    model.materials,
-    model.meshMaterial,
-    model.boneCount,
-    model.bones,
-    model.bindPose
-  )
-}
-raylib.UnloadModelKeepMeshes = UnloadModelKeepMeshes
 
 /**
  * Compute model bounding box limits (considers all meshes)
@@ -7586,6 +7747,24 @@ function LoadWaveFromMemory (fileType, fileData, dataSize) {
 raylib.LoadWaveFromMemory = LoadWaveFromMemory
 
 /**
+ * Checks if wave data is ready
+ *
+ * @param {Wave} wave
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsWaveReady (wave) {
+  return r.BindIsWaveReady(
+    wave.frameCount,
+    wave.sampleRate,
+    wave.sampleSize,
+    wave.channels,
+    wave.data
+  )
+}
+raylib.IsWaveReady = IsWaveReady
+
+/**
  * Load sound from file
  *
  * @param {string} fileName
@@ -7616,6 +7795,25 @@ function LoadSoundFromWave (wave) {
   )
 }
 raylib.LoadSoundFromWave = LoadSoundFromWave
+
+/**
+ * Checks if a sound is ready
+ *
+ * @param {Sound} sound
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsSoundReady (sound) {
+  return r.BindIsSoundReady(
+    sound.stream.buffer,
+    sound.stream.processor,
+    sound.stream.sampleRate,
+    sound.stream.sampleSize,
+    sound.stream.channels,
+    sound.frameCount
+  )
+}
+raylib.IsSoundReady = IsSoundReady
 
 /**
  * Update sound buffer with new data
@@ -7794,45 +7992,6 @@ function ResumeSound (sound) {
 raylib.ResumeSound = ResumeSound
 
 /**
- * Play a sound (using multichannel buffer pool)
- *
- * @param {Sound} sound
- *
- * @return {undefined}
- */
-function PlaySoundMulti (sound) {
-  return r.BindPlaySoundMulti(
-    sound.stream.buffer,
-    sound.stream.processor,
-    sound.stream.sampleRate,
-    sound.stream.sampleSize,
-    sound.stream.channels,
-    sound.frameCount
-  )
-}
-raylib.PlaySoundMulti = PlaySoundMulti
-
-/**
- * Stop any sound playing (using multichannel buffer pool)
- *
- * @return {undefined}
- */
-function StopSoundMulti () {
-  return r.BindStopSoundMulti()
-}
-raylib.StopSoundMulti = StopSoundMulti
-
-/**
- * Get number of sounds playing in the multichannel
- *
- * @return {number} The resulting int.
- */
-function GetSoundsPlaying () {
-  return r.BindGetSoundsPlaying()
-}
-raylib.GetSoundsPlaying = GetSoundsPlaying
-
-/**
  * Check if a sound is currently playing
  *
  * @param {Sound} sound
@@ -7995,6 +8154,28 @@ function LoadMusicStreamFromMemory (fileType, data, dataSize) {
   )
 }
 raylib.LoadMusicStreamFromMemory = LoadMusicStreamFromMemory
+
+/**
+ * Checks if a music stream is ready
+ *
+ * @param {Music} music
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsMusicReady (music) {
+  return r.BindIsMusicReady(
+    music.stream.buffer,
+    music.stream.processor,
+    music.stream.sampleRate,
+    music.stream.sampleSize,
+    music.stream.channels,
+    music.frameCount,
+    music.looping,
+    music.ctxType,
+    music.ctxData
+  )
+}
+raylib.IsMusicReady = IsMusicReady
 
 /**
  * Unload music stream
@@ -8307,6 +8488,24 @@ function LoadAudioStream (sampleRate, sampleSize, channels) {
   )
 }
 raylib.LoadAudioStream = LoadAudioStream
+
+/**
+ * Checks if an audio stream is ready
+ *
+ * @param {AudioStream} stream
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsAudioStreamReady (stream) {
+  return r.BindIsAudioStreamReady(
+    stream.buffer,
+    stream.processor,
+    stream.sampleRate,
+    stream.sampleSize,
+    stream.channels
+  )
+}
+raylib.IsAudioStreamReady = IsAudioStreamReady
 
 /**
  * Unload audio stream and free memory
@@ -9248,6 +9447,16 @@ function Vector2Angle (v1, v2) {
   )
 }
 raylib.Vector2Angle = Vector2Angle
+
+function Vector2LineAngle (start, end) {
+  return r.BindVector2LineAngle(
+    start.x,
+    start.y,
+    end.x,
+    end.y
+  )
+}
+raylib.Vector2LineAngle = Vector2LineAngle
 
 function Vector2Scale (v, scale) {
   return r.BindVector2Scale(
@@ -10583,6 +10792,29 @@ function GuiPanel (bounds, text) {
 raylib.GuiPanel = GuiPanel
 
 /**
+ * Tab Bar control, returns TAB to be closed or -1
+ *
+ * @param {Rectangle} bounds
+ * @param {number} text
+ * @param {number} count
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiTabBar (bounds, text, count, active) {
+  return r.BindGuiTabBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    count,
+    active
+  )
+}
+raylib.GuiTabBar = GuiTabBar
+
+/**
  * Scroll Panel control
  *
  * @param {Rectangle} bounds
@@ -11231,6 +11463,40 @@ function GuiLoadStyleDefault () {
 raylib.GuiLoadStyleDefault = GuiLoadStyleDefault
 
 /**
+ * Enable gui tooltips (global state)
+ *
+ * @return {undefined}
+ */
+function GuiEnableTooltip () {
+  return r.BindGuiEnableTooltip()
+}
+raylib.GuiEnableTooltip = GuiEnableTooltip
+
+/**
+ * Disable gui tooltips (global state)
+ *
+ * @return {undefined}
+ */
+function GuiDisableTooltip () {
+  return r.BindGuiDisableTooltip()
+}
+raylib.GuiDisableTooltip = GuiDisableTooltip
+
+/**
+ * Set tooltip string
+ *
+ * @param {string} tooltip
+ *
+ * @return {undefined}
+ */
+function GuiSetTooltip (tooltip) {
+  return r.BindGuiSetTooltip(
+    tooltip
+  )
+}
+raylib.GuiSetTooltip = GuiSetTooltip
+
+/**
  * Get text with icon id prepended (if supported)
  *
  * @param {number} iconId
@@ -11245,6 +11511,32 @@ function GuiIconText (iconId, text) {
   )
 }
 raylib.GuiIconText = GuiIconText
+
+/**
+ * Get raygui icons data pointer
+ *
+ * @return {number} The resulting unsigned int *.
+ */
+function GuiGetIcons () {
+  return r.BindGuiGetIcons()
+}
+raylib.GuiGetIcons = GuiGetIcons
+
+/**
+ * Load raygui icons file (.rgi) into internal icons data
+ *
+ * @param {string} fileName
+ * @param {boolean} loadIconsName
+ *
+ * @return {number} The resulting char **.
+ */
+function GuiLoadIcons (fileName, loadIconsName) {
+  return r.BindGuiLoadIcons(
+    fileName,
+    loadIconsName
+  )
+}
+raylib.GuiLoadIcons = GuiLoadIcons
 
 function GuiDrawIcon (iconId, posX, posY, pixelSize, color) {
   return r.BindGuiDrawIcon(
@@ -11261,47 +11553,7 @@ function GuiDrawIcon (iconId, posX, posY, pixelSize, color) {
 raylib.GuiDrawIcon = GuiDrawIcon
 
 /**
- * Get full icons data pointer
- *
- * @return {number} The resulting unsigned int *.
- */
-function GuiGetIcons () {
-  return r.BindGuiGetIcons()
-}
-raylib.GuiGetIcons = GuiGetIcons
-
-/**
- * Get icon bit data
- *
- * @param {number} iconId
- *
- * @return {number} The resulting unsigned int *.
- */
-function GuiGetIconData (iconId) {
-  return r.BindGuiGetIconData(
-    iconId
-  )
-}
-raylib.GuiGetIconData = GuiGetIconData
-
-/**
- * Set icon bit data
- *
- * @param {number} iconId
- * @param {number} data
- *
- * @return {undefined}
- */
-function GuiSetIconData (iconId, data) {
-  return r.BindGuiSetIconData(
-    iconId,
-    data
-  )
-}
-raylib.GuiSetIconData = GuiSetIconData
-
-/**
- * Set icon scale (1 by default)
+ * Set icon drawing size
  *
  * @param {number} scale
  *
@@ -11313,60 +11565,6 @@ function GuiSetIconScale (scale) {
   )
 }
 raylib.GuiSetIconScale = GuiSetIconScale
-
-/**
- * Set icon pixel value
- *
- * @param {number} iconId
- * @param {number} x
- * @param {number} y
- *
- * @return {undefined}
- */
-function GuiSetIconPixel (iconId, x, y) {
-  return r.BindGuiSetIconPixel(
-    iconId,
-    x,
-    y
-  )
-}
-raylib.GuiSetIconPixel = GuiSetIconPixel
-
-/**
- * Clear icon pixel value
- *
- * @param {number} iconId
- * @param {number} x
- * @param {number} y
- *
- * @return {undefined}
- */
-function GuiClearIconPixel (iconId, x, y) {
-  return r.BindGuiClearIconPixel(
-    iconId,
-    x,
-    y
-  )
-}
-raylib.GuiClearIconPixel = GuiClearIconPixel
-
-/**
- * Check icon pixel value
- *
- * @param {number} iconId
- * @param {number} x
- * @param {number} y
- *
- * @return {boolean} The resulting bool.
- */
-function GuiCheckIconPixel (iconId, x, y) {
-  return r.BindGuiCheckIconPixel(
-    iconId,
-    x,
-    y
-  )
-}
-raylib.GuiCheckIconPixel = GuiCheckIconPixel
 
 /**
  * Choose the current matrix to be transformed
@@ -11393,7 +11591,7 @@ function rlPushMatrix () {
 raylib.rlPushMatrix = rlPushMatrix
 
 /**
- * Pop lattest inserted matrix from stack
+ * Pop latest inserted matrix from stack
  *
  * @return {undefined}
  */
@@ -11873,6 +12071,24 @@ function rlTextureParameters (id, param, value) {
 raylib.rlTextureParameters = rlTextureParameters
 
 /**
+ * Set cubemap parameters (filter, wrap)
+ *
+ * @param {number} id
+ * @param {number} param
+ * @param {number} value
+ *
+ * @return {undefined}
+ */
+function rlCubemapParameters (id, param, value) {
+  return r.BindrlCubemapParameters(
+    id,
+    param,
+    value
+  )
+}
+raylib.rlCubemapParameters = rlCubemapParameters
+
+/**
  * Enable shader program
  *
  * @param {number} id
@@ -12013,6 +12229,20 @@ function rlDisableBackfaceCulling () {
   return r.BindrlDisableBackfaceCulling()
 }
 raylib.rlDisableBackfaceCulling = rlDisableBackfaceCulling
+
+/**
+ * Set face culling mode
+ *
+ * @param {number} mode
+ *
+ * @return {undefined}
+ */
+function rlSetCullFace (mode) {
+  return r.BindrlSetCullFace(
+    mode
+  )
+}
+raylib.rlSetCullFace = rlSetCullFace
 
 /**
  * Enable scissor test
@@ -12221,6 +12451,30 @@ function rlSetBlendFactors (glSrcFactor, glDstFactor, glEquation) {
 raylib.rlSetBlendFactors = rlSetBlendFactors
 
 /**
+ * Set blending mode factors and equations separately (using OpenGL factors)
+ *
+ * @param {number} glSrcRGB
+ * @param {number} glDstRGB
+ * @param {number} glSrcAlpha
+ * @param {number} glDstAlpha
+ * @param {number} glEqRGB
+ * @param {number} glEqAlpha
+ *
+ * @return {undefined}
+ */
+function rlSetBlendFactorsSeparate (glSrcRGB, glDstRGB, glSrcAlpha, glDstAlpha, glEqRGB, glEqAlpha) {
+  return r.BindrlSetBlendFactorsSeparate(
+    glSrcRGB,
+    glDstRGB,
+    glSrcAlpha,
+    glDstAlpha,
+    glEqRGB,
+    glEqAlpha
+  )
+}
+raylib.rlSetBlendFactorsSeparate = rlSetBlendFactorsSeparate
+
+/**
  * Initialize rlgl (buffers, shaders, textures, states)
  *
  * @param {number} width
@@ -12237,7 +12491,7 @@ function rlglInit (width, height) {
 raylib.rlglInit = rlglInit
 
 /**
- * De-inititialize rlgl (buffers, shaders, textures)
+ * De-initialize rlgl (buffers, shaders, textures)
  *
  * @return {undefined}
  */
@@ -13073,7 +13327,7 @@ function rlLoadComputeShaderProgram (shaderId) {
 raylib.rlLoadComputeShaderProgram = rlLoadComputeShaderProgram
 
 /**
- * Dispatch compute shader (equivalent to *draw* for graphics pilepine)
+ * Dispatch compute shader (equivalent to *draw* for graphics pipeline)
  *
  * @param {number} groupX
  * @param {number} groupY
@@ -13093,7 +13347,7 @@ raylib.rlComputeShaderDispatch = rlComputeShaderDispatch
 /**
  * Load shader storage buffer object (SSBO)
  *
- * @param {BigInt} size
+ * @param {number} size
  * @param {number} data
  * @param {number} usageHint
  *
@@ -13127,57 +13381,23 @@ raylib.rlUnloadShaderBuffer = rlUnloadShaderBuffer
  *
  * @param {number} id
  * @param {number} data
- * @param {BigInt} dataSize
- * @param {BigInt} offset
+ * @param {number} dataSize
+ * @param {number} offset
  *
  * @return {undefined}
  */
-function rlUpdateShaderBufferElements (id, data, dataSize, offset) {
-  return r.BindrlUpdateShaderBufferElements(
+function rlUpdateShaderBuffer (id, data, dataSize, offset) {
+  return r.BindrlUpdateShaderBuffer(
     id,
     data,
     dataSize,
     offset
   )
 }
-raylib.rlUpdateShaderBufferElements = rlUpdateShaderBufferElements
-
-/**
- * Get SSBO buffer size
- *
- * @param {number} id
- *
- * @return {BigInt} The resulting unsigned long long.
- */
-function rlGetShaderBufferSize (id) {
-  return r.BindrlGetShaderBufferSize(
-    id
-  )
-}
-raylib.rlGetShaderBufferSize = rlGetShaderBufferSize
+raylib.rlUpdateShaderBuffer = rlUpdateShaderBuffer
 
 /**
  * Bind SSBO buffer
- *
- * @param {number} id
- * @param {number} dest
- * @param {BigInt} count
- * @param {BigInt} offset
- *
- * @return {undefined}
- */
-function rlReadShaderBufferElements (id, dest, count, offset) {
-  return r.BindrlReadShaderBufferElements(
-    id,
-    dest,
-    count,
-    offset
-  )
-}
-raylib.rlReadShaderBufferElements = rlReadShaderBufferElements
-
-/**
- * Copy SSBO buffer data
  *
  * @param {number} id
  * @param {number} index
@@ -13193,18 +13413,38 @@ function rlBindShaderBuffer (id, index) {
 raylib.rlBindShaderBuffer = rlBindShaderBuffer
 
 /**
- * Copy SSBO buffer data
+ * Read SSBO buffer data (GPU->CPU)
  *
- * @param {number} destId
- * @param {number} srcId
- * @param {BigInt} destOffset
- * @param {BigInt} srcOffset
- * @param {BigInt} count
+ * @param {number} id
+ * @param {number} dest
+ * @param {number} count
+ * @param {number} offset
  *
  * @return {undefined}
  */
-function rlCopyBuffersElements (destId, srcId, destOffset, srcOffset, count) {
-  return r.BindrlCopyBuffersElements(
+function rlReadShaderBuffer (id, dest, count, offset) {
+  return r.BindrlReadShaderBuffer(
+    id,
+    dest,
+    count,
+    offset
+  )
+}
+raylib.rlReadShaderBuffer = rlReadShaderBuffer
+
+/**
+ * Copy SSBO data between buffers
+ *
+ * @param {number} destId
+ * @param {number} srcId
+ * @param {number} destOffset
+ * @param {number} srcOffset
+ * @param {number} count
+ *
+ * @return {undefined}
+ */
+function rlCopyShaderBuffer (destId, srcId, destOffset, srcOffset, count) {
+  return r.BindrlCopyShaderBuffer(
     destId,
     srcId,
     destOffset,
@@ -13212,7 +13452,21 @@ function rlCopyBuffersElements (destId, srcId, destOffset, srcOffset, count) {
     count
   )
 }
-raylib.rlCopyBuffersElements = rlCopyBuffersElements
+raylib.rlCopyShaderBuffer = rlCopyShaderBuffer
+
+/**
+ * Get SSBO buffer size
+ *
+ * @param {number} id
+ *
+ * @return {number} The resulting unsigned int.
+ */
+function rlGetShaderBufferSize (id) {
+  return r.BindrlGetShaderBufferSize(
+    id
+  )
+}
+raylib.rlGetShaderBufferSize = rlGetShaderBufferSize
 
 /**
  * Bind image texture
@@ -13220,7 +13474,7 @@ raylib.rlCopyBuffersElements = rlCopyBuffersElements
  * @param {number} id
  * @param {number} index
  * @param {number} format
- * @param {number} readonly
+ * @param {boolean} readonly
  *
  * @return {undefined}
  */
@@ -13466,10 +13720,11 @@ raylib.rlLoadDrawQuad = rlLoadDrawQuad
  * Update camera position for selected mode
  *
  * @param {Camera3D} camera
+ * @param {number} mode
  *
  * @return {undefined}
  */
-function UpdateCamera (camera) {
+function UpdateCamera (camera, mode) {
   const obj = r.BindUpdateCamera(
     camera.position.x,
     camera.position.y,
@@ -13481,7 +13736,8 @@ function UpdateCamera (camera) {
     camera.up.y,
     camera.up.z,
     camera.fovy,
-    camera.projection
+    camera.projection,
+    mode
   )
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
@@ -14234,7 +14490,7 @@ function ImageDrawLineV (dst, start, end, color) {
 raylib.ImageDrawLineV = ImageDrawLineV
 
 /**
- * Draw circle within an image
+ * Draw a filled circle within an image
  *
  * @param {Image} dst
  * @param {number} centerX
@@ -14268,7 +14524,7 @@ function ImageDrawCircle (dst, centerX, centerY, radius, color) {
 raylib.ImageDrawCircle = ImageDrawCircle
 
 /**
- * Draw circle within an image (Vector version)
+ * Draw a filled circle within an image (Vector version)
  *
  * @param {Image} dst
  * @param {Vector2} center
@@ -14852,7 +15108,7 @@ raylib.Camera2D = Camera2D
  * @param {Vector3} position - Camera position
  * @param {Vector3} target - Camera target it looks-at
  * @param {Vector3} up - Camera up vector (rotation over its axis)
- * @param {number} fovy - Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic
+ * @param {number} fovy - Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
  * @param {number} projection - Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
  *
  * @return {Camera3D} The new Camera3D.
@@ -16071,7 +16327,7 @@ raylib.MOUSE_BUTTON_SIDE = 3
 raylib.MOUSE_BUTTON_EXTRA = 4
 
 /**
- * Mouse button fordward (advanced mouse device)
+ * Mouse button forward (advanced mouse device)
  *
  * @type {number}
  * @constant
@@ -16159,7 +16415,7 @@ raylib.MOUSE_CURSOR_RESIZE_NWSE = 7
 raylib.MOUSE_CURSOR_RESIZE_NESW = 8
 
 /**
- * The omni-directional resize/move cursor shape
+ * The omnidirectional resize/move cursor shape
  *
  * @type {number}
  * @constant
@@ -17031,7 +17287,7 @@ raylib.CUBEMAP_LAYOUT_AUTO_DETECT = 0
 raylib.CUBEMAP_LAYOUT_LINE_VERTICAL = 1
 
 /**
- * Layout is defined by an horizontal line with faces
+ * Layout is defined by a horizontal line with faces
  *
  * @type {number}
  * @constant
@@ -17055,7 +17311,7 @@ raylib.CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = 3
 raylib.CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = 4
 
 /**
- * Layout is defined by a panorama image (equirectangular map)
+ * Layout is defined by a panorama image (equirrectangular map)
  *
  * @type {number}
  * @constant
@@ -17135,12 +17391,20 @@ raylib.BLEND_SUBTRACT_COLORS = 4
 raylib.BLEND_ALPHA_PREMULTIPLY = 5
 
 /**
- * Blend textures using custom src/dst factors (use rlSetBlendMode())
+ * Blend textures using custom src/dst factors (use rlSetBlendFactors())
  *
  * @type {number}
  * @constant
  */
 raylib.BLEND_CUSTOM = 6
+
+/**
+ * Blend textures using custom rgb/alpha separate src/dst factors (use rlSetBlendFactorsSeparate())
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.BLEND_CUSTOM_SEPARATE = 7
 
 /**
  * No gesture
@@ -19532,7 +19796,7 @@ raylib.ICON_ALARM = 205
  * @type {number}
  * @constant
  */
-raylib.ICON_206 = 206
+raylib.ICON_CPU = 206
 
 /**
  *
@@ -19540,7 +19804,7 @@ raylib.ICON_206 = 206
  * @type {number}
  * @constant
  */
-raylib.ICON_207 = 207
+raylib.ICON_ROM = 207
 
 /**
  *
@@ -19548,7 +19812,7 @@ raylib.ICON_207 = 207
  * @type {number}
  * @constant
  */
-raylib.ICON_208 = 208
+raylib.ICON_STEP_OVER = 208
 
 /**
  *
@@ -19556,7 +19820,7 @@ raylib.ICON_208 = 208
  * @type {number}
  * @constant
  */
-raylib.ICON_209 = 209
+raylib.ICON_STEP_INTO = 209
 
 /**
  *
@@ -19564,7 +19828,7 @@ raylib.ICON_209 = 209
  * @type {number}
  * @constant
  */
-raylib.ICON_210 = 210
+raylib.ICON_STEP_OUT = 210
 
 /**
  *
@@ -19572,7 +19836,7 @@ raylib.ICON_210 = 210
  * @type {number}
  * @constant
  */
-raylib.ICON_211 = 211
+raylib.ICON_RESTART = 211
 
 /**
  *
@@ -19580,7 +19844,7 @@ raylib.ICON_211 = 211
  * @type {number}
  * @constant
  */
-raylib.ICON_212 = 212
+raylib.ICON_BREAKPOINT_ON = 212
 
 /**
  *
@@ -19588,7 +19852,7 @@ raylib.ICON_212 = 212
  * @type {number}
  * @constant
  */
-raylib.ICON_213 = 213
+raylib.ICON_BREAKPOINT_OFF = 213
 
 /**
  *
@@ -19596,7 +19860,7 @@ raylib.ICON_213 = 213
  * @type {number}
  * @constant
  */
-raylib.ICON_214 = 214
+raylib.ICON_BURGER_MENU = 214
 
 /**
  *
@@ -19604,7 +19868,7 @@ raylib.ICON_214 = 214
  * @type {number}
  * @constant
  */
-raylib.ICON_215 = 215
+raylib.ICON_CASE_SENSITIVE = 215
 
 /**
  *
@@ -19612,7 +19876,7 @@ raylib.ICON_215 = 215
  * @type {number}
  * @constant
  */
-raylib.ICON_216 = 216
+raylib.ICON_REG_EXP = 216
 
 /**
  *
@@ -19620,7 +19884,7 @@ raylib.ICON_216 = 216
  * @type {number}
  * @constant
  */
-raylib.ICON_217 = 217
+raylib.ICON_FOLDER = 217
 
 /**
  *
@@ -19628,7 +19892,7 @@ raylib.ICON_217 = 217
  * @type {number}
  * @constant
  */
-raylib.ICON_218 = 218
+raylib.ICON_FILE = 218
 
 /**
  *
@@ -19927,188 +20191,44 @@ raylib.ICON_254 = 254
 raylib.ICON_255 = 255
 
 /**
- *
+ * OpenGL 1.1
  *
  * @type {number}
  * @constant
  */
-raylib.OPENGL_11 = 1
+raylib.RL_OPENGL_11 = 1
 
 /**
- *
+ * OpenGL 2.1 (GLSL 120)
  *
  * @type {number}
  * @constant
  */
-raylib.OPENGL_21 = 2
+raylib.RL_OPENGL_21 = 2
 
 /**
- *
+ * OpenGL 3.3 (GLSL 330)
  *
  * @type {number}
  * @constant
  */
-raylib.OPENGL_33 = 3
+raylib.RL_OPENGL_33 = 3
 
 /**
- *
+ * OpenGL 4.3 (using GLSL 330)
  *
  * @type {number}
  * @constant
  */
-raylib.OPENGL_43 = 4
+raylib.RL_OPENGL_43 = 4
 
 /**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.OPENGL_ES_20 = 5
-
-/**
- *
+ * OpenGL ES 2.0 (GLSL 100)
  *
  * @type {number}
  * @constant
  */
-raylib.RL_ATTACHMENT_COLOR_CHANNEL0 = 0
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_COLOR_CHANNEL1 = 1
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_COLOR_CHANNEL2 = 2
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_COLOR_CHANNEL3 = 3
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_COLOR_CHANNEL4 = 4
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_COLOR_CHANNEL5 = 5
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_COLOR_CHANNEL6 = 6
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_COLOR_CHANNEL7 = 7
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_DEPTH = 100
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_STENCIL = 200
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_TEXTURE2D = 100
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RL_ATTACHMENT_RENDERBUFFER = 200
+raylib.RL_OPENGL_ES_20 = 5
 
 /**
  * Display all logs
@@ -20447,6 +20567,14 @@ raylib.RL_BLEND_ALPHA_PREMULTIPLY = 5
 raylib.RL_BLEND_CUSTOM = 6
 
 /**
+ * Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_CUSTOM_SEPARATE = 7
+
+/**
  * Shader location: vertex attribute: position
  *
  * @type {number}
@@ -20759,6 +20887,166 @@ raylib.RL_SHADER_ATTRIB_VEC3 = 2
 raylib.RL_SHADER_ATTRIB_VEC4 = 3
 
 /**
+ * Framebuffer attachment type: color 0
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL0 = 0
+
+/**
+ * Framebuffer attachment type: color 1
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL1 = 1
+
+/**
+ * Framebuffer attachment type: color 2
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL2 = 2
+
+/**
+ * Framebuffer attachment type: color 3
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL3 = 3
+
+/**
+ * Framebuffer attachment type: color 4
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL4 = 4
+
+/**
+ * Framebuffer attachment type: color 5
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL5 = 5
+
+/**
+ * Framebuffer attachment type: color 6
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL6 = 6
+
+/**
+ * Framebuffer attachment type: color 7
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_COLOR_CHANNEL7 = 7
+
+/**
+ * Framebuffer attachment type: depth
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_DEPTH = 100
+
+/**
+ * Framebuffer attachment type: stencil
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_STENCIL = 200
+
+/**
+ * Framebuffer texture attachment type: cubemap, +X side
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0
+
+/**
+ * Framebuffer texture attachment type: cubemap, -X side
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1
+
+/**
+ * Framebuffer texture attachment type: cubemap, +Y side
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2
+
+/**
+ * Framebuffer texture attachment type: cubemap, -Y side
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3
+
+/**
+ * Framebuffer texture attachment type: cubemap, +Z side
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4
+
+/**
+ * Framebuffer texture attachment type: cubemap, -Z side
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
+
+/**
+ * Framebuffer texture attachment type: texture2d
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_TEXTURE2D = 100
+
+/**
+ * Framebuffer texture attachment type: renderbuffer
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ATTACHMENT_RENDERBUFFER = 200
+
+/**
+ *
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_CULL_FACE_FRONT = 0
+
+/**
+ *
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_CULL_FACE_BACK = 1
+
+/**
  *
  *
  * @type {number}
@@ -20893,6 +21181,14 @@ raylib.RL_TEXTURE_FILTER_MIP_LINEAR = 9987
  * @constant
  */
 raylib.RL_TEXTURE_FILTER_ANISOTROPIC = 12288
+
+/**
+ * Texture mipmap bias, percentage ratio (custom identifier)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_TEXTURE_MIPMAP_BIAS_RATIO = 16384
 
 /**
  * GL_REPEAT
@@ -21085,6 +21381,230 @@ raylib.RL_VERTEX_SHADER = 35633
  * @constant
  */
 raylib.RL_COMPUTE_SHADER = 37305
+
+/**
+ * GL_ZERO
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ZERO = 0
+
+/**
+ * GL_ONE
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ONE = 1
+
+/**
+ * GL_SRC_COLOR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SRC_COLOR = 768
+
+/**
+ * GL_ONE_MINUS_SRC_COLOR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ONE_MINUS_SRC_COLOR = 769
+
+/**
+ * GL_SRC_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SRC_ALPHA = 770
+
+/**
+ * GL_ONE_MINUS_SRC_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ONE_MINUS_SRC_ALPHA = 771
+
+/**
+ * GL_DST_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DST_ALPHA = 772
+
+/**
+ * GL_ONE_MINUS_DST_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ONE_MINUS_DST_ALPHA = 773
+
+/**
+ * GL_DST_COLOR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_DST_COLOR = 774
+
+/**
+ * GL_ONE_MINUS_DST_COLOR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ONE_MINUS_DST_COLOR = 775
+
+/**
+ * GL_SRC_ALPHA_SATURATE
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_SRC_ALPHA_SATURATE = 776
+
+/**
+ * GL_CONSTANT_COLOR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_CONSTANT_COLOR = 32769
+
+/**
+ * GL_ONE_MINUS_CONSTANT_COLOR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ONE_MINUS_CONSTANT_COLOR = 32770
+
+/**
+ * GL_CONSTANT_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_CONSTANT_ALPHA = 32771
+
+/**
+ * GL_ONE_MINUS_CONSTANT_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_ONE_MINUS_CONSTANT_ALPHA = 32772
+
+/**
+ * GL_FUNC_ADD
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_FUNC_ADD = 32774
+
+/**
+ * GL_MIN
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_MIN = 32775
+
+/**
+ * GL_MAX
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_MAX = 32776
+
+/**
+ * GL_FUNC_SUBTRACT
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_FUNC_SUBTRACT = 32778
+
+/**
+ * GL_FUNC_REVERSE_SUBTRACT
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_FUNC_REVERSE_SUBTRACT = 32779
+
+/**
+ * GL_BLEND_EQUATION
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_EQUATION = 32777
+
+/**
+ * GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_EQUATION_RGB = 32777
+
+/**
+ * GL_BLEND_EQUATION_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_EQUATION_ALPHA = 34877
+
+/**
+ * GL_BLEND_DST_RGB
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_DST_RGB = 32968
+
+/**
+ * GL_BLEND_SRC_RGB
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_SRC_RGB = 32969
+
+/**
+ * GL_BLEND_DST_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_DST_ALPHA = 32970
+
+/**
+ * GL_BLEND_SRC_ALPHA
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_SRC_ALPHA = 32971
+
+/**
+ * GL_BLEND_COLOR
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_BLEND_COLOR = 32773
 
 raylib.LIGHTGRAY = { r: 200, g: 200, b: 200, a: 255 }
 raylib.GRAY = { r: 130, g: 130, b: 130, a: 255 }

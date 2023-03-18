@@ -69,8 +69,6 @@ camera.type = r.CAMERA_PERSPECTIVE // Camera type
 
 const cubePosition = r.Vector3()
 
-r.SetCameraMode(camera, r.CAMERA_FIRST_PERSON) // Set first person camera mode
-
 r.SetTargetFPS(90) // Set our game to run at 90 frames-per-second
 // --------------------------------------------------------------------------------------
 
@@ -78,7 +76,7 @@ r.SetTargetFPS(90) // Set our game to run at 90 frames-per-second
 while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
-  r.UpdateCamera(camera) // Update camera (simulator mode)
+  r.UpdateCamera(camera, r.CAMERA_FIRST_PERSON) // Update camera (simulator mode)
 
   if (r.IsKeyPressed(r.KEY_SPACE)) r.ToggleVrMode() // Toggle VR mode
   // ----------------------------------------------------------------------------------

@@ -21,6 +21,10 @@ const blocklist = [
   'SetLoadFileTextCallback',
   'SetSaveFileTextCallback',
 
+  'AudioCallback',
+  'AttachAudioMixedProcessor',
+  'DetachAudioMixedProcessor',
+
   // Callbacks: AudioStream
   'SetAudioStreamCallback',
   'AttachAudioStreamProcessor',

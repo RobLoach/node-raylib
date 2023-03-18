@@ -23,13 +23,13 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # version doesn't seem to pick correct version
-#find_package(raylib 4.2 QUIET EXACT)
+#find_package(raylib 4.5 QUIET EXACT)
 if (NOT raylib_FOUND)
   include(FetchContent)
   FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
-    GIT_TAG 4.2.0
+    GIT_TAG 4.5.0
     GIT_SHALLOW TRUE
   )
   FetchContent_GetProperties(raylib)

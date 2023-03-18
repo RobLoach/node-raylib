@@ -14,6 +14,7 @@ raylib.MAX_GAMEPAD_BUTTONS = 32
 raylib.MAX_TOUCH_POINTS = 10
 raylib.MAX_KEY_PRESSED_QUEUE = 16
 raylib.DEG2RAD = Math.PI / 180
+
 // Wrapped Functions
 
 /**
@@ -32,5 +33,6 @@ raylib.rlColor4ub = (r, g, b, a) => {
   // workaround as the C addon version isn't compiling?
   raylib.rlColor4f(r / 255, g / 255, b / 255, a / 255)
 }
+
 // Export the bindings for the module.
 module.exports = raylib
