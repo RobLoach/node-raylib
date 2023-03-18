@@ -30,8 +30,6 @@ const camera = r.Camera(
 const cubePosition = r.Vector3()
 let cubeScreenPosition = r.Vector2()
 
-r.SetCameraMode(camera, r.CAMERA_FREE) // Set a free camera mode
-
 r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 // --------------------------------------------------------------------------------------
 
@@ -39,7 +37,7 @@ r.SetTargetFPS(60) // Set our game to run at 60 frames-per-second
 while (!r.WindowShouldClose()) { // Detect window close button or ESC key
   // Update
   // ----------------------------------------------------------------------------------
-  r.UpdateCamera(camera) // Update camera
+  r.UpdateCamera(camera, r.CAMERA_FREE) // Update camera
 
   // Calculate cube screen space position (with a little offset to be in top)
   const cubePositionVector = r.Vector3(cubePosition.x, cubePosition.y + 2.5, cubePosition.z)

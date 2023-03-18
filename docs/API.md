@@ -53,7 +53,10 @@
 <dd><p>Set window state: not minimized/maximized (only PLATFORM_DESKTOP)</p>
 </dd>
 <dt><a href="#SetWindowIcon">SetWindowIcon(image)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set icon for window (only PLATFORM_DESKTOP)</p>
+<dd><p>Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)</p>
+</dd>
+<dt><a href="#SetWindowIcons">SetWindowIcons(images, count)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)</p>
 </dd>
 <dt><a href="#SetWindowTitle">SetWindowTitle(title)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set title for window (only PLATFORM_DESKTOP)</p>
@@ -213,6 +216,9 @@
 </dd>
 <dt><a href="#LoadShaderFromMemory">LoadShaderFromMemory(vsCode, fsCode)</a> ⇒ <code>Shader</code></dt>
 <dd><p>Load shader from code strings and bind default locations</p>
+</dd>
+<dt><a href="#IsShaderReady">IsShaderReady(shader)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a shader is ready</p>
 </dd>
 <dt><a href="#GetShaderLocation">GetShaderLocation(shader, uniformName)</a> ⇒ <code>number</code></dt>
 <dd><p>Get shader uniform location</p>
@@ -514,20 +520,8 @@
 <dt><a href="#GetGesturePinchAngle">GetGesturePinchAngle()</a> ⇒ <code>number</code></dt>
 <dd><p>Get gesture pinch angle</p>
 </dd>
-<dt><a href="#SetCameraMode">SetCameraMode(camera, mode)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set camera mode (multiple camera modes available)</p>
-</dd>
-<dt><a href="#SetCameraPanControl">SetCameraPanControl(keyPan)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set camera pan key to combine with mouse movement (free camera)</p>
-</dd>
-<dt><a href="#SetCameraAltControl">SetCameraAltControl(keyAlt)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set camera alt key to combine with mouse movement (free camera)</p>
-</dd>
-<dt><a href="#SetCameraSmoothZoomControl">SetCameraSmoothZoomControl(keySmoothZoom)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set camera smooth zoom key to combine with mouse (free camera)</p>
-</dd>
-<dt><a href="#SetCameraMoveControls">SetCameraMoveControls(keyFront, keyBack, keyRight, keyLeft, keyUp, keyDown)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set camera move controls (1st person and 3rd person cameras)</p>
+<dt><a href="#UpdateCameraPro">UpdateCameraPro(camera, movement, rotation, zoom)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Update camera movement/rotation</p>
 </dd>
 <dt><a href="#SetShapesTexture">SetShapesTexture(texture, source)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set texture and rectangle to be used on shapes drawing</p>
@@ -661,6 +655,9 @@
 <dt><a href="#CheckCollisionPointTriangle">CheckCollisionPointTriangle(point, p1, p2, p3)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if point is inside a triangle</p>
 </dd>
+<dt><a href="#CheckCollisionPointPoly">CheckCollisionPointPoly(point, points, pointCount)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if point is within a polygon described by array of vertices</p>
+</dd>
 <dt><a href="#CheckCollisionLines">CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check the collision between two lines defined by two points each, returns collision point by reference</p>
 </dd>
@@ -687,6 +684,9 @@
 </dd>
 <dt><a href="#LoadImageFromScreen">LoadImageFromScreen()</a> ⇒ <code>Image</code></dt>
 <dd><p>Load image from screen buffer and (screenshot)</p>
+</dd>
+<dt><a href="#IsImageReady">IsImageReady(image)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if an image is ready</p>
 </dd>
 <dt><a href="#UnloadImage">UnloadImage(image)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload image from CPU memory (RAM)</p>
@@ -715,8 +715,14 @@
 <dt><a href="#GenImageWhiteNoise">GenImageWhiteNoise(width, height, factor)</a> ⇒ <code>Image</code></dt>
 <dd><p>Generate image: white noise</p>
 </dd>
+<dt><a href="#GenImagePerlinNoise">GenImagePerlinNoise(width, height, offsetX, offsetY, scale)</a> ⇒ <code>Image</code></dt>
+<dd><p>Generate image: perlin noise</p>
+</dd>
 <dt><a href="#GenImageCellular">GenImageCellular(width, height, tileSize)</a> ⇒ <code>Image</code></dt>
 <dd><p>Generate image: cellular algorithm, bigger tileSize means bigger cells</p>
+</dd>
+<dt><a href="#GenImageText">GenImageText(width, height, text)</a> ⇒ <code>Image</code></dt>
+<dd><p>Generate image: grayscale image from text data</p>
 </dd>
 <dt><a href="#ImageCopy">ImageCopy(image)</a> ⇒ <code>Image</code></dt>
 <dd><p>Create an image duplicate (useful for transformations)</p>
@@ -729,6 +735,9 @@
 </dd>
 <dt><a href="#ImageTextEx">ImageTextEx(font, text, fontSize, spacing, tint)</a> ⇒ <code>Image</code></dt>
 <dd><p>Create an image from text (custom sprite font)</p>
+</dd>
+<dt><a href="#ImageBlurGaussian">ImageBlurGaussian(image, blurSize)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Apply Gaussian blur using a box blur approximation</p>
 </dd>
 <dt><a href="#LoadImageColors">LoadImageColors(image)</a> ⇒ <code>number</code></dt>
 <dd><p>Load color data from image as a Color array (RGBA - 32bit)</p>
@@ -748,6 +757,12 @@
 <dt><a href="#GetImageColor">GetImageColor(image, x, y)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
 <dd><p>Get image pixel color at (x, y) position</p>
 </dd>
+<dt><a href="#ImageDrawCircleLines">ImageDrawCircleLines(dst, centerX, centerY, radius, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw circle outline within an image</p>
+</dd>
+<dt><a href="#ImageDrawCircleLinesV">ImageDrawCircleLinesV(dst, center, radius, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw circle outline within an image (Vector version)</p>
+</dd>
 <dt><a href="#LoadTexture">LoadTexture(fileName)</a> ⇒ <code>Texture2D</code></dt>
 <dd><p>Load texture from file into GPU memory (VRAM)</p>
 </dd>
@@ -760,8 +775,14 @@
 <dt><a href="#LoadRenderTexture">LoadRenderTexture(width, height)</a> ⇒ <code>RenderTexture2D</code></dt>
 <dd><p>Load texture for rendering (framebuffer)</p>
 </dd>
+<dt><a href="#IsTextureReady">IsTextureReady(texture)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a texture is ready</p>
+</dd>
 <dt><a href="#UnloadTexture">UnloadTexture(texture)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload texture from GPU memory (VRAM)</p>
+</dd>
+<dt><a href="#IsRenderTextureReady">IsRenderTextureReady(target)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a render texture is ready</p>
 </dd>
 <dt><a href="#UnloadRenderTexture">UnloadRenderTexture(target)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload render texture from GPU memory (VRAM)</p>
@@ -790,20 +811,11 @@
 <dt><a href="#DrawTextureRec">DrawTextureRec(texture, source, position, tint)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw a part of a texture defined by a rectangle</p>
 </dd>
-<dt><a href="#DrawTextureQuad">DrawTextureQuad(texture, tiling, offset, quad, tint)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw texture quad with tiling and offset parameters</p>
-</dd>
-<dt><a href="#DrawTextureTiled">DrawTextureTiled(texture, source, dest, origin, rotation, scale, tint)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.</p>
-</dd>
 <dt><a href="#DrawTexturePro">DrawTexturePro(texture, source, dest, origin, rotation, tint)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw a part of a texture defined by a rectangle with &#39;pro&#39; parameters</p>
 </dd>
 <dt><a href="#DrawTextureNPatch">DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draws a texture (or part of it) that stretches or shrinks nicely</p>
-</dd>
-<dt><a href="#DrawTexturePoly">DrawTexturePoly(texture, center, points, texcoords, pointCount, tint)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw a textured polygon</p>
 </dd>
 <dt><a href="#Fade">Fade(color, alpha)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
 <dd><p>Get color with alpha applied, alpha goes from 0.0f to 1.0f</p>
@@ -822,6 +834,15 @@
 </dd>
 <dt><a href="#ColorFromHSV">ColorFromHSV(hue, saturation, value)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
 <dd><p>Get a Color from HSV values, hue [0..360], saturation/value [0..1]</p>
+</dd>
+<dt><a href="#ColorTint">ColorTint(color, tint)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
+<dd><p>Get color multiplied with another color</p>
+</dd>
+<dt><a href="#ColorBrightness">ColorBrightness(color, factor)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
+<dd><p>Get color with brightness correction, brightness factor goes from -1.0f to 1.0f</p>
+</dd>
+<dt><a href="#ColorContrast">ColorContrast(color, contrast)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
+<dd><p>Get color with contrast correction, contrast values between -1.0f and 1.0f</p>
 </dd>
 <dt><a href="#ColorAlpha">ColorAlpha(color, alpha)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
 <dd><p>Get color with alpha applied, alpha goes from 0.0f to 1.0f</p>
@@ -855,6 +876,9 @@
 </dd>
 <dt><a href="#LoadFontFromMemory">LoadFontFromMemory(fileType, fileData, dataSize, fontSize, fontChars, glyphCount)</a> ⇒ <code>Font</code></dt>
 <dd><p>Load font from memory buffer, fileType refers to extension: i.e. &#39;.ttf&#39;</p>
+</dd>
+<dt><a href="#IsFontReady">IsFontReady(font)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a font is ready</p>
 </dd>
 <dt><a href="#LoadFontData">LoadFontData(fileData, dataSize, fontSize, fontChars, glyphCount, type)</a> ⇒ <code>number</code></dt>
 <dd><p>Load font data for further use</p>
@@ -904,6 +928,12 @@
 <dt><a href="#GetGlyphAtlasRec">GetGlyphAtlasRec(font, codepoint)</a> ⇒ <code><a href="#Rectangle">Rectangle</a></code></dt>
 <dd><p>Get glyph rectangle in font atlas for a codepoint (unicode character), fallback to &#39;?&#39; if not found</p>
 </dd>
+<dt><a href="#LoadUTF8">LoadUTF8(codepoints, length)</a> ⇒ <code>string</code></dt>
+<dd><p>Load UTF-8 text encoded from codepoints array</p>
+</dd>
+<dt><a href="#UnloadUTF8">UnloadUTF8(text)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload UTF-8 text encoded from codepoints array</p>
+</dd>
 <dt><a href="#LoadCodepoints">LoadCodepoints(text, count)</a> ⇒ <code>number</code></dt>
 <dd><p>Load all codepoints from a UTF-8 text string, codepoints count returned by parameter</p>
 </dd>
@@ -913,14 +943,17 @@
 <dt><a href="#GetCodepointCount">GetCodepointCount(text)</a> ⇒ <code>number</code></dt>
 <dd><p>Get total number of codepoints in a UTF-8 encoded string</p>
 </dd>
-<dt><a href="#GetCodepoint">GetCodepoint(text, bytesProcessed)</a> ⇒ <code>number</code></dt>
+<dt><a href="#GetCodepoint">GetCodepoint(text, codepointSize)</a> ⇒ <code>number</code></dt>
 <dd><p>Get next codepoint in a UTF-8 encoded string, 0x3f(&#39;?&#39;) is returned on failure</p>
 </dd>
-<dt><a href="#CodepointToUTF8">CodepointToUTF8(codepoint, byteSize)</a> ⇒ <code>string</code></dt>
-<dd><p>Encode one codepoint into UTF-8 byte array (array length returned as parameter)</p>
+<dt><a href="#GetCodepointNext">GetCodepointNext(text, codepointSize)</a> ⇒ <code>number</code></dt>
+<dd><p>Get next codepoint in a UTF-8 encoded string, 0x3f(&#39;?&#39;) is returned on failure</p>
 </dd>
-<dt><a href="#TextCodepointsToUTF8">TextCodepointsToUTF8(codepoints, length)</a> ⇒ <code>string</code></dt>
-<dd><p>Encode text as codepoints array into UTF-8 text string (WARNING: memory must be freed!)</p>
+<dt><a href="#GetCodepointPrevious">GetCodepointPrevious(text, codepointSize)</a> ⇒ <code>number</code></dt>
+<dd><p>Get previous codepoint in a UTF-8 encoded string, 0x3f(&#39;?&#39;) is returned on failure</p>
+</dd>
+<dt><a href="#CodepointToUTF8">CodepointToUTF8(codepoint, utf8Size)</a> ⇒ <code>string</code></dt>
+<dd><p>Encode one codepoint into UTF-8 byte array (array length returned as parameter)</p>
 </dd>
 <dt><a href="#TextCopy">TextCopy(dst, src)</a> ⇒ <code>number</code></dt>
 <dd><p>Copy one string to another, returns bytes copied</p>
@@ -991,12 +1024,6 @@
 <dt><a href="#DrawCubeWiresV">DrawCubeWiresV(position, size, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw cube wires (Vector version)</p>
 </dd>
-<dt><a href="#DrawCubeTexture">DrawCubeTexture(texture, position, width, height, length, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw cube textured</p>
-</dd>
-<dt><a href="#DrawCubeTextureRec">DrawCubeTextureRec(texture, source, position, width, height, length, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw cube with a region of a texture</p>
-</dd>
 <dt><a href="#DrawSphere">DrawSphere(centerPos, radius, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw sphere</p>
 </dd>
@@ -1018,6 +1045,12 @@
 <dt><a href="#DrawCylinderWiresEx">DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw a cylinder wires with base at startPos and top at endPos</p>
 </dd>
+<dt><a href="#DrawCapsule">DrawCapsule(startPos, endPos, radius, slices, rings, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw a capsule with the center of its sphere caps at startPos and endPos</p>
+</dd>
+<dt><a href="#DrawCapsuleWires">DrawCapsuleWires(startPos, endPos, radius, slices, rings, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw capsule wireframe with the center of its sphere caps at startPos and endPos</p>
+</dd>
 <dt><a href="#DrawPlane">DrawPlane(centerPos, size, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw a plane XZ</p>
 </dd>
@@ -1033,11 +1066,11 @@
 <dt><a href="#LoadModelFromMesh">LoadModelFromMesh(mesh)</a> ⇒ <code>Model</code></dt>
 <dd><p>Load model from generated mesh (default material)</p>
 </dd>
+<dt><a href="#IsModelReady">IsModelReady(model)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a model is ready</p>
+</dd>
 <dt><a href="#UnloadModel">UnloadModel(model)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload model (including meshes) from memory (RAM and/or VRAM)</p>
-</dd>
-<dt><a href="#UnloadModelKeepMeshes">UnloadModelKeepMeshes(model)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Unload model (but not meshes) from memory (RAM and/or VRAM)</p>
 </dd>
 <dt><a href="#GetModelBoundingBox">GetModelBoundingBox(model)</a> ⇒ <code>BoundingBox</code></dt>
 <dd><p>Compute model bounding box limits (considers all meshes)</p>
@@ -1168,11 +1201,17 @@
 <dt><a href="#LoadWaveFromMemory">LoadWaveFromMemory(fileType, fileData, dataSize)</a> ⇒ <code>Wave</code></dt>
 <dd><p>Load wave from memory buffer, fileType refers to extension: i.e. &#39;.wav&#39;</p>
 </dd>
+<dt><a href="#IsWaveReady">IsWaveReady(wave)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Checks if wave data is ready</p>
+</dd>
 <dt><a href="#LoadSound">LoadSound(fileName)</a> ⇒ <code>Sound</code></dt>
 <dd><p>Load sound from file</p>
 </dd>
 <dt><a href="#LoadSoundFromWave">LoadSoundFromWave(wave)</a> ⇒ <code>Sound</code></dt>
 <dd><p>Load sound from wave data</p>
+</dd>
+<dt><a href="#IsSoundReady">IsSoundReady(sound)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Checks if a sound is ready</p>
 </dd>
 <dt><a href="#UpdateSound">UpdateSound(sound, data, sampleCount)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Update sound buffer with new data</p>
@@ -1201,15 +1240,6 @@
 <dt><a href="#ResumeSound">ResumeSound(sound)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Resume a paused sound</p>
 </dd>
-<dt><a href="#PlaySoundMulti">PlaySoundMulti(sound)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Play a sound (using multichannel buffer pool)</p>
-</dd>
-<dt><a href="#StopSoundMulti">StopSoundMulti()</a> ⇒ <code>undefined</code></dt>
-<dd><p>Stop any sound playing (using multichannel buffer pool)</p>
-</dd>
-<dt><a href="#GetSoundsPlaying">GetSoundsPlaying()</a> ⇒ <code>number</code></dt>
-<dd><p>Get number of sounds playing in the multichannel</p>
-</dd>
 <dt><a href="#IsSoundPlaying">IsSoundPlaying(sound)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a sound is currently playing</p>
 </dd>
@@ -1236,6 +1266,9 @@
 </dd>
 <dt><a href="#LoadMusicStreamFromMemory">LoadMusicStreamFromMemory(fileType, data, dataSize)</a> ⇒ <code>Music</code></dt>
 <dd><p>Load music stream from data</p>
+</dd>
+<dt><a href="#IsMusicReady">IsMusicReady(music)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Checks if a music stream is ready</p>
 </dd>
 <dt><a href="#UnloadMusicStream">UnloadMusicStream(music)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload music stream</p>
@@ -1278,6 +1311,9 @@
 </dd>
 <dt><a href="#LoadAudioStream">LoadAudioStream(sampleRate, sampleSize, channels)</a> ⇒ <code>AudioStream</code></dt>
 <dd><p>Load audio stream (to stream raw audio pcm data)</p>
+</dd>
+<dt><a href="#IsAudioStreamReady">IsAudioStreamReady(stream)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Checks if an audio stream is ready</p>
 </dd>
 <dt><a href="#UnloadAudioStream">UnloadAudioStream(stream)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload audio stream and free memory</p>
@@ -1447,6 +1483,9 @@
 <dt><a href="#GuiPanel">GuiPanel(bounds, text)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Panel control, useful to group controls</p>
 </dd>
+<dt><a href="#GuiTabBar">GuiTabBar(bounds, text, count, active)</a> ⇒ <code>number</code></dt>
+<dd><p>Tab Bar control, returns TAB to be closed or -1</p>
+</dd>
 <dt><a href="#GuiScrollPanel">GuiScrollPanel(bounds, text, content, scroll)</a> ⇒ <code><a href="#Rectangle">Rectangle</a></code></dt>
 <dd><p>Scroll Panel control</p>
 </dd>
@@ -1534,29 +1573,26 @@
 <dt><a href="#GuiLoadStyleDefault">GuiLoadStyleDefault()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Load style default over global style</p>
 </dd>
+<dt><a href="#GuiEnableTooltip">GuiEnableTooltip()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable gui tooltips (global state)</p>
+</dd>
+<dt><a href="#GuiDisableTooltip">GuiDisableTooltip()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Disable gui tooltips (global state)</p>
+</dd>
+<dt><a href="#GuiSetTooltip">GuiSetTooltip(tooltip)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set tooltip string</p>
+</dd>
 <dt><a href="#GuiIconText">GuiIconText(iconId, text)</a> ⇒ <code>string</code></dt>
 <dd><p>Get text with icon id prepended (if supported)</p>
 </dd>
 <dt><a href="#GuiGetIcons">GuiGetIcons()</a> ⇒ <code>number</code></dt>
-<dd><p>Get full icons data pointer</p>
+<dd><p>Get raygui icons data pointer</p>
 </dd>
-<dt><a href="#GuiGetIconData">GuiGetIconData(iconId)</a> ⇒ <code>number</code></dt>
-<dd><p>Get icon bit data</p>
-</dd>
-<dt><a href="#GuiSetIconData">GuiSetIconData(iconId, data)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set icon bit data</p>
+<dt><a href="#GuiLoadIcons">GuiLoadIcons(fileName, loadIconsName)</a> ⇒ <code>number</code></dt>
+<dd><p>Load raygui icons file (.rgi) into internal icons data</p>
 </dd>
 <dt><a href="#GuiSetIconScale">GuiSetIconScale(scale)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set icon scale (1 by default)</p>
-</dd>
-<dt><a href="#GuiSetIconPixel">GuiSetIconPixel(iconId, x, y)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set icon pixel value</p>
-</dd>
-<dt><a href="#GuiClearIconPixel">GuiClearIconPixel(iconId, x, y)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Clear icon pixel value</p>
-</dd>
-<dt><a href="#GuiCheckIconPixel">GuiCheckIconPixel(iconId, x, y)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Check icon pixel value</p>
+<dd><p>Set icon drawing size</p>
 </dd>
 <dt><a href="#rlMatrixMode">rlMatrixMode(mode)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Choose the current matrix to be transformed</p>
@@ -1565,7 +1601,7 @@
 <dd><p>Push the current matrix to stack</p>
 </dd>
 <dt><a href="#rlPopMatrix">rlPopMatrix()</a> ⇒ <code>undefined</code></dt>
-<dd><p>Pop lattest inserted matrix from stack</p>
+<dd><p>Pop latest inserted matrix from stack</p>
 </dd>
 <dt><a href="#rlLoadIdentity">rlLoadIdentity()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Reset current matrix to identity matrix</p>
@@ -1657,6 +1693,9 @@
 <dt><a href="#rlTextureParameters">rlTextureParameters(id, param, value)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set texture parameters (filter, wrap)</p>
 </dd>
+<dt><a href="#rlCubemapParameters">rlCubemapParameters(id, param, value)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set cubemap parameters (filter, wrap)</p>
+</dd>
 <dt><a href="#rlEnableShader">rlEnableShader(id)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Enable shader program</p>
 </dd>
@@ -1695,6 +1734,9 @@
 </dd>
 <dt><a href="#rlDisableBackfaceCulling">rlDisableBackfaceCulling()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Disable backface culling</p>
+</dd>
+<dt><a href="#rlSetCullFace">rlSetCullFace(mode)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set face culling mode</p>
 </dd>
 <dt><a href="#rlEnableScissorTest">rlEnableScissorTest()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Enable scissor test</p>
@@ -1747,11 +1789,14 @@
 <dt><a href="#rlSetBlendFactors">rlSetBlendFactors(glSrcFactor, glDstFactor, glEquation)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set blending mode factor and equation (using OpenGL factors)</p>
 </dd>
+<dt><a href="#rlSetBlendFactorsSeparate">rlSetBlendFactorsSeparate(glSrcRGB, glDstRGB, glSrcAlpha, glDstAlpha, glEqRGB, glEqAlpha)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set blending mode factors and equations separately (using OpenGL factors)</p>
+</dd>
 <dt><a href="#rlglInit">rlglInit(width, height)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Initialize rlgl (buffers, shaders, textures, states)</p>
 </dd>
 <dt><a href="#rlglClose">rlglClose()</a> ⇒ <code>undefined</code></dt>
-<dd><p>De-inititialize rlgl (buffers, shaders, textures)</p>
+<dd><p>De-initialize rlgl (buffers, shaders, textures)</p>
 </dd>
 <dt><a href="#rlLoadExtensions">rlLoadExtensions(loader)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Load OpenGL extensions (loader function required)</p>
@@ -1895,7 +1940,7 @@
 <dd><p>Load compute shader program</p>
 </dd>
 <dt><a href="#rlComputeShaderDispatch">rlComputeShaderDispatch(groupX, groupY, groupZ)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Dispatch compute shader (equivalent to <em>draw</em> for graphics pilepine)</p>
+<dd><p>Dispatch compute shader (equivalent to <em>draw</em> for graphics pipeline)</p>
 </dd>
 <dt><a href="#rlLoadShaderBuffer">rlLoadShaderBuffer(size, data, usageHint)</a> ⇒ <code>number</code></dt>
 <dd><p>Load shader storage buffer object (SSBO)</p>
@@ -1903,20 +1948,20 @@
 <dt><a href="#rlUnloadShaderBuffer">rlUnloadShaderBuffer(ssboId)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload shader storage buffer object (SSBO)</p>
 </dd>
-<dt><a href="#rlUpdateShaderBufferElements">rlUpdateShaderBufferElements(id, data, dataSize, offset)</a> ⇒ <code>undefined</code></dt>
+<dt><a href="#rlUpdateShaderBuffer">rlUpdateShaderBuffer(id, data, dataSize, offset)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Update SSBO buffer data</p>
 </dd>
-<dt><a href="#rlGetShaderBufferSize">rlGetShaderBufferSize(id)</a> ⇒ <code>BigInt</code></dt>
-<dd><p>Get SSBO buffer size</p>
-</dd>
-<dt><a href="#rlReadShaderBufferElements">rlReadShaderBufferElements(id, dest, count, offset)</a> ⇒ <code>undefined</code></dt>
+<dt><a href="#rlBindShaderBuffer">rlBindShaderBuffer(id, index)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Bind SSBO buffer</p>
 </dd>
-<dt><a href="#rlBindShaderBuffer">rlBindShaderBuffer(id, index)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Copy SSBO buffer data</p>
+<dt><a href="#rlReadShaderBuffer">rlReadShaderBuffer(id, dest, count, offset)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Read SSBO buffer data (GPU-&gt;CPU)</p>
 </dd>
-<dt><a href="#rlCopyBuffersElements">rlCopyBuffersElements(destId, srcId, destOffset, srcOffset, count)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Copy SSBO buffer data</p>
+<dt><a href="#rlCopyShaderBuffer">rlCopyShaderBuffer(destId, srcId, destOffset, srcOffset, count)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Copy SSBO data between buffers</p>
+</dd>
+<dt><a href="#rlGetShaderBufferSize">rlGetShaderBufferSize(id)</a> ⇒ <code>number</code></dt>
+<dd><p>Get SSBO buffer size</p>
 </dd>
 <dt><a href="#rlBindImageTexture">rlBindImageTexture(id, index, format, readonly)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Bind image texture</p>
@@ -1954,7 +1999,7 @@
 <dt><a href="#rlLoadDrawQuad">rlLoadDrawQuad()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Load and draw a quad</p>
 </dd>
-<dt><a href="#UpdateCamera">UpdateCamera(camera)</a> ⇒ <code>undefined</code></dt>
+<dt><a href="#UpdateCamera">UpdateCamera(camera, mode)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Update camera position for selected mode</p>
 </dd>
 <dt><a href="#ImageFormat">ImageFormat(image, newFormat)</a> ⇒ <code>undefined</code></dt>
@@ -2039,10 +2084,10 @@
 <dd><p>Draw line within an image (Vector version)</p>
 </dd>
 <dt><a href="#ImageDrawCircle">ImageDrawCircle(dst, centerX, centerY, radius, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw circle within an image</p>
+<dd><p>Draw a filled circle within an image</p>
 </dd>
 <dt><a href="#ImageDrawCircleV">ImageDrawCircleV(dst, center, radius, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw circle within an image (Vector version)</p>
+<dd><p>Draw a filled circle within an image (Vector version)</p>
 </dd>
 <dt><a href="#ImageDrawRectangle">ImageDrawRectangle(dst, posX, posY, width, height, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw rectangle within an image</p>
@@ -2257,13 +2302,25 @@ Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
 <a name="SetWindowIcon"></a>
 
 ## SetWindowIcon(image) ⇒ <code>undefined</code>
-Set icon for window (only PLATFORM_DESKTOP)
+Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
 | image | <code>Image</code> | 
+
+<a name="SetWindowIcons"></a>
+
+## SetWindowIcons(images, count) ⇒ <code>undefined</code>
+Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| images | <code>number</code> | 
+| count | <code>number</code> | 
 
 <a name="SetWindowTitle"></a>
 
@@ -2638,7 +2695,7 @@ Begin drawing to render texture
 
 | Param | Type |
 | --- | --- |
-| target | <code>RenderTexture2D</code> | 
+| target | <code>RenderTexture</code> | 
 
 <a name="EndTextureMode"></a>
 
@@ -2732,6 +2789,18 @@ Load shader from code strings and bind default locations
 | vsCode | <code>string</code> | 
 | fsCode | <code>string</code> | 
 
+<a name="IsShaderReady"></a>
+
+## IsShaderReady(shader) ⇒ <code>boolean</code>
+Check if a shader is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| shader | <code>Shader</code> | 
+
 <a name="GetShaderLocation"></a>
 
 ## GetShaderLocation(shader, uniformName) ⇒ <code>number</code>
@@ -2782,7 +2851,7 @@ Set shader uniform value for texture (sampler2d)
 | --- | --- |
 | shader | <code>Shader</code> | 
 | locIndex | <code>number</code> | 
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 
 <a name="UnloadShader"></a>
 
@@ -2806,7 +2875,7 @@ Get a ray trace from mouse position
 | Param | Type |
 | --- | --- |
 | mousePosition | [<code>Vector2</code>](#Vector2) | 
-| camera | <code>Camera</code> | 
+| camera | [<code>Camera3D</code>](#Camera3D) | 
 
 <a name="GetCameraMatrix"></a>
 
@@ -2818,7 +2887,7 @@ Get camera transform matrix (view matrix)
 
 | Param | Type |
 | --- | --- |
-| camera | <code>Camera</code> | 
+| camera | [<code>Camera3D</code>](#Camera3D) | 
 
 <a name="GetCameraMatrix2D"></a>
 
@@ -2843,7 +2912,7 @@ Get the screen space position for a 3d world space position
 | Param | Type |
 | --- | --- |
 | position | [<code>Vector3</code>](#Vector3) | 
-| camera | <code>Camera</code> | 
+| camera | [<code>Camera3D</code>](#Camera3D) | 
 
 <a name="GetScreenToWorld2D"></a>
 
@@ -2869,7 +2938,7 @@ Get size position for a 3d world space position
 | Param | Type |
 | --- | --- |
 | position | [<code>Vector3</code>](#Vector3) | 
-| camera | <code>Camera</code> | 
+| camera | [<code>Camera3D</code>](#Camera3D) | 
 | width | <code>number</code> | 
 | height | <code>number</code> | 
 
@@ -3070,7 +3139,7 @@ Export data to code (.h), returns true on success
 
 | Param | Type |
 | --- | --- |
-| data | <code>string</code> | 
+| data | <code>Buffer</code> | 
 | size | <code>number</code> | 
 | fileName | <code>string</code> | 
 
@@ -3826,66 +3895,19 @@ Get gesture pinch angle
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting float.  
-<a name="SetCameraMode"></a>
+<a name="UpdateCameraPro"></a>
 
-## SetCameraMode(camera, mode) ⇒ <code>undefined</code>
-Set camera mode (multiple camera modes available)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| camera | <code>Camera</code> | 
-| mode | <code>number</code> | 
-
-<a name="SetCameraPanControl"></a>
-
-## SetCameraPanControl(keyPan) ⇒ <code>undefined</code>
-Set camera pan key to combine with mouse movement (free camera)
+## UpdateCameraPro(camera, movement, rotation, zoom) ⇒ <code>undefined</code>
+Update camera movement/rotation
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| keyPan | <code>number</code> | 
-
-<a name="SetCameraAltControl"></a>
-
-## SetCameraAltControl(keyAlt) ⇒ <code>undefined</code>
-Set camera alt key to combine with mouse movement (free camera)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| keyAlt | <code>number</code> | 
-
-<a name="SetCameraSmoothZoomControl"></a>
-
-## SetCameraSmoothZoomControl(keySmoothZoom) ⇒ <code>undefined</code>
-Set camera smooth zoom key to combine with mouse (free camera)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| keySmoothZoom | <code>number</code> | 
-
-<a name="SetCameraMoveControls"></a>
-
-## SetCameraMoveControls(keyFront, keyBack, keyRight, keyLeft, keyUp, keyDown) ⇒ <code>undefined</code>
-Set camera move controls (1st person and 3rd person cameras)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| keyFront | <code>number</code> | 
-| keyBack | <code>number</code> | 
-| keyRight | <code>number</code> | 
-| keyLeft | <code>number</code> | 
-| keyUp | <code>number</code> | 
-| keyDown | <code>number</code> | 
+| camera | <code>number</code> | 
+| movement | [<code>Vector3</code>](#Vector3) | 
+| rotation | [<code>Vector3</code>](#Vector3) | 
+| zoom | <code>number</code> | 
 
 <a name="SetShapesTexture"></a>
 
@@ -3896,7 +3918,7 @@ Set texture and rectangle to be used on shapes drawing
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | source | [<code>Rectangle</code>](#Rectangle) | 
 
 <a name="DrawPixel"></a>
@@ -4518,6 +4540,20 @@ Check if point is inside a triangle
 | p2 | [<code>Vector2</code>](#Vector2) | 
 | p3 | [<code>Vector2</code>](#Vector2) | 
 
+<a name="CheckCollisionPointPoly"></a>
+
+## CheckCollisionPointPoly(point, points, pointCount) ⇒ <code>boolean</code>
+Check if point is within a polygon described by array of vertices
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| point | [<code>Vector2</code>](#Vector2) | 
+| points | <code>number</code> | 
+| pointCount | <code>number</code> | 
+
 <a name="CheckCollisionLines"></a>
 
 ## CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint) ⇒ <code>boolean</code>
@@ -4627,7 +4663,7 @@ Load image from GPU texture data
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 
 <a name="LoadImageFromScreen"></a>
 
@@ -4636,6 +4672,18 @@ Load image from screen buffer and (screenshot)
 
 **Kind**: global function  
 **Returns**: <code>Image</code> - The resulting Image.  
+<a name="IsImageReady"></a>
+
+## IsImageReady(image) ⇒ <code>boolean</code>
+Check if an image is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| image | <code>Image</code> | 
+
 <a name="UnloadImage"></a>
 
 ## UnloadImage(image) ⇒ <code>undefined</code>
@@ -4764,6 +4812,22 @@ Generate image: white noise
 | height | <code>number</code> | 
 | factor | <code>number</code> | 
 
+<a name="GenImagePerlinNoise"></a>
+
+## GenImagePerlinNoise(width, height, offsetX, offsetY, scale) ⇒ <code>Image</code>
+Generate image: perlin noise
+
+**Kind**: global function  
+**Returns**: <code>Image</code> - The resulting Image.  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+| offsetX | <code>number</code> | 
+| offsetY | <code>number</code> | 
+| scale | <code>number</code> | 
+
 <a name="GenImageCellular"></a>
 
 ## GenImageCellular(width, height, tileSize) ⇒ <code>Image</code>
@@ -4777,6 +4841,20 @@ Generate image: cellular algorithm, bigger tileSize means bigger cells
 | width | <code>number</code> | 
 | height | <code>number</code> | 
 | tileSize | <code>number</code> | 
+
+<a name="GenImageText"></a>
+
+## GenImageText(width, height, text) ⇒ <code>Image</code>
+Generate image: grayscale image from text data
+
+**Kind**: global function  
+**Returns**: <code>Image</code> - The resulting Image.  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+| text | <code>string</code> | 
 
 <a name="ImageCopy"></a>
 
@@ -4832,6 +4910,18 @@ Create an image from text (custom sprite font)
 | fontSize | <code>number</code> | 
 | spacing | <code>number</code> | 
 | tint | [<code>Color</code>](#Color) | 
+
+<a name="ImageBlurGaussian"></a>
+
+## ImageBlurGaussian(image, blurSize) ⇒ <code>undefined</code>
+Apply Gaussian blur using a box blur approximation
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| image | <code>number</code> | 
+| blurSize | <code>number</code> | 
 
 <a name="LoadImageColors"></a>
 
@@ -4908,6 +4998,35 @@ Get image pixel color at (x, y) position
 | x | <code>number</code> | 
 | y | <code>number</code> | 
 
+<a name="ImageDrawCircleLines"></a>
+
+## ImageDrawCircleLines(dst, centerX, centerY, radius, color) ⇒ <code>undefined</code>
+Draw circle outline within an image
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| dst | <code>number</code> | 
+| centerX | <code>number</code> | 
+| centerY | <code>number</code> | 
+| radius | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="ImageDrawCircleLinesV"></a>
+
+## ImageDrawCircleLinesV(dst, center, radius, color) ⇒ <code>undefined</code>
+Draw circle outline within an image (Vector version)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| dst | <code>number</code> | 
+| center | [<code>Vector2</code>](#Vector2) | 
+| radius | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
 <a name="LoadTexture"></a>
 
 ## LoadTexture(fileName) ⇒ <code>Texture2D</code>
@@ -4958,6 +5077,18 @@ Load texture for rendering (framebuffer)
 | width | <code>number</code> | 
 | height | <code>number</code> | 
 
+<a name="IsTextureReady"></a>
+
+## IsTextureReady(texture) ⇒ <code>boolean</code>
+Check if a texture is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| texture | <code>Texture</code> | 
+
 <a name="UnloadTexture"></a>
 
 ## UnloadTexture(texture) ⇒ <code>undefined</code>
@@ -4967,7 +5098,19 @@ Unload texture from GPU memory (VRAM)
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
+
+<a name="IsRenderTextureReady"></a>
+
+## IsRenderTextureReady(target) ⇒ <code>boolean</code>
+Check if a render texture is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| target | <code>RenderTexture</code> | 
 
 <a name="UnloadRenderTexture"></a>
 
@@ -4978,7 +5121,7 @@ Unload render texture from GPU memory (VRAM)
 
 | Param | Type |
 | --- | --- |
-| target | <code>RenderTexture2D</code> | 
+| target | <code>RenderTexture</code> | 
 
 <a name="UpdateTexture"></a>
 
@@ -4989,7 +5132,7 @@ Update GPU texture with new data
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | pixels | <code>number</code> | 
 
 <a name="UpdateTextureRec"></a>
@@ -5001,7 +5144,7 @@ Update GPU texture rectangle with new data
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | rec | [<code>Rectangle</code>](#Rectangle) | 
 | pixels | <code>number</code> | 
 
@@ -5014,7 +5157,7 @@ Set texture scaling filter mode
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | filter | <code>number</code> | 
 
 <a name="SetTextureWrap"></a>
@@ -5026,7 +5169,7 @@ Set texture wrapping mode
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | wrap | <code>number</code> | 
 
 <a name="DrawTexture"></a>
@@ -5038,7 +5181,7 @@ Draw a Texture2D
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | posX | <code>number</code> | 
 | posY | <code>number</code> | 
 | tint | [<code>Color</code>](#Color) | 
@@ -5052,7 +5195,7 @@ Draw a Texture2D with position defined as Vector2
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | position | [<code>Vector2</code>](#Vector2) | 
 | tint | [<code>Color</code>](#Color) | 
 
@@ -5065,7 +5208,7 @@ Draw a Texture2D with extended parameters
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | position | [<code>Vector2</code>](#Vector2) | 
 | rotation | <code>number</code> | 
 | scale | <code>number</code> | 
@@ -5080,41 +5223,9 @@ Draw a part of a texture defined by a rectangle
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | source | [<code>Rectangle</code>](#Rectangle) | 
 | position | [<code>Vector2</code>](#Vector2) | 
-| tint | [<code>Color</code>](#Color) | 
-
-<a name="DrawTextureQuad"></a>
-
-## DrawTextureQuad(texture, tiling, offset, quad, tint) ⇒ <code>undefined</code>
-Draw texture quad with tiling and offset parameters
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| texture | <code>Texture2D</code> | 
-| tiling | [<code>Vector2</code>](#Vector2) | 
-| offset | [<code>Vector2</code>](#Vector2) | 
-| quad | [<code>Rectangle</code>](#Rectangle) | 
-| tint | [<code>Color</code>](#Color) | 
-
-<a name="DrawTextureTiled"></a>
-
-## DrawTextureTiled(texture, source, dest, origin, rotation, scale, tint) ⇒ <code>undefined</code>
-Draw part of a texture (defined by a rectangle) with rotation and scale tiled into dest.
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| texture | <code>Texture2D</code> | 
-| source | [<code>Rectangle</code>](#Rectangle) | 
-| dest | [<code>Rectangle</code>](#Rectangle) | 
-| origin | [<code>Vector2</code>](#Vector2) | 
-| rotation | <code>number</code> | 
-| scale | <code>number</code> | 
 | tint | [<code>Color</code>](#Color) | 
 
 <a name="DrawTexturePro"></a>
@@ -5126,7 +5237,7 @@ Draw a part of a texture defined by a rectangle with 'pro' parameters
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | source | [<code>Rectangle</code>](#Rectangle) | 
 | dest | [<code>Rectangle</code>](#Rectangle) | 
 | origin | [<code>Vector2</code>](#Vector2) | 
@@ -5142,27 +5253,11 @@ Draws a texture (or part of it) that stretches or shrinks nicely
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 | nPatchInfo | <code>NPatchInfo</code> | 
 | dest | [<code>Rectangle</code>](#Rectangle) | 
 | origin | [<code>Vector2</code>](#Vector2) | 
 | rotation | <code>number</code> | 
-| tint | [<code>Color</code>](#Color) | 
-
-<a name="DrawTexturePoly"></a>
-
-## DrawTexturePoly(texture, center, points, texcoords, pointCount, tint) ⇒ <code>undefined</code>
-Draw a textured polygon
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| texture | <code>Texture2D</code> | 
-| center | [<code>Vector2</code>](#Vector2) | 
-| points | <code>number</code> | 
-| texcoords | <code>number</code> | 
-| pointCount | <code>number</code> | 
 | tint | [<code>Color</code>](#Color) | 
 
 <a name="Fade"></a>
@@ -5239,6 +5334,45 @@ Get a Color from HSV values, hue [0..360], saturation/value [0..1]
 | hue | <code>number</code> | 
 | saturation | <code>number</code> | 
 | value | <code>number</code> | 
+
+<a name="ColorTint"></a>
+
+## ColorTint(color, tint) ⇒ [<code>Color</code>](#Color)
+Get color multiplied with another color
+
+**Kind**: global function  
+**Returns**: [<code>Color</code>](#Color) - The resulting Color.  
+
+| Param | Type |
+| --- | --- |
+| color | [<code>Color</code>](#Color) | 
+| tint | [<code>Color</code>](#Color) | 
+
+<a name="ColorBrightness"></a>
+
+## ColorBrightness(color, factor) ⇒ [<code>Color</code>](#Color)
+Get color with brightness correction, brightness factor goes from -1.0f to 1.0f
+
+**Kind**: global function  
+**Returns**: [<code>Color</code>](#Color) - The resulting Color.  
+
+| Param | Type |
+| --- | --- |
+| color | [<code>Color</code>](#Color) | 
+| factor | <code>number</code> | 
+
+<a name="ColorContrast"></a>
+
+## ColorContrast(color, contrast) ⇒ [<code>Color</code>](#Color)
+Get color with contrast correction, contrast values between -1.0f and 1.0f
+
+**Kind**: global function  
+**Returns**: [<code>Color</code>](#Color) - The resulting Color.  
+
+| Param | Type |
+| --- | --- |
+| color | [<code>Color</code>](#Color) | 
+| contrast | <code>number</code> | 
 
 <a name="ColorAlpha"></a>
 
@@ -5383,6 +5517,18 @@ Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
 | fontSize | <code>number</code> | 
 | fontChars | <code>number</code> | 
 | glyphCount | <code>number</code> | 
+
+<a name="IsFontReady"></a>
+
+## IsFontReady(font) ⇒ <code>boolean</code>
+Check if a font is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| font | <code>Font</code> | 
 
 <a name="LoadFontData"></a>
 
@@ -5614,6 +5760,30 @@ Get glyph rectangle in font atlas for a codepoint (unicode character), fallback 
 | font | <code>Font</code> | 
 | codepoint | <code>number</code> | 
 
+<a name="LoadUTF8"></a>
+
+## LoadUTF8(codepoints, length) ⇒ <code>string</code>
+Load UTF-8 text encoded from codepoints array
+
+**Kind**: global function  
+**Returns**: <code>string</code> - The resulting char *.  
+
+| Param | Type |
+| --- | --- |
+| codepoints | <code>number</code> | 
+| length | <code>number</code> | 
+
+<a name="UnloadUTF8"></a>
+
+## UnloadUTF8(text) ⇒ <code>undefined</code>
+Unload UTF-8 text encoded from codepoints array
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| text | <code>string</code> | 
+
 <a name="LoadCodepoints"></a>
 
 ## LoadCodepoints(text, count) ⇒ <code>number</code>
@@ -5652,7 +5822,7 @@ Get total number of codepoints in a UTF-8 encoded string
 
 <a name="GetCodepoint"></a>
 
-## GetCodepoint(text, bytesProcessed) ⇒ <code>number</code>
+## GetCodepoint(text, codepointSize) ⇒ <code>number</code>
 Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
 
 **Kind**: global function  
@@ -5661,11 +5831,37 @@ Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
 | Param | Type |
 | --- | --- |
 | text | <code>string</code> | 
-| bytesProcessed | <code>number</code> | 
+| codepointSize | <code>number</code> | 
+
+<a name="GetCodepointNext"></a>
+
+## GetCodepointNext(text, codepointSize) ⇒ <code>number</code>
+Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| text | <code>string</code> | 
+| codepointSize | <code>number</code> | 
+
+<a name="GetCodepointPrevious"></a>
+
+## GetCodepointPrevious(text, codepointSize) ⇒ <code>number</code>
+Get previous codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| text | <code>string</code> | 
+| codepointSize | <code>number</code> | 
 
 <a name="CodepointToUTF8"></a>
 
-## CodepointToUTF8(codepoint, byteSize) ⇒ <code>string</code>
+## CodepointToUTF8(codepoint, utf8Size) ⇒ <code>string</code>
 Encode one codepoint into UTF-8 byte array (array length returned as parameter)
 
 **Kind**: global function  
@@ -5674,20 +5870,7 @@ Encode one codepoint into UTF-8 byte array (array length returned as parameter)
 | Param | Type |
 | --- | --- |
 | codepoint | <code>number</code> | 
-| byteSize | <code>number</code> | 
-
-<a name="TextCodepointsToUTF8"></a>
-
-## TextCodepointsToUTF8(codepoints, length) ⇒ <code>string</code>
-Encode text as codepoints array into UTF-8 text string (WARNING: memory must be freed!)
-
-**Kind**: global function  
-**Returns**: <code>string</code> - The resulting char *.  
-
-| Param | Type |
-| --- | --- |
-| codepoints | <code>number</code> | 
-| length | <code>number</code> | 
+| utf8Size | <code>number</code> | 
 
 <a name="TextCopy"></a>
 
@@ -5994,39 +6177,6 @@ Draw cube wires (Vector version)
 | size | [<code>Vector3</code>](#Vector3) | 
 | color | [<code>Color</code>](#Color) | 
 
-<a name="DrawCubeTexture"></a>
-
-## DrawCubeTexture(texture, position, width, height, length, color) ⇒ <code>undefined</code>
-Draw cube textured
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| texture | <code>Texture2D</code> | 
-| position | [<code>Vector3</code>](#Vector3) | 
-| width | <code>number</code> | 
-| height | <code>number</code> | 
-| length | <code>number</code> | 
-| color | [<code>Color</code>](#Color) | 
-
-<a name="DrawCubeTextureRec"></a>
-
-## DrawCubeTextureRec(texture, source, position, width, height, length, color) ⇒ <code>undefined</code>
-Draw cube with a region of a texture
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| texture | <code>Texture2D</code> | 
-| source | [<code>Rectangle</code>](#Rectangle) | 
-| position | [<code>Vector3</code>](#Vector3) | 
-| width | <code>number</code> | 
-| height | <code>number</code> | 
-| length | <code>number</code> | 
-| color | [<code>Color</code>](#Color) | 
-
 <a name="DrawSphere"></a>
 
 ## DrawSphere(centerPos, radius, color) ⇒ <code>undefined</code>
@@ -6134,6 +6284,38 @@ Draw a cylinder wires with base at startPos and top at endPos
 | sides | <code>number</code> | 
 | color | [<code>Color</code>](#Color) | 
 
+<a name="DrawCapsule"></a>
+
+## DrawCapsule(startPos, endPos, radius, slices, rings, color) ⇒ <code>undefined</code>
+Draw a capsule with the center of its sphere caps at startPos and endPos
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| startPos | [<code>Vector3</code>](#Vector3) | 
+| endPos | [<code>Vector3</code>](#Vector3) | 
+| radius | <code>number</code> | 
+| slices | <code>number</code> | 
+| rings | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawCapsuleWires"></a>
+
+## DrawCapsuleWires(startPos, endPos, radius, slices, rings, color) ⇒ <code>undefined</code>
+Draw capsule wireframe with the center of its sphere caps at startPos and endPos
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| startPos | [<code>Vector3</code>](#Vector3) | 
+| endPos | [<code>Vector3</code>](#Vector3) | 
+| radius | <code>number</code> | 
+| slices | <code>number</code> | 
+| rings | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
 <a name="DrawPlane"></a>
 
 ## DrawPlane(centerPos, size, color) ⇒ <code>undefined</code>
@@ -6195,21 +6377,22 @@ Load model from generated mesh (default material)
 | --- | --- |
 | mesh | <code>Mesh</code> | 
 
-<a name="UnloadModel"></a>
+<a name="IsModelReady"></a>
 
-## UnloadModel(model) ⇒ <code>undefined</code>
-Unload model (including meshes) from memory (RAM and/or VRAM)
+## IsModelReady(model) ⇒ <code>boolean</code>
+Check if a model is ready
 
 **Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
 
 | Param | Type |
 | --- | --- |
 | model | <code>Model</code> | 
 
-<a name="UnloadModelKeepMeshes"></a>
+<a name="UnloadModel"></a>
 
-## UnloadModelKeepMeshes(model) ⇒ <code>undefined</code>
-Unload model (but not meshes) from memory (RAM and/or VRAM)
+## UnloadModel(model) ⇒ <code>undefined</code>
+Unload model (including meshes) from memory (RAM and/or VRAM)
 
 **Kind**: global function  
 
@@ -6310,8 +6493,8 @@ Draw a billboard texture
 
 | Param | Type |
 | --- | --- |
-| camera | <code>Camera</code> | 
-| texture | <code>Texture2D</code> | 
+| camera | [<code>Camera3D</code>](#Camera3D) | 
+| texture | <code>Texture</code> | 
 | position | [<code>Vector3</code>](#Vector3) | 
 | size | <code>number</code> | 
 | tint | [<code>Color</code>](#Color) | 
@@ -6325,8 +6508,8 @@ Draw a billboard texture defined by source
 
 | Param | Type |
 | --- | --- |
-| camera | <code>Camera</code> | 
-| texture | <code>Texture2D</code> | 
+| camera | [<code>Camera3D</code>](#Camera3D) | 
+| texture | <code>Texture</code> | 
 | source | [<code>Rectangle</code>](#Rectangle) | 
 | position | [<code>Vector3</code>](#Vector3) | 
 | size | [<code>Vector2</code>](#Vector2) | 
@@ -6341,8 +6524,8 @@ Draw a billboard texture defined by source and rotation
 
 | Param | Type |
 | --- | --- |
-| camera | <code>Camera</code> | 
-| texture | <code>Texture2D</code> | 
+| camera | [<code>Camera3D</code>](#Camera3D) | 
+| texture | <code>Texture</code> | 
 | source | [<code>Rectangle</code>](#Rectangle) | 
 | position | [<code>Vector3</code>](#Vector3) | 
 | up | [<code>Vector3</code>](#Vector3) | 
@@ -6788,6 +6971,18 @@ Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
 | fileData | <code>Buffer</code> | 
 | dataSize | <code>number</code> | 
 
+<a name="IsWaveReady"></a>
+
+## IsWaveReady(wave) ⇒ <code>boolean</code>
+Checks if wave data is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| wave | <code>Wave</code> | 
+
 <a name="LoadSound"></a>
 
 ## LoadSound(fileName) ⇒ <code>Sound</code>
@@ -6811,6 +7006,18 @@ Load sound from wave data
 | Param | Type |
 | --- | --- |
 | wave | <code>Wave</code> | 
+
+<a name="IsSoundReady"></a>
+
+## IsSoundReady(sound) ⇒ <code>boolean</code>
+Checks if a sound is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| sound | <code>Sound</code> | 
 
 <a name="UpdateSound"></a>
 
@@ -6917,30 +7124,6 @@ Resume a paused sound
 | --- | --- |
 | sound | <code>Sound</code> | 
 
-<a name="PlaySoundMulti"></a>
-
-## PlaySoundMulti(sound) ⇒ <code>undefined</code>
-Play a sound (using multichannel buffer pool)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| sound | <code>Sound</code> | 
-
-<a name="StopSoundMulti"></a>
-
-## StopSoundMulti() ⇒ <code>undefined</code>
-Stop any sound playing (using multichannel buffer pool)
-
-**Kind**: global function  
-<a name="GetSoundsPlaying"></a>
-
-## GetSoundsPlaying() ⇒ <code>number</code>
-Get number of sounds playing in the multichannel
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
 <a name="IsSoundPlaying"></a>
 
 ## IsSoundPlaying(sound) ⇒ <code>boolean</code>
@@ -7049,6 +7232,18 @@ Load music stream from data
 | fileType | <code>string</code> | 
 | data | <code>Buffer</code> | 
 | dataSize | <code>number</code> | 
+
+<a name="IsMusicReady"></a>
+
+## IsMusicReady(music) ⇒ <code>boolean</code>
+Checks if a music stream is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| music | <code>Music</code> | 
 
 <a name="UnloadMusicStream"></a>
 
@@ -7213,6 +7408,18 @@ Load audio stream (to stream raw audio pcm data)
 | sampleRate | <code>number</code> | 
 | sampleSize | <code>number</code> | 
 | channels | <code>number</code> | 
+
+<a name="IsAudioStreamReady"></a>
+
+## IsAudioStreamReady(stream) ⇒ <code>boolean</code>
+Checks if an audio stream is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| stream | <code>AudioStream</code> | 
 
 <a name="UnloadAudioStream"></a>
 
@@ -7926,6 +8133,21 @@ Panel control, useful to group controls
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
 
+<a name="GuiTabBar"></a>
+
+## GuiTabBar(bounds, text, count, active) ⇒ <code>number</code>
+Tab Bar control, returns TAB to be closed or -1
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>number</code> | 
+| count | <code>number</code> | 
+| active | <code>number</code> | 
+
 <a name="GuiScrollPanel"></a>
 
 ## GuiScrollPanel(bounds, text, content, scroll) ⇒ [<code>Rectangle</code>](#Rectangle)
@@ -8342,6 +8564,29 @@ Load style file over global style variable (.rgs)
 Load style default over global style
 
 **Kind**: global function  
+<a name="GuiEnableTooltip"></a>
+
+## GuiEnableTooltip() ⇒ <code>undefined</code>
+Enable gui tooltips (global state)
+
+**Kind**: global function  
+<a name="GuiDisableTooltip"></a>
+
+## GuiDisableTooltip() ⇒ <code>undefined</code>
+Disable gui tooltips (global state)
+
+**Kind**: global function  
+<a name="GuiSetTooltip"></a>
+
+## GuiSetTooltip(tooltip) ⇒ <code>undefined</code>
+Set tooltip string
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| tooltip | <code>string</code> | 
+
 <a name="GuiIconText"></a>
 
 ## GuiIconText(iconId, text) ⇒ <code>string</code>
@@ -8358,84 +8603,33 @@ Get text with icon id prepended (if supported)
 <a name="GuiGetIcons"></a>
 
 ## GuiGetIcons() ⇒ <code>number</code>
-Get full icons data pointer
+Get raygui icons data pointer
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting unsigned int *.  
-<a name="GuiGetIconData"></a>
+<a name="GuiLoadIcons"></a>
 
-## GuiGetIconData(iconId) ⇒ <code>number</code>
-Get icon bit data
+## GuiLoadIcons(fileName, loadIconsName) ⇒ <code>number</code>
+Load raygui icons file (.rgi) into internal icons data
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting unsigned int *.  
+**Returns**: <code>number</code> - The resulting char **.  
 
 | Param | Type |
 | --- | --- |
-| iconId | <code>number</code> | 
-
-<a name="GuiSetIconData"></a>
-
-## GuiSetIconData(iconId, data) ⇒ <code>undefined</code>
-Set icon bit data
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| iconId | <code>number</code> | 
-| data | <code>number</code> | 
+| fileName | <code>string</code> | 
+| loadIconsName | <code>boolean</code> | 
 
 <a name="GuiSetIconScale"></a>
 
 ## GuiSetIconScale(scale) ⇒ <code>undefined</code>
-Set icon scale (1 by default)
+Set icon drawing size
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
 | scale | <code>number</code> | 
-
-<a name="GuiSetIconPixel"></a>
-
-## GuiSetIconPixel(iconId, x, y) ⇒ <code>undefined</code>
-Set icon pixel value
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| iconId | <code>number</code> | 
-| x | <code>number</code> | 
-| y | <code>number</code> | 
-
-<a name="GuiClearIconPixel"></a>
-
-## GuiClearIconPixel(iconId, x, y) ⇒ <code>undefined</code>
-Clear icon pixel value
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| iconId | <code>number</code> | 
-| x | <code>number</code> | 
-| y | <code>number</code> | 
-
-<a name="GuiCheckIconPixel"></a>
-
-## GuiCheckIconPixel(iconId, x, y) ⇒ <code>boolean</code>
-Check icon pixel value
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| iconId | <code>number</code> | 
-| x | <code>number</code> | 
-| y | <code>number</code> | 
 
 <a name="rlMatrixMode"></a>
 
@@ -8457,7 +8651,7 @@ Push the current matrix to stack
 <a name="rlPopMatrix"></a>
 
 ## rlPopMatrix() ⇒ <code>undefined</code>
-Pop lattest inserted matrix from stack
+Pop latest inserted matrix from stack
 
 **Kind**: global function  
 <a name="rlLoadIdentity"></a>
@@ -8783,6 +8977,19 @@ Set texture parameters (filter, wrap)
 | param | <code>number</code> | 
 | value | <code>number</code> | 
 
+<a name="rlCubemapParameters"></a>
+
+## rlCubemapParameters(id, param, value) ⇒ <code>undefined</code>
+Set cubemap parameters (filter, wrap)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| param | <code>number</code> | 
+| value | <code>number</code> | 
+
 <a name="rlEnableShader"></a>
 
 ## rlEnableShader(id) ⇒ <code>undefined</code>
@@ -8876,6 +9083,17 @@ Enable backface culling
 Disable backface culling
 
 **Kind**: global function  
+<a name="rlSetCullFace"></a>
+
+## rlSetCullFace(mode) ⇒ <code>undefined</code>
+Set face culling mode
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| mode | <code>number</code> | 
+
 <a name="rlEnableScissorTest"></a>
 
 ## rlEnableScissorTest() ⇒ <code>undefined</code>
@@ -9013,6 +9231,22 @@ Set blending mode factor and equation (using OpenGL factors)
 | glDstFactor | <code>number</code> | 
 | glEquation | <code>number</code> | 
 
+<a name="rlSetBlendFactorsSeparate"></a>
+
+## rlSetBlendFactorsSeparate(glSrcRGB, glDstRGB, glSrcAlpha, glDstAlpha, glEqRGB, glEqAlpha) ⇒ <code>undefined</code>
+Set blending mode factors and equations separately (using OpenGL factors)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| glSrcRGB | <code>number</code> | 
+| glDstRGB | <code>number</code> | 
+| glSrcAlpha | <code>number</code> | 
+| glDstAlpha | <code>number</code> | 
+| glEqRGB | <code>number</code> | 
+| glEqAlpha | <code>number</code> | 
+
 <a name="rlglInit"></a>
 
 ## rlglInit(width, height) ⇒ <code>undefined</code>
@@ -9028,7 +9262,7 @@ Initialize rlgl (buffers, shaders, textures, states)
 <a name="rlglClose"></a>
 
 ## rlglClose() ⇒ <code>undefined</code>
-De-inititialize rlgl (buffers, shaders, textures)
+De-initialize rlgl (buffers, shaders, textures)
 
 **Kind**: global function  
 <a name="rlLoadExtensions"></a>
@@ -9591,7 +9825,7 @@ Load compute shader program
 <a name="rlComputeShaderDispatch"></a>
 
 ## rlComputeShaderDispatch(groupX, groupY, groupZ) ⇒ <code>undefined</code>
-Dispatch compute shader (equivalent to *draw* for graphics pilepine)
+Dispatch compute shader (equivalent to *draw* for graphics pipeline)
 
 **Kind**: global function  
 
@@ -9611,7 +9845,7 @@ Load shader storage buffer object (SSBO)
 
 | Param | Type |
 | --- | --- |
-| size | <code>BigInt</code> | 
+| size | <code>number</code> | 
 | data | <code>number</code> | 
 | usageHint | <code>number</code> | 
 
@@ -9626,9 +9860,9 @@ Unload shader storage buffer object (SSBO)
 | --- | --- |
 | ssboId | <code>number</code> | 
 
-<a name="rlUpdateShaderBufferElements"></a>
+<a name="rlUpdateShaderBuffer"></a>
 
-## rlUpdateShaderBufferElements(id, data, dataSize, offset) ⇒ <code>undefined</code>
+## rlUpdateShaderBuffer(id, data, dataSize, offset) ⇒ <code>undefined</code>
 Update SSBO buffer data
 
 **Kind**: global function  
@@ -9637,39 +9871,13 @@ Update SSBO buffer data
 | --- | --- |
 | id | <code>number</code> | 
 | data | <code>number</code> | 
-| dataSize | <code>BigInt</code> | 
-| offset | <code>BigInt</code> | 
-
-<a name="rlGetShaderBufferSize"></a>
-
-## rlGetShaderBufferSize(id) ⇒ <code>BigInt</code>
-Get SSBO buffer size
-
-**Kind**: global function  
-**Returns**: <code>BigInt</code> - The resulting unsigned long long.  
-
-| Param | Type |
-| --- | --- |
-| id | <code>number</code> | 
-
-<a name="rlReadShaderBufferElements"></a>
-
-## rlReadShaderBufferElements(id, dest, count, offset) ⇒ <code>undefined</code>
-Bind SSBO buffer
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| id | <code>number</code> | 
-| dest | <code>number</code> | 
-| count | <code>BigInt</code> | 
-| offset | <code>BigInt</code> | 
+| dataSize | <code>number</code> | 
+| offset | <code>number</code> | 
 
 <a name="rlBindShaderBuffer"></a>
 
 ## rlBindShaderBuffer(id, index) ⇒ <code>undefined</code>
-Copy SSBO buffer data
+Bind SSBO buffer
 
 **Kind**: global function  
 
@@ -9678,10 +9886,24 @@ Copy SSBO buffer data
 | id | <code>number</code> | 
 | index | <code>number</code> | 
 
-<a name="rlCopyBuffersElements"></a>
+<a name="rlReadShaderBuffer"></a>
 
-## rlCopyBuffersElements(destId, srcId, destOffset, srcOffset, count) ⇒ <code>undefined</code>
-Copy SSBO buffer data
+## rlReadShaderBuffer(id, dest, count, offset) ⇒ <code>undefined</code>
+Read SSBO buffer data (GPU->CPU)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
+| dest | <code>number</code> | 
+| count | <code>number</code> | 
+| offset | <code>number</code> | 
+
+<a name="rlCopyShaderBuffer"></a>
+
+## rlCopyShaderBuffer(destId, srcId, destOffset, srcOffset, count) ⇒ <code>undefined</code>
+Copy SSBO data between buffers
 
 **Kind**: global function  
 
@@ -9689,9 +9911,21 @@ Copy SSBO buffer data
 | --- | --- |
 | destId | <code>number</code> | 
 | srcId | <code>number</code> | 
-| destOffset | <code>BigInt</code> | 
-| srcOffset | <code>BigInt</code> | 
-| count | <code>BigInt</code> | 
+| destOffset | <code>number</code> | 
+| srcOffset | <code>number</code> | 
+| count | <code>number</code> | 
+
+<a name="rlGetShaderBufferSize"></a>
+
+## rlGetShaderBufferSize(id) ⇒ <code>number</code>
+Get SSBO buffer size
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting unsigned int.  
+
+| Param | Type |
+| --- | --- |
+| id | <code>number</code> | 
 
 <a name="rlBindImageTexture"></a>
 
@@ -9705,7 +9939,7 @@ Bind image texture
 | id | <code>number</code> | 
 | index | <code>number</code> | 
 | format | <code>number</code> | 
-| readonly | <code>number</code> | 
+| readonly | <code>boolean</code> | 
 
 <a name="rlGetMatrixModelview"></a>
 
@@ -9812,14 +10046,15 @@ Load and draw a quad
 **Kind**: global function  
 <a name="UpdateCamera"></a>
 
-## UpdateCamera(camera) ⇒ <code>undefined</code>
+## UpdateCamera(camera, mode) ⇒ <code>undefined</code>
 Update camera position for selected mode
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| camera | <code>Camera</code> | 
+| camera | [<code>Camera3D</code>](#Camera3D) | 
+| mode | <code>number</code> | 
 
 <a name="ImageFormat"></a>
 
@@ -10160,7 +10395,7 @@ Draw line within an image (Vector version)
 <a name="ImageDrawCircle"></a>
 
 ## ImageDrawCircle(dst, centerX, centerY, radius, color) ⇒ <code>undefined</code>
-Draw circle within an image
+Draw a filled circle within an image
 
 **Kind**: global function  
 
@@ -10175,7 +10410,7 @@ Draw circle within an image
 <a name="ImageDrawCircleV"></a>
 
 ## ImageDrawCircleV(dst, center, radius, color) ⇒ <code>undefined</code>
-Draw circle within an image (Vector version)
+Draw a filled circle within an image (Vector version)
 
 **Kind**: global function  
 
@@ -10300,7 +10535,7 @@ Generate GPU mipmaps for a texture
 
 | Param | Type |
 | --- | --- |
-| texture | <code>Texture2D</code> | 
+| texture | <code>Texture</code> | 
 
 <a name="UploadMesh"></a>
 
@@ -10465,7 +10700,7 @@ Camera, defines position/orientation in 3d space
 | position | [<code>Vector3</code>](#Vector3) | Camera position |
 | target | [<code>Vector3</code>](#Vector3) | Camera target it looks-at |
 | up | [<code>Vector3</code>](#Vector3) | Camera up vector (rotation over its axis) |
-| fovy | <code>number</code> | Camera field-of-view apperture in Y (degrees) in perspective, used as near plane width in orthographic |
+| fovy | <code>number</code> | Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic |
 | projection | <code>number</code> | Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC |
 
 <a name="SetShaderFloat"></a>
