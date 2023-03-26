@@ -7,7 +7,7 @@
   "scripts": {
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
-    "test": "vitest run --globals",
+    "test": "vitest run --globals --reporter verbose",
     "test:watch": "vitest --globals --ui",
     "posttest": "standard tools test examples index.js",
     "test:fix": "standard --fix",
