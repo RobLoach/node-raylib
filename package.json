@@ -7,7 +7,8 @@
   "scripts": {
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
-    "test": "jest",
+    "test": "vitest run --globals --reporter verbose",
+    "test:watch": "vitest --globals --ui",
     "posttest": "standard tools test examples index.js",
     "test:fix": "standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
@@ -66,11 +67,12 @@
   },
   "devDependencies": {
     "@raylib/api": "~4.5.0",
+    "@vitest/ui": "^0.29.7",
     "archiver": "^5.3.1",
-    "jest": "^29.5.0",
     "jsdoc-to-markdown": "^8.0.0",
     "pkg": "^5.8.1",
-    "standard": "^17.0.0"
+    "standard": "^17.0.0",
+    "vitest": "^0.29.7"
   },
   "jsdoc2md": {
     "files": [
