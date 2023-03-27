@@ -26,6 +26,12 @@ const SanitizeTypeName = name => {
   if (name === 'const char *') {
     return 'string'
   }
+  if (name === 'const unsigned char *') {
+    return 'bufferPointer'
+  }
+  if (name === 'unsigned char *') {
+    return 'bufferPointer'
+  }
   if (name.endsWith('*')) {
     return 'pointer'
   }
@@ -240,6 +246,9 @@ inline double doubleFromValue(const Napi::CallbackInfo& info, int index) {
 }
 uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
   return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
+}
+uintptr_t bufferPointerFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Uint8Array>().Data();
 }
 inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();

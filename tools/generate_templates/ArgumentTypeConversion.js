@@ -1,6 +1,6 @@
 function ArgumentTypeConversion (arg) {
-  if (arg === 'const unsigned char *') { return 'Buffer' }
-  if (arg === 'unsigned char *') { return 'Buffer' }
+  if (arg === 'const unsigned char *') { return 'UInt8Array' }
+  if (arg === 'unsigned char *') { return 'UInt8Array' }
 
   if (arg === 'char') { return 'string' }
   if (arg === 'char *') { return 'string' }
