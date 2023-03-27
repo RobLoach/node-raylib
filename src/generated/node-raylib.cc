@@ -61,6 +61,10 @@ inline double doubleFromValue(const Napi::CallbackInfo& info, int index) {
 uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
   return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
 }
+uintptr_t pointerFromBuffer(const Napi::CallbackInfo &info, int index)
+{
+  return (uintptr_t)info[index].As<Napi::Buffer<unsigned char>>().Data();
+}
 inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
@@ -1138,7 +1142,7 @@ Napi::Value BindSaveFileData(const Napi::CallbackInfo& info) {
 Napi::Value BindExportDataAsCode(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     ExportDataAsCode(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) pointerFromBuffer(info, 0),
        unsignedintFromValue(info, 1),
        (const char *) stringFromValue(info, 2)
     )
@@ -1312,7 +1316,7 @@ Napi::Value BindGetFileModTime(const Napi::CallbackInfo& info) {
 Napi::Value BindCompressData(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     CompressData(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) pointerFromBuffer(info, 0),
        intFromValue(info, 1),
        (int *) pointerFromValue(info, 2)
     )
@@ -1322,7 +1326,7 @@ Napi::Value BindCompressData(const Napi::CallbackInfo& info) {
 Napi::Value BindDecompressData(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     DecompressData(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) pointerFromBuffer(info, 0),
        intFromValue(info, 1),
        (int *) pointerFromValue(info, 2)
     )
@@ -1332,7 +1336,7 @@ Napi::Value BindDecompressData(const Napi::CallbackInfo& info) {
 Napi::Value BindEncodeDataBase64(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     EncodeDataBase64(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) pointerFromBuffer(info, 0),
        intFromValue(info, 1),
        (int *) pointerFromValue(info, 2)
     )
@@ -1342,7 +1346,7 @@ Napi::Value BindEncodeDataBase64(const Napi::CallbackInfo& info) {
 Napi::Value BindDecodeDataBase64(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     DecodeDataBase64(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) pointerFromBuffer(info, 0),
        (int *) pointerFromValue(info, 1)
     )
   );
@@ -1792,7 +1796,7 @@ Napi::Value BindLoadImageFromMemory(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadImageFromMemory(
        (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
+       (const unsigned char *) pointerFromBuffer(info, 1),
        intFromValue(info, 2)
     )
   );
@@ -2230,7 +2234,7 @@ Napi::Value BindLoadFontFromMemory(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadFontFromMemory(
        (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
+       (const unsigned char *) pointerFromBuffer(info, 1),
        intFromValue(info, 2),
        intFromValue(info, 3),
        (int *) pointerFromValue(info, 4),
@@ -2250,7 +2254,7 @@ Napi::Value BindIsFontReady(const Napi::CallbackInfo& info) {
 Napi::Value BindLoadFontData(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadFontData(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) pointerFromBuffer(info, 0),
        intFromValue(info, 1),
        intFromValue(info, 2),
        (int *) pointerFromValue(info, 3),
@@ -2787,7 +2791,7 @@ Napi::Value BindLoadWaveFromMemory(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadWaveFromMemory(
        (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
+       (const unsigned char *) pointerFromBuffer(info, 1),
        intFromValue(info, 2)
     )
   );
@@ -2879,7 +2883,7 @@ Napi::Value BindLoadMusicStreamFromMemory(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadMusicStreamFromMemory(
        (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
+       (const unsigned char *) pointerFromBuffer(info, 1),
        intFromValue(info, 2)
     )
   );
@@ -5213,7 +5217,7 @@ void BindOpenURL(const Napi::CallbackInfo& info) {
 
 void BindUnloadFileData(const Napi::CallbackInfo& info) {
   UnloadFileData(
-     (unsigned char *) pointerFromValue(info, 0)
+     (unsigned char *) pointerFromBuffer(info, 0)
   );
 }
 
