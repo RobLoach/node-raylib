@@ -295,7 +295,7 @@
 <dt><a href="#OpenURL">OpenURL(url)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Open URL with default system browser (if available)</p>
 </dd>
-<dt><a href="#LoadFileData">LoadFileData(fileName, bytesRead)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#LoadFileData">LoadFileData(fileName, bytesRead)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Load file data as byte array (read)</p>
 </dd>
 <dt><a href="#UnloadFileData">UnloadFileData(data)</a> ⇒ <code>undefined</code></dt>
@@ -376,16 +376,16 @@
 <dt><a href="#GetFileModTime">GetFileModTime(fileName)</a> ⇒ <code>number</code></dt>
 <dd><p>Get file modification time (last write time)</p>
 </dd>
-<dt><a href="#CompressData">CompressData(data, dataSize, compDataSize)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#CompressData">CompressData(data, dataSize, compDataSize)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Compress data (DEFLATE algorithm), memory must be MemFree()</p>
 </dd>
-<dt><a href="#DecompressData">DecompressData(compData, compDataSize, dataSize)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#DecompressData">DecompressData(compData, compDataSize, dataSize)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Decompress data (DEFLATE algorithm), memory must be MemFree()</p>
 </dd>
 <dt><a href="#EncodeDataBase64">EncodeDataBase64(data, dataSize, outputSize)</a> ⇒ <code>string</code></dt>
 <dd><p>Encode data to Base64 string, memory must be MemFree()</p>
 </dd>
-<dt><a href="#DecodeDataBase64">DecodeDataBase64(data, outputSize)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#DecodeDataBase64">DecodeDataBase64(data, outputSize)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Decode Base64 string data, memory must be MemFree()</p>
 </dd>
 <dt><a href="#IsKeyPressed">IsKeyPressed(key)</a> ⇒ <code>boolean</code></dt>
@@ -1891,7 +1891,7 @@
 <dt><a href="#rlReadTexturePixels">rlReadTexturePixels(id, width, height, format)</a> ⇒ <code>number</code></dt>
 <dd><p>Read texture pixel data</p>
 </dd>
-<dt><a href="#rlReadScreenPixels">rlReadScreenPixels(width, height)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#rlReadScreenPixels">rlReadScreenPixels(width, height)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Read screen pixel data (color buffer)</p>
 </dd>
 <dt><a href="#rlLoadFramebuffer">rlLoadFramebuffer(width, height)</a> ⇒ <code>number</code></dt>
@@ -3093,11 +3093,11 @@ Open URL with default system browser (if available)
 
 <a name="LoadFileData"></a>
 
-## LoadFileData(fileName, bytesRead) ⇒ <code>Buffer</code>
+## LoadFileData(fileName, bytesRead) ⇒ <code>UInt8Array</code>
 Load file data as byte array (read)
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
@@ -3113,7 +3113,7 @@ Unload file data allocated by LoadFileData()
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 
 <a name="SaveFileData"></a>
 
@@ -3139,7 +3139,7 @@ Export data to code (.h), returns true on success
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | size | <code>number</code> | 
 | fileName | <code>string</code> | 
 
@@ -3402,29 +3402,29 @@ Get file modification time (last write time)
 
 <a name="CompressData"></a>
 
-## CompressData(data, dataSize, compDataSize) ⇒ <code>Buffer</code>
+## CompressData(data, dataSize, compDataSize) ⇒ <code>UInt8Array</code>
 Compress data (DEFLATE algorithm), memory must be MemFree()
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | compDataSize | <code>number</code> | 
 
 <a name="DecompressData"></a>
 
-## DecompressData(compData, compDataSize, dataSize) ⇒ <code>Buffer</code>
+## DecompressData(compData, compDataSize, dataSize) ⇒ <code>UInt8Array</code>
 Decompress data (DEFLATE algorithm), memory must be MemFree()
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
-| compData | <code>Buffer</code> | 
+| compData | <code>UInt8Array</code> | 
 | compDataSize | <code>number</code> | 
 | dataSize | <code>number</code> | 
 
@@ -3438,21 +3438,21 @@ Encode data to Base64 string, memory must be MemFree()
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | outputSize | <code>number</code> | 
 
 <a name="DecodeDataBase64"></a>
 
-## DecodeDataBase64(data, outputSize) ⇒ <code>Buffer</code>
+## DecodeDataBase64(data, outputSize) ⇒ <code>UInt8Array</code>
 Decode Base64 string data, memory must be MemFree()
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | outputSize | <code>number</code> | 
 
 <a name="IsKeyPressed"></a>
@@ -4650,7 +4650,7 @@ Load image from memory buffer, fileType refers to extension: i.e. '.png'
 | Param | Type |
 | --- | --- |
 | fileType | <code>string</code> | 
-| fileData | <code>Buffer</code> | 
+| fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 
 <a name="LoadImageFromTexture"></a>
@@ -5512,7 +5512,7 @@ Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
 | Param | Type |
 | --- | --- |
 | fileType | <code>string</code> | 
-| fileData | <code>Buffer</code> | 
+| fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | fontSize | <code>number</code> | 
 | fontChars | <code>number</code> | 
@@ -5540,7 +5540,7 @@ Load font data for further use
 
 | Param | Type |
 | --- | --- |
-| fileData | <code>Buffer</code> | 
+| fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | fontSize | <code>number</code> | 
 | fontChars | <code>number</code> | 
@@ -6968,7 +6968,7 @@ Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
 | Param | Type |
 | --- | --- |
 | fileType | <code>string</code> | 
-| fileData | <code>Buffer</code> | 
+| fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 
 <a name="IsWaveReady"></a>
@@ -7230,7 +7230,7 @@ Load music stream from data
 | Param | Type |
 | --- | --- |
 | fileType | <code>string</code> | 
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 
 <a name="IsMusicReady"></a>
@@ -9622,11 +9622,11 @@ Read texture pixel data
 
 <a name="rlReadScreenPixels"></a>
 
-## rlReadScreenPixels(width, height) ⇒ <code>Buffer</code>
+## rlReadScreenPixels(width, height) ⇒ <code>UInt8Array</code>
 Read screen pixel data (color buffer)
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |

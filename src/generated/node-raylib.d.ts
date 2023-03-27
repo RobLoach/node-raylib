@@ -203,7 +203,7 @@ declare module "raylib" {
     /** Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4). (float *) */
     tangents: number
     /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
-    colors: Buffer
+    colors: UInt8Array
     /** Vertex indices (in case vertex data comes indexed). (unsigned short *) */
     indices: number
     /** Animated vertex positions (after bones transformations). (float *) */
@@ -211,7 +211,7 @@ declare module "raylib" {
     /** Animated normals (after bones transformations). (float *) */
     animNormals: number
     /** Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning). (unsigned char *) */
-    boneIds: Buffer
+    boneIds: UInt8Array
     /** Vertex bone weight, up to 4 bones influence by vertex (skinning). (float *) */
     boneWeights: number
     /** OpenGL Vertex Array Object id. (unsigned int) */
@@ -423,7 +423,7 @@ declare module "raylib" {
     /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1). (float *) */
     texcoords: number
     /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
-    colors: Buffer
+    colors: UInt8Array
     /** Vertex indices (in case vertex data comes indexed) (6 indices per quad). (unsigned int *) */
     indices: number
     /** OpenGL Vertex Array Object id. (unsigned int) */
@@ -767,16 +767,16 @@ declare module "raylib" {
   export function OpenURL(url: string): void
   
   /** Load file data as byte array (read) */
-  export function LoadFileData(fileName: string, bytesRead: number): Buffer
+  export function LoadFileData(fileName: string, bytesRead: number): UInt8Array
   
   /** Unload file data allocated by LoadFileData() */
-  export function UnloadFileData(data: Buffer): void
+  export function UnloadFileData(data: UInt8Array): void
   
   /** Save data to file from byte array (write), returns true on success */
   export function SaveFileData(fileName: string, data: number, bytesToWrite: number): boolean
   
   /** Export data to code (.h), returns true on success */
-  export function ExportDataAsCode(data: Buffer, size: number, fileName: string): boolean
+  export function ExportDataAsCode(data: UInt8Array, size: number, fileName: string): boolean
   
   /** Load text data from file (read), returns a '\0' terminated string */
   export function LoadFileText(fileName: string): string
@@ -848,16 +848,16 @@ declare module "raylib" {
   export function GetFileModTime(fileName: string): number
   
   /** Compress data (DEFLATE algorithm), memory must be MemFree() */
-  export function CompressData(data: Buffer, dataSize: number, compDataSize: number): Buffer
+  export function CompressData(data: UInt8Array, dataSize: number, compDataSize: number): UInt8Array
   
   /** Decompress data (DEFLATE algorithm), memory must be MemFree() */
-  export function DecompressData(compData: Buffer, compDataSize: number, dataSize: number): Buffer
+  export function DecompressData(compData: UInt8Array, compDataSize: number, dataSize: number): UInt8Array
   
   /** Encode data to Base64 string, memory must be MemFree() */
-  export function EncodeDataBase64(data: Buffer, dataSize: number, outputSize: number): string
+  export function EncodeDataBase64(data: UInt8Array, dataSize: number, outputSize: number): string
   
   /** Decode Base64 string data, memory must be MemFree() */
-  export function DecodeDataBase64(data: Buffer, outputSize: number): Buffer
+  export function DecodeDataBase64(data: UInt8Array, outputSize: number): UInt8Array
   
   /** Check if a key has been pressed once */
   export function IsKeyPressed(key: number): boolean
@@ -1151,7 +1151,7 @@ declare module "raylib" {
   export function LoadImageAnim(fileName: string, frames: number): Image
   
   /** Load image from memory buffer, fileType refers to extension: i.e. '.png' */
-  export function LoadImageFromMemory(fileType: string, fileData: Buffer, dataSize: number): Image
+  export function LoadImageFromMemory(fileType: string, fileData: UInt8Array, dataSize: number): Image
   
   /** Load image from GPU texture data */
   export function LoadImageFromTexture(texture: Texture): Image
@@ -1460,13 +1460,13 @@ declare module "raylib" {
   export function LoadFontFromImage(image: Image, key: Color, firstChar: number): Font
   
   /** Load font from memory buffer, fileType refers to extension: i.e. '.ttf' */
-  export function LoadFontFromMemory(fileType: string, fileData: Buffer, dataSize: number, fontSize: number, fontChars: number, glyphCount: number): Font
+  export function LoadFontFromMemory(fileType: string, fileData: UInt8Array, dataSize: number, fontSize: number, fontChars: number, glyphCount: number): Font
   
   /** Check if a font is ready */
   export function IsFontReady(font: Font): boolean
   
   /** Load font data for further use */
-  export function LoadFontData(fileData: Buffer, dataSize: number, fontSize: number, fontChars: number, glyphCount: number, type: number): number
+  export function LoadFontData(fileData: UInt8Array, dataSize: number, fontSize: number, fontChars: number, glyphCount: number, type: number): number
   
   /** Generate image font atlas using chars info */
   export function GenImageFontAtlas(chars: number, recs: number, glyphCount: number, fontSize: number, padding: number, packMethod: number): Image
@@ -1793,7 +1793,7 @@ declare module "raylib" {
   export function LoadWave(fileName: string): Wave
   
   /** Load wave from memory buffer, fileType refers to extension: i.e. '.wav' */
-  export function LoadWaveFromMemory(fileType: string, fileData: Buffer, dataSize: number): Wave
+  export function LoadWaveFromMemory(fileType: string, fileData: UInt8Array, dataSize: number): Wave
   
   /** Checks if wave data is ready */
   export function IsWaveReady(wave: Wave): boolean
@@ -1865,7 +1865,7 @@ declare module "raylib" {
   export function LoadMusicStream(fileName: string): Music
   
   /** Load music stream from data */
-  export function LoadMusicStreamFromMemory(fileType: string, data: Buffer, dataSize: number): Music
+  export function LoadMusicStreamFromMemory(fileType: string, data: UInt8Array, dataSize: number): Music
   
   /** Checks if a music stream is ready */
   export function IsMusicReady(music: Music): boolean
@@ -2855,7 +2855,7 @@ declare module "raylib" {
   export function rlReadTexturePixels(id: number, width: number, height: number, format: number): number
   
   /** Read screen pixel data (color buffer) */
-  export function rlReadScreenPixels(width: number, height: number): Buffer
+  export function rlReadScreenPixels(width: number, height: number): UInt8Array
   
   /** Load an empty framebuffer */
   export function rlLoadFramebuffer(width: number, height: number): number

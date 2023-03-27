@@ -1381,7 +1381,7 @@ raylib.OpenURL = OpenURL
  * @param {string} fileName
  * @param {number} bytesRead
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function LoadFileData (fileName, bytesRead) {
   return r.BindLoadFileData(
@@ -1394,7 +1394,7 @@ raylib.LoadFileData = LoadFileData
 /**
  * Unload file data allocated by LoadFileData()
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  *
  * @return {undefined}
  */
@@ -1426,7 +1426,7 @@ raylib.SaveFileData = SaveFileData
 /**
  * Export data to code (.h), returns true on success
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} size
  * @param {string} fileName
  *
@@ -1762,11 +1762,11 @@ raylib.GetFileModTime = GetFileModTime
 /**
  * Compress data (DEFLATE algorithm), memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} dataSize
  * @param {number} compDataSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function CompressData (data, dataSize, compDataSize) {
   return r.BindCompressData(
@@ -1780,11 +1780,11 @@ raylib.CompressData = CompressData
 /**
  * Decompress data (DEFLATE algorithm), memory must be MemFree()
  *
- * @param {Buffer} compData
+ * @param {UInt8Array} compData
  * @param {number} compDataSize
  * @param {number} dataSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function DecompressData (compData, compDataSize, dataSize) {
   return r.BindDecompressData(
@@ -1798,7 +1798,7 @@ raylib.DecompressData = DecompressData
 /**
  * Encode data to Base64 string, memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} dataSize
  * @param {number} outputSize
  *
@@ -1816,10 +1816,10 @@ raylib.EncodeDataBase64 = EncodeDataBase64
 /**
  * Decode Base64 string data, memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} outputSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function DecodeDataBase64 (data, outputSize) {
   return r.BindDecodeDataBase64(
@@ -3664,7 +3664,7 @@ raylib.LoadImageAnim = LoadImageAnim
  * Load image from memory buffer, fileType refers to extension: i.e. '.png'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {UInt8Array} fileData
  * @param {number} dataSize
  *
  * @return {Image} The resulting Image.
@@ -5045,7 +5045,7 @@ raylib.LoadFontFromImage = LoadFontFromImage
  * Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {UInt8Array} fileData
  * @param {number} dataSize
  * @param {number} fontSize
  * @param {number} fontChars
@@ -5091,7 +5091,7 @@ raylib.IsFontReady = IsFontReady
 /**
  * Load font data for further use
  *
- * @param {Buffer} fileData
+ * @param {UInt8Array} fileData
  * @param {number} dataSize
  * @param {number} fontSize
  * @param {number} fontChars
@@ -7732,7 +7732,7 @@ raylib.LoadWave = LoadWave
  * Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {UInt8Array} fileData
  * @param {number} dataSize
  *
  * @return {Wave} The resulting Wave.
@@ -8141,7 +8141,7 @@ raylib.LoadMusicStream = LoadMusicStream
  * Load music stream from data
  *
  * @param {string} fileType
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} dataSize
  *
  * @return {Music} The resulting Music.
@@ -13059,7 +13059,7 @@ raylib.rlReadTexturePixels = rlReadTexturePixels
  * @param {number} width
  * @param {number} height
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function rlReadScreenPixels (width, height) {
   return r.BindrlReadScreenPixels(
