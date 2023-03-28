@@ -7024,93 +7024,6 @@ function UnloadMesh (mesh) {
 raylib.UnloadMesh = UnloadMesh
 
 /**
- * Draw a 3d mesh with material and transform
- *
- * @param {Mesh} mesh
- * @param {Material} material
- * @param {Matrix} transform
- *
- * @return {undefined}
- */
-function DrawMesh (mesh, material, transform) {
-  return r.BindDrawMesh(
-    mesh.vertexCount,
-    mesh.triangleCount,
-    mesh.vertices,
-    mesh.texcoords,
-    mesh.texcoords2,
-    mesh.normals,
-    mesh.tangents,
-    mesh.colors,
-    mesh.indices,
-    mesh.animVertices,
-    mesh.animNormals,
-    mesh.boneIds,
-    mesh.boneWeights,
-    mesh.vaoId,
-    mesh.vboId,
-    material.shader.id,
-    material.shader.locs,
-    material.maps,
-    material.params,
-    transform.m0,
-    transform.m4,
-    transform.m8,
-    transform.m12,
-    transform.m1,
-    transform.m5,
-    transform.m9,
-    transform.m13,
-    transform.m2,
-    transform.m6,
-    transform.m10,
-    transform.m14,
-    transform.m3,
-    transform.m7,
-    transform.m11,
-    transform.m15
-  )
-}
-raylib.DrawMesh = DrawMesh
-
-/**
- * Draw multiple mesh instances with material and different transforms
- *
- * @param {Mesh} mesh
- * @param {Material} material
- * @param {number} transforms
- * @param {number} instances
- *
- * @return {undefined}
- */
-function DrawMeshInstanced (mesh, material, transforms, instances) {
-  return r.BindDrawMeshInstanced(
-    mesh.vertexCount,
-    mesh.triangleCount,
-    mesh.vertices,
-    mesh.texcoords,
-    mesh.texcoords2,
-    mesh.normals,
-    mesh.tangents,
-    mesh.colors,
-    mesh.indices,
-    mesh.animVertices,
-    mesh.animNormals,
-    mesh.boneIds,
-    mesh.boneWeights,
-    mesh.vaoId,
-    mesh.vboId,
-    material.shader.id,
-    material.shader.locs,
-    material.maps,
-    material.params,
-    transforms,
-    instances
-  )
-}
-raylib.DrawMeshInstanced = DrawMeshInstanced
-
-/**
  * Export mesh data to file, returns true on success
  *
  * @param {Mesh} mesh
@@ -7377,66 +7290,6 @@ function GenMeshCubicmap (cubicmap, cubeSize) {
   )
 }
 raylib.GenMeshCubicmap = GenMeshCubicmap
-
-/**
- * Load materials from model file
- *
- * @param {string} fileName
- * @param {number} materialCount
- *
- * @return {number} The resulting Material *.
- */
-function LoadMaterials (fileName, materialCount) {
-  return r.BindLoadMaterials(
-    fileName,
-    materialCount
-  )
-}
-raylib.LoadMaterials = LoadMaterials
-
-/**
- * Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)
- *
- * @return {Material} The resulting Material.
- */
-function LoadMaterialDefault () {
-  return r.BindLoadMaterialDefault()
-}
-raylib.LoadMaterialDefault = LoadMaterialDefault
-
-/**
- * Check if a material is ready
- *
- * @param {Material} material
- *
- * @return {boolean} The resulting bool.
- */
-function IsMaterialReady (material) {
-  return r.BindIsMaterialReady(
-    material.shader.id,
-    material.shader.locs,
-    material.maps,
-    material.params
-  )
-}
-raylib.IsMaterialReady = IsMaterialReady
-
-/**
- * Unload material from GPU memory (VRAM)
- *
- * @param {Material} material
- *
- * @return {undefined}
- */
-function UnloadMaterial (material) {
-  return r.BindUnloadMaterial(
-    material.shader.id,
-    material.shader.locs,
-    material.maps,
-    material.params
-  )
-}
-raylib.UnloadMaterial = UnloadMaterial
 
 /**
  * Load model animations from file
@@ -15059,36 +14912,6 @@ function GenMeshTangents (mesh) {
   }
 }
 raylib.GenMeshTangents = GenMeshTangents
-
-/**
- * Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
- *
- * @param {Material} material
- * @param {number} mapType
- * @param {Texture2D} texture
- *
- * @return {undefined}
- */
-function SetMaterialTexture (material, mapType, texture) {
-  const obj = r.BindSetMaterialTexture(
-    material.shader.id,
-    material.shader.locs,
-    material.maps,
-    material.params,
-    mapType,
-    texture.id,
-    texture.width,
-    texture.height,
-    texture.mipmaps,
-    texture.format
-  )
-  if (typeof obj !== 'undefined') {
-    for (const key in obj) {
-      material[key] = obj[key]
-    }
-  }
-}
-raylib.SetMaterialTexture = SetMaterialTexture
 
 /**
  * Set material for a mesh

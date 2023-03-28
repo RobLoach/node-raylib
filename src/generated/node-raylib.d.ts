@@ -1693,12 +1693,6 @@ declare module "raylib" {
   /** Unload mesh data from CPU and GPU */
   export function UnloadMesh(mesh: Mesh): void
   
-  /** Draw a 3d mesh with material and transform */
-  export function DrawMesh(mesh: Mesh, material: Material, transform: Matrix): void
-  
-  /** Draw multiple mesh instances with material and different transforms */
-  export function DrawMeshInstanced(mesh: Mesh, material: Material, transforms: number, instances: number): void
-  
   /** Export mesh data to file, returns true on success */
   export function ExportMesh(mesh: Mesh, fileName: string): boolean
   
@@ -1740,21 +1734,6 @@ declare module "raylib" {
   
   /** Generate cubes-based map mesh from image data */
   export function GenMeshCubicmap(cubicmap: Image, cubeSize: Vector3): Mesh
-  
-  /** Load materials from model file */
-  export function LoadMaterials(fileName: string, materialCount: number): number
-  
-  /** Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps) */
-  export function LoadMaterialDefault(): Material
-  
-  /** Check if a material is ready */
-  export function IsMaterialReady(material: Material): boolean
-  
-  /** Unload material from GPU memory (VRAM) */
-  export function UnloadMaterial(material: Material): void
-  
-  /** Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...) */
-  export function SetMaterialTexture(material: Material, mapType: number, texture: Texture): void
   
   /** Set material for a mesh */
   export function SetModelMeshMaterial(model: Model, meshId: number, materialId: number): void

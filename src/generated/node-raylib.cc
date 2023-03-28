@@ -302,14 +302,6 @@ inline MaterialMap MaterialMapFromValue(const Napi::CallbackInfo& info, int inde
   };
 }
 
-inline Material MaterialFromValue(const Napi::CallbackInfo& info, int index) {
-  return {
-     ShaderFromValue(info, index + 0),
-     (MaterialMap *) pointerFromValue(info, index + 2),
-     pointerFromValue(info, index + 3)
-  };
-}
-
 inline Transform TransformFromValue(const Napi::CallbackInfo& info, int index) {
   return {
      Vector3FromValue(info, index + 0),
@@ -611,14 +603,6 @@ inline Napi::Value ToValue(Napi::Env env, MaterialMap obj) {
   out.Set("texture", ToValue(env, obj.texture));
   out.Set("color", ToValue(env, obj.color));
   out.Set("value", ToValue(env, obj.value));
-  return out;
-}
-
-inline Napi::Value ToValue(Napi::Env env, Material obj) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("shader", ToValue(env, obj.shader));
-  out.Set("maps", ToValue(env, obj.maps));
-  out.Set("params", ToValue(env, obj.params));
   return out;
 }
 
@@ -2700,31 +2684,6 @@ Napi::Value BindGenMeshCubicmap(const Napi::CallbackInfo& info) {
     GenMeshCubicmap(
        ImageFromValue(info, 0),
        Vector3FromValue(info, 5)
-    )
-  );
-}
-
-Napi::Value BindLoadMaterials(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    LoadMaterials(
-       (const char *) stringFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
-}
-
-Napi::Value BindLoadMaterialDefault(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    LoadMaterialDefault(
-      
-    )
-  );
-}
-
-Napi::Value BindIsMaterialReady(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    IsMaterialReady(
-       MaterialFromValue(info, 0)
     )
   );
 }
@@ -6247,29 +6206,6 @@ void BindUnloadMesh(const Napi::CallbackInfo& info) {
   );
 }
 
-void BindDrawMesh(const Napi::CallbackInfo& info) {
-  DrawMesh(
-     MeshFromValue(info, 0),
-       MaterialFromValue(info, 15),
-       MatrixFromValue(info, 19)
-  );
-}
-
-void BindDrawMeshInstanced(const Napi::CallbackInfo& info) {
-  DrawMeshInstanced(
-     MeshFromValue(info, 0),
-       MaterialFromValue(info, 15),
-       (const Matrix *) pointerFromValue(info, 19),
-       intFromValue(info, 20)
-  );
-}
-
-void BindUnloadMaterial(const Napi::CallbackInfo& info) {
-  UnloadMaterial(
-     MaterialFromValue(info, 0)
-  );
-}
-
 void BindUpdateModelAnimation(const Napi::CallbackInfo& info) {
   UpdateModelAnimation(
      ModelFromValue(info, 0),
@@ -7816,15 +7752,6 @@ Napi::Value BindGenMeshTangents(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindSetMaterialTexture(const Napi::CallbackInfo& info) {
-  Material obj = MaterialFromValue(info, 0);
-  SetMaterialTexture(
-    &obj, intFromValue(info, 4),
-       TextureFromValue(info, 5)
-  );
-  return ToValue(info.Env(), obj);
-}
-
 Napi::Value BindSetModelMeshMaterial(const Napi::CallbackInfo& info) {
   Model obj = ModelFromValue(info, 0);
   SetModelMeshMaterial(
@@ -8319,8 +8246,6 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindUploadMesh", Napi::Function::New(env, BindUploadMesh));
   exports.Set("BindUpdateMeshBuffer", Napi::Function::New(env, BindUpdateMeshBuffer));
   exports.Set("BindUnloadMesh", Napi::Function::New(env, BindUnloadMesh));
-  exports.Set("BindDrawMesh", Napi::Function::New(env, BindDrawMesh));
-  exports.Set("BindDrawMeshInstanced", Napi::Function::New(env, BindDrawMeshInstanced));
   exports.Set("BindExportMesh", Napi::Function::New(env, BindExportMesh));
   exports.Set("BindGetMeshBoundingBox", Napi::Function::New(env, BindGetMeshBoundingBox));
   exports.Set("BindGenMeshTangents", Napi::Function::New(env, BindGenMeshTangents));
@@ -8335,11 +8260,6 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGenMeshKnot", Napi::Function::New(env, BindGenMeshKnot));
   exports.Set("BindGenMeshHeightmap", Napi::Function::New(env, BindGenMeshHeightmap));
   exports.Set("BindGenMeshCubicmap", Napi::Function::New(env, BindGenMeshCubicmap));
-  exports.Set("BindLoadMaterials", Napi::Function::New(env, BindLoadMaterials));
-  exports.Set("BindLoadMaterialDefault", Napi::Function::New(env, BindLoadMaterialDefault));
-  exports.Set("BindIsMaterialReady", Napi::Function::New(env, BindIsMaterialReady));
-  exports.Set("BindUnloadMaterial", Napi::Function::New(env, BindUnloadMaterial));
-  exports.Set("BindSetMaterialTexture", Napi::Function::New(env, BindSetMaterialTexture));
   exports.Set("BindSetModelMeshMaterial", Napi::Function::New(env, BindSetModelMeshMaterial));
   exports.Set("BindLoadModelAnimations", Napi::Function::New(env, BindLoadModelAnimations));
   exports.Set("BindUpdateModelAnimation", Napi::Function::New(env, BindUpdateModelAnimation));

@@ -1105,12 +1105,6 @@
 <dt><a href="#UnloadMesh">UnloadMesh(mesh)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload mesh data from CPU and GPU</p>
 </dd>
-<dt><a href="#DrawMesh">DrawMesh(mesh, material, transform)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw a 3d mesh with material and transform</p>
-</dd>
-<dt><a href="#DrawMeshInstanced">DrawMeshInstanced(mesh, material, transforms, instances)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw multiple mesh instances with material and different transforms</p>
-</dd>
 <dt><a href="#ExportMesh">ExportMesh(mesh, fileName)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Export mesh data to file, returns true on success</p>
 </dd>
@@ -1149,18 +1143,6 @@
 </dd>
 <dt><a href="#GenMeshCubicmap">GenMeshCubicmap(cubicmap, cubeSize)</a> ⇒ <code>Mesh</code></dt>
 <dd><p>Generate cubes-based map mesh from image data</p>
-</dd>
-<dt><a href="#LoadMaterials">LoadMaterials(fileName, materialCount)</a> ⇒ <code>number</code></dt>
-<dd><p>Load materials from model file</p>
-</dd>
-<dt><a href="#LoadMaterialDefault">LoadMaterialDefault()</a> ⇒ <code>Material</code></dt>
-<dd><p>Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)</p>
-</dd>
-<dt><a href="#IsMaterialReady">IsMaterialReady(material)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Check if a material is ready</p>
-</dd>
-<dt><a href="#UnloadMaterial">UnloadMaterial(material)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Unload material from GPU memory (VRAM)</p>
 </dd>
 <dt><a href="#LoadModelAnimations">LoadModelAnimations(fileName, animCount)</a> ⇒ <code>number</code></dt>
 <dd><p>Load model animations from file</p>
@@ -2136,9 +2118,6 @@
 </dd>
 <dt><a href="#GenMeshTangents">GenMeshTangents(mesh)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Compute mesh tangents</p>
-</dd>
-<dt><a href="#SetMaterialTexture">SetMaterialTexture(material, mapType, texture)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)</p>
 </dd>
 <dt><a href="#SetModelMeshMaterial">SetModelMeshMaterial(model, meshId, materialId)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set material for a mesh</p>
@@ -6581,33 +6560,6 @@ Unload mesh data from CPU and GPU
 | --- | --- |
 | mesh | <code>Mesh</code> | 
 
-<a name="DrawMesh"></a>
-
-## DrawMesh(mesh, material, transform) ⇒ <code>undefined</code>
-Draw a 3d mesh with material and transform
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| mesh | <code>Mesh</code> | 
-| material | <code>Material</code> | 
-| transform | <code>Matrix</code> | 
-
-<a name="DrawMeshInstanced"></a>
-
-## DrawMeshInstanced(mesh, material, transforms, instances) ⇒ <code>undefined</code>
-Draw multiple mesh instances with material and different transforms
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| mesh | <code>Mesh</code> | 
-| material | <code>Material</code> | 
-| transforms | <code>number</code> | 
-| instances | <code>number</code> | 
-
 <a name="ExportMesh"></a>
 
 ## ExportMesh(mesh, fileName) ⇒ <code>boolean</code>
@@ -6786,49 +6738,6 @@ Generate cubes-based map mesh from image data
 | --- | --- |
 | cubicmap | <code>Image</code> | 
 | cubeSize | [<code>Vector3</code>](#Vector3) | 
-
-<a name="LoadMaterials"></a>
-
-## LoadMaterials(fileName, materialCount) ⇒ <code>number</code>
-Load materials from model file
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting Material *.  
-
-| Param | Type |
-| --- | --- |
-| fileName | <code>string</code> | 
-| materialCount | <code>number</code> | 
-
-<a name="LoadMaterialDefault"></a>
-
-## LoadMaterialDefault() ⇒ <code>Material</code>
-Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)
-
-**Kind**: global function  
-**Returns**: <code>Material</code> - The resulting Material.  
-<a name="IsMaterialReady"></a>
-
-## IsMaterialReady(material) ⇒ <code>boolean</code>
-Check if a material is ready
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| material | <code>Material</code> | 
-
-<a name="UnloadMaterial"></a>
-
-## UnloadMaterial(material) ⇒ <code>undefined</code>
-Unload material from GPU memory (VRAM)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| material | <code>Material</code> | 
 
 <a name="LoadModelAnimations"></a>
 
@@ -10650,19 +10559,6 @@ Compute mesh tangents
 | Param | Type |
 | --- | --- |
 | mesh | <code>Mesh</code> | 
-
-<a name="SetMaterialTexture"></a>
-
-## SetMaterialTexture(material, mapType, texture) ⇒ <code>undefined</code>
-Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| material | <code>Material</code> | 
-| mapType | <code>number</code> | 
-| texture | <code>Texture</code> | 
 
 <a name="SetModelMeshMaterial"></a>
 
