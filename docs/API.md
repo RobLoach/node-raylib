@@ -934,7 +934,7 @@
 <dt><a href="#UnloadUTF8">UnloadUTF8(text)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload UTF-8 text encoded from codepoints array</p>
 </dd>
-<dt><a href="#LoadCodepoints">LoadCodepoints(text, count)</a> ⇒ <code>number</code></dt>
+<dt><a href="#LoadCodepoints">LoadCodepoints(text, count)</a> ⇒ <code>Int32Array</code></dt>
 <dd><p>Load all codepoints from a UTF-8 text string, codepoints count returned by parameter</p>
 </dd>
 <dt><a href="#UnloadCodepoints">UnloadCodepoints(codepoints)</a> ⇒ <code>undefined</code></dt>
@@ -1105,6 +1105,12 @@
 <dt><a href="#UnloadMesh">UnloadMesh(mesh)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload mesh data from CPU and GPU</p>
 </dd>
+<dt><a href="#DrawMesh">DrawMesh(mesh, material, transform)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw a 3d mesh with material and transform</p>
+</dd>
+<dt><a href="#DrawMeshInstanced">DrawMeshInstanced(mesh, material, transforms, instances)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw multiple mesh instances with material and different transforms</p>
+</dd>
 <dt><a href="#ExportMesh">ExportMesh(mesh, fileName)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Export mesh data to file, returns true on success</p>
 </dd>
@@ -1143,6 +1149,18 @@
 </dd>
 <dt><a href="#GenMeshCubicmap">GenMeshCubicmap(cubicmap, cubeSize)</a> ⇒ <code>Mesh</code></dt>
 <dd><p>Generate cubes-based map mesh from image data</p>
+</dd>
+<dt><a href="#LoadMaterials">LoadMaterials(fileName, materialCount)</a> ⇒ <code>number</code></dt>
+<dd><p>Load materials from model file</p>
+</dd>
+<dt><a href="#LoadMaterialDefault">LoadMaterialDefault()</a> ⇒ <code>Material</code></dt>
+<dd><p>Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)</p>
+</dd>
+<dt><a href="#IsMaterialReady">IsMaterialReady(material)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a material is ready</p>
+</dd>
+<dt><a href="#UnloadMaterial">UnloadMaterial(material)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload material from GPU memory (VRAM)</p>
 </dd>
 <dt><a href="#LoadModelAnimations">LoadModelAnimations(fileName, animCount)</a> ⇒ <code>number</code></dt>
 <dd><p>Load model animations from file</p>
@@ -1255,7 +1273,7 @@
 <dt><a href="#WaveCopy">WaveCopy(wave)</a> ⇒ <code>Wave</code></dt>
 <dd><p>Copy a wave to a new wave</p>
 </dd>
-<dt><a href="#LoadWaveSamples">LoadWaveSamples(wave)</a> ⇒ <code>number</code></dt>
+<dt><a href="#LoadWaveSamples">LoadWaveSamples(wave)</a> ⇒ <code>Float32Array</code></dt>
 <dd><p>Load samples data from wave as a 32bit float data array</p>
 </dd>
 <dt><a href="#UnloadWaveSamples">UnloadWaveSamples(samples)</a> ⇒ <code>undefined</code></dt>
@@ -1585,7 +1603,7 @@
 <dt><a href="#GuiIconText">GuiIconText(iconId, text)</a> ⇒ <code>string</code></dt>
 <dd><p>Get text with icon id prepended (if supported)</p>
 </dd>
-<dt><a href="#GuiGetIcons">GuiGetIcons()</a> ⇒ <code>number</code></dt>
+<dt><a href="#GuiGetIcons">GuiGetIcons()</a> ⇒ <code>UInt32Array</code></dt>
 <dd><p>Get raygui icons data pointer</p>
 </dd>
 <dt><a href="#GuiLoadIcons">GuiLoadIcons(fileName, loadIconsName)</a> ⇒ <code>number</code></dt>
@@ -1822,7 +1840,7 @@
 <dt><a href="#rlGetShaderIdDefault">rlGetShaderIdDefault()</a> ⇒ <code>number</code></dt>
 <dd><p>Get default shader id</p>
 </dd>
-<dt><a href="#rlGetShaderLocsDefault">rlGetShaderLocsDefault()</a> ⇒ <code>number</code></dt>
+<dt><a href="#rlGetShaderLocsDefault">rlGetShaderLocsDefault()</a> ⇒ <code>Int32Array</code></dt>
 <dd><p>Get default shader locations</p>
 </dd>
 <dt><a href="#rlLoadRenderBatch">rlLoadRenderBatch(numBuffers, bufferElements)</a> ⇒ <code>rlRenderBatch</code></dt>
@@ -2118,6 +2136,9 @@
 </dd>
 <dt><a href="#GenMeshTangents">GenMeshTangents(mesh)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Compute mesh tangents</p>
+</dd>
+<dt><a href="#SetMaterialTexture">SetMaterialTexture(material, mapType, texture)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)</p>
 </dd>
 <dt><a href="#SetModelMeshMaterial">SetModelMeshMaterial(model, meshId, materialId)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set material for a mesh</p>
@@ -5484,7 +5505,7 @@ Load font from file with extended parameters, use NULL for fontChars and 0 for g
 | --- | --- |
 | fileName | <code>string</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
+| fontChars | <code>Int32Array</code> | 
 | glyphCount | <code>number</code> | 
 
 <a name="LoadFontFromImage"></a>
@@ -5515,7 +5536,7 @@ Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
 | fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
+| fontChars | <code>Int32Array</code> | 
 | glyphCount | <code>number</code> | 
 
 <a name="IsFontReady"></a>
@@ -5543,7 +5564,7 @@ Load font data for further use
 | fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
+| fontChars | <code>Int32Array</code> | 
 | glyphCount | <code>number</code> | 
 | type | <code>number</code> | 
 
@@ -5686,7 +5707,7 @@ Draw multiple character (codepoint)
 | Param | Type |
 | --- | --- |
 | font | <code>Font</code> | 
-| codepoints | <code>number</code> | 
+| codepoints | <code>Int32Array</code> | 
 | count | <code>number</code> | 
 | position | [<code>Vector2</code>](#Vector2) | 
 | fontSize | <code>number</code> | 
@@ -5770,7 +5791,7 @@ Load UTF-8 text encoded from codepoints array
 
 | Param | Type |
 | --- | --- |
-| codepoints | <code>number</code> | 
+| codepoints | <code>Int32Array</code> | 
 | length | <code>number</code> | 
 
 <a name="UnloadUTF8"></a>
@@ -5786,11 +5807,11 @@ Unload UTF-8 text encoded from codepoints array
 
 <a name="LoadCodepoints"></a>
 
-## LoadCodepoints(text, count) ⇒ <code>number</code>
+## LoadCodepoints(text, count) ⇒ <code>Int32Array</code>
 Load all codepoints from a UTF-8 text string, codepoints count returned by parameter
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting int *.  
+**Returns**: <code>Int32Array</code> - The resulting int *.  
 
 | Param | Type |
 | --- | --- |
@@ -5806,7 +5827,7 @@ Unload codepoints data from memory
 
 | Param | Type |
 | --- | --- |
-| codepoints | <code>number</code> | 
+| codepoints | <code>Int32Array</code> | 
 
 <a name="GetCodepointCount"></a>
 
@@ -5870,7 +5891,7 @@ Encode one codepoint into UTF-8 byte array (array length returned as parameter)
 | Param | Type |
 | --- | --- |
 | codepoint | <code>number</code> | 
-| utf8Size | <code>number</code> | 
+| utf8Size | <code>Int32Array</code> | 
 
 <a name="TextCopy"></a>
 
@@ -6560,6 +6581,33 @@ Unload mesh data from CPU and GPU
 | --- | --- |
 | mesh | <code>Mesh</code> | 
 
+<a name="DrawMesh"></a>
+
+## DrawMesh(mesh, material, transform) ⇒ <code>undefined</code>
+Draw a 3d mesh with material and transform
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| mesh | <code>Mesh</code> | 
+| material | <code>Material</code> | 
+| transform | <code>Matrix</code> | 
+
+<a name="DrawMeshInstanced"></a>
+
+## DrawMeshInstanced(mesh, material, transforms, instances) ⇒ <code>undefined</code>
+Draw multiple mesh instances with material and different transforms
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| mesh | <code>Mesh</code> | 
+| material | <code>Material</code> | 
+| transforms | <code>number</code> | 
+| instances | <code>number</code> | 
+
 <a name="ExportMesh"></a>
 
 ## ExportMesh(mesh, fileName) ⇒ <code>boolean</code>
@@ -6738,6 +6786,49 @@ Generate cubes-based map mesh from image data
 | --- | --- |
 | cubicmap | <code>Image</code> | 
 | cubeSize | [<code>Vector3</code>](#Vector3) | 
+
+<a name="LoadMaterials"></a>
+
+## LoadMaterials(fileName, materialCount) ⇒ <code>number</code>
+Load materials from model file
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting Material *.  
+
+| Param | Type |
+| --- | --- |
+| fileName | <code>string</code> | 
+| materialCount | <code>number</code> | 
+
+<a name="LoadMaterialDefault"></a>
+
+## LoadMaterialDefault() ⇒ <code>Material</code>
+Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)
+
+**Kind**: global function  
+**Returns**: <code>Material</code> - The resulting Material.  
+<a name="IsMaterialReady"></a>
+
+## IsMaterialReady(material) ⇒ <code>boolean</code>
+Check if a material is ready
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| material | <code>Material</code> | 
+
+<a name="UnloadMaterial"></a>
+
+## UnloadMaterial(material) ⇒ <code>undefined</code>
+Unload material from GPU memory (VRAM)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| material | <code>Material</code> | 
 
 <a name="LoadModelAnimations"></a>
 
@@ -7186,11 +7277,11 @@ Copy a wave to a new wave
 
 <a name="LoadWaveSamples"></a>
 
-## LoadWaveSamples(wave) ⇒ <code>number</code>
+## LoadWaveSamples(wave) ⇒ <code>Float32Array</code>
 Load samples data from wave as a 32bit float data array
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float *.  
+**Returns**: <code>Float32Array</code> - The resulting float *.  
 
 | Param | Type |
 | --- | --- |
@@ -7205,7 +7296,7 @@ Unload samples data loaded with LoadWaveSamples()
 
 | Param | Type |
 | --- | --- |
-| samples | <code>number</code> | 
+| samples | <code>Float32Array</code> | 
 
 <a name="LoadMusicStream"></a>
 
@@ -8146,7 +8237,7 @@ Tab Bar control, returns TAB to be closed or -1
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>number</code> | 
 | count | <code>number</code> | 
-| active | <code>number</code> | 
+| active | <code>Int32Array</code> | 
 
 <a name="GuiScrollPanel"></a>
 
@@ -8269,7 +8360,7 @@ Dropdown Box control, returns selected item
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
-| active | <code>number</code> | 
+| active | <code>Int32Array</code> | 
 | editMode | <code>boolean</code> | 
 
 <a name="GuiSpinner"></a>
@@ -8284,7 +8375,7 @@ Spinner control, returns selected value
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
-| value | <code>number</code> | 
+| value | <code>Int32Array</code> | 
 | minValue | <code>number</code> | 
 | maxValue | <code>number</code> | 
 | editMode | <code>boolean</code> | 
@@ -8301,7 +8392,7 @@ Value Box control, updates input text with numbers
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
-| value | <code>number</code> | 
+| value | <code>Int32Array</code> | 
 | minValue | <code>number</code> | 
 | maxValue | <code>number</code> | 
 | editMode | <code>boolean</code> | 
@@ -8438,7 +8529,7 @@ List View control, returns selected list item index
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
-| scrollIndex | <code>number</code> | 
+| scrollIndex | <code>Int32Array</code> | 
 | active | <code>number</code> | 
 
 <a name="GuiListViewEx"></a>
@@ -8454,8 +8545,8 @@ List View with extended parameters
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>number</code> | 
 | count | <code>number</code> | 
-| focus | <code>number</code> | 
-| scrollIndex | <code>number</code> | 
+| focus | <code>Int32Array</code> | 
+| scrollIndex | <code>Int32Array</code> | 
 | active | <code>number</code> | 
 
 <a name="GuiMessageBox"></a>
@@ -8489,7 +8580,7 @@ Text Input Box control, ask for text, supports secret
 | buttons | <code>string</code> | 
 | text | <code>string</code> | 
 | textMaxSize | <code>number</code> | 
-| secretViewActive | <code>number</code> | 
+| secretViewActive | <code>Int32Array</code> | 
 
 <a name="GuiColorPicker"></a>
 
@@ -8602,11 +8693,11 @@ Get text with icon id prepended (if supported)
 
 <a name="GuiGetIcons"></a>
 
-## GuiGetIcons() ⇒ <code>number</code>
+## GuiGetIcons() ⇒ <code>UInt32Array</code>
 Get raygui icons data pointer
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting unsigned int *.  
+**Returns**: <code>UInt32Array</code> - The resulting unsigned int *.  
 <a name="GuiLoadIcons"></a>
 
 ## GuiLoadIcons(fileName, loadIconsName) ⇒ <code>number</code>
@@ -8709,7 +8800,7 @@ Multiply the current matrix by another matrix
 
 | Param | Type |
 | --- | --- |
-| matf | <code>number</code> | 
+| matf | <code>Float32Array</code> | 
 
 <a name="rlViewport"></a>
 
@@ -9335,11 +9426,11 @@ Get default shader id
 **Returns**: <code>number</code> - The resulting unsigned int.  
 <a name="rlGetShaderLocsDefault"></a>
 
-## rlGetShaderLocsDefault() ⇒ <code>number</code>
+## rlGetShaderLocsDefault() ⇒ <code>Int32Array</code>
 Get default shader locations
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting int *.  
+**Returns**: <code>Int32Array</code> - The resulting int *.  
 <a name="rlLoadRenderBatch"></a>
 
 ## rlLoadRenderBatch(numBuffers, bufferElements) ⇒ <code>rlRenderBatch</code>
@@ -9563,9 +9654,9 @@ Get OpenGL internal formats
 | Param | Type |
 | --- | --- |
 | format | <code>number</code> | 
-| glInternalFormat | <code>number</code> | 
-| glFormat | <code>number</code> | 
-| glType | <code>number</code> | 
+| glInternalFormat | <code>UInt32Array</code> | 
+| glFormat | <code>UInt32Array</code> | 
+| glType | <code>UInt32Array</code> | 
 
 <a name="rlGetPixelFormatName"></a>
 
@@ -9603,7 +9694,7 @@ Generate mipmap data for selected texture
 | width | <code>number</code> | 
 | height | <code>number</code> | 
 | format | <code>number</code> | 
-| mipmaps | <code>number</code> | 
+| mipmaps | <code>Int32Array</code> | 
 
 <a name="rlReadTexturePixels"></a>
 
@@ -9808,7 +9899,7 @@ Set shader currently active (id and locations)
 | Param | Type |
 | --- | --- |
 | id | <code>number</code> | 
-| locs | <code>number</code> | 
+| locs | <code>Int32Array</code> | 
 
 <a name="rlLoadComputeShaderProgram"></a>
 
@@ -10559,6 +10650,19 @@ Compute mesh tangents
 | Param | Type |
 | --- | --- |
 | mesh | <code>Mesh</code> | 
+
+<a name="SetMaterialTexture"></a>
+
+## SetMaterialTexture(material, mapType, texture) ⇒ <code>undefined</code>
+Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| material | <code>Material</code> | 
+| mapType | <code>number</code> | 
+| texture | <code>Texture</code> | 
 
 <a name="SetModelMeshMaterial"></a>
 

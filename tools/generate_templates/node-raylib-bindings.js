@@ -1,53 +1,87 @@
+// Some raylib functions expect the last argument to be a pointer
+// to a number that it will update after completing an operation, usually
+// when its reading a large chunk of data. for example LoadImagePalette or CompressData
+const ints = [
+  'bytesRead', // LoadFileData
+  'compDataSize', // CompressData
+  'dataSize', // DecompressData
+  'outputSize', // En/De codeDataBase64
+  'frames', // LoadImageAnim
+  'colorCount', // LoadImagePalette
+  'count', // LoadCodepoints, TextSplit
+  'codepointSize', // GetCodepoint, GetCodepointNext, GetCodepointPrevious
+  'position', // TextAppend
+  'materialCount', // LoadMaterials
+  'animCount' // LoadModelAnimations
+]
+
 /**
  * Sanitizes a type (primitive or struct) into a string that can be used as part of a function name.
  * Converts anything ending with '*' to 'pointer'
  * @param {*} name
  * @returns
  */
-const SanitizeTypeName = name => {
-  if (name === 'const Vector3') {
+const SanitizeTypeName = (type, name = '') => {
+  if (type === 'const Vector3') {
     return 'Vector3'
   }
-  if (name === 'float[2]') {
+  if (type === 'float[2]') {
     return 'pointer'
   }
-  if (name === 'char[32]') {
+  if (type === 'char[32]') {
     return 'pointer'
   }
-  if (name === 'float[4]') {
+  if (type === 'float[4]') {
     return 'pointer'
   }
-  if (name === 'unsigned int[4]') {
+  if (type === 'unsigned int[4]') {
     return '(unsigned int) pointer'
   }
-  if (name === 'Matrix[2]') {
+  if (type === 'Matrix[2]') {
     return 'pointer'
   }
-  if (name === 'const char *') {
+  if (type === 'const char *') {
     return 'string'
   }
-  if (name === 'const unsigned char *') {
-    return 'bufferPointer'
+
+  if (type === 'float *') { return 'Float32Array' }
+  if (type === 'const float *') { return 'Float32Array' }
+
+  if (type === 'int *' && !ints.includes(name)) { return 'Int32Array' }
+  if (type === 'const int *') { return 'Int32Array' }
+
+  if (type === 'unsigned int *' && !ints.includes(name)) { return 'UInt32Array' }
+  if (type === 'const unsigned int *') { return 'UInt32Array' }
+
+  if (type === 'short *') { return 'Int16Array' }
+  if (type === 'const short *') { return 'Int16Array' }
+
+  if (type === 'unsigned short *') { return 'UInt16Array' }
+  if (type === 'const unsigned short *') { return 'UInt16Array' }
+
+  if (type === 'const unsigned char *') {
+    return 'UInt8Array'
   }
-  if (name === 'unsigned char *') {
-    return 'bufferPointer'
+  if (type === 'unsigned char *') {
+    return 'UInt8Array'
   }
-  if (name.endsWith('*')) {
+
+  if (type.endsWith('*')) {
     return 'pointer'
   }
-  if (name.endsWith('Callback')) {
+  if (type.endsWith('Callback')) {
     return 'function'
   }
-  if (name === 'Camera') {
+  if (type === 'Camera') {
     return 'Camera3D'
   }
-  if (name === 'Quaternion') {
+  if (type === 'Quaternion') {
     return 'Vector4'
   }
-  if (name === 'Texture2D') {
+  if (type === 'Texture2D') {
     return 'Texture'
   }
-  return name.replace(/ /g, '')
+  return type.replace(/ /g, '')
 }
 
 const TypeUnwrappedLength = (structs, type) => {
@@ -88,7 +122,7 @@ const UnwrappedFuncArguments = (structs, func) => {
 
   return func.params
     .map(param => {
-      const out = `${param.type.endsWith('*') ? ` (${param.type})` : ''} ${SanitizeTypeName(param.type)}FromValue(info, ${length})`
+      const out = `${param.type.endsWith('*') ? ` (${param.type})` : ''} ${SanitizeTypeName(param.type, param.name)}FromValue(info, ${length})`
       length += TypeUnwrappedLength(structs, param.type)
       return out
     })
@@ -244,12 +278,30 @@ inline int intFromValue(const Napi::CallbackInfo& info, int index) {
 inline double doubleFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().DoubleValue();
 }
+
 uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
   return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
 }
-uintptr_t bufferPointerFromValue(const Napi::CallbackInfo& info, int index) {
+
+uintptr_t Float32ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Float32Array>().Data();
+}
+uintptr_t Int32ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Int32Array>().Data();
+}
+uintptr_t UInt32ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Uint32Array>().Data();
+}
+uintptr_t Int16ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Int16Array>().Data();
+}
+uintptr_t UInt16ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Uint16Array>().Data();
+}
+uintptr_t UInt8ArrayFromValue(const Napi::CallbackInfo& info, int index) {
   return (uintptr_t)info[index].As<Napi::Uint8Array>().Data();
 }
+
 inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }

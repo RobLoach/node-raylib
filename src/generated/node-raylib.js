@@ -5001,7 +5001,7 @@ raylib.LoadFont = LoadFont
  *
  * @param {string} fileName
  * @param {number} fontSize
- * @param {number} fontChars
+ * @param {Int32Array} fontChars
  * @param {number} glyphCount
  *
  * @return {Font} The resulting Font.
@@ -5048,7 +5048,7 @@ raylib.LoadFontFromImage = LoadFontFromImage
  * @param {UInt8Array} fileData
  * @param {number} dataSize
  * @param {number} fontSize
- * @param {number} fontChars
+ * @param {Int32Array} fontChars
  * @param {number} glyphCount
  *
  * @return {Font} The resulting Font.
@@ -5094,7 +5094,7 @@ raylib.IsFontReady = IsFontReady
  * @param {UInt8Array} fileData
  * @param {number} dataSize
  * @param {number} fontSize
- * @param {number} fontChars
+ * @param {Int32Array} fontChars
  * @param {number} glyphCount
  * @param {number} type
  *
@@ -5359,7 +5359,7 @@ raylib.DrawTextCodepoint = DrawTextCodepoint
  * Draw multiple character (codepoint)
  *
  * @param {Font} font
- * @param {number} codepoints
+ * @param {Int32Array} codepoints
  * @param {number} count
  * @param {Vector2} position
  * @param {number} fontSize
@@ -5517,7 +5517,7 @@ raylib.GetGlyphAtlasRec = GetGlyphAtlasRec
 /**
  * Load UTF-8 text encoded from codepoints array
  *
- * @param {number} codepoints
+ * @param {Int32Array} codepoints
  * @param {number} length
  *
  * @return {string} The resulting char *.
@@ -5550,7 +5550,7 @@ raylib.UnloadUTF8 = UnloadUTF8
  * @param {string} text
  * @param {number} count
  *
- * @return {number} The resulting int *.
+ * @return {Int32Array} The resulting int *.
  */
 function LoadCodepoints (text, count) {
   return r.BindLoadCodepoints(
@@ -5563,7 +5563,7 @@ raylib.LoadCodepoints = LoadCodepoints
 /**
  * Unload codepoints data from memory
  *
- * @param {number} codepoints
+ * @param {Int32Array} codepoints
  *
  * @return {undefined}
  */
@@ -5640,7 +5640,7 @@ raylib.GetCodepointPrevious = GetCodepointPrevious
  * Encode one codepoint into UTF-8 byte array (array length returned as parameter)
  *
  * @param {number} codepoint
- * @param {number} utf8Size
+ * @param {Int32Array} utf8Size
  *
  * @return {string} The resulting const char *.
  */
@@ -7024,6 +7024,93 @@ function UnloadMesh (mesh) {
 raylib.UnloadMesh = UnloadMesh
 
 /**
+ * Draw a 3d mesh with material and transform
+ *
+ * @param {Mesh} mesh
+ * @param {Material} material
+ * @param {Matrix} transform
+ *
+ * @return {undefined}
+ */
+function DrawMesh (mesh, material, transform) {
+  return r.BindDrawMesh(
+    mesh.vertexCount,
+    mesh.triangleCount,
+    mesh.vertices,
+    mesh.texcoords,
+    mesh.texcoords2,
+    mesh.normals,
+    mesh.tangents,
+    mesh.colors,
+    mesh.indices,
+    mesh.animVertices,
+    mesh.animNormals,
+    mesh.boneIds,
+    mesh.boneWeights,
+    mesh.vaoId,
+    mesh.vboId,
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params,
+    transform.m0,
+    transform.m4,
+    transform.m8,
+    transform.m12,
+    transform.m1,
+    transform.m5,
+    transform.m9,
+    transform.m13,
+    transform.m2,
+    transform.m6,
+    transform.m10,
+    transform.m14,
+    transform.m3,
+    transform.m7,
+    transform.m11,
+    transform.m15
+  )
+}
+raylib.DrawMesh = DrawMesh
+
+/**
+ * Draw multiple mesh instances with material and different transforms
+ *
+ * @param {Mesh} mesh
+ * @param {Material} material
+ * @param {number} transforms
+ * @param {number} instances
+ *
+ * @return {undefined}
+ */
+function DrawMeshInstanced (mesh, material, transforms, instances) {
+  return r.BindDrawMeshInstanced(
+    mesh.vertexCount,
+    mesh.triangleCount,
+    mesh.vertices,
+    mesh.texcoords,
+    mesh.texcoords2,
+    mesh.normals,
+    mesh.tangents,
+    mesh.colors,
+    mesh.indices,
+    mesh.animVertices,
+    mesh.animNormals,
+    mesh.boneIds,
+    mesh.boneWeights,
+    mesh.vaoId,
+    mesh.vboId,
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params,
+    transforms,
+    instances
+  )
+}
+raylib.DrawMeshInstanced = DrawMeshInstanced
+
+/**
  * Export mesh data to file, returns true on success
  *
  * @param {Mesh} mesh
@@ -7290,6 +7377,66 @@ function GenMeshCubicmap (cubicmap, cubeSize) {
   )
 }
 raylib.GenMeshCubicmap = GenMeshCubicmap
+
+/**
+ * Load materials from model file
+ *
+ * @param {string} fileName
+ * @param {number} materialCount
+ *
+ * @return {number} The resulting Material *.
+ */
+function LoadMaterials (fileName, materialCount) {
+  return r.BindLoadMaterials(
+    fileName,
+    materialCount
+  )
+}
+raylib.LoadMaterials = LoadMaterials
+
+/**
+ * Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)
+ *
+ * @return {Material} The resulting Material.
+ */
+function LoadMaterialDefault () {
+  return r.BindLoadMaterialDefault()
+}
+raylib.LoadMaterialDefault = LoadMaterialDefault
+
+/**
+ * Check if a material is ready
+ *
+ * @param {Material} material
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsMaterialReady (material) {
+  return r.BindIsMaterialReady(
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params
+  )
+}
+raylib.IsMaterialReady = IsMaterialReady
+
+/**
+ * Unload material from GPU memory (VRAM)
+ *
+ * @param {Material} material
+ *
+ * @return {undefined}
+ */
+function UnloadMaterial (material) {
+  return r.BindUnloadMaterial(
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params
+  )
+}
+raylib.UnloadMaterial = UnloadMaterial
 
 /**
  * Load model animations from file
@@ -8096,7 +8243,7 @@ raylib.WaveCopy = WaveCopy
  *
  * @param {Wave} wave
  *
- * @return {number} The resulting float *.
+ * @return {Float32Array} The resulting float *.
  */
 function LoadWaveSamples (wave) {
   return r.BindLoadWaveSamples(
@@ -8112,7 +8259,7 @@ raylib.LoadWaveSamples = LoadWaveSamples
 /**
  * Unload samples data loaded with LoadWaveSamples()
  *
- * @param {number} samples
+ * @param {Float32Array} samples
  *
  * @return {undefined}
  */
@@ -10797,7 +10944,7 @@ raylib.GuiPanel = GuiPanel
  * @param {Rectangle} bounds
  * @param {number} text
  * @param {number} count
- * @param {number} active
+ * @param {Int32Array} active
  *
  * @return {number} The resulting int.
  */
@@ -10986,7 +11133,7 @@ raylib.GuiComboBox = GuiComboBox
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {number} active
+ * @param {Int32Array} active
  * @param {boolean} editMode
  *
  * @return {boolean} The resulting bool.
@@ -11009,7 +11156,7 @@ raylib.GuiDropdownBox = GuiDropdownBox
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {number} value
+ * @param {Int32Array} value
  * @param {number} minValue
  * @param {number} maxValue
  * @param {boolean} editMode
@@ -11036,7 +11183,7 @@ raylib.GuiSpinner = GuiSpinner
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {number} value
+ * @param {Int32Array} value
  * @param {number} minValue
  * @param {number} maxValue
  * @param {boolean} editMode
@@ -11251,7 +11398,7 @@ raylib.GuiGrid = GuiGrid
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {number} scrollIndex
+ * @param {Int32Array} scrollIndex
  * @param {number} active
  *
  * @return {number} The resulting int.
@@ -11275,8 +11422,8 @@ raylib.GuiListView = GuiListView
  * @param {Rectangle} bounds
  * @param {number} text
  * @param {number} count
- * @param {number} focus
- * @param {number} scrollIndex
+ * @param {Int32Array} focus
+ * @param {Int32Array} scrollIndex
  * @param {number} active
  *
  * @return {number} The resulting int.
@@ -11328,7 +11475,7 @@ raylib.GuiMessageBox = GuiMessageBox
  * @param {string} buttons
  * @param {string} text
  * @param {number} textMaxSize
- * @param {number} secretViewActive
+ * @param {Int32Array} secretViewActive
  *
  * @return {number} The resulting int.
  */
@@ -11515,7 +11662,7 @@ raylib.GuiIconText = GuiIconText
 /**
  * Get raygui icons data pointer
  *
- * @return {number} The resulting unsigned int *.
+ * @return {UInt32Array} The resulting unsigned int *.
  */
 function GuiGetIcons () {
   return r.BindGuiGetIcons()
@@ -11669,7 +11816,7 @@ raylib.rlScalef = rlScalef
 /**
  * Multiply the current matrix by another matrix
  *
- * @param {number} matf
+ * @param {Float32Array} matf
  *
  * @return {undefined}
  */
@@ -12595,7 +12742,7 @@ raylib.rlGetShaderIdDefault = rlGetShaderIdDefault
 /**
  * Get default shader locations
  *
- * @return {number} The resulting int *.
+ * @return {Int32Array} The resulting int *.
  */
 function rlGetShaderLocsDefault () {
   return r.BindrlGetShaderLocsDefault()
@@ -12967,9 +13114,9 @@ raylib.rlUpdateTexture = rlUpdateTexture
  * Get OpenGL internal formats
  *
  * @param {number} format
- * @param {number} glInternalFormat
- * @param {number} glFormat
- * @param {number} glType
+ * @param {UInt32Array} glInternalFormat
+ * @param {UInt32Array} glFormat
+ * @param {UInt32Array} glType
  *
  * @return {undefined}
  */
@@ -13018,7 +13165,7 @@ raylib.rlUnloadTexture = rlUnloadTexture
  * @param {number} width
  * @param {number} height
  * @param {number} format
- * @param {number} mipmaps
+ * @param {Int32Array} mipmaps
  *
  * @return {undefined}
  */
@@ -13300,7 +13447,7 @@ raylib.rlSetUniformSampler = rlSetUniformSampler
  * Set shader currently active (id and locations)
  *
  * @param {number} id
- * @param {number} locs
+ * @param {Int32Array} locs
  *
  * @return {undefined}
  */
@@ -14912,6 +15059,36 @@ function GenMeshTangents (mesh) {
   }
 }
 raylib.GenMeshTangents = GenMeshTangents
+
+/**
+ * Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
+ *
+ * @param {Material} material
+ * @param {number} mapType
+ * @param {Texture} texture
+ *
+ * @return {undefined}
+ */
+function SetMaterialTexture (material, mapType, texture) {
+  const obj = r.BindSetMaterialTexture(
+    material.shader.id,
+    material.shader.locs,
+    material.maps,
+    material.params,
+    mapType,
+    texture.id,
+    texture.width,
+    texture.height,
+    texture.mipmaps,
+    texture.format
+  )
+  if (typeof obj !== 'undefined') {
+    for (const key in obj) {
+      material[key] = obj[key]
+    }
+  }
+}
+raylib.SetMaterialTexture = SetMaterialTexture
 
 /**
  * Set material for a mesh

@@ -5,7 +5,7 @@ const FunctionDefinition = (func) => {
   export function ${func.name}(${!func.params
       ? ''
       : func.params
-        .map(param => `${param.name}: ${ArgumentTypeConversion(param.type)}`)
+        .map(param => `${param.name}: ${ArgumentTypeConversion(param.type, param.name)}`)
         .join(', ')
     }): ${ArgumentTypeConversion(func.returnType)}
   `
