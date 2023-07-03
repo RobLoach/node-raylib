@@ -2970,9 +2970,9 @@ declare module "raylib" {
   /** Set shader uniform Vec2 */
   export function SetShaderVec2(shader: Shader, locIndex: number, value: Vector2): void
   /** Set shader uniform Vec3 */
-  export function SetShaderVector3(shader: Shader, locIndex: number, value: Vector3): void
+  export function SetShaderVec3(shader: Shader, locIndex: number, value: Vector3): void
   /** Set shader uniform Vec4 */
-  export function SetShaderVector4(shader: Shader, locIndex: number, value: Vector4): void
+  export function SetShaderVec4(shader: Shader, locIndex: number, value: Vector4): void
 
     /** Set to try enabling V-Sync on GPU */
   export const FLAG_VSYNC_HINT = 64
