@@ -40,7 +40,7 @@ for (let i = 0; i < MAX_BUILDINGS; i++) {
 }
 
 const camera = r.Camera2D(
-  r.Vector2(),
+  r.Vector2(screenWidth / 2, screenHeight / 2),
   r.Vector2(player.x + 20, player.y + 20),
   0, 1)
 
