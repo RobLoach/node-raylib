@@ -295,7 +295,7 @@
 <dt><a href="#OpenURL">OpenURL(url)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Open URL with default system browser (if available)</p>
 </dd>
-<dt><a href="#LoadFileData">LoadFileData(fileName, bytesRead)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#LoadFileData">LoadFileData(fileName, bytesRead)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Load file data as byte array (read)</p>
 </dd>
 <dt><a href="#UnloadFileData">UnloadFileData(data)</a> ⇒ <code>undefined</code></dt>
@@ -376,16 +376,16 @@
 <dt><a href="#GetFileModTime">GetFileModTime(fileName)</a> ⇒ <code>number</code></dt>
 <dd><p>Get file modification time (last write time)</p>
 </dd>
-<dt><a href="#CompressData">CompressData(data, dataSize, compDataSize)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#CompressData">CompressData(data, dataSize, compDataSize)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Compress data (DEFLATE algorithm), memory must be MemFree()</p>
 </dd>
-<dt><a href="#DecompressData">DecompressData(compData, compDataSize, dataSize)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#DecompressData">DecompressData(compData, compDataSize, dataSize)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Decompress data (DEFLATE algorithm), memory must be MemFree()</p>
 </dd>
 <dt><a href="#EncodeDataBase64">EncodeDataBase64(data, dataSize, outputSize)</a> ⇒ <code>string</code></dt>
 <dd><p>Encode data to Base64 string, memory must be MemFree()</p>
 </dd>
-<dt><a href="#DecodeDataBase64">DecodeDataBase64(data, outputSize)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#DecodeDataBase64">DecodeDataBase64(data, outputSize)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Decode Base64 string data, memory must be MemFree()</p>
 </dd>
 <dt><a href="#IsKeyPressed">IsKeyPressed(key)</a> ⇒ <code>boolean</code></dt>
@@ -934,7 +934,7 @@
 <dt><a href="#UnloadUTF8">UnloadUTF8(text)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload UTF-8 text encoded from codepoints array</p>
 </dd>
-<dt><a href="#LoadCodepoints">LoadCodepoints(text, count)</a> ⇒ <code>number</code></dt>
+<dt><a href="#LoadCodepoints">LoadCodepoints(text, count)</a> ⇒ <code>Int32Array</code></dt>
 <dd><p>Load all codepoints from a UTF-8 text string, codepoints count returned by parameter</p>
 </dd>
 <dt><a href="#UnloadCodepoints">UnloadCodepoints(codepoints)</a> ⇒ <code>undefined</code></dt>
@@ -1255,7 +1255,7 @@
 <dt><a href="#WaveCopy">WaveCopy(wave)</a> ⇒ <code>Wave</code></dt>
 <dd><p>Copy a wave to a new wave</p>
 </dd>
-<dt><a href="#LoadWaveSamples">LoadWaveSamples(wave)</a> ⇒ <code>number</code></dt>
+<dt><a href="#LoadWaveSamples">LoadWaveSamples(wave)</a> ⇒ <code>Float32Array</code></dt>
 <dd><p>Load samples data from wave as a 32bit float data array</p>
 </dd>
 <dt><a href="#UnloadWaveSamples">UnloadWaveSamples(samples)</a> ⇒ <code>undefined</code></dt>
@@ -1585,7 +1585,7 @@
 <dt><a href="#GuiIconText">GuiIconText(iconId, text)</a> ⇒ <code>string</code></dt>
 <dd><p>Get text with icon id prepended (if supported)</p>
 </dd>
-<dt><a href="#GuiGetIcons">GuiGetIcons()</a> ⇒ <code>number</code></dt>
+<dt><a href="#GuiGetIcons">GuiGetIcons()</a> ⇒ <code>UInt32Array</code></dt>
 <dd><p>Get raygui icons data pointer</p>
 </dd>
 <dt><a href="#GuiLoadIcons">GuiLoadIcons(fileName, loadIconsName)</a> ⇒ <code>number</code></dt>
@@ -1822,7 +1822,7 @@
 <dt><a href="#rlGetShaderIdDefault">rlGetShaderIdDefault()</a> ⇒ <code>number</code></dt>
 <dd><p>Get default shader id</p>
 </dd>
-<dt><a href="#rlGetShaderLocsDefault">rlGetShaderLocsDefault()</a> ⇒ <code>number</code></dt>
+<dt><a href="#rlGetShaderLocsDefault">rlGetShaderLocsDefault()</a> ⇒ <code>Int32Array</code></dt>
 <dd><p>Get default shader locations</p>
 </dd>
 <dt><a href="#rlLoadRenderBatch">rlLoadRenderBatch(numBuffers, bufferElements)</a> ⇒ <code>rlRenderBatch</code></dt>
@@ -1891,7 +1891,7 @@
 <dt><a href="#rlReadTexturePixels">rlReadTexturePixels(id, width, height, format)</a> ⇒ <code>number</code></dt>
 <dd><p>Read texture pixel data</p>
 </dd>
-<dt><a href="#rlReadScreenPixels">rlReadScreenPixels(width, height)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#rlReadScreenPixels">rlReadScreenPixels(width, height)</a> ⇒ <code>UInt8Array</code></dt>
 <dd><p>Read screen pixel data (color buffer)</p>
 </dd>
 <dt><a href="#rlLoadFramebuffer">rlLoadFramebuffer(width, height)</a> ⇒ <code>number</code></dt>
@@ -3093,11 +3093,11 @@ Open URL with default system browser (if available)
 
 <a name="LoadFileData"></a>
 
-## LoadFileData(fileName, bytesRead) ⇒ <code>Buffer</code>
+## LoadFileData(fileName, bytesRead) ⇒ <code>UInt8Array</code>
 Load file data as byte array (read)
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
@@ -3113,7 +3113,7 @@ Unload file data allocated by LoadFileData()
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 
 <a name="SaveFileData"></a>
 
@@ -3139,7 +3139,7 @@ Export data to code (.h), returns true on success
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | size | <code>number</code> | 
 | fileName | <code>string</code> | 
 
@@ -3402,29 +3402,29 @@ Get file modification time (last write time)
 
 <a name="CompressData"></a>
 
-## CompressData(data, dataSize, compDataSize) ⇒ <code>Buffer</code>
+## CompressData(data, dataSize, compDataSize) ⇒ <code>UInt8Array</code>
 Compress data (DEFLATE algorithm), memory must be MemFree()
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | compDataSize | <code>number</code> | 
 
 <a name="DecompressData"></a>
 
-## DecompressData(compData, compDataSize, dataSize) ⇒ <code>Buffer</code>
+## DecompressData(compData, compDataSize, dataSize) ⇒ <code>UInt8Array</code>
 Decompress data (DEFLATE algorithm), memory must be MemFree()
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
-| compData | <code>Buffer</code> | 
+| compData | <code>UInt8Array</code> | 
 | compDataSize | <code>number</code> | 
 | dataSize | <code>number</code> | 
 
@@ -3438,21 +3438,21 @@ Encode data to Base64 string, memory must be MemFree()
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | outputSize | <code>number</code> | 
 
 <a name="DecodeDataBase64"></a>
 
-## DecodeDataBase64(data, outputSize) ⇒ <code>Buffer</code>
+## DecodeDataBase64(data, outputSize) ⇒ <code>UInt8Array</code>
 Decode Base64 string data, memory must be MemFree()
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | outputSize | <code>number</code> | 
 
 <a name="IsKeyPressed"></a>
@@ -4650,7 +4650,7 @@ Load image from memory buffer, fileType refers to extension: i.e. '.png'
 | Param | Type |
 | --- | --- |
 | fileType | <code>string</code> | 
-| fileData | <code>Buffer</code> | 
+| fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 
 <a name="LoadImageFromTexture"></a>
@@ -5484,7 +5484,7 @@ Load font from file with extended parameters, use NULL for fontChars and 0 for g
 | --- | --- |
 | fileName | <code>string</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
+| fontChars | <code>Int32Array</code> | 
 | glyphCount | <code>number</code> | 
 
 <a name="LoadFontFromImage"></a>
@@ -5512,10 +5512,10 @@ Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
 | Param | Type |
 | --- | --- |
 | fileType | <code>string</code> | 
-| fileData | <code>Buffer</code> | 
+| fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
+| fontChars | <code>Int32Array</code> | 
 | glyphCount | <code>number</code> | 
 
 <a name="IsFontReady"></a>
@@ -5540,10 +5540,10 @@ Load font data for further use
 
 | Param | Type |
 | --- | --- |
-| fileData | <code>Buffer</code> | 
+| fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
+| fontChars | <code>Int32Array</code> | 
 | glyphCount | <code>number</code> | 
 | type | <code>number</code> | 
 
@@ -5686,7 +5686,7 @@ Draw multiple character (codepoint)
 | Param | Type |
 | --- | --- |
 | font | <code>Font</code> | 
-| codepoints | <code>number</code> | 
+| codepoints | <code>Int32Array</code> | 
 | count | <code>number</code> | 
 | position | [<code>Vector2</code>](#Vector2) | 
 | fontSize | <code>number</code> | 
@@ -5770,7 +5770,7 @@ Load UTF-8 text encoded from codepoints array
 
 | Param | Type |
 | --- | --- |
-| codepoints | <code>number</code> | 
+| codepoints | <code>Int32Array</code> | 
 | length | <code>number</code> | 
 
 <a name="UnloadUTF8"></a>
@@ -5786,11 +5786,11 @@ Unload UTF-8 text encoded from codepoints array
 
 <a name="LoadCodepoints"></a>
 
-## LoadCodepoints(text, count) ⇒ <code>number</code>
+## LoadCodepoints(text, count) ⇒ <code>Int32Array</code>
 Load all codepoints from a UTF-8 text string, codepoints count returned by parameter
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting int *.  
+**Returns**: <code>Int32Array</code> - The resulting int *.  
 
 | Param | Type |
 | --- | --- |
@@ -5806,7 +5806,7 @@ Unload codepoints data from memory
 
 | Param | Type |
 | --- | --- |
-| codepoints | <code>number</code> | 
+| codepoints | <code>Int32Array</code> | 
 
 <a name="GetCodepointCount"></a>
 
@@ -5870,7 +5870,7 @@ Encode one codepoint into UTF-8 byte array (array length returned as parameter)
 | Param | Type |
 | --- | --- |
 | codepoint | <code>number</code> | 
-| utf8Size | <code>number</code> | 
+| utf8Size | <code>Int32Array</code> | 
 
 <a name="TextCopy"></a>
 
@@ -6968,7 +6968,7 @@ Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
 | Param | Type |
 | --- | --- |
 | fileType | <code>string</code> | 
-| fileData | <code>Buffer</code> | 
+| fileData | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 
 <a name="IsWaveReady"></a>
@@ -7186,11 +7186,11 @@ Copy a wave to a new wave
 
 <a name="LoadWaveSamples"></a>
 
-## LoadWaveSamples(wave) ⇒ <code>number</code>
+## LoadWaveSamples(wave) ⇒ <code>Float32Array</code>
 Load samples data from wave as a 32bit float data array
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting float *.  
+**Returns**: <code>Float32Array</code> - The resulting float *.  
 
 | Param | Type |
 | --- | --- |
@@ -7205,7 +7205,7 @@ Unload samples data loaded with LoadWaveSamples()
 
 | Param | Type |
 | --- | --- |
-| samples | <code>number</code> | 
+| samples | <code>Float32Array</code> | 
 
 <a name="LoadMusicStream"></a>
 
@@ -7230,7 +7230,7 @@ Load music stream from data
 | Param | Type |
 | --- | --- |
 | fileType | <code>string</code> | 
-| data | <code>Buffer</code> | 
+| data | <code>UInt8Array</code> | 
 | dataSize | <code>number</code> | 
 
 <a name="IsMusicReady"></a>
@@ -8146,7 +8146,7 @@ Tab Bar control, returns TAB to be closed or -1
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>number</code> | 
 | count | <code>number</code> | 
-| active | <code>number</code> | 
+| active | <code>Int32Array</code> | 
 
 <a name="GuiScrollPanel"></a>
 
@@ -8269,7 +8269,7 @@ Dropdown Box control, returns selected item
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
-| active | <code>number</code> | 
+| active | <code>Int32Array</code> | 
 | editMode | <code>boolean</code> | 
 
 <a name="GuiSpinner"></a>
@@ -8284,7 +8284,7 @@ Spinner control, returns selected value
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
-| value | <code>number</code> | 
+| value | <code>Int32Array</code> | 
 | minValue | <code>number</code> | 
 | maxValue | <code>number</code> | 
 | editMode | <code>boolean</code> | 
@@ -8301,7 +8301,7 @@ Value Box control, updates input text with numbers
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
-| value | <code>number</code> | 
+| value | <code>Int32Array</code> | 
 | minValue | <code>number</code> | 
 | maxValue | <code>number</code> | 
 | editMode | <code>boolean</code> | 
@@ -8438,7 +8438,7 @@ List View control, returns selected list item index
 | --- | --- |
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>string</code> | 
-| scrollIndex | <code>number</code> | 
+| scrollIndex | <code>Int32Array</code> | 
 | active | <code>number</code> | 
 
 <a name="GuiListViewEx"></a>
@@ -8454,8 +8454,8 @@ List View with extended parameters
 | bounds | [<code>Rectangle</code>](#Rectangle) | 
 | text | <code>number</code> | 
 | count | <code>number</code> | 
-| focus | <code>number</code> | 
-| scrollIndex | <code>number</code> | 
+| focus | <code>Int32Array</code> | 
+| scrollIndex | <code>Int32Array</code> | 
 | active | <code>number</code> | 
 
 <a name="GuiMessageBox"></a>
@@ -8489,7 +8489,7 @@ Text Input Box control, ask for text, supports secret
 | buttons | <code>string</code> | 
 | text | <code>string</code> | 
 | textMaxSize | <code>number</code> | 
-| secretViewActive | <code>number</code> | 
+| secretViewActive | <code>Int32Array</code> | 
 
 <a name="GuiColorPicker"></a>
 
@@ -8602,11 +8602,11 @@ Get text with icon id prepended (if supported)
 
 <a name="GuiGetIcons"></a>
 
-## GuiGetIcons() ⇒ <code>number</code>
+## GuiGetIcons() ⇒ <code>UInt32Array</code>
 Get raygui icons data pointer
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting unsigned int *.  
+**Returns**: <code>UInt32Array</code> - The resulting unsigned int *.  
 <a name="GuiLoadIcons"></a>
 
 ## GuiLoadIcons(fileName, loadIconsName) ⇒ <code>number</code>
@@ -8709,7 +8709,7 @@ Multiply the current matrix by another matrix
 
 | Param | Type |
 | --- | --- |
-| matf | <code>number</code> | 
+| matf | <code>Float32Array</code> | 
 
 <a name="rlViewport"></a>
 
@@ -9335,11 +9335,11 @@ Get default shader id
 **Returns**: <code>number</code> - The resulting unsigned int.  
 <a name="rlGetShaderLocsDefault"></a>
 
-## rlGetShaderLocsDefault() ⇒ <code>number</code>
+## rlGetShaderLocsDefault() ⇒ <code>Int32Array</code>
 Get default shader locations
 
 **Kind**: global function  
-**Returns**: <code>number</code> - The resulting int *.  
+**Returns**: <code>Int32Array</code> - The resulting int *.  
 <a name="rlLoadRenderBatch"></a>
 
 ## rlLoadRenderBatch(numBuffers, bufferElements) ⇒ <code>rlRenderBatch</code>
@@ -9563,9 +9563,9 @@ Get OpenGL internal formats
 | Param | Type |
 | --- | --- |
 | format | <code>number</code> | 
-| glInternalFormat | <code>number</code> | 
-| glFormat | <code>number</code> | 
-| glType | <code>number</code> | 
+| glInternalFormat | <code>UInt32Array</code> | 
+| glFormat | <code>UInt32Array</code> | 
+| glType | <code>UInt32Array</code> | 
 
 <a name="rlGetPixelFormatName"></a>
 
@@ -9603,7 +9603,7 @@ Generate mipmap data for selected texture
 | width | <code>number</code> | 
 | height | <code>number</code> | 
 | format | <code>number</code> | 
-| mipmaps | <code>number</code> | 
+| mipmaps | <code>Int32Array</code> | 
 
 <a name="rlReadTexturePixels"></a>
 
@@ -9622,11 +9622,11 @@ Read texture pixel data
 
 <a name="rlReadScreenPixels"></a>
 
-## rlReadScreenPixels(width, height) ⇒ <code>Buffer</code>
+## rlReadScreenPixels(width, height) ⇒ <code>UInt8Array</code>
 Read screen pixel data (color buffer)
 
 **Kind**: global function  
-**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+**Returns**: <code>UInt8Array</code> - The resulting unsigned char *.  
 
 | Param | Type |
 | --- | --- |
@@ -9808,7 +9808,7 @@ Set shader currently active (id and locations)
 | Param | Type |
 | --- | --- |
 | id | <code>number</code> | 
-| locs | <code>number</code> | 
+| locs | <code>Int32Array</code> | 
 
 <a name="rlLoadComputeShaderProgram"></a>
 

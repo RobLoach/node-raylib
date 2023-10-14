@@ -45,7 +45,7 @@ const JSDocsForFunction = (structs, func) => {
   if (func.params) {
     params = '\n *'
     for (const param of func.params) {
-      params += `\n * @param {${ArgumentTypeConversion(param.type)}} ${param.name}`
+      params += `\n * @param {${ArgumentTypeConversion(param.type, param.name)}} ${param.name}`
     }
   }
 

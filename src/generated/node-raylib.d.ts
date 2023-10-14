@@ -193,38 +193,38 @@ declare module "raylib" {
     /** Number of triangles stored (indexed or not). (int) */
     triangleCount: number
     /** Vertex position (XYZ - 3 components per vertex) (shader-location = 0). (float *) */
-    vertices: number
+    vertices: Float32Array
     /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1). (float *) */
-    texcoords: number
+    texcoords: Float32Array
     /** Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5). (float *) */
-    texcoords2: number
+    texcoords2: Float32Array
     /** Vertex normals (XYZ - 3 components per vertex) (shader-location = 2). (float *) */
-    normals: number
+    normals: Float32Array
     /** Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4). (float *) */
-    tangents: number
+    tangents: Float32Array
     /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
-    colors: Buffer
+    colors: UInt8Array
     /** Vertex indices (in case vertex data comes indexed). (unsigned short *) */
-    indices: number
+    indices: UInt16Array
     /** Animated vertex positions (after bones transformations). (float *) */
-    animVertices: number
+    animVertices: Float32Array
     /** Animated normals (after bones transformations). (float *) */
-    animNormals: number
+    animNormals: Float32Array
     /** Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning). (unsigned char *) */
-    boneIds: Buffer
+    boneIds: UInt8Array
     /** Vertex bone weight, up to 4 bones influence by vertex (skinning). (float *) */
-    boneWeights: number
+    boneWeights: Float32Array
     /** OpenGL Vertex Array Object id. (unsigned int) */
     vaoId: number
     /** OpenGL Vertex Buffer Objects id (default vertex data). (unsigned int *) */
-    vboId: number
+    vboId: UInt32Array
   }
   /** Shader */
   export interface Shader {
     /** Shader program id. (unsigned int) */
     id: number
     /** Shader locations array (RL_MAX_SHADER_LOCATIONS). (int *) */
-    locs: number
+    locs: Int32Array
   }
   /** MaterialMap */
   export interface MaterialMap {
@@ -273,7 +273,7 @@ declare module "raylib" {
     /** Materials array. (Material *) */
     materials: number
     /** Mesh material number. (int *) */
-    meshMaterial: number
+    meshMaterial: Int32Array
     /** Number of bones. (int) */
     boneCount: number
     /** Bones information (skeleton). (BoneInfo *) */
@@ -419,13 +419,13 @@ declare module "raylib" {
     /** Number of elements in the buffer (QUADS). (int) */
     elementCount: number
     /** Vertex position (XYZ - 3 components per vertex) (shader-location = 0). (float *) */
-    vertices: number
+    vertices: Float32Array
     /** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1). (float *) */
-    texcoords: number
+    texcoords: Float32Array
     /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
-    colors: Buffer
+    colors: UInt8Array
     /** Vertex indices (in case vertex data comes indexed) (6 indices per quad). (unsigned int *) */
-    indices: number
+    indices: UInt32Array
     /** OpenGL Vertex Array Object id. (unsigned int) */
     vaoId: number
     /** OpenGL Vertex Buffer Objects id (4 types of vertex data). (unsigned int[4]) */
@@ -767,16 +767,16 @@ declare module "raylib" {
   export function OpenURL(url: string): void
   
   /** Load file data as byte array (read) */
-  export function LoadFileData(fileName: string, bytesRead: number): Buffer
+  export function LoadFileData(fileName: string, bytesRead: number): UInt8Array
   
   /** Unload file data allocated by LoadFileData() */
-  export function UnloadFileData(data: Buffer): void
+  export function UnloadFileData(data: UInt8Array): void
   
   /** Save data to file from byte array (write), returns true on success */
   export function SaveFileData(fileName: string, data: number, bytesToWrite: number): boolean
   
   /** Export data to code (.h), returns true on success */
-  export function ExportDataAsCode(data: Buffer, size: number, fileName: string): boolean
+  export function ExportDataAsCode(data: UInt8Array, size: number, fileName: string): boolean
   
   /** Load text data from file (read), returns a '\0' terminated string */
   export function LoadFileText(fileName: string): string
@@ -848,16 +848,16 @@ declare module "raylib" {
   export function GetFileModTime(fileName: string): number
   
   /** Compress data (DEFLATE algorithm), memory must be MemFree() */
-  export function CompressData(data: Buffer, dataSize: number, compDataSize: number): Buffer
+  export function CompressData(data: UInt8Array, dataSize: number, compDataSize: number): UInt8Array
   
   /** Decompress data (DEFLATE algorithm), memory must be MemFree() */
-  export function DecompressData(compData: Buffer, compDataSize: number, dataSize: number): Buffer
+  export function DecompressData(compData: UInt8Array, compDataSize: number, dataSize: number): UInt8Array
   
   /** Encode data to Base64 string, memory must be MemFree() */
-  export function EncodeDataBase64(data: Buffer, dataSize: number, outputSize: number): string
+  export function EncodeDataBase64(data: UInt8Array, dataSize: number, outputSize: number): string
   
   /** Decode Base64 string data, memory must be MemFree() */
-  export function DecodeDataBase64(data: Buffer, outputSize: number): Buffer
+  export function DecodeDataBase64(data: UInt8Array, outputSize: number): UInt8Array
   
   /** Check if a key has been pressed once */
   export function IsKeyPressed(key: number): boolean
@@ -1151,7 +1151,7 @@ declare module "raylib" {
   export function LoadImageAnim(fileName: string, frames: number): Image
   
   /** Load image from memory buffer, fileType refers to extension: i.e. '.png' */
-  export function LoadImageFromMemory(fileType: string, fileData: Buffer, dataSize: number): Image
+  export function LoadImageFromMemory(fileType: string, fileData: UInt8Array, dataSize: number): Image
   
   /** Load image from GPU texture data */
   export function LoadImageFromTexture(texture: Texture): Image
@@ -1454,19 +1454,19 @@ declare module "raylib" {
   export function LoadFont(fileName: string): Font
   
   /** Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set */
-  export function LoadFontEx(fileName: string, fontSize: number, fontChars: number, glyphCount: number): Font
+  export function LoadFontEx(fileName: string, fontSize: number, fontChars: Int32Array, glyphCount: number): Font
   
   /** Load font from Image (XNA style) */
   export function LoadFontFromImage(image: Image, key: Color, firstChar: number): Font
   
   /** Load font from memory buffer, fileType refers to extension: i.e. '.ttf' */
-  export function LoadFontFromMemory(fileType: string, fileData: Buffer, dataSize: number, fontSize: number, fontChars: number, glyphCount: number): Font
+  export function LoadFontFromMemory(fileType: string, fileData: UInt8Array, dataSize: number, fontSize: number, fontChars: Int32Array, glyphCount: number): Font
   
   /** Check if a font is ready */
   export function IsFontReady(font: Font): boolean
   
   /** Load font data for further use */
-  export function LoadFontData(fileData: Buffer, dataSize: number, fontSize: number, fontChars: number, glyphCount: number, type: number): number
+  export function LoadFontData(fileData: UInt8Array, dataSize: number, fontSize: number, fontChars: Int32Array, glyphCount: number, type: number): number
   
   /** Generate image font atlas using chars info */
   export function GenImageFontAtlas(chars: number, recs: number, glyphCount: number, fontSize: number, padding: number, packMethod: number): Image
@@ -1496,7 +1496,7 @@ declare module "raylib" {
   export function DrawTextCodepoint(font: Font, codepoint: number, position: Vector2, fontSize: number, tint: Color): void
   
   /** Draw multiple character (codepoint) */
-  export function DrawTextCodepoints(font: Font, codepoints: number, count: number, position: Vector2, fontSize: number, spacing: number, tint: Color): void
+  export function DrawTextCodepoints(font: Font, codepoints: Int32Array, count: number, position: Vector2, fontSize: number, spacing: number, tint: Color): void
   
   /** Measure string width for default font */
   export function MeasureText(text: string, fontSize: number): number
@@ -1514,16 +1514,16 @@ declare module "raylib" {
   export function GetGlyphAtlasRec(font: Font, codepoint: number): Rectangle
   
   /** Load UTF-8 text encoded from codepoints array */
-  export function LoadUTF8(codepoints: number, length: number): string
+  export function LoadUTF8(codepoints: Int32Array, length: number): string
   
   /** Unload UTF-8 text encoded from codepoints array */
   export function UnloadUTF8(text: string): void
   
   /** Load all codepoints from a UTF-8 text string, codepoints count returned by parameter */
-  export function LoadCodepoints(text: string, count: number): number
+  export function LoadCodepoints(text: string, count: number): Int32Array
   
   /** Unload codepoints data from memory */
-  export function UnloadCodepoints(codepoints: number): void
+  export function UnloadCodepoints(codepoints: Int32Array): void
   
   /** Get total number of codepoints in a UTF-8 encoded string */
   export function GetCodepointCount(text: string): number
@@ -1538,7 +1538,7 @@ declare module "raylib" {
   export function GetCodepointPrevious(text: string, codepointSize: number): number
   
   /** Encode one codepoint into UTF-8 byte array (array length returned as parameter) */
-  export function CodepointToUTF8(codepoint: number, utf8Size: number): string
+  export function CodepointToUTF8(codepoint: number, utf8Size: Int32Array): string
   
   /** Copy one string to another, returns bytes copied */
   export function TextCopy(dst: string, src: string): number
@@ -1793,7 +1793,7 @@ declare module "raylib" {
   export function LoadWave(fileName: string): Wave
   
   /** Load wave from memory buffer, fileType refers to extension: i.e. '.wav' */
-  export function LoadWaveFromMemory(fileType: string, fileData: Buffer, dataSize: number): Wave
+  export function LoadWaveFromMemory(fileType: string, fileData: UInt8Array, dataSize: number): Wave
   
   /** Checks if wave data is ready */
   export function IsWaveReady(wave: Wave): boolean
@@ -1856,16 +1856,16 @@ declare module "raylib" {
   export function WaveFormat(wave: Wave, sampleRate: number, sampleSize: number, channels: number): void
   
   /** Load samples data from wave as a 32bit float data array */
-  export function LoadWaveSamples(wave: Wave): number
+  export function LoadWaveSamples(wave: Wave): Float32Array
   
   /** Unload samples data loaded with LoadWaveSamples() */
-  export function UnloadWaveSamples(samples: number): void
+  export function UnloadWaveSamples(samples: Float32Array): void
   
   /** Load music stream from file */
   export function LoadMusicStream(fileName: string): Music
   
   /** Load music stream from data */
-  export function LoadMusicStreamFromMemory(fileType: string, data: Buffer, dataSize: number): Music
+  export function LoadMusicStreamFromMemory(fileType: string, data: UInt8Array, dataSize: number): Music
   
   /** Checks if a music stream is ready */
   export function IsMusicReady(music: Music): boolean
@@ -2351,7 +2351,7 @@ declare module "raylib" {
   export function QuaternionFromAxisAngle(axis: Vector3, angle: number): Quaternion
   
   /**  */
-  export function QuaternionToAxisAngle(q: Quaternion, outAxis: number, outAngle: number): void
+  export function QuaternionToAxisAngle(q: Quaternion, outAxis: number, outAngle: Float32Array): void
   
   /**  */
   export function QuaternionFromEuler(pitch: number, yaw: number, roll: number): Quaternion
@@ -2414,7 +2414,7 @@ declare module "raylib" {
   export function GuiPanel(bounds: Rectangle, text: string): void
   
   /** Tab Bar control, returns TAB to be closed or -1 */
-  export function GuiTabBar(bounds: Rectangle, text: number, count: number, active: number): number
+  export function GuiTabBar(bounds: Rectangle, text: number, count: number, active: Int32Array): number
   
   /** Scroll Panel control */
   export function GuiScrollPanel(bounds: Rectangle, text: string, content: Rectangle, scroll: number): Rectangle
@@ -2441,13 +2441,13 @@ declare module "raylib" {
   export function GuiComboBox(bounds: Rectangle, text: string, active: number): number
   
   /** Dropdown Box control, returns selected item */
-  export function GuiDropdownBox(bounds: Rectangle, text: string, active: number, editMode: boolean): boolean
+  export function GuiDropdownBox(bounds: Rectangle, text: string, active: Int32Array, editMode: boolean): boolean
   
   /** Spinner control, returns selected value */
-  export function GuiSpinner(bounds: Rectangle, text: string, value: number, minValue: number, maxValue: number, editMode: boolean): boolean
+  export function GuiSpinner(bounds: Rectangle, text: string, value: Int32Array, minValue: number, maxValue: number, editMode: boolean): boolean
   
   /** Value Box control, updates input text with numbers */
-  export function GuiValueBox(bounds: Rectangle, text: string, value: number, minValue: number, maxValue: number, editMode: boolean): boolean
+  export function GuiValueBox(bounds: Rectangle, text: string, value: Int32Array, minValue: number, maxValue: number, editMode: boolean): boolean
   
   /** Text Box control, updates input text */
   export function GuiTextBox(bounds: Rectangle, text: string, textSize: number, editMode: boolean): boolean
@@ -2474,16 +2474,16 @@ declare module "raylib" {
   export function GuiGrid(bounds: Rectangle, text: string, spacing: number, subdivs: number): Vector2
   
   /** List View control, returns selected list item index */
-  export function GuiListView(bounds: Rectangle, text: string, scrollIndex: number, active: number): number
+  export function GuiListView(bounds: Rectangle, text: string, scrollIndex: Int32Array, active: number): number
   
   /** List View with extended parameters */
-  export function GuiListViewEx(bounds: Rectangle, text: number, count: number, focus: number, scrollIndex: number, active: number): number
+  export function GuiListViewEx(bounds: Rectangle, text: number, count: number, focus: Int32Array, scrollIndex: Int32Array, active: number): number
   
   /** Message Box control, displays a message */
   export function GuiMessageBox(bounds: Rectangle, title: string, message: string, buttons: string): number
   
   /** Text Input Box control, ask for text, supports secret */
-  export function GuiTextInputBox(bounds: Rectangle, title: string, message: string, buttons: string, text: string, textMaxSize: number, secretViewActive: number): number
+  export function GuiTextInputBox(bounds: Rectangle, title: string, message: string, buttons: string, text: string, textMaxSize: number, secretViewActive: Int32Array): number
   
   /** Color Picker control (multiple color controls) */
   export function GuiColorPicker(bounds: Rectangle, text: string, color: Color): Color
@@ -2516,7 +2516,7 @@ declare module "raylib" {
   export function GuiIconText(iconId: number, text: string): string
   
   /** Get raygui icons data pointer */
-  export function GuiGetIcons(): number
+  export function GuiGetIcons(): UInt32Array
   
   /** Load raygui icons file (.rgi) into internal icons data */
   export function GuiLoadIcons(fileName: string, loadIconsName: boolean): number
@@ -2549,7 +2549,7 @@ declare module "raylib" {
   export function rlScalef(x: number, y: number, z: number): void
   
   /** Multiply the current matrix by another matrix */
-  export function rlMultMatrixf(matf: number): void
+  export function rlMultMatrixf(matf: Float32Array): void
   
   /**  */
   export function rlFrustum(left: number, right: number, bottom: number, top: number, znear: number, zfar: number): void
@@ -2762,7 +2762,7 @@ declare module "raylib" {
   export function rlGetShaderIdDefault(): number
   
   /** Get default shader locations */
-  export function rlGetShaderLocsDefault(): number
+  export function rlGetShaderLocsDefault(): Int32Array
   
   /** Load a render batch system */
   export function rlLoadRenderBatch(numBuffers: number, bufferElements: number): rlRenderBatch
@@ -2840,7 +2840,7 @@ declare module "raylib" {
   export function rlUpdateTexture(id: number, offsetX: number, offsetY: number, width: number, height: number, format: number, data: number): void
   
   /** Get OpenGL internal formats */
-  export function rlGetGlTextureFormats(format: number, glInternalFormat: number, glFormat: number, glType: number): void
+  export function rlGetGlTextureFormats(format: number, glInternalFormat: UInt32Array, glFormat: UInt32Array, glType: UInt32Array): void
   
   /** Get name string for pixel format */
   export function rlGetPixelFormatName(format: number): string
@@ -2849,13 +2849,13 @@ declare module "raylib" {
   export function rlUnloadTexture(id: number): void
   
   /** Generate mipmap data for selected texture */
-  export function rlGenTextureMipmaps(id: number, width: number, height: number, format: number, mipmaps: number): void
+  export function rlGenTextureMipmaps(id: number, width: number, height: number, format: number, mipmaps: Int32Array): void
   
   /** Read texture pixel data */
   export function rlReadTexturePixels(id: number, width: number, height: number, format: number): number
   
   /** Read screen pixel data (color buffer) */
-  export function rlReadScreenPixels(width: number, height: number): Buffer
+  export function rlReadScreenPixels(width: number, height: number): UInt8Array
   
   /** Load an empty framebuffer */
   export function rlLoadFramebuffer(width: number, height: number): number
@@ -2897,7 +2897,7 @@ declare module "raylib" {
   export function rlSetUniformSampler(locIndex: number, textureId: number): void
   
   /** Set shader currently active (id and locations) */
-  export function rlSetShader(id: number, locs: number): void
+  export function rlSetShader(id: number, locs: Int32Array): void
   
   /** Load compute shader program */
   export function rlLoadComputeShaderProgram(shaderId: number): number

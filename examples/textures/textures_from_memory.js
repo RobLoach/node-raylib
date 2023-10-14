@@ -21,12 +21,12 @@ const screenHeight = 450
 // Load the image using fs module into a `Buffer` instance.
 // NOTE: this `Buffer` could come from *anywhere* (statically encoded in your source code, as a
 // partial read from a custom resource packer file, etc.)
-const raw = readFileSync(resolve(__dirname, 'resources', 'wabbit_alpha.png'))
+const raw = readFileSync(resolve(__dirname, 'resources', 'raylib_logo.png'))
 
 r.InitWindow(screenWidth, screenHeight, 'raylib [textures] example - image loading from memory')
 
 // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-const image = r.LoadImageFromMemory('png', raw, raw.length) // Loaded in CPU memory (RAM)
+const image = r.LoadImageFromMemory('.png', raw, raw.length) // Loaded in CPU memory (RAM)
 if (!image) {
   console.error('image failed to load!')
   process.exit(1)

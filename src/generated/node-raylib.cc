@@ -58,9 +58,30 @@ inline int intFromValue(const Napi::CallbackInfo& info, int index) {
 inline double doubleFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().DoubleValue();
 }
+
 uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
   return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
 }
+
+uintptr_t Float32ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Float32Array>().Data();
+}
+uintptr_t Int32ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Int32Array>().Data();
+}
+uintptr_t UInt32ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Uint32Array>().Data();
+}
+uintptr_t Int16ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Int16Array>().Data();
+}
+uintptr_t UInt16ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Uint16Array>().Data();
+}
+uintptr_t UInt8ArrayFromValue(const Napi::CallbackInfo& info, int index) {
+  return (uintptr_t)info[index].As<Napi::Uint8Array>().Data();
+}
+
 inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
@@ -250,26 +271,26 @@ inline Mesh MeshFromValue(const Napi::CallbackInfo& info, int index) {
   return {
      intFromValue(info, index + 0),
      intFromValue(info, index + 1),
-     (float *) pointerFromValue(info, index + 2),
-     (float *) pointerFromValue(info, index + 3),
-     (float *) pointerFromValue(info, index + 4),
-     (float *) pointerFromValue(info, index + 5),
-     (float *) pointerFromValue(info, index + 6),
-     (unsigned char *) pointerFromValue(info, index + 7),
-     (unsigned short *) pointerFromValue(info, index + 8),
-     (float *) pointerFromValue(info, index + 9),
-     (float *) pointerFromValue(info, index + 10),
-     (unsigned char *) pointerFromValue(info, index + 11),
-     (float *) pointerFromValue(info, index + 12),
+     (float *) Float32ArrayFromValue(info, index + 2),
+     (float *) Float32ArrayFromValue(info, index + 3),
+     (float *) Float32ArrayFromValue(info, index + 4),
+     (float *) Float32ArrayFromValue(info, index + 5),
+     (float *) Float32ArrayFromValue(info, index + 6),
+     (unsigned char *) UInt8ArrayFromValue(info, index + 7),
+     (unsigned short *) UInt16ArrayFromValue(info, index + 8),
+     (float *) Float32ArrayFromValue(info, index + 9),
+     (float *) Float32ArrayFromValue(info, index + 10),
+     (unsigned char *) UInt8ArrayFromValue(info, index + 11),
+     (float *) Float32ArrayFromValue(info, index + 12),
      unsignedintFromValue(info, index + 13),
-     (unsigned int *) pointerFromValue(info, index + 14)
+     (unsigned int *) UInt32ArrayFromValue(info, index + 14)
   };
 }
 
 inline Shader ShaderFromValue(const Napi::CallbackInfo& info, int index) {
   return {
      unsignedintFromValue(info, index + 0),
-     (int *) pointerFromValue(info, index + 1)
+     (int *) Int32ArrayFromValue(info, index + 1)
   };
 }
 
@@ -303,7 +324,7 @@ inline Model ModelFromValue(const Napi::CallbackInfo& info, int index) {
      intFromValue(info, index + 17),
      (Mesh *) pointerFromValue(info, index + 18),
      (Material *) pointerFromValue(info, index + 19),
-     (int *) pointerFromValue(info, index + 20),
+     (int *) Int32ArrayFromValue(info, index + 20),
      intFromValue(info, index + 21),
      (BoneInfo *) pointerFromValue(info, index + 22),
      (Transform *) pointerFromValue(info, index + 23)
@@ -1138,7 +1159,7 @@ Napi::Value BindSaveFileData(const Napi::CallbackInfo& info) {
 Napi::Value BindExportDataAsCode(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     ExportDataAsCode(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) UInt8ArrayFromValue(info, 0),
        unsignedintFromValue(info, 1),
        (const char *) stringFromValue(info, 2)
     )
@@ -1312,7 +1333,7 @@ Napi::Value BindGetFileModTime(const Napi::CallbackInfo& info) {
 Napi::Value BindCompressData(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     CompressData(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) UInt8ArrayFromValue(info, 0),
        intFromValue(info, 1),
        (int *) pointerFromValue(info, 2)
     )
@@ -1322,7 +1343,7 @@ Napi::Value BindCompressData(const Napi::CallbackInfo& info) {
 Napi::Value BindDecompressData(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     DecompressData(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) UInt8ArrayFromValue(info, 0),
        intFromValue(info, 1),
        (int *) pointerFromValue(info, 2)
     )
@@ -1332,7 +1353,7 @@ Napi::Value BindDecompressData(const Napi::CallbackInfo& info) {
 Napi::Value BindEncodeDataBase64(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     EncodeDataBase64(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) UInt8ArrayFromValue(info, 0),
        intFromValue(info, 1),
        (int *) pointerFromValue(info, 2)
     )
@@ -1342,7 +1363,7 @@ Napi::Value BindEncodeDataBase64(const Napi::CallbackInfo& info) {
 Napi::Value BindDecodeDataBase64(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     DecodeDataBase64(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) UInt8ArrayFromValue(info, 0),
        (int *) pointerFromValue(info, 1)
     )
   );
@@ -1792,7 +1813,7 @@ Napi::Value BindLoadImageFromMemory(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadImageFromMemory(
        (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
+       (const unsigned char *) UInt8ArrayFromValue(info, 1),
        intFromValue(info, 2)
     )
   );
@@ -2210,7 +2231,7 @@ Napi::Value BindLoadFontEx(const Napi::CallbackInfo& info) {
     LoadFontEx(
        (const char *) stringFromValue(info, 0),
        intFromValue(info, 1),
-       (int *) pointerFromValue(info, 2),
+       (int *) Int32ArrayFromValue(info, 2),
        intFromValue(info, 3)
     )
   );
@@ -2230,10 +2251,10 @@ Napi::Value BindLoadFontFromMemory(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadFontFromMemory(
        (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
+       (const unsigned char *) UInt8ArrayFromValue(info, 1),
        intFromValue(info, 2),
        intFromValue(info, 3),
-       (int *) pointerFromValue(info, 4),
+       (int *) Int32ArrayFromValue(info, 4),
        intFromValue(info, 5)
     )
   );
@@ -2250,10 +2271,10 @@ Napi::Value BindIsFontReady(const Napi::CallbackInfo& info) {
 Napi::Value BindLoadFontData(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadFontData(
-       (const unsigned char *) pointerFromValue(info, 0),
+       (const unsigned char *) UInt8ArrayFromValue(info, 0),
        intFromValue(info, 1),
        intFromValue(info, 2),
-       (int *) pointerFromValue(info, 3),
+       (int *) Int32ArrayFromValue(info, 3),
        intFromValue(info, 4),
        intFromValue(info, 5)
     )
@@ -2332,7 +2353,7 @@ Napi::Value BindGetGlyphAtlasRec(const Napi::CallbackInfo& info) {
 Napi::Value BindLoadUTF8(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadUTF8(
-       (const int *) pointerFromValue(info, 0),
+       (const int *) Int32ArrayFromValue(info, 0),
        intFromValue(info, 1)
     )
   );
@@ -2386,7 +2407,7 @@ Napi::Value BindCodepointToUTF8(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     CodepointToUTF8(
        intFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
+       (int *) Int32ArrayFromValue(info, 1)
     )
   );
 }
@@ -2787,7 +2808,7 @@ Napi::Value BindLoadWaveFromMemory(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadWaveFromMemory(
        (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
+       (const unsigned char *) UInt8ArrayFromValue(info, 1),
        intFromValue(info, 2)
     )
   );
@@ -2879,7 +2900,7 @@ Napi::Value BindLoadMusicStreamFromMemory(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadMusicStreamFromMemory(
        (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
+       (const unsigned char *) UInt8ArrayFromValue(info, 1),
        intFromValue(info, 2)
     )
   );
@@ -4283,7 +4304,7 @@ Napi::Value BindGuiTabBar(const Napi::CallbackInfo& info) {
        RectangleFromValue(info, 0),
        (const char **) pointerFromValue(info, 4),
        intFromValue(info, 5),
-       (int *) pointerFromValue(info, 6)
+       (int *) Int32ArrayFromValue(info, 6)
     )
   );
 }
@@ -4362,7 +4383,7 @@ Napi::Value BindGuiDropdownBox(const Napi::CallbackInfo& info) {
     GuiDropdownBox(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5),
+       (int *) Int32ArrayFromValue(info, 5),
        boolFromValue(info, 6)
     )
   );
@@ -4373,7 +4394,7 @@ Napi::Value BindGuiSpinner(const Napi::CallbackInfo& info) {
     GuiSpinner(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5),
+       (int *) Int32ArrayFromValue(info, 5),
        intFromValue(info, 6),
        intFromValue(info, 7),
        boolFromValue(info, 8)
@@ -4386,7 +4407,7 @@ Napi::Value BindGuiValueBox(const Napi::CallbackInfo& info) {
     GuiValueBox(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5),
+       (int *) Int32ArrayFromValue(info, 5),
        intFromValue(info, 6),
        intFromValue(info, 7),
        boolFromValue(info, 8)
@@ -4471,7 +4492,7 @@ Napi::Value BindGuiListView(const Napi::CallbackInfo& info) {
     GuiListView(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5),
+       (int *) Int32ArrayFromValue(info, 5),
        intFromValue(info, 6)
     )
   );
@@ -4483,8 +4504,8 @@ Napi::Value BindGuiListViewEx(const Napi::CallbackInfo& info) {
        RectangleFromValue(info, 0),
        (const char **) pointerFromValue(info, 4),
        intFromValue(info, 5),
-       (int *) pointerFromValue(info, 6),
-       (int *) pointerFromValue(info, 7),
+       (int *) Int32ArrayFromValue(info, 6),
+       (int *) Int32ArrayFromValue(info, 7),
        intFromValue(info, 8)
     )
   );
@@ -4510,7 +4531,7 @@ Napi::Value BindGuiTextInputBox(const Napi::CallbackInfo& info) {
        (const char *) stringFromValue(info, 6),
        (char *) pointerFromValue(info, 7),
        intFromValue(info, 8),
-       (int *) pointerFromValue(info, 9)
+       (int *) Int32ArrayFromValue(info, 9)
     )
   );
 }
@@ -5213,7 +5234,7 @@ void BindOpenURL(const Napi::CallbackInfo& info) {
 
 void BindUnloadFileData(const Napi::CallbackInfo& info) {
   UnloadFileData(
-     (unsigned char *) pointerFromValue(info, 0)
+     (unsigned char *) UInt8ArrayFromValue(info, 0)
   );
 }
 
@@ -5858,7 +5879,7 @@ void BindDrawTextCodepoint(const Napi::CallbackInfo& info) {
 void BindDrawTextCodepoints(const Napi::CallbackInfo& info) {
   DrawTextCodepoints(
      FontFromValue(info, 0),
-       (const int *) pointerFromValue(info, 10),
+       (const int *) Int32ArrayFromValue(info, 10),
        intFromValue(info, 11),
        Vector2FromValue(info, 12),
        floatFromValue(info, 14),
@@ -5875,7 +5896,7 @@ void BindUnloadUTF8(const Napi::CallbackInfo& info) {
 
 void BindUnloadCodepoints(const Napi::CallbackInfo& info) {
   UnloadCodepoints(
-     (int *) pointerFromValue(info, 0)
+     (int *) Int32ArrayFromValue(info, 0)
   );
 }
 
@@ -6291,7 +6312,7 @@ void BindSetSoundPan(const Napi::CallbackInfo& info) {
 
 void BindUnloadWaveSamples(const Napi::CallbackInfo& info) {
   UnloadWaveSamples(
-     (float *) pointerFromValue(info, 0)
+     (float *) Float32ArrayFromValue(info, 0)
   );
 }
 
@@ -6435,7 +6456,7 @@ void BindQuaternionToAxisAngle(const Napi::CallbackInfo& info) {
   QuaternionToAxisAngle(
      Vector4FromValue(info, 0),
        (Vector3 *) pointerFromValue(info, 1),
-       (float *) pointerFromValue(info, 2)
+       (float *) Float32ArrayFromValue(info, 2)
   );
 }
 
@@ -6628,7 +6649,7 @@ void BindrlScalef(const Napi::CallbackInfo& info) {
 
 void BindrlMultMatrixf(const Napi::CallbackInfo& info) {
   rlMultMatrixf(
-     (const float *) pointerFromValue(info, 0)
+     (const float *) Float32ArrayFromValue(info, 0)
   );
 }
 
@@ -7184,9 +7205,9 @@ void BindrlUpdateTexture(const Napi::CallbackInfo& info) {
 void BindrlGetGlTextureFormats(const Napi::CallbackInfo& info) {
   rlGetGlTextureFormats(
      intFromValue(info, 0),
-       (unsigned int *) pointerFromValue(info, 1),
-       (unsigned int *) pointerFromValue(info, 2),
-       (unsigned int *) pointerFromValue(info, 3)
+       (unsigned int *) UInt32ArrayFromValue(info, 1),
+       (unsigned int *) UInt32ArrayFromValue(info, 2),
+       (unsigned int *) UInt32ArrayFromValue(info, 3)
   );
 }
 
@@ -7202,7 +7223,7 @@ void BindrlGenTextureMipmaps(const Napi::CallbackInfo& info) {
        intFromValue(info, 1),
        intFromValue(info, 2),
        intFromValue(info, 3),
-       (int *) pointerFromValue(info, 4)
+       (int *) Int32ArrayFromValue(info, 4)
   );
 }
 
@@ -7254,7 +7275,7 @@ void BindrlSetUniformSampler(const Napi::CallbackInfo& info) {
 void BindrlSetShader(const Napi::CallbackInfo& info) {
   rlSetShader(
      unsignedintFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
+       (int *) Int32ArrayFromValue(info, 1)
   );
 }
 

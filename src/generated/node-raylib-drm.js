@@ -1381,7 +1381,7 @@ raylib.OpenURL = OpenURL
  * @param {string} fileName
  * @param {number} bytesRead
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function LoadFileData (fileName, bytesRead) {
   return r.BindLoadFileData(
@@ -1394,7 +1394,7 @@ raylib.LoadFileData = LoadFileData
 /**
  * Unload file data allocated by LoadFileData()
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  *
  * @return {undefined}
  */
@@ -1426,7 +1426,7 @@ raylib.SaveFileData = SaveFileData
 /**
  * Export data to code (.h), returns true on success
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} size
  * @param {string} fileName
  *
@@ -1762,11 +1762,11 @@ raylib.GetFileModTime = GetFileModTime
 /**
  * Compress data (DEFLATE algorithm), memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} dataSize
  * @param {number} compDataSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function CompressData (data, dataSize, compDataSize) {
   return r.BindCompressData(
@@ -1780,11 +1780,11 @@ raylib.CompressData = CompressData
 /**
  * Decompress data (DEFLATE algorithm), memory must be MemFree()
  *
- * @param {Buffer} compData
+ * @param {UInt8Array} compData
  * @param {number} compDataSize
  * @param {number} dataSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function DecompressData (compData, compDataSize, dataSize) {
   return r.BindDecompressData(
@@ -1798,7 +1798,7 @@ raylib.DecompressData = DecompressData
 /**
  * Encode data to Base64 string, memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} dataSize
  * @param {number} outputSize
  *
@@ -1816,10 +1816,10 @@ raylib.EncodeDataBase64 = EncodeDataBase64
 /**
  * Decode Base64 string data, memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} outputSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function DecodeDataBase64 (data, outputSize) {
   return r.BindDecodeDataBase64(
@@ -3664,7 +3664,7 @@ raylib.LoadImageAnim = LoadImageAnim
  * Load image from memory buffer, fileType refers to extension: i.e. '.png'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {UInt8Array} fileData
  * @param {number} dataSize
  *
  * @return {Image} The resulting Image.
@@ -5001,7 +5001,7 @@ raylib.LoadFont = LoadFont
  *
  * @param {string} fileName
  * @param {number} fontSize
- * @param {number} fontChars
+ * @param {Int32Array} fontChars
  * @param {number} glyphCount
  *
  * @return {Font} The resulting Font.
@@ -5045,10 +5045,10 @@ raylib.LoadFontFromImage = LoadFontFromImage
  * Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {UInt8Array} fileData
  * @param {number} dataSize
  * @param {number} fontSize
- * @param {number} fontChars
+ * @param {Int32Array} fontChars
  * @param {number} glyphCount
  *
  * @return {Font} The resulting Font.
@@ -5091,10 +5091,10 @@ raylib.IsFontReady = IsFontReady
 /**
  * Load font data for further use
  *
- * @param {Buffer} fileData
+ * @param {UInt8Array} fileData
  * @param {number} dataSize
  * @param {number} fontSize
- * @param {number} fontChars
+ * @param {Int32Array} fontChars
  * @param {number} glyphCount
  * @param {number} type
  *
@@ -5359,7 +5359,7 @@ raylib.DrawTextCodepoint = DrawTextCodepoint
  * Draw multiple character (codepoint)
  *
  * @param {Font} font
- * @param {number} codepoints
+ * @param {Int32Array} codepoints
  * @param {number} count
  * @param {Vector2} position
  * @param {number} fontSize
@@ -5517,7 +5517,7 @@ raylib.GetGlyphAtlasRec = GetGlyphAtlasRec
 /**
  * Load UTF-8 text encoded from codepoints array
  *
- * @param {number} codepoints
+ * @param {Int32Array} codepoints
  * @param {number} length
  *
  * @return {string} The resulting char *.
@@ -5550,7 +5550,7 @@ raylib.UnloadUTF8 = UnloadUTF8
  * @param {string} text
  * @param {number} count
  *
- * @return {number} The resulting int *.
+ * @return {Int32Array} The resulting int *.
  */
 function LoadCodepoints (text, count) {
   return r.BindLoadCodepoints(
@@ -5563,7 +5563,7 @@ raylib.LoadCodepoints = LoadCodepoints
 /**
  * Unload codepoints data from memory
  *
- * @param {number} codepoints
+ * @param {Int32Array} codepoints
  *
  * @return {undefined}
  */
@@ -5640,7 +5640,7 @@ raylib.GetCodepointPrevious = GetCodepointPrevious
  * Encode one codepoint into UTF-8 byte array (array length returned as parameter)
  *
  * @param {number} codepoint
- * @param {number} utf8Size
+ * @param {Int32Array} utf8Size
  *
  * @return {string} The resulting const char *.
  */
@@ -7732,7 +7732,7 @@ raylib.LoadWave = LoadWave
  * Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {UInt8Array} fileData
  * @param {number} dataSize
  *
  * @return {Wave} The resulting Wave.
@@ -8096,7 +8096,7 @@ raylib.WaveCopy = WaveCopy
  *
  * @param {Wave} wave
  *
- * @return {number} The resulting float *.
+ * @return {Float32Array} The resulting float *.
  */
 function LoadWaveSamples (wave) {
   return r.BindLoadWaveSamples(
@@ -8112,7 +8112,7 @@ raylib.LoadWaveSamples = LoadWaveSamples
 /**
  * Unload samples data loaded with LoadWaveSamples()
  *
- * @param {number} samples
+ * @param {Float32Array} samples
  *
  * @return {undefined}
  */
@@ -8141,7 +8141,7 @@ raylib.LoadMusicStream = LoadMusicStream
  * Load music stream from data
  *
  * @param {string} fileType
- * @param {Buffer} data
+ * @param {UInt8Array} data
  * @param {number} dataSize
  *
  * @return {Music} The resulting Music.
@@ -10797,7 +10797,7 @@ raylib.GuiPanel = GuiPanel
  * @param {Rectangle} bounds
  * @param {number} text
  * @param {number} count
- * @param {number} active
+ * @param {Int32Array} active
  *
  * @return {number} The resulting int.
  */
@@ -10986,7 +10986,7 @@ raylib.GuiComboBox = GuiComboBox
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {number} active
+ * @param {Int32Array} active
  * @param {boolean} editMode
  *
  * @return {boolean} The resulting bool.
@@ -11009,7 +11009,7 @@ raylib.GuiDropdownBox = GuiDropdownBox
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {number} value
+ * @param {Int32Array} value
  * @param {number} minValue
  * @param {number} maxValue
  * @param {boolean} editMode
@@ -11036,7 +11036,7 @@ raylib.GuiSpinner = GuiSpinner
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {number} value
+ * @param {Int32Array} value
  * @param {number} minValue
  * @param {number} maxValue
  * @param {boolean} editMode
@@ -11251,7 +11251,7 @@ raylib.GuiGrid = GuiGrid
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {number} scrollIndex
+ * @param {Int32Array} scrollIndex
  * @param {number} active
  *
  * @return {number} The resulting int.
@@ -11275,8 +11275,8 @@ raylib.GuiListView = GuiListView
  * @param {Rectangle} bounds
  * @param {number} text
  * @param {number} count
- * @param {number} focus
- * @param {number} scrollIndex
+ * @param {Int32Array} focus
+ * @param {Int32Array} scrollIndex
  * @param {number} active
  *
  * @return {number} The resulting int.
@@ -11328,7 +11328,7 @@ raylib.GuiMessageBox = GuiMessageBox
  * @param {string} buttons
  * @param {string} text
  * @param {number} textMaxSize
- * @param {number} secretViewActive
+ * @param {Int32Array} secretViewActive
  *
  * @return {number} The resulting int.
  */
@@ -11515,7 +11515,7 @@ raylib.GuiIconText = GuiIconText
 /**
  * Get raygui icons data pointer
  *
- * @return {number} The resulting unsigned int *.
+ * @return {UInt32Array} The resulting unsigned int *.
  */
 function GuiGetIcons () {
   return r.BindGuiGetIcons()
@@ -11669,7 +11669,7 @@ raylib.rlScalef = rlScalef
 /**
  * Multiply the current matrix by another matrix
  *
- * @param {number} matf
+ * @param {Float32Array} matf
  *
  * @return {undefined}
  */
@@ -12595,7 +12595,7 @@ raylib.rlGetShaderIdDefault = rlGetShaderIdDefault
 /**
  * Get default shader locations
  *
- * @return {number} The resulting int *.
+ * @return {Int32Array} The resulting int *.
  */
 function rlGetShaderLocsDefault () {
   return r.BindrlGetShaderLocsDefault()
@@ -12967,9 +12967,9 @@ raylib.rlUpdateTexture = rlUpdateTexture
  * Get OpenGL internal formats
  *
  * @param {number} format
- * @param {number} glInternalFormat
- * @param {number} glFormat
- * @param {number} glType
+ * @param {UInt32Array} glInternalFormat
+ * @param {UInt32Array} glFormat
+ * @param {UInt32Array} glType
  *
  * @return {undefined}
  */
@@ -13018,7 +13018,7 @@ raylib.rlUnloadTexture = rlUnloadTexture
  * @param {number} width
  * @param {number} height
  * @param {number} format
- * @param {number} mipmaps
+ * @param {Int32Array} mipmaps
  *
  * @return {undefined}
  */
@@ -13059,7 +13059,7 @@ raylib.rlReadTexturePixels = rlReadTexturePixels
  * @param {number} width
  * @param {number} height
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {UInt8Array} The resulting unsigned char *.
  */
 function rlReadScreenPixels (width, height) {
   return r.BindrlReadScreenPixels(
@@ -13300,7 +13300,7 @@ raylib.rlSetUniformSampler = rlSetUniformSampler
  * Set shader currently active (id and locations)
  *
  * @param {number} id
- * @param {number} locs
+ * @param {Int32Array} locs
  *
  * @return {undefined}
  */
