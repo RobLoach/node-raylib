@@ -30,16 +30,6 @@ function InitWindow(width, height, title) {
 raylib.InitWindow = InitWindow
 
 /**
- * Check if KEY_ESCAPE pressed or Close icon pressed
- *
- * @return {boolean} The resulting bool.
- */
-function WindowShouldClose() {
-  return r.BindWindowShouldClose()
-}
-raylib.WindowShouldClose = WindowShouldClose
-
-/**
  * Close window and unload OpenGL context
  *
  * @return {undefined}
@@ -48,6 +38,16 @@ function CloseWindow() {
   return r.BindCloseWindow()
 }
 raylib.CloseWindow = CloseWindow
+
+/**
+ * Check if application should close (KEY_ESCAPE pressed or windows close icon clicked)
+ *
+ * @return {boolean} The resulting bool.
+ */
+function WindowShouldClose() {
+  return r.BindWindowShouldClose()
+}
+raylib.WindowShouldClose = WindowShouldClose
 
 /**
  * Check if window has been initialized successfully
@@ -172,6 +172,16 @@ function ToggleFullscreen() {
 raylib.ToggleFullscreen = ToggleFullscreen
 
 /**
+ * Toggle window state: borderless windowed (only PLATFORM_DESKTOP)
+ *
+ * @return {undefined}
+ */
+function ToggleBorderlessWindowed() {
+  return r.BindToggleBorderlessWindowed()
+}
+raylib.ToggleBorderlessWindowed = ToggleBorderlessWindowed
+
+/**
  * Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
  *
  * @return {undefined}
@@ -236,7 +246,7 @@ function SetWindowIcons(images, count) {
 raylib.SetWindowIcons = SetWindowIcons
 
 /**
- * Set title for window (only PLATFORM_DESKTOP)
+ * Set title for window (only PLATFORM_DESKTOP and PLATFORM_WEB)
  *
  * @param {string} title
  *
@@ -266,7 +276,7 @@ function SetWindowPosition(x, y) {
 raylib.SetWindowPosition = SetWindowPosition
 
 /**
- * Set monitor for the current window (fullscreen mode)
+ * Set monitor for the current window
  *
  * @param {number} monitor
  *
@@ -294,6 +304,22 @@ function SetWindowMinSize(width, height) {
   )
 }
 raylib.SetWindowMinSize = SetWindowMinSize
+
+/**
+ * Set window maximum dimensions (for FLAG_WINDOW_RESIZABLE)
+ *
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {undefined}
+ */
+function SetWindowMaxSize(width, height) {
+  return r.BindSetWindowMaxSize(
+    width,
+    height
+  )
+}
+raylib.SetWindowMaxSize = SetWindowMaxSize
 
 /**
  * Set window dimensions
@@ -324,6 +350,16 @@ function SetWindowOpacity(opacity) {
   )
 }
 raylib.SetWindowOpacity = SetWindowOpacity
+
+/**
+ * Set window focused (only PLATFORM_DESKTOP)
+ *
+ * @return {undefined}
+ */
+function SetWindowFocused() {
+  return r.BindSetWindowFocused()
+}
+raylib.SetWindowFocused = SetWindowFocused
 
 /**
  * Get native window handle
@@ -500,7 +536,7 @@ function GetWindowScaleDPI() {
 raylib.GetWindowScaleDPI = GetWindowScaleDPI
 
 /**
- * Get the human-readable, UTF-8 encoded name of the primary monitor
+ * Get the human-readable, UTF-8 encoded name of the specified monitor
  *
  * @param {number} monitor
  *
@@ -556,40 +592,6 @@ function DisableEventWaiting() {
   return r.BindDisableEventWaiting()
 }
 raylib.DisableEventWaiting = DisableEventWaiting
-
-/**
- * Swap back buffer with front buffer (screen drawing)
- *
- * @return {undefined}
- */
-function SwapScreenBuffer() {
-  return r.BindSwapScreenBuffer()
-}
-raylib.SwapScreenBuffer = SwapScreenBuffer
-
-/**
- * Register all input events
- *
- * @return {undefined}
- */
-function PollInputEvents() {
-  return r.BindPollInputEvents()
-}
-raylib.PollInputEvents = PollInputEvents
-
-/**
- * Wait for some time (halt program execution)
- *
- * @param {number} seconds
- *
- * @return {undefined}
- */
-function WaitTime(seconds) {
-  return r.BindWaitTime(
-    seconds
-  )
-}
-raylib.WaitTime = WaitTime
 
 /**
  * Shows cursor
@@ -1216,16 +1218,6 @@ function SetTargetFPS(fps) {
 raylib.SetTargetFPS = SetTargetFPS
 
 /**
- * Get current FPS
- *
- * @return {number} The resulting int.
- */
-function GetFPS() {
-  return r.BindGetFPS()
-}
-raylib.GetFPS = GetFPS
-
-/**
  * Get time in seconds for last frame drawn (delta time)
  *
  * @return {number} The resulting float.
@@ -1246,6 +1238,64 @@ function GetTime() {
 raylib.GetTime = GetTime
 
 /**
+ * Get current FPS
+ *
+ * @return {number} The resulting int.
+ */
+function GetFPS() {
+  return r.BindGetFPS()
+}
+raylib.GetFPS = GetFPS
+
+/**
+ * Swap back buffer with front buffer (screen drawing)
+ *
+ * @return {undefined}
+ */
+function SwapScreenBuffer() {
+  return r.BindSwapScreenBuffer()
+}
+raylib.SwapScreenBuffer = SwapScreenBuffer
+
+/**
+ * Register all input events
+ *
+ * @return {undefined}
+ */
+function PollInputEvents() {
+  return r.BindPollInputEvents()
+}
+raylib.PollInputEvents = PollInputEvents
+
+/**
+ * Wait for some time (halt program execution)
+ *
+ * @param {number} seconds
+ *
+ * @return {undefined}
+ */
+function WaitTime(seconds) {
+  return r.BindWaitTime(
+    seconds
+  )
+}
+raylib.WaitTime = WaitTime
+
+/**
+ * Set the seed for the random number generator
+ *
+ * @param {number} seed
+ *
+ * @return {undefined}
+ */
+function SetRandomSeed(seed) {
+  return r.BindSetRandomSeed(
+    seed
+  )
+}
+raylib.SetRandomSeed = SetRandomSeed
+
+/**
  * Get a random value between min and max (both included)
  *
  * @param {number} min
@@ -1262,18 +1312,36 @@ function GetRandomValue(min, max) {
 raylib.GetRandomValue = GetRandomValue
 
 /**
- * Set the seed for the random number generator
+ * Load random values sequence, no values repeated
  *
- * @param {number} seed
+ * @param {number} count
+ * @param {number} min
+ * @param {number} max
+ *
+ * @return {number} The resulting int *.
+ */
+function LoadRandomSequence(count, min, max) {
+  return r.BindLoadRandomSequence(
+    count,
+    min,
+    max
+  )
+}
+raylib.LoadRandomSequence = LoadRandomSequence
+
+/**
+ * Unload random values sequence
+ *
+ * @param {number} sequence
  *
  * @return {undefined}
  */
-function SetRandomSeed(seed) {
-  return r.BindSetRandomSeed(
-    seed
+function UnloadRandomSequence(sequence) {
+  return r.BindUnloadRandomSequence(
+    sequence
   )
 }
-raylib.SetRandomSeed = SetRandomSeed
+raylib.UnloadRandomSequence = UnloadRandomSequence
 
 /**
  * Takes a screenshot of current screen (filename extension defines format)
@@ -1302,6 +1370,20 @@ function SetConfigFlags(flags) {
   )
 }
 raylib.SetConfigFlags = SetConfigFlags
+
+/**
+ * Open URL with default system browser (if available)
+ *
+ * @param {string} url
+ *
+ * @return {undefined}
+ */
+function OpenURL(url) {
+  return r.BindOpenURL(
+    url
+  )
+}
+raylib.OpenURL = OpenURL
 
 /**
  * Set the current threshold (minimum) log level
@@ -1362,31 +1444,17 @@ function MemFree(ptr) {
 raylib.MemFree = MemFree
 
 /**
- * Open URL with default system browser (if available)
- *
- * @param {string} url
- *
- * @return {undefined}
- */
-function OpenURL(url) {
-  return r.BindOpenURL(
-    url
-  )
-}
-raylib.OpenURL = OpenURL
-
-/**
  * Load file data as byte array (read)
  *
  * @param {string} fileName
- * @param {number} bytesRead
+ * @param {number} dataSize
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function LoadFileData(fileName, bytesRead) {
+function LoadFileData(fileName, dataSize) {
   return r.BindLoadFileData(
     fileName,
-    bytesRead
+    dataSize
   )
 }
 raylib.LoadFileData = LoadFileData
@@ -1410,15 +1478,15 @@ raylib.UnloadFileData = UnloadFileData
  *
  * @param {string} fileName
  * @param {number} data
- * @param {number} bytesToWrite
+ * @param {number} dataSize
  *
  * @return {boolean} The resulting bool.
  */
-function SaveFileData(fileName, data, bytesToWrite) {
+function SaveFileData(fileName, data, dataSize) {
   return r.BindSaveFileData(
     fileName,
     data,
-    bytesToWrite
+    dataSize
   )
 }
 raylib.SaveFileData = SaveFileData
@@ -1427,15 +1495,15 @@ raylib.SaveFileData = SaveFileData
  * Export data to code (.h), returns true on success
  *
  * @param {Buffer} data
- * @param {number} size
+ * @param {number} dataSize
  * @param {string} fileName
  *
  * @return {boolean} The resulting bool.
  */
-function ExportDataAsCode(data, size, fileName) {
+function ExportDataAsCode(data, dataSize, fileName) {
   return r.BindExportDataAsCode(
     data,
-    size,
+    dataSize,
     fileName
   )
 }
@@ -1624,7 +1692,7 @@ function GetWorkingDirectory() {
 raylib.GetWorkingDirectory = GetWorkingDirectory
 
 /**
- * Get the directory if the running application (uses static string)
+ * Get the directory of the running application (uses static string)
  *
  * @return {string} The resulting const char *.
  */
@@ -1830,6 +1898,116 @@ function DecodeDataBase64(data, outputSize) {
 raylib.DecodeDataBase64 = DecodeDataBase64
 
 /**
+ * Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
+ *
+ * @param {string} fileName
+ *
+ * @return {AutomationEventList} The resulting AutomationEventList.
+ */
+function LoadAutomationEventList(fileName) {
+  return r.BindLoadAutomationEventList(
+    fileName
+  )
+}
+raylib.LoadAutomationEventList = LoadAutomationEventList
+
+/**
+ * Unload automation events list from file
+ *
+ * @param {number} list
+ *
+ * @return {undefined}
+ */
+function UnloadAutomationEventList(list) {
+  return r.BindUnloadAutomationEventList(
+    list
+  )
+}
+raylib.UnloadAutomationEventList = UnloadAutomationEventList
+
+/**
+ * Export automation events list as text file
+ *
+ * @param {AutomationEventList} list
+ * @param {string} fileName
+ *
+ * @return {boolean} The resulting bool.
+ */
+function ExportAutomationEventList(list, fileName) {
+  return r.BindExportAutomationEventList(
+    list.capacity,
+    list.count,
+    list.events,
+    fileName
+  )
+}
+raylib.ExportAutomationEventList = ExportAutomationEventList
+
+/**
+ * Set automation event list to record to
+ *
+ * @param {number} list
+ *
+ * @return {undefined}
+ */
+function SetAutomationEventList(list) {
+  return r.BindSetAutomationEventList(
+    list
+  )
+}
+raylib.SetAutomationEventList = SetAutomationEventList
+
+/**
+ * Set automation event internal base frame to start recording
+ *
+ * @param {number} frame
+ *
+ * @return {undefined}
+ */
+function SetAutomationEventBaseFrame(frame) {
+  return r.BindSetAutomationEventBaseFrame(
+    frame
+  )
+}
+raylib.SetAutomationEventBaseFrame = SetAutomationEventBaseFrame
+
+/**
+ * Start recording automation events (AutomationEventList must be set)
+ *
+ * @return {undefined}
+ */
+function StartAutomationEventRecording() {
+  return r.BindStartAutomationEventRecording()
+}
+raylib.StartAutomationEventRecording = StartAutomationEventRecording
+
+/**
+ * Stop recording automation events
+ *
+ * @return {undefined}
+ */
+function StopAutomationEventRecording() {
+  return r.BindStopAutomationEventRecording()
+}
+raylib.StopAutomationEventRecording = StopAutomationEventRecording
+
+/**
+ * Play a recorded automation event
+ *
+ * @param {AutomationEvent} event
+ *
+ * @return {undefined}
+ */
+function PlayAutomationEvent(event) {
+  return r.BindPlayAutomationEvent(
+    event.frame,
+    event.type,
+    event.params
+  )
+}
+raylib.PlayAutomationEvent = PlayAutomationEvent
+
+/**
  * Check if a key has been pressed once
  *
  * @param {number} key
@@ -1842,6 +2020,20 @@ function IsKeyPressed(key) {
   )
 }
 raylib.IsKeyPressed = IsKeyPressed
+
+/**
+ * Check if a key has been pressed again (Only PLATFORM_DESKTOP)
+ *
+ * @param {number} key
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsKeyPressedRepeat(key) {
+  return r.BindIsKeyPressedRepeat(
+    key
+  )
+}
+raylib.IsKeyPressedRepeat = IsKeyPressedRepeat
 
 /**
  * Check if a key is being pressed
@@ -1886,20 +2078,6 @@ function IsKeyUp(key) {
 raylib.IsKeyUp = IsKeyUp
 
 /**
- * Set a custom key to exit program (default is ESC)
- *
- * @param {number} key
- *
- * @return {undefined}
- */
-function SetExitKey(key) {
-  return r.BindSetExitKey(
-    key
-  )
-}
-raylib.SetExitKey = SetExitKey
-
-/**
  * Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
  *
  * @return {number} The resulting int.
@@ -1918,6 +2096,20 @@ function GetCharPressed() {
   return r.BindGetCharPressed()
 }
 raylib.GetCharPressed = GetCharPressed
+
+/**
+ * Set a custom key to exit program (default is ESC)
+ *
+ * @param {number} key
+ *
+ * @return {undefined}
+ */
+function SetExitKey(key) {
+  return r.BindSetExitKey(
+    key
+  )
+}
+raylib.SetExitKey = SetExitKey
 
 /**
  * Check if a gamepad is available
@@ -2503,7 +2695,7 @@ function DrawLine(startPosX, startPosY, endPosX, endPosY, color) {
 raylib.DrawLine = DrawLine
 
 /**
- * Draw a line (Vector version)
+ * Draw a line (using gl lines)
  *
  * @param {Vector2} startPos
  * @param {Vector2} endPos
@@ -2526,7 +2718,7 @@ function DrawLineV(startPos, endPos, color) {
 raylib.DrawLineV = DrawLineV
 
 /**
- * Draw a line defining thickness
+ * Draw a line (using triangles/quads)
  *
  * @param {Vector2} startPos
  * @param {Vector2} endPos
@@ -2551,7 +2743,28 @@ function DrawLineEx(startPos, endPos, thick, color) {
 raylib.DrawLineEx = DrawLineEx
 
 /**
- * Draw a line using cubic-bezier curves in-out
+ * Draw lines sequence (using gl lines)
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawLineStrip(points, pointCount, color) {
+  return r.BindDrawLineStrip(
+    points,
+    pointCount,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawLineStrip = DrawLineStrip
+
+/**
+ * Draw line segment cubic-bezier in-out interpolation
  *
  * @param {Vector2} startPos
  * @param {Vector2} endPos
@@ -2574,86 +2787,6 @@ function DrawLineBezier(startPos, endPos, thick, color) {
   )
 }
 raylib.DrawLineBezier = DrawLineBezier
-
-/**
- * Draw line using quadratic bezier curves with a control point
- *
- * @param {Vector2} startPos
- * @param {Vector2} endPos
- * @param {Vector2} controlPos
- * @param {number} thick
- * @param {Color} color
- *
- * @return {undefined}
- */
-function DrawLineBezierQuad(startPos, endPos, controlPos, thick, color) {
-  return r.BindDrawLineBezierQuad(
-    startPos.x,
-    startPos.y,
-    endPos.x,
-    endPos.y,
-    controlPos.x,
-    controlPos.y,
-    thick,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.DrawLineBezierQuad = DrawLineBezierQuad
-
-/**
- * Draw line using cubic bezier curves with 2 control points
- *
- * @param {Vector2} startPos
- * @param {Vector2} endPos
- * @param {Vector2} startControlPos
- * @param {Vector2} endControlPos
- * @param {number} thick
- * @param {Color} color
- *
- * @return {undefined}
- */
-function DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color) {
-  return r.BindDrawLineBezierCubic(
-    startPos.x,
-    startPos.y,
-    endPos.x,
-    endPos.y,
-    startControlPos.x,
-    startControlPos.y,
-    endControlPos.x,
-    endControlPos.y,
-    thick,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.DrawLineBezierCubic = DrawLineBezierCubic
-
-/**
- * Draw lines sequence
- *
- * @param {number} points
- * @param {number} pointCount
- * @param {Color} color
- *
- * @return {undefined}
- */
-function DrawLineStrip(points, pointCount, color) {
-  return r.BindDrawLineStrip(
-    points,
-    pointCount,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.DrawLineStrip = DrawLineStrip
 
 /**
  * Draw a color-filled circle
@@ -2806,6 +2939,28 @@ function DrawCircleLines(centerX, centerY, radius, color) {
   )
 }
 raylib.DrawCircleLines = DrawCircleLines
+
+/**
+ * Draw circle outline (Vector version)
+ *
+ * @param {Vector2} center
+ * @param {number} radius
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawCircleLinesV(center, radius, color) {
+  return r.BindDrawCircleLinesV(
+    center.x,
+    center.y,
+    radius,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawCircleLinesV = DrawCircleLinesV
 
 /**
  * Draw ellipse
@@ -3389,6 +3544,388 @@ function DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color) {
 raylib.DrawPolyLinesEx = DrawPolyLinesEx
 
 /**
+ * Draw spline: Linear, minimum 2 points
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineLinear(points, pointCount, thick, color) {
+  return r.BindDrawSplineLinear(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineLinear = DrawSplineLinear
+
+/**
+ * Draw spline: B-Spline, minimum 4 points
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineBasis(points, pointCount, thick, color) {
+  return r.BindDrawSplineBasis(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineBasis = DrawSplineBasis
+
+/**
+ * Draw spline: Catmull-Rom, minimum 4 points
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineCatmullRom(points, pointCount, thick, color) {
+  return r.BindDrawSplineCatmullRom(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineCatmullRom = DrawSplineCatmullRom
+
+/**
+ * Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineBezierQuadratic(points, pointCount, thick, color) {
+  return r.BindDrawSplineBezierQuadratic(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineBezierQuadratic = DrawSplineBezierQuadratic
+
+/**
+ * Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineBezierCubic(points, pointCount, thick, color) {
+  return r.BindDrawSplineBezierCubic(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineBezierCubic = DrawSplineBezierCubic
+
+/**
+ * Draw spline segment: Linear, 2 points
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentLinear(p1, p2, thick, color) {
+  return r.BindDrawSplineSegmentLinear(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentLinear = DrawSplineSegmentLinear
+
+/**
+ * Draw spline segment: B-Spline, 4 points
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {Vector2} p3
+ * @param {Vector2} p4
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentBasis(p1, p2, p3, p4, thick, color) {
+  return r.BindDrawSplineSegmentBasis(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    p3.x,
+    p3.y,
+    p4.x,
+    p4.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentBasis = DrawSplineSegmentBasis
+
+/**
+ * Draw spline segment: Catmull-Rom, 4 points
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {Vector2} p3
+ * @param {Vector2} p4
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentCatmullRom(p1, p2, p3, p4, thick, color) {
+  return r.BindDrawSplineSegmentCatmullRom(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    p3.x,
+    p3.y,
+    p4.x,
+    p4.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentCatmullRom = DrawSplineSegmentCatmullRom
+
+/**
+ * Draw spline segment: Quadratic Bezier, 2 points, 1 control point
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} c2
+ * @param {Vector2} p3
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentBezierQuadratic(p1, c2, p3, thick, color) {
+  return r.BindDrawSplineSegmentBezierQuadratic(
+    p1.x,
+    p1.y,
+    c2.x,
+    c2.y,
+    p3.x,
+    p3.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentBezierQuadratic = DrawSplineSegmentBezierQuadratic
+
+/**
+ * Draw spline segment: Cubic Bezier, 2 points, 2 control points
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} c2
+ * @param {Vector2} c3
+ * @param {Vector2} p4
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentBezierCubic(p1, c2, c3, p4, thick, color) {
+  return r.BindDrawSplineSegmentBezierCubic(
+    p1.x,
+    p1.y,
+    c2.x,
+    c2.y,
+    c3.x,
+    c3.y,
+    p4.x,
+    p4.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentBezierCubic = DrawSplineSegmentBezierCubic
+
+/**
+ * Get (evaluate) spline point: Linear
+ *
+ * @param {Vector2} startPos
+ * @param {Vector2} endPos
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointLinear(startPos, endPos, t) {
+  return r.BindGetSplinePointLinear(
+    startPos.x,
+    startPos.y,
+    endPos.x,
+    endPos.y,
+    t
+  )
+}
+raylib.GetSplinePointLinear = GetSplinePointLinear
+
+/**
+ * Get (evaluate) spline point: B-Spline
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {Vector2} p3
+ * @param {Vector2} p4
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointBasis(p1, p2, p3, p4, t) {
+  return r.BindGetSplinePointBasis(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    p3.x,
+    p3.y,
+    p4.x,
+    p4.y,
+    t
+  )
+}
+raylib.GetSplinePointBasis = GetSplinePointBasis
+
+/**
+ * Get (evaluate) spline point: Catmull-Rom
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {Vector2} p3
+ * @param {Vector2} p4
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointCatmullRom(p1, p2, p3, p4, t) {
+  return r.BindGetSplinePointCatmullRom(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    p3.x,
+    p3.y,
+    p4.x,
+    p4.y,
+    t
+  )
+}
+raylib.GetSplinePointCatmullRom = GetSplinePointCatmullRom
+
+/**
+ * Get (evaluate) spline point: Quadratic Bezier
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} c2
+ * @param {Vector2} p3
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointBezierQuad(p1, c2, p3, t) {
+  return r.BindGetSplinePointBezierQuad(
+    p1.x,
+    p1.y,
+    c2.x,
+    c2.y,
+    p3.x,
+    p3.y,
+    t
+  )
+}
+raylib.GetSplinePointBezierQuad = GetSplinePointBezierQuad
+
+/**
+ * Get (evaluate) spline point: Cubic Bezier
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} c2
+ * @param {Vector2} c3
+ * @param {Vector2} p4
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointBezierCubic(p1, c2, c3, p4, t) {
+  return r.BindGetSplinePointBezierCubic(
+    p1.x,
+    p1.y,
+    c2.x,
+    c2.y,
+    c3.x,
+    c3.y,
+    p4.x,
+    p4.y,
+    t
+  )
+}
+raylib.GetSplinePointBezierCubic = GetSplinePointBezierCubic
+
+/**
  * Check collision between two rectangles
  *
  * @param {Rectangle} rec1
@@ -3645,6 +4182,24 @@ function LoadImageRaw(fileName, width, height, format, headerSize) {
 raylib.LoadImageRaw = LoadImageRaw
 
 /**
+ * Load image from SVG file data or string with specified size
+ *
+ * @param {string} fileNameOrString
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {Image} The resulting Image.
+ */
+function LoadImageSvg(fileNameOrString, width, height) {
+  return r.BindLoadImageSvg(
+    fileNameOrString,
+    width,
+    height
+  )
+}
+raylib.LoadImageSvg = LoadImageSvg
+
+/**
  * Load image sequence from file (frames appended to image.data)
  *
  * @param {string} fileName
@@ -3763,6 +4318,28 @@ function ExportImage(image, fileName) {
 raylib.ExportImage = ExportImage
 
 /**
+ * Export image to memory buffer
+ *
+ * @param {Image} image
+ * @param {string} fileType
+ * @param {number} fileSize
+ *
+ * @return {Buffer} The resulting unsigned char *.
+ */
+function ExportImageToMemory(image, fileType, fileSize) {
+  return r.BindExportImageToMemory(
+    image.data,
+    image.width,
+    image.height,
+    image.mipmaps,
+    image.format,
+    fileType,
+    fileSize
+  )
+}
+raylib.ExportImageToMemory = ExportImageToMemory
+
+/**
  * Export image as code file defining an array of bytes, returns true on success
  *
  * @param {Image} image
@@ -3804,56 +4381,32 @@ function GenImageColor(width, height, color) {
 raylib.GenImageColor = GenImageColor
 
 /**
- * Generate image: vertical gradient
+ * Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient
  *
  * @param {number} width
  * @param {number} height
- * @param {Color} top
- * @param {Color} bottom
+ * @param {number} direction
+ * @param {Color} start
+ * @param {Color} end
  *
  * @return {Image} The resulting Image.
  */
-function GenImageGradientV(width, height, top, bottom) {
-  return r.BindGenImageGradientV(
+function GenImageGradientLinear(width, height, direction, start, end) {
+  return r.BindGenImageGradientLinear(
     width,
     height,
-    top.r,
-    top.g,
-    top.b,
-    top.a,
-    bottom.r,
-    bottom.g,
-    bottom.b,
-    bottom.a
+    direction,
+    start.r,
+    start.g,
+    start.b,
+    start.a,
+    end.r,
+    end.g,
+    end.b,
+    end.a
   )
 }
-raylib.GenImageGradientV = GenImageGradientV
-
-/**
- * Generate image: horizontal gradient
- *
- * @param {number} width
- * @param {number} height
- * @param {Color} left
- * @param {Color} right
- *
- * @return {Image} The resulting Image.
- */
-function GenImageGradientH(width, height, left, right) {
-  return r.BindGenImageGradientH(
-    width,
-    height,
-    left.r,
-    left.g,
-    left.b,
-    left.a,
-    right.r,
-    right.g,
-    right.b,
-    right.a
-  )
-}
-raylib.GenImageGradientH = GenImageGradientH
+raylib.GenImageGradientLinear = GenImageGradientLinear
 
 /**
  * Generate image: radial gradient
@@ -3882,6 +4435,34 @@ function GenImageGradientRadial(width, height, density, inner, outer) {
   )
 }
 raylib.GenImageGradientRadial = GenImageGradientRadial
+
+/**
+ * Generate image: square gradient
+ *
+ * @param {number} width
+ * @param {number} height
+ * @param {number} density
+ * @param {Color} inner
+ * @param {Color} outer
+ *
+ * @return {Image} The resulting Image.
+ */
+function GenImageGradientSquare(width, height, density, inner, outer) {
+  return r.BindGenImageGradientSquare(
+    width,
+    height,
+    density,
+    inner.r,
+    inner.g,
+    inner.b,
+    inner.a,
+    outer.r,
+    outer.g,
+    outer.b,
+    outer.a
+  )
+}
+raylib.GenImageGradientSquare = GenImageGradientSquare
 
 /**
  * Generate image: checked
@@ -4100,6 +4681,22 @@ function ImageBlurGaussian(image, blurSize) {
   )
 }
 raylib.ImageBlurGaussian = ImageBlurGaussian
+
+/**
+ * Rotate image by input angle in degrees (-359 to 359)
+ *
+ * @param {number} image
+ * @param {number} degrees
+ *
+ * @return {undefined}
+ */
+function ImageRotate(image, degrees) {
+  return r.BindImageRotate(
+    image,
+    degrees
+  )
+}
+raylib.ImageRotate = ImageRotate
 
 /**
  * Load color data from image as a Color array (RGBA - 32bit)
@@ -4997,21 +5594,21 @@ function LoadFont(fileName) {
 raylib.LoadFont = LoadFont
 
 /**
- * Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
+ * Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont
  *
  * @param {string} fileName
  * @param {number} fontSize
- * @param {number} fontChars
- * @param {number} glyphCount
+ * @param {number} codepoints
+ * @param {number} codepointCount
  *
  * @return {Font} The resulting Font.
  */
-function LoadFontEx(fileName, fontSize, fontChars, glyphCount) {
+function LoadFontEx(fileName, fontSize, codepoints, codepointCount) {
   return r.BindLoadFontEx(
     fileName,
     fontSize,
-    fontChars,
-    glyphCount
+    codepoints,
+    codepointCount
   )
 }
 raylib.LoadFontEx = LoadFontEx
@@ -5048,19 +5645,19 @@ raylib.LoadFontFromImage = LoadFontFromImage
  * @param {Buffer} fileData
  * @param {number} dataSize
  * @param {number} fontSize
- * @param {number} fontChars
- * @param {number} glyphCount
+ * @param {number} codepoints
+ * @param {number} codepointCount
  *
  * @return {Font} The resulting Font.
  */
-function LoadFontFromMemory(fileType, fileData, dataSize, fontSize, fontChars, glyphCount) {
+function LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount) {
   return r.BindLoadFontFromMemory(
     fileType,
     fileData,
     dataSize,
     fontSize,
-    fontChars,
-    glyphCount
+    codepoints,
+    codepointCount
   )
 }
 raylib.LoadFontFromMemory = LoadFontFromMemory
@@ -5094,19 +5691,19 @@ raylib.IsFontReady = IsFontReady
  * @param {Buffer} fileData
  * @param {number} dataSize
  * @param {number} fontSize
- * @param {number} fontChars
- * @param {number} glyphCount
+ * @param {number} codepoints
+ * @param {number} codepointCount
  * @param {number} type
  *
  * @return {number} The resulting GlyphInfo *.
  */
-function LoadFontData(fileData, dataSize, fontSize, fontChars, glyphCount, type) {
+function LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type) {
   return r.BindLoadFontData(
     fileData,
     dataSize,
     fontSize,
-    fontChars,
-    glyphCount,
+    codepoints,
+    codepointCount,
     type
   )
 }
@@ -5115,8 +5712,8 @@ raylib.LoadFontData = LoadFontData
 /**
  * Generate image font atlas using chars info
  *
- * @param {number} chars
- * @param {number} recs
+ * @param {number} glyphs
+ * @param {number} glyphRecs
  * @param {number} glyphCount
  * @param {number} fontSize
  * @param {number} padding
@@ -5124,10 +5721,10 @@ raylib.LoadFontData = LoadFontData
  *
  * @return {Image} The resulting Image.
  */
-function GenImageFontAtlas(chars, recs, glyphCount, fontSize, padding, packMethod) {
+function GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod) {
   return r.BindGenImageFontAtlas(
-    chars,
-    recs,
+    glyphs,
+    glyphRecs,
     glyphCount,
     fontSize,
     padding,
@@ -5139,14 +5736,14 @@ raylib.GenImageFontAtlas = GenImageFontAtlas
 /**
  * Unload font chars info data (RAM)
  *
- * @param {number} chars
+ * @param {number} glyphs
  * @param {number} glyphCount
  *
  * @return {undefined}
  */
-function UnloadFontData(chars, glyphCount) {
+function UnloadFontData(glyphs, glyphCount) {
   return r.BindUnloadFontData(
-    chars,
+    glyphs,
     glyphCount
   )
 }
@@ -5360,7 +5957,7 @@ raylib.DrawTextCodepoint = DrawTextCodepoint
  *
  * @param {Font} font
  * @param {number} codepoints
- * @param {number} count
+ * @param {number} codepointCount
  * @param {Vector2} position
  * @param {number} fontSize
  * @param {number} spacing
@@ -5368,7 +5965,7 @@ raylib.DrawTextCodepoint = DrawTextCodepoint
  *
  * @return {undefined}
  */
-function DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing, tint) {
+function DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint) {
   return r.BindDrawTextCodepoints(
     font.baseSize,
     font.glyphCount,
@@ -5381,7 +5978,7 @@ function DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing
     font.recs,
     font.glyphs,
     codepoints,
-    count,
+    codepointCount,
     position.x,
     position.y,
     fontSize,
@@ -5393,6 +5990,20 @@ function DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing
   )
 }
 raylib.DrawTextCodepoints = DrawTextCodepoints
+
+/**
+ * Set vertical line spacing when drawing with line-breaks
+ *
+ * @param {number} spacing
+ *
+ * @return {undefined}
+ */
+function SetTextLineSpacing(spacing) {
+  return r.BindSetTextLineSpacing(
+    spacing
+  )
+}
+raylib.SetTextLineSpacing = SetTextLineSpacing
 
 /**
  * Measure string width for default font
@@ -7346,6 +7957,7 @@ function UpdateModelAnimation(model, anim, frame) {
     anim.frameCount,
     anim.bones,
     anim.framePoses,
+    anim.name,
     frame
   )
 }
@@ -7363,7 +7975,8 @@ function UnloadModelAnimation(anim) {
     anim.boneCount,
     anim.frameCount,
     anim.bones,
-    anim.framePoses
+    anim.framePoses,
+    anim.name
   )
 }
 raylib.UnloadModelAnimation = UnloadModelAnimation
@@ -7372,14 +7985,14 @@ raylib.UnloadModelAnimation = UnloadModelAnimation
  * Unload animation array data
  *
  * @param {number} animations
- * @param {number} count
+ * @param {number} animCount
  *
  * @return {undefined}
  */
-function UnloadModelAnimations(animations, count) {
+function UnloadModelAnimations(animations, animCount) {
   return r.BindUnloadModelAnimations(
     animations,
-    count
+    animCount
   )
 }
 raylib.UnloadModelAnimations = UnloadModelAnimations
@@ -7421,7 +8034,8 @@ function IsModelAnimationValid(model, anim) {
     anim.boneCount,
     anim.frameCount,
     anim.bones,
-    anim.framePoses
+    anim.framePoses,
+    anim.name
   )
 }
 raylib.IsModelAnimationValid = IsModelAnimationValid
@@ -7715,6 +8329,16 @@ function SetMasterVolume(volume) {
 raylib.SetMasterVolume = SetMasterVolume
 
 /**
+ * Get master volume (listener)
+ *
+ * @return {number} The resulting float.
+ */
+function GetMasterVolume() {
+  return r.BindGetMasterVolume()
+}
+raylib.GetMasterVolume = GetMasterVolume
+
+/**
  * Load wave data from file
  *
  * @param {string} fileName
@@ -7797,6 +8421,25 @@ function LoadSoundFromWave(wave) {
 raylib.LoadSoundFromWave = LoadSoundFromWave
 
 /**
+ * Create a new sound that shares the same sample data as the source sound, does not own the sound data
+ *
+ * @param {Sound} source
+ *
+ * @return {Sound} The resulting Sound.
+ */
+function LoadSoundAlias(source) {
+  return r.BindLoadSoundAlias(
+    source.stream.buffer,
+    source.stream.processor,
+    source.stream.sampleRate,
+    source.stream.sampleSize,
+    source.stream.channels,
+    source.frameCount
+  )
+}
+raylib.LoadSoundAlias = LoadSoundAlias
+
+/**
  * Checks if a sound is ready
  *
  * @param {Sound} sound
@@ -7874,6 +8517,25 @@ function UnloadSound(sound) {
   )
 }
 raylib.UnloadSound = UnloadSound
+
+/**
+ * Unload a sound alias (does not deallocate sample data)
+ *
+ * @param {Sound} alias
+ *
+ * @return {undefined}
+ */
+function UnloadSoundAlias(alias) {
+  return r.BindUnloadSoundAlias(
+    alias.stream.buffer,
+    alias.stream.processor,
+    alias.stream.sampleRate,
+    alias.stream.sampleSize,
+    alias.stream.channels,
+    alias.frameCount
+  )
+}
+raylib.UnloadSoundAlias = UnloadSoundAlias
 
 /**
  * Export wave data to file, returns true on success
@@ -9797,6 +10459,30 @@ function Vector3Normalize(v) {
 }
 raylib.Vector3Normalize = Vector3Normalize
 
+function Vector3Project(v1, v2) {
+  return r.BindVector3Project(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Project = Vector3Project
+
+function Vector3Reject(v1, v2) {
+  return r.BindVector3Reject(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Reject = Vector3Reject
+
 function Vector3OrthoNormalize(v1, v2) {
   return r.BindVector3OrthoNormalize(
     v1,
@@ -10307,24 +10993,24 @@ function MatrixFrustum(left, right, bottom, top, near, far) {
 }
 raylib.MatrixFrustum = MatrixFrustum
 
-function MatrixPerspective(fovy, aspect, near, far) {
+function MatrixPerspective(fovY, aspect, nearPlane, farPlane) {
   return r.BindMatrixPerspective(
-    fovy,
+    fovY,
     aspect,
-    near,
-    far
+    nearPlane,
+    farPlane
   )
 }
 raylib.MatrixPerspective = MatrixPerspective
 
-function MatrixOrtho(left, right, bottom, top, near, far) {
+function MatrixOrtho(left, right, bottom, top, nearPlane, farPlane) {
   return r.BindMatrixOrtho(
     left,
     right,
     bottom,
     top,
-    near,
-    far
+    nearPlane,
+    farPlane
   )
 }
 raylib.MatrixOrtho = MatrixOrtho
@@ -10617,12 +11303,12 @@ raylib.GuiIsLocked = GuiIsLocked
  *
  * @return {undefined}
  */
-function GuiFade(alpha) {
-  return r.BindGuiFade(
+function GuiSetAlpha(alpha) {
+  return r.BindGuiSetAlpha(
     alpha
   )
 }
-raylib.GuiFade = GuiFade
+raylib.GuiSetAlpha = GuiSetAlpha
 
 /**
  * Set gui state (global state)
@@ -10716,729 +11402,6 @@ function GuiGetStyle(control, property) {
 raylib.GuiGetStyle = GuiGetStyle
 
 /**
- * Window Box control, shows a window that can be closed
- *
- * @param {Rectangle} bounds
- * @param {string} title
- *
- * @return {boolean} The resulting bool.
- */
-function GuiWindowBox(bounds, title) {
-  return r.BindGuiWindowBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    title
-  )
-}
-raylib.GuiWindowBox = GuiWindowBox
-
-/**
- * Group Box control with text name
- *
- * @param {Rectangle} bounds
- * @param {string} text
- *
- * @return {undefined}
- */
-function GuiGroupBox(bounds, text) {
-  return r.BindGuiGroupBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text
-  )
-}
-raylib.GuiGroupBox = GuiGroupBox
-
-/**
- * Line separator control, could contain text
- *
- * @param {Rectangle} bounds
- * @param {string} text
- *
- * @return {undefined}
- */
-function GuiLine(bounds, text) {
-  return r.BindGuiLine(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text
-  )
-}
-raylib.GuiLine = GuiLine
-
-/**
- * Panel control, useful to group controls
- *
- * @param {Rectangle} bounds
- * @param {string} text
- *
- * @return {undefined}
- */
-function GuiPanel(bounds, text) {
-  return r.BindGuiPanel(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text
-  )
-}
-raylib.GuiPanel = GuiPanel
-
-/**
- * Tab Bar control, returns TAB to be closed or -1
- *
- * @param {Rectangle} bounds
- * @param {number} text
- * @param {number} count
- * @param {number} active
- *
- * @return {number} The resulting int.
- */
-function GuiTabBar(bounds, text, count, active) {
-  return r.BindGuiTabBar(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    count,
-    active
-  )
-}
-raylib.GuiTabBar = GuiTabBar
-
-/**
- * Scroll Panel control
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {Rectangle} content
- * @param {number} scroll
- *
- * @return {Rectangle} The resulting Rectangle.
- */
-function GuiScrollPanel(bounds, text, content, scroll) {
-  return r.BindGuiScrollPanel(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    content.x,
-    content.y,
-    content.width,
-    content.height,
-    scroll
-  )
-}
-raylib.GuiScrollPanel = GuiScrollPanel
-
-/**
- * Label control, shows text
- *
- * @param {Rectangle} bounds
- * @param {string} text
- *
- * @return {undefined}
- */
-function GuiLabel(bounds, text) {
-  return r.BindGuiLabel(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text
-  )
-}
-raylib.GuiLabel = GuiLabel
-
-/**
- * Button control, returns true when clicked
- *
- * @param {Rectangle} bounds
- * @param {string} text
- *
- * @return {boolean} The resulting bool.
- */
-function GuiButton(bounds, text) {
-  return r.BindGuiButton(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text
-  )
-}
-raylib.GuiButton = GuiButton
-
-/**
- * Label button control, show true when clicked
- *
- * @param {Rectangle} bounds
- * @param {string} text
- *
- * @return {boolean} The resulting bool.
- */
-function GuiLabelButton(bounds, text) {
-  return r.BindGuiLabelButton(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text
-  )
-}
-raylib.GuiLabelButton = GuiLabelButton
-
-/**
- * Toggle Button control, returns true when active
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {boolean} active
- *
- * @return {boolean} The resulting bool.
- */
-function GuiToggle(bounds, text, active) {
-  return r.BindGuiToggle(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    active
-  )
-}
-raylib.GuiToggle = GuiToggle
-
-/**
- * Toggle Group control, returns active toggle index
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} active
- *
- * @return {number} The resulting int.
- */
-function GuiToggleGroup(bounds, text, active) {
-  return r.BindGuiToggleGroup(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    active
-  )
-}
-raylib.GuiToggleGroup = GuiToggleGroup
-
-/**
- * Check Box control, returns true when active
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {boolean} checked
- *
- * @return {boolean} The resulting bool.
- */
-function GuiCheckBox(bounds, text, checked) {
-  return r.BindGuiCheckBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    checked
-  )
-}
-raylib.GuiCheckBox = GuiCheckBox
-
-/**
- * Combo Box control, returns selected item index
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} active
- *
- * @return {number} The resulting int.
- */
-function GuiComboBox(bounds, text, active) {
-  return r.BindGuiComboBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    active
-  )
-}
-raylib.GuiComboBox = GuiComboBox
-
-/**
- * Dropdown Box control, returns selected item
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} active
- * @param {boolean} editMode
- *
- * @return {boolean} The resulting bool.
- */
-function GuiDropdownBox(bounds, text, active, editMode) {
-  return r.BindGuiDropdownBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    active,
-    editMode
-  )
-}
-raylib.GuiDropdownBox = GuiDropdownBox
-
-/**
- * Spinner control, returns selected value
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} value
- * @param {number} minValue
- * @param {number} maxValue
- * @param {boolean} editMode
- *
- * @return {boolean} The resulting bool.
- */
-function GuiSpinner(bounds, text, value, minValue, maxValue, editMode) {
-  return r.BindGuiSpinner(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    value,
-    minValue,
-    maxValue,
-    editMode
-  )
-}
-raylib.GuiSpinner = GuiSpinner
-
-/**
- * Value Box control, updates input text with numbers
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} value
- * @param {number} minValue
- * @param {number} maxValue
- * @param {boolean} editMode
- *
- * @return {boolean} The resulting bool.
- */
-function GuiValueBox(bounds, text, value, minValue, maxValue, editMode) {
-  return r.BindGuiValueBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    value,
-    minValue,
-    maxValue,
-    editMode
-  )
-}
-raylib.GuiValueBox = GuiValueBox
-
-/**
- * Text Box control, updates input text
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} textSize
- * @param {boolean} editMode
- *
- * @return {boolean} The resulting bool.
- */
-function GuiTextBox(bounds, text, textSize, editMode) {
-  return r.BindGuiTextBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    textSize,
-    editMode
-  )
-}
-raylib.GuiTextBox = GuiTextBox
-
-/**
- * Text Box control with multiple lines
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} textSize
- * @param {boolean} editMode
- *
- * @return {boolean} The resulting bool.
- */
-function GuiTextBoxMulti(bounds, text, textSize, editMode) {
-  return r.BindGuiTextBoxMulti(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    textSize,
-    editMode
-  )
-}
-raylib.GuiTextBoxMulti = GuiTextBoxMulti
-
-/**
- * Slider control, returns selected value
- *
- * @param {Rectangle} bounds
- * @param {string} textLeft
- * @param {string} textRight
- * @param {number} value
- * @param {number} minValue
- * @param {number} maxValue
- *
- * @return {number} The resulting float.
- */
-function GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue) {
-  return r.BindGuiSlider(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    textLeft,
-    textRight,
-    value,
-    minValue,
-    maxValue
-  )
-}
-raylib.GuiSlider = GuiSlider
-
-/**
- * Slider Bar control, returns selected value
- *
- * @param {Rectangle} bounds
- * @param {string} textLeft
- * @param {string} textRight
- * @param {number} value
- * @param {number} minValue
- * @param {number} maxValue
- *
- * @return {number} The resulting float.
- */
-function GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue) {
-  return r.BindGuiSliderBar(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    textLeft,
-    textRight,
-    value,
-    minValue,
-    maxValue
-  )
-}
-raylib.GuiSliderBar = GuiSliderBar
-
-/**
- * Progress Bar control, shows current progress value
- *
- * @param {Rectangle} bounds
- * @param {string} textLeft
- * @param {string} textRight
- * @param {number} value
- * @param {number} minValue
- * @param {number} maxValue
- *
- * @return {number} The resulting float.
- */
-function GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue) {
-  return r.BindGuiProgressBar(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    textLeft,
-    textRight,
-    value,
-    minValue,
-    maxValue
-  )
-}
-raylib.GuiProgressBar = GuiProgressBar
-
-/**
- * Status Bar control, shows info text
- *
- * @param {Rectangle} bounds
- * @param {string} text
- *
- * @return {undefined}
- */
-function GuiStatusBar(bounds, text) {
-  return r.BindGuiStatusBar(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text
-  )
-}
-raylib.GuiStatusBar = GuiStatusBar
-
-/**
- * Dummy control for placeholders
- *
- * @param {Rectangle} bounds
- * @param {string} text
- *
- * @return {undefined}
- */
-function GuiDummyRec(bounds, text) {
-  return r.BindGuiDummyRec(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text
-  )
-}
-raylib.GuiDummyRec = GuiDummyRec
-
-/**
- * Grid control, returns mouse cell position
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} spacing
- * @param {number} subdivs
- *
- * @return {Vector2} The resulting Vector2.
- */
-function GuiGrid(bounds, text, spacing, subdivs) {
-  return r.BindGuiGrid(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    spacing,
-    subdivs
-  )
-}
-raylib.GuiGrid = GuiGrid
-
-/**
- * List View control, returns selected list item index
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} scrollIndex
- * @param {number} active
- *
- * @return {number} The resulting int.
- */
-function GuiListView(bounds, text, scrollIndex, active) {
-  return r.BindGuiListView(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    scrollIndex,
-    active
-  )
-}
-raylib.GuiListView = GuiListView
-
-/**
- * List View with extended parameters
- *
- * @param {Rectangle} bounds
- * @param {number} text
- * @param {number} count
- * @param {number} focus
- * @param {number} scrollIndex
- * @param {number} active
- *
- * @return {number} The resulting int.
- */
-function GuiListViewEx(bounds, text, count, focus, scrollIndex, active) {
-  return r.BindGuiListViewEx(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    count,
-    focus,
-    scrollIndex,
-    active
-  )
-}
-raylib.GuiListViewEx = GuiListViewEx
-
-/**
- * Message Box control, displays a message
- *
- * @param {Rectangle} bounds
- * @param {string} title
- * @param {string} message
- * @param {string} buttons
- *
- * @return {number} The resulting int.
- */
-function GuiMessageBox(bounds, title, message, buttons) {
-  return r.BindGuiMessageBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    title,
-    message,
-    buttons
-  )
-}
-raylib.GuiMessageBox = GuiMessageBox
-
-/**
- * Text Input Box control, ask for text, supports secret
- *
- * @param {Rectangle} bounds
- * @param {string} title
- * @param {string} message
- * @param {string} buttons
- * @param {string} text
- * @param {number} textMaxSize
- * @param {number} secretViewActive
- *
- * @return {number} The resulting int.
- */
-function GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive) {
-  return r.BindGuiTextInputBox(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    title,
-    message,
-    buttons,
-    text,
-    textMaxSize,
-    secretViewActive
-  )
-}
-raylib.GuiTextInputBox = GuiTextInputBox
-
-/**
- * Color Picker control (multiple color controls)
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {Color} color
- *
- * @return {Color} The resulting Color.
- */
-function GuiColorPicker(bounds, text, color) {
-  return r.BindGuiColorPicker(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.GuiColorPicker = GuiColorPicker
-
-/**
- * Color Panel control
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {Color} color
- *
- * @return {Color} The resulting Color.
- */
-function GuiColorPanel(bounds, text, color) {
-  return r.BindGuiColorPanel(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.GuiColorPanel = GuiColorPanel
-
-/**
- * Color Bar Alpha control
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} alpha
- *
- * @return {number} The resulting float.
- */
-function GuiColorBarAlpha(bounds, text, alpha) {
-  return r.BindGuiColorBarAlpha(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    alpha
-  )
-}
-raylib.GuiColorBarAlpha = GuiColorBarAlpha
-
-/**
- * Color Bar Hue control
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} value
- *
- * @return {number} The resulting float.
- */
-function GuiColorBarHue(bounds, text, value) {
-  return r.BindGuiColorBarHue(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    value
-  )
-}
-raylib.GuiColorBarHue = GuiColorBarHue
-
-/**
  * Load style file over global style variable (.rgs)
  *
  * @param {string} fileName
@@ -11513,6 +11476,20 @@ function GuiIconText(iconId, text) {
 raylib.GuiIconText = GuiIconText
 
 /**
+ * Set default icon drawing size
+ *
+ * @param {number} scale
+ *
+ * @return {undefined}
+ */
+function GuiSetIconScale(scale) {
+  return r.BindGuiSetIconScale(
+    scale
+  )
+}
+raylib.GuiSetIconScale = GuiSetIconScale
+
+/**
  * Get raygui icons data pointer
  *
  * @return {number} The resulting unsigned int *.
@@ -11538,6 +11515,17 @@ function GuiLoadIcons(fileName, loadIconsName) {
 }
 raylib.GuiLoadIcons = GuiLoadIcons
 
+/**
+ * Draw icon using pixel size at specified position
+ *
+ * @param {number} iconId
+ * @param {number} posX
+ * @param {number} posY
+ * @param {number} pixelSize
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
 function GuiDrawIcon(iconId, posX, posY, pixelSize, color) {
   return r.BindGuiDrawIcon(
     iconId,
@@ -11553,18 +11541,765 @@ function GuiDrawIcon(iconId, posX, posY, pixelSize, color) {
 raylib.GuiDrawIcon = GuiDrawIcon
 
 /**
- * Set icon drawing size
+ * Window Box control, shows a window that can be closed
  *
- * @param {number} scale
+ * @param {Rectangle} bounds
+ * @param {string} title
  *
- * @return {undefined}
+ * @return {number} The resulting int.
  */
-function GuiSetIconScale(scale) {
-  return r.BindGuiSetIconScale(
-    scale
+function GuiWindowBox(bounds, title) {
+  return r.BindGuiWindowBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    title
   )
 }
-raylib.GuiSetIconScale = GuiSetIconScale
+raylib.GuiWindowBox = GuiWindowBox
+
+/**
+ * Group Box control with text name
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiGroupBox(bounds, text) {
+  return r.BindGuiGroupBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiGroupBox = GuiGroupBox
+
+/**
+ * Line separator control, could contain text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiLine(bounds, text) {
+  return r.BindGuiLine(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiLine = GuiLine
+
+/**
+ * Panel control, useful to group controls
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiPanel(bounds, text) {
+  return r.BindGuiPanel(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiPanel = GuiPanel
+
+/**
+ * Tab Bar control, returns TAB to be closed or -1
+ *
+ * @param {Rectangle} bounds
+ * @param {number} text
+ * @param {number} count
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiTabBar(bounds, text, count, active) {
+  return r.BindGuiTabBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    count,
+    active
+  )
+}
+raylib.GuiTabBar = GuiTabBar
+
+/**
+ * Scroll Panel control
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {Rectangle} content
+ * @param {number} scroll
+ * @param {number} view
+ *
+ * @return {number} The resulting int.
+ */
+function GuiScrollPanel(bounds, text, content, scroll, view) {
+  return r.BindGuiScrollPanel(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    content.x,
+    content.y,
+    content.width,
+    content.height,
+    scroll,
+    view
+  )
+}
+raylib.GuiScrollPanel = GuiScrollPanel
+
+/**
+ * Label control, shows text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiLabel(bounds, text) {
+  return r.BindGuiLabel(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiLabel = GuiLabel
+
+/**
+ * Button control, returns true when clicked
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiButton(bounds, text) {
+  return r.BindGuiButton(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiButton = GuiButton
+
+/**
+ * Label button control, show true when clicked
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiLabelButton(bounds, text) {
+  return r.BindGuiLabelButton(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiLabelButton = GuiLabelButton
+
+/**
+ * Toggle Button control, returns true when active
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiToggle(bounds, text, active) {
+  return r.BindGuiToggle(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active
+  )
+}
+raylib.GuiToggle = GuiToggle
+
+/**
+ * Toggle Group control, returns active toggle index
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiToggleGroup(bounds, text, active) {
+  return r.BindGuiToggleGroup(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active
+  )
+}
+raylib.GuiToggleGroup = GuiToggleGroup
+
+/**
+ * Toggle Slider control, returns true when clicked
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiToggleSlider(bounds, text, active) {
+  return r.BindGuiToggleSlider(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active
+  )
+}
+raylib.GuiToggleSlider = GuiToggleSlider
+
+/**
+ * Check Box control, returns true when active
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} checked
+ *
+ * @return {number} The resulting int.
+ */
+function GuiCheckBox(bounds, text, checked) {
+  return r.BindGuiCheckBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    checked
+  )
+}
+raylib.GuiCheckBox = GuiCheckBox
+
+/**
+ * Combo Box control, returns selected item index
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiComboBox(bounds, text, active) {
+  return r.BindGuiComboBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active
+  )
+}
+raylib.GuiComboBox = GuiComboBox
+
+/**
+ * Dropdown Box control, returns selected item
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ * @param {boolean} editMode
+ *
+ * @return {number} The resulting int.
+ */
+function GuiDropdownBox(bounds, text, active, editMode) {
+  return r.BindGuiDropdownBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active,
+    editMode
+  )
+}
+raylib.GuiDropdownBox = GuiDropdownBox
+
+/**
+ * Spinner control, returns selected value
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @param {boolean} editMode
+ *
+ * @return {number} The resulting int.
+ */
+function GuiSpinner(bounds, text, value, minValue, maxValue, editMode) {
+  return r.BindGuiSpinner(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    value,
+    minValue,
+    maxValue,
+    editMode
+  )
+}
+raylib.GuiSpinner = GuiSpinner
+
+/**
+ * Value Box control, updates input text with numbers
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ * @param {boolean} editMode
+ *
+ * @return {number} The resulting int.
+ */
+function GuiValueBox(bounds, text, value, minValue, maxValue, editMode) {
+  return r.BindGuiValueBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    value,
+    minValue,
+    maxValue,
+    editMode
+  )
+}
+raylib.GuiValueBox = GuiValueBox
+
+/**
+ * Text Box control, updates input text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} textSize
+ * @param {boolean} editMode
+ *
+ * @return {number} The resulting int.
+ */
+function GuiTextBox(bounds, text, textSize, editMode) {
+  return r.BindGuiTextBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    textSize,
+    editMode
+  )
+}
+raylib.GuiTextBox = GuiTextBox
+
+/**
+ * Slider control, returns selected value
+ *
+ * @param {Rectangle} bounds
+ * @param {string} textLeft
+ * @param {string} textRight
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ *
+ * @return {number} The resulting int.
+ */
+function GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue) {
+  return r.BindGuiSlider(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    textLeft,
+    textRight,
+    value,
+    minValue,
+    maxValue
+  )
+}
+raylib.GuiSlider = GuiSlider
+
+/**
+ * Slider Bar control, returns selected value
+ *
+ * @param {Rectangle} bounds
+ * @param {string} textLeft
+ * @param {string} textRight
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ *
+ * @return {number} The resulting int.
+ */
+function GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue) {
+  return r.BindGuiSliderBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    textLeft,
+    textRight,
+    value,
+    minValue,
+    maxValue
+  )
+}
+raylib.GuiSliderBar = GuiSliderBar
+
+/**
+ * Progress Bar control, shows current progress value
+ *
+ * @param {Rectangle} bounds
+ * @param {string} textLeft
+ * @param {string} textRight
+ * @param {number} value
+ * @param {number} minValue
+ * @param {number} maxValue
+ *
+ * @return {number} The resulting int.
+ */
+function GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue) {
+  return r.BindGuiProgressBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    textLeft,
+    textRight,
+    value,
+    minValue,
+    maxValue
+  )
+}
+raylib.GuiProgressBar = GuiProgressBar
+
+/**
+ * Status Bar control, shows info text
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiStatusBar(bounds, text) {
+  return r.BindGuiStatusBar(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiStatusBar = GuiStatusBar
+
+/**
+ * Dummy control for placeholders
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ *
+ * @return {number} The resulting int.
+ */
+function GuiDummyRec(bounds, text) {
+  return r.BindGuiDummyRec(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text
+  )
+}
+raylib.GuiDummyRec = GuiDummyRec
+
+/**
+ * Grid control, returns mouse cell position
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} spacing
+ * @param {number} subdivs
+ * @param {number} mouseCell
+ *
+ * @return {number} The resulting int.
+ */
+function GuiGrid(bounds, text, spacing, subdivs, mouseCell) {
+  return r.BindGuiGrid(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    spacing,
+    subdivs,
+    mouseCell
+  )
+}
+raylib.GuiGrid = GuiGrid
+
+/**
+ * List View control, returns selected list item index
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} scrollIndex
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiListView(bounds, text, scrollIndex, active) {
+  return r.BindGuiListView(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    scrollIndex,
+    active
+  )
+}
+raylib.GuiListView = GuiListView
+
+/**
+ * List View with extended parameters
+ *
+ * @param {Rectangle} bounds
+ * @param {number} text
+ * @param {number} count
+ * @param {number} scrollIndex
+ * @param {number} active
+ * @param {number} focus
+ *
+ * @return {number} The resulting int.
+ */
+function GuiListViewEx(bounds, text, count, scrollIndex, active, focus) {
+  return r.BindGuiListViewEx(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    count,
+    scrollIndex,
+    active,
+    focus
+  )
+}
+raylib.GuiListViewEx = GuiListViewEx
+
+/**
+ * Message Box control, displays a message
+ *
+ * @param {Rectangle} bounds
+ * @param {string} title
+ * @param {string} message
+ * @param {string} buttons
+ *
+ * @return {number} The resulting int.
+ */
+function GuiMessageBox(bounds, title, message, buttons) {
+  return r.BindGuiMessageBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    title,
+    message,
+    buttons
+  )
+}
+raylib.GuiMessageBox = GuiMessageBox
+
+/**
+ * Text Input Box control, ask for text, supports secret
+ *
+ * @param {Rectangle} bounds
+ * @param {string} title
+ * @param {string} message
+ * @param {string} buttons
+ * @param {string} text
+ * @param {number} textMaxSize
+ * @param {number} secretViewActive
+ *
+ * @return {number} The resulting int.
+ */
+function GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive) {
+  return r.BindGuiTextInputBox(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    title,
+    message,
+    buttons,
+    text,
+    textMaxSize,
+    secretViewActive
+  )
+}
+raylib.GuiTextInputBox = GuiTextInputBox
+
+/**
+ * Color Picker control (multiple color controls)
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} color
+ *
+ * @return {number} The resulting int.
+ */
+function GuiColorPicker(bounds, text, color) {
+  return r.BindGuiColorPicker(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    color
+  )
+}
+raylib.GuiColorPicker = GuiColorPicker
+
+/**
+ * Color Panel control
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} color
+ *
+ * @return {number} The resulting int.
+ */
+function GuiColorPanel(bounds, text, color) {
+  return r.BindGuiColorPanel(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    color
+  )
+}
+raylib.GuiColorPanel = GuiColorPanel
+
+/**
+ * Color Bar Alpha control
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} alpha
+ *
+ * @return {number} The resulting int.
+ */
+function GuiColorBarAlpha(bounds, text, alpha) {
+  return r.BindGuiColorBarAlpha(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    alpha
+  )
+}
+raylib.GuiColorBarAlpha = GuiColorBarAlpha
+
+/**
+ * Color Bar Hue control
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} value
+ *
+ * @return {number} The resulting int.
+ */
+function GuiColorBarHue(bounds, text, value) {
+  return r.BindGuiColorBarHue(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    value
+  )
+}
+raylib.GuiColorBarHue = GuiColorBarHue
+
+/**
+ * Color Picker control that avoids conversion to RGB on each call (multiple color controls)
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} colorHsv
+ *
+ * @return {number} The resulting int.
+ */
+function GuiColorPickerHSV(bounds, text, colorHsv) {
+  return r.BindGuiColorPickerHSV(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    colorHsv
+  )
+}
+raylib.GuiColorPickerHSV = GuiColorPickerHSV
+
+/**
+ * Color Panel control that returns HSV color value, used by GuiColorPickerHSV()
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} colorHsv
+ *
+ * @return {number} The resulting int.
+ */
+function GuiColorPanelHSV(bounds, text, colorHsv) {
+  return r.BindGuiColorPanelHSV(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    colorHsv
+  )
+}
+raylib.GuiColorPanelHSV = GuiColorPanelHSV
 
 /**
  * Choose the current matrix to be transformed
@@ -12151,6 +12886,36 @@ function rlActiveDrawBuffers(count) {
 raylib.rlActiveDrawBuffers = rlActiveDrawBuffers
 
 /**
+ * Blit active framebuffer to main framebuffer
+ *
+ * @param {number} srcX
+ * @param {number} srcY
+ * @param {number} srcWidth
+ * @param {number} srcHeight
+ * @param {number} dstX
+ * @param {number} dstY
+ * @param {number} dstWidth
+ * @param {number} dstHeight
+ * @param {number} bufferMask
+ *
+ * @return {undefined}
+ */
+function rlBlitFramebuffer(srcX, srcY, srcWidth, srcHeight, dstX, dstY, dstWidth, dstHeight, bufferMask) {
+  return r.BindrlBlitFramebuffer(
+    srcX,
+    srcY,
+    srcWidth,
+    srcHeight,
+    dstX,
+    dstY,
+    dstWidth,
+    dstHeight,
+    bufferMask
+  )
+}
+raylib.rlBlitFramebuffer = rlBlitFramebuffer
+
+/**
  * Enable color blending
  *
  * @return {undefined}
@@ -12295,7 +13060,17 @@ function rlEnableWireMode() {
 raylib.rlEnableWireMode = rlEnableWireMode
 
 /**
- * Disable wire mode
+ * Enable point mode
+ *
+ * @return {undefined}
+ */
+function rlEnablePointMode() {
+  return r.BindrlEnablePointMode()
+}
+raylib.rlEnablePointMode = rlEnablePointMode
+
+/**
+ * Disable wire mode ( and point ) maybe rename
  *
  * @return {undefined}
  */
@@ -15327,6 +16102,14 @@ raylib.FLAG_WINDOW_HIGHDPI = 8192
 raylib.FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384
 
 /**
+ * Set to run program in borderless windowed mode
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.FLAG_BORDERLESS_WINDOWED_MODE = 32768
+
+/**
  * Set to try enabling MSAA 4X
  *
  * @type {number}
@@ -17103,12 +17886,36 @@ raylib.PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
 raylib.PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
 
 /**
+ * 16 bpp (1 channel - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.PIXELFORMAT_UNCOMPRESSED_R16 = 11
+
+/**
+ * 16*3 bpp (3 channels - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.PIXELFORMAT_UNCOMPRESSED_R16G16B16 = 12
+
+/**
+ * 16*4 bpp (4 channels - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.PIXELFORMAT_UNCOMPRESSED_R16G16B16A16 = 13
+
+/**
  * 4 bpp (no alpha)
  *
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+raylib.PIXELFORMAT_COMPRESSED_DXT1_RGB = 14
 
 /**
  * 4 bpp (1 bit alpha)
@@ -17116,7 +17923,7 @@ raylib.PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+raylib.PIXELFORMAT_COMPRESSED_DXT1_RGBA = 15
 
 /**
  * 8 bpp
@@ -17124,7 +17931,7 @@ raylib.PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+raylib.PIXELFORMAT_COMPRESSED_DXT3_RGBA = 16
 
 /**
  * 8 bpp
@@ -17132,7 +17939,7 @@ raylib.PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+raylib.PIXELFORMAT_COMPRESSED_DXT5_RGBA = 17
 
 /**
  * 4 bpp
@@ -17140,7 +17947,7 @@ raylib.PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+raylib.PIXELFORMAT_COMPRESSED_ETC1_RGB = 18
 
 /**
  * 4 bpp
@@ -17148,7 +17955,7 @@ raylib.PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+raylib.PIXELFORMAT_COMPRESSED_ETC2_RGB = 19
 
 /**
  * 8 bpp
@@ -17156,7 +17963,7 @@ raylib.PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+raylib.PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 20
 
 /**
  * 4 bpp
@@ -17164,7 +17971,7 @@ raylib.PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+raylib.PIXELFORMAT_COMPRESSED_PVRT_RGB = 21
 
 /**
  * 4 bpp
@@ -17172,7 +17979,7 @@ raylib.PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+raylib.PIXELFORMAT_COMPRESSED_PVRT_RGBA = 22
 
 /**
  * 8 bpp
@@ -17180,7 +17987,7 @@ raylib.PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 23
 
 /**
  * 2 bpp
@@ -17188,7 +17995,7 @@ raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
+raylib.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 24
 
 /**
  * No filter, just pixel approximation
@@ -17636,6 +18443,54 @@ raylib.TEXT_ALIGN_RIGHT = 2
  * @type {number}
  * @constant
  */
+raylib.TEXT_ALIGN_TOP = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_ALIGN_MIDDLE = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_ALIGN_BOTTOM = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_WRAP_NONE = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_WRAP_CHAR = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_WRAP_WORD = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
 raylib.DEFAULT = 0
 
 /**
@@ -17663,7 +18518,7 @@ raylib.BUTTON = 2
 raylib.TOGGLE = 3
 
 /**
- * Used also for: SLIDERBAR
+ * Used also for: SLIDERBAR, TOGGLESLIDER
  *
  * @type {number}
  * @constant
@@ -17759,7 +18614,7 @@ raylib.SCROLLBAR = 14
 raylib.STATUSBAR = 15
 
 /**
- * 
+ * Control border color in STATE_NORMAL
  *
  * @type {number}
  * @constant
@@ -17767,7 +18622,7 @@ raylib.STATUSBAR = 15
 raylib.BORDER_COLOR_NORMAL = 0
 
 /**
- * 
+ * Control base color in STATE_NORMAL
  *
  * @type {number}
  * @constant
@@ -17775,7 +18630,7 @@ raylib.BORDER_COLOR_NORMAL = 0
 raylib.BASE_COLOR_NORMAL = 1
 
 /**
- * 
+ * Control text color in STATE_NORMAL
  *
  * @type {number}
  * @constant
@@ -17783,7 +18638,7 @@ raylib.BASE_COLOR_NORMAL = 1
 raylib.TEXT_COLOR_NORMAL = 2
 
 /**
- * 
+ * Control border color in STATE_FOCUSED
  *
  * @type {number}
  * @constant
@@ -17791,7 +18646,7 @@ raylib.TEXT_COLOR_NORMAL = 2
 raylib.BORDER_COLOR_FOCUSED = 3
 
 /**
- * 
+ * Control base color in STATE_FOCUSED
  *
  * @type {number}
  * @constant
@@ -17799,7 +18654,7 @@ raylib.BORDER_COLOR_FOCUSED = 3
 raylib.BASE_COLOR_FOCUSED = 4
 
 /**
- * 
+ * Control text color in STATE_FOCUSED
  *
  * @type {number}
  * @constant
@@ -17807,7 +18662,7 @@ raylib.BASE_COLOR_FOCUSED = 4
 raylib.TEXT_COLOR_FOCUSED = 5
 
 /**
- * 
+ * Control border color in STATE_PRESSED
  *
  * @type {number}
  * @constant
@@ -17815,7 +18670,7 @@ raylib.TEXT_COLOR_FOCUSED = 5
 raylib.BORDER_COLOR_PRESSED = 6
 
 /**
- * 
+ * Control base color in STATE_PRESSED
  *
  * @type {number}
  * @constant
@@ -17823,7 +18678,7 @@ raylib.BORDER_COLOR_PRESSED = 6
 raylib.BASE_COLOR_PRESSED = 7
 
 /**
- * 
+ * Control text color in STATE_PRESSED
  *
  * @type {number}
  * @constant
@@ -17831,7 +18686,7 @@ raylib.BASE_COLOR_PRESSED = 7
 raylib.TEXT_COLOR_PRESSED = 8
 
 /**
- * 
+ * Control border color in STATE_DISABLED
  *
  * @type {number}
  * @constant
@@ -17839,7 +18694,7 @@ raylib.TEXT_COLOR_PRESSED = 8
 raylib.BORDER_COLOR_DISABLED = 9
 
 /**
- * 
+ * Control base color in STATE_DISABLED
  *
  * @type {number}
  * @constant
@@ -17847,7 +18702,7 @@ raylib.BORDER_COLOR_DISABLED = 9
 raylib.BASE_COLOR_DISABLED = 10
 
 /**
- * 
+ * Control text color in STATE_DISABLED
  *
  * @type {number}
  * @constant
@@ -17855,7 +18710,7 @@ raylib.BASE_COLOR_DISABLED = 10
 raylib.TEXT_COLOR_DISABLED = 11
 
 /**
- * 
+ * Control border size, 0 for no border
  *
  * @type {number}
  * @constant
@@ -17863,7 +18718,7 @@ raylib.TEXT_COLOR_DISABLED = 11
 raylib.BORDER_WIDTH = 12
 
 /**
- * 
+ * Control text padding, not considering border
  *
  * @type {number}
  * @constant
@@ -17871,20 +18726,12 @@ raylib.BORDER_WIDTH = 12
 raylib.TEXT_PADDING = 13
 
 /**
- * 
+ * Control text horizontal alignment inside control text bound (after border and padding)
  *
  * @type {number}
  * @constant
  */
 raylib.TEXT_ALIGNMENT = 14
-
-/**
- * 
- *
- * @type {number}
- * @constant
- */
-raylib.RESERVED = 15
 
 /**
  * Text size (glyphs max height)
@@ -17919,6 +18766,30 @@ raylib.LINE_COLOR = 18
 raylib.BACKGROUND_COLOR = 19
 
 /**
+ * Text spacing between lines
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_LINE_SPACING = 20
+
+/**
+ * Text vertical alignment inside text bounds (after border and padding)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_ALIGNMENT_VERTICAL = 21
+
+/**
+ * Text wrap-mode inside text bounds
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_WRAP_MODE = 22
+
+/**
  * ToggleGroup separation between toggles
  *
  * @type {number}
@@ -17951,7 +18822,7 @@ raylib.SLIDER_PADDING = 17
 raylib.PROGRESS_PADDING = 16
 
 /**
- * 
+ * ScrollBar arrows size
  *
  * @type {number}
  * @constant
@@ -17959,7 +18830,7 @@ raylib.PROGRESS_PADDING = 16
 raylib.ARROWS_SIZE = 16
 
 /**
- * 
+ * ScrollBar arrows visible
  *
  * @type {number}
  * @constant
@@ -17967,7 +18838,7 @@ raylib.ARROWS_SIZE = 16
 raylib.ARROWS_VISIBLE = 17
 
 /**
- * (SLIDERBAR, SLIDER_PADDING)
+ * ScrollBar slider internal padding
  *
  * @type {number}
  * @constant
@@ -17975,7 +18846,7 @@ raylib.ARROWS_VISIBLE = 17
 raylib.SCROLL_SLIDER_PADDING = 18
 
 /**
- * 
+ * ScrollBar slider size
  *
  * @type {number}
  * @constant
@@ -17983,7 +18854,7 @@ raylib.SCROLL_SLIDER_PADDING = 18
 raylib.SCROLL_SLIDER_SIZE = 19
 
 /**
- * 
+ * ScrollBar scroll padding from arrows
  *
  * @type {number}
  * @constant
@@ -17991,7 +18862,7 @@ raylib.SCROLL_SLIDER_SIZE = 19
 raylib.SCROLL_PADDING = 20
 
 /**
- * 
+ * ScrollBar scrolling speed
  *
  * @type {number}
  * @constant
@@ -18039,20 +18910,12 @@ raylib.ARROW_PADDING = 16
 raylib.DROPDOWN_ITEMS_SPACING = 17
 
 /**
- * TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
+ * TextBox in read-only mode: 0-text editable, 1-text no-editable
  *
  * @type {number}
  * @constant
  */
-raylib.TEXT_INNER_PADDING = 16
-
-/**
- * TextBoxMulti lines separation
- *
- * @type {number}
- * @constant
- */
-raylib.TEXT_LINES_SPACING = 17
+raylib.TEXT_READONLY = 16
 
 /**
  * Spinner left/right buttons width
@@ -18095,7 +18958,7 @@ raylib.LIST_ITEMS_SPACING = 17
 raylib.SCROLLBAR_WIDTH = 18
 
 /**
- * ListView scrollbar side (0-left, 1-right)
+ * ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
  *
  * @type {number}
  * @constant
@@ -19900,7 +20763,7 @@ raylib.ICON_FILE = 218
  * @type {number}
  * @constant
  */
-raylib.ICON_219 = 219
+raylib.ICON_SAND_TIMER = 219
 
 /**
  * 
@@ -20231,6 +21094,14 @@ raylib.RL_OPENGL_43 = 4
 raylib.RL_OPENGL_ES_20 = 5
 
 /**
+ * OpenGL ES 3.0 (GLSL 300 es)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_OPENGL_ES_30 = 6
+
+/**
  * Display all logs
  *
  * @type {number}
@@ -20375,12 +21246,36 @@ raylib.RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
 raylib.RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
 
 /**
+ * 16 bpp (1 channel - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R16 = 11
+
+/**
+ * 16*3 bpp (3 channels - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16 = 12
+
+/**
+ * 16*4 bpp (4 channels - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16A16 = 13
+
+/**
  * 4 bpp (no alpha)
  *
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 14
 
 /**
  * 4 bpp (1 bit alpha)
@@ -20388,7 +21283,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 15
 
 /**
  * 8 bpp
@@ -20396,7 +21291,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 16
 
 /**
  * 8 bpp
@@ -20404,7 +21299,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 17
 
 /**
  * 4 bpp
@@ -20412,7 +21307,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 18
 
 /**
  * 4 bpp
@@ -20420,7 +21315,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 19
 
 /**
  * 8 bpp
@@ -20428,7 +21323,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 20
 
 /**
  * 4 bpp
@@ -20436,7 +21331,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 21
 
 /**
  * 4 bpp
@@ -20444,7 +21339,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 22
 
 /**
  * 8 bpp
@@ -20452,7 +21347,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 23
 
 /**
  * 2 bpp
@@ -20460,7 +21355,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
+raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 24
 
 /**
  * No filter, just pixel approximation

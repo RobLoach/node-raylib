@@ -315,7 +315,8 @@ inline ModelAnimation ModelAnimationFromValue(const Napi::CallbackInfo& info, in
      intFromValue(info, index + 0),
      intFromValue(info, index + 1),
      (BoneInfo *) pointerFromValue(info, index + 2),
-     (Transform **) pointerFromValue(info, index + 3)
+     (Transform **) pointerFromValue(info, index + 3),
+     pointerFromValue(info, index + 4)
   };
 }
 
@@ -384,6 +385,22 @@ inline FilePathList FilePathListFromValue(const Napi::CallbackInfo& info, int in
      unsignedintFromValue(info, index + 0),
      unsignedintFromValue(info, index + 1),
      (char **) pointerFromValue(info, index + 2)
+  };
+}
+
+inline AutomationEvent AutomationEventFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     unsignedintFromValue(info, index + 0),
+     unsignedintFromValue(info, index + 1),
+     int[4]FromValue(info, index + 2)
+  };
+}
+
+inline AutomationEventList AutomationEventListFromValue(const Napi::CallbackInfo& info, int index) {
+  return {
+     unsignedintFromValue(info, index + 0),
+     unsignedintFromValue(info, index + 1),
+     (AutomationEvent *) pointerFromValue(info, index + 2)
   };
 }
 
@@ -620,6 +637,7 @@ inline Napi::Value ToValue(Napi::Env env, ModelAnimation obj) {
   out.Set("frameCount", ToValue(env, obj.frameCount));
   out.Set("bones", ToValue(env, obj.bones));
   out.Set("framePoses", ToValue(env, obj.framePoses));
+  out.Set("name", ToValue(env, obj.name));
   return out;
 }
 
@@ -688,6 +706,22 @@ inline Napi::Value ToValue(Napi::Env env, FilePathList obj) {
   out.Set("capacity", ToValue(env, obj.capacity));
   out.Set("count", ToValue(env, obj.count));
   out.Set("paths", ToValue(env, obj.paths));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, AutomationEvent obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("frame", ToValue(env, obj.frame));
+  out.Set("type", ToValue(env, obj.type));
+  out.Set("params", ToValue(env, obj.params));
+  return out;
+}
+
+inline Napi::Value ToValue(Napi::Env env, AutomationEventList obj) {
+  Napi::Object out = Napi::Object::New(env);
+  out.Set("capacity", ToValue(env, obj.capacity));
+  out.Set("count", ToValue(env, obj.count));
+  out.Set("events", ToValue(env, obj.events));
   return out;
 }
 
@@ -1066,14 +1100,6 @@ Napi::Value BindGetWorldToScreen2D(const Napi::CallbackInfo& info) {
   );
 }
 
-Napi::Value BindGetFPS(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    GetFPS(
-      
-    )
-  );
-}
-
 Napi::Value BindGetFrameTime(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     GetFrameTime(
@@ -1090,11 +1116,29 @@ Napi::Value BindGetTime(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindGetFPS(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GetFPS(
+      
+    )
+  );
+}
+
 Napi::Value BindGetRandomValue(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     GetRandomValue(
        intFromValue(info, 0),
        intFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindLoadRandomSequence(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    LoadRandomSequence(
+       unsignedintFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
     )
   );
 }
@@ -1120,7 +1164,7 @@ Napi::Value BindLoadFileData(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadFileData(
        (const char *) stringFromValue(info, 0),
-       (unsigned int *) pointerFromValue(info, 1)
+       (int *) pointerFromValue(info, 1)
     )
   );
 }
@@ -1130,7 +1174,7 @@ Napi::Value BindSaveFileData(const Napi::CallbackInfo& info) {
     SaveFileData(
        (const char *) stringFromValue(info, 0),
        (void *) pointerFromValue(info, 1),
-       unsignedintFromValue(info, 2)
+       intFromValue(info, 2)
     )
   );
 }
@@ -1139,7 +1183,7 @@ Napi::Value BindExportDataAsCode(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     ExportDataAsCode(
        (const unsigned char *) pointerFromValue(info, 0),
-       unsignedintFromValue(info, 1),
+       intFromValue(info, 1),
        (const char *) stringFromValue(info, 2)
     )
   );
@@ -1348,9 +1392,34 @@ Napi::Value BindDecodeDataBase64(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindLoadAutomationEventList(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    LoadAutomationEventList(
+       (const char *) stringFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindExportAutomationEventList(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    ExportAutomationEventList(
+       AutomationEventListFromValue(info, 0),
+       (const char *) stringFromValue(info, 3)
+    )
+  );
+}
+
 Napi::Value BindIsKeyPressed(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     IsKeyPressed(
+       intFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindIsKeyPressedRepeat(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    IsKeyPressedRepeat(
        intFromValue(info, 0)
     )
   );
@@ -1604,7 +1673,7 @@ Napi::Value BindGetTouchPointCount(const Napi::CallbackInfo& info) {
 Napi::Value BindIsGestureDetected(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     IsGestureDetected(
-       intFromValue(info, 0)
+       unsignedintFromValue(info, 0)
     )
   );
 }
@@ -1653,6 +1722,63 @@ Napi::Value BindGetGesturePinchAngle(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     GetGesturePinchAngle(
       
+    )
+  );
+}
+
+Napi::Value BindGetSplinePointLinear(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GetSplinePointLinear(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       floatFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGetSplinePointBasis(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GetSplinePointBasis(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       Vector2FromValue(info, 4),
+       Vector2FromValue(info, 6),
+       floatFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGetSplinePointCatmullRom(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GetSplinePointCatmullRom(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       Vector2FromValue(info, 4),
+       Vector2FromValue(info, 6),
+       floatFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGetSplinePointBezierQuad(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GetSplinePointBezierQuad(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       Vector2FromValue(info, 4),
+       floatFromValue(info, 6)
+    )
+  );
+}
+
+Napi::Value BindGetSplinePointBezierCubic(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GetSplinePointBezierCubic(
+       Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       Vector2FromValue(info, 4),
+       Vector2FromValue(info, 6),
+       floatFromValue(info, 8)
     )
   );
 }
@@ -1779,6 +1905,16 @@ Napi::Value BindLoadImageRaw(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindLoadImageSvg(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    LoadImageSvg(
+       (const char *) stringFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2)
+    )
+  );
+}
+
 Napi::Value BindLoadImageAnim(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadImageAnim(
@@ -1831,6 +1967,16 @@ Napi::Value BindExportImage(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindExportImageToMemory(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    ExportImageToMemory(
+       ImageFromValue(info, 0),
+       (const char *) stringFromValue(info, 5),
+       (int *) pointerFromValue(info, 6)
+    )
+  );
+}
+
 Napi::Value BindExportImageAsCode(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     ExportImageAsCode(
@@ -1850,24 +1996,14 @@ Napi::Value BindGenImageColor(const Napi::CallbackInfo& info) {
   );
 }
 
-Napi::Value BindGenImageGradientV(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageGradientLinear(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
-    GenImageGradientV(
+    GenImageGradientLinear(
        intFromValue(info, 0),
        intFromValue(info, 1),
-       ColorFromValue(info, 2),
-       ColorFromValue(info, 6)
-    )
-  );
-}
-
-Napi::Value BindGenImageGradientH(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    GenImageGradientH(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2),
-       ColorFromValue(info, 6)
+       intFromValue(info, 2),
+       ColorFromValue(info, 3),
+       ColorFromValue(info, 7)
     )
   );
 }
@@ -1875,6 +2011,18 @@ Napi::Value BindGenImageGradientH(const Napi::CallbackInfo& info) {
 Napi::Value BindGenImageGradientRadial(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     GenImageGradientRadial(
+       intFromValue(info, 0),
+       intFromValue(info, 1),
+       floatFromValue(info, 2),
+       ColorFromValue(info, 3),
+       ColorFromValue(info, 7)
+    )
+  );
+}
+
+Napi::Value BindGenImageGradientSquare(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GenImageGradientSquare(
        intFromValue(info, 0),
        intFromValue(info, 1),
        floatFromValue(info, 2),
@@ -2671,7 +2819,7 @@ Napi::Value BindLoadModelAnimations(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadModelAnimations(
        (const char *) stringFromValue(info, 0),
-       (unsigned int *) pointerFromValue(info, 1)
+       (int *) pointerFromValue(info, 1)
     )
   );
 }
@@ -2775,6 +2923,14 @@ Napi::Value BindIsAudioDeviceReady(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindGetMasterVolume(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GetMasterVolume(
+      
+    )
+  );
+}
+
 Napi::Value BindLoadWave(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadWave(
@@ -2813,6 +2969,14 @@ Napi::Value BindLoadSoundFromWave(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     LoadSoundFromWave(
        WaveFromValue(info, 0)
+    )
+  );
+}
+
+Napi::Value BindLoadSoundAlias(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    LoadSoundAlias(
+       SoundFromValue(info, 0)
     )
   );
 }
@@ -3724,6 +3888,24 @@ Napi::Value BindVector3Normalize(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindVector3Project(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Project(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
+Napi::Value BindVector3Reject(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    Vector3Reject(
+       Vector3FromValue(info, 0),
+       Vector3FromValue(info, 3)
+    )
+  );
+}
+
 Napi::Value BindVector3Transform(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     Vector3Transform(
@@ -4268,9 +4450,62 @@ Napi::Value BindGuiGetStyle(const Napi::CallbackInfo& info) {
   );
 }
 
+Napi::Value BindGuiIconText(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiIconText(
+       intFromValue(info, 0),
+       (const char *) stringFromValue(info, 1)
+    )
+  );
+}
+
+Napi::Value BindGuiGetIcons(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiGetIcons(
+      
+    )
+  );
+}
+
+Napi::Value BindGuiLoadIcons(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiLoadIcons(
+       (const char *) stringFromValue(info, 0),
+       boolFromValue(info, 1)
+    )
+  );
+}
+
 Napi::Value BindGuiWindowBox(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     GuiWindowBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiGroupBox(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiGroupBox(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiLine(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiLine(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiPanel(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiPanel(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4)
     )
@@ -4294,7 +4529,17 @@ Napi::Value BindGuiScrollPanel(const Napi::CallbackInfo& info) {
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
        RectangleFromValue(info, 5),
-       (Vector2 *) pointerFromValue(info, 9)
+       (Vector2 *) pointerFromValue(info, 9),
+       (Rectangle *) pointerFromValue(info, 10)
+    )
+  );
+}
+
+Napi::Value BindGuiLabel(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiLabel(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
     )
   );
 }
@@ -4322,7 +4567,7 @@ Napi::Value BindGuiToggle(const Napi::CallbackInfo& info) {
     GuiToggle(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       boolFromValue(info, 5)
+       (bool *) pointerFromValue(info, 5)
     )
   );
 }
@@ -4332,7 +4577,17 @@ Napi::Value BindGuiToggleGroup(const Napi::CallbackInfo& info) {
     GuiToggleGroup(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       intFromValue(info, 5)
+       (int *) pointerFromValue(info, 5)
+    )
+  );
+}
+
+Napi::Value BindGuiToggleSlider(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiToggleSlider(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (int *) pointerFromValue(info, 5)
     )
   );
 }
@@ -4342,7 +4597,7 @@ Napi::Value BindGuiCheckBox(const Napi::CallbackInfo& info) {
     GuiCheckBox(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       boolFromValue(info, 5)
+       (bool *) pointerFromValue(info, 5)
     )
   );
 }
@@ -4352,7 +4607,7 @@ Napi::Value BindGuiComboBox(const Napi::CallbackInfo& info) {
     GuiComboBox(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       intFromValue(info, 5)
+       (int *) pointerFromValue(info, 5)
     )
   );
 }
@@ -4405,24 +4660,13 @@ Napi::Value BindGuiTextBox(const Napi::CallbackInfo& info) {
   );
 }
 
-Napi::Value BindGuiTextBoxMulti(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    GuiTextBoxMulti(
-       RectangleFromValue(info, 0),
-       (char *) pointerFromValue(info, 4),
-       intFromValue(info, 5),
-       boolFromValue(info, 6)
-    )
-  );
-}
-
 Napi::Value BindGuiSlider(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
     GuiSlider(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
        (const char *) stringFromValue(info, 5),
-       floatFromValue(info, 6),
+       (float *) pointerFromValue(info, 6),
        floatFromValue(info, 7),
        floatFromValue(info, 8)
     )
@@ -4435,7 +4679,7 @@ Napi::Value BindGuiSliderBar(const Napi::CallbackInfo& info) {
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
        (const char *) stringFromValue(info, 5),
-       floatFromValue(info, 6),
+       (float *) pointerFromValue(info, 6),
        floatFromValue(info, 7),
        floatFromValue(info, 8)
     )
@@ -4448,9 +4692,27 @@ Napi::Value BindGuiProgressBar(const Napi::CallbackInfo& info) {
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
        (const char *) stringFromValue(info, 5),
-       floatFromValue(info, 6),
+       (float *) pointerFromValue(info, 6),
        floatFromValue(info, 7),
        floatFromValue(info, 8)
+    )
+  );
+}
+
+Napi::Value BindGuiStatusBar(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiStatusBar(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
+    )
+  );
+}
+
+Napi::Value BindGuiDummyRec(const Napi::CallbackInfo& info) {
+  return ToValue(info.Env(),
+    GuiDummyRec(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4)
     )
   );
 }
@@ -4461,7 +4723,8 @@ Napi::Value BindGuiGrid(const Napi::CallbackInfo& info) {
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
        floatFromValue(info, 5),
-       intFromValue(info, 6)
+       intFromValue(info, 6),
+       (Vector2 *) pointerFromValue(info, 7)
     )
   );
 }
@@ -4472,7 +4735,7 @@ Napi::Value BindGuiListView(const Napi::CallbackInfo& info) {
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
        (int *) pointerFromValue(info, 5),
-       intFromValue(info, 6)
+       (int *) pointerFromValue(info, 6)
     )
   );
 }
@@ -4485,7 +4748,7 @@ Napi::Value BindGuiListViewEx(const Napi::CallbackInfo& info) {
        intFromValue(info, 5),
        (int *) pointerFromValue(info, 6),
        (int *) pointerFromValue(info, 7),
-       intFromValue(info, 8)
+       (int *) pointerFromValue(info, 8)
     )
   );
 }
@@ -4510,7 +4773,7 @@ Napi::Value BindGuiTextInputBox(const Napi::CallbackInfo& info) {
        (const char *) stringFromValue(info, 6),
        (char *) pointerFromValue(info, 7),
        intFromValue(info, 8),
-       (int *) pointerFromValue(info, 9)
+       (bool *) pointerFromValue(info, 9)
     )
   );
 }
@@ -4520,7 +4783,7 @@ Napi::Value BindGuiColorPicker(const Napi::CallbackInfo& info) {
     GuiColorPicker(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       ColorFromValue(info, 5)
+       (Color *) pointerFromValue(info, 5)
     )
   );
 }
@@ -4530,7 +4793,7 @@ Napi::Value BindGuiColorPanel(const Napi::CallbackInfo& info) {
     GuiColorPanel(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       ColorFromValue(info, 5)
+       (Color *) pointerFromValue(info, 5)
     )
   );
 }
@@ -4540,7 +4803,7 @@ Napi::Value BindGuiColorBarAlpha(const Napi::CallbackInfo& info) {
     GuiColorBarAlpha(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       floatFromValue(info, 5)
+       (float *) pointerFromValue(info, 5)
     )
   );
 }
@@ -4550,33 +4813,27 @@ Napi::Value BindGuiColorBarHue(const Napi::CallbackInfo& info) {
     GuiColorBarHue(
        RectangleFromValue(info, 0),
        (const char *) stringFromValue(info, 4),
-       floatFromValue(info, 5)
+       (float *) pointerFromValue(info, 5)
     )
   );
 }
 
-Napi::Value BindGuiIconText(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiColorPickerHSV(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
-    GuiIconText(
-       intFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
+    GuiColorPickerHSV(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (Vector3 *) pointerFromValue(info, 5)
     )
   );
 }
 
-Napi::Value BindGuiGetIcons(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiColorPanelHSV(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(),
-    GuiGetIcons(
-      
-    )
-  );
-}
-
-Napi::Value BindGuiLoadIcons(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    GuiLoadIcons(
-       (const char *) stringFromValue(info, 0),
-       boolFromValue(info, 1)
+    GuiColorPanelHSV(
+       RectangleFromValue(info, 0),
+       (const char *) stringFromValue(info, 4),
+       (Vector3 *) pointerFromValue(info, 5)
     )
   );
 }
@@ -4918,6 +5175,12 @@ void BindToggleFullscreen(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindToggleBorderlessWindowed(const Napi::CallbackInfo& info) {
+  ToggleBorderlessWindowed(
+    
+  );
+}
+
 void BindMaximizeWindow(const Napi::CallbackInfo& info) {
   MaximizeWindow(
     
@@ -4975,6 +5238,13 @@ void BindSetWindowMinSize(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindSetWindowMaxSize(const Napi::CallbackInfo& info) {
+  SetWindowMaxSize(
+     intFromValue(info, 0),
+       intFromValue(info, 1)
+  );
+}
+
 void BindSetWindowSize(const Napi::CallbackInfo& info) {
   SetWindowSize(
      intFromValue(info, 0),
@@ -4985,6 +5255,12 @@ void BindSetWindowSize(const Napi::CallbackInfo& info) {
 void BindSetWindowOpacity(const Napi::CallbackInfo& info) {
   SetWindowOpacity(
      floatFromValue(info, 0)
+  );
+}
+
+void BindSetWindowFocused(const Napi::CallbackInfo& info) {
+  SetWindowFocused(
+    
   );
 }
 
@@ -5003,24 +5279,6 @@ void BindEnableEventWaiting(const Napi::CallbackInfo& info) {
 void BindDisableEventWaiting(const Napi::CallbackInfo& info) {
   DisableEventWaiting(
     
-  );
-}
-
-void BindSwapScreenBuffer(const Napi::CallbackInfo& info) {
-  SwapScreenBuffer(
-    
-  );
-}
-
-void BindPollInputEvents(const Napi::CallbackInfo& info) {
-  PollInputEvents(
-    
-  );
-}
-
-void BindWaitTime(const Napi::CallbackInfo& info) {
-  WaitTime(
-     doubleFromValue(info, 0)
   );
 }
 
@@ -5175,9 +5433,33 @@ void BindSetTargetFPS(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindSwapScreenBuffer(const Napi::CallbackInfo& info) {
+  SwapScreenBuffer(
+    
+  );
+}
+
+void BindPollInputEvents(const Napi::CallbackInfo& info) {
+  PollInputEvents(
+    
+  );
+}
+
+void BindWaitTime(const Napi::CallbackInfo& info) {
+  WaitTime(
+     doubleFromValue(info, 0)
+  );
+}
+
 void BindSetRandomSeed(const Napi::CallbackInfo& info) {
   SetRandomSeed(
      unsignedintFromValue(info, 0)
+  );
+}
+
+void BindUnloadRandomSequence(const Napi::CallbackInfo& info) {
+  UnloadRandomSequence(
+     (int *) pointerFromValue(info, 0)
   );
 }
 
@@ -5193,6 +5475,12 @@ void BindSetConfigFlags(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindOpenURL(const Napi::CallbackInfo& info) {
+  OpenURL(
+     (const char *) stringFromValue(info, 0)
+  );
+}
+
 void BindSetTraceLogLevel(const Napi::CallbackInfo& info) {
   SetTraceLogLevel(
      intFromValue(info, 0)
@@ -5202,12 +5490,6 @@ void BindSetTraceLogLevel(const Napi::CallbackInfo& info) {
 void BindMemFree(const Napi::CallbackInfo& info) {
   MemFree(
      (void *) pointerFromValue(info, 0)
-  );
-}
-
-void BindOpenURL(const Napi::CallbackInfo& info) {
-  OpenURL(
-     (const char *) stringFromValue(info, 0)
   );
 }
 
@@ -5232,6 +5514,42 @@ void BindUnloadDirectoryFiles(const Napi::CallbackInfo& info) {
 void BindUnloadDroppedFiles(const Napi::CallbackInfo& info) {
   UnloadDroppedFiles(
      FilePathListFromValue(info, 0)
+  );
+}
+
+void BindUnloadAutomationEventList(const Napi::CallbackInfo& info) {
+  UnloadAutomationEventList(
+     (AutomationEventList *) pointerFromValue(info, 0)
+  );
+}
+
+void BindSetAutomationEventList(const Napi::CallbackInfo& info) {
+  SetAutomationEventList(
+     (AutomationEventList *) pointerFromValue(info, 0)
+  );
+}
+
+void BindSetAutomationEventBaseFrame(const Napi::CallbackInfo& info) {
+  SetAutomationEventBaseFrame(
+     intFromValue(info, 0)
+  );
+}
+
+void BindStartAutomationEventRecording(const Napi::CallbackInfo& info) {
+  StartAutomationEventRecording(
+    
+  );
+}
+
+void BindStopAutomationEventRecording(const Napi::CallbackInfo& info) {
+  StopAutomationEventRecording(
+    
+  );
+}
+
+void BindPlayAutomationEvent(const Napi::CallbackInfo& info) {
+  PlayAutomationEvent(
+     AutomationEventFromValue(info, 0)
   );
 }
 
@@ -5332,41 +5650,20 @@ void BindDrawLineEx(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindDrawLineStrip(const Napi::CallbackInfo& info) {
+  DrawLineStrip(
+     (Vector2 *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       ColorFromValue(info, 2)
+  );
+}
+
 void BindDrawLineBezier(const Napi::CallbackInfo& info) {
   DrawLineBezier(
      Vector2FromValue(info, 0),
        Vector2FromValue(info, 2),
        floatFromValue(info, 4),
        ColorFromValue(info, 5)
-  );
-}
-
-void BindDrawLineBezierQuad(const Napi::CallbackInfo& info) {
-  DrawLineBezierQuad(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       floatFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
-}
-
-void BindDrawLineBezierCubic(const Napi::CallbackInfo& info) {
-  DrawLineBezierCubic(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6),
-       floatFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
-}
-
-void BindDrawLineStrip(const Napi::CallbackInfo& info) {
-  DrawLineStrip(
-     (Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2)
   );
 }
 
@@ -5423,6 +5720,14 @@ void BindDrawCircleLines(const Napi::CallbackInfo& info) {
   DrawCircleLines(
      intFromValue(info, 0),
        intFromValue(info, 1),
+       floatFromValue(info, 2),
+       ColorFromValue(info, 3)
+  );
+}
+
+void BindDrawCircleLinesV(const Napi::CallbackInfo& info) {
+  DrawCircleLinesV(
+     Vector2FromValue(info, 0),
        floatFromValue(info, 2),
        ColorFromValue(info, 3)
   );
@@ -5640,6 +5945,103 @@ void BindDrawPolyLinesEx(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindDrawSplineLinear(const Napi::CallbackInfo& info) {
+  DrawSplineLinear(
+     (Vector2 *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       floatFromValue(info, 2),
+       ColorFromValue(info, 3)
+  );
+}
+
+void BindDrawSplineBasis(const Napi::CallbackInfo& info) {
+  DrawSplineBasis(
+     (Vector2 *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       floatFromValue(info, 2),
+       ColorFromValue(info, 3)
+  );
+}
+
+void BindDrawSplineCatmullRom(const Napi::CallbackInfo& info) {
+  DrawSplineCatmullRom(
+     (Vector2 *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       floatFromValue(info, 2),
+       ColorFromValue(info, 3)
+  );
+}
+
+void BindDrawSplineBezierQuadratic(const Napi::CallbackInfo& info) {
+  DrawSplineBezierQuadratic(
+     (Vector2 *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       floatFromValue(info, 2),
+       ColorFromValue(info, 3)
+  );
+}
+
+void BindDrawSplineBezierCubic(const Napi::CallbackInfo& info) {
+  DrawSplineBezierCubic(
+     (Vector2 *) pointerFromValue(info, 0),
+       intFromValue(info, 1),
+       floatFromValue(info, 2),
+       ColorFromValue(info, 3)
+  );
+}
+
+void BindDrawSplineSegmentLinear(const Napi::CallbackInfo& info) {
+  DrawSplineSegmentLinear(
+     Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       floatFromValue(info, 4),
+       ColorFromValue(info, 5)
+  );
+}
+
+void BindDrawSplineSegmentBasis(const Napi::CallbackInfo& info) {
+  DrawSplineSegmentBasis(
+     Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       Vector2FromValue(info, 4),
+       Vector2FromValue(info, 6),
+       floatFromValue(info, 8),
+       ColorFromValue(info, 9)
+  );
+}
+
+void BindDrawSplineSegmentCatmullRom(const Napi::CallbackInfo& info) {
+  DrawSplineSegmentCatmullRom(
+     Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       Vector2FromValue(info, 4),
+       Vector2FromValue(info, 6),
+       floatFromValue(info, 8),
+       ColorFromValue(info, 9)
+  );
+}
+
+void BindDrawSplineSegmentBezierQuadratic(const Napi::CallbackInfo& info) {
+  DrawSplineSegmentBezierQuadratic(
+     Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       Vector2FromValue(info, 4),
+       floatFromValue(info, 6),
+       ColorFromValue(info, 7)
+  );
+}
+
+void BindDrawSplineSegmentBezierCubic(const Napi::CallbackInfo& info) {
+  DrawSplineSegmentBezierCubic(
+     Vector2FromValue(info, 0),
+       Vector2FromValue(info, 2),
+       Vector2FromValue(info, 4),
+       Vector2FromValue(info, 6),
+       floatFromValue(info, 8),
+       ColorFromValue(info, 9)
+  );
+}
+
 void BindUnloadImage(const Napi::CallbackInfo& info) {
   UnloadImage(
      ImageFromValue(info, 0)
@@ -5648,6 +6050,13 @@ void BindUnloadImage(const Napi::CallbackInfo& info) {
 
 void BindImageBlurGaussian(const Napi::CallbackInfo& info) {
   ImageBlurGaussian(
+     (Image *) pointerFromValue(info, 0),
+       intFromValue(info, 1)
+  );
+}
+
+void BindImageRotate(const Napi::CallbackInfo& info) {
+  ImageRotate(
      (Image *) pointerFromValue(info, 0),
        intFromValue(info, 1)
   );
@@ -5864,6 +6273,12 @@ void BindDrawTextCodepoints(const Napi::CallbackInfo& info) {
        floatFromValue(info, 14),
        floatFromValue(info, 15),
        ColorFromValue(info, 16)
+  );
+}
+
+void BindSetTextLineSpacing(const Napi::CallbackInfo& info) {
+  SetTextLineSpacing(
+     intFromValue(info, 0)
   );
 }
 
@@ -6189,7 +6604,7 @@ void BindUpdateModelAnimation(const Napi::CallbackInfo& info) {
   UpdateModelAnimation(
      ModelFromValue(info, 0),
        ModelAnimationFromValue(info, 24),
-       intFromValue(info, 28)
+       intFromValue(info, 29)
   );
 }
 
@@ -6202,7 +6617,7 @@ void BindUnloadModelAnimation(const Napi::CallbackInfo& info) {
 void BindUnloadModelAnimations(const Napi::CallbackInfo& info) {
   UnloadModelAnimations(
      (ModelAnimation *) pointerFromValue(info, 0),
-       unsignedintFromValue(info, 1)
+       intFromValue(info, 1)
   );
 }
 
@@ -6240,6 +6655,12 @@ void BindUnloadWave(const Napi::CallbackInfo& info) {
 
 void BindUnloadSound(const Napi::CallbackInfo& info) {
   UnloadSound(
+     SoundFromValue(info, 0)
+  );
+}
+
+void BindUnloadSoundAlias(const Napi::CallbackInfo& info) {
+  UnloadSoundAlias(
      SoundFromValue(info, 0)
   );
 }
@@ -6463,8 +6884,8 @@ void BindGuiUnlock(const Napi::CallbackInfo& info) {
   );
 }
 
-void BindGuiFade(const Napi::CallbackInfo& info) {
-  GuiFade(
+void BindGuiSetAlpha(const Napi::CallbackInfo& info) {
+  GuiSetAlpha(
      floatFromValue(info, 0)
   );
 }
@@ -6486,48 +6907,6 @@ void BindGuiSetStyle(const Napi::CallbackInfo& info) {
      intFromValue(info, 0),
        intFromValue(info, 1),
        intFromValue(info, 2)
-  );
-}
-
-void BindGuiGroupBox(const Napi::CallbackInfo& info) {
-  GuiGroupBox(
-     RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-  );
-}
-
-void BindGuiLine(const Napi::CallbackInfo& info) {
-  GuiLine(
-     RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-  );
-}
-
-void BindGuiPanel(const Napi::CallbackInfo& info) {
-  GuiPanel(
-     RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-  );
-}
-
-void BindGuiLabel(const Napi::CallbackInfo& info) {
-  GuiLabel(
-     RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-  );
-}
-
-void BindGuiStatusBar(const Napi::CallbackInfo& info) {
-  GuiStatusBar(
-     RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-  );
-}
-
-void BindGuiDummyRec(const Napi::CallbackInfo& info) {
-  GuiDummyRec(
-     RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
   );
 }
 
@@ -6561,6 +6940,12 @@ void BindGuiSetTooltip(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindGuiSetIconScale(const Napi::CallbackInfo& info) {
+  GuiSetIconScale(
+     intFromValue(info, 0)
+  );
+}
+
 void BindGuiDrawIcon(const Napi::CallbackInfo& info) {
   GuiDrawIcon(
      intFromValue(info, 0),
@@ -6568,12 +6953,6 @@ void BindGuiDrawIcon(const Napi::CallbackInfo& info) {
        intFromValue(info, 2),
        intFromValue(info, 3),
        ColorFromValue(info, 4)
-  );
-}
-
-void BindGuiSetIconScale(const Napi::CallbackInfo& info) {
-  GuiSetIconScale(
-     intFromValue(info, 0)
   );
 }
 
@@ -6856,6 +7235,20 @@ void BindrlActiveDrawBuffers(const Napi::CallbackInfo& info) {
   );
 }
 
+void BindrlBlitFramebuffer(const Napi::CallbackInfo& info) {
+  rlBlitFramebuffer(
+     intFromValue(info, 0),
+       intFromValue(info, 1),
+       intFromValue(info, 2),
+       intFromValue(info, 3),
+       intFromValue(info, 4),
+       intFromValue(info, 5),
+       intFromValue(info, 6),
+       intFromValue(info, 7),
+       intFromValue(info, 8)
+  );
+}
+
 void BindrlEnableColorBlend(const Napi::CallbackInfo& info) {
   rlEnableColorBlend(
     
@@ -6933,6 +7326,12 @@ void BindrlScissor(const Napi::CallbackInfo& info) {
 
 void BindrlEnableWireMode(const Napi::CallbackInfo& info) {
   rlEnableWireMode(
+    
+  );
+}
+
+void BindrlEnablePointMode(const Napi::CallbackInfo& info) {
+  rlEnablePointMode(
     
   );
 }
@@ -7819,8 +8218,8 @@ void BindSetShaderVec4(const Napi::CallbackInfo& info) {
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
 
   exports.Set("BindInitWindow", Napi::Function::New(env, BindInitWindow));
-  exports.Set("BindWindowShouldClose", Napi::Function::New(env, BindWindowShouldClose));
   exports.Set("BindCloseWindow", Napi::Function::New(env, BindCloseWindow));
+  exports.Set("BindWindowShouldClose", Napi::Function::New(env, BindWindowShouldClose));
   exports.Set("BindIsWindowReady", Napi::Function::New(env, BindIsWindowReady));
   exports.Set("BindIsWindowFullscreen", Napi::Function::New(env, BindIsWindowFullscreen));
   exports.Set("BindIsWindowHidden", Napi::Function::New(env, BindIsWindowHidden));
@@ -7832,6 +8231,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindSetWindowState", Napi::Function::New(env, BindSetWindowState));
   exports.Set("BindClearWindowState", Napi::Function::New(env, BindClearWindowState));
   exports.Set("BindToggleFullscreen", Napi::Function::New(env, BindToggleFullscreen));
+  exports.Set("BindToggleBorderlessWindowed", Napi::Function::New(env, BindToggleBorderlessWindowed));
   exports.Set("BindMaximizeWindow", Napi::Function::New(env, BindMaximizeWindow));
   exports.Set("BindMinimizeWindow", Napi::Function::New(env, BindMinimizeWindow));
   exports.Set("BindRestoreWindow", Napi::Function::New(env, BindRestoreWindow));
@@ -7841,8 +8241,10 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindSetWindowPosition", Napi::Function::New(env, BindSetWindowPosition));
   exports.Set("BindSetWindowMonitor", Napi::Function::New(env, BindSetWindowMonitor));
   exports.Set("BindSetWindowMinSize", Napi::Function::New(env, BindSetWindowMinSize));
+  exports.Set("BindSetWindowMaxSize", Napi::Function::New(env, BindSetWindowMaxSize));
   exports.Set("BindSetWindowSize", Napi::Function::New(env, BindSetWindowSize));
   exports.Set("BindSetWindowOpacity", Napi::Function::New(env, BindSetWindowOpacity));
+  exports.Set("BindSetWindowFocused", Napi::Function::New(env, BindSetWindowFocused));
   exports.Set("BindGetWindowHandle", Napi::Function::New(env, BindGetWindowHandle));
   exports.Set("BindGetScreenWidth", Napi::Function::New(env, BindGetScreenWidth));
   exports.Set("BindGetScreenHeight", Napi::Function::New(env, BindGetScreenHeight));
@@ -7863,9 +8265,6 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGetClipboardText", Napi::Function::New(env, BindGetClipboardText));
   exports.Set("BindEnableEventWaiting", Napi::Function::New(env, BindEnableEventWaiting));
   exports.Set("BindDisableEventWaiting", Napi::Function::New(env, BindDisableEventWaiting));
-  exports.Set("BindSwapScreenBuffer", Napi::Function::New(env, BindSwapScreenBuffer));
-  exports.Set("BindPollInputEvents", Napi::Function::New(env, BindPollInputEvents));
-  exports.Set("BindWaitTime", Napi::Function::New(env, BindWaitTime));
   exports.Set("BindShowCursor", Napi::Function::New(env, BindShowCursor));
   exports.Set("BindHideCursor", Napi::Function::New(env, BindHideCursor));
   exports.Set("BindIsCursorHidden", Napi::Function::New(env, BindIsCursorHidden));
@@ -7904,18 +8303,23 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGetWorldToScreenEx", Napi::Function::New(env, BindGetWorldToScreenEx));
   exports.Set("BindGetWorldToScreen2D", Napi::Function::New(env, BindGetWorldToScreen2D));
   exports.Set("BindSetTargetFPS", Napi::Function::New(env, BindSetTargetFPS));
-  exports.Set("BindGetFPS", Napi::Function::New(env, BindGetFPS));
   exports.Set("BindGetFrameTime", Napi::Function::New(env, BindGetFrameTime));
   exports.Set("BindGetTime", Napi::Function::New(env, BindGetTime));
-  exports.Set("BindGetRandomValue", Napi::Function::New(env, BindGetRandomValue));
+  exports.Set("BindGetFPS", Napi::Function::New(env, BindGetFPS));
+  exports.Set("BindSwapScreenBuffer", Napi::Function::New(env, BindSwapScreenBuffer));
+  exports.Set("BindPollInputEvents", Napi::Function::New(env, BindPollInputEvents));
+  exports.Set("BindWaitTime", Napi::Function::New(env, BindWaitTime));
   exports.Set("BindSetRandomSeed", Napi::Function::New(env, BindSetRandomSeed));
+  exports.Set("BindGetRandomValue", Napi::Function::New(env, BindGetRandomValue));
+  exports.Set("BindLoadRandomSequence", Napi::Function::New(env, BindLoadRandomSequence));
+  exports.Set("BindUnloadRandomSequence", Napi::Function::New(env, BindUnloadRandomSequence));
   exports.Set("BindTakeScreenshot", Napi::Function::New(env, BindTakeScreenshot));
   exports.Set("BindSetConfigFlags", Napi::Function::New(env, BindSetConfigFlags));
+  exports.Set("BindOpenURL", Napi::Function::New(env, BindOpenURL));
   exports.Set("BindSetTraceLogLevel", Napi::Function::New(env, BindSetTraceLogLevel));
   exports.Set("BindMemAlloc", Napi::Function::New(env, BindMemAlloc));
   exports.Set("BindMemRealloc", Napi::Function::New(env, BindMemRealloc));
   exports.Set("BindMemFree", Napi::Function::New(env, BindMemFree));
-  exports.Set("BindOpenURL", Napi::Function::New(env, BindOpenURL));
   exports.Set("BindLoadFileData", Napi::Function::New(env, BindLoadFileData));
   exports.Set("BindUnloadFileData", Napi::Function::New(env, BindUnloadFileData));
   exports.Set("BindSaveFileData", Napi::Function::New(env, BindSaveFileData));
@@ -7947,13 +8351,22 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindDecompressData", Napi::Function::New(env, BindDecompressData));
   exports.Set("BindEncodeDataBase64", Napi::Function::New(env, BindEncodeDataBase64));
   exports.Set("BindDecodeDataBase64", Napi::Function::New(env, BindDecodeDataBase64));
+  exports.Set("BindLoadAutomationEventList", Napi::Function::New(env, BindLoadAutomationEventList));
+  exports.Set("BindUnloadAutomationEventList", Napi::Function::New(env, BindUnloadAutomationEventList));
+  exports.Set("BindExportAutomationEventList", Napi::Function::New(env, BindExportAutomationEventList));
+  exports.Set("BindSetAutomationEventList", Napi::Function::New(env, BindSetAutomationEventList));
+  exports.Set("BindSetAutomationEventBaseFrame", Napi::Function::New(env, BindSetAutomationEventBaseFrame));
+  exports.Set("BindStartAutomationEventRecording", Napi::Function::New(env, BindStartAutomationEventRecording));
+  exports.Set("BindStopAutomationEventRecording", Napi::Function::New(env, BindStopAutomationEventRecording));
+  exports.Set("BindPlayAutomationEvent", Napi::Function::New(env, BindPlayAutomationEvent));
   exports.Set("BindIsKeyPressed", Napi::Function::New(env, BindIsKeyPressed));
+  exports.Set("BindIsKeyPressedRepeat", Napi::Function::New(env, BindIsKeyPressedRepeat));
   exports.Set("BindIsKeyDown", Napi::Function::New(env, BindIsKeyDown));
   exports.Set("BindIsKeyReleased", Napi::Function::New(env, BindIsKeyReleased));
   exports.Set("BindIsKeyUp", Napi::Function::New(env, BindIsKeyUp));
-  exports.Set("BindSetExitKey", Napi::Function::New(env, BindSetExitKey));
   exports.Set("BindGetKeyPressed", Napi::Function::New(env, BindGetKeyPressed));
   exports.Set("BindGetCharPressed", Napi::Function::New(env, BindGetCharPressed));
+  exports.Set("BindSetExitKey", Napi::Function::New(env, BindSetExitKey));
   exports.Set("BindIsGamepadAvailable", Napi::Function::New(env, BindIsGamepadAvailable));
   exports.Set("BindGetGamepadName", Napi::Function::New(env, BindGetGamepadName));
   exports.Set("BindIsGamepadButtonPressed", Napi::Function::New(env, BindIsGamepadButtonPressed));
@@ -7999,16 +8412,15 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindDrawLine", Napi::Function::New(env, BindDrawLine));
   exports.Set("BindDrawLineV", Napi::Function::New(env, BindDrawLineV));
   exports.Set("BindDrawLineEx", Napi::Function::New(env, BindDrawLineEx));
-  exports.Set("BindDrawLineBezier", Napi::Function::New(env, BindDrawLineBezier));
-  exports.Set("BindDrawLineBezierQuad", Napi::Function::New(env, BindDrawLineBezierQuad));
-  exports.Set("BindDrawLineBezierCubic", Napi::Function::New(env, BindDrawLineBezierCubic));
   exports.Set("BindDrawLineStrip", Napi::Function::New(env, BindDrawLineStrip));
+  exports.Set("BindDrawLineBezier", Napi::Function::New(env, BindDrawLineBezier));
   exports.Set("BindDrawCircle", Napi::Function::New(env, BindDrawCircle));
   exports.Set("BindDrawCircleSector", Napi::Function::New(env, BindDrawCircleSector));
   exports.Set("BindDrawCircleSectorLines", Napi::Function::New(env, BindDrawCircleSectorLines));
   exports.Set("BindDrawCircleGradient", Napi::Function::New(env, BindDrawCircleGradient));
   exports.Set("BindDrawCircleV", Napi::Function::New(env, BindDrawCircleV));
   exports.Set("BindDrawCircleLines", Napi::Function::New(env, BindDrawCircleLines));
+  exports.Set("BindDrawCircleLinesV", Napi::Function::New(env, BindDrawCircleLinesV));
   exports.Set("BindDrawEllipse", Napi::Function::New(env, BindDrawEllipse));
   exports.Set("BindDrawEllipseLines", Napi::Function::New(env, BindDrawEllipseLines));
   exports.Set("BindDrawRing", Napi::Function::New(env, BindDrawRing));
@@ -8031,6 +8443,21 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindDrawPoly", Napi::Function::New(env, BindDrawPoly));
   exports.Set("BindDrawPolyLines", Napi::Function::New(env, BindDrawPolyLines));
   exports.Set("BindDrawPolyLinesEx", Napi::Function::New(env, BindDrawPolyLinesEx));
+  exports.Set("BindDrawSplineLinear", Napi::Function::New(env, BindDrawSplineLinear));
+  exports.Set("BindDrawSplineBasis", Napi::Function::New(env, BindDrawSplineBasis));
+  exports.Set("BindDrawSplineCatmullRom", Napi::Function::New(env, BindDrawSplineCatmullRom));
+  exports.Set("BindDrawSplineBezierQuadratic", Napi::Function::New(env, BindDrawSplineBezierQuadratic));
+  exports.Set("BindDrawSplineBezierCubic", Napi::Function::New(env, BindDrawSplineBezierCubic));
+  exports.Set("BindDrawSplineSegmentLinear", Napi::Function::New(env, BindDrawSplineSegmentLinear));
+  exports.Set("BindDrawSplineSegmentBasis", Napi::Function::New(env, BindDrawSplineSegmentBasis));
+  exports.Set("BindDrawSplineSegmentCatmullRom", Napi::Function::New(env, BindDrawSplineSegmentCatmullRom));
+  exports.Set("BindDrawSplineSegmentBezierQuadratic", Napi::Function::New(env, BindDrawSplineSegmentBezierQuadratic));
+  exports.Set("BindDrawSplineSegmentBezierCubic", Napi::Function::New(env, BindDrawSplineSegmentBezierCubic));
+  exports.Set("BindGetSplinePointLinear", Napi::Function::New(env, BindGetSplinePointLinear));
+  exports.Set("BindGetSplinePointBasis", Napi::Function::New(env, BindGetSplinePointBasis));
+  exports.Set("BindGetSplinePointCatmullRom", Napi::Function::New(env, BindGetSplinePointCatmullRom));
+  exports.Set("BindGetSplinePointBezierQuad", Napi::Function::New(env, BindGetSplinePointBezierQuad));
+  exports.Set("BindGetSplinePointBezierCubic", Napi::Function::New(env, BindGetSplinePointBezierCubic));
   exports.Set("BindCheckCollisionRecs", Napi::Function::New(env, BindCheckCollisionRecs));
   exports.Set("BindCheckCollisionCircles", Napi::Function::New(env, BindCheckCollisionCircles));
   exports.Set("BindCheckCollisionCircleRec", Napi::Function::New(env, BindCheckCollisionCircleRec));
@@ -8043,6 +8470,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGetCollisionRec", Napi::Function::New(env, BindGetCollisionRec));
   exports.Set("BindLoadImage", Napi::Function::New(env, BindLoadImage));
   exports.Set("BindLoadImageRaw", Napi::Function::New(env, BindLoadImageRaw));
+  exports.Set("BindLoadImageSvg", Napi::Function::New(env, BindLoadImageSvg));
   exports.Set("BindLoadImageAnim", Napi::Function::New(env, BindLoadImageAnim));
   exports.Set("BindLoadImageFromMemory", Napi::Function::New(env, BindLoadImageFromMemory));
   exports.Set("BindLoadImageFromTexture", Napi::Function::New(env, BindLoadImageFromTexture));
@@ -8050,11 +8478,12 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindIsImageReady", Napi::Function::New(env, BindIsImageReady));
   exports.Set("BindUnloadImage", Napi::Function::New(env, BindUnloadImage));
   exports.Set("BindExportImage", Napi::Function::New(env, BindExportImage));
+  exports.Set("BindExportImageToMemory", Napi::Function::New(env, BindExportImageToMemory));
   exports.Set("BindExportImageAsCode", Napi::Function::New(env, BindExportImageAsCode));
   exports.Set("BindGenImageColor", Napi::Function::New(env, BindGenImageColor));
-  exports.Set("BindGenImageGradientV", Napi::Function::New(env, BindGenImageGradientV));
-  exports.Set("BindGenImageGradientH", Napi::Function::New(env, BindGenImageGradientH));
+  exports.Set("BindGenImageGradientLinear", Napi::Function::New(env, BindGenImageGradientLinear));
   exports.Set("BindGenImageGradientRadial", Napi::Function::New(env, BindGenImageGradientRadial));
+  exports.Set("BindGenImageGradientSquare", Napi::Function::New(env, BindGenImageGradientSquare));
   exports.Set("BindGenImageChecked", Napi::Function::New(env, BindGenImageChecked));
   exports.Set("BindGenImageWhiteNoise", Napi::Function::New(env, BindGenImageWhiteNoise));
   exports.Set("BindGenImagePerlinNoise", Napi::Function::New(env, BindGenImagePerlinNoise));
@@ -8079,6 +8508,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindImageDither", Napi::Function::New(env, BindImageDither));
   exports.Set("BindImageFlipVertical", Napi::Function::New(env, BindImageFlipVertical));
   exports.Set("BindImageFlipHorizontal", Napi::Function::New(env, BindImageFlipHorizontal));
+  exports.Set("BindImageRotate", Napi::Function::New(env, BindImageRotate));
   exports.Set("BindImageRotateCW", Napi::Function::New(env, BindImageRotateCW));
   exports.Set("BindImageRotateCCW", Napi::Function::New(env, BindImageRotateCCW));
   exports.Set("BindImageColorTint", Napi::Function::New(env, BindImageColorTint));
@@ -8160,6 +8590,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindDrawTextPro", Napi::Function::New(env, BindDrawTextPro));
   exports.Set("BindDrawTextCodepoint", Napi::Function::New(env, BindDrawTextCodepoint));
   exports.Set("BindDrawTextCodepoints", Napi::Function::New(env, BindDrawTextCodepoints));
+  exports.Set("BindSetTextLineSpacing", Napi::Function::New(env, BindSetTextLineSpacing));
   exports.Set("BindMeasureText", Napi::Function::New(env, BindMeasureText));
   exports.Set("BindMeasureTextEx", Napi::Function::New(env, BindMeasureTextEx));
   exports.Set("BindGetGlyphIndex", Napi::Function::New(env, BindGetGlyphIndex));
@@ -8257,15 +8688,18 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindCloseAudioDevice", Napi::Function::New(env, BindCloseAudioDevice));
   exports.Set("BindIsAudioDeviceReady", Napi::Function::New(env, BindIsAudioDeviceReady));
   exports.Set("BindSetMasterVolume", Napi::Function::New(env, BindSetMasterVolume));
+  exports.Set("BindGetMasterVolume", Napi::Function::New(env, BindGetMasterVolume));
   exports.Set("BindLoadWave", Napi::Function::New(env, BindLoadWave));
   exports.Set("BindLoadWaveFromMemory", Napi::Function::New(env, BindLoadWaveFromMemory));
   exports.Set("BindIsWaveReady", Napi::Function::New(env, BindIsWaveReady));
   exports.Set("BindLoadSound", Napi::Function::New(env, BindLoadSound));
   exports.Set("BindLoadSoundFromWave", Napi::Function::New(env, BindLoadSoundFromWave));
+  exports.Set("BindLoadSoundAlias", Napi::Function::New(env, BindLoadSoundAlias));
   exports.Set("BindIsSoundReady", Napi::Function::New(env, BindIsSoundReady));
   exports.Set("BindUpdateSound", Napi::Function::New(env, BindUpdateSound));
   exports.Set("BindUnloadWave", Napi::Function::New(env, BindUnloadWave));
   exports.Set("BindUnloadSound", Napi::Function::New(env, BindUnloadSound));
+  exports.Set("BindUnloadSoundAlias", Napi::Function::New(env, BindUnloadSoundAlias));
   exports.Set("BindExportWave", Napi::Function::New(env, BindExportWave));
   exports.Set("BindExportWaveAsCode", Napi::Function::New(env, BindExportWaveAsCode));
   exports.Set("BindPlaySound", Napi::Function::New(env, BindPlaySound));
@@ -8391,6 +8825,8 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindVector3Negate", Napi::Function::New(env, BindVector3Negate));
   exports.Set("BindVector3Divide", Napi::Function::New(env, BindVector3Divide));
   exports.Set("BindVector3Normalize", Napi::Function::New(env, BindVector3Normalize));
+  exports.Set("BindVector3Project", Napi::Function::New(env, BindVector3Project));
+  exports.Set("BindVector3Reject", Napi::Function::New(env, BindVector3Reject));
   exports.Set("BindVector3OrthoNormalize", Napi::Function::New(env, BindVector3OrthoNormalize));
   exports.Set("BindVector3Transform", Napi::Function::New(env, BindVector3Transform));
   exports.Set("BindVector3RotateByQuaternion", Napi::Function::New(env, BindVector3RotateByQuaternion));
@@ -8454,13 +8890,23 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGuiLock", Napi::Function::New(env, BindGuiLock));
   exports.Set("BindGuiUnlock", Napi::Function::New(env, BindGuiUnlock));
   exports.Set("BindGuiIsLocked", Napi::Function::New(env, BindGuiIsLocked));
-  exports.Set("BindGuiFade", Napi::Function::New(env, BindGuiFade));
+  exports.Set("BindGuiSetAlpha", Napi::Function::New(env, BindGuiSetAlpha));
   exports.Set("BindGuiSetState", Napi::Function::New(env, BindGuiSetState));
   exports.Set("BindGuiGetState", Napi::Function::New(env, BindGuiGetState));
   exports.Set("BindGuiSetFont", Napi::Function::New(env, BindGuiSetFont));
   exports.Set("BindGuiGetFont", Napi::Function::New(env, BindGuiGetFont));
   exports.Set("BindGuiSetStyle", Napi::Function::New(env, BindGuiSetStyle));
   exports.Set("BindGuiGetStyle", Napi::Function::New(env, BindGuiGetStyle));
+  exports.Set("BindGuiLoadStyle", Napi::Function::New(env, BindGuiLoadStyle));
+  exports.Set("BindGuiLoadStyleDefault", Napi::Function::New(env, BindGuiLoadStyleDefault));
+  exports.Set("BindGuiEnableTooltip", Napi::Function::New(env, BindGuiEnableTooltip));
+  exports.Set("BindGuiDisableTooltip", Napi::Function::New(env, BindGuiDisableTooltip));
+  exports.Set("BindGuiSetTooltip", Napi::Function::New(env, BindGuiSetTooltip));
+  exports.Set("BindGuiIconText", Napi::Function::New(env, BindGuiIconText));
+  exports.Set("BindGuiSetIconScale", Napi::Function::New(env, BindGuiSetIconScale));
+  exports.Set("BindGuiGetIcons", Napi::Function::New(env, BindGuiGetIcons));
+  exports.Set("BindGuiLoadIcons", Napi::Function::New(env, BindGuiLoadIcons));
+  exports.Set("BindGuiDrawIcon", Napi::Function::New(env, BindGuiDrawIcon));
   exports.Set("BindGuiWindowBox", Napi::Function::New(env, BindGuiWindowBox));
   exports.Set("BindGuiGroupBox", Napi::Function::New(env, BindGuiGroupBox));
   exports.Set("BindGuiLine", Napi::Function::New(env, BindGuiLine));
@@ -8472,13 +8918,13 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGuiLabelButton", Napi::Function::New(env, BindGuiLabelButton));
   exports.Set("BindGuiToggle", Napi::Function::New(env, BindGuiToggle));
   exports.Set("BindGuiToggleGroup", Napi::Function::New(env, BindGuiToggleGroup));
+  exports.Set("BindGuiToggleSlider", Napi::Function::New(env, BindGuiToggleSlider));
   exports.Set("BindGuiCheckBox", Napi::Function::New(env, BindGuiCheckBox));
   exports.Set("BindGuiComboBox", Napi::Function::New(env, BindGuiComboBox));
   exports.Set("BindGuiDropdownBox", Napi::Function::New(env, BindGuiDropdownBox));
   exports.Set("BindGuiSpinner", Napi::Function::New(env, BindGuiSpinner));
   exports.Set("BindGuiValueBox", Napi::Function::New(env, BindGuiValueBox));
   exports.Set("BindGuiTextBox", Napi::Function::New(env, BindGuiTextBox));
-  exports.Set("BindGuiTextBoxMulti", Napi::Function::New(env, BindGuiTextBoxMulti));
   exports.Set("BindGuiSlider", Napi::Function::New(env, BindGuiSlider));
   exports.Set("BindGuiSliderBar", Napi::Function::New(env, BindGuiSliderBar));
   exports.Set("BindGuiProgressBar", Napi::Function::New(env, BindGuiProgressBar));
@@ -8493,16 +8939,8 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGuiColorPanel", Napi::Function::New(env, BindGuiColorPanel));
   exports.Set("BindGuiColorBarAlpha", Napi::Function::New(env, BindGuiColorBarAlpha));
   exports.Set("BindGuiColorBarHue", Napi::Function::New(env, BindGuiColorBarHue));
-  exports.Set("BindGuiLoadStyle", Napi::Function::New(env, BindGuiLoadStyle));
-  exports.Set("BindGuiLoadStyleDefault", Napi::Function::New(env, BindGuiLoadStyleDefault));
-  exports.Set("BindGuiEnableTooltip", Napi::Function::New(env, BindGuiEnableTooltip));
-  exports.Set("BindGuiDisableTooltip", Napi::Function::New(env, BindGuiDisableTooltip));
-  exports.Set("BindGuiSetTooltip", Napi::Function::New(env, BindGuiSetTooltip));
-  exports.Set("BindGuiIconText", Napi::Function::New(env, BindGuiIconText));
-  exports.Set("BindGuiGetIcons", Napi::Function::New(env, BindGuiGetIcons));
-  exports.Set("BindGuiLoadIcons", Napi::Function::New(env, BindGuiLoadIcons));
-  exports.Set("BindGuiDrawIcon", Napi::Function::New(env, BindGuiDrawIcon));
-  exports.Set("BindGuiSetIconScale", Napi::Function::New(env, BindGuiSetIconScale));
+  exports.Set("BindGuiColorPickerHSV", Napi::Function::New(env, BindGuiColorPickerHSV));
+  exports.Set("BindGuiColorPanelHSV", Napi::Function::New(env, BindGuiColorPanelHSV));
   exports.Set("BindrlMatrixMode", Napi::Function::New(env, BindrlMatrixMode));
   exports.Set("BindrlPushMatrix", Napi::Function::New(env, BindrlPushMatrix));
   exports.Set("BindrlPopMatrix", Napi::Function::New(env, BindrlPopMatrix));
@@ -8544,6 +8982,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindrlEnableFramebuffer", Napi::Function::New(env, BindrlEnableFramebuffer));
   exports.Set("BindrlDisableFramebuffer", Napi::Function::New(env, BindrlDisableFramebuffer));
   exports.Set("BindrlActiveDrawBuffers", Napi::Function::New(env, BindrlActiveDrawBuffers));
+  exports.Set("BindrlBlitFramebuffer", Napi::Function::New(env, BindrlBlitFramebuffer));
   exports.Set("BindrlEnableColorBlend", Napi::Function::New(env, BindrlEnableColorBlend));
   exports.Set("BindrlDisableColorBlend", Napi::Function::New(env, BindrlDisableColorBlend));
   exports.Set("BindrlEnableDepthTest", Napi::Function::New(env, BindrlEnableDepthTest));
@@ -8557,6 +8996,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindrlDisableScissorTest", Napi::Function::New(env, BindrlDisableScissorTest));
   exports.Set("BindrlScissor", Napi::Function::New(env, BindrlScissor));
   exports.Set("BindrlEnableWireMode", Napi::Function::New(env, BindrlEnableWireMode));
+  exports.Set("BindrlEnablePointMode", Napi::Function::New(env, BindrlEnablePointMode));
   exports.Set("BindrlDisableWireMode", Napi::Function::New(env, BindrlDisableWireMode));
   exports.Set("BindrlSetLineWidth", Napi::Function::New(env, BindrlSetLineWidth));
   exports.Set("BindrlGetLineWidth", Napi::Function::New(env, BindrlGetLineWidth));
