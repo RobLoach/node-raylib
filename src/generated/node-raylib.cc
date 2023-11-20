@@ -392,7 +392,7 @@ inline AutomationEvent AutomationEventFromValue(const Napi::CallbackInfo& info, 
   return {
      unsignedintFromValue(info, index + 0),
      unsignedintFromValue(info, index + 1),
-     int[4]FromValue(info, index + 2)
+     pointerFromValue(info, index + 2)
   };
 }
 
