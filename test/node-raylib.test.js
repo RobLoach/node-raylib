@@ -44,7 +44,7 @@ describe('raylib', () => {
       expect(r.KEY_A).toBe(65)
     })
     it('PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA', () => {
-      expect(r.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA).toBe(20)
+      expect(r.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA).toBe(23)
     })
   })
 

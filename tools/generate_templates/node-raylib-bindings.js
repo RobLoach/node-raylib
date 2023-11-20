@@ -20,6 +20,9 @@ const SanitizeTypeName = name => {
   if (name === 'unsigned int[4]') {
     return '(unsigned int) pointer'
   }
+  if (name === 'int[4]') {
+    return 'pointer'
+  }
   if (name === 'Matrix[2]') {
     return 'pointer'
   }

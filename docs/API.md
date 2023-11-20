@@ -4,11 +4,11 @@
 <dt><a href="#InitWindow">InitWindow(width, height, title)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Initialize window and OpenGL context</p>
 </dd>
-<dt><a href="#WindowShouldClose">WindowShouldClose()</a> ⇒ <code>boolean</code></dt>
-<dd><p>Check if KEY_ESCAPE pressed or Close icon pressed</p>
-</dd>
 <dt><a href="#CloseWindow">CloseWindow()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Close window and unload OpenGL context</p>
+</dd>
+<dt><a href="#WindowShouldClose">WindowShouldClose()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if application should close (KEY_ESCAPE pressed or windows close icon clicked)</p>
 </dd>
 <dt><a href="#IsWindowReady">IsWindowReady()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if window has been initialized successfully</p>
@@ -43,6 +43,9 @@
 <dt><a href="#ToggleFullscreen">ToggleFullscreen()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)</p>
 </dd>
+<dt><a href="#ToggleBorderlessWindowed">ToggleBorderlessWindowed()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Toggle window state: borderless windowed (only PLATFORM_DESKTOP)</p>
+</dd>
 <dt><a href="#MaximizeWindow">MaximizeWindow()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set window state: maximized, if resizable (only PLATFORM_DESKTOP)</p>
 </dd>
@@ -59,22 +62,28 @@
 <dd><p>Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)</p>
 </dd>
 <dt><a href="#SetWindowTitle">SetWindowTitle(title)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set title for window (only PLATFORM_DESKTOP)</p>
+<dd><p>Set title for window (only PLATFORM_DESKTOP and PLATFORM_WEB)</p>
 </dd>
 <dt><a href="#SetWindowPosition">SetWindowPosition(x, y)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set window position on screen (only PLATFORM_DESKTOP)</p>
 </dd>
 <dt><a href="#SetWindowMonitor">SetWindowMonitor(monitor)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set monitor for the current window (fullscreen mode)</p>
+<dd><p>Set monitor for the current window</p>
 </dd>
 <dt><a href="#SetWindowMinSize">SetWindowMinSize(width, height)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)</p>
+</dd>
+<dt><a href="#SetWindowMaxSize">SetWindowMaxSize(width, height)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set window maximum dimensions (for FLAG_WINDOW_RESIZABLE)</p>
 </dd>
 <dt><a href="#SetWindowSize">SetWindowSize(width, height)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set window dimensions</p>
 </dd>
 <dt><a href="#SetWindowOpacity">SetWindowOpacity(opacity)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)</p>
+</dd>
+<dt><a href="#SetWindowFocused">SetWindowFocused()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set window focused (only PLATFORM_DESKTOP)</p>
 </dd>
 <dt><a href="#GetWindowHandle">GetWindowHandle()</a> ⇒ <code>number</code></dt>
 <dd><p>Get native window handle</p>
@@ -122,7 +131,7 @@
 <dd><p>Get window scale DPI factor</p>
 </dd>
 <dt><a href="#GetMonitorName">GetMonitorName(monitor)</a> ⇒ <code>string</code></dt>
-<dd><p>Get the human-readable, UTF-8 encoded name of the primary monitor</p>
+<dd><p>Get the human-readable, UTF-8 encoded name of the specified monitor</p>
 </dd>
 <dt><a href="#SetClipboardText">SetClipboardText(text)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set clipboard text content</p>
@@ -135,15 +144,6 @@
 </dd>
 <dt><a href="#DisableEventWaiting">DisableEventWaiting()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Disable waiting for events on EndDrawing(), automatic events polling</p>
-</dd>
-<dt><a href="#SwapScreenBuffer">SwapScreenBuffer()</a> ⇒ <code>undefined</code></dt>
-<dd><p>Swap back buffer with front buffer (screen drawing)</p>
-</dd>
-<dt><a href="#PollInputEvents">PollInputEvents()</a> ⇒ <code>undefined</code></dt>
-<dd><p>Register all input events</p>
-</dd>
-<dt><a href="#WaitTime">WaitTime(seconds)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Wait for some time (halt program execution)</p>
 </dd>
 <dt><a href="#ShowCursor">ShowCursor()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Shows cursor</p>
@@ -259,26 +259,44 @@
 <dt><a href="#SetTargetFPS">SetTargetFPS(fps)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set target FPS (maximum)</p>
 </dd>
-<dt><a href="#GetFPS">GetFPS()</a> ⇒ <code>number</code></dt>
-<dd><p>Get current FPS</p>
-</dd>
 <dt><a href="#GetFrameTime">GetFrameTime()</a> ⇒ <code>number</code></dt>
 <dd><p>Get time in seconds for last frame drawn (delta time)</p>
 </dd>
 <dt><a href="#GetTime">GetTime()</a> ⇒ <code>number</code></dt>
 <dd><p>Get elapsed time in seconds since InitWindow()</p>
 </dd>
-<dt><a href="#GetRandomValue">GetRandomValue(min, max)</a> ⇒ <code>number</code></dt>
-<dd><p>Get a random value between min and max (both included)</p>
+<dt><a href="#GetFPS">GetFPS()</a> ⇒ <code>number</code></dt>
+<dd><p>Get current FPS</p>
+</dd>
+<dt><a href="#SwapScreenBuffer">SwapScreenBuffer()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Swap back buffer with front buffer (screen drawing)</p>
+</dd>
+<dt><a href="#PollInputEvents">PollInputEvents()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Register all input events</p>
+</dd>
+<dt><a href="#WaitTime">WaitTime(seconds)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Wait for some time (halt program execution)</p>
 </dd>
 <dt><a href="#SetRandomSeed">SetRandomSeed(seed)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set the seed for the random number generator</p>
+</dd>
+<dt><a href="#GetRandomValue">GetRandomValue(min, max)</a> ⇒ <code>number</code></dt>
+<dd><p>Get a random value between min and max (both included)</p>
+</dd>
+<dt><a href="#LoadRandomSequence">LoadRandomSequence(count, min, max)</a> ⇒ <code>number</code></dt>
+<dd><p>Load random values sequence, no values repeated</p>
+</dd>
+<dt><a href="#UnloadRandomSequence">UnloadRandomSequence(sequence)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload random values sequence</p>
 </dd>
 <dt><a href="#TakeScreenshot">TakeScreenshot(fileName)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Takes a screenshot of current screen (filename extension defines format)</p>
 </dd>
 <dt><a href="#SetConfigFlags">SetConfigFlags(flags)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Setup init configuration flags (view FLAGS)</p>
+</dd>
+<dt><a href="#OpenURL">OpenURL(url)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Open URL with default system browser (if available)</p>
 </dd>
 <dt><a href="#SetTraceLogLevel">SetTraceLogLevel(logLevel)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set the current threshold (minimum) log level</p>
@@ -292,19 +310,16 @@
 <dt><a href="#MemFree">MemFree(ptr)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Internal memory free</p>
 </dd>
-<dt><a href="#OpenURL">OpenURL(url)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Open URL with default system browser (if available)</p>
-</dd>
-<dt><a href="#LoadFileData">LoadFileData(fileName, bytesRead)</a> ⇒ <code>Buffer</code></dt>
+<dt><a href="#LoadFileData">LoadFileData(fileName, dataSize)</a> ⇒ <code>Buffer</code></dt>
 <dd><p>Load file data as byte array (read)</p>
 </dd>
 <dt><a href="#UnloadFileData">UnloadFileData(data)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload file data allocated by LoadFileData()</p>
 </dd>
-<dt><a href="#SaveFileData">SaveFileData(fileName, data, bytesToWrite)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="#SaveFileData">SaveFileData(fileName, data, dataSize)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Save data to file from byte array (write), returns true on success</p>
 </dd>
-<dt><a href="#ExportDataAsCode">ExportDataAsCode(data, size, fileName)</a> ⇒ <code>boolean</code></dt>
+<dt><a href="#ExportDataAsCode">ExportDataAsCode(data, dataSize, fileName)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Export data to code (.h), returns true on success</p>
 </dd>
 <dt><a href="#LoadFileText">LoadFileText(fileName)</a> ⇒ <code>string</code></dt>
@@ -347,7 +362,7 @@
 <dd><p>Get current working directory (uses static string)</p>
 </dd>
 <dt><a href="#GetApplicationDirectory">GetApplicationDirectory()</a> ⇒ <code>string</code></dt>
-<dd><p>Get the directory if the running application (uses static string)</p>
+<dd><p>Get the directory of the running application (uses static string)</p>
 </dd>
 <dt><a href="#ChangeDirectory">ChangeDirectory(dir)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Change working directory, return true on success</p>
@@ -388,8 +403,35 @@
 <dt><a href="#DecodeDataBase64">DecodeDataBase64(data, outputSize)</a> ⇒ <code>Buffer</code></dt>
 <dd><p>Decode Base64 string data, memory must be MemFree()</p>
 </dd>
+<dt><a href="#LoadAutomationEventList">LoadAutomationEventList(fileName)</a> ⇒ <code>AutomationEventList</code></dt>
+<dd><p>Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS</p>
+</dd>
+<dt><a href="#UnloadAutomationEventList">UnloadAutomationEventList(list)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload automation events list from file</p>
+</dd>
+<dt><a href="#ExportAutomationEventList">ExportAutomationEventList(list, fileName)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Export automation events list as text file</p>
+</dd>
+<dt><a href="#SetAutomationEventList">SetAutomationEventList(list)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set automation event list to record to</p>
+</dd>
+<dt><a href="#SetAutomationEventBaseFrame">SetAutomationEventBaseFrame(frame)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set automation event internal base frame to start recording</p>
+</dd>
+<dt><a href="#StartAutomationEventRecording">StartAutomationEventRecording()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Start recording automation events (AutomationEventList must be set)</p>
+</dd>
+<dt><a href="#StopAutomationEventRecording">StopAutomationEventRecording()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Stop recording automation events</p>
+</dd>
+<dt><a href="#PlayAutomationEvent">PlayAutomationEvent(event)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Play a recorded automation event</p>
+</dd>
 <dt><a href="#IsKeyPressed">IsKeyPressed(key)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a key has been pressed once</p>
+</dd>
+<dt><a href="#IsKeyPressedRepeat">IsKeyPressedRepeat(key)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check if a key has been pressed again (Only PLATFORM_DESKTOP)</p>
 </dd>
 <dt><a href="#IsKeyDown">IsKeyDown(key)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a key is being pressed</p>
@@ -400,14 +442,14 @@
 <dt><a href="#IsKeyUp">IsKeyUp(key)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a key is NOT being pressed</p>
 </dd>
-<dt><a href="#SetExitKey">SetExitKey(key)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set a custom key to exit program (default is ESC)</p>
-</dd>
 <dt><a href="#GetKeyPressed">GetKeyPressed()</a> ⇒ <code>number</code></dt>
 <dd><p>Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty</p>
 </dd>
 <dt><a href="#GetCharPressed">GetCharPressed()</a> ⇒ <code>number</code></dt>
 <dd><p>Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty</p>
+</dd>
+<dt><a href="#SetExitKey">SetExitKey(key)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set a custom key to exit program (default is ESC)</p>
 </dd>
 <dt><a href="#IsGamepadAvailable">IsGamepadAvailable(gamepad)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a gamepad is available</p>
@@ -536,22 +578,16 @@
 <dd><p>Draw a line</p>
 </dd>
 <dt><a href="#DrawLineV">DrawLineV(startPos, endPos, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw a line (Vector version)</p>
+<dd><p>Draw a line (using gl lines)</p>
 </dd>
 <dt><a href="#DrawLineEx">DrawLineEx(startPos, endPos, thick, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw a line defining thickness</p>
-</dd>
-<dt><a href="#DrawLineBezier">DrawLineBezier(startPos, endPos, thick, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw a line using cubic-bezier curves in-out</p>
-</dd>
-<dt><a href="#DrawLineBezierQuad">DrawLineBezierQuad(startPos, endPos, controlPos, thick, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw line using quadratic bezier curves with a control point</p>
-</dd>
-<dt><a href="#DrawLineBezierCubic">DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw line using cubic bezier curves with 2 control points</p>
+<dd><p>Draw a line (using triangles/quads)</p>
 </dd>
 <dt><a href="#DrawLineStrip">DrawLineStrip(points, pointCount, color)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Draw lines sequence</p>
+<dd><p>Draw lines sequence (using gl lines)</p>
+</dd>
+<dt><a href="#DrawLineBezier">DrawLineBezier(startPos, endPos, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw line segment cubic-bezier in-out interpolation</p>
 </dd>
 <dt><a href="#DrawCircle">DrawCircle(centerX, centerY, radius, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw a color-filled circle</p>
@@ -570,6 +606,9 @@
 </dd>
 <dt><a href="#DrawCircleLines">DrawCircleLines(centerX, centerY, radius, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw circle outline</p>
+</dd>
+<dt><a href="#DrawCircleLinesV">DrawCircleLinesV(center, radius, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw circle outline (Vector version)</p>
 </dd>
 <dt><a href="#DrawEllipse">DrawEllipse(centerX, centerY, radiusH, radiusV, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw ellipse</p>
@@ -637,6 +676,51 @@
 <dt><a href="#DrawPolyLinesEx">DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw a polygon outline of n sides with extended parameters</p>
 </dd>
+<dt><a href="#DrawSplineLinear">DrawSplineLinear(points, pointCount, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline: Linear, minimum 2 points</p>
+</dd>
+<dt><a href="#DrawSplineBasis">DrawSplineBasis(points, pointCount, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline: B-Spline, minimum 4 points</p>
+</dd>
+<dt><a href="#DrawSplineCatmullRom">DrawSplineCatmullRom(points, pointCount, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline: Catmull-Rom, minimum 4 points</p>
+</dd>
+<dt><a href="#DrawSplineBezierQuadratic">DrawSplineBezierQuadratic(points, pointCount, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]</p>
+</dd>
+<dt><a href="#DrawSplineBezierCubic">DrawSplineBezierCubic(points, pointCount, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]</p>
+</dd>
+<dt><a href="#DrawSplineSegmentLinear">DrawSplineSegmentLinear(p1, p2, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline segment: Linear, 2 points</p>
+</dd>
+<dt><a href="#DrawSplineSegmentBasis">DrawSplineSegmentBasis(p1, p2, p3, p4, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline segment: B-Spline, 4 points</p>
+</dd>
+<dt><a href="#DrawSplineSegmentCatmullRom">DrawSplineSegmentCatmullRom(p1, p2, p3, p4, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline segment: Catmull-Rom, 4 points</p>
+</dd>
+<dt><a href="#DrawSplineSegmentBezierQuadratic">DrawSplineSegmentBezierQuadratic(p1, c2, p3, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline segment: Quadratic Bezier, 2 points, 1 control point</p>
+</dd>
+<dt><a href="#DrawSplineSegmentBezierCubic">DrawSplineSegmentBezierCubic(p1, c2, c3, p4, thick, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw spline segment: Cubic Bezier, 2 points, 2 control points</p>
+</dd>
+<dt><a href="#GetSplinePointLinear">GetSplinePointLinear(startPos, endPos, t)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Get (evaluate) spline point: Linear</p>
+</dd>
+<dt><a href="#GetSplinePointBasis">GetSplinePointBasis(p1, p2, p3, p4, t)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Get (evaluate) spline point: B-Spline</p>
+</dd>
+<dt><a href="#GetSplinePointCatmullRom">GetSplinePointCatmullRom(p1, p2, p3, p4, t)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Get (evaluate) spline point: Catmull-Rom</p>
+</dd>
+<dt><a href="#GetSplinePointBezierQuad">GetSplinePointBezierQuad(p1, c2, p3, t)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Get (evaluate) spline point: Quadratic Bezier</p>
+</dd>
+<dt><a href="#GetSplinePointBezierCubic">GetSplinePointBezierCubic(p1, c2, c3, p4, t)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
+<dd><p>Get (evaluate) spline point: Cubic Bezier</p>
+</dd>
 <dt><a href="#CheckCollisionRecs">CheckCollisionRecs(rec1, rec2)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check collision between two rectangles</p>
 </dd>
@@ -673,6 +757,9 @@
 <dt><a href="#LoadImageRaw">LoadImageRaw(fileName, width, height, format, headerSize)</a> ⇒ <code>Image</code></dt>
 <dd><p>Load image from RAW file data</p>
 </dd>
+<dt><a href="#LoadImageSvg">LoadImageSvg(fileNameOrString, width, height)</a> ⇒ <code>Image</code></dt>
+<dd><p>Load image from SVG file data or string with specified size</p>
+</dd>
 <dt><a href="#LoadImageAnim">LoadImageAnim(fileName, frames)</a> ⇒ <code>Image</code></dt>
 <dd><p>Load image sequence from file (frames appended to image.data)</p>
 </dd>
@@ -694,20 +781,23 @@
 <dt><a href="#ExportImage">ExportImage(image, fileName)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Export image data to file, returns true on success</p>
 </dd>
+<dt><a href="#ExportImageToMemory">ExportImageToMemory(image, fileType, fileSize)</a> ⇒ <code>Buffer</code></dt>
+<dd><p>Export image to memory buffer</p>
+</dd>
 <dt><a href="#ExportImageAsCode">ExportImageAsCode(image, fileName)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Export image as code file defining an array of bytes, returns true on success</p>
 </dd>
 <dt><a href="#GenImageColor">GenImageColor(width, height, color)</a> ⇒ <code>Image</code></dt>
 <dd><p>Generate image: plain color</p>
 </dd>
-<dt><a href="#GenImageGradientV">GenImageGradientV(width, height, top, bottom)</a> ⇒ <code>Image</code></dt>
-<dd><p>Generate image: vertical gradient</p>
-</dd>
-<dt><a href="#GenImageGradientH">GenImageGradientH(width, height, left, right)</a> ⇒ <code>Image</code></dt>
-<dd><p>Generate image: horizontal gradient</p>
+<dt><a href="#GenImageGradientLinear">GenImageGradientLinear(width, height, direction, start, end)</a> ⇒ <code>Image</code></dt>
+<dd><p>Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient</p>
 </dd>
 <dt><a href="#GenImageGradientRadial">GenImageGradientRadial(width, height, density, inner, outer)</a> ⇒ <code>Image</code></dt>
 <dd><p>Generate image: radial gradient</p>
+</dd>
+<dt><a href="#GenImageGradientSquare">GenImageGradientSquare(width, height, density, inner, outer)</a> ⇒ <code>Image</code></dt>
+<dd><p>Generate image: square gradient</p>
 </dd>
 <dt><a href="#GenImageChecked">GenImageChecked(width, height, checksX, checksY, col1, col2)</a> ⇒ <code>Image</code></dt>
 <dd><p>Generate image: checked</p>
@@ -738,6 +828,9 @@
 </dd>
 <dt><a href="#ImageBlurGaussian">ImageBlurGaussian(image, blurSize)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Apply Gaussian blur using a box blur approximation</p>
+</dd>
+<dt><a href="#ImageRotate">ImageRotate(image, degrees)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Rotate image by input angle in degrees (-359 to 359)</p>
 </dd>
 <dt><a href="#LoadImageColors">LoadImageColors(image)</a> ⇒ <code>number</code></dt>
 <dd><p>Load color data from image as a Color array (RGBA - 32bit)</p>
@@ -868,25 +961,25 @@
 <dt><a href="#LoadFont">LoadFont(fileName)</a> ⇒ <code>Font</code></dt>
 <dd><p>Load font from file into GPU memory (VRAM)</p>
 </dd>
-<dt><a href="#LoadFontEx">LoadFontEx(fileName, fontSize, fontChars, glyphCount)</a> ⇒ <code>Font</code></dt>
-<dd><p>Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set</p>
+<dt><a href="#LoadFontEx">LoadFontEx(fileName, fontSize, codepoints, codepointCount)</a> ⇒ <code>Font</code></dt>
+<dd><p>Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont</p>
 </dd>
 <dt><a href="#LoadFontFromImage">LoadFontFromImage(image, key, firstChar)</a> ⇒ <code>Font</code></dt>
 <dd><p>Load font from Image (XNA style)</p>
 </dd>
-<dt><a href="#LoadFontFromMemory">LoadFontFromMemory(fileType, fileData, dataSize, fontSize, fontChars, glyphCount)</a> ⇒ <code>Font</code></dt>
+<dt><a href="#LoadFontFromMemory">LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount)</a> ⇒ <code>Font</code></dt>
 <dd><p>Load font from memory buffer, fileType refers to extension: i.e. &#39;.ttf&#39;</p>
 </dd>
 <dt><a href="#IsFontReady">IsFontReady(font)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if a font is ready</p>
 </dd>
-<dt><a href="#LoadFontData">LoadFontData(fileData, dataSize, fontSize, fontChars, glyphCount, type)</a> ⇒ <code>number</code></dt>
+<dt><a href="#LoadFontData">LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type)</a> ⇒ <code>number</code></dt>
 <dd><p>Load font data for further use</p>
 </dd>
-<dt><a href="#GenImageFontAtlas">GenImageFontAtlas(chars, recs, glyphCount, fontSize, padding, packMethod)</a> ⇒ <code>Image</code></dt>
+<dt><a href="#GenImageFontAtlas">GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod)</a> ⇒ <code>Image</code></dt>
 <dd><p>Generate image font atlas using chars info</p>
 </dd>
-<dt><a href="#UnloadFontData">UnloadFontData(chars, glyphCount)</a> ⇒ <code>undefined</code></dt>
+<dt><a href="#UnloadFontData">UnloadFontData(glyphs, glyphCount)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload font chars info data (RAM)</p>
 </dd>
 <dt><a href="#UnloadFont">UnloadFont(font)</a> ⇒ <code>undefined</code></dt>
@@ -910,8 +1003,11 @@
 <dt><a href="#DrawTextCodepoint">DrawTextCodepoint(font, codepoint, position, fontSize, tint)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw one character (codepoint)</p>
 </dd>
-<dt><a href="#DrawTextCodepoints">DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing, tint)</a> ⇒ <code>undefined</code></dt>
+<dt><a href="#DrawTextCodepoints">DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Draw multiple character (codepoint)</p>
+</dd>
+<dt><a href="#SetTextLineSpacing">SetTextLineSpacing(spacing)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set vertical line spacing when drawing with line-breaks</p>
 </dd>
 <dt><a href="#MeasureText">MeasureText(text, fontSize)</a> ⇒ <code>number</code></dt>
 <dd><p>Measure string width for default font</p>
@@ -1153,7 +1249,7 @@
 <dt><a href="#UnloadModelAnimation">UnloadModelAnimation(anim)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload animation data</p>
 </dd>
-<dt><a href="#UnloadModelAnimations">UnloadModelAnimations(animations, count)</a> ⇒ <code>undefined</code></dt>
+<dt><a href="#UnloadModelAnimations">UnloadModelAnimations(animations, animCount)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload animation array data</p>
 </dd>
 <dt><a href="#IsModelAnimationValid">IsModelAnimationValid(model, anim)</a> ⇒ <code>boolean</code></dt>
@@ -1195,6 +1291,9 @@
 <dt><a href="#SetMasterVolume">SetMasterVolume(volume)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set master volume (listener)</p>
 </dd>
+<dt><a href="#GetMasterVolume">GetMasterVolume()</a> ⇒ <code>number</code></dt>
+<dd><p>Get master volume (listener)</p>
+</dd>
 <dt><a href="#LoadWave">LoadWave(fileName)</a> ⇒ <code>Wave</code></dt>
 <dd><p>Load wave data from file</p>
 </dd>
@@ -1210,6 +1309,9 @@
 <dt><a href="#LoadSoundFromWave">LoadSoundFromWave(wave)</a> ⇒ <code>Sound</code></dt>
 <dd><p>Load sound from wave data</p>
 </dd>
+<dt><a href="#LoadSoundAlias">LoadSoundAlias(source)</a> ⇒ <code>Sound</code></dt>
+<dd><p>Create a new sound that shares the same sample data as the source sound, does not own the sound data</p>
+</dd>
 <dt><a href="#IsSoundReady">IsSoundReady(sound)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Checks if a sound is ready</p>
 </dd>
@@ -1221,6 +1323,9 @@
 </dd>
 <dt><a href="#UnloadSound">UnloadSound(sound)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Unload sound</p>
+</dd>
+<dt><a href="#UnloadSoundAlias">UnloadSoundAlias(alias)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Unload a sound alias (does not deallocate sample data)</p>
 </dd>
 <dt><a href="#ExportWave">ExportWave(wave, fileName)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Export wave data to file, returns true on success</p>
@@ -1450,7 +1555,7 @@
 <dt><a href="#GuiIsLocked">GuiIsLocked()</a> ⇒ <code>boolean</code></dt>
 <dd><p>Check if gui is locked (global state)</p>
 </dd>
-<dt><a href="#GuiFade">GuiFade(alpha)</a> ⇒ <code>undefined</code></dt>
+<dt><a href="#GuiSetAlpha">GuiSetAlpha(alpha)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f</p>
 </dd>
 <dt><a href="#GuiSetState">GuiSetState(state)</a> ⇒ <code>undefined</code></dt>
@@ -1471,102 +1576,6 @@
 <dt><a href="#GuiGetStyle">GuiGetStyle(control, property)</a> ⇒ <code>number</code></dt>
 <dd><p>Get one style property</p>
 </dd>
-<dt><a href="#GuiWindowBox">GuiWindowBox(bounds, title)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Window Box control, shows a window that can be closed</p>
-</dd>
-<dt><a href="#GuiGroupBox">GuiGroupBox(bounds, text)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Group Box control with text name</p>
-</dd>
-<dt><a href="#GuiLine">GuiLine(bounds, text)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Line separator control, could contain text</p>
-</dd>
-<dt><a href="#GuiPanel">GuiPanel(bounds, text)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Panel control, useful to group controls</p>
-</dd>
-<dt><a href="#GuiTabBar">GuiTabBar(bounds, text, count, active)</a> ⇒ <code>number</code></dt>
-<dd><p>Tab Bar control, returns TAB to be closed or -1</p>
-</dd>
-<dt><a href="#GuiScrollPanel">GuiScrollPanel(bounds, text, content, scroll)</a> ⇒ <code><a href="#Rectangle">Rectangle</a></code></dt>
-<dd><p>Scroll Panel control</p>
-</dd>
-<dt><a href="#GuiLabel">GuiLabel(bounds, text)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Label control, shows text</p>
-</dd>
-<dt><a href="#GuiButton">GuiButton(bounds, text)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Button control, returns true when clicked</p>
-</dd>
-<dt><a href="#GuiLabelButton">GuiLabelButton(bounds, text)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Label button control, show true when clicked</p>
-</dd>
-<dt><a href="#GuiToggle">GuiToggle(bounds, text, active)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Toggle Button control, returns true when active</p>
-</dd>
-<dt><a href="#GuiToggleGroup">GuiToggleGroup(bounds, text, active)</a> ⇒ <code>number</code></dt>
-<dd><p>Toggle Group control, returns active toggle index</p>
-</dd>
-<dt><a href="#GuiCheckBox">GuiCheckBox(bounds, text, checked)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Check Box control, returns true when active</p>
-</dd>
-<dt><a href="#GuiComboBox">GuiComboBox(bounds, text, active)</a> ⇒ <code>number</code></dt>
-<dd><p>Combo Box control, returns selected item index</p>
-</dd>
-<dt><a href="#GuiDropdownBox">GuiDropdownBox(bounds, text, active, editMode)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Dropdown Box control, returns selected item</p>
-</dd>
-<dt><a href="#GuiSpinner">GuiSpinner(bounds, text, value, minValue, maxValue, editMode)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Spinner control, returns selected value</p>
-</dd>
-<dt><a href="#GuiValueBox">GuiValueBox(bounds, text, value, minValue, maxValue, editMode)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Value Box control, updates input text with numbers</p>
-</dd>
-<dt><a href="#GuiTextBox">GuiTextBox(bounds, text, textSize, editMode)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Text Box control, updates input text</p>
-</dd>
-<dt><a href="#GuiTextBoxMulti">GuiTextBoxMulti(bounds, text, textSize, editMode)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Text Box control with multiple lines</p>
-</dd>
-<dt><a href="#GuiSlider">GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
-<dd><p>Slider control, returns selected value</p>
-</dd>
-<dt><a href="#GuiSliderBar">GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
-<dd><p>Slider Bar control, returns selected value</p>
-</dd>
-<dt><a href="#GuiProgressBar">GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
-<dd><p>Progress Bar control, shows current progress value</p>
-</dd>
-<dt><a href="#GuiStatusBar">GuiStatusBar(bounds, text)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Status Bar control, shows info text</p>
-</dd>
-<dt><a href="#GuiDummyRec">GuiDummyRec(bounds, text)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Dummy control for placeholders</p>
-</dd>
-<dt><a href="#GuiGrid">GuiGrid(bounds, text, spacing, subdivs)</a> ⇒ <code><a href="#Vector2">Vector2</a></code></dt>
-<dd><p>Grid control, returns mouse cell position</p>
-</dd>
-<dt><a href="#GuiListView">GuiListView(bounds, text, scrollIndex, active)</a> ⇒ <code>number</code></dt>
-<dd><p>List View control, returns selected list item index</p>
-</dd>
-<dt><a href="#GuiListViewEx">GuiListViewEx(bounds, text, count, focus, scrollIndex, active)</a> ⇒ <code>number</code></dt>
-<dd><p>List View with extended parameters</p>
-</dd>
-<dt><a href="#GuiMessageBox">GuiMessageBox(bounds, title, message, buttons)</a> ⇒ <code>number</code></dt>
-<dd><p>Message Box control, displays a message</p>
-</dd>
-<dt><a href="#GuiTextInputBox">GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive)</a> ⇒ <code>number</code></dt>
-<dd><p>Text Input Box control, ask for text, supports secret</p>
-</dd>
-<dt><a href="#GuiColorPicker">GuiColorPicker(bounds, text, color)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
-<dd><p>Color Picker control (multiple color controls)</p>
-</dd>
-<dt><a href="#GuiColorPanel">GuiColorPanel(bounds, text, color)</a> ⇒ <code><a href="#Color">Color</a></code></dt>
-<dd><p>Color Panel control</p>
-</dd>
-<dt><a href="#GuiColorBarAlpha">GuiColorBarAlpha(bounds, text, alpha)</a> ⇒ <code>number</code></dt>
-<dd><p>Color Bar Alpha control</p>
-</dd>
-<dt><a href="#GuiColorBarHue">GuiColorBarHue(bounds, text, value)</a> ⇒ <code>number</code></dt>
-<dd><p>Color Bar Hue control</p>
-</dd>
 <dt><a href="#GuiLoadStyle">GuiLoadStyle(fileName)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Load style file over global style variable (.rgs)</p>
 </dd>
@@ -1585,14 +1594,119 @@
 <dt><a href="#GuiIconText">GuiIconText(iconId, text)</a> ⇒ <code>string</code></dt>
 <dd><p>Get text with icon id prepended (if supported)</p>
 </dd>
+<dt><a href="#GuiSetIconScale">GuiSetIconScale(scale)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Set default icon drawing size</p>
+</dd>
 <dt><a href="#GuiGetIcons">GuiGetIcons()</a> ⇒ <code>number</code></dt>
 <dd><p>Get raygui icons data pointer</p>
 </dd>
 <dt><a href="#GuiLoadIcons">GuiLoadIcons(fileName, loadIconsName)</a> ⇒ <code>number</code></dt>
 <dd><p>Load raygui icons file (.rgi) into internal icons data</p>
 </dd>
-<dt><a href="#GuiSetIconScale">GuiSetIconScale(scale)</a> ⇒ <code>undefined</code></dt>
-<dd><p>Set icon drawing size</p>
+<dt><a href="#GuiDrawIcon">GuiDrawIcon(iconId, posX, posY, pixelSize, color)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Draw icon using pixel size at specified position</p>
+</dd>
+<dt><a href="#GuiWindowBox">GuiWindowBox(bounds, title)</a> ⇒ <code>number</code></dt>
+<dd><p>Window Box control, shows a window that can be closed</p>
+</dd>
+<dt><a href="#GuiGroupBox">GuiGroupBox(bounds, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Group Box control with text name</p>
+</dd>
+<dt><a href="#GuiLine">GuiLine(bounds, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Line separator control, could contain text</p>
+</dd>
+<dt><a href="#GuiPanel">GuiPanel(bounds, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Panel control, useful to group controls</p>
+</dd>
+<dt><a href="#GuiTabBar">GuiTabBar(bounds, text, count, active)</a> ⇒ <code>number</code></dt>
+<dd><p>Tab Bar control, returns TAB to be closed or -1</p>
+</dd>
+<dt><a href="#GuiScrollPanel">GuiScrollPanel(bounds, text, content, scroll, view)</a> ⇒ <code>number</code></dt>
+<dd><p>Scroll Panel control</p>
+</dd>
+<dt><a href="#GuiLabel">GuiLabel(bounds, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Label control, shows text</p>
+</dd>
+<dt><a href="#GuiButton">GuiButton(bounds, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Button control, returns true when clicked</p>
+</dd>
+<dt><a href="#GuiLabelButton">GuiLabelButton(bounds, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Label button control, show true when clicked</p>
+</dd>
+<dt><a href="#GuiToggle">GuiToggle(bounds, text, active)</a> ⇒ <code>number</code></dt>
+<dd><p>Toggle Button control, returns true when active</p>
+</dd>
+<dt><a href="#GuiToggleGroup">GuiToggleGroup(bounds, text, active)</a> ⇒ <code>number</code></dt>
+<dd><p>Toggle Group control, returns active toggle index</p>
+</dd>
+<dt><a href="#GuiToggleSlider">GuiToggleSlider(bounds, text, active)</a> ⇒ <code>number</code></dt>
+<dd><p>Toggle Slider control, returns true when clicked</p>
+</dd>
+<dt><a href="#GuiCheckBox">GuiCheckBox(bounds, text, checked)</a> ⇒ <code>number</code></dt>
+<dd><p>Check Box control, returns true when active</p>
+</dd>
+<dt><a href="#GuiComboBox">GuiComboBox(bounds, text, active)</a> ⇒ <code>number</code></dt>
+<dd><p>Combo Box control, returns selected item index</p>
+</dd>
+<dt><a href="#GuiDropdownBox">GuiDropdownBox(bounds, text, active, editMode)</a> ⇒ <code>number</code></dt>
+<dd><p>Dropdown Box control, returns selected item</p>
+</dd>
+<dt><a href="#GuiSpinner">GuiSpinner(bounds, text, value, minValue, maxValue, editMode)</a> ⇒ <code>number</code></dt>
+<dd><p>Spinner control, returns selected value</p>
+</dd>
+<dt><a href="#GuiValueBox">GuiValueBox(bounds, text, value, minValue, maxValue, editMode)</a> ⇒ <code>number</code></dt>
+<dd><p>Value Box control, updates input text with numbers</p>
+</dd>
+<dt><a href="#GuiTextBox">GuiTextBox(bounds, text, textSize, editMode)</a> ⇒ <code>number</code></dt>
+<dd><p>Text Box control, updates input text</p>
+</dd>
+<dt><a href="#GuiSlider">GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
+<dd><p>Slider control, returns selected value</p>
+</dd>
+<dt><a href="#GuiSliderBar">GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
+<dd><p>Slider Bar control, returns selected value</p>
+</dd>
+<dt><a href="#GuiProgressBar">GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
+<dd><p>Progress Bar control, shows current progress value</p>
+</dd>
+<dt><a href="#GuiStatusBar">GuiStatusBar(bounds, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Status Bar control, shows info text</p>
+</dd>
+<dt><a href="#GuiDummyRec">GuiDummyRec(bounds, text)</a> ⇒ <code>number</code></dt>
+<dd><p>Dummy control for placeholders</p>
+</dd>
+<dt><a href="#GuiGrid">GuiGrid(bounds, text, spacing, subdivs, mouseCell)</a> ⇒ <code>number</code></dt>
+<dd><p>Grid control, returns mouse cell position</p>
+</dd>
+<dt><a href="#GuiListView">GuiListView(bounds, text, scrollIndex, active)</a> ⇒ <code>number</code></dt>
+<dd><p>List View control, returns selected list item index</p>
+</dd>
+<dt><a href="#GuiListViewEx">GuiListViewEx(bounds, text, count, scrollIndex, active, focus)</a> ⇒ <code>number</code></dt>
+<dd><p>List View with extended parameters</p>
+</dd>
+<dt><a href="#GuiMessageBox">GuiMessageBox(bounds, title, message, buttons)</a> ⇒ <code>number</code></dt>
+<dd><p>Message Box control, displays a message</p>
+</dd>
+<dt><a href="#GuiTextInputBox">GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive)</a> ⇒ <code>number</code></dt>
+<dd><p>Text Input Box control, ask for text, supports secret</p>
+</dd>
+<dt><a href="#GuiColorPicker">GuiColorPicker(bounds, text, color)</a> ⇒ <code>number</code></dt>
+<dd><p>Color Picker control (multiple color controls)</p>
+</dd>
+<dt><a href="#GuiColorPanel">GuiColorPanel(bounds, text, color)</a> ⇒ <code>number</code></dt>
+<dd><p>Color Panel control</p>
+</dd>
+<dt><a href="#GuiColorBarAlpha">GuiColorBarAlpha(bounds, text, alpha)</a> ⇒ <code>number</code></dt>
+<dd><p>Color Bar Alpha control</p>
+</dd>
+<dt><a href="#GuiColorBarHue">GuiColorBarHue(bounds, text, value)</a> ⇒ <code>number</code></dt>
+<dd><p>Color Bar Hue control</p>
+</dd>
+<dt><a href="#GuiColorPickerHSV">GuiColorPickerHSV(bounds, text, colorHsv)</a> ⇒ <code>number</code></dt>
+<dd><p>Color Picker control that avoids conversion to RGB on each call (multiple color controls)</p>
+</dd>
+<dt><a href="#GuiColorPanelHSV">GuiColorPanelHSV(bounds, text, colorHsv)</a> ⇒ <code>number</code></dt>
+<dd><p>Color Panel control that returns HSV color value, used by GuiColorPickerHSV()</p>
 </dd>
 <dt><a href="#rlMatrixMode">rlMatrixMode(mode)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Choose the current matrix to be transformed</p>
@@ -1711,6 +1825,9 @@
 <dt><a href="#rlActiveDrawBuffers">rlActiveDrawBuffers(count)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Activate multiple draw color buffers</p>
 </dd>
+<dt><a href="#rlBlitFramebuffer">rlBlitFramebuffer(srcX, srcY, srcWidth, srcHeight, dstX, dstY, dstWidth, dstHeight, bufferMask)</a> ⇒ <code>undefined</code></dt>
+<dd><p>Blit active framebuffer to main framebuffer</p>
+</dd>
 <dt><a href="#rlEnableColorBlend">rlEnableColorBlend()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Enable color blending</p>
 </dd>
@@ -1750,8 +1867,11 @@
 <dt><a href="#rlEnableWireMode">rlEnableWireMode()</a> ⇒ <code>undefined</code></dt>
 <dd><p>Enable wire mode</p>
 </dd>
+<dt><a href="#rlEnablePointMode">rlEnablePointMode()</a> ⇒ <code>undefined</code></dt>
+<dd><p>Enable point mode</p>
+</dd>
 <dt><a href="#rlDisableWireMode">rlDisableWireMode()</a> ⇒ <code>undefined</code></dt>
-<dd><p>Disable wire mode</p>
+<dd><p>Disable wire mode ( and point ) maybe rename</p>
 </dd>
 <dt><a href="#rlSetLineWidth">rlSetLineWidth(width)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Set the line drawing width</p>
@@ -2179,19 +2299,19 @@ Initialize window and OpenGL context
 | height | <code>number</code> | 
 | title | <code>string</code> | 
 
-<a name="WindowShouldClose"></a>
-
-## WindowShouldClose() ⇒ <code>boolean</code>
-Check if KEY_ESCAPE pressed or Close icon pressed
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
 <a name="CloseWindow"></a>
 
 ## CloseWindow() ⇒ <code>undefined</code>
 Close window and unload OpenGL context
 
 **Kind**: global function  
+<a name="WindowShouldClose"></a>
+
+## WindowShouldClose() ⇒ <code>boolean</code>
+Check if application should close (KEY_ESCAPE pressed or windows close icon clicked)
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
 <a name="IsWindowReady"></a>
 
 ## IsWindowReady() ⇒ <code>boolean</code>
@@ -2281,6 +2401,12 @@ Clear window configuration state flags
 Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
 
 **Kind**: global function  
+<a name="ToggleBorderlessWindowed"></a>
+
+## ToggleBorderlessWindowed() ⇒ <code>undefined</code>
+Toggle window state: borderless windowed (only PLATFORM_DESKTOP)
+
+**Kind**: global function  
 <a name="MaximizeWindow"></a>
 
 ## MaximizeWindow() ⇒ <code>undefined</code>
@@ -2325,7 +2451,7 @@ Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)
 <a name="SetWindowTitle"></a>
 
 ## SetWindowTitle(title) ⇒ <code>undefined</code>
-Set title for window (only PLATFORM_DESKTOP)
+Set title for window (only PLATFORM_DESKTOP and PLATFORM_WEB)
 
 **Kind**: global function  
 
@@ -2348,7 +2474,7 @@ Set window position on screen (only PLATFORM_DESKTOP)
 <a name="SetWindowMonitor"></a>
 
 ## SetWindowMonitor(monitor) ⇒ <code>undefined</code>
-Set monitor for the current window (fullscreen mode)
+Set monitor for the current window
 
 **Kind**: global function  
 
@@ -2360,6 +2486,18 @@ Set monitor for the current window (fullscreen mode)
 
 ## SetWindowMinSize(width, height) ⇒ <code>undefined</code>
 Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+
+<a name="SetWindowMaxSize"></a>
+
+## SetWindowMaxSize(width, height) ⇒ <code>undefined</code>
+Set window maximum dimensions (for FLAG_WINDOW_RESIZABLE)
 
 **Kind**: global function  
 
@@ -2391,6 +2529,12 @@ Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)
 | --- | --- |
 | opacity | <code>number</code> | 
 
+<a name="SetWindowFocused"></a>
+
+## SetWindowFocused() ⇒ <code>undefined</code>
+Set window focused (only PLATFORM_DESKTOP)
+
+**Kind**: global function  
 <a name="GetWindowHandle"></a>
 
 ## GetWindowHandle() ⇒ <code>number</code>
@@ -2529,7 +2673,7 @@ Get window scale DPI factor
 <a name="GetMonitorName"></a>
 
 ## GetMonitorName(monitor) ⇒ <code>string</code>
-Get the human-readable, UTF-8 encoded name of the primary monitor
+Get the human-readable, UTF-8 encoded name of the specified monitor
 
 **Kind**: global function  
 **Returns**: <code>string</code> - The resulting const char *.  
@@ -2568,29 +2712,6 @@ Enable waiting for events on EndDrawing(), no automatic event polling
 Disable waiting for events on EndDrawing(), automatic events polling
 
 **Kind**: global function  
-<a name="SwapScreenBuffer"></a>
-
-## SwapScreenBuffer() ⇒ <code>undefined</code>
-Swap back buffer with front buffer (screen drawing)
-
-**Kind**: global function  
-<a name="PollInputEvents"></a>
-
-## PollInputEvents() ⇒ <code>undefined</code>
-Register all input events
-
-**Kind**: global function  
-<a name="WaitTime"></a>
-
-## WaitTime(seconds) ⇒ <code>undefined</code>
-Wait for some time (halt program execution)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| seconds | <code>number</code> | 
-
 <a name="ShowCursor"></a>
 
 ## ShowCursor() ⇒ <code>undefined</code>
@@ -2966,13 +3087,6 @@ Set target FPS (maximum)
 | --- | --- |
 | fps | <code>number</code> | 
 
-<a name="GetFPS"></a>
-
-## GetFPS() ⇒ <code>number</code>
-Get current FPS
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
 <a name="GetFrameTime"></a>
 
 ## GetFrameTime() ⇒ <code>number</code>
@@ -2987,6 +3101,47 @@ Get elapsed time in seconds since InitWindow()
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting double.  
+<a name="GetFPS"></a>
+
+## GetFPS() ⇒ <code>number</code>
+Get current FPS
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+<a name="SwapScreenBuffer"></a>
+
+## SwapScreenBuffer() ⇒ <code>undefined</code>
+Swap back buffer with front buffer (screen drawing)
+
+**Kind**: global function  
+<a name="PollInputEvents"></a>
+
+## PollInputEvents() ⇒ <code>undefined</code>
+Register all input events
+
+**Kind**: global function  
+<a name="WaitTime"></a>
+
+## WaitTime(seconds) ⇒ <code>undefined</code>
+Wait for some time (halt program execution)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| seconds | <code>number</code> | 
+
+<a name="SetRandomSeed"></a>
+
+## SetRandomSeed(seed) ⇒ <code>undefined</code>
+Set the seed for the random number generator
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| seed | <code>number</code> | 
+
 <a name="GetRandomValue"></a>
 
 ## GetRandomValue(min, max) ⇒ <code>number</code>
@@ -3000,16 +3155,30 @@ Get a random value between min and max (both included)
 | min | <code>number</code> | 
 | max | <code>number</code> | 
 
-<a name="SetRandomSeed"></a>
+<a name="LoadRandomSequence"></a>
 
-## SetRandomSeed(seed) ⇒ <code>undefined</code>
-Set the seed for the random number generator
+## LoadRandomSequence(count, min, max) ⇒ <code>number</code>
+Load random values sequence, no values repeated
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int *.  
+
+| Param | Type |
+| --- | --- |
+| count | <code>number</code> | 
+| min | <code>number</code> | 
+| max | <code>number</code> | 
+
+<a name="UnloadRandomSequence"></a>
+
+## UnloadRandomSequence(sequence) ⇒ <code>undefined</code>
+Unload random values sequence
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| seed | <code>number</code> | 
+| sequence | <code>number</code> | 
 
 <a name="TakeScreenshot"></a>
 
@@ -3032,6 +3201,17 @@ Setup init configuration flags (view FLAGS)
 | Param | Type |
 | --- | --- |
 | flags | <code>number</code> | 
+
+<a name="OpenURL"></a>
+
+## OpenURL(url) ⇒ <code>undefined</code>
+Open URL with default system browser (if available)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| url | <code>string</code> | 
 
 <a name="SetTraceLogLevel"></a>
 
@@ -3080,20 +3260,9 @@ Internal memory free
 | --- | --- |
 | ptr | <code>number</code> | 
 
-<a name="OpenURL"></a>
-
-## OpenURL(url) ⇒ <code>undefined</code>
-Open URL with default system browser (if available)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| url | <code>string</code> | 
-
 <a name="LoadFileData"></a>
 
-## LoadFileData(fileName, bytesRead) ⇒ <code>Buffer</code>
+## LoadFileData(fileName, dataSize) ⇒ <code>Buffer</code>
 Load file data as byte array (read)
 
 **Kind**: global function  
@@ -3102,7 +3271,7 @@ Load file data as byte array (read)
 | Param | Type |
 | --- | --- |
 | fileName | <code>string</code> | 
-| bytesRead | <code>number</code> | 
+| dataSize | <code>number</code> | 
 
 <a name="UnloadFileData"></a>
 
@@ -3117,7 +3286,7 @@ Unload file data allocated by LoadFileData()
 
 <a name="SaveFileData"></a>
 
-## SaveFileData(fileName, data, bytesToWrite) ⇒ <code>boolean</code>
+## SaveFileData(fileName, data, dataSize) ⇒ <code>boolean</code>
 Save data to file from byte array (write), returns true on success
 
 **Kind**: global function  
@@ -3127,11 +3296,11 @@ Save data to file from byte array (write), returns true on success
 | --- | --- |
 | fileName | <code>string</code> | 
 | data | <code>number</code> | 
-| bytesToWrite | <code>number</code> | 
+| dataSize | <code>number</code> | 
 
 <a name="ExportDataAsCode"></a>
 
-## ExportDataAsCode(data, size, fileName) ⇒ <code>boolean</code>
+## ExportDataAsCode(data, dataSize, fileName) ⇒ <code>boolean</code>
 Export data to code (.h), returns true on success
 
 **Kind**: global function  
@@ -3140,7 +3309,7 @@ Export data to code (.h), returns true on success
 | Param | Type |
 | --- | --- |
 | data | <code>Buffer</code> | 
-| size | <code>number</code> | 
+| dataSize | <code>number</code> | 
 | fileName | <code>string</code> | 
 
 <a name="LoadFileText"></a>
@@ -3298,7 +3467,7 @@ Get current working directory (uses static string)
 <a name="GetApplicationDirectory"></a>
 
 ## GetApplicationDirectory() ⇒ <code>string</code>
-Get the directory if the running application (uses static string)
+Get the directory of the running application (uses static string)
 
 **Kind**: global function  
 **Returns**: <code>string</code> - The resulting const char *.  
@@ -3455,10 +3624,103 @@ Decode Base64 string data, memory must be MemFree()
 | data | <code>Buffer</code> | 
 | outputSize | <code>number</code> | 
 
+<a name="LoadAutomationEventList"></a>
+
+## LoadAutomationEventList(fileName) ⇒ <code>AutomationEventList</code>
+Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
+
+**Kind**: global function  
+**Returns**: <code>AutomationEventList</code> - The resulting AutomationEventList.  
+
+| Param | Type |
+| --- | --- |
+| fileName | <code>string</code> | 
+
+<a name="UnloadAutomationEventList"></a>
+
+## UnloadAutomationEventList(list) ⇒ <code>undefined</code>
+Unload automation events list from file
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| list | <code>number</code> | 
+
+<a name="ExportAutomationEventList"></a>
+
+## ExportAutomationEventList(list, fileName) ⇒ <code>boolean</code>
+Export automation events list as text file
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| list | <code>AutomationEventList</code> | 
+| fileName | <code>string</code> | 
+
+<a name="SetAutomationEventList"></a>
+
+## SetAutomationEventList(list) ⇒ <code>undefined</code>
+Set automation event list to record to
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| list | <code>number</code> | 
+
+<a name="SetAutomationEventBaseFrame"></a>
+
+## SetAutomationEventBaseFrame(frame) ⇒ <code>undefined</code>
+Set automation event internal base frame to start recording
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| frame | <code>number</code> | 
+
+<a name="StartAutomationEventRecording"></a>
+
+## StartAutomationEventRecording() ⇒ <code>undefined</code>
+Start recording automation events (AutomationEventList must be set)
+
+**Kind**: global function  
+<a name="StopAutomationEventRecording"></a>
+
+## StopAutomationEventRecording() ⇒ <code>undefined</code>
+Stop recording automation events
+
+**Kind**: global function  
+<a name="PlayAutomationEvent"></a>
+
+## PlayAutomationEvent(event) ⇒ <code>undefined</code>
+Play a recorded automation event
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| event | <code>AutomationEvent</code> | 
+
 <a name="IsKeyPressed"></a>
 
 ## IsKeyPressed(key) ⇒ <code>boolean</code>
 Check if a key has been pressed once
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> - The resulting bool.  
+
+| Param | Type |
+| --- | --- |
+| key | <code>number</code> | 
+
+<a name="IsKeyPressedRepeat"></a>
+
+## IsKeyPressedRepeat(key) ⇒ <code>boolean</code>
+Check if a key has been pressed again (Only PLATFORM_DESKTOP)
 
 **Kind**: global function  
 **Returns**: <code>boolean</code> - The resulting bool.  
@@ -3503,17 +3765,6 @@ Check if a key is NOT being pressed
 | --- | --- |
 | key | <code>number</code> | 
 
-<a name="SetExitKey"></a>
-
-## SetExitKey(key) ⇒ <code>undefined</code>
-Set a custom key to exit program (default is ESC)
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| key | <code>number</code> | 
-
 <a name="GetKeyPressed"></a>
 
 ## GetKeyPressed() ⇒ <code>number</code>
@@ -3528,6 +3779,17 @@ Get char pressed (unicode), call it multiple times for chars queued, returns 0 w
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
+<a name="SetExitKey"></a>
+
+## SetExitKey(key) ⇒ <code>undefined</code>
+Set a custom key to exit program (default is ESC)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| key | <code>number</code> | 
+
 <a name="IsGamepadAvailable"></a>
 
 ## IsGamepadAvailable(gamepad) ⇒ <code>boolean</code>
@@ -3964,7 +4226,7 @@ Draw a line
 <a name="DrawLineV"></a>
 
 ## DrawLineV(startPos, endPos, color) ⇒ <code>undefined</code>
-Draw a line (Vector version)
+Draw a line (using gl lines)
 
 **Kind**: global function  
 
@@ -3977,7 +4239,7 @@ Draw a line (Vector version)
 <a name="DrawLineEx"></a>
 
 ## DrawLineEx(startPos, endPos, thick, color) ⇒ <code>undefined</code>
-Draw a line defining thickness
+Draw a line (using triangles/quads)
 
 **Kind**: global function  
 
@@ -3985,58 +4247,13 @@ Draw a line defining thickness
 | --- | --- |
 | startPos | [<code>Vector2</code>](#Vector2) | 
 | endPos | [<code>Vector2</code>](#Vector2) | 
-| thick | <code>number</code> | 
-| color | [<code>Color</code>](#Color) | 
-
-<a name="DrawLineBezier"></a>
-
-## DrawLineBezier(startPos, endPos, thick, color) ⇒ <code>undefined</code>
-Draw a line using cubic-bezier curves in-out
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| startPos | [<code>Vector2</code>](#Vector2) | 
-| endPos | [<code>Vector2</code>](#Vector2) | 
-| thick | <code>number</code> | 
-| color | [<code>Color</code>](#Color) | 
-
-<a name="DrawLineBezierQuad"></a>
-
-## DrawLineBezierQuad(startPos, endPos, controlPos, thick, color) ⇒ <code>undefined</code>
-Draw line using quadratic bezier curves with a control point
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| startPos | [<code>Vector2</code>](#Vector2) | 
-| endPos | [<code>Vector2</code>](#Vector2) | 
-| controlPos | [<code>Vector2</code>](#Vector2) | 
-| thick | <code>number</code> | 
-| color | [<code>Color</code>](#Color) | 
-
-<a name="DrawLineBezierCubic"></a>
-
-## DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color) ⇒ <code>undefined</code>
-Draw line using cubic bezier curves with 2 control points
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| startPos | [<code>Vector2</code>](#Vector2) | 
-| endPos | [<code>Vector2</code>](#Vector2) | 
-| startControlPos | [<code>Vector2</code>](#Vector2) | 
-| endControlPos | [<code>Vector2</code>](#Vector2) | 
 | thick | <code>number</code> | 
 | color | [<code>Color</code>](#Color) | 
 
 <a name="DrawLineStrip"></a>
 
 ## DrawLineStrip(points, pointCount, color) ⇒ <code>undefined</code>
-Draw lines sequence
+Draw lines sequence (using gl lines)
 
 **Kind**: global function  
 
@@ -4044,6 +4261,20 @@ Draw lines sequence
 | --- | --- |
 | points | <code>number</code> | 
 | pointCount | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawLineBezier"></a>
+
+## DrawLineBezier(startPos, endPos, thick, color) ⇒ <code>undefined</code>
+Draw line segment cubic-bezier in-out interpolation
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| startPos | [<code>Vector2</code>](#Vector2) | 
+| endPos | [<code>Vector2</code>](#Vector2) | 
+| thick | <code>number</code> | 
 | color | [<code>Color</code>](#Color) | 
 
 <a name="DrawCircle"></a>
@@ -4131,6 +4362,19 @@ Draw circle outline
 | --- | --- |
 | centerX | <code>number</code> | 
 | centerY | <code>number</code> | 
+| radius | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawCircleLinesV"></a>
+
+## DrawCircleLinesV(center, radius, color) ⇒ <code>undefined</code>
+Draw circle outline (Vector version)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| center | [<code>Vector2</code>](#Vector2) | 
 | radius | <code>number</code> | 
 | color | [<code>Color</code>](#Color) | 
 
@@ -4456,6 +4700,230 @@ Draw a polygon outline of n sides with extended parameters
 | lineThick | <code>number</code> | 
 | color | [<code>Color</code>](#Color) | 
 
+<a name="DrawSplineLinear"></a>
+
+## DrawSplineLinear(points, pointCount, thick, color) ⇒ <code>undefined</code>
+Draw spline: Linear, minimum 2 points
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| points | <code>number</code> | 
+| pointCount | <code>number</code> | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineBasis"></a>
+
+## DrawSplineBasis(points, pointCount, thick, color) ⇒ <code>undefined</code>
+Draw spline: B-Spline, minimum 4 points
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| points | <code>number</code> | 
+| pointCount | <code>number</code> | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineCatmullRom"></a>
+
+## DrawSplineCatmullRom(points, pointCount, thick, color) ⇒ <code>undefined</code>
+Draw spline: Catmull-Rom, minimum 4 points
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| points | <code>number</code> | 
+| pointCount | <code>number</code> | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineBezierQuadratic"></a>
+
+## DrawSplineBezierQuadratic(points, pointCount, thick, color) ⇒ <code>undefined</code>
+Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| points | <code>number</code> | 
+| pointCount | <code>number</code> | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineBezierCubic"></a>
+
+## DrawSplineBezierCubic(points, pointCount, thick, color) ⇒ <code>undefined</code>
+Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| points | <code>number</code> | 
+| pointCount | <code>number</code> | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineSegmentLinear"></a>
+
+## DrawSplineSegmentLinear(p1, p2, thick, color) ⇒ <code>undefined</code>
+Draw spline segment: Linear, 2 points
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| p2 | [<code>Vector2</code>](#Vector2) | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineSegmentBasis"></a>
+
+## DrawSplineSegmentBasis(p1, p2, p3, p4, thick, color) ⇒ <code>undefined</code>
+Draw spline segment: B-Spline, 4 points
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| p2 | [<code>Vector2</code>](#Vector2) | 
+| p3 | [<code>Vector2</code>](#Vector2) | 
+| p4 | [<code>Vector2</code>](#Vector2) | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineSegmentCatmullRom"></a>
+
+## DrawSplineSegmentCatmullRom(p1, p2, p3, p4, thick, color) ⇒ <code>undefined</code>
+Draw spline segment: Catmull-Rom, 4 points
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| p2 | [<code>Vector2</code>](#Vector2) | 
+| p3 | [<code>Vector2</code>](#Vector2) | 
+| p4 | [<code>Vector2</code>](#Vector2) | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineSegmentBezierQuadratic"></a>
+
+## DrawSplineSegmentBezierQuadratic(p1, c2, p3, thick, color) ⇒ <code>undefined</code>
+Draw spline segment: Quadratic Bezier, 2 points, 1 control point
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| c2 | [<code>Vector2</code>](#Vector2) | 
+| p3 | [<code>Vector2</code>](#Vector2) | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="DrawSplineSegmentBezierCubic"></a>
+
+## DrawSplineSegmentBezierCubic(p1, c2, c3, p4, thick, color) ⇒ <code>undefined</code>
+Draw spline segment: Cubic Bezier, 2 points, 2 control points
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| c2 | [<code>Vector2</code>](#Vector2) | 
+| c3 | [<code>Vector2</code>](#Vector2) | 
+| p4 | [<code>Vector2</code>](#Vector2) | 
+| thick | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="GetSplinePointLinear"></a>
+
+## GetSplinePointLinear(startPos, endPos, t) ⇒ [<code>Vector2</code>](#Vector2)
+Get (evaluate) spline point: Linear
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
+
+| Param | Type |
+| --- | --- |
+| startPos | [<code>Vector2</code>](#Vector2) | 
+| endPos | [<code>Vector2</code>](#Vector2) | 
+| t | <code>number</code> | 
+
+<a name="GetSplinePointBasis"></a>
+
+## GetSplinePointBasis(p1, p2, p3, p4, t) ⇒ [<code>Vector2</code>](#Vector2)
+Get (evaluate) spline point: B-Spline
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| p2 | [<code>Vector2</code>](#Vector2) | 
+| p3 | [<code>Vector2</code>](#Vector2) | 
+| p4 | [<code>Vector2</code>](#Vector2) | 
+| t | <code>number</code> | 
+
+<a name="GetSplinePointCatmullRom"></a>
+
+## GetSplinePointCatmullRom(p1, p2, p3, p4, t) ⇒ [<code>Vector2</code>](#Vector2)
+Get (evaluate) spline point: Catmull-Rom
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| p2 | [<code>Vector2</code>](#Vector2) | 
+| p3 | [<code>Vector2</code>](#Vector2) | 
+| p4 | [<code>Vector2</code>](#Vector2) | 
+| t | <code>number</code> | 
+
+<a name="GetSplinePointBezierQuad"></a>
+
+## GetSplinePointBezierQuad(p1, c2, p3, t) ⇒ [<code>Vector2</code>](#Vector2)
+Get (evaluate) spline point: Quadratic Bezier
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| c2 | [<code>Vector2</code>](#Vector2) | 
+| p3 | [<code>Vector2</code>](#Vector2) | 
+| t | <code>number</code> | 
+
+<a name="GetSplinePointBezierCubic"></a>
+
+## GetSplinePointBezierCubic(p1, c2, c3, p4, t) ⇒ [<code>Vector2</code>](#Vector2)
+Get (evaluate) spline point: Cubic Bezier
+
+**Kind**: global function  
+**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
+
+| Param | Type |
+| --- | --- |
+| p1 | [<code>Vector2</code>](#Vector2) | 
+| c2 | [<code>Vector2</code>](#Vector2) | 
+| c3 | [<code>Vector2</code>](#Vector2) | 
+| p4 | [<code>Vector2</code>](#Vector2) | 
+| t | <code>number</code> | 
+
 <a name="CheckCollisionRecs"></a>
 
 ## CheckCollisionRecs(rec1, rec2) ⇒ <code>boolean</code>
@@ -4626,6 +5094,20 @@ Load image from RAW file data
 | format | <code>number</code> | 
 | headerSize | <code>number</code> | 
 
+<a name="LoadImageSvg"></a>
+
+## LoadImageSvg(fileNameOrString, width, height) ⇒ <code>Image</code>
+Load image from SVG file data or string with specified size
+
+**Kind**: global function  
+**Returns**: <code>Image</code> - The resulting Image.  
+
+| Param | Type |
+| --- | --- |
+| fileNameOrString | <code>string</code> | 
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+
 <a name="LoadImageAnim"></a>
 
 ## LoadImageAnim(fileName, frames) ⇒ <code>Image</code>
@@ -4708,6 +5190,20 @@ Export image data to file, returns true on success
 | image | <code>Image</code> | 
 | fileName | <code>string</code> | 
 
+<a name="ExportImageToMemory"></a>
+
+## ExportImageToMemory(image, fileType, fileSize) ⇒ <code>Buffer</code>
+Export image to memory buffer
+
+**Kind**: global function  
+**Returns**: <code>Buffer</code> - The resulting unsigned char *.  
+
+| Param | Type |
+| --- | --- |
+| image | <code>Image</code> | 
+| fileType | <code>string</code> | 
+| fileSize | <code>number</code> | 
+
 <a name="ExportImageAsCode"></a>
 
 ## ExportImageAsCode(image, fileName) ⇒ <code>boolean</code>
@@ -4735,25 +5231,10 @@ Generate image: plain color
 | height | <code>number</code> | 
 | color | [<code>Color</code>](#Color) | 
 
-<a name="GenImageGradientV"></a>
+<a name="GenImageGradientLinear"></a>
 
-## GenImageGradientV(width, height, top, bottom) ⇒ <code>Image</code>
-Generate image: vertical gradient
-
-**Kind**: global function  
-**Returns**: <code>Image</code> - The resulting Image.  
-
-| Param | Type |
-| --- | --- |
-| width | <code>number</code> | 
-| height | <code>number</code> | 
-| top | [<code>Color</code>](#Color) | 
-| bottom | [<code>Color</code>](#Color) | 
-
-<a name="GenImageGradientH"></a>
-
-## GenImageGradientH(width, height, left, right) ⇒ <code>Image</code>
-Generate image: horizontal gradient
+## GenImageGradientLinear(width, height, direction, start, end) ⇒ <code>Image</code>
+Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient
 
 **Kind**: global function  
 **Returns**: <code>Image</code> - The resulting Image.  
@@ -4762,13 +5243,30 @@ Generate image: horizontal gradient
 | --- | --- |
 | width | <code>number</code> | 
 | height | <code>number</code> | 
-| left | [<code>Color</code>](#Color) | 
-| right | [<code>Color</code>](#Color) | 
+| direction | <code>number</code> | 
+| start | [<code>Color</code>](#Color) | 
+| end | [<code>Color</code>](#Color) | 
 
 <a name="GenImageGradientRadial"></a>
 
 ## GenImageGradientRadial(width, height, density, inner, outer) ⇒ <code>Image</code>
 Generate image: radial gradient
+
+**Kind**: global function  
+**Returns**: <code>Image</code> - The resulting Image.  
+
+| Param | Type |
+| --- | --- |
+| width | <code>number</code> | 
+| height | <code>number</code> | 
+| density | <code>number</code> | 
+| inner | [<code>Color</code>](#Color) | 
+| outer | [<code>Color</code>](#Color) | 
+
+<a name="GenImageGradientSquare"></a>
+
+## GenImageGradientSquare(width, height, density, inner, outer) ⇒ <code>Image</code>
+Generate image: square gradient
 
 **Kind**: global function  
 **Returns**: <code>Image</code> - The resulting Image.  
@@ -4922,6 +5420,18 @@ Apply Gaussian blur using a box blur approximation
 | --- | --- |
 | image | <code>number</code> | 
 | blurSize | <code>number</code> | 
+
+<a name="ImageRotate"></a>
+
+## ImageRotate(image, degrees) ⇒ <code>undefined</code>
+Rotate image by input angle in degrees (-359 to 359)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| image | <code>number</code> | 
+| degrees | <code>number</code> | 
 
 <a name="LoadImageColors"></a>
 
@@ -5474,8 +5984,8 @@ Load font from file into GPU memory (VRAM)
 
 <a name="LoadFontEx"></a>
 
-## LoadFontEx(fileName, fontSize, fontChars, glyphCount) ⇒ <code>Font</code>
-Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
+## LoadFontEx(fileName, fontSize, codepoints, codepointCount) ⇒ <code>Font</code>
+Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont
 
 **Kind**: global function  
 **Returns**: <code>Font</code> - The resulting Font.  
@@ -5484,8 +5994,8 @@ Load font from file with extended parameters, use NULL for fontChars and 0 for g
 | --- | --- |
 | fileName | <code>string</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
-| glyphCount | <code>number</code> | 
+| codepoints | <code>number</code> | 
+| codepointCount | <code>number</code> | 
 
 <a name="LoadFontFromImage"></a>
 
@@ -5503,7 +6013,7 @@ Load font from Image (XNA style)
 
 <a name="LoadFontFromMemory"></a>
 
-## LoadFontFromMemory(fileType, fileData, dataSize, fontSize, fontChars, glyphCount) ⇒ <code>Font</code>
+## LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount) ⇒ <code>Font</code>
 Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
 
 **Kind**: global function  
@@ -5515,8 +6025,8 @@ Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
 | fileData | <code>Buffer</code> | 
 | dataSize | <code>number</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
-| glyphCount | <code>number</code> | 
+| codepoints | <code>number</code> | 
+| codepointCount | <code>number</code> | 
 
 <a name="IsFontReady"></a>
 
@@ -5532,7 +6042,7 @@ Check if a font is ready
 
 <a name="LoadFontData"></a>
 
-## LoadFontData(fileData, dataSize, fontSize, fontChars, glyphCount, type) ⇒ <code>number</code>
+## LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type) ⇒ <code>number</code>
 Load font data for further use
 
 **Kind**: global function  
@@ -5543,13 +6053,13 @@ Load font data for further use
 | fileData | <code>Buffer</code> | 
 | dataSize | <code>number</code> | 
 | fontSize | <code>number</code> | 
-| fontChars | <code>number</code> | 
-| glyphCount | <code>number</code> | 
+| codepoints | <code>number</code> | 
+| codepointCount | <code>number</code> | 
 | type | <code>number</code> | 
 
 <a name="GenImageFontAtlas"></a>
 
-## GenImageFontAtlas(chars, recs, glyphCount, fontSize, padding, packMethod) ⇒ <code>Image</code>
+## GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod) ⇒ <code>Image</code>
 Generate image font atlas using chars info
 
 **Kind**: global function  
@@ -5557,8 +6067,8 @@ Generate image font atlas using chars info
 
 | Param | Type |
 | --- | --- |
-| chars | <code>number</code> | 
-| recs | <code>number</code> | 
+| glyphs | <code>number</code> | 
+| glyphRecs | <code>number</code> | 
 | glyphCount | <code>number</code> | 
 | fontSize | <code>number</code> | 
 | padding | <code>number</code> | 
@@ -5566,14 +6076,14 @@ Generate image font atlas using chars info
 
 <a name="UnloadFontData"></a>
 
-## UnloadFontData(chars, glyphCount) ⇒ <code>undefined</code>
+## UnloadFontData(glyphs, glyphCount) ⇒ <code>undefined</code>
 Unload font chars info data (RAM)
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| chars | <code>number</code> | 
+| glyphs | <code>number</code> | 
 | glyphCount | <code>number</code> | 
 
 <a name="UnloadFont"></a>
@@ -5678,7 +6188,7 @@ Draw one character (codepoint)
 
 <a name="DrawTextCodepoints"></a>
 
-## DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing, tint) ⇒ <code>undefined</code>
+## DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint) ⇒ <code>undefined</code>
 Draw multiple character (codepoint)
 
 **Kind**: global function  
@@ -5687,11 +6197,22 @@ Draw multiple character (codepoint)
 | --- | --- |
 | font | <code>Font</code> | 
 | codepoints | <code>number</code> | 
-| count | <code>number</code> | 
+| codepointCount | <code>number</code> | 
 | position | [<code>Vector2</code>](#Vector2) | 
 | fontSize | <code>number</code> | 
 | spacing | <code>number</code> | 
 | tint | [<code>Color</code>](#Color) | 
+
+<a name="SetTextLineSpacing"></a>
+
+## SetTextLineSpacing(spacing) ⇒ <code>undefined</code>
+Set vertical line spacing when drawing with line-breaks
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| spacing | <code>number</code> | 
 
 <a name="MeasureText"></a>
 
@@ -6778,7 +7299,7 @@ Unload animation data
 
 <a name="UnloadModelAnimations"></a>
 
-## UnloadModelAnimations(animations, count) ⇒ <code>undefined</code>
+## UnloadModelAnimations(animations, animCount) ⇒ <code>undefined</code>
 Unload animation array data
 
 **Kind**: global function  
@@ -6786,7 +7307,7 @@ Unload animation array data
 | Param | Type |
 | --- | --- |
 | animations | <code>number</code> | 
-| count | <code>number</code> | 
+| animCount | <code>number</code> | 
 
 <a name="IsModelAnimationValid"></a>
 
@@ -6945,6 +7466,13 @@ Set master volume (listener)
 | --- | --- |
 | volume | <code>number</code> | 
 
+<a name="GetMasterVolume"></a>
+
+## GetMasterVolume() ⇒ <code>number</code>
+Get master volume (listener)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting float.  
 <a name="LoadWave"></a>
 
 ## LoadWave(fileName) ⇒ <code>Wave</code>
@@ -7007,6 +7535,18 @@ Load sound from wave data
 | --- | --- |
 | wave | <code>Wave</code> | 
 
+<a name="LoadSoundAlias"></a>
+
+## LoadSoundAlias(source) ⇒ <code>Sound</code>
+Create a new sound that shares the same sample data as the source sound, does not own the sound data
+
+**Kind**: global function  
+**Returns**: <code>Sound</code> - The resulting Sound.  
+
+| Param | Type |
+| --- | --- |
+| source | <code>Sound</code> | 
+
 <a name="IsSoundReady"></a>
 
 ## IsSoundReady(sound) ⇒ <code>boolean</code>
@@ -7053,6 +7593,17 @@ Unload sound
 | Param | Type |
 | --- | --- |
 | sound | <code>Sound</code> | 
+
+<a name="UnloadSoundAlias"></a>
+
+## UnloadSoundAlias(alias) ⇒ <code>undefined</code>
+Unload a sound alias (does not deallocate sample data)
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| alias | <code>Sound</code> | 
 
 <a name="ExportWave"></a>
 
@@ -8011,9 +8562,9 @@ Check if gui is locked (global state)
 
 **Kind**: global function  
 **Returns**: <code>boolean</code> - The resulting bool.  
-<a name="GuiFade"></a>
+<a name="GuiSetAlpha"></a>
 
-## GuiFade(alpha) ⇒ <code>undefined</code>
+## GuiSetAlpha(alpha) ⇒ <code>undefined</code>
 Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
 
 **Kind**: global function  
@@ -8084,469 +8635,6 @@ Get one style property
 | control | <code>number</code> | 
 | property | <code>number</code> | 
 
-<a name="GuiWindowBox"></a>
-
-## GuiWindowBox(bounds, title) ⇒ <code>boolean</code>
-Window Box control, shows a window that can be closed
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| title | <code>string</code> | 
-
-<a name="GuiGroupBox"></a>
-
-## GuiGroupBox(bounds, text) ⇒ <code>undefined</code>
-Group Box control with text name
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-
-<a name="GuiLine"></a>
-
-## GuiLine(bounds, text) ⇒ <code>undefined</code>
-Line separator control, could contain text
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-
-<a name="GuiPanel"></a>
-
-## GuiPanel(bounds, text) ⇒ <code>undefined</code>
-Panel control, useful to group controls
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-
-<a name="GuiTabBar"></a>
-
-## GuiTabBar(bounds, text, count, active) ⇒ <code>number</code>
-Tab Bar control, returns TAB to be closed or -1
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>number</code> | 
-| count | <code>number</code> | 
-| active | <code>number</code> | 
-
-<a name="GuiScrollPanel"></a>
-
-## GuiScrollPanel(bounds, text, content, scroll) ⇒ [<code>Rectangle</code>](#Rectangle)
-Scroll Panel control
-
-**Kind**: global function  
-**Returns**: [<code>Rectangle</code>](#Rectangle) - The resulting Rectangle.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| content | [<code>Rectangle</code>](#Rectangle) | 
-| scroll | <code>number</code> | 
-
-<a name="GuiLabel"></a>
-
-## GuiLabel(bounds, text) ⇒ <code>undefined</code>
-Label control, shows text
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-
-<a name="GuiButton"></a>
-
-## GuiButton(bounds, text) ⇒ <code>boolean</code>
-Button control, returns true when clicked
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-
-<a name="GuiLabelButton"></a>
-
-## GuiLabelButton(bounds, text) ⇒ <code>boolean</code>
-Label button control, show true when clicked
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-
-<a name="GuiToggle"></a>
-
-## GuiToggle(bounds, text, active) ⇒ <code>boolean</code>
-Toggle Button control, returns true when active
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| active | <code>boolean</code> | 
-
-<a name="GuiToggleGroup"></a>
-
-## GuiToggleGroup(bounds, text, active) ⇒ <code>number</code>
-Toggle Group control, returns active toggle index
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| active | <code>number</code> | 
-
-<a name="GuiCheckBox"></a>
-
-## GuiCheckBox(bounds, text, checked) ⇒ <code>boolean</code>
-Check Box control, returns true when active
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| checked | <code>boolean</code> | 
-
-<a name="GuiComboBox"></a>
-
-## GuiComboBox(bounds, text, active) ⇒ <code>number</code>
-Combo Box control, returns selected item index
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| active | <code>number</code> | 
-
-<a name="GuiDropdownBox"></a>
-
-## GuiDropdownBox(bounds, text, active, editMode) ⇒ <code>boolean</code>
-Dropdown Box control, returns selected item
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| active | <code>number</code> | 
-| editMode | <code>boolean</code> | 
-
-<a name="GuiSpinner"></a>
-
-## GuiSpinner(bounds, text, value, minValue, maxValue, editMode) ⇒ <code>boolean</code>
-Spinner control, returns selected value
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| value | <code>number</code> | 
-| minValue | <code>number</code> | 
-| maxValue | <code>number</code> | 
-| editMode | <code>boolean</code> | 
-
-<a name="GuiValueBox"></a>
-
-## GuiValueBox(bounds, text, value, minValue, maxValue, editMode) ⇒ <code>boolean</code>
-Value Box control, updates input text with numbers
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| value | <code>number</code> | 
-| minValue | <code>number</code> | 
-| maxValue | <code>number</code> | 
-| editMode | <code>boolean</code> | 
-
-<a name="GuiTextBox"></a>
-
-## GuiTextBox(bounds, text, textSize, editMode) ⇒ <code>boolean</code>
-Text Box control, updates input text
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| textSize | <code>number</code> | 
-| editMode | <code>boolean</code> | 
-
-<a name="GuiTextBoxMulti"></a>
-
-## GuiTextBoxMulti(bounds, text, textSize, editMode) ⇒ <code>boolean</code>
-Text Box control with multiple lines
-
-**Kind**: global function  
-**Returns**: <code>boolean</code> - The resulting bool.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| textSize | <code>number</code> | 
-| editMode | <code>boolean</code> | 
-
-<a name="GuiSlider"></a>
-
-## GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
-Slider control, returns selected value
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| textLeft | <code>string</code> | 
-| textRight | <code>string</code> | 
-| value | <code>number</code> | 
-| minValue | <code>number</code> | 
-| maxValue | <code>number</code> | 
-
-<a name="GuiSliderBar"></a>
-
-## GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
-Slider Bar control, returns selected value
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| textLeft | <code>string</code> | 
-| textRight | <code>string</code> | 
-| value | <code>number</code> | 
-| minValue | <code>number</code> | 
-| maxValue | <code>number</code> | 
-
-<a name="GuiProgressBar"></a>
-
-## GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
-Progress Bar control, shows current progress value
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| textLeft | <code>string</code> | 
-| textRight | <code>string</code> | 
-| value | <code>number</code> | 
-| minValue | <code>number</code> | 
-| maxValue | <code>number</code> | 
-
-<a name="GuiStatusBar"></a>
-
-## GuiStatusBar(bounds, text) ⇒ <code>undefined</code>
-Status Bar control, shows info text
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-
-<a name="GuiDummyRec"></a>
-
-## GuiDummyRec(bounds, text) ⇒ <code>undefined</code>
-Dummy control for placeholders
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-
-<a name="GuiGrid"></a>
-
-## GuiGrid(bounds, text, spacing, subdivs) ⇒ [<code>Vector2</code>](#Vector2)
-Grid control, returns mouse cell position
-
-**Kind**: global function  
-**Returns**: [<code>Vector2</code>](#Vector2) - The resulting Vector2.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| spacing | <code>number</code> | 
-| subdivs | <code>number</code> | 
-
-<a name="GuiListView"></a>
-
-## GuiListView(bounds, text, scrollIndex, active) ⇒ <code>number</code>
-List View control, returns selected list item index
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| scrollIndex | <code>number</code> | 
-| active | <code>number</code> | 
-
-<a name="GuiListViewEx"></a>
-
-## GuiListViewEx(bounds, text, count, focus, scrollIndex, active) ⇒ <code>number</code>
-List View with extended parameters
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>number</code> | 
-| count | <code>number</code> | 
-| focus | <code>number</code> | 
-| scrollIndex | <code>number</code> | 
-| active | <code>number</code> | 
-
-<a name="GuiMessageBox"></a>
-
-## GuiMessageBox(bounds, title, message, buttons) ⇒ <code>number</code>
-Message Box control, displays a message
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| title | <code>string</code> | 
-| message | <code>string</code> | 
-| buttons | <code>string</code> | 
-
-<a name="GuiTextInputBox"></a>
-
-## GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive) ⇒ <code>number</code>
-Text Input Box control, ask for text, supports secret
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting int.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| title | <code>string</code> | 
-| message | <code>string</code> | 
-| buttons | <code>string</code> | 
-| text | <code>string</code> | 
-| textMaxSize | <code>number</code> | 
-| secretViewActive | <code>number</code> | 
-
-<a name="GuiColorPicker"></a>
-
-## GuiColorPicker(bounds, text, color) ⇒ [<code>Color</code>](#Color)
-Color Picker control (multiple color controls)
-
-**Kind**: global function  
-**Returns**: [<code>Color</code>](#Color) - The resulting Color.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| color | [<code>Color</code>](#Color) | 
-
-<a name="GuiColorPanel"></a>
-
-## GuiColorPanel(bounds, text, color) ⇒ [<code>Color</code>](#Color)
-Color Panel control
-
-**Kind**: global function  
-**Returns**: [<code>Color</code>](#Color) - The resulting Color.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| color | [<code>Color</code>](#Color) | 
-
-<a name="GuiColorBarAlpha"></a>
-
-## GuiColorBarAlpha(bounds, text, alpha) ⇒ <code>number</code>
-Color Bar Alpha control
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| alpha | <code>number</code> | 
-
-<a name="GuiColorBarHue"></a>
-
-## GuiColorBarHue(bounds, text, value) ⇒ <code>number</code>
-Color Bar Hue control
-
-**Kind**: global function  
-**Returns**: <code>number</code> - The resulting float.  
-
-| Param | Type |
-| --- | --- |
-| bounds | [<code>Rectangle</code>](#Rectangle) | 
-| text | <code>string</code> | 
-| value | <code>number</code> | 
-
 <a name="GuiLoadStyle"></a>
 
 ## GuiLoadStyle(fileName) ⇒ <code>undefined</code>
@@ -8600,6 +8688,17 @@ Get text with icon id prepended (if supported)
 | iconId | <code>number</code> | 
 | text | <code>string</code> | 
 
+<a name="GuiSetIconScale"></a>
+
+## GuiSetIconScale(scale) ⇒ <code>undefined</code>
+Set default icon drawing size
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| scale | <code>number</code> | 
+
 <a name="GuiGetIcons"></a>
 
 ## GuiGetIcons() ⇒ <code>number</code>
@@ -8620,16 +8719,518 @@ Load raygui icons file (.rgi) into internal icons data
 | fileName | <code>string</code> | 
 | loadIconsName | <code>boolean</code> | 
 
-<a name="GuiSetIconScale"></a>
+<a name="GuiDrawIcon"></a>
 
-## GuiSetIconScale(scale) ⇒ <code>undefined</code>
-Set icon drawing size
+## GuiDrawIcon(iconId, posX, posY, pixelSize, color) ⇒ <code>undefined</code>
+Draw icon using pixel size at specified position
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| scale | <code>number</code> | 
+| iconId | <code>number</code> | 
+| posX | <code>number</code> | 
+| posY | <code>number</code> | 
+| pixelSize | <code>number</code> | 
+| color | [<code>Color</code>](#Color) | 
+
+<a name="GuiWindowBox"></a>
+
+## GuiWindowBox(bounds, title) ⇒ <code>number</code>
+Window Box control, shows a window that can be closed
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| title | <code>string</code> | 
+
+<a name="GuiGroupBox"></a>
+
+## GuiGroupBox(bounds, text) ⇒ <code>number</code>
+Group Box control with text name
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiLine"></a>
+
+## GuiLine(bounds, text) ⇒ <code>number</code>
+Line separator control, could contain text
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiPanel"></a>
+
+## GuiPanel(bounds, text) ⇒ <code>number</code>
+Panel control, useful to group controls
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiTabBar"></a>
+
+## GuiTabBar(bounds, text, count, active) ⇒ <code>number</code>
+Tab Bar control, returns TAB to be closed or -1
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>number</code> | 
+| count | <code>number</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiScrollPanel"></a>
+
+## GuiScrollPanel(bounds, text, content, scroll, view) ⇒ <code>number</code>
+Scroll Panel control
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| content | [<code>Rectangle</code>](#Rectangle) | 
+| scroll | <code>number</code> | 
+| view | <code>number</code> | 
+
+<a name="GuiLabel"></a>
+
+## GuiLabel(bounds, text) ⇒ <code>number</code>
+Label control, shows text
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiButton"></a>
+
+## GuiButton(bounds, text) ⇒ <code>number</code>
+Button control, returns true when clicked
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiLabelButton"></a>
+
+## GuiLabelButton(bounds, text) ⇒ <code>number</code>
+Label button control, show true when clicked
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiToggle"></a>
+
+## GuiToggle(bounds, text, active) ⇒ <code>number</code>
+Toggle Button control, returns true when active
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiToggleGroup"></a>
+
+## GuiToggleGroup(bounds, text, active) ⇒ <code>number</code>
+Toggle Group control, returns active toggle index
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiToggleSlider"></a>
+
+## GuiToggleSlider(bounds, text, active) ⇒ <code>number</code>
+Toggle Slider control, returns true when clicked
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiCheckBox"></a>
+
+## GuiCheckBox(bounds, text, checked) ⇒ <code>number</code>
+Check Box control, returns true when active
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| checked | <code>number</code> | 
+
+<a name="GuiComboBox"></a>
+
+## GuiComboBox(bounds, text, active) ⇒ <code>number</code>
+Combo Box control, returns selected item index
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiDropdownBox"></a>
+
+## GuiDropdownBox(bounds, text, active, editMode) ⇒ <code>number</code>
+Dropdown Box control, returns selected item
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| active | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiSpinner"></a>
+
+## GuiSpinner(bounds, text, value, minValue, maxValue, editMode) ⇒ <code>number</code>
+Spinner control, returns selected value
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiValueBox"></a>
+
+## GuiValueBox(bounds, text, value, minValue, maxValue, editMode) ⇒ <code>number</code>
+Value Box control, updates input text with numbers
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiTextBox"></a>
+
+## GuiTextBox(bounds, text, textSize, editMode) ⇒ <code>number</code>
+Text Box control, updates input text
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| textSize | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
+<a name="GuiSlider"></a>
+
+## GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
+Slider control, returns selected value
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| textLeft | <code>string</code> | 
+| textRight | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
+
+<a name="GuiSliderBar"></a>
+
+## GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
+Slider Bar control, returns selected value
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| textLeft | <code>string</code> | 
+| textRight | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
+
+<a name="GuiProgressBar"></a>
+
+## GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
+Progress Bar control, shows current progress value
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| textLeft | <code>string</code> | 
+| textRight | <code>string</code> | 
+| value | <code>number</code> | 
+| minValue | <code>number</code> | 
+| maxValue | <code>number</code> | 
+
+<a name="GuiStatusBar"></a>
+
+## GuiStatusBar(bounds, text) ⇒ <code>number</code>
+Status Bar control, shows info text
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiDummyRec"></a>
+
+## GuiDummyRec(bounds, text) ⇒ <code>number</code>
+Dummy control for placeholders
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+
+<a name="GuiGrid"></a>
+
+## GuiGrid(bounds, text, spacing, subdivs, mouseCell) ⇒ <code>number</code>
+Grid control, returns mouse cell position
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| spacing | <code>number</code> | 
+| subdivs | <code>number</code> | 
+| mouseCell | <code>number</code> | 
+
+<a name="GuiListView"></a>
+
+## GuiListView(bounds, text, scrollIndex, active) ⇒ <code>number</code>
+List View control, returns selected list item index
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| scrollIndex | <code>number</code> | 
+| active | <code>number</code> | 
+
+<a name="GuiListViewEx"></a>
+
+## GuiListViewEx(bounds, text, count, scrollIndex, active, focus) ⇒ <code>number</code>
+List View with extended parameters
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>number</code> | 
+| count | <code>number</code> | 
+| scrollIndex | <code>number</code> | 
+| active | <code>number</code> | 
+| focus | <code>number</code> | 
+
+<a name="GuiMessageBox"></a>
+
+## GuiMessageBox(bounds, title, message, buttons) ⇒ <code>number</code>
+Message Box control, displays a message
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| title | <code>string</code> | 
+| message | <code>string</code> | 
+| buttons | <code>string</code> | 
+
+<a name="GuiTextInputBox"></a>
+
+## GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive) ⇒ <code>number</code>
+Text Input Box control, ask for text, supports secret
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| title | <code>string</code> | 
+| message | <code>string</code> | 
+| buttons | <code>string</code> | 
+| text | <code>string</code> | 
+| textMaxSize | <code>number</code> | 
+| secretViewActive | <code>number</code> | 
+
+<a name="GuiColorPicker"></a>
+
+## GuiColorPicker(bounds, text, color) ⇒ <code>number</code>
+Color Picker control (multiple color controls)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| color | <code>number</code> | 
+
+<a name="GuiColorPanel"></a>
+
+## GuiColorPanel(bounds, text, color) ⇒ <code>number</code>
+Color Panel control
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| color | <code>number</code> | 
+
+<a name="GuiColorBarAlpha"></a>
+
+## GuiColorBarAlpha(bounds, text, alpha) ⇒ <code>number</code>
+Color Bar Alpha control
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| alpha | <code>number</code> | 
+
+<a name="GuiColorBarHue"></a>
+
+## GuiColorBarHue(bounds, text, value) ⇒ <code>number</code>
+Color Bar Hue control
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| value | <code>number</code> | 
+
+<a name="GuiColorPickerHSV"></a>
+
+## GuiColorPickerHSV(bounds, text, colorHsv) ⇒ <code>number</code>
+Color Picker control that avoids conversion to RGB on each call (multiple color controls)
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| colorHsv | <code>number</code> | 
+
+<a name="GuiColorPanelHSV"></a>
+
+## GuiColorPanelHSV(bounds, text, colorHsv) ⇒ <code>number</code>
+Color Panel control that returns HSV color value, used by GuiColorPickerHSV()
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| colorHsv | <code>number</code> | 
 
 <a name="rlMatrixMode"></a>
 
@@ -9035,6 +9636,25 @@ Activate multiple draw color buffers
 | --- | --- |
 | count | <code>number</code> | 
 
+<a name="rlBlitFramebuffer"></a>
+
+## rlBlitFramebuffer(srcX, srcY, srcWidth, srcHeight, dstX, dstY, dstWidth, dstHeight, bufferMask) ⇒ <code>undefined</code>
+Blit active framebuffer to main framebuffer
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| srcX | <code>number</code> | 
+| srcY | <code>number</code> | 
+| srcWidth | <code>number</code> | 
+| srcHeight | <code>number</code> | 
+| dstX | <code>number</code> | 
+| dstY | <code>number</code> | 
+| dstWidth | <code>number</code> | 
+| dstHeight | <code>number</code> | 
+| bufferMask | <code>number</code> | 
+
 <a name="rlEnableColorBlend"></a>
 
 ## rlEnableColorBlend() ⇒ <code>undefined</code>
@@ -9126,10 +9746,16 @@ Scissor test
 Enable wire mode
 
 **Kind**: global function  
+<a name="rlEnablePointMode"></a>
+
+## rlEnablePointMode() ⇒ <code>undefined</code>
+Enable point mode
+
+**Kind**: global function  
 <a name="rlDisableWireMode"></a>
 
 ## rlDisableWireMode() ⇒ <code>undefined</code>
-Disable wire mode
+Disable wire mode ( and point ) maybe rename
 
 **Kind**: global function  
 <a name="rlSetLineWidth"></a>

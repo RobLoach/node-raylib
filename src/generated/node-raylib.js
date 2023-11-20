@@ -20,7 +20,7 @@ const raylib = {}
  *
  * @return {undefined}
  */
-function InitWindow (width, height, title) {
+function InitWindow(width, height, title) {
   return r.BindInitWindow(
     width,
     height,
@@ -30,31 +30,31 @@ function InitWindow (width, height, title) {
 raylib.InitWindow = InitWindow
 
 /**
- * Check if KEY_ESCAPE pressed or Close icon pressed
- *
- * @return {boolean} The resulting bool.
- */
-function WindowShouldClose () {
-  return r.BindWindowShouldClose()
-}
-raylib.WindowShouldClose = WindowShouldClose
-
-/**
  * Close window and unload OpenGL context
  *
  * @return {undefined}
  */
-function CloseWindow () {
+function CloseWindow() {
   return r.BindCloseWindow()
 }
 raylib.CloseWindow = CloseWindow
+
+/**
+ * Check if application should close (KEY_ESCAPE pressed or windows close icon clicked)
+ *
+ * @return {boolean} The resulting bool.
+ */
+function WindowShouldClose() {
+  return r.BindWindowShouldClose()
+}
+raylib.WindowShouldClose = WindowShouldClose
 
 /**
  * Check if window has been initialized successfully
  *
  * @return {boolean} The resulting bool.
  */
-function IsWindowReady () {
+function IsWindowReady() {
   return r.BindIsWindowReady()
 }
 raylib.IsWindowReady = IsWindowReady
@@ -64,7 +64,7 @@ raylib.IsWindowReady = IsWindowReady
  *
  * @return {boolean} The resulting bool.
  */
-function IsWindowFullscreen () {
+function IsWindowFullscreen() {
   return r.BindIsWindowFullscreen()
 }
 raylib.IsWindowFullscreen = IsWindowFullscreen
@@ -74,7 +74,7 @@ raylib.IsWindowFullscreen = IsWindowFullscreen
  *
  * @return {boolean} The resulting bool.
  */
-function IsWindowHidden () {
+function IsWindowHidden() {
   return r.BindIsWindowHidden()
 }
 raylib.IsWindowHidden = IsWindowHidden
@@ -84,7 +84,7 @@ raylib.IsWindowHidden = IsWindowHidden
  *
  * @return {boolean} The resulting bool.
  */
-function IsWindowMinimized () {
+function IsWindowMinimized() {
   return r.BindIsWindowMinimized()
 }
 raylib.IsWindowMinimized = IsWindowMinimized
@@ -94,7 +94,7 @@ raylib.IsWindowMinimized = IsWindowMinimized
  *
  * @return {boolean} The resulting bool.
  */
-function IsWindowMaximized () {
+function IsWindowMaximized() {
   return r.BindIsWindowMaximized()
 }
 raylib.IsWindowMaximized = IsWindowMaximized
@@ -104,7 +104,7 @@ raylib.IsWindowMaximized = IsWindowMaximized
  *
  * @return {boolean} The resulting bool.
  */
-function IsWindowFocused () {
+function IsWindowFocused() {
   return r.BindIsWindowFocused()
 }
 raylib.IsWindowFocused = IsWindowFocused
@@ -114,7 +114,7 @@ raylib.IsWindowFocused = IsWindowFocused
  *
  * @return {boolean} The resulting bool.
  */
-function IsWindowResized () {
+function IsWindowResized() {
   return r.BindIsWindowResized()
 }
 raylib.IsWindowResized = IsWindowResized
@@ -126,7 +126,7 @@ raylib.IsWindowResized = IsWindowResized
  *
  * @return {boolean} The resulting bool.
  */
-function IsWindowState (flag) {
+function IsWindowState(flag) {
   return r.BindIsWindowState(
     flag
   )
@@ -140,7 +140,7 @@ raylib.IsWindowState = IsWindowState
  *
  * @return {undefined}
  */
-function SetWindowState (flags) {
+function SetWindowState(flags) {
   return r.BindSetWindowState(
     flags
   )
@@ -154,7 +154,7 @@ raylib.SetWindowState = SetWindowState
  *
  * @return {undefined}
  */
-function ClearWindowState (flags) {
+function ClearWindowState(flags) {
   return r.BindClearWindowState(
     flags
   )
@@ -166,17 +166,27 @@ raylib.ClearWindowState = ClearWindowState
  *
  * @return {undefined}
  */
-function ToggleFullscreen () {
+function ToggleFullscreen() {
   return r.BindToggleFullscreen()
 }
 raylib.ToggleFullscreen = ToggleFullscreen
+
+/**
+ * Toggle window state: borderless windowed (only PLATFORM_DESKTOP)
+ *
+ * @return {undefined}
+ */
+function ToggleBorderlessWindowed() {
+  return r.BindToggleBorderlessWindowed()
+}
+raylib.ToggleBorderlessWindowed = ToggleBorderlessWindowed
 
 /**
  * Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
  *
  * @return {undefined}
  */
-function MaximizeWindow () {
+function MaximizeWindow() {
   return r.BindMaximizeWindow()
 }
 raylib.MaximizeWindow = MaximizeWindow
@@ -186,7 +196,7 @@ raylib.MaximizeWindow = MaximizeWindow
  *
  * @return {undefined}
  */
-function MinimizeWindow () {
+function MinimizeWindow() {
   return r.BindMinimizeWindow()
 }
 raylib.MinimizeWindow = MinimizeWindow
@@ -196,7 +206,7 @@ raylib.MinimizeWindow = MinimizeWindow
  *
  * @return {undefined}
  */
-function RestoreWindow () {
+function RestoreWindow() {
   return r.BindRestoreWindow()
 }
 raylib.RestoreWindow = RestoreWindow
@@ -208,7 +218,7 @@ raylib.RestoreWindow = RestoreWindow
  *
  * @return {undefined}
  */
-function SetWindowIcon (image) {
+function SetWindowIcon(image) {
   return r.BindSetWindowIcon(
     image.data,
     image.width,
@@ -227,7 +237,7 @@ raylib.SetWindowIcon = SetWindowIcon
  *
  * @return {undefined}
  */
-function SetWindowIcons (images, count) {
+function SetWindowIcons(images, count) {
   return r.BindSetWindowIcons(
     images,
     count
@@ -236,13 +246,13 @@ function SetWindowIcons (images, count) {
 raylib.SetWindowIcons = SetWindowIcons
 
 /**
- * Set title for window (only PLATFORM_DESKTOP)
+ * Set title for window (only PLATFORM_DESKTOP and PLATFORM_WEB)
  *
  * @param {string} title
  *
  * @return {undefined}
  */
-function SetWindowTitle (title) {
+function SetWindowTitle(title) {
   return r.BindSetWindowTitle(
     title
   )
@@ -257,7 +267,7 @@ raylib.SetWindowTitle = SetWindowTitle
  *
  * @return {undefined}
  */
-function SetWindowPosition (x, y) {
+function SetWindowPosition(x, y) {
   return r.BindSetWindowPosition(
     x,
     y
@@ -266,13 +276,13 @@ function SetWindowPosition (x, y) {
 raylib.SetWindowPosition = SetWindowPosition
 
 /**
- * Set monitor for the current window (fullscreen mode)
+ * Set monitor for the current window
  *
  * @param {number} monitor
  *
  * @return {undefined}
  */
-function SetWindowMonitor (monitor) {
+function SetWindowMonitor(monitor) {
   return r.BindSetWindowMonitor(
     monitor
   )
@@ -287,13 +297,29 @@ raylib.SetWindowMonitor = SetWindowMonitor
  *
  * @return {undefined}
  */
-function SetWindowMinSize (width, height) {
+function SetWindowMinSize(width, height) {
   return r.BindSetWindowMinSize(
     width,
     height
   )
 }
 raylib.SetWindowMinSize = SetWindowMinSize
+
+/**
+ * Set window maximum dimensions (for FLAG_WINDOW_RESIZABLE)
+ *
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {undefined}
+ */
+function SetWindowMaxSize(width, height) {
+  return r.BindSetWindowMaxSize(
+    width,
+    height
+  )
+}
+raylib.SetWindowMaxSize = SetWindowMaxSize
 
 /**
  * Set window dimensions
@@ -303,7 +329,7 @@ raylib.SetWindowMinSize = SetWindowMinSize
  *
  * @return {undefined}
  */
-function SetWindowSize (width, height) {
+function SetWindowSize(width, height) {
   return r.BindSetWindowSize(
     width,
     height
@@ -318,7 +344,7 @@ raylib.SetWindowSize = SetWindowSize
  *
  * @return {undefined}
  */
-function SetWindowOpacity (opacity) {
+function SetWindowOpacity(opacity) {
   return r.BindSetWindowOpacity(
     opacity
   )
@@ -326,11 +352,21 @@ function SetWindowOpacity (opacity) {
 raylib.SetWindowOpacity = SetWindowOpacity
 
 /**
+ * Set window focused (only PLATFORM_DESKTOP)
+ *
+ * @return {undefined}
+ */
+function SetWindowFocused() {
+  return r.BindSetWindowFocused()
+}
+raylib.SetWindowFocused = SetWindowFocused
+
+/**
  * Get native window handle
  *
  * @return {number} The resulting void *.
  */
-function GetWindowHandle () {
+function GetWindowHandle() {
   return r.BindGetWindowHandle()
 }
 raylib.GetWindowHandle = GetWindowHandle
@@ -340,7 +376,7 @@ raylib.GetWindowHandle = GetWindowHandle
  *
  * @return {number} The resulting int.
  */
-function GetScreenWidth () {
+function GetScreenWidth() {
   return r.BindGetScreenWidth()
 }
 raylib.GetScreenWidth = GetScreenWidth
@@ -350,7 +386,7 @@ raylib.GetScreenWidth = GetScreenWidth
  *
  * @return {number} The resulting int.
  */
-function GetScreenHeight () {
+function GetScreenHeight() {
   return r.BindGetScreenHeight()
 }
 raylib.GetScreenHeight = GetScreenHeight
@@ -360,7 +396,7 @@ raylib.GetScreenHeight = GetScreenHeight
  *
  * @return {number} The resulting int.
  */
-function GetRenderWidth () {
+function GetRenderWidth() {
   return r.BindGetRenderWidth()
 }
 raylib.GetRenderWidth = GetRenderWidth
@@ -370,7 +406,7 @@ raylib.GetRenderWidth = GetRenderWidth
  *
  * @return {number} The resulting int.
  */
-function GetRenderHeight () {
+function GetRenderHeight() {
   return r.BindGetRenderHeight()
 }
 raylib.GetRenderHeight = GetRenderHeight
@@ -380,7 +416,7 @@ raylib.GetRenderHeight = GetRenderHeight
  *
  * @return {number} The resulting int.
  */
-function GetMonitorCount () {
+function GetMonitorCount() {
   return r.BindGetMonitorCount()
 }
 raylib.GetMonitorCount = GetMonitorCount
@@ -390,7 +426,7 @@ raylib.GetMonitorCount = GetMonitorCount
  *
  * @return {number} The resulting int.
  */
-function GetCurrentMonitor () {
+function GetCurrentMonitor() {
   return r.BindGetCurrentMonitor()
 }
 raylib.GetCurrentMonitor = GetCurrentMonitor
@@ -402,7 +438,7 @@ raylib.GetCurrentMonitor = GetCurrentMonitor
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetMonitorPosition (monitor) {
+function GetMonitorPosition(monitor) {
   return r.BindGetMonitorPosition(
     monitor
   )
@@ -416,7 +452,7 @@ raylib.GetMonitorPosition = GetMonitorPosition
  *
  * @return {number} The resulting int.
  */
-function GetMonitorWidth (monitor) {
+function GetMonitorWidth(monitor) {
   return r.BindGetMonitorWidth(
     monitor
   )
@@ -430,7 +466,7 @@ raylib.GetMonitorWidth = GetMonitorWidth
  *
  * @return {number} The resulting int.
  */
-function GetMonitorHeight (monitor) {
+function GetMonitorHeight(monitor) {
   return r.BindGetMonitorHeight(
     monitor
   )
@@ -444,7 +480,7 @@ raylib.GetMonitorHeight = GetMonitorHeight
  *
  * @return {number} The resulting int.
  */
-function GetMonitorPhysicalWidth (monitor) {
+function GetMonitorPhysicalWidth(monitor) {
   return r.BindGetMonitorPhysicalWidth(
     monitor
   )
@@ -458,7 +494,7 @@ raylib.GetMonitorPhysicalWidth = GetMonitorPhysicalWidth
  *
  * @return {number} The resulting int.
  */
-function GetMonitorPhysicalHeight (monitor) {
+function GetMonitorPhysicalHeight(monitor) {
   return r.BindGetMonitorPhysicalHeight(
     monitor
   )
@@ -472,7 +508,7 @@ raylib.GetMonitorPhysicalHeight = GetMonitorPhysicalHeight
  *
  * @return {number} The resulting int.
  */
-function GetMonitorRefreshRate (monitor) {
+function GetMonitorRefreshRate(monitor) {
   return r.BindGetMonitorRefreshRate(
     monitor
   )
@@ -484,7 +520,7 @@ raylib.GetMonitorRefreshRate = GetMonitorRefreshRate
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetWindowPosition () {
+function GetWindowPosition() {
   return r.BindGetWindowPosition()
 }
 raylib.GetWindowPosition = GetWindowPosition
@@ -494,19 +530,19 @@ raylib.GetWindowPosition = GetWindowPosition
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetWindowScaleDPI () {
+function GetWindowScaleDPI() {
   return r.BindGetWindowScaleDPI()
 }
 raylib.GetWindowScaleDPI = GetWindowScaleDPI
 
 /**
- * Get the human-readable, UTF-8 encoded name of the primary monitor
+ * Get the human-readable, UTF-8 encoded name of the specified monitor
  *
  * @param {number} monitor
  *
  * @return {string} The resulting const char *.
  */
-function GetMonitorName (monitor) {
+function GetMonitorName(monitor) {
   return r.BindGetMonitorName(
     monitor
   )
@@ -520,7 +556,7 @@ raylib.GetMonitorName = GetMonitorName
  *
  * @return {undefined}
  */
-function SetClipboardText (text) {
+function SetClipboardText(text) {
   return r.BindSetClipboardText(
     text
   )
@@ -532,7 +568,7 @@ raylib.SetClipboardText = SetClipboardText
  *
  * @return {string} The resulting const char *.
  */
-function GetClipboardText () {
+function GetClipboardText() {
   return r.BindGetClipboardText()
 }
 raylib.GetClipboardText = GetClipboardText
@@ -542,7 +578,7 @@ raylib.GetClipboardText = GetClipboardText
  *
  * @return {undefined}
  */
-function EnableEventWaiting () {
+function EnableEventWaiting() {
   return r.BindEnableEventWaiting()
 }
 raylib.EnableEventWaiting = EnableEventWaiting
@@ -552,51 +588,17 @@ raylib.EnableEventWaiting = EnableEventWaiting
  *
  * @return {undefined}
  */
-function DisableEventWaiting () {
+function DisableEventWaiting() {
   return r.BindDisableEventWaiting()
 }
 raylib.DisableEventWaiting = DisableEventWaiting
-
-/**
- * Swap back buffer with front buffer (screen drawing)
- *
- * @return {undefined}
- */
-function SwapScreenBuffer () {
-  return r.BindSwapScreenBuffer()
-}
-raylib.SwapScreenBuffer = SwapScreenBuffer
-
-/**
- * Register all input events
- *
- * @return {undefined}
- */
-function PollInputEvents () {
-  return r.BindPollInputEvents()
-}
-raylib.PollInputEvents = PollInputEvents
-
-/**
- * Wait for some time (halt program execution)
- *
- * @param {number} seconds
- *
- * @return {undefined}
- */
-function WaitTime (seconds) {
-  return r.BindWaitTime(
-    seconds
-  )
-}
-raylib.WaitTime = WaitTime
 
 /**
  * Shows cursor
  *
  * @return {undefined}
  */
-function ShowCursor () {
+function ShowCursor() {
   return r.BindShowCursor()
 }
 raylib.ShowCursor = ShowCursor
@@ -606,7 +608,7 @@ raylib.ShowCursor = ShowCursor
  *
  * @return {undefined}
  */
-function HideCursor () {
+function HideCursor() {
   return r.BindHideCursor()
 }
 raylib.HideCursor = HideCursor
@@ -616,7 +618,7 @@ raylib.HideCursor = HideCursor
  *
  * @return {boolean} The resulting bool.
  */
-function IsCursorHidden () {
+function IsCursorHidden() {
   return r.BindIsCursorHidden()
 }
 raylib.IsCursorHidden = IsCursorHidden
@@ -626,7 +628,7 @@ raylib.IsCursorHidden = IsCursorHidden
  *
  * @return {undefined}
  */
-function EnableCursor () {
+function EnableCursor() {
   return r.BindEnableCursor()
 }
 raylib.EnableCursor = EnableCursor
@@ -636,7 +638,7 @@ raylib.EnableCursor = EnableCursor
  *
  * @return {undefined}
  */
-function DisableCursor () {
+function DisableCursor() {
   return r.BindDisableCursor()
 }
 raylib.DisableCursor = DisableCursor
@@ -646,7 +648,7 @@ raylib.DisableCursor = DisableCursor
  *
  * @return {boolean} The resulting bool.
  */
-function IsCursorOnScreen () {
+function IsCursorOnScreen() {
   return r.BindIsCursorOnScreen()
 }
 raylib.IsCursorOnScreen = IsCursorOnScreen
@@ -658,7 +660,7 @@ raylib.IsCursorOnScreen = IsCursorOnScreen
  *
  * @return {undefined}
  */
-function ClearBackground (color) {
+function ClearBackground(color) {
   return r.BindClearBackground(
     color.r,
     color.g,
@@ -673,7 +675,7 @@ raylib.ClearBackground = ClearBackground
  *
  * @return {undefined}
  */
-function BeginDrawing () {
+function BeginDrawing() {
   return r.BindBeginDrawing()
 }
 raylib.BeginDrawing = BeginDrawing
@@ -683,7 +685,7 @@ raylib.BeginDrawing = BeginDrawing
  *
  * @return {undefined}
  */
-function EndDrawing () {
+function EndDrawing() {
   return r.BindEndDrawing()
 }
 raylib.EndDrawing = EndDrawing
@@ -695,7 +697,7 @@ raylib.EndDrawing = EndDrawing
  *
  * @return {undefined}
  */
-function BeginMode2D (camera) {
+function BeginMode2D(camera) {
   return r.BindBeginMode2D(
     camera.offset.x,
     camera.offset.y,
@@ -712,7 +714,7 @@ raylib.BeginMode2D = BeginMode2D
  *
  * @return {undefined}
  */
-function EndMode2D () {
+function EndMode2D() {
   return r.BindEndMode2D()
 }
 raylib.EndMode2D = EndMode2D
@@ -724,7 +726,7 @@ raylib.EndMode2D = EndMode2D
  *
  * @return {undefined}
  */
-function BeginMode3D (camera) {
+function BeginMode3D(camera) {
   return r.BindBeginMode3D(
     camera.position.x,
     camera.position.y,
@@ -746,7 +748,7 @@ raylib.BeginMode3D = BeginMode3D
  *
  * @return {undefined}
  */
-function EndMode3D () {
+function EndMode3D() {
   return r.BindEndMode3D()
 }
 raylib.EndMode3D = EndMode3D
@@ -758,7 +760,7 @@ raylib.EndMode3D = EndMode3D
  *
  * @return {undefined}
  */
-function BeginTextureMode (target) {
+function BeginTextureMode(target) {
   return r.BindBeginTextureMode(
     target.id,
     target.texture.id,
@@ -780,7 +782,7 @@ raylib.BeginTextureMode = BeginTextureMode
  *
  * @return {undefined}
  */
-function EndTextureMode () {
+function EndTextureMode() {
   return r.BindEndTextureMode()
 }
 raylib.EndTextureMode = EndTextureMode
@@ -792,7 +794,7 @@ raylib.EndTextureMode = EndTextureMode
  *
  * @return {undefined}
  */
-function BeginShaderMode (shader) {
+function BeginShaderMode(shader) {
   return r.BindBeginShaderMode(
     shader.id,
     shader.locs
@@ -805,7 +807,7 @@ raylib.BeginShaderMode = BeginShaderMode
  *
  * @return {undefined}
  */
-function EndShaderMode () {
+function EndShaderMode() {
   return r.BindEndShaderMode()
 }
 raylib.EndShaderMode = EndShaderMode
@@ -817,7 +819,7 @@ raylib.EndShaderMode = EndShaderMode
  *
  * @return {undefined}
  */
-function BeginBlendMode (mode) {
+function BeginBlendMode(mode) {
   return r.BindBeginBlendMode(
     mode
   )
@@ -829,7 +831,7 @@ raylib.BeginBlendMode = BeginBlendMode
  *
  * @return {undefined}
  */
-function EndBlendMode () {
+function EndBlendMode() {
   return r.BindEndBlendMode()
 }
 raylib.EndBlendMode = EndBlendMode
@@ -844,7 +846,7 @@ raylib.EndBlendMode = EndBlendMode
  *
  * @return {undefined}
  */
-function BeginScissorMode (x, y, width, height) {
+function BeginScissorMode(x, y, width, height) {
   return r.BindBeginScissorMode(
     x,
     y,
@@ -859,7 +861,7 @@ raylib.BeginScissorMode = BeginScissorMode
  *
  * @return {undefined}
  */
-function EndScissorMode () {
+function EndScissorMode() {
   return r.BindEndScissorMode()
 }
 raylib.EndScissorMode = EndScissorMode
@@ -869,7 +871,7 @@ raylib.EndScissorMode = EndScissorMode
  *
  * @return {undefined}
  */
-function EndVrStereoMode () {
+function EndVrStereoMode() {
   return r.BindEndVrStereoMode()
 }
 raylib.EndVrStereoMode = EndVrStereoMode
@@ -882,7 +884,7 @@ raylib.EndVrStereoMode = EndVrStereoMode
  *
  * @return {Shader} The resulting Shader.
  */
-function LoadShader (vsFileName, fsFileName) {
+function LoadShader(vsFileName, fsFileName) {
   return r.BindLoadShader(
     vsFileName,
     fsFileName
@@ -898,7 +900,7 @@ raylib.LoadShader = LoadShader
  *
  * @return {Shader} The resulting Shader.
  */
-function LoadShaderFromMemory (vsCode, fsCode) {
+function LoadShaderFromMemory(vsCode, fsCode) {
   return r.BindLoadShaderFromMemory(
     vsCode,
     fsCode
@@ -913,7 +915,7 @@ raylib.LoadShaderFromMemory = LoadShaderFromMemory
  *
  * @return {boolean} The resulting bool.
  */
-function IsShaderReady (shader) {
+function IsShaderReady(shader) {
   return r.BindIsShaderReady(
     shader.id,
     shader.locs
@@ -929,7 +931,7 @@ raylib.IsShaderReady = IsShaderReady
  *
  * @return {number} The resulting int.
  */
-function GetShaderLocation (shader, uniformName) {
+function GetShaderLocation(shader, uniformName) {
   return r.BindGetShaderLocation(
     shader.id,
     shader.locs,
@@ -946,7 +948,7 @@ raylib.GetShaderLocation = GetShaderLocation
  *
  * @return {number} The resulting int.
  */
-function GetShaderLocationAttrib (shader, attribName) {
+function GetShaderLocationAttrib(shader, attribName) {
   return r.BindGetShaderLocationAttrib(
     shader.id,
     shader.locs,
@@ -964,7 +966,7 @@ raylib.GetShaderLocationAttrib = GetShaderLocationAttrib
  *
  * @return {undefined}
  */
-function SetShaderValueMatrix (shader, locIndex, mat) {
+function SetShaderValueMatrix(shader, locIndex, mat) {
   return r.BindSetShaderValueMatrix(
     shader.id,
     shader.locs,
@@ -998,7 +1000,7 @@ raylib.SetShaderValueMatrix = SetShaderValueMatrix
  *
  * @return {undefined}
  */
-function SetShaderValueTexture (shader, locIndex, texture) {
+function SetShaderValueTexture(shader, locIndex, texture) {
   return r.BindSetShaderValueTexture(
     shader.id,
     shader.locs,
@@ -1019,7 +1021,7 @@ raylib.SetShaderValueTexture = SetShaderValueTexture
  *
  * @return {undefined}
  */
-function UnloadShader (shader) {
+function UnloadShader(shader) {
   return r.BindUnloadShader(
     shader.id,
     shader.locs
@@ -1035,7 +1037,7 @@ raylib.UnloadShader = UnloadShader
  *
  * @return {Ray} The resulting Ray.
  */
-function GetMouseRay (mousePosition, camera) {
+function GetMouseRay(mousePosition, camera) {
   return r.BindGetMouseRay(
     mousePosition.x,
     mousePosition.y,
@@ -1061,7 +1063,7 @@ raylib.GetMouseRay = GetMouseRay
  *
  * @return {Matrix} The resulting Matrix.
  */
-function GetCameraMatrix (camera) {
+function GetCameraMatrix(camera) {
   return r.BindGetCameraMatrix(
     camera.position.x,
     camera.position.y,
@@ -1085,7 +1087,7 @@ raylib.GetCameraMatrix = GetCameraMatrix
  *
  * @return {Matrix} The resulting Matrix.
  */
-function GetCameraMatrix2D (camera) {
+function GetCameraMatrix2D(camera) {
   return r.BindGetCameraMatrix2D(
     camera.offset.x,
     camera.offset.y,
@@ -1105,7 +1107,7 @@ raylib.GetCameraMatrix2D = GetCameraMatrix2D
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetWorldToScreen (position, camera) {
+function GetWorldToScreen(position, camera) {
   return r.BindGetWorldToScreen(
     position.x,
     position.y,
@@ -1133,7 +1135,7 @@ raylib.GetWorldToScreen = GetWorldToScreen
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetScreenToWorld2D (position, camera) {
+function GetScreenToWorld2D(position, camera) {
   return r.BindGetScreenToWorld2D(
     position.x,
     position.y,
@@ -1157,7 +1159,7 @@ raylib.GetScreenToWorld2D = GetScreenToWorld2D
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetWorldToScreenEx (position, camera, width, height) {
+function GetWorldToScreenEx(position, camera, width, height) {
   return r.BindGetWorldToScreenEx(
     position.x,
     position.y,
@@ -1187,7 +1189,7 @@ raylib.GetWorldToScreenEx = GetWorldToScreenEx
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetWorldToScreen2D (position, camera) {
+function GetWorldToScreen2D(position, camera) {
   return r.BindGetWorldToScreen2D(
     position.x,
     position.y,
@@ -1208,7 +1210,7 @@ raylib.GetWorldToScreen2D = GetWorldToScreen2D
  *
  * @return {undefined}
  */
-function SetTargetFPS (fps) {
+function SetTargetFPS(fps) {
   return r.BindSetTargetFPS(
     fps
   )
@@ -1216,21 +1218,11 @@ function SetTargetFPS (fps) {
 raylib.SetTargetFPS = SetTargetFPS
 
 /**
- * Get current FPS
- *
- * @return {number} The resulting int.
- */
-function GetFPS () {
-  return r.BindGetFPS()
-}
-raylib.GetFPS = GetFPS
-
-/**
  * Get time in seconds for last frame drawn (delta time)
  *
  * @return {number} The resulting float.
  */
-function GetFrameTime () {
+function GetFrameTime() {
   return r.BindGetFrameTime()
 }
 raylib.GetFrameTime = GetFrameTime
@@ -1240,10 +1232,68 @@ raylib.GetFrameTime = GetFrameTime
  *
  * @return {number} The resulting double.
  */
-function GetTime () {
+function GetTime() {
   return r.BindGetTime()
 }
 raylib.GetTime = GetTime
+
+/**
+ * Get current FPS
+ *
+ * @return {number} The resulting int.
+ */
+function GetFPS() {
+  return r.BindGetFPS()
+}
+raylib.GetFPS = GetFPS
+
+/**
+ * Swap back buffer with front buffer (screen drawing)
+ *
+ * @return {undefined}
+ */
+function SwapScreenBuffer() {
+  return r.BindSwapScreenBuffer()
+}
+raylib.SwapScreenBuffer = SwapScreenBuffer
+
+/**
+ * Register all input events
+ *
+ * @return {undefined}
+ */
+function PollInputEvents() {
+  return r.BindPollInputEvents()
+}
+raylib.PollInputEvents = PollInputEvents
+
+/**
+ * Wait for some time (halt program execution)
+ *
+ * @param {number} seconds
+ *
+ * @return {undefined}
+ */
+function WaitTime(seconds) {
+  return r.BindWaitTime(
+    seconds
+  )
+}
+raylib.WaitTime = WaitTime
+
+/**
+ * Set the seed for the random number generator
+ *
+ * @param {number} seed
+ *
+ * @return {undefined}
+ */
+function SetRandomSeed(seed) {
+  return r.BindSetRandomSeed(
+    seed
+  )
+}
+raylib.SetRandomSeed = SetRandomSeed
 
 /**
  * Get a random value between min and max (both included)
@@ -1253,7 +1303,7 @@ raylib.GetTime = GetTime
  *
  * @return {number} The resulting int.
  */
-function GetRandomValue (min, max) {
+function GetRandomValue(min, max) {
   return r.BindGetRandomValue(
     min,
     max
@@ -1262,18 +1312,36 @@ function GetRandomValue (min, max) {
 raylib.GetRandomValue = GetRandomValue
 
 /**
- * Set the seed for the random number generator
+ * Load random values sequence, no values repeated
  *
- * @param {number} seed
+ * @param {number} count
+ * @param {number} min
+ * @param {number} max
+ *
+ * @return {number} The resulting int *.
+ */
+function LoadRandomSequence(count, min, max) {
+  return r.BindLoadRandomSequence(
+    count,
+    min,
+    max
+  )
+}
+raylib.LoadRandomSequence = LoadRandomSequence
+
+/**
+ * Unload random values sequence
+ *
+ * @param {number} sequence
  *
  * @return {undefined}
  */
-function SetRandomSeed (seed) {
-  return r.BindSetRandomSeed(
-    seed
+function UnloadRandomSequence(sequence) {
+  return r.BindUnloadRandomSequence(
+    sequence
   )
 }
-raylib.SetRandomSeed = SetRandomSeed
+raylib.UnloadRandomSequence = UnloadRandomSequence
 
 /**
  * Takes a screenshot of current screen (filename extension defines format)
@@ -1282,7 +1350,7 @@ raylib.SetRandomSeed = SetRandomSeed
  *
  * @return {undefined}
  */
-function TakeScreenshot (fileName) {
+function TakeScreenshot(fileName) {
   return r.BindTakeScreenshot(
     fileName
   )
@@ -1296,12 +1364,26 @@ raylib.TakeScreenshot = TakeScreenshot
  *
  * @return {undefined}
  */
-function SetConfigFlags (flags) {
+function SetConfigFlags(flags) {
   return r.BindSetConfigFlags(
     flags
   )
 }
 raylib.SetConfigFlags = SetConfigFlags
+
+/**
+ * Open URL with default system browser (if available)
+ *
+ * @param {string} url
+ *
+ * @return {undefined}
+ */
+function OpenURL(url) {
+  return r.BindOpenURL(
+    url
+  )
+}
+raylib.OpenURL = OpenURL
 
 /**
  * Set the current threshold (minimum) log level
@@ -1310,7 +1392,7 @@ raylib.SetConfigFlags = SetConfigFlags
  *
  * @return {undefined}
  */
-function SetTraceLogLevel (logLevel) {
+function SetTraceLogLevel(logLevel) {
   return r.BindSetTraceLogLevel(
     logLevel
   )
@@ -1324,7 +1406,7 @@ raylib.SetTraceLogLevel = SetTraceLogLevel
  *
  * @return {number} The resulting void *.
  */
-function MemAlloc (size) {
+function MemAlloc(size) {
   return r.BindMemAlloc(
     size
   )
@@ -1339,7 +1421,7 @@ raylib.MemAlloc = MemAlloc
  *
  * @return {number} The resulting void *.
  */
-function MemRealloc (ptr, size) {
+function MemRealloc(ptr, size) {
   return r.BindMemRealloc(
     ptr,
     size
@@ -1354,7 +1436,7 @@ raylib.MemRealloc = MemRealloc
  *
  * @return {undefined}
  */
-function MemFree (ptr) {
+function MemFree(ptr) {
   return r.BindMemFree(
     ptr
   )
@@ -1362,31 +1444,17 @@ function MemFree (ptr) {
 raylib.MemFree = MemFree
 
 /**
- * Open URL with default system browser (if available)
- *
- * @param {string} url
- *
- * @return {undefined}
- */
-function OpenURL (url) {
-  return r.BindOpenURL(
-    url
-  )
-}
-raylib.OpenURL = OpenURL
-
-/**
  * Load file data as byte array (read)
  *
  * @param {string} fileName
- * @param {number} bytesRead
+ * @param {number} dataSize
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function LoadFileData (fileName, bytesRead) {
+function LoadFileData(fileName, dataSize) {
   return r.BindLoadFileData(
     fileName,
-    bytesRead
+    dataSize
   )
 }
 raylib.LoadFileData = LoadFileData
@@ -1398,7 +1466,7 @@ raylib.LoadFileData = LoadFileData
  *
  * @return {undefined}
  */
-function UnloadFileData (data) {
+function UnloadFileData(data) {
   return r.BindUnloadFileData(
     data
   )
@@ -1410,15 +1478,15 @@ raylib.UnloadFileData = UnloadFileData
  *
  * @param {string} fileName
  * @param {number} data
- * @param {number} bytesToWrite
+ * @param {number} dataSize
  *
  * @return {boolean} The resulting bool.
  */
-function SaveFileData (fileName, data, bytesToWrite) {
+function SaveFileData(fileName, data, dataSize) {
   return r.BindSaveFileData(
     fileName,
     data,
-    bytesToWrite
+    dataSize
   )
 }
 raylib.SaveFileData = SaveFileData
@@ -1427,15 +1495,15 @@ raylib.SaveFileData = SaveFileData
  * Export data to code (.h), returns true on success
  *
  * @param {Buffer} data
- * @param {number} size
+ * @param {number} dataSize
  * @param {string} fileName
  *
  * @return {boolean} The resulting bool.
  */
-function ExportDataAsCode (data, size, fileName) {
+function ExportDataAsCode(data, dataSize, fileName) {
   return r.BindExportDataAsCode(
     data,
-    size,
+    dataSize,
     fileName
   )
 }
@@ -1448,7 +1516,7 @@ raylib.ExportDataAsCode = ExportDataAsCode
  *
  * @return {string} The resulting char *.
  */
-function LoadFileText (fileName) {
+function LoadFileText(fileName) {
   return r.BindLoadFileText(
     fileName
   )
@@ -1462,7 +1530,7 @@ raylib.LoadFileText = LoadFileText
  *
  * @return {undefined}
  */
-function UnloadFileText (text) {
+function UnloadFileText(text) {
   return r.BindUnloadFileText(
     text
   )
@@ -1477,7 +1545,7 @@ raylib.UnloadFileText = UnloadFileText
  *
  * @return {boolean} The resulting bool.
  */
-function SaveFileText (fileName, text) {
+function SaveFileText(fileName, text) {
   return r.BindSaveFileText(
     fileName,
     text
@@ -1492,7 +1560,7 @@ raylib.SaveFileText = SaveFileText
  *
  * @return {boolean} The resulting bool.
  */
-function FileExists (fileName) {
+function FileExists(fileName) {
   return r.BindFileExists(
     fileName
   )
@@ -1506,7 +1574,7 @@ raylib.FileExists = FileExists
  *
  * @return {boolean} The resulting bool.
  */
-function DirectoryExists (dirPath) {
+function DirectoryExists(dirPath) {
   return r.BindDirectoryExists(
     dirPath
   )
@@ -1521,7 +1589,7 @@ raylib.DirectoryExists = DirectoryExists
  *
  * @return {boolean} The resulting bool.
  */
-function IsFileExtension (fileName, ext) {
+function IsFileExtension(fileName, ext) {
   return r.BindIsFileExtension(
     fileName,
     ext
@@ -1536,7 +1604,7 @@ raylib.IsFileExtension = IsFileExtension
  *
  * @return {number} The resulting int.
  */
-function GetFileLength (fileName) {
+function GetFileLength(fileName) {
   return r.BindGetFileLength(
     fileName
   )
@@ -1550,7 +1618,7 @@ raylib.GetFileLength = GetFileLength
  *
  * @return {string} The resulting const char *.
  */
-function GetFileExtension (fileName) {
+function GetFileExtension(fileName) {
   return r.BindGetFileExtension(
     fileName
   )
@@ -1564,7 +1632,7 @@ raylib.GetFileExtension = GetFileExtension
  *
  * @return {string} The resulting const char *.
  */
-function GetFileName (filePath) {
+function GetFileName(filePath) {
   return r.BindGetFileName(
     filePath
   )
@@ -1578,7 +1646,7 @@ raylib.GetFileName = GetFileName
  *
  * @return {string} The resulting const char *.
  */
-function GetFileNameWithoutExt (filePath) {
+function GetFileNameWithoutExt(filePath) {
   return r.BindGetFileNameWithoutExt(
     filePath
   )
@@ -1592,7 +1660,7 @@ raylib.GetFileNameWithoutExt = GetFileNameWithoutExt
  *
  * @return {string} The resulting const char *.
  */
-function GetDirectoryPath (filePath) {
+function GetDirectoryPath(filePath) {
   return r.BindGetDirectoryPath(
     filePath
   )
@@ -1606,7 +1674,7 @@ raylib.GetDirectoryPath = GetDirectoryPath
  *
  * @return {string} The resulting const char *.
  */
-function GetPrevDirectoryPath (dirPath) {
+function GetPrevDirectoryPath(dirPath) {
   return r.BindGetPrevDirectoryPath(
     dirPath
   )
@@ -1618,17 +1686,17 @@ raylib.GetPrevDirectoryPath = GetPrevDirectoryPath
  *
  * @return {string} The resulting const char *.
  */
-function GetWorkingDirectory () {
+function GetWorkingDirectory() {
   return r.BindGetWorkingDirectory()
 }
 raylib.GetWorkingDirectory = GetWorkingDirectory
 
 /**
- * Get the directory if the running application (uses static string)
+ * Get the directory of the running application (uses static string)
  *
  * @return {string} The resulting const char *.
  */
-function GetApplicationDirectory () {
+function GetApplicationDirectory() {
   return r.BindGetApplicationDirectory()
 }
 raylib.GetApplicationDirectory = GetApplicationDirectory
@@ -1640,7 +1708,7 @@ raylib.GetApplicationDirectory = GetApplicationDirectory
  *
  * @return {boolean} The resulting bool.
  */
-function ChangeDirectory (dir) {
+function ChangeDirectory(dir) {
   return r.BindChangeDirectory(
     dir
   )
@@ -1654,7 +1722,7 @@ raylib.ChangeDirectory = ChangeDirectory
  *
  * @return {boolean} The resulting bool.
  */
-function IsPathFile (path) {
+function IsPathFile(path) {
   return r.BindIsPathFile(
     path
   )
@@ -1668,7 +1736,7 @@ raylib.IsPathFile = IsPathFile
  *
  * @return {FilePathList} The resulting FilePathList.
  */
-function LoadDirectoryFiles (dirPath) {
+function LoadDirectoryFiles(dirPath) {
   return r.BindLoadDirectoryFiles(
     dirPath
   )
@@ -1684,7 +1752,7 @@ raylib.LoadDirectoryFiles = LoadDirectoryFiles
  *
  * @return {FilePathList} The resulting FilePathList.
  */
-function LoadDirectoryFilesEx (basePath, filter, scanSubdirs) {
+function LoadDirectoryFilesEx(basePath, filter, scanSubdirs) {
   return r.BindLoadDirectoryFilesEx(
     basePath,
     filter,
@@ -1700,7 +1768,7 @@ raylib.LoadDirectoryFilesEx = LoadDirectoryFilesEx
  *
  * @return {undefined}
  */
-function UnloadDirectoryFiles (files) {
+function UnloadDirectoryFiles(files) {
   return r.BindUnloadDirectoryFiles(
     files.capacity,
     files.count,
@@ -1714,7 +1782,7 @@ raylib.UnloadDirectoryFiles = UnloadDirectoryFiles
  *
  * @return {boolean} The resulting bool.
  */
-function IsFileDropped () {
+function IsFileDropped() {
   return r.BindIsFileDropped()
 }
 raylib.IsFileDropped = IsFileDropped
@@ -1724,7 +1792,7 @@ raylib.IsFileDropped = IsFileDropped
  *
  * @return {FilePathList} The resulting FilePathList.
  */
-function LoadDroppedFiles () {
+function LoadDroppedFiles() {
   return r.BindLoadDroppedFiles()
 }
 raylib.LoadDroppedFiles = LoadDroppedFiles
@@ -1736,7 +1804,7 @@ raylib.LoadDroppedFiles = LoadDroppedFiles
  *
  * @return {undefined}
  */
-function UnloadDroppedFiles (files) {
+function UnloadDroppedFiles(files) {
   return r.BindUnloadDroppedFiles(
     files.capacity,
     files.count,
@@ -1752,7 +1820,7 @@ raylib.UnloadDroppedFiles = UnloadDroppedFiles
  *
  * @return {number} The resulting long.
  */
-function GetFileModTime (fileName) {
+function GetFileModTime(fileName) {
   return r.BindGetFileModTime(
     fileName
   )
@@ -1768,7 +1836,7 @@ raylib.GetFileModTime = GetFileModTime
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function CompressData (data, dataSize, compDataSize) {
+function CompressData(data, dataSize, compDataSize) {
   return r.BindCompressData(
     data,
     dataSize,
@@ -1786,7 +1854,7 @@ raylib.CompressData = CompressData
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function DecompressData (compData, compDataSize, dataSize) {
+function DecompressData(compData, compDataSize, dataSize) {
   return r.BindDecompressData(
     compData,
     compDataSize,
@@ -1804,7 +1872,7 @@ raylib.DecompressData = DecompressData
  *
  * @return {string} The resulting char *.
  */
-function EncodeDataBase64 (data, dataSize, outputSize) {
+function EncodeDataBase64(data, dataSize, outputSize) {
   return r.BindEncodeDataBase64(
     data,
     dataSize,
@@ -1821,7 +1889,7 @@ raylib.EncodeDataBase64 = EncodeDataBase64
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function DecodeDataBase64 (data, outputSize) {
+function DecodeDataBase64(data, outputSize) {
   return r.BindDecodeDataBase64(
     data,
     outputSize
@@ -1830,18 +1898,142 @@ function DecodeDataBase64 (data, outputSize) {
 raylib.DecodeDataBase64 = DecodeDataBase64
 
 /**
+ * Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
+ *
+ * @param {string} fileName
+ *
+ * @return {AutomationEventList} The resulting AutomationEventList.
+ */
+function LoadAutomationEventList(fileName) {
+  return r.BindLoadAutomationEventList(
+    fileName
+  )
+}
+raylib.LoadAutomationEventList = LoadAutomationEventList
+
+/**
+ * Unload automation events list from file
+ *
+ * @param {number} list
+ *
+ * @return {undefined}
+ */
+function UnloadAutomationEventList(list) {
+  return r.BindUnloadAutomationEventList(
+    list
+  )
+}
+raylib.UnloadAutomationEventList = UnloadAutomationEventList
+
+/**
+ * Export automation events list as text file
+ *
+ * @param {AutomationEventList} list
+ * @param {string} fileName
+ *
+ * @return {boolean} The resulting bool.
+ */
+function ExportAutomationEventList(list, fileName) {
+  return r.BindExportAutomationEventList(
+    list.capacity,
+    list.count,
+    list.events,
+    fileName
+  )
+}
+raylib.ExportAutomationEventList = ExportAutomationEventList
+
+/**
+ * Set automation event list to record to
+ *
+ * @param {number} list
+ *
+ * @return {undefined}
+ */
+function SetAutomationEventList(list) {
+  return r.BindSetAutomationEventList(
+    list
+  )
+}
+raylib.SetAutomationEventList = SetAutomationEventList
+
+/**
+ * Set automation event internal base frame to start recording
+ *
+ * @param {number} frame
+ *
+ * @return {undefined}
+ */
+function SetAutomationEventBaseFrame(frame) {
+  return r.BindSetAutomationEventBaseFrame(
+    frame
+  )
+}
+raylib.SetAutomationEventBaseFrame = SetAutomationEventBaseFrame
+
+/**
+ * Start recording automation events (AutomationEventList must be set)
+ *
+ * @return {undefined}
+ */
+function StartAutomationEventRecording() {
+  return r.BindStartAutomationEventRecording()
+}
+raylib.StartAutomationEventRecording = StartAutomationEventRecording
+
+/**
+ * Stop recording automation events
+ *
+ * @return {undefined}
+ */
+function StopAutomationEventRecording() {
+  return r.BindStopAutomationEventRecording()
+}
+raylib.StopAutomationEventRecording = StopAutomationEventRecording
+
+/**
+ * Play a recorded automation event
+ *
+ * @param {AutomationEvent} event
+ *
+ * @return {undefined}
+ */
+function PlayAutomationEvent(event) {
+  return r.BindPlayAutomationEvent(
+    event.frame,
+    event.type,
+    event.params
+  )
+}
+raylib.PlayAutomationEvent = PlayAutomationEvent
+
+/**
  * Check if a key has been pressed once
  *
  * @param {number} key
  *
  * @return {boolean} The resulting bool.
  */
-function IsKeyPressed (key) {
+function IsKeyPressed(key) {
   return r.BindIsKeyPressed(
     key
   )
 }
 raylib.IsKeyPressed = IsKeyPressed
+
+/**
+ * Check if a key has been pressed again (Only PLATFORM_DESKTOP)
+ *
+ * @param {number} key
+ *
+ * @return {boolean} The resulting bool.
+ */
+function IsKeyPressedRepeat(key) {
+  return r.BindIsKeyPressedRepeat(
+    key
+  )
+}
+raylib.IsKeyPressedRepeat = IsKeyPressedRepeat
 
 /**
  * Check if a key is being pressed
@@ -1850,7 +2042,7 @@ raylib.IsKeyPressed = IsKeyPressed
  *
  * @return {boolean} The resulting bool.
  */
-function IsKeyDown (key) {
+function IsKeyDown(key) {
   return r.BindIsKeyDown(
     key
   )
@@ -1864,7 +2056,7 @@ raylib.IsKeyDown = IsKeyDown
  *
  * @return {boolean} The resulting bool.
  */
-function IsKeyReleased (key) {
+function IsKeyReleased(key) {
   return r.BindIsKeyReleased(
     key
   )
@@ -1878,7 +2070,7 @@ raylib.IsKeyReleased = IsKeyReleased
  *
  * @return {boolean} The resulting bool.
  */
-function IsKeyUp (key) {
+function IsKeyUp(key) {
   return r.BindIsKeyUp(
     key
   )
@@ -1886,25 +2078,11 @@ function IsKeyUp (key) {
 raylib.IsKeyUp = IsKeyUp
 
 /**
- * Set a custom key to exit program (default is ESC)
- *
- * @param {number} key
- *
- * @return {undefined}
- */
-function SetExitKey (key) {
-  return r.BindSetExitKey(
-    key
-  )
-}
-raylib.SetExitKey = SetExitKey
-
-/**
  * Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
  *
  * @return {number} The resulting int.
  */
-function GetKeyPressed () {
+function GetKeyPressed() {
   return r.BindGetKeyPressed()
 }
 raylib.GetKeyPressed = GetKeyPressed
@@ -1914,10 +2092,24 @@ raylib.GetKeyPressed = GetKeyPressed
  *
  * @return {number} The resulting int.
  */
-function GetCharPressed () {
+function GetCharPressed() {
   return r.BindGetCharPressed()
 }
 raylib.GetCharPressed = GetCharPressed
+
+/**
+ * Set a custom key to exit program (default is ESC)
+ *
+ * @param {number} key
+ *
+ * @return {undefined}
+ */
+function SetExitKey(key) {
+  return r.BindSetExitKey(
+    key
+  )
+}
+raylib.SetExitKey = SetExitKey
 
 /**
  * Check if a gamepad is available
@@ -1926,7 +2118,7 @@ raylib.GetCharPressed = GetCharPressed
  *
  * @return {boolean} The resulting bool.
  */
-function IsGamepadAvailable (gamepad) {
+function IsGamepadAvailable(gamepad) {
   return r.BindIsGamepadAvailable(
     gamepad
   )
@@ -1940,7 +2132,7 @@ raylib.IsGamepadAvailable = IsGamepadAvailable
  *
  * @return {string} The resulting const char *.
  */
-function GetGamepadName (gamepad) {
+function GetGamepadName(gamepad) {
   return r.BindGetGamepadName(
     gamepad
   )
@@ -1955,7 +2147,7 @@ raylib.GetGamepadName = GetGamepadName
  *
  * @return {boolean} The resulting bool.
  */
-function IsGamepadButtonPressed (gamepad, button) {
+function IsGamepadButtonPressed(gamepad, button) {
   return r.BindIsGamepadButtonPressed(
     gamepad,
     button
@@ -1971,7 +2163,7 @@ raylib.IsGamepadButtonPressed = IsGamepadButtonPressed
  *
  * @return {boolean} The resulting bool.
  */
-function IsGamepadButtonDown (gamepad, button) {
+function IsGamepadButtonDown(gamepad, button) {
   return r.BindIsGamepadButtonDown(
     gamepad,
     button
@@ -1987,7 +2179,7 @@ raylib.IsGamepadButtonDown = IsGamepadButtonDown
  *
  * @return {boolean} The resulting bool.
  */
-function IsGamepadButtonReleased (gamepad, button) {
+function IsGamepadButtonReleased(gamepad, button) {
   return r.BindIsGamepadButtonReleased(
     gamepad,
     button
@@ -2003,7 +2195,7 @@ raylib.IsGamepadButtonReleased = IsGamepadButtonReleased
  *
  * @return {boolean} The resulting bool.
  */
-function IsGamepadButtonUp (gamepad, button) {
+function IsGamepadButtonUp(gamepad, button) {
   return r.BindIsGamepadButtonUp(
     gamepad,
     button
@@ -2016,7 +2208,7 @@ raylib.IsGamepadButtonUp = IsGamepadButtonUp
  *
  * @return {number} The resulting int.
  */
-function GetGamepadButtonPressed () {
+function GetGamepadButtonPressed() {
   return r.BindGetGamepadButtonPressed()
 }
 raylib.GetGamepadButtonPressed = GetGamepadButtonPressed
@@ -2028,7 +2220,7 @@ raylib.GetGamepadButtonPressed = GetGamepadButtonPressed
  *
  * @return {number} The resulting int.
  */
-function GetGamepadAxisCount (gamepad) {
+function GetGamepadAxisCount(gamepad) {
   return r.BindGetGamepadAxisCount(
     gamepad
   )
@@ -2043,7 +2235,7 @@ raylib.GetGamepadAxisCount = GetGamepadAxisCount
  *
  * @return {number} The resulting float.
  */
-function GetGamepadAxisMovement (gamepad, axis) {
+function GetGamepadAxisMovement(gamepad, axis) {
   return r.BindGetGamepadAxisMovement(
     gamepad,
     axis
@@ -2058,7 +2250,7 @@ raylib.GetGamepadAxisMovement = GetGamepadAxisMovement
  *
  * @return {number} The resulting int.
  */
-function SetGamepadMappings (mappings) {
+function SetGamepadMappings(mappings) {
   return r.BindSetGamepadMappings(
     mappings
   )
@@ -2072,7 +2264,7 @@ raylib.SetGamepadMappings = SetGamepadMappings
  *
  * @return {boolean} The resulting bool.
  */
-function IsMouseButtonPressed (button) {
+function IsMouseButtonPressed(button) {
   return r.BindIsMouseButtonPressed(
     button
   )
@@ -2086,7 +2278,7 @@ raylib.IsMouseButtonPressed = IsMouseButtonPressed
  *
  * @return {boolean} The resulting bool.
  */
-function IsMouseButtonDown (button) {
+function IsMouseButtonDown(button) {
   return r.BindIsMouseButtonDown(
     button
   )
@@ -2100,7 +2292,7 @@ raylib.IsMouseButtonDown = IsMouseButtonDown
  *
  * @return {boolean} The resulting bool.
  */
-function IsMouseButtonReleased (button) {
+function IsMouseButtonReleased(button) {
   return r.BindIsMouseButtonReleased(
     button
   )
@@ -2114,7 +2306,7 @@ raylib.IsMouseButtonReleased = IsMouseButtonReleased
  *
  * @return {boolean} The resulting bool.
  */
-function IsMouseButtonUp (button) {
+function IsMouseButtonUp(button) {
   return r.BindIsMouseButtonUp(
     button
   )
@@ -2126,7 +2318,7 @@ raylib.IsMouseButtonUp = IsMouseButtonUp
  *
  * @return {number} The resulting int.
  */
-function GetMouseX () {
+function GetMouseX() {
   return r.BindGetMouseX()
 }
 raylib.GetMouseX = GetMouseX
@@ -2136,7 +2328,7 @@ raylib.GetMouseX = GetMouseX
  *
  * @return {number} The resulting int.
  */
-function GetMouseY () {
+function GetMouseY() {
   return r.BindGetMouseY()
 }
 raylib.GetMouseY = GetMouseY
@@ -2146,7 +2338,7 @@ raylib.GetMouseY = GetMouseY
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetMousePosition () {
+function GetMousePosition() {
   return r.BindGetMousePosition()
 }
 raylib.GetMousePosition = GetMousePosition
@@ -2156,7 +2348,7 @@ raylib.GetMousePosition = GetMousePosition
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetMouseDelta () {
+function GetMouseDelta() {
   return r.BindGetMouseDelta()
 }
 raylib.GetMouseDelta = GetMouseDelta
@@ -2169,7 +2361,7 @@ raylib.GetMouseDelta = GetMouseDelta
  *
  * @return {undefined}
  */
-function SetMousePosition (x, y) {
+function SetMousePosition(x, y) {
   return r.BindSetMousePosition(
     x,
     y
@@ -2185,7 +2377,7 @@ raylib.SetMousePosition = SetMousePosition
  *
  * @return {undefined}
  */
-function SetMouseOffset (offsetX, offsetY) {
+function SetMouseOffset(offsetX, offsetY) {
   return r.BindSetMouseOffset(
     offsetX,
     offsetY
@@ -2201,7 +2393,7 @@ raylib.SetMouseOffset = SetMouseOffset
  *
  * @return {undefined}
  */
-function SetMouseScale (scaleX, scaleY) {
+function SetMouseScale(scaleX, scaleY) {
   return r.BindSetMouseScale(
     scaleX,
     scaleY
@@ -2214,7 +2406,7 @@ raylib.SetMouseScale = SetMouseScale
  *
  * @return {number} The resulting float.
  */
-function GetMouseWheelMove () {
+function GetMouseWheelMove() {
   return r.BindGetMouseWheelMove()
 }
 raylib.GetMouseWheelMove = GetMouseWheelMove
@@ -2224,7 +2416,7 @@ raylib.GetMouseWheelMove = GetMouseWheelMove
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetMouseWheelMoveV () {
+function GetMouseWheelMoveV() {
   return r.BindGetMouseWheelMoveV()
 }
 raylib.GetMouseWheelMoveV = GetMouseWheelMoveV
@@ -2236,7 +2428,7 @@ raylib.GetMouseWheelMoveV = GetMouseWheelMoveV
  *
  * @return {undefined}
  */
-function SetMouseCursor (cursor) {
+function SetMouseCursor(cursor) {
   return r.BindSetMouseCursor(
     cursor
   )
@@ -2248,7 +2440,7 @@ raylib.SetMouseCursor = SetMouseCursor
  *
  * @return {number} The resulting int.
  */
-function GetTouchX () {
+function GetTouchX() {
   return r.BindGetTouchX()
 }
 raylib.GetTouchX = GetTouchX
@@ -2258,7 +2450,7 @@ raylib.GetTouchX = GetTouchX
  *
  * @return {number} The resulting int.
  */
-function GetTouchY () {
+function GetTouchY() {
   return r.BindGetTouchY()
 }
 raylib.GetTouchY = GetTouchY
@@ -2270,7 +2462,7 @@ raylib.GetTouchY = GetTouchY
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetTouchPosition (index) {
+function GetTouchPosition(index) {
   return r.BindGetTouchPosition(
     index
   )
@@ -2284,7 +2476,7 @@ raylib.GetTouchPosition = GetTouchPosition
  *
  * @return {number} The resulting int.
  */
-function GetTouchPointId (index) {
+function GetTouchPointId(index) {
   return r.BindGetTouchPointId(
     index
   )
@@ -2296,7 +2488,7 @@ raylib.GetTouchPointId = GetTouchPointId
  *
  * @return {number} The resulting int.
  */
-function GetTouchPointCount () {
+function GetTouchPointCount() {
   return r.BindGetTouchPointCount()
 }
 raylib.GetTouchPointCount = GetTouchPointCount
@@ -2308,7 +2500,7 @@ raylib.GetTouchPointCount = GetTouchPointCount
  *
  * @return {undefined}
  */
-function SetGesturesEnabled (flags) {
+function SetGesturesEnabled(flags) {
   return r.BindSetGesturesEnabled(
     flags
   )
@@ -2322,7 +2514,7 @@ raylib.SetGesturesEnabled = SetGesturesEnabled
  *
  * @return {boolean} The resulting bool.
  */
-function IsGestureDetected (gesture) {
+function IsGestureDetected(gesture) {
   return r.BindIsGestureDetected(
     gesture
   )
@@ -2334,7 +2526,7 @@ raylib.IsGestureDetected = IsGestureDetected
  *
  * @return {number} The resulting int.
  */
-function GetGestureDetected () {
+function GetGestureDetected() {
   return r.BindGetGestureDetected()
 }
 raylib.GetGestureDetected = GetGestureDetected
@@ -2344,7 +2536,7 @@ raylib.GetGestureDetected = GetGestureDetected
  *
  * @return {number} The resulting float.
  */
-function GetGestureHoldDuration () {
+function GetGestureHoldDuration() {
   return r.BindGetGestureHoldDuration()
 }
 raylib.GetGestureHoldDuration = GetGestureHoldDuration
@@ -2354,7 +2546,7 @@ raylib.GetGestureHoldDuration = GetGestureHoldDuration
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetGestureDragVector () {
+function GetGestureDragVector() {
   return r.BindGetGestureDragVector()
 }
 raylib.GetGestureDragVector = GetGestureDragVector
@@ -2364,7 +2556,7 @@ raylib.GetGestureDragVector = GetGestureDragVector
  *
  * @return {number} The resulting float.
  */
-function GetGestureDragAngle () {
+function GetGestureDragAngle() {
   return r.BindGetGestureDragAngle()
 }
 raylib.GetGestureDragAngle = GetGestureDragAngle
@@ -2374,7 +2566,7 @@ raylib.GetGestureDragAngle = GetGestureDragAngle
  *
  * @return {Vector2} The resulting Vector2.
  */
-function GetGesturePinchVector () {
+function GetGesturePinchVector() {
   return r.BindGetGesturePinchVector()
 }
 raylib.GetGesturePinchVector = GetGesturePinchVector
@@ -2384,7 +2576,7 @@ raylib.GetGesturePinchVector = GetGesturePinchVector
  *
  * @return {number} The resulting float.
  */
-function GetGesturePinchAngle () {
+function GetGesturePinchAngle() {
   return r.BindGetGesturePinchAngle()
 }
 raylib.GetGesturePinchAngle = GetGesturePinchAngle
@@ -2399,7 +2591,7 @@ raylib.GetGesturePinchAngle = GetGesturePinchAngle
  *
  * @return {undefined}
  */
-function UpdateCameraPro (camera, movement, rotation, zoom) {
+function UpdateCameraPro(camera, movement, rotation, zoom) {
   return r.BindUpdateCameraPro(
     camera,
     movement.x,
@@ -2421,7 +2613,7 @@ raylib.UpdateCameraPro = UpdateCameraPro
  *
  * @return {undefined}
  */
-function SetShapesTexture (texture, source) {
+function SetShapesTexture(texture, source) {
   return r.BindSetShapesTexture(
     texture.id,
     texture.width,
@@ -2445,7 +2637,7 @@ raylib.SetShapesTexture = SetShapesTexture
  *
  * @return {undefined}
  */
-function DrawPixel (posX, posY, color) {
+function DrawPixel(posX, posY, color) {
   return r.BindDrawPixel(
     posX,
     posY,
@@ -2465,7 +2657,7 @@ raylib.DrawPixel = DrawPixel
  *
  * @return {undefined}
  */
-function DrawPixelV (position, color) {
+function DrawPixelV(position, color) {
   return r.BindDrawPixelV(
     position.x,
     position.y,
@@ -2488,7 +2680,7 @@ raylib.DrawPixelV = DrawPixelV
  *
  * @return {undefined}
  */
-function DrawLine (startPosX, startPosY, endPosX, endPosY, color) {
+function DrawLine(startPosX, startPosY, endPosX, endPosY, color) {
   return r.BindDrawLine(
     startPosX,
     startPosY,
@@ -2503,7 +2695,7 @@ function DrawLine (startPosX, startPosY, endPosX, endPosY, color) {
 raylib.DrawLine = DrawLine
 
 /**
- * Draw a line (Vector version)
+ * Draw a line (using gl lines)
  *
  * @param {Vector2} startPos
  * @param {Vector2} endPos
@@ -2511,7 +2703,7 @@ raylib.DrawLine = DrawLine
  *
  * @return {undefined}
  */
-function DrawLineV (startPos, endPos, color) {
+function DrawLineV(startPos, endPos, color) {
   return r.BindDrawLineV(
     startPos.x,
     startPos.y,
@@ -2526,7 +2718,7 @@ function DrawLineV (startPos, endPos, color) {
 raylib.DrawLineV = DrawLineV
 
 /**
- * Draw a line defining thickness
+ * Draw a line (using triangles/quads)
  *
  * @param {Vector2} startPos
  * @param {Vector2} endPos
@@ -2535,7 +2727,7 @@ raylib.DrawLineV = DrawLineV
  *
  * @return {undefined}
  */
-function DrawLineEx (startPos, endPos, thick, color) {
+function DrawLineEx(startPos, endPos, thick, color) {
   return r.BindDrawLineEx(
     startPos.x,
     startPos.y,
@@ -2551,7 +2743,28 @@ function DrawLineEx (startPos, endPos, thick, color) {
 raylib.DrawLineEx = DrawLineEx
 
 /**
- * Draw a line using cubic-bezier curves in-out
+ * Draw lines sequence (using gl lines)
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawLineStrip(points, pointCount, color) {
+  return r.BindDrawLineStrip(
+    points,
+    pointCount,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawLineStrip = DrawLineStrip
+
+/**
+ * Draw line segment cubic-bezier in-out interpolation
  *
  * @param {Vector2} startPos
  * @param {Vector2} endPos
@@ -2560,7 +2773,7 @@ raylib.DrawLineEx = DrawLineEx
  *
  * @return {undefined}
  */
-function DrawLineBezier (startPos, endPos, thick, color) {
+function DrawLineBezier(startPos, endPos, thick, color) {
   return r.BindDrawLineBezier(
     startPos.x,
     startPos.y,
@@ -2576,86 +2789,6 @@ function DrawLineBezier (startPos, endPos, thick, color) {
 raylib.DrawLineBezier = DrawLineBezier
 
 /**
- * Draw line using quadratic bezier curves with a control point
- *
- * @param {Vector2} startPos
- * @param {Vector2} endPos
- * @param {Vector2} controlPos
- * @param {number} thick
- * @param {Color} color
- *
- * @return {undefined}
- */
-function DrawLineBezierQuad (startPos, endPos, controlPos, thick, color) {
-  return r.BindDrawLineBezierQuad(
-    startPos.x,
-    startPos.y,
-    endPos.x,
-    endPos.y,
-    controlPos.x,
-    controlPos.y,
-    thick,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.DrawLineBezierQuad = DrawLineBezierQuad
-
-/**
- * Draw line using cubic bezier curves with 2 control points
- *
- * @param {Vector2} startPos
- * @param {Vector2} endPos
- * @param {Vector2} startControlPos
- * @param {Vector2} endControlPos
- * @param {number} thick
- * @param {Color} color
- *
- * @return {undefined}
- */
-function DrawLineBezierCubic (startPos, endPos, startControlPos, endControlPos, thick, color) {
-  return r.BindDrawLineBezierCubic(
-    startPos.x,
-    startPos.y,
-    endPos.x,
-    endPos.y,
-    startControlPos.x,
-    startControlPos.y,
-    endControlPos.x,
-    endControlPos.y,
-    thick,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.DrawLineBezierCubic = DrawLineBezierCubic
-
-/**
- * Draw lines sequence
- *
- * @param {number} points
- * @param {number} pointCount
- * @param {Color} color
- *
- * @return {undefined}
- */
-function DrawLineStrip (points, pointCount, color) {
-  return r.BindDrawLineStrip(
-    points,
-    pointCount,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.DrawLineStrip = DrawLineStrip
-
-/**
  * Draw a color-filled circle
  *
  * @param {number} centerX
@@ -2665,7 +2798,7 @@ raylib.DrawLineStrip = DrawLineStrip
  *
  * @return {undefined}
  */
-function DrawCircle (centerX, centerY, radius, color) {
+function DrawCircle(centerX, centerY, radius, color) {
   return r.BindDrawCircle(
     centerX,
     centerY,
@@ -2690,7 +2823,7 @@ raylib.DrawCircle = DrawCircle
  *
  * @return {undefined}
  */
-function DrawCircleSector (center, radius, startAngle, endAngle, segments, color) {
+function DrawCircleSector(center, radius, startAngle, endAngle, segments, color) {
   return r.BindDrawCircleSector(
     center.x,
     center.y,
@@ -2718,7 +2851,7 @@ raylib.DrawCircleSector = DrawCircleSector
  *
  * @return {undefined}
  */
-function DrawCircleSectorLines (center, radius, startAngle, endAngle, segments, color) {
+function DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color) {
   return r.BindDrawCircleSectorLines(
     center.x,
     center.y,
@@ -2745,7 +2878,7 @@ raylib.DrawCircleSectorLines = DrawCircleSectorLines
  *
  * @return {undefined}
  */
-function DrawCircleGradient (centerX, centerY, radius, color1, color2) {
+function DrawCircleGradient(centerX, centerY, radius, color1, color2) {
   return r.BindDrawCircleGradient(
     centerX,
     centerY,
@@ -2771,7 +2904,7 @@ raylib.DrawCircleGradient = DrawCircleGradient
  *
  * @return {undefined}
  */
-function DrawCircleV (center, radius, color) {
+function DrawCircleV(center, radius, color) {
   return r.BindDrawCircleV(
     center.x,
     center.y,
@@ -2794,7 +2927,7 @@ raylib.DrawCircleV = DrawCircleV
  *
  * @return {undefined}
  */
-function DrawCircleLines (centerX, centerY, radius, color) {
+function DrawCircleLines(centerX, centerY, radius, color) {
   return r.BindDrawCircleLines(
     centerX,
     centerY,
@@ -2808,6 +2941,28 @@ function DrawCircleLines (centerX, centerY, radius, color) {
 raylib.DrawCircleLines = DrawCircleLines
 
 /**
+ * Draw circle outline (Vector version)
+ *
+ * @param {Vector2} center
+ * @param {number} radius
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawCircleLinesV(center, radius, color) {
+  return r.BindDrawCircleLinesV(
+    center.x,
+    center.y,
+    radius,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawCircleLinesV = DrawCircleLinesV
+
+/**
  * Draw ellipse
  *
  * @param {number} centerX
@@ -2818,7 +2973,7 @@ raylib.DrawCircleLines = DrawCircleLines
  *
  * @return {undefined}
  */
-function DrawEllipse (centerX, centerY, radiusH, radiusV, color) {
+function DrawEllipse(centerX, centerY, radiusH, radiusV, color) {
   return r.BindDrawEllipse(
     centerX,
     centerY,
@@ -2843,7 +2998,7 @@ raylib.DrawEllipse = DrawEllipse
  *
  * @return {undefined}
  */
-function DrawEllipseLines (centerX, centerY, radiusH, radiusV, color) {
+function DrawEllipseLines(centerX, centerY, radiusH, radiusV, color) {
   return r.BindDrawEllipseLines(
     centerX,
     centerY,
@@ -2870,7 +3025,7 @@ raylib.DrawEllipseLines = DrawEllipseLines
  *
  * @return {undefined}
  */
-function DrawRing (center, innerRadius, outerRadius, startAngle, endAngle, segments, color) {
+function DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color) {
   return r.BindDrawRing(
     center.x,
     center.y,
@@ -2900,7 +3055,7 @@ raylib.DrawRing = DrawRing
  *
  * @return {undefined}
  */
-function DrawRingLines (center, innerRadius, outerRadius, startAngle, endAngle, segments, color) {
+function DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color) {
   return r.BindDrawRingLines(
     center.x,
     center.y,
@@ -2928,7 +3083,7 @@ raylib.DrawRingLines = DrawRingLines
  *
  * @return {undefined}
  */
-function DrawRectangle (posX, posY, width, height, color) {
+function DrawRectangle(posX, posY, width, height, color) {
   return r.BindDrawRectangle(
     posX,
     posY,
@@ -2951,7 +3106,7 @@ raylib.DrawRectangle = DrawRectangle
  *
  * @return {undefined}
  */
-function DrawRectangleV (position, size, color) {
+function DrawRectangleV(position, size, color) {
   return r.BindDrawRectangleV(
     position.x,
     position.y,
@@ -2973,7 +3128,7 @@ raylib.DrawRectangleV = DrawRectangleV
  *
  * @return {undefined}
  */
-function DrawRectangleRec (rec, color) {
+function DrawRectangleRec(rec, color) {
   return r.BindDrawRectangleRec(
     rec.x,
     rec.y,
@@ -2997,7 +3152,7 @@ raylib.DrawRectangleRec = DrawRectangleRec
  *
  * @return {undefined}
  */
-function DrawRectanglePro (rec, origin, rotation, color) {
+function DrawRectanglePro(rec, origin, rotation, color) {
   return r.BindDrawRectanglePro(
     rec.x,
     rec.y,
@@ -3026,7 +3181,7 @@ raylib.DrawRectanglePro = DrawRectanglePro
  *
  * @return {undefined}
  */
-function DrawRectangleGradientV (posX, posY, width, height, color1, color2) {
+function DrawRectangleGradientV(posX, posY, width, height, color1, color2) {
   return r.BindDrawRectangleGradientV(
     posX,
     posY,
@@ -3056,7 +3211,7 @@ raylib.DrawRectangleGradientV = DrawRectangleGradientV
  *
  * @return {undefined}
  */
-function DrawRectangleGradientH (posX, posY, width, height, color1, color2) {
+function DrawRectangleGradientH(posX, posY, width, height, color1, color2) {
   return r.BindDrawRectangleGradientH(
     posX,
     posY,
@@ -3085,7 +3240,7 @@ raylib.DrawRectangleGradientH = DrawRectangleGradientH
  *
  * @return {undefined}
  */
-function DrawRectangleGradientEx (rec, col1, col2, col3, col4) {
+function DrawRectangleGradientEx(rec, col1, col2, col3, col4) {
   return r.BindDrawRectangleGradientEx(
     rec.x,
     rec.y,
@@ -3122,7 +3277,7 @@ raylib.DrawRectangleGradientEx = DrawRectangleGradientEx
  *
  * @return {undefined}
  */
-function DrawRectangleLines (posX, posY, width, height, color) {
+function DrawRectangleLines(posX, posY, width, height, color) {
   return r.BindDrawRectangleLines(
     posX,
     posY,
@@ -3145,7 +3300,7 @@ raylib.DrawRectangleLines = DrawRectangleLines
  *
  * @return {undefined}
  */
-function DrawRectangleLinesEx (rec, lineThick, color) {
+function DrawRectangleLinesEx(rec, lineThick, color) {
   return r.BindDrawRectangleLinesEx(
     rec.x,
     rec.y,
@@ -3170,7 +3325,7 @@ raylib.DrawRectangleLinesEx = DrawRectangleLinesEx
  *
  * @return {undefined}
  */
-function DrawRectangleRounded (rec, roundness, segments, color) {
+function DrawRectangleRounded(rec, roundness, segments, color) {
   return r.BindDrawRectangleRounded(
     rec.x,
     rec.y,
@@ -3197,7 +3352,7 @@ raylib.DrawRectangleRounded = DrawRectangleRounded
  *
  * @return {undefined}
  */
-function DrawRectangleRoundedLines (rec, roundness, segments, lineThick, color) {
+function DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color) {
   return r.BindDrawRectangleRoundedLines(
     rec.x,
     rec.y,
@@ -3224,7 +3379,7 @@ raylib.DrawRectangleRoundedLines = DrawRectangleRoundedLines
  *
  * @return {undefined}
  */
-function DrawTriangle (v1, v2, v3, color) {
+function DrawTriangle(v1, v2, v3, color) {
   return r.BindDrawTriangle(
     v1.x,
     v1.y,
@@ -3250,7 +3405,7 @@ raylib.DrawTriangle = DrawTriangle
  *
  * @return {undefined}
  */
-function DrawTriangleLines (v1, v2, v3, color) {
+function DrawTriangleLines(v1, v2, v3, color) {
   return r.BindDrawTriangleLines(
     v1.x,
     v1.y,
@@ -3275,7 +3430,7 @@ raylib.DrawTriangleLines = DrawTriangleLines
  *
  * @return {undefined}
  */
-function DrawTriangleFan (points, pointCount, color) {
+function DrawTriangleFan(points, pointCount, color) {
   return r.BindDrawTriangleFan(
     points,
     pointCount,
@@ -3296,7 +3451,7 @@ raylib.DrawTriangleFan = DrawTriangleFan
  *
  * @return {undefined}
  */
-function DrawTriangleStrip (points, pointCount, color) {
+function DrawTriangleStrip(points, pointCount, color) {
   return r.BindDrawTriangleStrip(
     points,
     pointCount,
@@ -3319,7 +3474,7 @@ raylib.DrawTriangleStrip = DrawTriangleStrip
  *
  * @return {undefined}
  */
-function DrawPoly (center, sides, radius, rotation, color) {
+function DrawPoly(center, sides, radius, rotation, color) {
   return r.BindDrawPoly(
     center.x,
     center.y,
@@ -3345,7 +3500,7 @@ raylib.DrawPoly = DrawPoly
  *
  * @return {undefined}
  */
-function DrawPolyLines (center, sides, radius, rotation, color) {
+function DrawPolyLines(center, sides, radius, rotation, color) {
   return r.BindDrawPolyLines(
     center.x,
     center.y,
@@ -3372,7 +3527,7 @@ raylib.DrawPolyLines = DrawPolyLines
  *
  * @return {undefined}
  */
-function DrawPolyLinesEx (center, sides, radius, rotation, lineThick, color) {
+function DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color) {
   return r.BindDrawPolyLinesEx(
     center.x,
     center.y,
@@ -3389,6 +3544,388 @@ function DrawPolyLinesEx (center, sides, radius, rotation, lineThick, color) {
 raylib.DrawPolyLinesEx = DrawPolyLinesEx
 
 /**
+ * Draw spline: Linear, minimum 2 points
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineLinear(points, pointCount, thick, color) {
+  return r.BindDrawSplineLinear(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineLinear = DrawSplineLinear
+
+/**
+ * Draw spline: B-Spline, minimum 4 points
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineBasis(points, pointCount, thick, color) {
+  return r.BindDrawSplineBasis(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineBasis = DrawSplineBasis
+
+/**
+ * Draw spline: Catmull-Rom, minimum 4 points
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineCatmullRom(points, pointCount, thick, color) {
+  return r.BindDrawSplineCatmullRom(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineCatmullRom = DrawSplineCatmullRom
+
+/**
+ * Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineBezierQuadratic(points, pointCount, thick, color) {
+  return r.BindDrawSplineBezierQuadratic(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineBezierQuadratic = DrawSplineBezierQuadratic
+
+/**
+ * Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
+ *
+ * @param {number} points
+ * @param {number} pointCount
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineBezierCubic(points, pointCount, thick, color) {
+  return r.BindDrawSplineBezierCubic(
+    points,
+    pointCount,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineBezierCubic = DrawSplineBezierCubic
+
+/**
+ * Draw spline segment: Linear, 2 points
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentLinear(p1, p2, thick, color) {
+  return r.BindDrawSplineSegmentLinear(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentLinear = DrawSplineSegmentLinear
+
+/**
+ * Draw spline segment: B-Spline, 4 points
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {Vector2} p3
+ * @param {Vector2} p4
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentBasis(p1, p2, p3, p4, thick, color) {
+  return r.BindDrawSplineSegmentBasis(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    p3.x,
+    p3.y,
+    p4.x,
+    p4.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentBasis = DrawSplineSegmentBasis
+
+/**
+ * Draw spline segment: Catmull-Rom, 4 points
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {Vector2} p3
+ * @param {Vector2} p4
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentCatmullRom(p1, p2, p3, p4, thick, color) {
+  return r.BindDrawSplineSegmentCatmullRom(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    p3.x,
+    p3.y,
+    p4.x,
+    p4.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentCatmullRom = DrawSplineSegmentCatmullRom
+
+/**
+ * Draw spline segment: Quadratic Bezier, 2 points, 1 control point
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} c2
+ * @param {Vector2} p3
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentBezierQuadratic(p1, c2, p3, thick, color) {
+  return r.BindDrawSplineSegmentBezierQuadratic(
+    p1.x,
+    p1.y,
+    c2.x,
+    c2.y,
+    p3.x,
+    p3.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentBezierQuadratic = DrawSplineSegmentBezierQuadratic
+
+/**
+ * Draw spline segment: Cubic Bezier, 2 points, 2 control points
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} c2
+ * @param {Vector2} c3
+ * @param {Vector2} p4
+ * @param {number} thick
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function DrawSplineSegmentBezierCubic(p1, c2, c3, p4, thick, color) {
+  return r.BindDrawSplineSegmentBezierCubic(
+    p1.x,
+    p1.y,
+    c2.x,
+    c2.y,
+    c3.x,
+    c3.y,
+    p4.x,
+    p4.y,
+    thick,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.DrawSplineSegmentBezierCubic = DrawSplineSegmentBezierCubic
+
+/**
+ * Get (evaluate) spline point: Linear
+ *
+ * @param {Vector2} startPos
+ * @param {Vector2} endPos
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointLinear(startPos, endPos, t) {
+  return r.BindGetSplinePointLinear(
+    startPos.x,
+    startPos.y,
+    endPos.x,
+    endPos.y,
+    t
+  )
+}
+raylib.GetSplinePointLinear = GetSplinePointLinear
+
+/**
+ * Get (evaluate) spline point: B-Spline
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {Vector2} p3
+ * @param {Vector2} p4
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointBasis(p1, p2, p3, p4, t) {
+  return r.BindGetSplinePointBasis(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    p3.x,
+    p3.y,
+    p4.x,
+    p4.y,
+    t
+  )
+}
+raylib.GetSplinePointBasis = GetSplinePointBasis
+
+/**
+ * Get (evaluate) spline point: Catmull-Rom
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} p2
+ * @param {Vector2} p3
+ * @param {Vector2} p4
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointCatmullRom(p1, p2, p3, p4, t) {
+  return r.BindGetSplinePointCatmullRom(
+    p1.x,
+    p1.y,
+    p2.x,
+    p2.y,
+    p3.x,
+    p3.y,
+    p4.x,
+    p4.y,
+    t
+  )
+}
+raylib.GetSplinePointCatmullRom = GetSplinePointCatmullRom
+
+/**
+ * Get (evaluate) spline point: Quadratic Bezier
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} c2
+ * @param {Vector2} p3
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointBezierQuad(p1, c2, p3, t) {
+  return r.BindGetSplinePointBezierQuad(
+    p1.x,
+    p1.y,
+    c2.x,
+    c2.y,
+    p3.x,
+    p3.y,
+    t
+  )
+}
+raylib.GetSplinePointBezierQuad = GetSplinePointBezierQuad
+
+/**
+ * Get (evaluate) spline point: Cubic Bezier
+ *
+ * @param {Vector2} p1
+ * @param {Vector2} c2
+ * @param {Vector2} c3
+ * @param {Vector2} p4
+ * @param {number} t
+ *
+ * @return {Vector2} The resulting Vector2.
+ */
+function GetSplinePointBezierCubic(p1, c2, c3, p4, t) {
+  return r.BindGetSplinePointBezierCubic(
+    p1.x,
+    p1.y,
+    c2.x,
+    c2.y,
+    c3.x,
+    c3.y,
+    p4.x,
+    p4.y,
+    t
+  )
+}
+raylib.GetSplinePointBezierCubic = GetSplinePointBezierCubic
+
+/**
  * Check collision between two rectangles
  *
  * @param {Rectangle} rec1
@@ -3396,7 +3933,7 @@ raylib.DrawPolyLinesEx = DrawPolyLinesEx
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionRecs (rec1, rec2) {
+function CheckCollisionRecs(rec1, rec2) {
   return r.BindCheckCollisionRecs(
     rec1.x,
     rec1.y,
@@ -3420,7 +3957,7 @@ raylib.CheckCollisionRecs = CheckCollisionRecs
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionCircles (center1, radius1, center2, radius2) {
+function CheckCollisionCircles(center1, radius1, center2, radius2) {
   return r.BindCheckCollisionCircles(
     center1.x,
     center1.y,
@@ -3441,7 +3978,7 @@ raylib.CheckCollisionCircles = CheckCollisionCircles
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionCircleRec (center, radius, rec) {
+function CheckCollisionCircleRec(center, radius, rec) {
   return r.BindCheckCollisionCircleRec(
     center.x,
     center.y,
@@ -3462,7 +3999,7 @@ raylib.CheckCollisionCircleRec = CheckCollisionCircleRec
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionPointRec (point, rec) {
+function CheckCollisionPointRec(point, rec) {
   return r.BindCheckCollisionPointRec(
     point.x,
     point.y,
@@ -3483,7 +4020,7 @@ raylib.CheckCollisionPointRec = CheckCollisionPointRec
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionPointCircle (point, center, radius) {
+function CheckCollisionPointCircle(point, center, radius) {
   return r.BindCheckCollisionPointCircle(
     point.x,
     point.y,
@@ -3504,7 +4041,7 @@ raylib.CheckCollisionPointCircle = CheckCollisionPointCircle
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionPointTriangle (point, p1, p2, p3) {
+function CheckCollisionPointTriangle(point, p1, p2, p3) {
   return r.BindCheckCollisionPointTriangle(
     point.x,
     point.y,
@@ -3527,7 +4064,7 @@ raylib.CheckCollisionPointTriangle = CheckCollisionPointTriangle
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionPointPoly (point, points, pointCount) {
+function CheckCollisionPointPoly(point, points, pointCount) {
   return r.BindCheckCollisionPointPoly(
     point.x,
     point.y,
@@ -3548,7 +4085,7 @@ raylib.CheckCollisionPointPoly = CheckCollisionPointPoly
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionLines (startPos1, endPos1, startPos2, endPos2, collisionPoint) {
+function CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint) {
   return r.BindCheckCollisionLines(
     startPos1.x,
     startPos1.y,
@@ -3573,7 +4110,7 @@ raylib.CheckCollisionLines = CheckCollisionLines
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionPointLine (point, p1, p2, threshold) {
+function CheckCollisionPointLine(point, p1, p2, threshold) {
   return r.BindCheckCollisionPointLine(
     point.x,
     point.y,
@@ -3594,7 +4131,7 @@ raylib.CheckCollisionPointLine = CheckCollisionPointLine
  *
  * @return {Rectangle} The resulting Rectangle.
  */
-function GetCollisionRec (rec1, rec2) {
+function GetCollisionRec(rec1, rec2) {
   return r.BindGetCollisionRec(
     rec1.x,
     rec1.y,
@@ -3615,7 +4152,7 @@ raylib.GetCollisionRec = GetCollisionRec
  *
  * @return {Image} The resulting Image.
  */
-function LoadImage (fileName) {
+function LoadImage(fileName) {
   return r.BindLoadImage(
     fileName
   )
@@ -3633,7 +4170,7 @@ raylib.LoadImage = LoadImage
  *
  * @return {Image} The resulting Image.
  */
-function LoadImageRaw (fileName, width, height, format, headerSize) {
+function LoadImageRaw(fileName, width, height, format, headerSize) {
   return r.BindLoadImageRaw(
     fileName,
     width,
@@ -3645,6 +4182,24 @@ function LoadImageRaw (fileName, width, height, format, headerSize) {
 raylib.LoadImageRaw = LoadImageRaw
 
 /**
+ * Load image from SVG file data or string with specified size
+ *
+ * @param {string} fileNameOrString
+ * @param {number} width
+ * @param {number} height
+ *
+ * @return {Image} The resulting Image.
+ */
+function LoadImageSvg(fileNameOrString, width, height) {
+  return r.BindLoadImageSvg(
+    fileNameOrString,
+    width,
+    height
+  )
+}
+raylib.LoadImageSvg = LoadImageSvg
+
+/**
  * Load image sequence from file (frames appended to image.data)
  *
  * @param {string} fileName
@@ -3652,7 +4207,7 @@ raylib.LoadImageRaw = LoadImageRaw
  *
  * @return {Image} The resulting Image.
  */
-function LoadImageAnim (fileName, frames) {
+function LoadImageAnim(fileName, frames) {
   return r.BindLoadImageAnim(
     fileName,
     frames
@@ -3669,7 +4224,7 @@ raylib.LoadImageAnim = LoadImageAnim
  *
  * @return {Image} The resulting Image.
  */
-function LoadImageFromMemory (fileType, fileData, dataSize) {
+function LoadImageFromMemory(fileType, fileData, dataSize) {
   return r.BindLoadImageFromMemory(
     fileType,
     fileData,
@@ -3685,7 +4240,7 @@ raylib.LoadImageFromMemory = LoadImageFromMemory
  *
  * @return {Image} The resulting Image.
  */
-function LoadImageFromTexture (texture) {
+function LoadImageFromTexture(texture) {
   return r.BindLoadImageFromTexture(
     texture.id,
     texture.width,
@@ -3701,7 +4256,7 @@ raylib.LoadImageFromTexture = LoadImageFromTexture
  *
  * @return {Image} The resulting Image.
  */
-function LoadImageFromScreen () {
+function LoadImageFromScreen() {
   return r.BindLoadImageFromScreen()
 }
 raylib.LoadImageFromScreen = LoadImageFromScreen
@@ -3713,7 +4268,7 @@ raylib.LoadImageFromScreen = LoadImageFromScreen
  *
  * @return {boolean} The resulting bool.
  */
-function IsImageReady (image) {
+function IsImageReady(image) {
   return r.BindIsImageReady(
     image.data,
     image.width,
@@ -3731,7 +4286,7 @@ raylib.IsImageReady = IsImageReady
  *
  * @return {undefined}
  */
-function UnloadImage (image) {
+function UnloadImage(image) {
   return r.BindUnloadImage(
     image.data,
     image.width,
@@ -3750,7 +4305,7 @@ raylib.UnloadImage = UnloadImage
  *
  * @return {boolean} The resulting bool.
  */
-function ExportImage (image, fileName) {
+function ExportImage(image, fileName) {
   return r.BindExportImage(
     image.data,
     image.width,
@@ -3763,6 +4318,28 @@ function ExportImage (image, fileName) {
 raylib.ExportImage = ExportImage
 
 /**
+ * Export image to memory buffer
+ *
+ * @param {Image} image
+ * @param {string} fileType
+ * @param {number} fileSize
+ *
+ * @return {Buffer} The resulting unsigned char *.
+ */
+function ExportImageToMemory(image, fileType, fileSize) {
+  return r.BindExportImageToMemory(
+    image.data,
+    image.width,
+    image.height,
+    image.mipmaps,
+    image.format,
+    fileType,
+    fileSize
+  )
+}
+raylib.ExportImageToMemory = ExportImageToMemory
+
+/**
  * Export image as code file defining an array of bytes, returns true on success
  *
  * @param {Image} image
@@ -3770,7 +4347,7 @@ raylib.ExportImage = ExportImage
  *
  * @return {boolean} The resulting bool.
  */
-function ExportImageAsCode (image, fileName) {
+function ExportImageAsCode(image, fileName) {
   return r.BindExportImageAsCode(
     image.data,
     image.width,
@@ -3791,7 +4368,7 @@ raylib.ExportImageAsCode = ExportImageAsCode
  *
  * @return {Image} The resulting Image.
  */
-function GenImageColor (width, height, color) {
+function GenImageColor(width, height, color) {
   return r.BindGenImageColor(
     width,
     height,
@@ -3804,56 +4381,32 @@ function GenImageColor (width, height, color) {
 raylib.GenImageColor = GenImageColor
 
 /**
- * Generate image: vertical gradient
+ * Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient
  *
  * @param {number} width
  * @param {number} height
- * @param {Color} top
- * @param {Color} bottom
+ * @param {number} direction
+ * @param {Color} start
+ * @param {Color} end
  *
  * @return {Image} The resulting Image.
  */
-function GenImageGradientV (width, height, top, bottom) {
-  return r.BindGenImageGradientV(
+function GenImageGradientLinear(width, height, direction, start, end) {
+  return r.BindGenImageGradientLinear(
     width,
     height,
-    top.r,
-    top.g,
-    top.b,
-    top.a,
-    bottom.r,
-    bottom.g,
-    bottom.b,
-    bottom.a
+    direction,
+    start.r,
+    start.g,
+    start.b,
+    start.a,
+    end.r,
+    end.g,
+    end.b,
+    end.a
   )
 }
-raylib.GenImageGradientV = GenImageGradientV
-
-/**
- * Generate image: horizontal gradient
- *
- * @param {number} width
- * @param {number} height
- * @param {Color} left
- * @param {Color} right
- *
- * @return {Image} The resulting Image.
- */
-function GenImageGradientH (width, height, left, right) {
-  return r.BindGenImageGradientH(
-    width,
-    height,
-    left.r,
-    left.g,
-    left.b,
-    left.a,
-    right.r,
-    right.g,
-    right.b,
-    right.a
-  )
-}
-raylib.GenImageGradientH = GenImageGradientH
+raylib.GenImageGradientLinear = GenImageGradientLinear
 
 /**
  * Generate image: radial gradient
@@ -3866,7 +4419,7 @@ raylib.GenImageGradientH = GenImageGradientH
  *
  * @return {Image} The resulting Image.
  */
-function GenImageGradientRadial (width, height, density, inner, outer) {
+function GenImageGradientRadial(width, height, density, inner, outer) {
   return r.BindGenImageGradientRadial(
     width,
     height,
@@ -3884,6 +4437,34 @@ function GenImageGradientRadial (width, height, density, inner, outer) {
 raylib.GenImageGradientRadial = GenImageGradientRadial
 
 /**
+ * Generate image: square gradient
+ *
+ * @param {number} width
+ * @param {number} height
+ * @param {number} density
+ * @param {Color} inner
+ * @param {Color} outer
+ *
+ * @return {Image} The resulting Image.
+ */
+function GenImageGradientSquare(width, height, density, inner, outer) {
+  return r.BindGenImageGradientSquare(
+    width,
+    height,
+    density,
+    inner.r,
+    inner.g,
+    inner.b,
+    inner.a,
+    outer.r,
+    outer.g,
+    outer.b,
+    outer.a
+  )
+}
+raylib.GenImageGradientSquare = GenImageGradientSquare
+
+/**
  * Generate image: checked
  *
  * @param {number} width
@@ -3895,7 +4476,7 @@ raylib.GenImageGradientRadial = GenImageGradientRadial
  *
  * @return {Image} The resulting Image.
  */
-function GenImageChecked (width, height, checksX, checksY, col1, col2) {
+function GenImageChecked(width, height, checksX, checksY, col1, col2) {
   return r.BindGenImageChecked(
     width,
     height,
@@ -3922,7 +4503,7 @@ raylib.GenImageChecked = GenImageChecked
  *
  * @return {Image} The resulting Image.
  */
-function GenImageWhiteNoise (width, height, factor) {
+function GenImageWhiteNoise(width, height, factor) {
   return r.BindGenImageWhiteNoise(
     width,
     height,
@@ -3942,7 +4523,7 @@ raylib.GenImageWhiteNoise = GenImageWhiteNoise
  *
  * @return {Image} The resulting Image.
  */
-function GenImagePerlinNoise (width, height, offsetX, offsetY, scale) {
+function GenImagePerlinNoise(width, height, offsetX, offsetY, scale) {
   return r.BindGenImagePerlinNoise(
     width,
     height,
@@ -3962,7 +4543,7 @@ raylib.GenImagePerlinNoise = GenImagePerlinNoise
  *
  * @return {Image} The resulting Image.
  */
-function GenImageCellular (width, height, tileSize) {
+function GenImageCellular(width, height, tileSize) {
   return r.BindGenImageCellular(
     width,
     height,
@@ -3980,7 +4561,7 @@ raylib.GenImageCellular = GenImageCellular
  *
  * @return {Image} The resulting Image.
  */
-function GenImageText (width, height, text) {
+function GenImageText(width, height, text) {
   return r.BindGenImageText(
     width,
     height,
@@ -3996,7 +4577,7 @@ raylib.GenImageText = GenImageText
  *
  * @return {Image} The resulting Image.
  */
-function ImageCopy (image) {
+function ImageCopy(image) {
   return r.BindImageCopy(
     image.data,
     image.width,
@@ -4015,7 +4596,7 @@ raylib.ImageCopy = ImageCopy
  *
  * @return {Image} The resulting Image.
  */
-function ImageFromImage (image, rec) {
+function ImageFromImage(image, rec) {
   return r.BindImageFromImage(
     image.data,
     image.width,
@@ -4039,7 +4620,7 @@ raylib.ImageFromImage = ImageFromImage
  *
  * @return {Image} The resulting Image.
  */
-function ImageText (text, fontSize, color) {
+function ImageText(text, fontSize, color) {
   return r.BindImageText(
     text,
     fontSize,
@@ -4062,7 +4643,7 @@ raylib.ImageText = ImageText
  *
  * @return {Image} The resulting Image.
  */
-function ImageTextEx (font, text, fontSize, spacing, tint) {
+function ImageTextEx(font, text, fontSize, spacing, tint) {
   return r.BindImageTextEx(
     font.baseSize,
     font.glyphCount,
@@ -4093,7 +4674,7 @@ raylib.ImageTextEx = ImageTextEx
  *
  * @return {undefined}
  */
-function ImageBlurGaussian (image, blurSize) {
+function ImageBlurGaussian(image, blurSize) {
   return r.BindImageBlurGaussian(
     image,
     blurSize
@@ -4102,13 +4683,29 @@ function ImageBlurGaussian (image, blurSize) {
 raylib.ImageBlurGaussian = ImageBlurGaussian
 
 /**
+ * Rotate image by input angle in degrees (-359 to 359)
+ *
+ * @param {number} image
+ * @param {number} degrees
+ *
+ * @return {undefined}
+ */
+function ImageRotate(image, degrees) {
+  return r.BindImageRotate(
+    image,
+    degrees
+  )
+}
+raylib.ImageRotate = ImageRotate
+
+/**
  * Load color data from image as a Color array (RGBA - 32bit)
  *
  * @param {Image} image
  *
  * @return {number} The resulting Color *.
  */
-function LoadImageColors (image) {
+function LoadImageColors(image) {
   return r.BindLoadImageColors(
     image.data,
     image.width,
@@ -4128,7 +4725,7 @@ raylib.LoadImageColors = LoadImageColors
  *
  * @return {number} The resulting Color *.
  */
-function LoadImagePalette (image, maxPaletteSize, colorCount) {
+function LoadImagePalette(image, maxPaletteSize, colorCount) {
   return r.BindLoadImagePalette(
     image.data,
     image.width,
@@ -4148,7 +4745,7 @@ raylib.LoadImagePalette = LoadImagePalette
  *
  * @return {undefined}
  */
-function UnloadImageColors (colors) {
+function UnloadImageColors(colors) {
   return r.BindUnloadImageColors(
     colors
   )
@@ -4162,7 +4759,7 @@ raylib.UnloadImageColors = UnloadImageColors
  *
  * @return {undefined}
  */
-function UnloadImagePalette (colors) {
+function UnloadImagePalette(colors) {
   return r.BindUnloadImagePalette(
     colors
   )
@@ -4177,7 +4774,7 @@ raylib.UnloadImagePalette = UnloadImagePalette
  *
  * @return {Rectangle} The resulting Rectangle.
  */
-function GetImageAlphaBorder (image, threshold) {
+function GetImageAlphaBorder(image, threshold) {
   return r.BindGetImageAlphaBorder(
     image.data,
     image.width,
@@ -4198,7 +4795,7 @@ raylib.GetImageAlphaBorder = GetImageAlphaBorder
  *
  * @return {Color} The resulting Color.
  */
-function GetImageColor (image, x, y) {
+function GetImageColor(image, x, y) {
   return r.BindGetImageColor(
     image.data,
     image.width,
@@ -4222,7 +4819,7 @@ raylib.GetImageColor = GetImageColor
  *
  * @return {undefined}
  */
-function ImageDrawCircleLines (dst, centerX, centerY, radius, color) {
+function ImageDrawCircleLines(dst, centerX, centerY, radius, color) {
   return r.BindImageDrawCircleLines(
     dst,
     centerX,
@@ -4246,7 +4843,7 @@ raylib.ImageDrawCircleLines = ImageDrawCircleLines
  *
  * @return {undefined}
  */
-function ImageDrawCircleLinesV (dst, center, radius, color) {
+function ImageDrawCircleLinesV(dst, center, radius, color) {
   return r.BindImageDrawCircleLinesV(
     dst,
     center.x,
@@ -4267,7 +4864,7 @@ raylib.ImageDrawCircleLinesV = ImageDrawCircleLinesV
  *
  * @return {Texture2D} The resulting Texture2D.
  */
-function LoadTexture (fileName) {
+function LoadTexture(fileName) {
   return r.BindLoadTexture(
     fileName
   )
@@ -4281,7 +4878,7 @@ raylib.LoadTexture = LoadTexture
  *
  * @return {Texture2D} The resulting Texture2D.
  */
-function LoadTextureFromImage (image) {
+function LoadTextureFromImage(image) {
   return r.BindLoadTextureFromImage(
     image.data,
     image.width,
@@ -4300,7 +4897,7 @@ raylib.LoadTextureFromImage = LoadTextureFromImage
  *
  * @return {TextureCubemap} The resulting TextureCubemap.
  */
-function LoadTextureCubemap (image, layout) {
+function LoadTextureCubemap(image, layout) {
   return r.BindLoadTextureCubemap(
     image.data,
     image.width,
@@ -4320,7 +4917,7 @@ raylib.LoadTextureCubemap = LoadTextureCubemap
  *
  * @return {RenderTexture2D} The resulting RenderTexture2D.
  */
-function LoadRenderTexture (width, height) {
+function LoadRenderTexture(width, height) {
   return r.BindLoadRenderTexture(
     width,
     height
@@ -4335,7 +4932,7 @@ raylib.LoadRenderTexture = LoadRenderTexture
  *
  * @return {boolean} The resulting bool.
  */
-function IsTextureReady (texture) {
+function IsTextureReady(texture) {
   return r.BindIsTextureReady(
     texture.id,
     texture.width,
@@ -4353,7 +4950,7 @@ raylib.IsTextureReady = IsTextureReady
  *
  * @return {undefined}
  */
-function UnloadTexture (texture) {
+function UnloadTexture(texture) {
   return r.BindUnloadTexture(
     texture.id,
     texture.width,
@@ -4371,7 +4968,7 @@ raylib.UnloadTexture = UnloadTexture
  *
  * @return {boolean} The resulting bool.
  */
-function IsRenderTextureReady (target) {
+function IsRenderTextureReady(target) {
   return r.BindIsRenderTextureReady(
     target.id,
     target.texture.id,
@@ -4395,7 +4992,7 @@ raylib.IsRenderTextureReady = IsRenderTextureReady
  *
  * @return {undefined}
  */
-function UnloadRenderTexture (target) {
+function UnloadRenderTexture(target) {
   return r.BindUnloadRenderTexture(
     target.id,
     target.texture.id,
@@ -4420,7 +5017,7 @@ raylib.UnloadRenderTexture = UnloadRenderTexture
  *
  * @return {undefined}
  */
-function UpdateTexture (texture, pixels) {
+function UpdateTexture(texture, pixels) {
   return r.BindUpdateTexture(
     texture.id,
     texture.width,
@@ -4441,7 +5038,7 @@ raylib.UpdateTexture = UpdateTexture
  *
  * @return {undefined}
  */
-function UpdateTextureRec (texture, rec, pixels) {
+function UpdateTextureRec(texture, rec, pixels) {
   return r.BindUpdateTextureRec(
     texture.id,
     texture.width,
@@ -4465,7 +5062,7 @@ raylib.UpdateTextureRec = UpdateTextureRec
  *
  * @return {undefined}
  */
-function SetTextureFilter (texture, filter) {
+function SetTextureFilter(texture, filter) {
   return r.BindSetTextureFilter(
     texture.id,
     texture.width,
@@ -4485,7 +5082,7 @@ raylib.SetTextureFilter = SetTextureFilter
  *
  * @return {undefined}
  */
-function SetTextureWrap (texture, wrap) {
+function SetTextureWrap(texture, wrap) {
   return r.BindSetTextureWrap(
     texture.id,
     texture.width,
@@ -4507,7 +5104,7 @@ raylib.SetTextureWrap = SetTextureWrap
  *
  * @return {undefined}
  */
-function DrawTexture (texture, posX, posY, tint) {
+function DrawTexture(texture, posX, posY, tint) {
   return r.BindDrawTexture(
     texture.id,
     texture.width,
@@ -4533,7 +5130,7 @@ raylib.DrawTexture = DrawTexture
  *
  * @return {undefined}
  */
-function DrawTextureV (texture, position, tint) {
+function DrawTextureV(texture, position, tint) {
   return r.BindDrawTextureV(
     texture.id,
     texture.width,
@@ -4561,7 +5158,7 @@ raylib.DrawTextureV = DrawTextureV
  *
  * @return {undefined}
  */
-function DrawTextureEx (texture, position, rotation, scale, tint) {
+function DrawTextureEx(texture, position, rotation, scale, tint) {
   return r.BindDrawTextureEx(
     texture.id,
     texture.width,
@@ -4590,7 +5187,7 @@ raylib.DrawTextureEx = DrawTextureEx
  *
  * @return {undefined}
  */
-function DrawTextureRec (texture, source, position, tint) {
+function DrawTextureRec(texture, source, position, tint) {
   return r.BindDrawTextureRec(
     texture.id,
     texture.width,
@@ -4623,7 +5220,7 @@ raylib.DrawTextureRec = DrawTextureRec
  *
  * @return {undefined}
  */
-function DrawTexturePro (texture, source, dest, origin, rotation, tint) {
+function DrawTexturePro(texture, source, dest, origin, rotation, tint) {
   return r.BindDrawTexturePro(
     texture.id,
     texture.width,
@@ -4661,7 +5258,7 @@ raylib.DrawTexturePro = DrawTexturePro
  *
  * @return {undefined}
  */
-function DrawTextureNPatch (texture, nPatchInfo, dest, origin, rotation, tint) {
+function DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint) {
   return r.BindDrawTextureNPatch(
     texture.id,
     texture.width,
@@ -4700,7 +5297,7 @@ raylib.DrawTextureNPatch = DrawTextureNPatch
  *
  * @return {Color} The resulting Color.
  */
-function Fade (color, alpha) {
+function Fade(color, alpha) {
   return r.BindFade(
     color.r,
     color.g,
@@ -4718,7 +5315,7 @@ raylib.Fade = Fade
  *
  * @return {number} The resulting int.
  */
-function ColorToInt (color) {
+function ColorToInt(color) {
   return r.BindColorToInt(
     color.r,
     color.g,
@@ -4735,7 +5332,7 @@ raylib.ColorToInt = ColorToInt
  *
  * @return {Vector4} The resulting Vector4.
  */
-function ColorNormalize (color) {
+function ColorNormalize(color) {
   return r.BindColorNormalize(
     color.r,
     color.g,
@@ -4752,7 +5349,7 @@ raylib.ColorNormalize = ColorNormalize
  *
  * @return {Color} The resulting Color.
  */
-function ColorFromNormalized (normalized) {
+function ColorFromNormalized(normalized) {
   return r.BindColorFromNormalized(
     normalized.x,
     normalized.y,
@@ -4769,7 +5366,7 @@ raylib.ColorFromNormalized = ColorFromNormalized
  *
  * @return {Vector3} The resulting Vector3.
  */
-function ColorToHSV (color) {
+function ColorToHSV(color) {
   return r.BindColorToHSV(
     color.r,
     color.g,
@@ -4788,7 +5385,7 @@ raylib.ColorToHSV = ColorToHSV
  *
  * @return {Color} The resulting Color.
  */
-function ColorFromHSV (hue, saturation, value) {
+function ColorFromHSV(hue, saturation, value) {
   return r.BindColorFromHSV(
     hue,
     saturation,
@@ -4805,7 +5402,7 @@ raylib.ColorFromHSV = ColorFromHSV
  *
  * @return {Color} The resulting Color.
  */
-function ColorTint (color, tint) {
+function ColorTint(color, tint) {
   return r.BindColorTint(
     color.r,
     color.g,
@@ -4827,7 +5424,7 @@ raylib.ColorTint = ColorTint
  *
  * @return {Color} The resulting Color.
  */
-function ColorBrightness (color, factor) {
+function ColorBrightness(color, factor) {
   return r.BindColorBrightness(
     color.r,
     color.g,
@@ -4846,7 +5443,7 @@ raylib.ColorBrightness = ColorBrightness
  *
  * @return {Color} The resulting Color.
  */
-function ColorContrast (color, contrast) {
+function ColorContrast(color, contrast) {
   return r.BindColorContrast(
     color.r,
     color.g,
@@ -4865,7 +5462,7 @@ raylib.ColorContrast = ColorContrast
  *
  * @return {Color} The resulting Color.
  */
-function ColorAlpha (color, alpha) {
+function ColorAlpha(color, alpha) {
   return r.BindColorAlpha(
     color.r,
     color.g,
@@ -4885,7 +5482,7 @@ raylib.ColorAlpha = ColorAlpha
  *
  * @return {Color} The resulting Color.
  */
-function ColorAlphaBlend (dst, src, tint) {
+function ColorAlphaBlend(dst, src, tint) {
   return r.BindColorAlphaBlend(
     dst.r,
     dst.g,
@@ -4910,7 +5507,7 @@ raylib.ColorAlphaBlend = ColorAlphaBlend
  *
  * @return {Color} The resulting Color.
  */
-function GetColor (hexValue) {
+function GetColor(hexValue) {
   return r.BindGetColor(
     hexValue
   )
@@ -4925,7 +5522,7 @@ raylib.GetColor = GetColor
  *
  * @return {Color} The resulting Color.
  */
-function GetPixelColor (srcPtr, format) {
+function GetPixelColor(srcPtr, format) {
   return r.BindGetPixelColor(
     srcPtr,
     format
@@ -4942,7 +5539,7 @@ raylib.GetPixelColor = GetPixelColor
  *
  * @return {undefined}
  */
-function SetPixelColor (dstPtr, color, format) {
+function SetPixelColor(dstPtr, color, format) {
   return r.BindSetPixelColor(
     dstPtr,
     color.r,
@@ -4963,7 +5560,7 @@ raylib.SetPixelColor = SetPixelColor
  *
  * @return {number} The resulting int.
  */
-function GetPixelDataSize (width, height, format) {
+function GetPixelDataSize(width, height, format) {
   return r.BindGetPixelDataSize(
     width,
     height,
@@ -4977,7 +5574,7 @@ raylib.GetPixelDataSize = GetPixelDataSize
  *
  * @return {Font} The resulting Font.
  */
-function GetFontDefault () {
+function GetFontDefault() {
   return r.BindGetFontDefault()
 }
 raylib.GetFontDefault = GetFontDefault
@@ -4989,7 +5586,7 @@ raylib.GetFontDefault = GetFontDefault
  *
  * @return {Font} The resulting Font.
  */
-function LoadFont (fileName) {
+function LoadFont(fileName) {
   return r.BindLoadFont(
     fileName
   )
@@ -4997,21 +5594,21 @@ function LoadFont (fileName) {
 raylib.LoadFont = LoadFont
 
 /**
- * Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
+ * Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont
  *
  * @param {string} fileName
  * @param {number} fontSize
- * @param {number} fontChars
- * @param {number} glyphCount
+ * @param {number} codepoints
+ * @param {number} codepointCount
  *
  * @return {Font} The resulting Font.
  */
-function LoadFontEx (fileName, fontSize, fontChars, glyphCount) {
+function LoadFontEx(fileName, fontSize, codepoints, codepointCount) {
   return r.BindLoadFontEx(
     fileName,
     fontSize,
-    fontChars,
-    glyphCount
+    codepoints,
+    codepointCount
   )
 }
 raylib.LoadFontEx = LoadFontEx
@@ -5025,7 +5622,7 @@ raylib.LoadFontEx = LoadFontEx
  *
  * @return {Font} The resulting Font.
  */
-function LoadFontFromImage (image, key, firstChar) {
+function LoadFontFromImage(image, key, firstChar) {
   return r.BindLoadFontFromImage(
     image.data,
     image.width,
@@ -5048,19 +5645,19 @@ raylib.LoadFontFromImage = LoadFontFromImage
  * @param {Buffer} fileData
  * @param {number} dataSize
  * @param {number} fontSize
- * @param {number} fontChars
- * @param {number} glyphCount
+ * @param {number} codepoints
+ * @param {number} codepointCount
  *
  * @return {Font} The resulting Font.
  */
-function LoadFontFromMemory (fileType, fileData, dataSize, fontSize, fontChars, glyphCount) {
+function LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount) {
   return r.BindLoadFontFromMemory(
     fileType,
     fileData,
     dataSize,
     fontSize,
-    fontChars,
-    glyphCount
+    codepoints,
+    codepointCount
   )
 }
 raylib.LoadFontFromMemory = LoadFontFromMemory
@@ -5072,7 +5669,7 @@ raylib.LoadFontFromMemory = LoadFontFromMemory
  *
  * @return {boolean} The resulting bool.
  */
-function IsFontReady (font) {
+function IsFontReady(font) {
   return r.BindIsFontReady(
     font.baseSize,
     font.glyphCount,
@@ -5094,19 +5691,19 @@ raylib.IsFontReady = IsFontReady
  * @param {Buffer} fileData
  * @param {number} dataSize
  * @param {number} fontSize
- * @param {number} fontChars
- * @param {number} glyphCount
+ * @param {number} codepoints
+ * @param {number} codepointCount
  * @param {number} type
  *
  * @return {number} The resulting GlyphInfo *.
  */
-function LoadFontData (fileData, dataSize, fontSize, fontChars, glyphCount, type) {
+function LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type) {
   return r.BindLoadFontData(
     fileData,
     dataSize,
     fontSize,
-    fontChars,
-    glyphCount,
+    codepoints,
+    codepointCount,
     type
   )
 }
@@ -5115,8 +5712,8 @@ raylib.LoadFontData = LoadFontData
 /**
  * Generate image font atlas using chars info
  *
- * @param {number} chars
- * @param {number} recs
+ * @param {number} glyphs
+ * @param {number} glyphRecs
  * @param {number} glyphCount
  * @param {number} fontSize
  * @param {number} padding
@@ -5124,10 +5721,10 @@ raylib.LoadFontData = LoadFontData
  *
  * @return {Image} The resulting Image.
  */
-function GenImageFontAtlas (chars, recs, glyphCount, fontSize, padding, packMethod) {
+function GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod) {
   return r.BindGenImageFontAtlas(
-    chars,
-    recs,
+    glyphs,
+    glyphRecs,
     glyphCount,
     fontSize,
     padding,
@@ -5139,14 +5736,14 @@ raylib.GenImageFontAtlas = GenImageFontAtlas
 /**
  * Unload font chars info data (RAM)
  *
- * @param {number} chars
+ * @param {number} glyphs
  * @param {number} glyphCount
  *
  * @return {undefined}
  */
-function UnloadFontData (chars, glyphCount) {
+function UnloadFontData(glyphs, glyphCount) {
   return r.BindUnloadFontData(
-    chars,
+    glyphs,
     glyphCount
   )
 }
@@ -5159,7 +5756,7 @@ raylib.UnloadFontData = UnloadFontData
  *
  * @return {undefined}
  */
-function UnloadFont (font) {
+function UnloadFont(font) {
   return r.BindUnloadFont(
     font.baseSize,
     font.glyphCount,
@@ -5183,7 +5780,7 @@ raylib.UnloadFont = UnloadFont
  *
  * @return {boolean} The resulting bool.
  */
-function ExportFontAsCode (font, fileName) {
+function ExportFontAsCode(font, fileName) {
   return r.BindExportFontAsCode(
     font.baseSize,
     font.glyphCount,
@@ -5208,7 +5805,7 @@ raylib.ExportFontAsCode = ExportFontAsCode
  *
  * @return {undefined}
  */
-function DrawFPS (posX, posY) {
+function DrawFPS(posX, posY) {
   return r.BindDrawFPS(
     posX,
     posY
@@ -5227,7 +5824,7 @@ raylib.DrawFPS = DrawFPS
  *
  * @return {undefined}
  */
-function DrawText (text, posX, posY, fontSize, color) {
+function DrawText(text, posX, posY, fontSize, color) {
   return r.BindDrawText(
     text,
     posX,
@@ -5253,7 +5850,7 @@ raylib.DrawText = DrawText
  *
  * @return {undefined}
  */
-function DrawTextEx (font, text, position, fontSize, spacing, tint) {
+function DrawTextEx(font, text, position, fontSize, spacing, tint) {
   return r.BindDrawTextEx(
     font.baseSize,
     font.glyphCount,
@@ -5292,7 +5889,7 @@ raylib.DrawTextEx = DrawTextEx
  *
  * @return {undefined}
  */
-function DrawTextPro (font, text, position, origin, rotation, fontSize, spacing, tint) {
+function DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint) {
   return r.BindDrawTextPro(
     font.baseSize,
     font.glyphCount,
@@ -5331,7 +5928,7 @@ raylib.DrawTextPro = DrawTextPro
  *
  * @return {undefined}
  */
-function DrawTextCodepoint (font, codepoint, position, fontSize, tint) {
+function DrawTextCodepoint(font, codepoint, position, fontSize, tint) {
   return r.BindDrawTextCodepoint(
     font.baseSize,
     font.glyphCount,
@@ -5360,7 +5957,7 @@ raylib.DrawTextCodepoint = DrawTextCodepoint
  *
  * @param {Font} font
  * @param {number} codepoints
- * @param {number} count
+ * @param {number} codepointCount
  * @param {Vector2} position
  * @param {number} fontSize
  * @param {number} spacing
@@ -5368,7 +5965,7 @@ raylib.DrawTextCodepoint = DrawTextCodepoint
  *
  * @return {undefined}
  */
-function DrawTextCodepoints (font, codepoints, count, position, fontSize, spacing, tint) {
+function DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint) {
   return r.BindDrawTextCodepoints(
     font.baseSize,
     font.glyphCount,
@@ -5381,7 +5978,7 @@ function DrawTextCodepoints (font, codepoints, count, position, fontSize, spacin
     font.recs,
     font.glyphs,
     codepoints,
-    count,
+    codepointCount,
     position.x,
     position.y,
     fontSize,
@@ -5395,6 +5992,20 @@ function DrawTextCodepoints (font, codepoints, count, position, fontSize, spacin
 raylib.DrawTextCodepoints = DrawTextCodepoints
 
 /**
+ * Set vertical line spacing when drawing with line-breaks
+ *
+ * @param {number} spacing
+ *
+ * @return {undefined}
+ */
+function SetTextLineSpacing(spacing) {
+  return r.BindSetTextLineSpacing(
+    spacing
+  )
+}
+raylib.SetTextLineSpacing = SetTextLineSpacing
+
+/**
  * Measure string width for default font
  *
  * @param {string} text
@@ -5402,7 +6013,7 @@ raylib.DrawTextCodepoints = DrawTextCodepoints
  *
  * @return {number} The resulting int.
  */
-function MeasureText (text, fontSize) {
+function MeasureText(text, fontSize) {
   return r.BindMeasureText(
     text,
     fontSize
@@ -5420,7 +6031,7 @@ raylib.MeasureText = MeasureText
  *
  * @return {Vector2} The resulting Vector2.
  */
-function MeasureTextEx (font, text, fontSize, spacing) {
+function MeasureTextEx(font, text, fontSize, spacing) {
   return r.BindMeasureTextEx(
     font.baseSize,
     font.glyphCount,
@@ -5447,7 +6058,7 @@ raylib.MeasureTextEx = MeasureTextEx
  *
  * @return {number} The resulting int.
  */
-function GetGlyphIndex (font, codepoint) {
+function GetGlyphIndex(font, codepoint) {
   return r.BindGetGlyphIndex(
     font.baseSize,
     font.glyphCount,
@@ -5472,7 +6083,7 @@ raylib.GetGlyphIndex = GetGlyphIndex
  *
  * @return {GlyphInfo} The resulting GlyphInfo.
  */
-function GetGlyphInfo (font, codepoint) {
+function GetGlyphInfo(font, codepoint) {
   return r.BindGetGlyphInfo(
     font.baseSize,
     font.glyphCount,
@@ -5497,7 +6108,7 @@ raylib.GetGlyphInfo = GetGlyphInfo
  *
  * @return {Rectangle} The resulting Rectangle.
  */
-function GetGlyphAtlasRec (font, codepoint) {
+function GetGlyphAtlasRec(font, codepoint) {
   return r.BindGetGlyphAtlasRec(
     font.baseSize,
     font.glyphCount,
@@ -5522,7 +6133,7 @@ raylib.GetGlyphAtlasRec = GetGlyphAtlasRec
  *
  * @return {string} The resulting char *.
  */
-function LoadUTF8 (codepoints, length) {
+function LoadUTF8(codepoints, length) {
   return r.BindLoadUTF8(
     codepoints,
     length
@@ -5537,7 +6148,7 @@ raylib.LoadUTF8 = LoadUTF8
  *
  * @return {undefined}
  */
-function UnloadUTF8 (text) {
+function UnloadUTF8(text) {
   return r.BindUnloadUTF8(
     text
   )
@@ -5552,7 +6163,7 @@ raylib.UnloadUTF8 = UnloadUTF8
  *
  * @return {number} The resulting int *.
  */
-function LoadCodepoints (text, count) {
+function LoadCodepoints(text, count) {
   return r.BindLoadCodepoints(
     text,
     count
@@ -5567,7 +6178,7 @@ raylib.LoadCodepoints = LoadCodepoints
  *
  * @return {undefined}
  */
-function UnloadCodepoints (codepoints) {
+function UnloadCodepoints(codepoints) {
   return r.BindUnloadCodepoints(
     codepoints
   )
@@ -5581,7 +6192,7 @@ raylib.UnloadCodepoints = UnloadCodepoints
  *
  * @return {number} The resulting int.
  */
-function GetCodepointCount (text) {
+function GetCodepointCount(text) {
   return r.BindGetCodepointCount(
     text
   )
@@ -5596,7 +6207,7 @@ raylib.GetCodepointCount = GetCodepointCount
  *
  * @return {number} The resulting int.
  */
-function GetCodepoint (text, codepointSize) {
+function GetCodepoint(text, codepointSize) {
   return r.BindGetCodepoint(
     text,
     codepointSize
@@ -5612,7 +6223,7 @@ raylib.GetCodepoint = GetCodepoint
  *
  * @return {number} The resulting int.
  */
-function GetCodepointNext (text, codepointSize) {
+function GetCodepointNext(text, codepointSize) {
   return r.BindGetCodepointNext(
     text,
     codepointSize
@@ -5628,7 +6239,7 @@ raylib.GetCodepointNext = GetCodepointNext
  *
  * @return {number} The resulting int.
  */
-function GetCodepointPrevious (text, codepointSize) {
+function GetCodepointPrevious(text, codepointSize) {
   return r.BindGetCodepointPrevious(
     text,
     codepointSize
@@ -5644,7 +6255,7 @@ raylib.GetCodepointPrevious = GetCodepointPrevious
  *
  * @return {string} The resulting const char *.
  */
-function CodepointToUTF8 (codepoint, utf8Size) {
+function CodepointToUTF8(codepoint, utf8Size) {
   return r.BindCodepointToUTF8(
     codepoint,
     utf8Size
@@ -5660,7 +6271,7 @@ raylib.CodepointToUTF8 = CodepointToUTF8
  *
  * @return {number} The resulting int.
  */
-function TextCopy (dst, src) {
+function TextCopy(dst, src) {
   return r.BindTextCopy(
     dst,
     src
@@ -5676,7 +6287,7 @@ raylib.TextCopy = TextCopy
  *
  * @return {boolean} The resulting bool.
  */
-function TextIsEqual (text1, text2) {
+function TextIsEqual(text1, text2) {
   return r.BindTextIsEqual(
     text1,
     text2
@@ -5691,7 +6302,7 @@ raylib.TextIsEqual = TextIsEqual
  *
  * @return {number} The resulting unsigned int.
  */
-function TextLength (text) {
+function TextLength(text) {
   return r.BindTextLength(
     text
   )
@@ -5707,7 +6318,7 @@ raylib.TextLength = TextLength
  *
  * @return {string} The resulting const char *.
  */
-function TextSubtext (text, position, length) {
+function TextSubtext(text, position, length) {
   return r.BindTextSubtext(
     text,
     position,
@@ -5725,7 +6336,7 @@ raylib.TextSubtext = TextSubtext
  *
  * @return {string} The resulting char *.
  */
-function TextReplace (text, replace, by) {
+function TextReplace(text, replace, by) {
   return r.BindTextReplace(
     text,
     replace,
@@ -5743,7 +6354,7 @@ raylib.TextReplace = TextReplace
  *
  * @return {string} The resulting char *.
  */
-function TextInsert (text, insert, position) {
+function TextInsert(text, insert, position) {
   return r.BindTextInsert(
     text,
     insert,
@@ -5761,7 +6372,7 @@ raylib.TextInsert = TextInsert
  *
  * @return {string} The resulting const char *.
  */
-function TextJoin (textList, count, delimiter) {
+function TextJoin(textList, count, delimiter) {
   return r.BindTextJoin(
     textList,
     count,
@@ -5779,7 +6390,7 @@ raylib.TextJoin = TextJoin
  *
  * @return {number} The resulting const char **.
  */
-function TextSplit (text, delimiter, count) {
+function TextSplit(text, delimiter, count) {
   return r.BindTextSplit(
     text,
     delimiter,
@@ -5797,7 +6408,7 @@ raylib.TextSplit = TextSplit
  *
  * @return {undefined}
  */
-function TextAppend (text, append, position) {
+function TextAppend(text, append, position) {
   return r.BindTextAppend(
     text,
     append,
@@ -5814,7 +6425,7 @@ raylib.TextAppend = TextAppend
  *
  * @return {number} The resulting int.
  */
-function TextFindIndex (text, find) {
+function TextFindIndex(text, find) {
   return r.BindTextFindIndex(
     text,
     find
@@ -5829,7 +6440,7 @@ raylib.TextFindIndex = TextFindIndex
  *
  * @return {string} The resulting const char *.
  */
-function TextToUpper (text) {
+function TextToUpper(text) {
   return r.BindTextToUpper(
     text
   )
@@ -5843,7 +6454,7 @@ raylib.TextToUpper = TextToUpper
  *
  * @return {string} The resulting const char *.
  */
-function TextToLower (text) {
+function TextToLower(text) {
   return r.BindTextToLower(
     text
   )
@@ -5857,7 +6468,7 @@ raylib.TextToLower = TextToLower
  *
  * @return {string} The resulting const char *.
  */
-function TextToPascal (text) {
+function TextToPascal(text) {
   return r.BindTextToPascal(
     text
   )
@@ -5871,7 +6482,7 @@ raylib.TextToPascal = TextToPascal
  *
  * @return {number} The resulting int.
  */
-function TextToInteger (text) {
+function TextToInteger(text) {
   return r.BindTextToInteger(
     text
   )
@@ -5887,7 +6498,7 @@ raylib.TextToInteger = TextToInteger
  *
  * @return {undefined}
  */
-function DrawLine3D (startPos, endPos, color) {
+function DrawLine3D(startPos, endPos, color) {
   return r.BindDrawLine3D(
     startPos.x,
     startPos.y,
@@ -5911,7 +6522,7 @@ raylib.DrawLine3D = DrawLine3D
  *
  * @return {undefined}
  */
-function DrawPoint3D (position, color) {
+function DrawPoint3D(position, color) {
   return r.BindDrawPoint3D(
     position.x,
     position.y,
@@ -5935,7 +6546,7 @@ raylib.DrawPoint3D = DrawPoint3D
  *
  * @return {undefined}
  */
-function DrawCircle3D (center, radius, rotationAxis, rotationAngle, color) {
+function DrawCircle3D(center, radius, rotationAxis, rotationAngle, color) {
   return r.BindDrawCircle3D(
     center.x,
     center.y,
@@ -5963,7 +6574,7 @@ raylib.DrawCircle3D = DrawCircle3D
  *
  * @return {undefined}
  */
-function DrawTriangle3D (v1, v2, v3, color) {
+function DrawTriangle3D(v1, v2, v3, color) {
   return r.BindDrawTriangle3D(
     v1.x,
     v1.y,
@@ -5991,7 +6602,7 @@ raylib.DrawTriangle3D = DrawTriangle3D
  *
  * @return {undefined}
  */
-function DrawTriangleStrip3D (points, pointCount, color) {
+function DrawTriangleStrip3D(points, pointCount, color) {
   return r.BindDrawTriangleStrip3D(
     points,
     pointCount,
@@ -6014,7 +6625,7 @@ raylib.DrawTriangleStrip3D = DrawTriangleStrip3D
  *
  * @return {undefined}
  */
-function DrawCube (position, width, height, length, color) {
+function DrawCube(position, width, height, length, color) {
   return r.BindDrawCube(
     position.x,
     position.y,
@@ -6039,7 +6650,7 @@ raylib.DrawCube = DrawCube
  *
  * @return {undefined}
  */
-function DrawCubeV (position, size, color) {
+function DrawCubeV(position, size, color) {
   return r.BindDrawCubeV(
     position.x,
     position.y,
@@ -6066,7 +6677,7 @@ raylib.DrawCubeV = DrawCubeV
  *
  * @return {undefined}
  */
-function DrawCubeWires (position, width, height, length, color) {
+function DrawCubeWires(position, width, height, length, color) {
   return r.BindDrawCubeWires(
     position.x,
     position.y,
@@ -6091,7 +6702,7 @@ raylib.DrawCubeWires = DrawCubeWires
  *
  * @return {undefined}
  */
-function DrawCubeWiresV (position, size, color) {
+function DrawCubeWiresV(position, size, color) {
   return r.BindDrawCubeWiresV(
     position.x,
     position.y,
@@ -6116,7 +6727,7 @@ raylib.DrawCubeWiresV = DrawCubeWiresV
  *
  * @return {undefined}
  */
-function DrawSphere (centerPos, radius, color) {
+function DrawSphere(centerPos, radius, color) {
   return r.BindDrawSphere(
     centerPos.x,
     centerPos.y,
@@ -6141,7 +6752,7 @@ raylib.DrawSphere = DrawSphere
  *
  * @return {undefined}
  */
-function DrawSphereEx (centerPos, radius, rings, slices, color) {
+function DrawSphereEx(centerPos, radius, rings, slices, color) {
   return r.BindDrawSphereEx(
     centerPos.x,
     centerPos.y,
@@ -6168,7 +6779,7 @@ raylib.DrawSphereEx = DrawSphereEx
  *
  * @return {undefined}
  */
-function DrawSphereWires (centerPos, radius, rings, slices, color) {
+function DrawSphereWires(centerPos, radius, rings, slices, color) {
   return r.BindDrawSphereWires(
     centerPos.x,
     centerPos.y,
@@ -6196,7 +6807,7 @@ raylib.DrawSphereWires = DrawSphereWires
  *
  * @return {undefined}
  */
-function DrawCylinder (position, radiusTop, radiusBottom, height, slices, color) {
+function DrawCylinder(position, radiusTop, radiusBottom, height, slices, color) {
   return r.BindDrawCylinder(
     position.x,
     position.y,
@@ -6225,7 +6836,7 @@ raylib.DrawCylinder = DrawCylinder
  *
  * @return {undefined}
  */
-function DrawCylinderEx (startPos, endPos, startRadius, endRadius, sides, color) {
+function DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color) {
   return r.BindDrawCylinderEx(
     startPos.x,
     startPos.y,
@@ -6256,7 +6867,7 @@ raylib.DrawCylinderEx = DrawCylinderEx
  *
  * @return {undefined}
  */
-function DrawCylinderWires (position, radiusTop, radiusBottom, height, slices, color) {
+function DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color) {
   return r.BindDrawCylinderWires(
     position.x,
     position.y,
@@ -6285,7 +6896,7 @@ raylib.DrawCylinderWires = DrawCylinderWires
  *
  * @return {undefined}
  */
-function DrawCylinderWiresEx (startPos, endPos, startRadius, endRadius, sides, color) {
+function DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color) {
   return r.BindDrawCylinderWiresEx(
     startPos.x,
     startPos.y,
@@ -6316,7 +6927,7 @@ raylib.DrawCylinderWiresEx = DrawCylinderWiresEx
  *
  * @return {undefined}
  */
-function DrawCapsule (startPos, endPos, radius, slices, rings, color) {
+function DrawCapsule(startPos, endPos, radius, slices, rings, color) {
   return r.BindDrawCapsule(
     startPos.x,
     startPos.y,
@@ -6347,7 +6958,7 @@ raylib.DrawCapsule = DrawCapsule
  *
  * @return {undefined}
  */
-function DrawCapsuleWires (startPos, endPos, radius, slices, rings, color) {
+function DrawCapsuleWires(startPos, endPos, radius, slices, rings, color) {
   return r.BindDrawCapsuleWires(
     startPos.x,
     startPos.y,
@@ -6375,7 +6986,7 @@ raylib.DrawCapsuleWires = DrawCapsuleWires
  *
  * @return {undefined}
  */
-function DrawPlane (centerPos, size, color) {
+function DrawPlane(centerPos, size, color) {
   return r.BindDrawPlane(
     centerPos.x,
     centerPos.y,
@@ -6398,7 +7009,7 @@ raylib.DrawPlane = DrawPlane
  *
  * @return {undefined}
  */
-function DrawRay (ray, color) {
+function DrawRay(ray, color) {
   return r.BindDrawRay(
     ray.position.x,
     ray.position.y,
@@ -6422,7 +7033,7 @@ raylib.DrawRay = DrawRay
  *
  * @return {undefined}
  */
-function DrawGrid (slices, spacing) {
+function DrawGrid(slices, spacing) {
   return r.BindDrawGrid(
     slices,
     spacing
@@ -6437,7 +7048,7 @@ raylib.DrawGrid = DrawGrid
  *
  * @return {Model} The resulting Model.
  */
-function LoadModel (fileName) {
+function LoadModel(fileName) {
   return r.BindLoadModel(
     fileName
   )
@@ -6451,7 +7062,7 @@ raylib.LoadModel = LoadModel
  *
  * @return {Model} The resulting Model.
  */
-function LoadModelFromMesh (mesh) {
+function LoadModelFromMesh(mesh) {
   return r.BindLoadModelFromMesh(
     mesh.vertexCount,
     mesh.triangleCount,
@@ -6479,7 +7090,7 @@ raylib.LoadModelFromMesh = LoadModelFromMesh
  *
  * @return {boolean} The resulting bool.
  */
-function IsModelReady (model) {
+function IsModelReady(model) {
   return r.BindIsModelReady(
     model.transform.m0,
     model.transform.m4,
@@ -6516,7 +7127,7 @@ raylib.IsModelReady = IsModelReady
  *
  * @return {undefined}
  */
-function UnloadModel (model) {
+function UnloadModel(model) {
   return r.BindUnloadModel(
     model.transform.m0,
     model.transform.m4,
@@ -6553,7 +7164,7 @@ raylib.UnloadModel = UnloadModel
  *
  * @return {BoundingBox} The resulting BoundingBox.
  */
-function GetModelBoundingBox (model) {
+function GetModelBoundingBox(model) {
   return r.BindGetModelBoundingBox(
     model.transform.m0,
     model.transform.m4,
@@ -6593,7 +7204,7 @@ raylib.GetModelBoundingBox = GetModelBoundingBox
  *
  * @return {undefined}
  */
-function DrawModel (model, position, scale, tint) {
+function DrawModel(model, position, scale, tint) {
   return r.BindDrawModel(
     model.transform.m0,
     model.transform.m4,
@@ -6643,7 +7254,7 @@ raylib.DrawModel = DrawModel
  *
  * @return {undefined}
  */
-function DrawModelEx (model, position, rotationAxis, rotationAngle, scale, tint) {
+function DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint) {
   return r.BindDrawModelEx(
     model.transform.m0,
     model.transform.m4,
@@ -6697,7 +7308,7 @@ raylib.DrawModelEx = DrawModelEx
  *
  * @return {undefined}
  */
-function DrawModelWires (model, position, scale, tint) {
+function DrawModelWires(model, position, scale, tint) {
   return r.BindDrawModelWires(
     model.transform.m0,
     model.transform.m4,
@@ -6747,7 +7358,7 @@ raylib.DrawModelWires = DrawModelWires
  *
  * @return {undefined}
  */
-function DrawModelWiresEx (model, position, rotationAxis, rotationAngle, scale, tint) {
+function DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint) {
   return r.BindDrawModelWiresEx(
     model.transform.m0,
     model.transform.m4,
@@ -6799,7 +7410,7 @@ raylib.DrawModelWiresEx = DrawModelWiresEx
  *
  * @return {undefined}
  */
-function DrawBoundingBox (box, color) {
+function DrawBoundingBox(box, color) {
   return r.BindDrawBoundingBox(
     box.min.x,
     box.min.y,
@@ -6826,7 +7437,7 @@ raylib.DrawBoundingBox = DrawBoundingBox
  *
  * @return {undefined}
  */
-function DrawBillboard (camera, texture, position, size, tint) {
+function DrawBillboard(camera, texture, position, size, tint) {
   return r.BindDrawBillboard(
     camera.position.x,
     camera.position.y,
@@ -6868,7 +7479,7 @@ raylib.DrawBillboard = DrawBillboard
  *
  * @return {undefined}
  */
-function DrawBillboardRec (camera, texture, source, position, size, tint) {
+function DrawBillboardRec(camera, texture, source, position, size, tint) {
   return r.BindDrawBillboardRec(
     camera.position.x,
     camera.position.y,
@@ -6918,7 +7529,7 @@ raylib.DrawBillboardRec = DrawBillboardRec
  *
  * @return {undefined}
  */
-function DrawBillboardPro (camera, texture, source, position, up, size, origin, rotation, tint) {
+function DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint) {
   return r.BindDrawBillboardPro(
     camera.position.x,
     camera.position.y,
@@ -6970,7 +7581,7 @@ raylib.DrawBillboardPro = DrawBillboardPro
  *
  * @return {undefined}
  */
-function UpdateMeshBuffer (mesh, index, data, dataSize, offset) {
+function UpdateMeshBuffer(mesh, index, data, dataSize, offset) {
   return r.BindUpdateMeshBuffer(
     mesh.vertexCount,
     mesh.triangleCount,
@@ -7002,7 +7613,7 @@ raylib.UpdateMeshBuffer = UpdateMeshBuffer
  *
  * @return {undefined}
  */
-function UnloadMesh (mesh) {
+function UnloadMesh(mesh) {
   return r.BindUnloadMesh(
     mesh.vertexCount,
     mesh.triangleCount,
@@ -7031,7 +7642,7 @@ raylib.UnloadMesh = UnloadMesh
  *
  * @return {boolean} The resulting bool.
  */
-function ExportMesh (mesh, fileName) {
+function ExportMesh(mesh, fileName) {
   return r.BindExportMesh(
     mesh.vertexCount,
     mesh.triangleCount,
@@ -7060,7 +7671,7 @@ raylib.ExportMesh = ExportMesh
  *
  * @return {BoundingBox} The resulting BoundingBox.
  */
-function GetMeshBoundingBox (mesh) {
+function GetMeshBoundingBox(mesh) {
   return r.BindGetMeshBoundingBox(
     mesh.vertexCount,
     mesh.triangleCount,
@@ -7089,7 +7700,7 @@ raylib.GetMeshBoundingBox = GetMeshBoundingBox
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshPoly (sides, radius) {
+function GenMeshPoly(sides, radius) {
   return r.BindGenMeshPoly(
     sides,
     radius
@@ -7107,7 +7718,7 @@ raylib.GenMeshPoly = GenMeshPoly
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshPlane (width, length, resX, resZ) {
+function GenMeshPlane(width, length, resX, resZ) {
   return r.BindGenMeshPlane(
     width,
     length,
@@ -7126,7 +7737,7 @@ raylib.GenMeshPlane = GenMeshPlane
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshCube (width, height, length) {
+function GenMeshCube(width, height, length) {
   return r.BindGenMeshCube(
     width,
     height,
@@ -7144,7 +7755,7 @@ raylib.GenMeshCube = GenMeshCube
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshSphere (radius, rings, slices) {
+function GenMeshSphere(radius, rings, slices) {
   return r.BindGenMeshSphere(
     radius,
     rings,
@@ -7162,7 +7773,7 @@ raylib.GenMeshSphere = GenMeshSphere
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshHemiSphere (radius, rings, slices) {
+function GenMeshHemiSphere(radius, rings, slices) {
   return r.BindGenMeshHemiSphere(
     radius,
     rings,
@@ -7180,7 +7791,7 @@ raylib.GenMeshHemiSphere = GenMeshHemiSphere
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshCylinder (radius, height, slices) {
+function GenMeshCylinder(radius, height, slices) {
   return r.BindGenMeshCylinder(
     radius,
     height,
@@ -7198,7 +7809,7 @@ raylib.GenMeshCylinder = GenMeshCylinder
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshCone (radius, height, slices) {
+function GenMeshCone(radius, height, slices) {
   return r.BindGenMeshCone(
     radius,
     height,
@@ -7217,7 +7828,7 @@ raylib.GenMeshCone = GenMeshCone
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshTorus (radius, size, radSeg, sides) {
+function GenMeshTorus(radius, size, radSeg, sides) {
   return r.BindGenMeshTorus(
     radius,
     size,
@@ -7237,7 +7848,7 @@ raylib.GenMeshTorus = GenMeshTorus
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshKnot (radius, size, radSeg, sides) {
+function GenMeshKnot(radius, size, radSeg, sides) {
   return r.BindGenMeshKnot(
     radius,
     size,
@@ -7255,7 +7866,7 @@ raylib.GenMeshKnot = GenMeshKnot
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshHeightmap (heightmap, size) {
+function GenMeshHeightmap(heightmap, size) {
   return r.BindGenMeshHeightmap(
     heightmap.data,
     heightmap.width,
@@ -7277,7 +7888,7 @@ raylib.GenMeshHeightmap = GenMeshHeightmap
  *
  * @return {Mesh} The resulting Mesh.
  */
-function GenMeshCubicmap (cubicmap, cubeSize) {
+function GenMeshCubicmap(cubicmap, cubeSize) {
   return r.BindGenMeshCubicmap(
     cubicmap.data,
     cubicmap.width,
@@ -7299,7 +7910,7 @@ raylib.GenMeshCubicmap = GenMeshCubicmap
  *
  * @return {number} The resulting ModelAnimation *.
  */
-function LoadModelAnimations (fileName, animCount) {
+function LoadModelAnimations(fileName, animCount) {
   return r.BindLoadModelAnimations(
     fileName,
     animCount
@@ -7316,7 +7927,7 @@ raylib.LoadModelAnimations = LoadModelAnimations
  *
  * @return {undefined}
  */
-function UpdateModelAnimation (model, anim, frame) {
+function UpdateModelAnimation(model, anim, frame) {
   return r.BindUpdateModelAnimation(
     model.transform.m0,
     model.transform.m4,
@@ -7346,6 +7957,7 @@ function UpdateModelAnimation (model, anim, frame) {
     anim.frameCount,
     anim.bones,
     anim.framePoses,
+    anim.name,
     frame
   )
 }
@@ -7358,12 +7970,13 @@ raylib.UpdateModelAnimation = UpdateModelAnimation
  *
  * @return {undefined}
  */
-function UnloadModelAnimation (anim) {
+function UnloadModelAnimation(anim) {
   return r.BindUnloadModelAnimation(
     anim.boneCount,
     anim.frameCount,
     anim.bones,
-    anim.framePoses
+    anim.framePoses,
+    anim.name
   )
 }
 raylib.UnloadModelAnimation = UnloadModelAnimation
@@ -7372,14 +7985,14 @@ raylib.UnloadModelAnimation = UnloadModelAnimation
  * Unload animation array data
  *
  * @param {number} animations
- * @param {number} count
+ * @param {number} animCount
  *
  * @return {undefined}
  */
-function UnloadModelAnimations (animations, count) {
+function UnloadModelAnimations(animations, animCount) {
   return r.BindUnloadModelAnimations(
     animations,
-    count
+    animCount
   )
 }
 raylib.UnloadModelAnimations = UnloadModelAnimations
@@ -7392,7 +8005,7 @@ raylib.UnloadModelAnimations = UnloadModelAnimations
  *
  * @return {boolean} The resulting bool.
  */
-function IsModelAnimationValid (model, anim) {
+function IsModelAnimationValid(model, anim) {
   return r.BindIsModelAnimationValid(
     model.transform.m0,
     model.transform.m4,
@@ -7421,7 +8034,8 @@ function IsModelAnimationValid (model, anim) {
     anim.boneCount,
     anim.frameCount,
     anim.bones,
-    anim.framePoses
+    anim.framePoses,
+    anim.name
   )
 }
 raylib.IsModelAnimationValid = IsModelAnimationValid
@@ -7436,7 +8050,7 @@ raylib.IsModelAnimationValid = IsModelAnimationValid
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionSpheres (center1, radius1, center2, radius2) {
+function CheckCollisionSpheres(center1, radius1, center2, radius2) {
   return r.BindCheckCollisionSpheres(
     center1.x,
     center1.y,
@@ -7458,7 +8072,7 @@ raylib.CheckCollisionSpheres = CheckCollisionSpheres
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionBoxes (box1, box2) {
+function CheckCollisionBoxes(box1, box2) {
   return r.BindCheckCollisionBoxes(
     box1.min.x,
     box1.min.y,
@@ -7485,7 +8099,7 @@ raylib.CheckCollisionBoxes = CheckCollisionBoxes
  *
  * @return {boolean} The resulting bool.
  */
-function CheckCollisionBoxSphere (box, center, radius) {
+function CheckCollisionBoxSphere(box, center, radius) {
   return r.BindCheckCollisionBoxSphere(
     box.min.x,
     box.min.y,
@@ -7510,7 +8124,7 @@ raylib.CheckCollisionBoxSphere = CheckCollisionBoxSphere
  *
  * @return {RayCollision} The resulting RayCollision.
  */
-function GetRayCollisionSphere (ray, center, radius) {
+function GetRayCollisionSphere(ray, center, radius) {
   return r.BindGetRayCollisionSphere(
     ray.position.x,
     ray.position.y,
@@ -7534,7 +8148,7 @@ raylib.GetRayCollisionSphere = GetRayCollisionSphere
  *
  * @return {RayCollision} The resulting RayCollision.
  */
-function GetRayCollisionBox (ray, box) {
+function GetRayCollisionBox(ray, box) {
   return r.BindGetRayCollisionBox(
     ray.position.x,
     ray.position.y,
@@ -7561,7 +8175,7 @@ raylib.GetRayCollisionBox = GetRayCollisionBox
  *
  * @return {RayCollision} The resulting RayCollision.
  */
-function GetRayCollisionMesh (ray, mesh, transform) {
+function GetRayCollisionMesh(ray, mesh, transform) {
   return r.BindGetRayCollisionMesh(
     ray.position.x,
     ray.position.y,
@@ -7614,7 +8228,7 @@ raylib.GetRayCollisionMesh = GetRayCollisionMesh
  *
  * @return {RayCollision} The resulting RayCollision.
  */
-function GetRayCollisionTriangle (ray, p1, p2, p3) {
+function GetRayCollisionTriangle(ray, p1, p2, p3) {
   return r.BindGetRayCollisionTriangle(
     ray.position.x,
     ray.position.y,
@@ -7646,7 +8260,7 @@ raylib.GetRayCollisionTriangle = GetRayCollisionTriangle
  *
  * @return {RayCollision} The resulting RayCollision.
  */
-function GetRayCollisionQuad (ray, p1, p2, p3, p4) {
+function GetRayCollisionQuad(ray, p1, p2, p3, p4) {
   return r.BindGetRayCollisionQuad(
     ray.position.x,
     ray.position.y,
@@ -7675,7 +8289,7 @@ raylib.GetRayCollisionQuad = GetRayCollisionQuad
  *
  * @return {undefined}
  */
-function InitAudioDevice () {
+function InitAudioDevice() {
   return r.BindInitAudioDevice()
 }
 raylib.InitAudioDevice = InitAudioDevice
@@ -7685,7 +8299,7 @@ raylib.InitAudioDevice = InitAudioDevice
  *
  * @return {undefined}
  */
-function CloseAudioDevice () {
+function CloseAudioDevice() {
   return r.BindCloseAudioDevice()
 }
 raylib.CloseAudioDevice = CloseAudioDevice
@@ -7695,7 +8309,7 @@ raylib.CloseAudioDevice = CloseAudioDevice
  *
  * @return {boolean} The resulting bool.
  */
-function IsAudioDeviceReady () {
+function IsAudioDeviceReady() {
   return r.BindIsAudioDeviceReady()
 }
 raylib.IsAudioDeviceReady = IsAudioDeviceReady
@@ -7707,12 +8321,22 @@ raylib.IsAudioDeviceReady = IsAudioDeviceReady
  *
  * @return {undefined}
  */
-function SetMasterVolume (volume) {
+function SetMasterVolume(volume) {
   return r.BindSetMasterVolume(
     volume
   )
 }
 raylib.SetMasterVolume = SetMasterVolume
+
+/**
+ * Get master volume (listener)
+ *
+ * @return {number} The resulting float.
+ */
+function GetMasterVolume() {
+  return r.BindGetMasterVolume()
+}
+raylib.GetMasterVolume = GetMasterVolume
 
 /**
  * Load wave data from file
@@ -7721,7 +8345,7 @@ raylib.SetMasterVolume = SetMasterVolume
  *
  * @return {Wave} The resulting Wave.
  */
-function LoadWave (fileName) {
+function LoadWave(fileName) {
   return r.BindLoadWave(
     fileName
   )
@@ -7737,7 +8361,7 @@ raylib.LoadWave = LoadWave
  *
  * @return {Wave} The resulting Wave.
  */
-function LoadWaveFromMemory (fileType, fileData, dataSize) {
+function LoadWaveFromMemory(fileType, fileData, dataSize) {
   return r.BindLoadWaveFromMemory(
     fileType,
     fileData,
@@ -7753,7 +8377,7 @@ raylib.LoadWaveFromMemory = LoadWaveFromMemory
  *
  * @return {boolean} The resulting bool.
  */
-function IsWaveReady (wave) {
+function IsWaveReady(wave) {
   return r.BindIsWaveReady(
     wave.frameCount,
     wave.sampleRate,
@@ -7771,7 +8395,7 @@ raylib.IsWaveReady = IsWaveReady
  *
  * @return {Sound} The resulting Sound.
  */
-function LoadSound (fileName) {
+function LoadSound(fileName) {
   return r.BindLoadSound(
     fileName
   )
@@ -7785,7 +8409,7 @@ raylib.LoadSound = LoadSound
  *
  * @return {Sound} The resulting Sound.
  */
-function LoadSoundFromWave (wave) {
+function LoadSoundFromWave(wave) {
   return r.BindLoadSoundFromWave(
     wave.frameCount,
     wave.sampleRate,
@@ -7797,13 +8421,32 @@ function LoadSoundFromWave (wave) {
 raylib.LoadSoundFromWave = LoadSoundFromWave
 
 /**
+ * Create a new sound that shares the same sample data as the source sound, does not own the sound data
+ *
+ * @param {Sound} source
+ *
+ * @return {Sound} The resulting Sound.
+ */
+function LoadSoundAlias(source) {
+  return r.BindLoadSoundAlias(
+    source.stream.buffer,
+    source.stream.processor,
+    source.stream.sampleRate,
+    source.stream.sampleSize,
+    source.stream.channels,
+    source.frameCount
+  )
+}
+raylib.LoadSoundAlias = LoadSoundAlias
+
+/**
  * Checks if a sound is ready
  *
  * @param {Sound} sound
  *
  * @return {boolean} The resulting bool.
  */
-function IsSoundReady (sound) {
+function IsSoundReady(sound) {
   return r.BindIsSoundReady(
     sound.stream.buffer,
     sound.stream.processor,
@@ -7824,7 +8467,7 @@ raylib.IsSoundReady = IsSoundReady
  *
  * @return {undefined}
  */
-function UpdateSound (sound, data, sampleCount) {
+function UpdateSound(sound, data, sampleCount) {
   return r.BindUpdateSound(
     sound.stream.buffer,
     sound.stream.processor,
@@ -7845,7 +8488,7 @@ raylib.UpdateSound = UpdateSound
  *
  * @return {undefined}
  */
-function UnloadWave (wave) {
+function UnloadWave(wave) {
   return r.BindUnloadWave(
     wave.frameCount,
     wave.sampleRate,
@@ -7863,7 +8506,7 @@ raylib.UnloadWave = UnloadWave
  *
  * @return {undefined}
  */
-function UnloadSound (sound) {
+function UnloadSound(sound) {
   return r.BindUnloadSound(
     sound.stream.buffer,
     sound.stream.processor,
@@ -7876,6 +8519,25 @@ function UnloadSound (sound) {
 raylib.UnloadSound = UnloadSound
 
 /**
+ * Unload a sound alias (does not deallocate sample data)
+ *
+ * @param {Sound} alias
+ *
+ * @return {undefined}
+ */
+function UnloadSoundAlias(alias) {
+  return r.BindUnloadSoundAlias(
+    alias.stream.buffer,
+    alias.stream.processor,
+    alias.stream.sampleRate,
+    alias.stream.sampleSize,
+    alias.stream.channels,
+    alias.frameCount
+  )
+}
+raylib.UnloadSoundAlias = UnloadSoundAlias
+
+/**
  * Export wave data to file, returns true on success
  *
  * @param {Wave} wave
@@ -7883,7 +8545,7 @@ raylib.UnloadSound = UnloadSound
  *
  * @return {boolean} The resulting bool.
  */
-function ExportWave (wave, fileName) {
+function ExportWave(wave, fileName) {
   return r.BindExportWave(
     wave.frameCount,
     wave.sampleRate,
@@ -7903,7 +8565,7 @@ raylib.ExportWave = ExportWave
  *
  * @return {boolean} The resulting bool.
  */
-function ExportWaveAsCode (wave, fileName) {
+function ExportWaveAsCode(wave, fileName) {
   return r.BindExportWaveAsCode(
     wave.frameCount,
     wave.sampleRate,
@@ -7922,7 +8584,7 @@ raylib.ExportWaveAsCode = ExportWaveAsCode
  *
  * @return {undefined}
  */
-function PlaySound (sound) {
+function PlaySound(sound) {
   return r.BindPlaySound(
     sound.stream.buffer,
     sound.stream.processor,
@@ -7941,7 +8603,7 @@ raylib.PlaySound = PlaySound
  *
  * @return {undefined}
  */
-function StopSound (sound) {
+function StopSound(sound) {
   return r.BindStopSound(
     sound.stream.buffer,
     sound.stream.processor,
@@ -7960,7 +8622,7 @@ raylib.StopSound = StopSound
  *
  * @return {undefined}
  */
-function PauseSound (sound) {
+function PauseSound(sound) {
   return r.BindPauseSound(
     sound.stream.buffer,
     sound.stream.processor,
@@ -7979,7 +8641,7 @@ raylib.PauseSound = PauseSound
  *
  * @return {undefined}
  */
-function ResumeSound (sound) {
+function ResumeSound(sound) {
   return r.BindResumeSound(
     sound.stream.buffer,
     sound.stream.processor,
@@ -7998,7 +8660,7 @@ raylib.ResumeSound = ResumeSound
  *
  * @return {boolean} The resulting bool.
  */
-function IsSoundPlaying (sound) {
+function IsSoundPlaying(sound) {
   return r.BindIsSoundPlaying(
     sound.stream.buffer,
     sound.stream.processor,
@@ -8018,7 +8680,7 @@ raylib.IsSoundPlaying = IsSoundPlaying
  *
  * @return {undefined}
  */
-function SetSoundVolume (sound, volume) {
+function SetSoundVolume(sound, volume) {
   return r.BindSetSoundVolume(
     sound.stream.buffer,
     sound.stream.processor,
@@ -8039,7 +8701,7 @@ raylib.SetSoundVolume = SetSoundVolume
  *
  * @return {undefined}
  */
-function SetSoundPitch (sound, pitch) {
+function SetSoundPitch(sound, pitch) {
   return r.BindSetSoundPitch(
     sound.stream.buffer,
     sound.stream.processor,
@@ -8060,7 +8722,7 @@ raylib.SetSoundPitch = SetSoundPitch
  *
  * @return {undefined}
  */
-function SetSoundPan (sound, pan) {
+function SetSoundPan(sound, pan) {
   return r.BindSetSoundPan(
     sound.stream.buffer,
     sound.stream.processor,
@@ -8080,7 +8742,7 @@ raylib.SetSoundPan = SetSoundPan
  *
  * @return {Wave} The resulting Wave.
  */
-function WaveCopy (wave) {
+function WaveCopy(wave) {
   return r.BindWaveCopy(
     wave.frameCount,
     wave.sampleRate,
@@ -8098,7 +8760,7 @@ raylib.WaveCopy = WaveCopy
  *
  * @return {number} The resulting float *.
  */
-function LoadWaveSamples (wave) {
+function LoadWaveSamples(wave) {
   return r.BindLoadWaveSamples(
     wave.frameCount,
     wave.sampleRate,
@@ -8116,7 +8778,7 @@ raylib.LoadWaveSamples = LoadWaveSamples
  *
  * @return {undefined}
  */
-function UnloadWaveSamples (samples) {
+function UnloadWaveSamples(samples) {
   return r.BindUnloadWaveSamples(
     samples
   )
@@ -8130,7 +8792,7 @@ raylib.UnloadWaveSamples = UnloadWaveSamples
  *
  * @return {Music} The resulting Music.
  */
-function LoadMusicStream (fileName) {
+function LoadMusicStream(fileName) {
   return r.BindLoadMusicStream(
     fileName
   )
@@ -8146,7 +8808,7 @@ raylib.LoadMusicStream = LoadMusicStream
  *
  * @return {Music} The resulting Music.
  */
-function LoadMusicStreamFromMemory (fileType, data, dataSize) {
+function LoadMusicStreamFromMemory(fileType, data, dataSize) {
   return r.BindLoadMusicStreamFromMemory(
     fileType,
     data,
@@ -8162,7 +8824,7 @@ raylib.LoadMusicStreamFromMemory = LoadMusicStreamFromMemory
  *
  * @return {boolean} The resulting bool.
  */
-function IsMusicReady (music) {
+function IsMusicReady(music) {
   return r.BindIsMusicReady(
     music.stream.buffer,
     music.stream.processor,
@@ -8184,7 +8846,7 @@ raylib.IsMusicReady = IsMusicReady
  *
  * @return {undefined}
  */
-function UnloadMusicStream (music) {
+function UnloadMusicStream(music) {
   return r.BindUnloadMusicStream(
     music.stream.buffer,
     music.stream.processor,
@@ -8206,7 +8868,7 @@ raylib.UnloadMusicStream = UnloadMusicStream
  *
  * @return {undefined}
  */
-function PlayMusicStream (music) {
+function PlayMusicStream(music) {
   return r.BindPlayMusicStream(
     music.stream.buffer,
     music.stream.processor,
@@ -8228,7 +8890,7 @@ raylib.PlayMusicStream = PlayMusicStream
  *
  * @return {boolean} The resulting bool.
  */
-function IsMusicStreamPlaying (music) {
+function IsMusicStreamPlaying(music) {
   return r.BindIsMusicStreamPlaying(
     music.stream.buffer,
     music.stream.processor,
@@ -8250,7 +8912,7 @@ raylib.IsMusicStreamPlaying = IsMusicStreamPlaying
  *
  * @return {undefined}
  */
-function UpdateMusicStream (music) {
+function UpdateMusicStream(music) {
   return r.BindUpdateMusicStream(
     music.stream.buffer,
     music.stream.processor,
@@ -8272,7 +8934,7 @@ raylib.UpdateMusicStream = UpdateMusicStream
  *
  * @return {undefined}
  */
-function StopMusicStream (music) {
+function StopMusicStream(music) {
   return r.BindStopMusicStream(
     music.stream.buffer,
     music.stream.processor,
@@ -8294,7 +8956,7 @@ raylib.StopMusicStream = StopMusicStream
  *
  * @return {undefined}
  */
-function PauseMusicStream (music) {
+function PauseMusicStream(music) {
   return r.BindPauseMusicStream(
     music.stream.buffer,
     music.stream.processor,
@@ -8316,7 +8978,7 @@ raylib.PauseMusicStream = PauseMusicStream
  *
  * @return {undefined}
  */
-function ResumeMusicStream (music) {
+function ResumeMusicStream(music) {
   return r.BindResumeMusicStream(
     music.stream.buffer,
     music.stream.processor,
@@ -8339,7 +9001,7 @@ raylib.ResumeMusicStream = ResumeMusicStream
  *
  * @return {undefined}
  */
-function SeekMusicStream (music, position) {
+function SeekMusicStream(music, position) {
   return r.BindSeekMusicStream(
     music.stream.buffer,
     music.stream.processor,
@@ -8363,7 +9025,7 @@ raylib.SeekMusicStream = SeekMusicStream
  *
  * @return {undefined}
  */
-function SetMusicVolume (music, volume) {
+function SetMusicVolume(music, volume) {
   return r.BindSetMusicVolume(
     music.stream.buffer,
     music.stream.processor,
@@ -8387,7 +9049,7 @@ raylib.SetMusicVolume = SetMusicVolume
  *
  * @return {undefined}
  */
-function SetMusicPitch (music, pitch) {
+function SetMusicPitch(music, pitch) {
   return r.BindSetMusicPitch(
     music.stream.buffer,
     music.stream.processor,
@@ -8411,7 +9073,7 @@ raylib.SetMusicPitch = SetMusicPitch
  *
  * @return {undefined}
  */
-function SetMusicPan (music, pan) {
+function SetMusicPan(music, pan) {
   return r.BindSetMusicPan(
     music.stream.buffer,
     music.stream.processor,
@@ -8434,7 +9096,7 @@ raylib.SetMusicPan = SetMusicPan
  *
  * @return {number} The resulting float.
  */
-function GetMusicTimeLength (music) {
+function GetMusicTimeLength(music) {
   return r.BindGetMusicTimeLength(
     music.stream.buffer,
     music.stream.processor,
@@ -8456,7 +9118,7 @@ raylib.GetMusicTimeLength = GetMusicTimeLength
  *
  * @return {number} The resulting float.
  */
-function GetMusicTimePlayed (music) {
+function GetMusicTimePlayed(music) {
   return r.BindGetMusicTimePlayed(
     music.stream.buffer,
     music.stream.processor,
@@ -8480,7 +9142,7 @@ raylib.GetMusicTimePlayed = GetMusicTimePlayed
  *
  * @return {AudioStream} The resulting AudioStream.
  */
-function LoadAudioStream (sampleRate, sampleSize, channels) {
+function LoadAudioStream(sampleRate, sampleSize, channels) {
   return r.BindLoadAudioStream(
     sampleRate,
     sampleSize,
@@ -8496,7 +9158,7 @@ raylib.LoadAudioStream = LoadAudioStream
  *
  * @return {boolean} The resulting bool.
  */
-function IsAudioStreamReady (stream) {
+function IsAudioStreamReady(stream) {
   return r.BindIsAudioStreamReady(
     stream.buffer,
     stream.processor,
@@ -8514,7 +9176,7 @@ raylib.IsAudioStreamReady = IsAudioStreamReady
  *
  * @return {undefined}
  */
-function UnloadAudioStream (stream) {
+function UnloadAudioStream(stream) {
   return r.BindUnloadAudioStream(
     stream.buffer,
     stream.processor,
@@ -8534,7 +9196,7 @@ raylib.UnloadAudioStream = UnloadAudioStream
  *
  * @return {undefined}
  */
-function UpdateAudioStream (stream, data, frameCount) {
+function UpdateAudioStream(stream, data, frameCount) {
   return r.BindUpdateAudioStream(
     stream.buffer,
     stream.processor,
@@ -8554,7 +9216,7 @@ raylib.UpdateAudioStream = UpdateAudioStream
  *
  * @return {boolean} The resulting bool.
  */
-function IsAudioStreamProcessed (stream) {
+function IsAudioStreamProcessed(stream) {
   return r.BindIsAudioStreamProcessed(
     stream.buffer,
     stream.processor,
@@ -8572,7 +9234,7 @@ raylib.IsAudioStreamProcessed = IsAudioStreamProcessed
  *
  * @return {undefined}
  */
-function PlayAudioStream (stream) {
+function PlayAudioStream(stream) {
   return r.BindPlayAudioStream(
     stream.buffer,
     stream.processor,
@@ -8590,7 +9252,7 @@ raylib.PlayAudioStream = PlayAudioStream
  *
  * @return {undefined}
  */
-function PauseAudioStream (stream) {
+function PauseAudioStream(stream) {
   return r.BindPauseAudioStream(
     stream.buffer,
     stream.processor,
@@ -8608,7 +9270,7 @@ raylib.PauseAudioStream = PauseAudioStream
  *
  * @return {undefined}
  */
-function ResumeAudioStream (stream) {
+function ResumeAudioStream(stream) {
   return r.BindResumeAudioStream(
     stream.buffer,
     stream.processor,
@@ -8626,7 +9288,7 @@ raylib.ResumeAudioStream = ResumeAudioStream
  *
  * @return {boolean} The resulting bool.
  */
-function IsAudioStreamPlaying (stream) {
+function IsAudioStreamPlaying(stream) {
   return r.BindIsAudioStreamPlaying(
     stream.buffer,
     stream.processor,
@@ -8644,7 +9306,7 @@ raylib.IsAudioStreamPlaying = IsAudioStreamPlaying
  *
  * @return {undefined}
  */
-function StopAudioStream (stream) {
+function StopAudioStream(stream) {
   return r.BindStopAudioStream(
     stream.buffer,
     stream.processor,
@@ -8663,7 +9325,7 @@ raylib.StopAudioStream = StopAudioStream
  *
  * @return {undefined}
  */
-function SetAudioStreamVolume (stream, volume) {
+function SetAudioStreamVolume(stream, volume) {
   return r.BindSetAudioStreamVolume(
     stream.buffer,
     stream.processor,
@@ -8683,7 +9345,7 @@ raylib.SetAudioStreamVolume = SetAudioStreamVolume
  *
  * @return {undefined}
  */
-function SetAudioStreamPitch (stream, pitch) {
+function SetAudioStreamPitch(stream, pitch) {
   return r.BindSetAudioStreamPitch(
     stream.buffer,
     stream.processor,
@@ -8703,7 +9365,7 @@ raylib.SetAudioStreamPitch = SetAudioStreamPitch
  *
  * @return {undefined}
  */
-function SetAudioStreamPan (stream, pan) {
+function SetAudioStreamPan(stream, pan) {
   return r.BindSetAudioStreamPan(
     stream.buffer,
     stream.processor,
@@ -8722,7 +9384,7 @@ raylib.SetAudioStreamPan = SetAudioStreamPan
  *
  * @return {undefined}
  */
-function SetAudioStreamBufferSizeDefault (size) {
+function SetAudioStreamBufferSizeDefault(size) {
   return r.BindSetAudioStreamBufferSizeDefault(
     size
   )
@@ -8739,7 +9401,7 @@ raylib.SetAudioStreamBufferSizeDefault = SetAudioStreamBufferSizeDefault
  *
  * @return {number} The resulting float.
  */
-function EaseLinearNone (t, b, c, d) {
+function EaseLinearNone(t, b, c, d) {
   return r.BindEaseLinearNone(
     t,
     b,
@@ -8759,7 +9421,7 @@ raylib.EaseLinearNone = EaseLinearNone
  *
  * @return {number} The resulting float.
  */
-function EaseLinearIn (t, b, c, d) {
+function EaseLinearIn(t, b, c, d) {
   return r.BindEaseLinearIn(
     t,
     b,
@@ -8779,7 +9441,7 @@ raylib.EaseLinearIn = EaseLinearIn
  *
  * @return {number} The resulting float.
  */
-function EaseLinearOut (t, b, c, d) {
+function EaseLinearOut(t, b, c, d) {
   return r.BindEaseLinearOut(
     t,
     b,
@@ -8799,7 +9461,7 @@ raylib.EaseLinearOut = EaseLinearOut
  *
  * @return {number} The resulting float.
  */
-function EaseLinearInOut (t, b, c, d) {
+function EaseLinearInOut(t, b, c, d) {
   return r.BindEaseLinearInOut(
     t,
     b,
@@ -8819,7 +9481,7 @@ raylib.EaseLinearInOut = EaseLinearInOut
  *
  * @return {number} The resulting float.
  */
-function EaseSineIn (t, b, c, d) {
+function EaseSineIn(t, b, c, d) {
   return r.BindEaseSineIn(
     t,
     b,
@@ -8839,7 +9501,7 @@ raylib.EaseSineIn = EaseSineIn
  *
  * @return {number} The resulting float.
  */
-function EaseSineOut (t, b, c, d) {
+function EaseSineOut(t, b, c, d) {
   return r.BindEaseSineOut(
     t,
     b,
@@ -8859,7 +9521,7 @@ raylib.EaseSineOut = EaseSineOut
  *
  * @return {number} The resulting float.
  */
-function EaseSineInOut (t, b, c, d) {
+function EaseSineInOut(t, b, c, d) {
   return r.BindEaseSineInOut(
     t,
     b,
@@ -8879,7 +9541,7 @@ raylib.EaseSineInOut = EaseSineInOut
  *
  * @return {number} The resulting float.
  */
-function EaseCircIn (t, b, c, d) {
+function EaseCircIn(t, b, c, d) {
   return r.BindEaseCircIn(
     t,
     b,
@@ -8899,7 +9561,7 @@ raylib.EaseCircIn = EaseCircIn
  *
  * @return {number} The resulting float.
  */
-function EaseCircOut (t, b, c, d) {
+function EaseCircOut(t, b, c, d) {
   return r.BindEaseCircOut(
     t,
     b,
@@ -8919,7 +9581,7 @@ raylib.EaseCircOut = EaseCircOut
  *
  * @return {number} The resulting float.
  */
-function EaseCircInOut (t, b, c, d) {
+function EaseCircInOut(t, b, c, d) {
   return r.BindEaseCircInOut(
     t,
     b,
@@ -8939,7 +9601,7 @@ raylib.EaseCircInOut = EaseCircInOut
  *
  * @return {number} The resulting float.
  */
-function EaseCubicIn (t, b, c, d) {
+function EaseCubicIn(t, b, c, d) {
   return r.BindEaseCubicIn(
     t,
     b,
@@ -8959,7 +9621,7 @@ raylib.EaseCubicIn = EaseCubicIn
  *
  * @return {number} The resulting float.
  */
-function EaseCubicOut (t, b, c, d) {
+function EaseCubicOut(t, b, c, d) {
   return r.BindEaseCubicOut(
     t,
     b,
@@ -8979,7 +9641,7 @@ raylib.EaseCubicOut = EaseCubicOut
  *
  * @return {number} The resulting float.
  */
-function EaseCubicInOut (t, b, c, d) {
+function EaseCubicInOut(t, b, c, d) {
   return r.BindEaseCubicInOut(
     t,
     b,
@@ -8999,7 +9661,7 @@ raylib.EaseCubicInOut = EaseCubicInOut
  *
  * @return {number} The resulting float.
  */
-function EaseQuadIn (t, b, c, d) {
+function EaseQuadIn(t, b, c, d) {
   return r.BindEaseQuadIn(
     t,
     b,
@@ -9019,7 +9681,7 @@ raylib.EaseQuadIn = EaseQuadIn
  *
  * @return {number} The resulting float.
  */
-function EaseQuadOut (t, b, c, d) {
+function EaseQuadOut(t, b, c, d) {
   return r.BindEaseQuadOut(
     t,
     b,
@@ -9039,7 +9701,7 @@ raylib.EaseQuadOut = EaseQuadOut
  *
  * @return {number} The resulting float.
  */
-function EaseQuadInOut (t, b, c, d) {
+function EaseQuadInOut(t, b, c, d) {
   return r.BindEaseQuadInOut(
     t,
     b,
@@ -9059,7 +9721,7 @@ raylib.EaseQuadInOut = EaseQuadInOut
  *
  * @return {number} The resulting float.
  */
-function EaseExpoIn (t, b, c, d) {
+function EaseExpoIn(t, b, c, d) {
   return r.BindEaseExpoIn(
     t,
     b,
@@ -9079,7 +9741,7 @@ raylib.EaseExpoIn = EaseExpoIn
  *
  * @return {number} The resulting float.
  */
-function EaseExpoOut (t, b, c, d) {
+function EaseExpoOut(t, b, c, d) {
   return r.BindEaseExpoOut(
     t,
     b,
@@ -9099,7 +9761,7 @@ raylib.EaseExpoOut = EaseExpoOut
  *
  * @return {number} The resulting float.
  */
-function EaseExpoInOut (t, b, c, d) {
+function EaseExpoInOut(t, b, c, d) {
   return r.BindEaseExpoInOut(
     t,
     b,
@@ -9119,7 +9781,7 @@ raylib.EaseExpoInOut = EaseExpoInOut
  *
  * @return {number} The resulting float.
  */
-function EaseBackIn (t, b, c, d) {
+function EaseBackIn(t, b, c, d) {
   return r.BindEaseBackIn(
     t,
     b,
@@ -9139,7 +9801,7 @@ raylib.EaseBackIn = EaseBackIn
  *
  * @return {number} The resulting float.
  */
-function EaseBackOut (t, b, c, d) {
+function EaseBackOut(t, b, c, d) {
   return r.BindEaseBackOut(
     t,
     b,
@@ -9159,7 +9821,7 @@ raylib.EaseBackOut = EaseBackOut
  *
  * @return {number} The resulting float.
  */
-function EaseBackInOut (t, b, c, d) {
+function EaseBackInOut(t, b, c, d) {
   return r.BindEaseBackInOut(
     t,
     b,
@@ -9179,7 +9841,7 @@ raylib.EaseBackInOut = EaseBackInOut
  *
  * @return {number} The resulting float.
  */
-function EaseBounceOut (t, b, c, d) {
+function EaseBounceOut(t, b, c, d) {
   return r.BindEaseBounceOut(
     t,
     b,
@@ -9199,7 +9861,7 @@ raylib.EaseBounceOut = EaseBounceOut
  *
  * @return {number} The resulting float.
  */
-function EaseBounceIn (t, b, c, d) {
+function EaseBounceIn(t, b, c, d) {
   return r.BindEaseBounceIn(
     t,
     b,
@@ -9219,7 +9881,7 @@ raylib.EaseBounceIn = EaseBounceIn
  *
  * @return {number} The resulting float.
  */
-function EaseBounceInOut (t, b, c, d) {
+function EaseBounceInOut(t, b, c, d) {
   return r.BindEaseBounceInOut(
     t,
     b,
@@ -9239,7 +9901,7 @@ raylib.EaseBounceInOut = EaseBounceInOut
  *
  * @return {number} The resulting float.
  */
-function EaseElasticIn (t, b, c, d) {
+function EaseElasticIn(t, b, c, d) {
   return r.BindEaseElasticIn(
     t,
     b,
@@ -9259,7 +9921,7 @@ raylib.EaseElasticIn = EaseElasticIn
  *
  * @return {number} The resulting float.
  */
-function EaseElasticOut (t, b, c, d) {
+function EaseElasticOut(t, b, c, d) {
   return r.BindEaseElasticOut(
     t,
     b,
@@ -9279,7 +9941,7 @@ raylib.EaseElasticOut = EaseElasticOut
  *
  * @return {number} The resulting float.
  */
-function EaseElasticInOut (t, b, c, d) {
+function EaseElasticInOut(t, b, c, d) {
   return r.BindEaseElasticInOut(
     t,
     b,
@@ -9289,7 +9951,7 @@ function EaseElasticInOut (t, b, c, d) {
 }
 raylib.EaseElasticInOut = EaseElasticInOut
 
-function Clamp (value, min, max) {
+function Clamp(value, min, max) {
   return r.BindClamp(
     value,
     min,
@@ -9298,7 +9960,7 @@ function Clamp (value, min, max) {
 }
 raylib.Clamp = Clamp
 
-function Lerp (start, end, amount) {
+function Lerp(start, end, amount) {
   return r.BindLerp(
     start,
     end,
@@ -9307,7 +9969,7 @@ function Lerp (start, end, amount) {
 }
 raylib.Lerp = Lerp
 
-function Normalize (value, start, end) {
+function Normalize(value, start, end) {
   return r.BindNormalize(
     value,
     start,
@@ -9316,7 +9978,7 @@ function Normalize (value, start, end) {
 }
 raylib.Normalize = Normalize
 
-function Remap (value, inputStart, inputEnd, outputStart, outputEnd) {
+function Remap(value, inputStart, inputEnd, outputStart, outputEnd) {
   return r.BindRemap(
     value,
     inputStart,
@@ -9327,7 +9989,7 @@ function Remap (value, inputStart, inputEnd, outputStart, outputEnd) {
 }
 raylib.Remap = Remap
 
-function Wrap (value, min, max) {
+function Wrap(value, min, max) {
   return r.BindWrap(
     value,
     min,
@@ -9336,7 +9998,7 @@ function Wrap (value, min, max) {
 }
 raylib.Wrap = Wrap
 
-function FloatEquals (x, y) {
+function FloatEquals(x, y) {
   return r.BindFloatEquals(
     x,
     y
@@ -9344,17 +10006,17 @@ function FloatEquals (x, y) {
 }
 raylib.FloatEquals = FloatEquals
 
-function Vector2Zero () {
+function Vector2Zero() {
   return r.BindVector2Zero()
 }
 raylib.Vector2Zero = Vector2Zero
 
-function Vector2One () {
+function Vector2One() {
   return r.BindVector2One()
 }
 raylib.Vector2One = Vector2One
 
-function Vector2Add (v1, v2) {
+function Vector2Add(v1, v2) {
   return r.BindVector2Add(
     v1.x,
     v1.y,
@@ -9364,7 +10026,7 @@ function Vector2Add (v1, v2) {
 }
 raylib.Vector2Add = Vector2Add
 
-function Vector2AddValue (v, add) {
+function Vector2AddValue(v, add) {
   return r.BindVector2AddValue(
     v.x,
     v.y,
@@ -9373,7 +10035,7 @@ function Vector2AddValue (v, add) {
 }
 raylib.Vector2AddValue = Vector2AddValue
 
-function Vector2Subtract (v1, v2) {
+function Vector2Subtract(v1, v2) {
   return r.BindVector2Subtract(
     v1.x,
     v1.y,
@@ -9383,7 +10045,7 @@ function Vector2Subtract (v1, v2) {
 }
 raylib.Vector2Subtract = Vector2Subtract
 
-function Vector2SubtractValue (v, sub) {
+function Vector2SubtractValue(v, sub) {
   return r.BindVector2SubtractValue(
     v.x,
     v.y,
@@ -9392,7 +10054,7 @@ function Vector2SubtractValue (v, sub) {
 }
 raylib.Vector2SubtractValue = Vector2SubtractValue
 
-function Vector2Length (v) {
+function Vector2Length(v) {
   return r.BindVector2Length(
     v.x,
     v.y
@@ -9400,7 +10062,7 @@ function Vector2Length (v) {
 }
 raylib.Vector2Length = Vector2Length
 
-function Vector2LengthSqr (v) {
+function Vector2LengthSqr(v) {
   return r.BindVector2LengthSqr(
     v.x,
     v.y
@@ -9408,7 +10070,7 @@ function Vector2LengthSqr (v) {
 }
 raylib.Vector2LengthSqr = Vector2LengthSqr
 
-function Vector2DotProduct (v1, v2) {
+function Vector2DotProduct(v1, v2) {
   return r.BindVector2DotProduct(
     v1.x,
     v1.y,
@@ -9418,7 +10080,7 @@ function Vector2DotProduct (v1, v2) {
 }
 raylib.Vector2DotProduct = Vector2DotProduct
 
-function Vector2Distance (v1, v2) {
+function Vector2Distance(v1, v2) {
   return r.BindVector2Distance(
     v1.x,
     v1.y,
@@ -9428,7 +10090,7 @@ function Vector2Distance (v1, v2) {
 }
 raylib.Vector2Distance = Vector2Distance
 
-function Vector2DistanceSqr (v1, v2) {
+function Vector2DistanceSqr(v1, v2) {
   return r.BindVector2DistanceSqr(
     v1.x,
     v1.y,
@@ -9438,7 +10100,7 @@ function Vector2DistanceSqr (v1, v2) {
 }
 raylib.Vector2DistanceSqr = Vector2DistanceSqr
 
-function Vector2Angle (v1, v2) {
+function Vector2Angle(v1, v2) {
   return r.BindVector2Angle(
     v1.x,
     v1.y,
@@ -9448,7 +10110,7 @@ function Vector2Angle (v1, v2) {
 }
 raylib.Vector2Angle = Vector2Angle
 
-function Vector2LineAngle (start, end) {
+function Vector2LineAngle(start, end) {
   return r.BindVector2LineAngle(
     start.x,
     start.y,
@@ -9458,7 +10120,7 @@ function Vector2LineAngle (start, end) {
 }
 raylib.Vector2LineAngle = Vector2LineAngle
 
-function Vector2Scale (v, scale) {
+function Vector2Scale(v, scale) {
   return r.BindVector2Scale(
     v.x,
     v.y,
@@ -9467,7 +10129,7 @@ function Vector2Scale (v, scale) {
 }
 raylib.Vector2Scale = Vector2Scale
 
-function Vector2Multiply (v1, v2) {
+function Vector2Multiply(v1, v2) {
   return r.BindVector2Multiply(
     v1.x,
     v1.y,
@@ -9477,7 +10139,7 @@ function Vector2Multiply (v1, v2) {
 }
 raylib.Vector2Multiply = Vector2Multiply
 
-function Vector2Negate (v) {
+function Vector2Negate(v) {
   return r.BindVector2Negate(
     v.x,
     v.y
@@ -9485,7 +10147,7 @@ function Vector2Negate (v) {
 }
 raylib.Vector2Negate = Vector2Negate
 
-function Vector2Divide (v1, v2) {
+function Vector2Divide(v1, v2) {
   return r.BindVector2Divide(
     v1.x,
     v1.y,
@@ -9495,7 +10157,7 @@ function Vector2Divide (v1, v2) {
 }
 raylib.Vector2Divide = Vector2Divide
 
-function Vector2Normalize (v) {
+function Vector2Normalize(v) {
   return r.BindVector2Normalize(
     v.x,
     v.y
@@ -9503,7 +10165,7 @@ function Vector2Normalize (v) {
 }
 raylib.Vector2Normalize = Vector2Normalize
 
-function Vector2Transform (v, mat) {
+function Vector2Transform(v, mat) {
   return r.BindVector2Transform(
     v.x,
     v.y,
@@ -9527,7 +10189,7 @@ function Vector2Transform (v, mat) {
 }
 raylib.Vector2Transform = Vector2Transform
 
-function Vector2Lerp (v1, v2, amount) {
+function Vector2Lerp(v1, v2, amount) {
   return r.BindVector2Lerp(
     v1.x,
     v1.y,
@@ -9538,7 +10200,7 @@ function Vector2Lerp (v1, v2, amount) {
 }
 raylib.Vector2Lerp = Vector2Lerp
 
-function Vector2Reflect (v, normal) {
+function Vector2Reflect(v, normal) {
   return r.BindVector2Reflect(
     v.x,
     v.y,
@@ -9548,7 +10210,7 @@ function Vector2Reflect (v, normal) {
 }
 raylib.Vector2Reflect = Vector2Reflect
 
-function Vector2Rotate (v, angle) {
+function Vector2Rotate(v, angle) {
   return r.BindVector2Rotate(
     v.x,
     v.y,
@@ -9557,7 +10219,7 @@ function Vector2Rotate (v, angle) {
 }
 raylib.Vector2Rotate = Vector2Rotate
 
-function Vector2MoveTowards (v, target, maxDistance) {
+function Vector2MoveTowards(v, target, maxDistance) {
   return r.BindVector2MoveTowards(
     v.x,
     v.y,
@@ -9568,7 +10230,7 @@ function Vector2MoveTowards (v, target, maxDistance) {
 }
 raylib.Vector2MoveTowards = Vector2MoveTowards
 
-function Vector2Invert (v) {
+function Vector2Invert(v) {
   return r.BindVector2Invert(
     v.x,
     v.y
@@ -9576,7 +10238,7 @@ function Vector2Invert (v) {
 }
 raylib.Vector2Invert = Vector2Invert
 
-function Vector2Clamp (v, min, max) {
+function Vector2Clamp(v, min, max) {
   return r.BindVector2Clamp(
     v.x,
     v.y,
@@ -9588,7 +10250,7 @@ function Vector2Clamp (v, min, max) {
 }
 raylib.Vector2Clamp = Vector2Clamp
 
-function Vector2ClampValue (v, min, max) {
+function Vector2ClampValue(v, min, max) {
   return r.BindVector2ClampValue(
     v.x,
     v.y,
@@ -9598,7 +10260,7 @@ function Vector2ClampValue (v, min, max) {
 }
 raylib.Vector2ClampValue = Vector2ClampValue
 
-function Vector2Equals (p, q) {
+function Vector2Equals(p, q) {
   return r.BindVector2Equals(
     p.x,
     p.y,
@@ -9608,17 +10270,17 @@ function Vector2Equals (p, q) {
 }
 raylib.Vector2Equals = Vector2Equals
 
-function Vector3Zero () {
+function Vector3Zero() {
   return r.BindVector3Zero()
 }
 raylib.Vector3Zero = Vector3Zero
 
-function Vector3One () {
+function Vector3One() {
   return r.BindVector3One()
 }
 raylib.Vector3One = Vector3One
 
-function Vector3Add (v1, v2) {
+function Vector3Add(v1, v2) {
   return r.BindVector3Add(
     v1.x,
     v1.y,
@@ -9630,7 +10292,7 @@ function Vector3Add (v1, v2) {
 }
 raylib.Vector3Add = Vector3Add
 
-function Vector3AddValue (v, add) {
+function Vector3AddValue(v, add) {
   return r.BindVector3AddValue(
     v.x,
     v.y,
@@ -9640,7 +10302,7 @@ function Vector3AddValue (v, add) {
 }
 raylib.Vector3AddValue = Vector3AddValue
 
-function Vector3Subtract (v1, v2) {
+function Vector3Subtract(v1, v2) {
   return r.BindVector3Subtract(
     v1.x,
     v1.y,
@@ -9652,7 +10314,7 @@ function Vector3Subtract (v1, v2) {
 }
 raylib.Vector3Subtract = Vector3Subtract
 
-function Vector3SubtractValue (v, sub) {
+function Vector3SubtractValue(v, sub) {
   return r.BindVector3SubtractValue(
     v.x,
     v.y,
@@ -9662,7 +10324,7 @@ function Vector3SubtractValue (v, sub) {
 }
 raylib.Vector3SubtractValue = Vector3SubtractValue
 
-function Vector3Scale (v, scalar) {
+function Vector3Scale(v, scalar) {
   return r.BindVector3Scale(
     v.x,
     v.y,
@@ -9672,7 +10334,7 @@ function Vector3Scale (v, scalar) {
 }
 raylib.Vector3Scale = Vector3Scale
 
-function Vector3Multiply (v1, v2) {
+function Vector3Multiply(v1, v2) {
   return r.BindVector3Multiply(
     v1.x,
     v1.y,
@@ -9684,7 +10346,7 @@ function Vector3Multiply (v1, v2) {
 }
 raylib.Vector3Multiply = Vector3Multiply
 
-function Vector3CrossProduct (v1, v2) {
+function Vector3CrossProduct(v1, v2) {
   return r.BindVector3CrossProduct(
     v1.x,
     v1.y,
@@ -9696,7 +10358,7 @@ function Vector3CrossProduct (v1, v2) {
 }
 raylib.Vector3CrossProduct = Vector3CrossProduct
 
-function Vector3Perpendicular (v) {
+function Vector3Perpendicular(v) {
   return r.BindVector3Perpendicular(
     v.x,
     v.y,
@@ -9705,21 +10367,21 @@ function Vector3Perpendicular (v) {
 }
 raylib.Vector3Perpendicular = Vector3Perpendicular
 
-function Vector3Length (v) {
+function Vector3Length(v) {
   return r.BindVector3Length(
     v
   )
 }
 raylib.Vector3Length = Vector3Length
 
-function Vector3LengthSqr (v) {
+function Vector3LengthSqr(v) {
   return r.BindVector3LengthSqr(
     v
   )
 }
 raylib.Vector3LengthSqr = Vector3LengthSqr
 
-function Vector3DotProduct (v1, v2) {
+function Vector3DotProduct(v1, v2) {
   return r.BindVector3DotProduct(
     v1.x,
     v1.y,
@@ -9731,7 +10393,7 @@ function Vector3DotProduct (v1, v2) {
 }
 raylib.Vector3DotProduct = Vector3DotProduct
 
-function Vector3Distance (v1, v2) {
+function Vector3Distance(v1, v2) {
   return r.BindVector3Distance(
     v1.x,
     v1.y,
@@ -9743,7 +10405,7 @@ function Vector3Distance (v1, v2) {
 }
 raylib.Vector3Distance = Vector3Distance
 
-function Vector3DistanceSqr (v1, v2) {
+function Vector3DistanceSqr(v1, v2) {
   return r.BindVector3DistanceSqr(
     v1.x,
     v1.y,
@@ -9755,7 +10417,7 @@ function Vector3DistanceSqr (v1, v2) {
 }
 raylib.Vector3DistanceSqr = Vector3DistanceSqr
 
-function Vector3Angle (v1, v2) {
+function Vector3Angle(v1, v2) {
   return r.BindVector3Angle(
     v1.x,
     v1.y,
@@ -9767,7 +10429,7 @@ function Vector3Angle (v1, v2) {
 }
 raylib.Vector3Angle = Vector3Angle
 
-function Vector3Negate (v) {
+function Vector3Negate(v) {
   return r.BindVector3Negate(
     v.x,
     v.y,
@@ -9776,7 +10438,7 @@ function Vector3Negate (v) {
 }
 raylib.Vector3Negate = Vector3Negate
 
-function Vector3Divide (v1, v2) {
+function Vector3Divide(v1, v2) {
   return r.BindVector3Divide(
     v1.x,
     v1.y,
@@ -9788,7 +10450,7 @@ function Vector3Divide (v1, v2) {
 }
 raylib.Vector3Divide = Vector3Divide
 
-function Vector3Normalize (v) {
+function Vector3Normalize(v) {
   return r.BindVector3Normalize(
     v.x,
     v.y,
@@ -9797,7 +10459,31 @@ function Vector3Normalize (v) {
 }
 raylib.Vector3Normalize = Vector3Normalize
 
-function Vector3OrthoNormalize (v1, v2) {
+function Vector3Project(v1, v2) {
+  return r.BindVector3Project(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Project = Vector3Project
+
+function Vector3Reject(v1, v2) {
+  return r.BindVector3Reject(
+    v1.x,
+    v1.y,
+    v1.z,
+    v2.x,
+    v2.y,
+    v2.z
+  )
+}
+raylib.Vector3Reject = Vector3Reject
+
+function Vector3OrthoNormalize(v1, v2) {
   return r.BindVector3OrthoNormalize(
     v1,
     v2
@@ -9805,7 +10491,7 @@ function Vector3OrthoNormalize (v1, v2) {
 }
 raylib.Vector3OrthoNormalize = Vector3OrthoNormalize
 
-function Vector3Transform (v, mat) {
+function Vector3Transform(v, mat) {
   return r.BindVector3Transform(
     v.x,
     v.y,
@@ -9830,7 +10516,7 @@ function Vector3Transform (v, mat) {
 }
 raylib.Vector3Transform = Vector3Transform
 
-function Vector3RotateByQuaternion (v, q) {
+function Vector3RotateByQuaternion(v, q) {
   return r.BindVector3RotateByQuaternion(
     v.x,
     v.y,
@@ -9840,7 +10526,7 @@ function Vector3RotateByQuaternion (v, q) {
 }
 raylib.Vector3RotateByQuaternion = Vector3RotateByQuaternion
 
-function Vector3RotateByAxisAngle (v, axis, angle) {
+function Vector3RotateByAxisAngle(v, axis, angle) {
   return r.BindVector3RotateByAxisAngle(
     v.x,
     v.y,
@@ -9853,7 +10539,7 @@ function Vector3RotateByAxisAngle (v, axis, angle) {
 }
 raylib.Vector3RotateByAxisAngle = Vector3RotateByAxisAngle
 
-function Vector3Lerp (v1, v2, amount) {
+function Vector3Lerp(v1, v2, amount) {
   return r.BindVector3Lerp(
     v1.x,
     v1.y,
@@ -9866,7 +10552,7 @@ function Vector3Lerp (v1, v2, amount) {
 }
 raylib.Vector3Lerp = Vector3Lerp
 
-function Vector3Reflect (v, normal) {
+function Vector3Reflect(v, normal) {
   return r.BindVector3Reflect(
     v.x,
     v.y,
@@ -9878,7 +10564,7 @@ function Vector3Reflect (v, normal) {
 }
 raylib.Vector3Reflect = Vector3Reflect
 
-function Vector3Min (v1, v2) {
+function Vector3Min(v1, v2) {
   return r.BindVector3Min(
     v1.x,
     v1.y,
@@ -9890,7 +10576,7 @@ function Vector3Min (v1, v2) {
 }
 raylib.Vector3Min = Vector3Min
 
-function Vector3Max (v1, v2) {
+function Vector3Max(v1, v2) {
   return r.BindVector3Max(
     v1.x,
     v1.y,
@@ -9902,7 +10588,7 @@ function Vector3Max (v1, v2) {
 }
 raylib.Vector3Max = Vector3Max
 
-function Vector3Barycenter (p, a, b, c) {
+function Vector3Barycenter(p, a, b, c) {
   return r.BindVector3Barycenter(
     p.x,
     p.y,
@@ -9920,7 +10606,7 @@ function Vector3Barycenter (p, a, b, c) {
 }
 raylib.Vector3Barycenter = Vector3Barycenter
 
-function Vector3Unproject (source, projection, view) {
+function Vector3Unproject(source, projection, view) {
   return r.BindVector3Unproject(
     source.x,
     source.y,
@@ -9961,7 +10647,7 @@ function Vector3Unproject (source, projection, view) {
 }
 raylib.Vector3Unproject = Vector3Unproject
 
-function Vector3Invert (v) {
+function Vector3Invert(v) {
   return r.BindVector3Invert(
     v.x,
     v.y,
@@ -9970,7 +10656,7 @@ function Vector3Invert (v) {
 }
 raylib.Vector3Invert = Vector3Invert
 
-function Vector3Clamp (v, min, max) {
+function Vector3Clamp(v, min, max) {
   return r.BindVector3Clamp(
     v.x,
     v.y,
@@ -9985,7 +10671,7 @@ function Vector3Clamp (v, min, max) {
 }
 raylib.Vector3Clamp = Vector3Clamp
 
-function Vector3ClampValue (v, min, max) {
+function Vector3ClampValue(v, min, max) {
   return r.BindVector3ClampValue(
     v.x,
     v.y,
@@ -9996,7 +10682,7 @@ function Vector3ClampValue (v, min, max) {
 }
 raylib.Vector3ClampValue = Vector3ClampValue
 
-function Vector3Equals (p, q) {
+function Vector3Equals(p, q) {
   return r.BindVector3Equals(
     p.x,
     p.y,
@@ -10008,7 +10694,7 @@ function Vector3Equals (p, q) {
 }
 raylib.Vector3Equals = Vector3Equals
 
-function Vector3Refract (v, n, r) {
+function Vector3Refract(v, n, r) {
   return r.BindVector3Refract(
     v.x,
     v.y,
@@ -10021,7 +10707,7 @@ function Vector3Refract (v, n, r) {
 }
 raylib.Vector3Refract = Vector3Refract
 
-function MatrixDeterminant (mat) {
+function MatrixDeterminant(mat) {
   return r.BindMatrixDeterminant(
     mat.m0,
     mat.m4,
@@ -10043,7 +10729,7 @@ function MatrixDeterminant (mat) {
 }
 raylib.MatrixDeterminant = MatrixDeterminant
 
-function MatrixTrace (mat) {
+function MatrixTrace(mat) {
   return r.BindMatrixTrace(
     mat.m0,
     mat.m4,
@@ -10065,7 +10751,7 @@ function MatrixTrace (mat) {
 }
 raylib.MatrixTrace = MatrixTrace
 
-function MatrixTranspose (mat) {
+function MatrixTranspose(mat) {
   return r.BindMatrixTranspose(
     mat.m0,
     mat.m4,
@@ -10087,7 +10773,7 @@ function MatrixTranspose (mat) {
 }
 raylib.MatrixTranspose = MatrixTranspose
 
-function MatrixInvert (mat) {
+function MatrixInvert(mat) {
   return r.BindMatrixInvert(
     mat.m0,
     mat.m4,
@@ -10109,12 +10795,12 @@ function MatrixInvert (mat) {
 }
 raylib.MatrixInvert = MatrixInvert
 
-function MatrixIdentity () {
+function MatrixIdentity() {
   return r.BindMatrixIdentity()
 }
 raylib.MatrixIdentity = MatrixIdentity
 
-function MatrixAdd (left, right) {
+function MatrixAdd(left, right) {
   return r.BindMatrixAdd(
     left.m0,
     left.m4,
@@ -10152,7 +10838,7 @@ function MatrixAdd (left, right) {
 }
 raylib.MatrixAdd = MatrixAdd
 
-function MatrixSubtract (left, right) {
+function MatrixSubtract(left, right) {
   return r.BindMatrixSubtract(
     left.m0,
     left.m4,
@@ -10190,7 +10876,7 @@ function MatrixSubtract (left, right) {
 }
 raylib.MatrixSubtract = MatrixSubtract
 
-function MatrixMultiply (left, right) {
+function MatrixMultiply(left, right) {
   return r.BindMatrixMultiply(
     left.m0,
     left.m4,
@@ -10228,7 +10914,7 @@ function MatrixMultiply (left, right) {
 }
 raylib.MatrixMultiply = MatrixMultiply
 
-function MatrixTranslate (x, y, z) {
+function MatrixTranslate(x, y, z) {
   return r.BindMatrixTranslate(
     x,
     y,
@@ -10237,7 +10923,7 @@ function MatrixTranslate (x, y, z) {
 }
 raylib.MatrixTranslate = MatrixTranslate
 
-function MatrixRotate (axis, angle) {
+function MatrixRotate(axis, angle) {
   return r.BindMatrixRotate(
     axis.x,
     axis.y,
@@ -10247,28 +10933,28 @@ function MatrixRotate (axis, angle) {
 }
 raylib.MatrixRotate = MatrixRotate
 
-function MatrixRotateX (angle) {
+function MatrixRotateX(angle) {
   return r.BindMatrixRotateX(
     angle
   )
 }
 raylib.MatrixRotateX = MatrixRotateX
 
-function MatrixRotateY (angle) {
+function MatrixRotateY(angle) {
   return r.BindMatrixRotateY(
     angle
   )
 }
 raylib.MatrixRotateY = MatrixRotateY
 
-function MatrixRotateZ (angle) {
+function MatrixRotateZ(angle) {
   return r.BindMatrixRotateZ(
     angle
   )
 }
 raylib.MatrixRotateZ = MatrixRotateZ
 
-function MatrixRotateXYZ (angle) {
+function MatrixRotateXYZ(angle) {
   return r.BindMatrixRotateXYZ(
     angle.x,
     angle.y,
@@ -10277,7 +10963,7 @@ function MatrixRotateXYZ (angle) {
 }
 raylib.MatrixRotateXYZ = MatrixRotateXYZ
 
-function MatrixRotateZYX (angle) {
+function MatrixRotateZYX(angle) {
   return r.BindMatrixRotateZYX(
     angle.x,
     angle.y,
@@ -10286,7 +10972,7 @@ function MatrixRotateZYX (angle) {
 }
 raylib.MatrixRotateZYX = MatrixRotateZYX
 
-function MatrixScale (x, y, z) {
+function MatrixScale(x, y, z) {
   return r.BindMatrixScale(
     x,
     y,
@@ -10295,7 +10981,7 @@ function MatrixScale (x, y, z) {
 }
 raylib.MatrixScale = MatrixScale
 
-function MatrixFrustum (left, right, bottom, top, near, far) {
+function MatrixFrustum(left, right, bottom, top, near, far) {
   return r.BindMatrixFrustum(
     left,
     right,
@@ -10307,29 +10993,29 @@ function MatrixFrustum (left, right, bottom, top, near, far) {
 }
 raylib.MatrixFrustum = MatrixFrustum
 
-function MatrixPerspective (fovy, aspect, near, far) {
+function MatrixPerspective(fovY, aspect, nearPlane, farPlane) {
   return r.BindMatrixPerspective(
-    fovy,
+    fovY,
     aspect,
-    near,
-    far
+    nearPlane,
+    farPlane
   )
 }
 raylib.MatrixPerspective = MatrixPerspective
 
-function MatrixOrtho (left, right, bottom, top, near, far) {
+function MatrixOrtho(left, right, bottom, top, nearPlane, farPlane) {
   return r.BindMatrixOrtho(
     left,
     right,
     bottom,
     top,
-    near,
-    far
+    nearPlane,
+    farPlane
   )
 }
 raylib.MatrixOrtho = MatrixOrtho
 
-function MatrixLookAt (eye, target, up) {
+function MatrixLookAt(eye, target, up) {
   return r.BindMatrixLookAt(
     eye.x,
     eye.y,
@@ -10344,7 +11030,7 @@ function MatrixLookAt (eye, target, up) {
 }
 raylib.MatrixLookAt = MatrixLookAt
 
-function QuaternionAdd (q1, q2) {
+function QuaternionAdd(q1, q2) {
   return r.BindQuaternionAdd(
     q1,
     q2
@@ -10352,7 +11038,7 @@ function QuaternionAdd (q1, q2) {
 }
 raylib.QuaternionAdd = QuaternionAdd
 
-function QuaternionAddValue (q, add) {
+function QuaternionAddValue(q, add) {
   return r.BindQuaternionAddValue(
     q,
     add
@@ -10360,7 +11046,7 @@ function QuaternionAddValue (q, add) {
 }
 raylib.QuaternionAddValue = QuaternionAddValue
 
-function QuaternionSubtract (q1, q2) {
+function QuaternionSubtract(q1, q2) {
   return r.BindQuaternionSubtract(
     q1,
     q2
@@ -10368,7 +11054,7 @@ function QuaternionSubtract (q1, q2) {
 }
 raylib.QuaternionSubtract = QuaternionSubtract
 
-function QuaternionSubtractValue (q, sub) {
+function QuaternionSubtractValue(q, sub) {
   return r.BindQuaternionSubtractValue(
     q,
     sub
@@ -10376,33 +11062,33 @@ function QuaternionSubtractValue (q, sub) {
 }
 raylib.QuaternionSubtractValue = QuaternionSubtractValue
 
-function QuaternionIdentity () {
+function QuaternionIdentity() {
   return r.BindQuaternionIdentity()
 }
 raylib.QuaternionIdentity = QuaternionIdentity
 
-function QuaternionLength (q) {
+function QuaternionLength(q) {
   return r.BindQuaternionLength(
     q
   )
 }
 raylib.QuaternionLength = QuaternionLength
 
-function QuaternionNormalize (q) {
+function QuaternionNormalize(q) {
   return r.BindQuaternionNormalize(
     q
   )
 }
 raylib.QuaternionNormalize = QuaternionNormalize
 
-function QuaternionInvert (q) {
+function QuaternionInvert(q) {
   return r.BindQuaternionInvert(
     q
   )
 }
 raylib.QuaternionInvert = QuaternionInvert
 
-function QuaternionMultiply (q1, q2) {
+function QuaternionMultiply(q1, q2) {
   return r.BindQuaternionMultiply(
     q1,
     q2
@@ -10410,7 +11096,7 @@ function QuaternionMultiply (q1, q2) {
 }
 raylib.QuaternionMultiply = QuaternionMultiply
 
-function QuaternionScale (q, mul) {
+function QuaternionScale(q, mul) {
   return r.BindQuaternionScale(
     q,
     mul
@@ -10418,7 +11104,7 @@ function QuaternionScale (q, mul) {
 }
 raylib.QuaternionScale = QuaternionScale
 
-function QuaternionDivide (q1, q2) {
+function QuaternionDivide(q1, q2) {
   return r.BindQuaternionDivide(
     q1,
     q2
@@ -10426,7 +11112,7 @@ function QuaternionDivide (q1, q2) {
 }
 raylib.QuaternionDivide = QuaternionDivide
 
-function QuaternionLerp (q1, q2, amount) {
+function QuaternionLerp(q1, q2, amount) {
   return r.BindQuaternionLerp(
     q1,
     q2,
@@ -10435,7 +11121,7 @@ function QuaternionLerp (q1, q2, amount) {
 }
 raylib.QuaternionLerp = QuaternionLerp
 
-function QuaternionNlerp (q1, q2, amount) {
+function QuaternionNlerp(q1, q2, amount) {
   return r.BindQuaternionNlerp(
     q1,
     q2,
@@ -10444,7 +11130,7 @@ function QuaternionNlerp (q1, q2, amount) {
 }
 raylib.QuaternionNlerp = QuaternionNlerp
 
-function QuaternionSlerp (q1, q2, amount) {
+function QuaternionSlerp(q1, q2, amount) {
   return r.BindQuaternionSlerp(
     q1,
     q2,
@@ -10453,7 +11139,7 @@ function QuaternionSlerp (q1, q2, amount) {
 }
 raylib.QuaternionSlerp = QuaternionSlerp
 
-function QuaternionFromVector3ToVector3 (from, to) {
+function QuaternionFromVector3ToVector3(from, to) {
   return r.BindQuaternionFromVector3ToVector3(
     from.x,
     from.y,
@@ -10465,7 +11151,7 @@ function QuaternionFromVector3ToVector3 (from, to) {
 }
 raylib.QuaternionFromVector3ToVector3 = QuaternionFromVector3ToVector3
 
-function QuaternionFromMatrix (mat) {
+function QuaternionFromMatrix(mat) {
   return r.BindQuaternionFromMatrix(
     mat.m0,
     mat.m4,
@@ -10487,14 +11173,14 @@ function QuaternionFromMatrix (mat) {
 }
 raylib.QuaternionFromMatrix = QuaternionFromMatrix
 
-function QuaternionToMatrix (q) {
+function QuaternionToMatrix(q) {
   return r.BindQuaternionToMatrix(
     q
   )
 }
 raylib.QuaternionToMatrix = QuaternionToMatrix
 
-function QuaternionFromAxisAngle (axis, angle) {
+function QuaternionFromAxisAngle(axis, angle) {
   return r.BindQuaternionFromAxisAngle(
     axis.x,
     axis.y,
@@ -10504,7 +11190,7 @@ function QuaternionFromAxisAngle (axis, angle) {
 }
 raylib.QuaternionFromAxisAngle = QuaternionFromAxisAngle
 
-function QuaternionToAxisAngle (q, outAxis, outAngle) {
+function QuaternionToAxisAngle(q, outAxis, outAngle) {
   return r.BindQuaternionToAxisAngle(
     q,
     outAxis,
@@ -10513,7 +11199,7 @@ function QuaternionToAxisAngle (q, outAxis, outAngle) {
 }
 raylib.QuaternionToAxisAngle = QuaternionToAxisAngle
 
-function QuaternionFromEuler (pitch, yaw, roll) {
+function QuaternionFromEuler(pitch, yaw, roll) {
   return r.BindQuaternionFromEuler(
     pitch,
     yaw,
@@ -10522,14 +11208,14 @@ function QuaternionFromEuler (pitch, yaw, roll) {
 }
 raylib.QuaternionFromEuler = QuaternionFromEuler
 
-function QuaternionToEuler (q) {
+function QuaternionToEuler(q) {
   return r.BindQuaternionToEuler(
     q
   )
 }
 raylib.QuaternionToEuler = QuaternionToEuler
 
-function QuaternionTransform (q, mat) {
+function QuaternionTransform(q, mat) {
   return r.BindQuaternionTransform(
     q,
     mat.m0,
@@ -10552,7 +11238,7 @@ function QuaternionTransform (q, mat) {
 }
 raylib.QuaternionTransform = QuaternionTransform
 
-function QuaternionEquals (p, q) {
+function QuaternionEquals(p, q) {
   return r.BindQuaternionEquals(
     p,
     q
@@ -10565,7 +11251,7 @@ raylib.QuaternionEquals = QuaternionEquals
  *
  * @return {undefined}
  */
-function GuiEnable () {
+function GuiEnable() {
   return r.BindGuiEnable()
 }
 raylib.GuiEnable = GuiEnable
@@ -10575,7 +11261,7 @@ raylib.GuiEnable = GuiEnable
  *
  * @return {undefined}
  */
-function GuiDisable () {
+function GuiDisable() {
   return r.BindGuiDisable()
 }
 raylib.GuiDisable = GuiDisable
@@ -10585,7 +11271,7 @@ raylib.GuiDisable = GuiDisable
  *
  * @return {undefined}
  */
-function GuiLock () {
+function GuiLock() {
   return r.BindGuiLock()
 }
 raylib.GuiLock = GuiLock
@@ -10595,7 +11281,7 @@ raylib.GuiLock = GuiLock
  *
  * @return {undefined}
  */
-function GuiUnlock () {
+function GuiUnlock() {
   return r.BindGuiUnlock()
 }
 raylib.GuiUnlock = GuiUnlock
@@ -10605,7 +11291,7 @@ raylib.GuiUnlock = GuiUnlock
  *
  * @return {boolean} The resulting bool.
  */
-function GuiIsLocked () {
+function GuiIsLocked() {
   return r.BindGuiIsLocked()
 }
 raylib.GuiIsLocked = GuiIsLocked
@@ -10617,12 +11303,12 @@ raylib.GuiIsLocked = GuiIsLocked
  *
  * @return {undefined}
  */
-function GuiFade (alpha) {
-  return r.BindGuiFade(
+function GuiSetAlpha(alpha) {
+  return r.BindGuiSetAlpha(
     alpha
   )
 }
-raylib.GuiFade = GuiFade
+raylib.GuiSetAlpha = GuiSetAlpha
 
 /**
  * Set gui state (global state)
@@ -10631,7 +11317,7 @@ raylib.GuiFade = GuiFade
  *
  * @return {undefined}
  */
-function GuiSetState (state) {
+function GuiSetState(state) {
   return r.BindGuiSetState(
     state
   )
@@ -10643,7 +11329,7 @@ raylib.GuiSetState = GuiSetState
  *
  * @return {number} The resulting int.
  */
-function GuiGetState () {
+function GuiGetState() {
   return r.BindGuiGetState()
 }
 raylib.GuiGetState = GuiGetState
@@ -10655,7 +11341,7 @@ raylib.GuiGetState = GuiGetState
  *
  * @return {undefined}
  */
-function GuiSetFont (font) {
+function GuiSetFont(font) {
   return r.BindGuiSetFont(
     font.baseSize,
     font.glyphCount,
@@ -10676,7 +11362,7 @@ raylib.GuiSetFont = GuiSetFont
  *
  * @return {Font} The resulting Font.
  */
-function GuiGetFont () {
+function GuiGetFont() {
   return r.BindGuiGetFont()
 }
 raylib.GuiGetFont = GuiGetFont
@@ -10690,7 +11376,7 @@ raylib.GuiGetFont = GuiGetFont
  *
  * @return {undefined}
  */
-function GuiSetStyle (control, property, value) {
+function GuiSetStyle(control, property, value) {
   return r.BindGuiSetStyle(
     control,
     property,
@@ -10707,7 +11393,7 @@ raylib.GuiSetStyle = GuiSetStyle
  *
  * @return {number} The resulting int.
  */
-function GuiGetStyle (control, property) {
+function GuiGetStyle(control, property) {
   return r.BindGuiGetStyle(
     control,
     property
@@ -10716,14 +11402,153 @@ function GuiGetStyle (control, property) {
 raylib.GuiGetStyle = GuiGetStyle
 
 /**
+ * Load style file over global style variable (.rgs)
+ *
+ * @param {string} fileName
+ *
+ * @return {undefined}
+ */
+function GuiLoadStyle(fileName) {
+  return r.BindGuiLoadStyle(
+    fileName
+  )
+}
+raylib.GuiLoadStyle = GuiLoadStyle
+
+/**
+ * Load style default over global style
+ *
+ * @return {undefined}
+ */
+function GuiLoadStyleDefault() {
+  return r.BindGuiLoadStyleDefault()
+}
+raylib.GuiLoadStyleDefault = GuiLoadStyleDefault
+
+/**
+ * Enable gui tooltips (global state)
+ *
+ * @return {undefined}
+ */
+function GuiEnableTooltip() {
+  return r.BindGuiEnableTooltip()
+}
+raylib.GuiEnableTooltip = GuiEnableTooltip
+
+/**
+ * Disable gui tooltips (global state)
+ *
+ * @return {undefined}
+ */
+function GuiDisableTooltip() {
+  return r.BindGuiDisableTooltip()
+}
+raylib.GuiDisableTooltip = GuiDisableTooltip
+
+/**
+ * Set tooltip string
+ *
+ * @param {string} tooltip
+ *
+ * @return {undefined}
+ */
+function GuiSetTooltip(tooltip) {
+  return r.BindGuiSetTooltip(
+    tooltip
+  )
+}
+raylib.GuiSetTooltip = GuiSetTooltip
+
+/**
+ * Get text with icon id prepended (if supported)
+ *
+ * @param {number} iconId
+ * @param {string} text
+ *
+ * @return {string} The resulting const char *.
+ */
+function GuiIconText(iconId, text) {
+  return r.BindGuiIconText(
+    iconId,
+    text
+  )
+}
+raylib.GuiIconText = GuiIconText
+
+/**
+ * Set default icon drawing size
+ *
+ * @param {number} scale
+ *
+ * @return {undefined}
+ */
+function GuiSetIconScale(scale) {
+  return r.BindGuiSetIconScale(
+    scale
+  )
+}
+raylib.GuiSetIconScale = GuiSetIconScale
+
+/**
+ * Get raygui icons data pointer
+ *
+ * @return {number} The resulting unsigned int *.
+ */
+function GuiGetIcons() {
+  return r.BindGuiGetIcons()
+}
+raylib.GuiGetIcons = GuiGetIcons
+
+/**
+ * Load raygui icons file (.rgi) into internal icons data
+ *
+ * @param {string} fileName
+ * @param {boolean} loadIconsName
+ *
+ * @return {number} The resulting char **.
+ */
+function GuiLoadIcons(fileName, loadIconsName) {
+  return r.BindGuiLoadIcons(
+    fileName,
+    loadIconsName
+  )
+}
+raylib.GuiLoadIcons = GuiLoadIcons
+
+/**
+ * Draw icon using pixel size at specified position
+ *
+ * @param {number} iconId
+ * @param {number} posX
+ * @param {number} posY
+ * @param {number} pixelSize
+ * @param {Color} color
+ *
+ * @return {undefined}
+ */
+function GuiDrawIcon(iconId, posX, posY, pixelSize, color) {
+  return r.BindGuiDrawIcon(
+    iconId,
+    posX,
+    posY,
+    pixelSize,
+    color.r,
+    color.g,
+    color.b,
+    color.a
+  )
+}
+raylib.GuiDrawIcon = GuiDrawIcon
+
+/**
  * Window Box control, shows a window that can be closed
  *
  * @param {Rectangle} bounds
  * @param {string} title
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiWindowBox (bounds, title) {
+function GuiWindowBox(bounds, title) {
   return r.BindGuiWindowBox(
     bounds.x,
     bounds.y,
@@ -10740,9 +11565,9 @@ raylib.GuiWindowBox = GuiWindowBox
  * @param {Rectangle} bounds
  * @param {string} text
  *
- * @return {undefined}
+ * @return {number} The resulting int.
  */
-function GuiGroupBox (bounds, text) {
+function GuiGroupBox(bounds, text) {
   return r.BindGuiGroupBox(
     bounds.x,
     bounds.y,
@@ -10759,9 +11584,9 @@ raylib.GuiGroupBox = GuiGroupBox
  * @param {Rectangle} bounds
  * @param {string} text
  *
- * @return {undefined}
+ * @return {number} The resulting int.
  */
-function GuiLine (bounds, text) {
+function GuiLine(bounds, text) {
   return r.BindGuiLine(
     bounds.x,
     bounds.y,
@@ -10778,9 +11603,9 @@ raylib.GuiLine = GuiLine
  * @param {Rectangle} bounds
  * @param {string} text
  *
- * @return {undefined}
+ * @return {number} The resulting int.
  */
-function GuiPanel (bounds, text) {
+function GuiPanel(bounds, text) {
   return r.BindGuiPanel(
     bounds.x,
     bounds.y,
@@ -10801,7 +11626,7 @@ raylib.GuiPanel = GuiPanel
  *
  * @return {number} The resulting int.
  */
-function GuiTabBar (bounds, text, count, active) {
+function GuiTabBar(bounds, text, count, active) {
   return r.BindGuiTabBar(
     bounds.x,
     bounds.y,
@@ -10821,10 +11646,11 @@ raylib.GuiTabBar = GuiTabBar
  * @param {string} text
  * @param {Rectangle} content
  * @param {number} scroll
+ * @param {number} view
  *
- * @return {Rectangle} The resulting Rectangle.
+ * @return {number} The resulting int.
  */
-function GuiScrollPanel (bounds, text, content, scroll) {
+function GuiScrollPanel(bounds, text, content, scroll, view) {
   return r.BindGuiScrollPanel(
     bounds.x,
     bounds.y,
@@ -10835,7 +11661,8 @@ function GuiScrollPanel (bounds, text, content, scroll) {
     content.y,
     content.width,
     content.height,
-    scroll
+    scroll,
+    view
   )
 }
 raylib.GuiScrollPanel = GuiScrollPanel
@@ -10846,9 +11673,9 @@ raylib.GuiScrollPanel = GuiScrollPanel
  * @param {Rectangle} bounds
  * @param {string} text
  *
- * @return {undefined}
+ * @return {number} The resulting int.
  */
-function GuiLabel (bounds, text) {
+function GuiLabel(bounds, text) {
   return r.BindGuiLabel(
     bounds.x,
     bounds.y,
@@ -10865,9 +11692,9 @@ raylib.GuiLabel = GuiLabel
  * @param {Rectangle} bounds
  * @param {string} text
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiButton (bounds, text) {
+function GuiButton(bounds, text) {
   return r.BindGuiButton(
     bounds.x,
     bounds.y,
@@ -10884,9 +11711,9 @@ raylib.GuiButton = GuiButton
  * @param {Rectangle} bounds
  * @param {string} text
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiLabelButton (bounds, text) {
+function GuiLabelButton(bounds, text) {
   return r.BindGuiLabelButton(
     bounds.x,
     bounds.y,
@@ -10902,11 +11729,11 @@ raylib.GuiLabelButton = GuiLabelButton
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {boolean} active
+ * @param {number} active
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiToggle (bounds, text, active) {
+function GuiToggle(bounds, text, active) {
   return r.BindGuiToggle(
     bounds.x,
     bounds.y,
@@ -10927,7 +11754,7 @@ raylib.GuiToggle = GuiToggle
  *
  * @return {number} The resulting int.
  */
-function GuiToggleGroup (bounds, text, active) {
+function GuiToggleGroup(bounds, text, active) {
   return r.BindGuiToggleGroup(
     bounds.x,
     bounds.y,
@@ -10940,15 +11767,36 @@ function GuiToggleGroup (bounds, text, active) {
 raylib.GuiToggleGroup = GuiToggleGroup
 
 /**
+ * Toggle Slider control, returns true when clicked
+ *
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} active
+ *
+ * @return {number} The resulting int.
+ */
+function GuiToggleSlider(bounds, text, active) {
+  return r.BindGuiToggleSlider(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    active
+  )
+}
+raylib.GuiToggleSlider = GuiToggleSlider
+
+/**
  * Check Box control, returns true when active
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {boolean} checked
+ * @param {number} checked
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiCheckBox (bounds, text, checked) {
+function GuiCheckBox(bounds, text, checked) {
   return r.BindGuiCheckBox(
     bounds.x,
     bounds.y,
@@ -10969,7 +11817,7 @@ raylib.GuiCheckBox = GuiCheckBox
  *
  * @return {number} The resulting int.
  */
-function GuiComboBox (bounds, text, active) {
+function GuiComboBox(bounds, text, active) {
   return r.BindGuiComboBox(
     bounds.x,
     bounds.y,
@@ -10989,9 +11837,9 @@ raylib.GuiComboBox = GuiComboBox
  * @param {number} active
  * @param {boolean} editMode
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiDropdownBox (bounds, text, active, editMode) {
+function GuiDropdownBox(bounds, text, active, editMode) {
   return r.BindGuiDropdownBox(
     bounds.x,
     bounds.y,
@@ -11014,9 +11862,9 @@ raylib.GuiDropdownBox = GuiDropdownBox
  * @param {number} maxValue
  * @param {boolean} editMode
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiSpinner (bounds, text, value, minValue, maxValue, editMode) {
+function GuiSpinner(bounds, text, value, minValue, maxValue, editMode) {
   return r.BindGuiSpinner(
     bounds.x,
     bounds.y,
@@ -11041,9 +11889,9 @@ raylib.GuiSpinner = GuiSpinner
  * @param {number} maxValue
  * @param {boolean} editMode
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiValueBox (bounds, text, value, minValue, maxValue, editMode) {
+function GuiValueBox(bounds, text, value, minValue, maxValue, editMode) {
   return r.BindGuiValueBox(
     bounds.x,
     bounds.y,
@@ -11066,9 +11914,9 @@ raylib.GuiValueBox = GuiValueBox
  * @param {number} textSize
  * @param {boolean} editMode
  *
- * @return {boolean} The resulting bool.
+ * @return {number} The resulting int.
  */
-function GuiTextBox (bounds, text, textSize, editMode) {
+function GuiTextBox(bounds, text, textSize, editMode) {
   return r.BindGuiTextBox(
     bounds.x,
     bounds.y,
@@ -11082,29 +11930,6 @@ function GuiTextBox (bounds, text, textSize, editMode) {
 raylib.GuiTextBox = GuiTextBox
 
 /**
- * Text Box control with multiple lines
- *
- * @param {Rectangle} bounds
- * @param {string} text
- * @param {number} textSize
- * @param {boolean} editMode
- *
- * @return {boolean} The resulting bool.
- */
-function GuiTextBoxMulti (bounds, text, textSize, editMode) {
-  return r.BindGuiTextBoxMulti(
-    bounds.x,
-    bounds.y,
-    bounds.width,
-    bounds.height,
-    text,
-    textSize,
-    editMode
-  )
-}
-raylib.GuiTextBoxMulti = GuiTextBoxMulti
-
-/**
  * Slider control, returns selected value
  *
  * @param {Rectangle} bounds
@@ -11114,9 +11939,9 @@ raylib.GuiTextBoxMulti = GuiTextBoxMulti
  * @param {number} minValue
  * @param {number} maxValue
  *
- * @return {number} The resulting float.
+ * @return {number} The resulting int.
  */
-function GuiSlider (bounds, textLeft, textRight, value, minValue, maxValue) {
+function GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue) {
   return r.BindGuiSlider(
     bounds.x,
     bounds.y,
@@ -11141,9 +11966,9 @@ raylib.GuiSlider = GuiSlider
  * @param {number} minValue
  * @param {number} maxValue
  *
- * @return {number} The resulting float.
+ * @return {number} The resulting int.
  */
-function GuiSliderBar (bounds, textLeft, textRight, value, minValue, maxValue) {
+function GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue) {
   return r.BindGuiSliderBar(
     bounds.x,
     bounds.y,
@@ -11168,9 +11993,9 @@ raylib.GuiSliderBar = GuiSliderBar
  * @param {number} minValue
  * @param {number} maxValue
  *
- * @return {number} The resulting float.
+ * @return {number} The resulting int.
  */
-function GuiProgressBar (bounds, textLeft, textRight, value, minValue, maxValue) {
+function GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue) {
   return r.BindGuiProgressBar(
     bounds.x,
     bounds.y,
@@ -11191,9 +12016,9 @@ raylib.GuiProgressBar = GuiProgressBar
  * @param {Rectangle} bounds
  * @param {string} text
  *
- * @return {undefined}
+ * @return {number} The resulting int.
  */
-function GuiStatusBar (bounds, text) {
+function GuiStatusBar(bounds, text) {
   return r.BindGuiStatusBar(
     bounds.x,
     bounds.y,
@@ -11210,9 +12035,9 @@ raylib.GuiStatusBar = GuiStatusBar
  * @param {Rectangle} bounds
  * @param {string} text
  *
- * @return {undefined}
+ * @return {number} The resulting int.
  */
-function GuiDummyRec (bounds, text) {
+function GuiDummyRec(bounds, text) {
   return r.BindGuiDummyRec(
     bounds.x,
     bounds.y,
@@ -11230,10 +12055,11 @@ raylib.GuiDummyRec = GuiDummyRec
  * @param {string} text
  * @param {number} spacing
  * @param {number} subdivs
+ * @param {number} mouseCell
  *
- * @return {Vector2} The resulting Vector2.
+ * @return {number} The resulting int.
  */
-function GuiGrid (bounds, text, spacing, subdivs) {
+function GuiGrid(bounds, text, spacing, subdivs, mouseCell) {
   return r.BindGuiGrid(
     bounds.x,
     bounds.y,
@@ -11241,7 +12067,8 @@ function GuiGrid (bounds, text, spacing, subdivs) {
     bounds.height,
     text,
     spacing,
-    subdivs
+    subdivs,
+    mouseCell
   )
 }
 raylib.GuiGrid = GuiGrid
@@ -11256,7 +12083,7 @@ raylib.GuiGrid = GuiGrid
  *
  * @return {number} The resulting int.
  */
-function GuiListView (bounds, text, scrollIndex, active) {
+function GuiListView(bounds, text, scrollIndex, active) {
   return r.BindGuiListView(
     bounds.x,
     bounds.y,
@@ -11275,13 +12102,13 @@ raylib.GuiListView = GuiListView
  * @param {Rectangle} bounds
  * @param {number} text
  * @param {number} count
- * @param {number} focus
  * @param {number} scrollIndex
  * @param {number} active
+ * @param {number} focus
  *
  * @return {number} The resulting int.
  */
-function GuiListViewEx (bounds, text, count, focus, scrollIndex, active) {
+function GuiListViewEx(bounds, text, count, scrollIndex, active, focus) {
   return r.BindGuiListViewEx(
     bounds.x,
     bounds.y,
@@ -11289,9 +12116,9 @@ function GuiListViewEx (bounds, text, count, focus, scrollIndex, active) {
     bounds.height,
     text,
     count,
-    focus,
     scrollIndex,
-    active
+    active,
+    focus
   )
 }
 raylib.GuiListViewEx = GuiListViewEx
@@ -11306,7 +12133,7 @@ raylib.GuiListViewEx = GuiListViewEx
  *
  * @return {number} The resulting int.
  */
-function GuiMessageBox (bounds, title, message, buttons) {
+function GuiMessageBox(bounds, title, message, buttons) {
   return r.BindGuiMessageBox(
     bounds.x,
     bounds.y,
@@ -11332,7 +12159,7 @@ raylib.GuiMessageBox = GuiMessageBox
  *
  * @return {number} The resulting int.
  */
-function GuiTextInputBox (bounds, title, message, buttons, text, textMaxSize, secretViewActive) {
+function GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive) {
   return r.BindGuiTextInputBox(
     bounds.x,
     bounds.y,
@@ -11353,21 +12180,18 @@ raylib.GuiTextInputBox = GuiTextInputBox
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {Color} color
+ * @param {number} color
  *
- * @return {Color} The resulting Color.
+ * @return {number} The resulting int.
  */
-function GuiColorPicker (bounds, text, color) {
+function GuiColorPicker(bounds, text, color) {
   return r.BindGuiColorPicker(
     bounds.x,
     bounds.y,
     bounds.width,
     bounds.height,
     text,
-    color.r,
-    color.g,
-    color.b,
-    color.a
+    color
   )
 }
 raylib.GuiColorPicker = GuiColorPicker
@@ -11377,21 +12201,18 @@ raylib.GuiColorPicker = GuiColorPicker
  *
  * @param {Rectangle} bounds
  * @param {string} text
- * @param {Color} color
+ * @param {number} color
  *
- * @return {Color} The resulting Color.
+ * @return {number} The resulting int.
  */
-function GuiColorPanel (bounds, text, color) {
+function GuiColorPanel(bounds, text, color) {
   return r.BindGuiColorPanel(
     bounds.x,
     bounds.y,
     bounds.width,
     bounds.height,
     text,
-    color.r,
-    color.g,
-    color.b,
-    color.a
+    color
   )
 }
 raylib.GuiColorPanel = GuiColorPanel
@@ -11403,9 +12224,9 @@ raylib.GuiColorPanel = GuiColorPanel
  * @param {string} text
  * @param {number} alpha
  *
- * @return {number} The resulting float.
+ * @return {number} The resulting int.
  */
-function GuiColorBarAlpha (bounds, text, alpha) {
+function GuiColorBarAlpha(bounds, text, alpha) {
   return r.BindGuiColorBarAlpha(
     bounds.x,
     bounds.y,
@@ -11424,9 +12245,9 @@ raylib.GuiColorBarAlpha = GuiColorBarAlpha
  * @param {string} text
  * @param {number} value
  *
- * @return {number} The resulting float.
+ * @return {number} The resulting int.
  */
-function GuiColorBarHue (bounds, text, value) {
+function GuiColorBarHue(bounds, text, value) {
   return r.BindGuiColorBarHue(
     bounds.x,
     bounds.y,
@@ -11439,132 +12260,46 @@ function GuiColorBarHue (bounds, text, value) {
 raylib.GuiColorBarHue = GuiColorBarHue
 
 /**
- * Load style file over global style variable (.rgs)
+ * Color Picker control that avoids conversion to RGB on each call (multiple color controls)
  *
- * @param {string} fileName
- *
- * @return {undefined}
- */
-function GuiLoadStyle (fileName) {
-  return r.BindGuiLoadStyle(
-    fileName
-  )
-}
-raylib.GuiLoadStyle = GuiLoadStyle
-
-/**
- * Load style default over global style
- *
- * @return {undefined}
- */
-function GuiLoadStyleDefault () {
-  return r.BindGuiLoadStyleDefault()
-}
-raylib.GuiLoadStyleDefault = GuiLoadStyleDefault
-
-/**
- * Enable gui tooltips (global state)
- *
- * @return {undefined}
- */
-function GuiEnableTooltip () {
-  return r.BindGuiEnableTooltip()
-}
-raylib.GuiEnableTooltip = GuiEnableTooltip
-
-/**
- * Disable gui tooltips (global state)
- *
- * @return {undefined}
- */
-function GuiDisableTooltip () {
-  return r.BindGuiDisableTooltip()
-}
-raylib.GuiDisableTooltip = GuiDisableTooltip
-
-/**
- * Set tooltip string
- *
- * @param {string} tooltip
- *
- * @return {undefined}
- */
-function GuiSetTooltip (tooltip) {
-  return r.BindGuiSetTooltip(
-    tooltip
-  )
-}
-raylib.GuiSetTooltip = GuiSetTooltip
-
-/**
- * Get text with icon id prepended (if supported)
- *
- * @param {number} iconId
+ * @param {Rectangle} bounds
  * @param {string} text
+ * @param {number} colorHsv
  *
- * @return {string} The resulting const char *.
+ * @return {number} The resulting int.
  */
-function GuiIconText (iconId, text) {
-  return r.BindGuiIconText(
-    iconId,
-    text
+function GuiColorPickerHSV(bounds, text, colorHsv) {
+  return r.BindGuiColorPickerHSV(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    colorHsv
   )
 }
-raylib.GuiIconText = GuiIconText
+raylib.GuiColorPickerHSV = GuiColorPickerHSV
 
 /**
- * Get raygui icons data pointer
+ * Color Panel control that returns HSV color value, used by GuiColorPickerHSV()
  *
- * @return {number} The resulting unsigned int *.
+ * @param {Rectangle} bounds
+ * @param {string} text
+ * @param {number} colorHsv
+ *
+ * @return {number} The resulting int.
  */
-function GuiGetIcons () {
-  return r.BindGuiGetIcons()
-}
-raylib.GuiGetIcons = GuiGetIcons
-
-/**
- * Load raygui icons file (.rgi) into internal icons data
- *
- * @param {string} fileName
- * @param {boolean} loadIconsName
- *
- * @return {number} The resulting char **.
- */
-function GuiLoadIcons (fileName, loadIconsName) {
-  return r.BindGuiLoadIcons(
-    fileName,
-    loadIconsName
+function GuiColorPanelHSV(bounds, text, colorHsv) {
+  return r.BindGuiColorPanelHSV(
+    bounds.x,
+    bounds.y,
+    bounds.width,
+    bounds.height,
+    text,
+    colorHsv
   )
 }
-raylib.GuiLoadIcons = GuiLoadIcons
-
-function GuiDrawIcon (iconId, posX, posY, pixelSize, color) {
-  return r.BindGuiDrawIcon(
-    iconId,
-    posX,
-    posY,
-    pixelSize,
-    color.r,
-    color.g,
-    color.b,
-    color.a
-  )
-}
-raylib.GuiDrawIcon = GuiDrawIcon
-
-/**
- * Set icon drawing size
- *
- * @param {number} scale
- *
- * @return {undefined}
- */
-function GuiSetIconScale (scale) {
-  return r.BindGuiSetIconScale(
-    scale
-  )
-}
-raylib.GuiSetIconScale = GuiSetIconScale
+raylib.GuiColorPanelHSV = GuiColorPanelHSV
 
 /**
  * Choose the current matrix to be transformed
@@ -11573,7 +12308,7 @@ raylib.GuiSetIconScale = GuiSetIconScale
  *
  * @return {undefined}
  */
-function rlMatrixMode (mode) {
+function rlMatrixMode(mode) {
   return r.BindrlMatrixMode(
     mode
   )
@@ -11585,7 +12320,7 @@ raylib.rlMatrixMode = rlMatrixMode
  *
  * @return {undefined}
  */
-function rlPushMatrix () {
+function rlPushMatrix() {
   return r.BindrlPushMatrix()
 }
 raylib.rlPushMatrix = rlPushMatrix
@@ -11595,7 +12330,7 @@ raylib.rlPushMatrix = rlPushMatrix
  *
  * @return {undefined}
  */
-function rlPopMatrix () {
+function rlPopMatrix() {
   return r.BindrlPopMatrix()
 }
 raylib.rlPopMatrix = rlPopMatrix
@@ -11605,7 +12340,7 @@ raylib.rlPopMatrix = rlPopMatrix
  *
  * @return {undefined}
  */
-function rlLoadIdentity () {
+function rlLoadIdentity() {
   return r.BindrlLoadIdentity()
 }
 raylib.rlLoadIdentity = rlLoadIdentity
@@ -11619,7 +12354,7 @@ raylib.rlLoadIdentity = rlLoadIdentity
  *
  * @return {undefined}
  */
-function rlTranslatef (x, y, z) {
+function rlTranslatef(x, y, z) {
   return r.BindrlTranslatef(
     x,
     y,
@@ -11638,7 +12373,7 @@ raylib.rlTranslatef = rlTranslatef
  *
  * @return {undefined}
  */
-function rlRotatef (angle, x, y, z) {
+function rlRotatef(angle, x, y, z) {
   return r.BindrlRotatef(
     angle,
     x,
@@ -11657,7 +12392,7 @@ raylib.rlRotatef = rlRotatef
  *
  * @return {undefined}
  */
-function rlScalef (x, y, z) {
+function rlScalef(x, y, z) {
   return r.BindrlScalef(
     x,
     y,
@@ -11673,14 +12408,14 @@ raylib.rlScalef = rlScalef
  *
  * @return {undefined}
  */
-function rlMultMatrixf (matf) {
+function rlMultMatrixf(matf) {
   return r.BindrlMultMatrixf(
     matf
   )
 }
 raylib.rlMultMatrixf = rlMultMatrixf
 
-function rlFrustum (left, right, bottom, top, znear, zfar) {
+function rlFrustum(left, right, bottom, top, znear, zfar) {
   return r.BindrlFrustum(
     left,
     right,
@@ -11692,7 +12427,7 @@ function rlFrustum (left, right, bottom, top, znear, zfar) {
 }
 raylib.rlFrustum = rlFrustum
 
-function rlOrtho (left, right, bottom, top, znear, zfar) {
+function rlOrtho(left, right, bottom, top, znear, zfar) {
   return r.BindrlOrtho(
     left,
     right,
@@ -11714,7 +12449,7 @@ raylib.rlOrtho = rlOrtho
  *
  * @return {undefined}
  */
-function rlViewport (x, y, width, height) {
+function rlViewport(x, y, width, height) {
   return r.BindrlViewport(
     x,
     y,
@@ -11731,7 +12466,7 @@ raylib.rlViewport = rlViewport
  *
  * @return {undefined}
  */
-function rlBegin (mode) {
+function rlBegin(mode) {
   return r.BindrlBegin(
     mode
   )
@@ -11743,7 +12478,7 @@ raylib.rlBegin = rlBegin
  *
  * @return {undefined}
  */
-function rlEnd () {
+function rlEnd() {
   return r.BindrlEnd()
 }
 raylib.rlEnd = rlEnd
@@ -11756,7 +12491,7 @@ raylib.rlEnd = rlEnd
  *
  * @return {undefined}
  */
-function rlVertex2i (x, y) {
+function rlVertex2i(x, y) {
   return r.BindrlVertex2i(
     x,
     y
@@ -11772,7 +12507,7 @@ raylib.rlVertex2i = rlVertex2i
  *
  * @return {undefined}
  */
-function rlVertex2f (x, y) {
+function rlVertex2f(x, y) {
   return r.BindrlVertex2f(
     x,
     y
@@ -11789,7 +12524,7 @@ raylib.rlVertex2f = rlVertex2f
  *
  * @return {undefined}
  */
-function rlVertex3f (x, y, z) {
+function rlVertex3f(x, y, z) {
   return r.BindrlVertex3f(
     x,
     y,
@@ -11806,7 +12541,7 @@ raylib.rlVertex3f = rlVertex3f
  *
  * @return {undefined}
  */
-function rlTexCoord2f (x, y) {
+function rlTexCoord2f(x, y) {
   return r.BindrlTexCoord2f(
     x,
     y
@@ -11823,7 +12558,7 @@ raylib.rlTexCoord2f = rlTexCoord2f
  *
  * @return {undefined}
  */
-function rlNormal3f (x, y, z) {
+function rlNormal3f(x, y, z) {
   return r.BindrlNormal3f(
     x,
     y,
@@ -11842,7 +12577,7 @@ raylib.rlNormal3f = rlNormal3f
  *
  * @return {undefined}
  */
-function rlColor4ub (r, g, b, a) {
+function rlColor4ub(r, g, b, a) {
   return r.BindrlColor4ub(
     r,
     g,
@@ -11861,7 +12596,7 @@ raylib.rlColor4ub = rlColor4ub
  *
  * @return {undefined}
  */
-function rlColor3f (x, y, z) {
+function rlColor3f(x, y, z) {
   return r.BindrlColor3f(
     x,
     y,
@@ -11880,7 +12615,7 @@ raylib.rlColor3f = rlColor3f
  *
  * @return {undefined}
  */
-function rlColor4f (x, y, z, w) {
+function rlColor4f(x, y, z, w) {
   return r.BindrlColor4f(
     x,
     y,
@@ -11897,7 +12632,7 @@ raylib.rlColor4f = rlColor4f
  *
  * @return {boolean} The resulting bool.
  */
-function rlEnableVertexArray (vaoId) {
+function rlEnableVertexArray(vaoId) {
   return r.BindrlEnableVertexArray(
     vaoId
   )
@@ -11909,7 +12644,7 @@ raylib.rlEnableVertexArray = rlEnableVertexArray
  *
  * @return {undefined}
  */
-function rlDisableVertexArray () {
+function rlDisableVertexArray() {
   return r.BindrlDisableVertexArray()
 }
 raylib.rlDisableVertexArray = rlDisableVertexArray
@@ -11921,7 +12656,7 @@ raylib.rlDisableVertexArray = rlDisableVertexArray
  *
  * @return {undefined}
  */
-function rlEnableVertexBuffer (id) {
+function rlEnableVertexBuffer(id) {
   return r.BindrlEnableVertexBuffer(
     id
   )
@@ -11933,7 +12668,7 @@ raylib.rlEnableVertexBuffer = rlEnableVertexBuffer
  *
  * @return {undefined}
  */
-function rlDisableVertexBuffer () {
+function rlDisableVertexBuffer() {
   return r.BindrlDisableVertexBuffer()
 }
 raylib.rlDisableVertexBuffer = rlDisableVertexBuffer
@@ -11945,7 +12680,7 @@ raylib.rlDisableVertexBuffer = rlDisableVertexBuffer
  *
  * @return {undefined}
  */
-function rlEnableVertexBufferElement (id) {
+function rlEnableVertexBufferElement(id) {
   return r.BindrlEnableVertexBufferElement(
     id
   )
@@ -11957,7 +12692,7 @@ raylib.rlEnableVertexBufferElement = rlEnableVertexBufferElement
  *
  * @return {undefined}
  */
-function rlDisableVertexBufferElement () {
+function rlDisableVertexBufferElement() {
   return r.BindrlDisableVertexBufferElement()
 }
 raylib.rlDisableVertexBufferElement = rlDisableVertexBufferElement
@@ -11969,7 +12704,7 @@ raylib.rlDisableVertexBufferElement = rlDisableVertexBufferElement
  *
  * @return {undefined}
  */
-function rlEnableVertexAttribute (index) {
+function rlEnableVertexAttribute(index) {
   return r.BindrlEnableVertexAttribute(
     index
   )
@@ -11983,7 +12718,7 @@ raylib.rlEnableVertexAttribute = rlEnableVertexAttribute
  *
  * @return {undefined}
  */
-function rlDisableVertexAttribute (index) {
+function rlDisableVertexAttribute(index) {
   return r.BindrlDisableVertexAttribute(
     index
   )
@@ -11997,7 +12732,7 @@ raylib.rlDisableVertexAttribute = rlDisableVertexAttribute
  *
  * @return {undefined}
  */
-function rlActiveTextureSlot (slot) {
+function rlActiveTextureSlot(slot) {
   return r.BindrlActiveTextureSlot(
     slot
   )
@@ -12011,7 +12746,7 @@ raylib.rlActiveTextureSlot = rlActiveTextureSlot
  *
  * @return {undefined}
  */
-function rlEnableTexture (id) {
+function rlEnableTexture(id) {
   return r.BindrlEnableTexture(
     id
   )
@@ -12023,7 +12758,7 @@ raylib.rlEnableTexture = rlEnableTexture
  *
  * @return {undefined}
  */
-function rlDisableTexture () {
+function rlDisableTexture() {
   return r.BindrlDisableTexture()
 }
 raylib.rlDisableTexture = rlDisableTexture
@@ -12035,7 +12770,7 @@ raylib.rlDisableTexture = rlDisableTexture
  *
  * @return {undefined}
  */
-function rlEnableTextureCubemap (id) {
+function rlEnableTextureCubemap(id) {
   return r.BindrlEnableTextureCubemap(
     id
   )
@@ -12047,7 +12782,7 @@ raylib.rlEnableTextureCubemap = rlEnableTextureCubemap
  *
  * @return {undefined}
  */
-function rlDisableTextureCubemap () {
+function rlDisableTextureCubemap() {
   return r.BindrlDisableTextureCubemap()
 }
 raylib.rlDisableTextureCubemap = rlDisableTextureCubemap
@@ -12061,7 +12796,7 @@ raylib.rlDisableTextureCubemap = rlDisableTextureCubemap
  *
  * @return {undefined}
  */
-function rlTextureParameters (id, param, value) {
+function rlTextureParameters(id, param, value) {
   return r.BindrlTextureParameters(
     id,
     param,
@@ -12079,7 +12814,7 @@ raylib.rlTextureParameters = rlTextureParameters
  *
  * @return {undefined}
  */
-function rlCubemapParameters (id, param, value) {
+function rlCubemapParameters(id, param, value) {
   return r.BindrlCubemapParameters(
     id,
     param,
@@ -12095,7 +12830,7 @@ raylib.rlCubemapParameters = rlCubemapParameters
  *
  * @return {undefined}
  */
-function rlEnableShader (id) {
+function rlEnableShader(id) {
   return r.BindrlEnableShader(
     id
   )
@@ -12107,7 +12842,7 @@ raylib.rlEnableShader = rlEnableShader
  *
  * @return {undefined}
  */
-function rlDisableShader () {
+function rlDisableShader() {
   return r.BindrlDisableShader()
 }
 raylib.rlDisableShader = rlDisableShader
@@ -12119,7 +12854,7 @@ raylib.rlDisableShader = rlDisableShader
  *
  * @return {undefined}
  */
-function rlEnableFramebuffer (id) {
+function rlEnableFramebuffer(id) {
   return r.BindrlEnableFramebuffer(
     id
   )
@@ -12131,7 +12866,7 @@ raylib.rlEnableFramebuffer = rlEnableFramebuffer
  *
  * @return {undefined}
  */
-function rlDisableFramebuffer () {
+function rlDisableFramebuffer() {
   return r.BindrlDisableFramebuffer()
 }
 raylib.rlDisableFramebuffer = rlDisableFramebuffer
@@ -12143,7 +12878,7 @@ raylib.rlDisableFramebuffer = rlDisableFramebuffer
  *
  * @return {undefined}
  */
-function rlActiveDrawBuffers (count) {
+function rlActiveDrawBuffers(count) {
   return r.BindrlActiveDrawBuffers(
     count
   )
@@ -12151,11 +12886,41 @@ function rlActiveDrawBuffers (count) {
 raylib.rlActiveDrawBuffers = rlActiveDrawBuffers
 
 /**
+ * Blit active framebuffer to main framebuffer
+ *
+ * @param {number} srcX
+ * @param {number} srcY
+ * @param {number} srcWidth
+ * @param {number} srcHeight
+ * @param {number} dstX
+ * @param {number} dstY
+ * @param {number} dstWidth
+ * @param {number} dstHeight
+ * @param {number} bufferMask
+ *
+ * @return {undefined}
+ */
+function rlBlitFramebuffer(srcX, srcY, srcWidth, srcHeight, dstX, dstY, dstWidth, dstHeight, bufferMask) {
+  return r.BindrlBlitFramebuffer(
+    srcX,
+    srcY,
+    srcWidth,
+    srcHeight,
+    dstX,
+    dstY,
+    dstWidth,
+    dstHeight,
+    bufferMask
+  )
+}
+raylib.rlBlitFramebuffer = rlBlitFramebuffer
+
+/**
  * Enable color blending
  *
  * @return {undefined}
  */
-function rlEnableColorBlend () {
+function rlEnableColorBlend() {
   return r.BindrlEnableColorBlend()
 }
 raylib.rlEnableColorBlend = rlEnableColorBlend
@@ -12165,7 +12930,7 @@ raylib.rlEnableColorBlend = rlEnableColorBlend
  *
  * @return {undefined}
  */
-function rlDisableColorBlend () {
+function rlDisableColorBlend() {
   return r.BindrlDisableColorBlend()
 }
 raylib.rlDisableColorBlend = rlDisableColorBlend
@@ -12175,7 +12940,7 @@ raylib.rlDisableColorBlend = rlDisableColorBlend
  *
  * @return {undefined}
  */
-function rlEnableDepthTest () {
+function rlEnableDepthTest() {
   return r.BindrlEnableDepthTest()
 }
 raylib.rlEnableDepthTest = rlEnableDepthTest
@@ -12185,7 +12950,7 @@ raylib.rlEnableDepthTest = rlEnableDepthTest
  *
  * @return {undefined}
  */
-function rlDisableDepthTest () {
+function rlDisableDepthTest() {
   return r.BindrlDisableDepthTest()
 }
 raylib.rlDisableDepthTest = rlDisableDepthTest
@@ -12195,7 +12960,7 @@ raylib.rlDisableDepthTest = rlDisableDepthTest
  *
  * @return {undefined}
  */
-function rlEnableDepthMask () {
+function rlEnableDepthMask() {
   return r.BindrlEnableDepthMask()
 }
 raylib.rlEnableDepthMask = rlEnableDepthMask
@@ -12205,7 +12970,7 @@ raylib.rlEnableDepthMask = rlEnableDepthMask
  *
  * @return {undefined}
  */
-function rlDisableDepthMask () {
+function rlDisableDepthMask() {
   return r.BindrlDisableDepthMask()
 }
 raylib.rlDisableDepthMask = rlDisableDepthMask
@@ -12215,7 +12980,7 @@ raylib.rlDisableDepthMask = rlDisableDepthMask
  *
  * @return {undefined}
  */
-function rlEnableBackfaceCulling () {
+function rlEnableBackfaceCulling() {
   return r.BindrlEnableBackfaceCulling()
 }
 raylib.rlEnableBackfaceCulling = rlEnableBackfaceCulling
@@ -12225,7 +12990,7 @@ raylib.rlEnableBackfaceCulling = rlEnableBackfaceCulling
  *
  * @return {undefined}
  */
-function rlDisableBackfaceCulling () {
+function rlDisableBackfaceCulling() {
   return r.BindrlDisableBackfaceCulling()
 }
 raylib.rlDisableBackfaceCulling = rlDisableBackfaceCulling
@@ -12237,7 +13002,7 @@ raylib.rlDisableBackfaceCulling = rlDisableBackfaceCulling
  *
  * @return {undefined}
  */
-function rlSetCullFace (mode) {
+function rlSetCullFace(mode) {
   return r.BindrlSetCullFace(
     mode
   )
@@ -12249,7 +13014,7 @@ raylib.rlSetCullFace = rlSetCullFace
  *
  * @return {undefined}
  */
-function rlEnableScissorTest () {
+function rlEnableScissorTest() {
   return r.BindrlEnableScissorTest()
 }
 raylib.rlEnableScissorTest = rlEnableScissorTest
@@ -12259,7 +13024,7 @@ raylib.rlEnableScissorTest = rlEnableScissorTest
  *
  * @return {undefined}
  */
-function rlDisableScissorTest () {
+function rlDisableScissorTest() {
   return r.BindrlDisableScissorTest()
 }
 raylib.rlDisableScissorTest = rlDisableScissorTest
@@ -12274,7 +13039,7 @@ raylib.rlDisableScissorTest = rlDisableScissorTest
  *
  * @return {undefined}
  */
-function rlScissor (x, y, width, height) {
+function rlScissor(x, y, width, height) {
   return r.BindrlScissor(
     x,
     y,
@@ -12289,17 +13054,27 @@ raylib.rlScissor = rlScissor
  *
  * @return {undefined}
  */
-function rlEnableWireMode () {
+function rlEnableWireMode() {
   return r.BindrlEnableWireMode()
 }
 raylib.rlEnableWireMode = rlEnableWireMode
 
 /**
- * Disable wire mode
+ * Enable point mode
  *
  * @return {undefined}
  */
-function rlDisableWireMode () {
+function rlEnablePointMode() {
+  return r.BindrlEnablePointMode()
+}
+raylib.rlEnablePointMode = rlEnablePointMode
+
+/**
+ * Disable wire mode ( and point ) maybe rename
+ *
+ * @return {undefined}
+ */
+function rlDisableWireMode() {
   return r.BindrlDisableWireMode()
 }
 raylib.rlDisableWireMode = rlDisableWireMode
@@ -12311,7 +13086,7 @@ raylib.rlDisableWireMode = rlDisableWireMode
  *
  * @return {undefined}
  */
-function rlSetLineWidth (width) {
+function rlSetLineWidth(width) {
   return r.BindrlSetLineWidth(
     width
   )
@@ -12323,7 +13098,7 @@ raylib.rlSetLineWidth = rlSetLineWidth
  *
  * @return {number} The resulting float.
  */
-function rlGetLineWidth () {
+function rlGetLineWidth() {
   return r.BindrlGetLineWidth()
 }
 raylib.rlGetLineWidth = rlGetLineWidth
@@ -12333,7 +13108,7 @@ raylib.rlGetLineWidth = rlGetLineWidth
  *
  * @return {undefined}
  */
-function rlEnableSmoothLines () {
+function rlEnableSmoothLines() {
   return r.BindrlEnableSmoothLines()
 }
 raylib.rlEnableSmoothLines = rlEnableSmoothLines
@@ -12343,7 +13118,7 @@ raylib.rlEnableSmoothLines = rlEnableSmoothLines
  *
  * @return {undefined}
  */
-function rlDisableSmoothLines () {
+function rlDisableSmoothLines() {
   return r.BindrlDisableSmoothLines()
 }
 raylib.rlDisableSmoothLines = rlDisableSmoothLines
@@ -12353,7 +13128,7 @@ raylib.rlDisableSmoothLines = rlDisableSmoothLines
  *
  * @return {undefined}
  */
-function rlEnableStereoRender () {
+function rlEnableStereoRender() {
   return r.BindrlEnableStereoRender()
 }
 raylib.rlEnableStereoRender = rlEnableStereoRender
@@ -12363,7 +13138,7 @@ raylib.rlEnableStereoRender = rlEnableStereoRender
  *
  * @return {undefined}
  */
-function rlDisableStereoRender () {
+function rlDisableStereoRender() {
   return r.BindrlDisableStereoRender()
 }
 raylib.rlDisableStereoRender = rlDisableStereoRender
@@ -12373,7 +13148,7 @@ raylib.rlDisableStereoRender = rlDisableStereoRender
  *
  * @return {boolean} The resulting bool.
  */
-function rlIsStereoRenderEnabled () {
+function rlIsStereoRenderEnabled() {
   return r.BindrlIsStereoRenderEnabled()
 }
 raylib.rlIsStereoRenderEnabled = rlIsStereoRenderEnabled
@@ -12388,7 +13163,7 @@ raylib.rlIsStereoRenderEnabled = rlIsStereoRenderEnabled
  *
  * @return {undefined}
  */
-function rlClearColor (r, g, b, a) {
+function rlClearColor(r, g, b, a) {
   return r.BindrlClearColor(
     r,
     g,
@@ -12403,7 +13178,7 @@ raylib.rlClearColor = rlClearColor
  *
  * @return {undefined}
  */
-function rlClearScreenBuffers () {
+function rlClearScreenBuffers() {
   return r.BindrlClearScreenBuffers()
 }
 raylib.rlClearScreenBuffers = rlClearScreenBuffers
@@ -12413,7 +13188,7 @@ raylib.rlClearScreenBuffers = rlClearScreenBuffers
  *
  * @return {undefined}
  */
-function rlCheckErrors () {
+function rlCheckErrors() {
   return r.BindrlCheckErrors()
 }
 raylib.rlCheckErrors = rlCheckErrors
@@ -12425,7 +13200,7 @@ raylib.rlCheckErrors = rlCheckErrors
  *
  * @return {undefined}
  */
-function rlSetBlendMode (mode) {
+function rlSetBlendMode(mode) {
   return r.BindrlSetBlendMode(
     mode
   )
@@ -12441,7 +13216,7 @@ raylib.rlSetBlendMode = rlSetBlendMode
  *
  * @return {undefined}
  */
-function rlSetBlendFactors (glSrcFactor, glDstFactor, glEquation) {
+function rlSetBlendFactors(glSrcFactor, glDstFactor, glEquation) {
   return r.BindrlSetBlendFactors(
     glSrcFactor,
     glDstFactor,
@@ -12462,7 +13237,7 @@ raylib.rlSetBlendFactors = rlSetBlendFactors
  *
  * @return {undefined}
  */
-function rlSetBlendFactorsSeparate (glSrcRGB, glDstRGB, glSrcAlpha, glDstAlpha, glEqRGB, glEqAlpha) {
+function rlSetBlendFactorsSeparate(glSrcRGB, glDstRGB, glSrcAlpha, glDstAlpha, glEqRGB, glEqAlpha) {
   return r.BindrlSetBlendFactorsSeparate(
     glSrcRGB,
     glDstRGB,
@@ -12482,7 +13257,7 @@ raylib.rlSetBlendFactorsSeparate = rlSetBlendFactorsSeparate
  *
  * @return {undefined}
  */
-function rlglInit (width, height) {
+function rlglInit(width, height) {
   return r.BindrlglInit(
     width,
     height
@@ -12495,7 +13270,7 @@ raylib.rlglInit = rlglInit
  *
  * @return {undefined}
  */
-function rlglClose () {
+function rlglClose() {
   return r.BindrlglClose()
 }
 raylib.rlglClose = rlglClose
@@ -12507,7 +13282,7 @@ raylib.rlglClose = rlglClose
  *
  * @return {undefined}
  */
-function rlLoadExtensions (loader) {
+function rlLoadExtensions(loader) {
   return r.BindrlLoadExtensions(
     loader
   )
@@ -12519,7 +13294,7 @@ raylib.rlLoadExtensions = rlLoadExtensions
  *
  * @return {number} The resulting int.
  */
-function rlGetVersion () {
+function rlGetVersion() {
   return r.BindrlGetVersion()
 }
 raylib.rlGetVersion = rlGetVersion
@@ -12531,7 +13306,7 @@ raylib.rlGetVersion = rlGetVersion
  *
  * @return {undefined}
  */
-function rlSetFramebufferWidth (width) {
+function rlSetFramebufferWidth(width) {
   return r.BindrlSetFramebufferWidth(
     width
   )
@@ -12543,7 +13318,7 @@ raylib.rlSetFramebufferWidth = rlSetFramebufferWidth
  *
  * @return {number} The resulting int.
  */
-function rlGetFramebufferWidth () {
+function rlGetFramebufferWidth() {
   return r.BindrlGetFramebufferWidth()
 }
 raylib.rlGetFramebufferWidth = rlGetFramebufferWidth
@@ -12555,7 +13330,7 @@ raylib.rlGetFramebufferWidth = rlGetFramebufferWidth
  *
  * @return {undefined}
  */
-function rlSetFramebufferHeight (height) {
+function rlSetFramebufferHeight(height) {
   return r.BindrlSetFramebufferHeight(
     height
   )
@@ -12567,7 +13342,7 @@ raylib.rlSetFramebufferHeight = rlSetFramebufferHeight
  *
  * @return {number} The resulting int.
  */
-function rlGetFramebufferHeight () {
+function rlGetFramebufferHeight() {
   return r.BindrlGetFramebufferHeight()
 }
 raylib.rlGetFramebufferHeight = rlGetFramebufferHeight
@@ -12577,7 +13352,7 @@ raylib.rlGetFramebufferHeight = rlGetFramebufferHeight
  *
  * @return {number} The resulting unsigned int.
  */
-function rlGetTextureIdDefault () {
+function rlGetTextureIdDefault() {
   return r.BindrlGetTextureIdDefault()
 }
 raylib.rlGetTextureIdDefault = rlGetTextureIdDefault
@@ -12587,7 +13362,7 @@ raylib.rlGetTextureIdDefault = rlGetTextureIdDefault
  *
  * @return {number} The resulting unsigned int.
  */
-function rlGetShaderIdDefault () {
+function rlGetShaderIdDefault() {
   return r.BindrlGetShaderIdDefault()
 }
 raylib.rlGetShaderIdDefault = rlGetShaderIdDefault
@@ -12597,7 +13372,7 @@ raylib.rlGetShaderIdDefault = rlGetShaderIdDefault
  *
  * @return {number} The resulting int *.
  */
-function rlGetShaderLocsDefault () {
+function rlGetShaderLocsDefault() {
   return r.BindrlGetShaderLocsDefault()
 }
 raylib.rlGetShaderLocsDefault = rlGetShaderLocsDefault
@@ -12610,7 +13385,7 @@ raylib.rlGetShaderLocsDefault = rlGetShaderLocsDefault
  *
  * @return {rlRenderBatch} The resulting rlRenderBatch.
  */
-function rlLoadRenderBatch (numBuffers, bufferElements) {
+function rlLoadRenderBatch(numBuffers, bufferElements) {
   return r.BindrlLoadRenderBatch(
     numBuffers,
     bufferElements
@@ -12625,7 +13400,7 @@ raylib.rlLoadRenderBatch = rlLoadRenderBatch
  *
  * @return {undefined}
  */
-function rlUnloadRenderBatch (batch) {
+function rlUnloadRenderBatch(batch) {
   return r.BindrlUnloadRenderBatch(
     batch.bufferCount,
     batch.currentBuffer,
@@ -12644,7 +13419,7 @@ raylib.rlUnloadRenderBatch = rlUnloadRenderBatch
  *
  * @return {undefined}
  */
-function rlDrawRenderBatch (batch) {
+function rlDrawRenderBatch(batch) {
   return r.BindrlDrawRenderBatch(
     batch
   )
@@ -12658,7 +13433,7 @@ raylib.rlDrawRenderBatch = rlDrawRenderBatch
  *
  * @return {undefined}
  */
-function rlSetRenderBatchActive (batch) {
+function rlSetRenderBatchActive(batch) {
   return r.BindrlSetRenderBatchActive(
     batch
   )
@@ -12670,7 +13445,7 @@ raylib.rlSetRenderBatchActive = rlSetRenderBatchActive
  *
  * @return {undefined}
  */
-function rlDrawRenderBatchActive () {
+function rlDrawRenderBatchActive() {
   return r.BindrlDrawRenderBatchActive()
 }
 raylib.rlDrawRenderBatchActive = rlDrawRenderBatchActive
@@ -12682,7 +13457,7 @@ raylib.rlDrawRenderBatchActive = rlDrawRenderBatchActive
  *
  * @return {boolean} The resulting bool.
  */
-function rlCheckRenderBatchLimit (vCount) {
+function rlCheckRenderBatchLimit(vCount) {
   return r.BindrlCheckRenderBatchLimit(
     vCount
   )
@@ -12696,7 +13471,7 @@ raylib.rlCheckRenderBatchLimit = rlCheckRenderBatchLimit
  *
  * @return {undefined}
  */
-function rlSetTexture (id) {
+function rlSetTexture(id) {
   return r.BindrlSetTexture(
     id
   )
@@ -12708,7 +13483,7 @@ raylib.rlSetTexture = rlSetTexture
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadVertexArray () {
+function rlLoadVertexArray() {
   return r.BindrlLoadVertexArray()
 }
 raylib.rlLoadVertexArray = rlLoadVertexArray
@@ -12722,7 +13497,7 @@ raylib.rlLoadVertexArray = rlLoadVertexArray
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadVertexBuffer (buffer, size, dynamic) {
+function rlLoadVertexBuffer(buffer, size, dynamic) {
   return r.BindrlLoadVertexBuffer(
     buffer,
     size,
@@ -12740,7 +13515,7 @@ raylib.rlLoadVertexBuffer = rlLoadVertexBuffer
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadVertexBufferElement (buffer, size, dynamic) {
+function rlLoadVertexBufferElement(buffer, size, dynamic) {
   return r.BindrlLoadVertexBufferElement(
     buffer,
     size,
@@ -12759,7 +13534,7 @@ raylib.rlLoadVertexBufferElement = rlLoadVertexBufferElement
  *
  * @return {undefined}
  */
-function rlUpdateVertexBuffer (bufferId, data, dataSize, offset) {
+function rlUpdateVertexBuffer(bufferId, data, dataSize, offset) {
   return r.BindrlUpdateVertexBuffer(
     bufferId,
     data,
@@ -12779,7 +13554,7 @@ raylib.rlUpdateVertexBuffer = rlUpdateVertexBuffer
  *
  * @return {undefined}
  */
-function rlUpdateVertexBufferElements (id, data, dataSize, offset) {
+function rlUpdateVertexBufferElements(id, data, dataSize, offset) {
   return r.BindrlUpdateVertexBufferElements(
     id,
     data,
@@ -12789,21 +13564,21 @@ function rlUpdateVertexBufferElements (id, data, dataSize, offset) {
 }
 raylib.rlUpdateVertexBufferElements = rlUpdateVertexBufferElements
 
-function rlUnloadVertexArray (vaoId) {
+function rlUnloadVertexArray(vaoId) {
   return r.BindrlUnloadVertexArray(
     vaoId
   )
 }
 raylib.rlUnloadVertexArray = rlUnloadVertexArray
 
-function rlUnloadVertexBuffer (vboId) {
+function rlUnloadVertexBuffer(vboId) {
   return r.BindrlUnloadVertexBuffer(
     vboId
   )
 }
 raylib.rlUnloadVertexBuffer = rlUnloadVertexBuffer
 
-function rlSetVertexAttribute (index, compSize, type, normalized, stride, pointer) {
+function rlSetVertexAttribute(index, compSize, type, normalized, stride, pointer) {
   return r.BindrlSetVertexAttribute(
     index,
     compSize,
@@ -12815,7 +13590,7 @@ function rlSetVertexAttribute (index, compSize, type, normalized, stride, pointe
 }
 raylib.rlSetVertexAttribute = rlSetVertexAttribute
 
-function rlSetVertexAttributeDivisor (index, divisor) {
+function rlSetVertexAttributeDivisor(index, divisor) {
   return r.BindrlSetVertexAttributeDivisor(
     index,
     divisor
@@ -12833,7 +13608,7 @@ raylib.rlSetVertexAttributeDivisor = rlSetVertexAttributeDivisor
  *
  * @return {undefined}
  */
-function rlSetVertexAttributeDefault (locIndex, value, attribType, count) {
+function rlSetVertexAttributeDefault(locIndex, value, attribType, count) {
   return r.BindrlSetVertexAttributeDefault(
     locIndex,
     value,
@@ -12843,7 +13618,7 @@ function rlSetVertexAttributeDefault (locIndex, value, attribType, count) {
 }
 raylib.rlSetVertexAttributeDefault = rlSetVertexAttributeDefault
 
-function rlDrawVertexArray (offset, count) {
+function rlDrawVertexArray(offset, count) {
   return r.BindrlDrawVertexArray(
     offset,
     count
@@ -12851,7 +13626,7 @@ function rlDrawVertexArray (offset, count) {
 }
 raylib.rlDrawVertexArray = rlDrawVertexArray
 
-function rlDrawVertexArrayElements (offset, count, buffer) {
+function rlDrawVertexArrayElements(offset, count, buffer) {
   return r.BindrlDrawVertexArrayElements(
     offset,
     count,
@@ -12860,7 +13635,7 @@ function rlDrawVertexArrayElements (offset, count, buffer) {
 }
 raylib.rlDrawVertexArrayElements = rlDrawVertexArrayElements
 
-function rlDrawVertexArrayInstanced (offset, count, instances) {
+function rlDrawVertexArrayInstanced(offset, count, instances) {
   return r.BindrlDrawVertexArrayInstanced(
     offset,
     count,
@@ -12869,7 +13644,7 @@ function rlDrawVertexArrayInstanced (offset, count, instances) {
 }
 raylib.rlDrawVertexArrayInstanced = rlDrawVertexArrayInstanced
 
-function rlDrawVertexArrayElementsInstanced (offset, count, buffer, instances) {
+function rlDrawVertexArrayElementsInstanced(offset, count, buffer, instances) {
   return r.BindrlDrawVertexArrayElementsInstanced(
     offset,
     count,
@@ -12890,7 +13665,7 @@ raylib.rlDrawVertexArrayElementsInstanced = rlDrawVertexArrayElementsInstanced
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadTexture (data, width, height, format, mipmapCount) {
+function rlLoadTexture(data, width, height, format, mipmapCount) {
   return r.BindrlLoadTexture(
     data,
     width,
@@ -12910,7 +13685,7 @@ raylib.rlLoadTexture = rlLoadTexture
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadTextureDepth (width, height, useRenderBuffer) {
+function rlLoadTextureDepth(width, height, useRenderBuffer) {
   return r.BindrlLoadTextureDepth(
     width,
     height,
@@ -12928,7 +13703,7 @@ raylib.rlLoadTextureDepth = rlLoadTextureDepth
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadTextureCubemap (data, size, format) {
+function rlLoadTextureCubemap(data, size, format) {
   return r.BindrlLoadTextureCubemap(
     data,
     size,
@@ -12950,7 +13725,7 @@ raylib.rlLoadTextureCubemap = rlLoadTextureCubemap
  *
  * @return {undefined}
  */
-function rlUpdateTexture (id, offsetX, offsetY, width, height, format, data) {
+function rlUpdateTexture(id, offsetX, offsetY, width, height, format, data) {
   return r.BindrlUpdateTexture(
     id,
     offsetX,
@@ -12973,7 +13748,7 @@ raylib.rlUpdateTexture = rlUpdateTexture
  *
  * @return {undefined}
  */
-function rlGetGlTextureFormats (format, glInternalFormat, glFormat, glType) {
+function rlGetGlTextureFormats(format, glInternalFormat, glFormat, glType) {
   return r.BindrlGetGlTextureFormats(
     format,
     glInternalFormat,
@@ -12990,7 +13765,7 @@ raylib.rlGetGlTextureFormats = rlGetGlTextureFormats
  *
  * @return {string} The resulting const char *.
  */
-function rlGetPixelFormatName (format) {
+function rlGetPixelFormatName(format) {
   return r.BindrlGetPixelFormatName(
     format
   )
@@ -13004,7 +13779,7 @@ raylib.rlGetPixelFormatName = rlGetPixelFormatName
  *
  * @return {undefined}
  */
-function rlUnloadTexture (id) {
+function rlUnloadTexture(id) {
   return r.BindrlUnloadTexture(
     id
   )
@@ -13022,7 +13797,7 @@ raylib.rlUnloadTexture = rlUnloadTexture
  *
  * @return {undefined}
  */
-function rlGenTextureMipmaps (id, width, height, format, mipmaps) {
+function rlGenTextureMipmaps(id, width, height, format, mipmaps) {
   return r.BindrlGenTextureMipmaps(
     id,
     width,
@@ -13043,7 +13818,7 @@ raylib.rlGenTextureMipmaps = rlGenTextureMipmaps
  *
  * @return {number} The resulting void *.
  */
-function rlReadTexturePixels (id, width, height, format) {
+function rlReadTexturePixels(id, width, height, format) {
   return r.BindrlReadTexturePixels(
     id,
     width,
@@ -13061,7 +13836,7 @@ raylib.rlReadTexturePixels = rlReadTexturePixels
  *
  * @return {Buffer} The resulting unsigned char *.
  */
-function rlReadScreenPixels (width, height) {
+function rlReadScreenPixels(width, height) {
   return r.BindrlReadScreenPixels(
     width,
     height
@@ -13077,7 +13852,7 @@ raylib.rlReadScreenPixels = rlReadScreenPixels
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadFramebuffer (width, height) {
+function rlLoadFramebuffer(width, height) {
   return r.BindrlLoadFramebuffer(
     width,
     height
@@ -13096,7 +13871,7 @@ raylib.rlLoadFramebuffer = rlLoadFramebuffer
  *
  * @return {undefined}
  */
-function rlFramebufferAttach (fboId, texId, attachType, texType, mipLevel) {
+function rlFramebufferAttach(fboId, texId, attachType, texType, mipLevel) {
   return r.BindrlFramebufferAttach(
     fboId,
     texId,
@@ -13114,7 +13889,7 @@ raylib.rlFramebufferAttach = rlFramebufferAttach
  *
  * @return {boolean} The resulting bool.
  */
-function rlFramebufferComplete (id) {
+function rlFramebufferComplete(id) {
   return r.BindrlFramebufferComplete(
     id
   )
@@ -13128,7 +13903,7 @@ raylib.rlFramebufferComplete = rlFramebufferComplete
  *
  * @return {undefined}
  */
-function rlUnloadFramebuffer (id) {
+function rlUnloadFramebuffer(id) {
   return r.BindrlUnloadFramebuffer(
     id
   )
@@ -13143,7 +13918,7 @@ raylib.rlUnloadFramebuffer = rlUnloadFramebuffer
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadShaderCode (vsCode, fsCode) {
+function rlLoadShaderCode(vsCode, fsCode) {
   return r.BindrlLoadShaderCode(
     vsCode,
     fsCode
@@ -13159,7 +13934,7 @@ raylib.rlLoadShaderCode = rlLoadShaderCode
  *
  * @return {number} The resulting unsigned int.
  */
-function rlCompileShader (shaderCode, type) {
+function rlCompileShader(shaderCode, type) {
   return r.BindrlCompileShader(
     shaderCode,
     type
@@ -13175,7 +13950,7 @@ raylib.rlCompileShader = rlCompileShader
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadShaderProgram (vShaderId, fShaderId) {
+function rlLoadShaderProgram(vShaderId, fShaderId) {
   return r.BindrlLoadShaderProgram(
     vShaderId,
     fShaderId
@@ -13190,7 +13965,7 @@ raylib.rlLoadShaderProgram = rlLoadShaderProgram
  *
  * @return {undefined}
  */
-function rlUnloadShaderProgram (id) {
+function rlUnloadShaderProgram(id) {
   return r.BindrlUnloadShaderProgram(
     id
   )
@@ -13205,7 +13980,7 @@ raylib.rlUnloadShaderProgram = rlUnloadShaderProgram
  *
  * @return {number} The resulting int.
  */
-function rlGetLocationUniform (shaderId, uniformName) {
+function rlGetLocationUniform(shaderId, uniformName) {
   return r.BindrlGetLocationUniform(
     shaderId,
     uniformName
@@ -13221,7 +13996,7 @@ raylib.rlGetLocationUniform = rlGetLocationUniform
  *
  * @return {number} The resulting int.
  */
-function rlGetLocationAttrib (shaderId, attribName) {
+function rlGetLocationAttrib(shaderId, attribName) {
   return r.BindrlGetLocationAttrib(
     shaderId,
     attribName
@@ -13239,7 +14014,7 @@ raylib.rlGetLocationAttrib = rlGetLocationAttrib
  *
  * @return {undefined}
  */
-function rlSetUniform (locIndex, value, uniformType, count) {
+function rlSetUniform(locIndex, value, uniformType, count) {
   return r.BindrlSetUniform(
     locIndex,
     value,
@@ -13257,7 +14032,7 @@ raylib.rlSetUniform = rlSetUniform
  *
  * @return {undefined}
  */
-function rlSetUniformMatrix (locIndex, mat) {
+function rlSetUniformMatrix(locIndex, mat) {
   return r.BindrlSetUniformMatrix(
     locIndex,
     mat.m0,
@@ -13288,7 +14063,7 @@ raylib.rlSetUniformMatrix = rlSetUniformMatrix
  *
  * @return {undefined}
  */
-function rlSetUniformSampler (locIndex, textureId) {
+function rlSetUniformSampler(locIndex, textureId) {
   return r.BindrlSetUniformSampler(
     locIndex,
     textureId
@@ -13304,7 +14079,7 @@ raylib.rlSetUniformSampler = rlSetUniformSampler
  *
  * @return {undefined}
  */
-function rlSetShader (id, locs) {
+function rlSetShader(id, locs) {
   return r.BindrlSetShader(
     id,
     locs
@@ -13319,7 +14094,7 @@ raylib.rlSetShader = rlSetShader
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadComputeShaderProgram (shaderId) {
+function rlLoadComputeShaderProgram(shaderId) {
   return r.BindrlLoadComputeShaderProgram(
     shaderId
   )
@@ -13335,7 +14110,7 @@ raylib.rlLoadComputeShaderProgram = rlLoadComputeShaderProgram
  *
  * @return {undefined}
  */
-function rlComputeShaderDispatch (groupX, groupY, groupZ) {
+function rlComputeShaderDispatch(groupX, groupY, groupZ) {
   return r.BindrlComputeShaderDispatch(
     groupX,
     groupY,
@@ -13353,7 +14128,7 @@ raylib.rlComputeShaderDispatch = rlComputeShaderDispatch
  *
  * @return {number} The resulting unsigned int.
  */
-function rlLoadShaderBuffer (size, data, usageHint) {
+function rlLoadShaderBuffer(size, data, usageHint) {
   return r.BindrlLoadShaderBuffer(
     size,
     data,
@@ -13369,7 +14144,7 @@ raylib.rlLoadShaderBuffer = rlLoadShaderBuffer
  *
  * @return {undefined}
  */
-function rlUnloadShaderBuffer (ssboId) {
+function rlUnloadShaderBuffer(ssboId) {
   return r.BindrlUnloadShaderBuffer(
     ssboId
   )
@@ -13386,7 +14161,7 @@ raylib.rlUnloadShaderBuffer = rlUnloadShaderBuffer
  *
  * @return {undefined}
  */
-function rlUpdateShaderBuffer (id, data, dataSize, offset) {
+function rlUpdateShaderBuffer(id, data, dataSize, offset) {
   return r.BindrlUpdateShaderBuffer(
     id,
     data,
@@ -13404,7 +14179,7 @@ raylib.rlUpdateShaderBuffer = rlUpdateShaderBuffer
  *
  * @return {undefined}
  */
-function rlBindShaderBuffer (id, index) {
+function rlBindShaderBuffer(id, index) {
   return r.BindrlBindShaderBuffer(
     id,
     index
@@ -13422,7 +14197,7 @@ raylib.rlBindShaderBuffer = rlBindShaderBuffer
  *
  * @return {undefined}
  */
-function rlReadShaderBuffer (id, dest, count, offset) {
+function rlReadShaderBuffer(id, dest, count, offset) {
   return r.BindrlReadShaderBuffer(
     id,
     dest,
@@ -13443,7 +14218,7 @@ raylib.rlReadShaderBuffer = rlReadShaderBuffer
  *
  * @return {undefined}
  */
-function rlCopyShaderBuffer (destId, srcId, destOffset, srcOffset, count) {
+function rlCopyShaderBuffer(destId, srcId, destOffset, srcOffset, count) {
   return r.BindrlCopyShaderBuffer(
     destId,
     srcId,
@@ -13461,7 +14236,7 @@ raylib.rlCopyShaderBuffer = rlCopyShaderBuffer
  *
  * @return {number} The resulting unsigned int.
  */
-function rlGetShaderBufferSize (id) {
+function rlGetShaderBufferSize(id) {
   return r.BindrlGetShaderBufferSize(
     id
   )
@@ -13478,7 +14253,7 @@ raylib.rlGetShaderBufferSize = rlGetShaderBufferSize
  *
  * @return {undefined}
  */
-function rlBindImageTexture (id, index, format, readonly) {
+function rlBindImageTexture(id, index, format, readonly) {
   return r.BindrlBindImageTexture(
     id,
     index,
@@ -13493,7 +14268,7 @@ raylib.rlBindImageTexture = rlBindImageTexture
  *
  * @return {Matrix} The resulting Matrix.
  */
-function rlGetMatrixModelview () {
+function rlGetMatrixModelview() {
   return r.BindrlGetMatrixModelview()
 }
 raylib.rlGetMatrixModelview = rlGetMatrixModelview
@@ -13503,7 +14278,7 @@ raylib.rlGetMatrixModelview = rlGetMatrixModelview
  *
  * @return {Matrix} The resulting Matrix.
  */
-function rlGetMatrixProjection () {
+function rlGetMatrixProjection() {
   return r.BindrlGetMatrixProjection()
 }
 raylib.rlGetMatrixProjection = rlGetMatrixProjection
@@ -13513,7 +14288,7 @@ raylib.rlGetMatrixProjection = rlGetMatrixProjection
  *
  * @return {Matrix} The resulting Matrix.
  */
-function rlGetMatrixTransform () {
+function rlGetMatrixTransform() {
   return r.BindrlGetMatrixTransform()
 }
 raylib.rlGetMatrixTransform = rlGetMatrixTransform
@@ -13525,7 +14300,7 @@ raylib.rlGetMatrixTransform = rlGetMatrixTransform
  *
  * @return {Matrix} The resulting Matrix.
  */
-function rlGetMatrixProjectionStereo (eye) {
+function rlGetMatrixProjectionStereo(eye) {
   return r.BindrlGetMatrixProjectionStereo(
     eye
   )
@@ -13539,7 +14314,7 @@ raylib.rlGetMatrixProjectionStereo = rlGetMatrixProjectionStereo
  *
  * @return {Matrix} The resulting Matrix.
  */
-function rlGetMatrixViewOffsetStereo (eye) {
+function rlGetMatrixViewOffsetStereo(eye) {
   return r.BindrlGetMatrixViewOffsetStereo(
     eye
   )
@@ -13553,7 +14328,7 @@ raylib.rlGetMatrixViewOffsetStereo = rlGetMatrixViewOffsetStereo
  *
  * @return {undefined}
  */
-function rlSetMatrixProjection (proj) {
+function rlSetMatrixProjection(proj) {
   return r.BindrlSetMatrixProjection(
     proj.m0,
     proj.m4,
@@ -13582,7 +14357,7 @@ raylib.rlSetMatrixProjection = rlSetMatrixProjection
  *
  * @return {undefined}
  */
-function rlSetMatrixModelview (view) {
+function rlSetMatrixModelview(view) {
   return r.BindrlSetMatrixModelview(
     view.m0,
     view.m4,
@@ -13612,7 +14387,7 @@ raylib.rlSetMatrixModelview = rlSetMatrixModelview
  *
  * @return {undefined}
  */
-function rlSetMatrixProjectionStereo (right, left) {
+function rlSetMatrixProjectionStereo(right, left) {
   return r.BindrlSetMatrixProjectionStereo(
     right.m0,
     right.m4,
@@ -13658,7 +14433,7 @@ raylib.rlSetMatrixProjectionStereo = rlSetMatrixProjectionStereo
  *
  * @return {undefined}
  */
-function rlSetMatrixViewOffsetStereo (right, left) {
+function rlSetMatrixViewOffsetStereo(right, left) {
   return r.BindrlSetMatrixViewOffsetStereo(
     right.m0,
     right.m4,
@@ -13701,7 +14476,7 @@ raylib.rlSetMatrixViewOffsetStereo = rlSetMatrixViewOffsetStereo
  *
  * @return {undefined}
  */
-function rlLoadDrawCube () {
+function rlLoadDrawCube() {
   return r.BindrlLoadDrawCube()
 }
 raylib.rlLoadDrawCube = rlLoadDrawCube
@@ -13711,7 +14486,7 @@ raylib.rlLoadDrawCube = rlLoadDrawCube
  *
  * @return {undefined}
  */
-function rlLoadDrawQuad () {
+function rlLoadDrawQuad() {
   return r.BindrlLoadDrawQuad()
 }
 raylib.rlLoadDrawQuad = rlLoadDrawQuad
@@ -13724,7 +14499,7 @@ raylib.rlLoadDrawQuad = rlLoadDrawQuad
  *
  * @return {undefined}
  */
-function UpdateCamera (camera, mode) {
+function UpdateCamera(camera, mode) {
   const obj = r.BindUpdateCamera(
     camera.position.x,
     camera.position.y,
@@ -13755,7 +14530,7 @@ raylib.UpdateCamera = UpdateCamera
  *
  * @return {undefined}
  */
-function ImageFormat (image, newFormat) {
+function ImageFormat(image, newFormat) {
   const obj = r.BindImageFormat(
     image.data,
     image.width,
@@ -13780,7 +14555,7 @@ raylib.ImageFormat = ImageFormat
  *
  * @return {undefined}
  */
-function ImageToPOT (image, fill) {
+function ImageToPOT(image, fill) {
   const obj = r.BindImageToPOT(
     image.data,
     image.width,
@@ -13808,7 +14583,7 @@ raylib.ImageToPOT = ImageToPOT
  *
  * @return {undefined}
  */
-function ImageCrop (image, crop) {
+function ImageCrop(image, crop) {
   const obj = r.BindImageCrop(
     image.data,
     image.width,
@@ -13836,7 +14611,7 @@ raylib.ImageCrop = ImageCrop
  *
  * @return {undefined}
  */
-function ImageAlphaCrop (image, threshold) {
+function ImageAlphaCrop(image, threshold) {
   const obj = r.BindImageAlphaCrop(
     image.data,
     image.width,
@@ -13862,7 +14637,7 @@ raylib.ImageAlphaCrop = ImageAlphaCrop
  *
  * @return {undefined}
  */
-function ImageAlphaClear (image, color, threshold) {
+function ImageAlphaClear(image, color, threshold) {
   const obj = r.BindImageAlphaClear(
     image.data,
     image.width,
@@ -13891,7 +14666,7 @@ raylib.ImageAlphaClear = ImageAlphaClear
  *
  * @return {undefined}
  */
-function ImageAlphaMask (image, alphaMask) {
+function ImageAlphaMask(image, alphaMask) {
   const obj = r.BindImageAlphaMask(
     image.data,
     image.width,
@@ -13919,7 +14694,7 @@ raylib.ImageAlphaMask = ImageAlphaMask
  *
  * @return {undefined}
  */
-function ImageAlphaPremultiply (image) {
+function ImageAlphaPremultiply(image) {
   const obj = r.BindImageAlphaPremultiply(
     image.data,
     image.width,
@@ -13944,7 +14719,7 @@ raylib.ImageAlphaPremultiply = ImageAlphaPremultiply
  *
  * @return {undefined}
  */
-function ImageResize (image, newWidth, newHeight) {
+function ImageResize(image, newWidth, newHeight) {
   const obj = r.BindImageResize(
     image.data,
     image.width,
@@ -13971,7 +14746,7 @@ raylib.ImageResize = ImageResize
  *
  * @return {undefined}
  */
-function ImageResizeNN (image, newWidth, newHeight) {
+function ImageResizeNN(image, newWidth, newHeight) {
   const obj = r.BindImageResizeNN(
     image.data,
     image.width,
@@ -14001,7 +14776,7 @@ raylib.ImageResizeNN = ImageResizeNN
  *
  * @return {undefined}
  */
-function ImageResizeCanvas (image, newWidth, newHeight, offsetX, offsetY, fill) {
+function ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill) {
   const obj = r.BindImageResizeCanvas(
     image.data,
     image.width,
@@ -14032,7 +14807,7 @@ raylib.ImageResizeCanvas = ImageResizeCanvas
  *
  * @return {undefined}
  */
-function ImageMipmaps (image) {
+function ImageMipmaps(image) {
   const obj = r.BindImageMipmaps(
     image.data,
     image.width,
@@ -14059,7 +14834,7 @@ raylib.ImageMipmaps = ImageMipmaps
  *
  * @return {undefined}
  */
-function ImageDither (image, rBpp, gBpp, bBpp, aBpp) {
+function ImageDither(image, rBpp, gBpp, bBpp, aBpp) {
   const obj = r.BindImageDither(
     image.data,
     image.width,
@@ -14086,7 +14861,7 @@ raylib.ImageDither = ImageDither
  *
  * @return {undefined}
  */
-function ImageFlipVertical (image) {
+function ImageFlipVertical(image) {
   const obj = r.BindImageFlipVertical(
     image.data,
     image.width,
@@ -14109,7 +14884,7 @@ raylib.ImageFlipVertical = ImageFlipVertical
  *
  * @return {undefined}
  */
-function ImageFlipHorizontal (image) {
+function ImageFlipHorizontal(image) {
   const obj = r.BindImageFlipHorizontal(
     image.data,
     image.width,
@@ -14132,7 +14907,7 @@ raylib.ImageFlipHorizontal = ImageFlipHorizontal
  *
  * @return {undefined}
  */
-function ImageRotateCW (image) {
+function ImageRotateCW(image) {
   const obj = r.BindImageRotateCW(
     image.data,
     image.width,
@@ -14155,7 +14930,7 @@ raylib.ImageRotateCW = ImageRotateCW
  *
  * @return {undefined}
  */
-function ImageRotateCCW (image) {
+function ImageRotateCCW(image) {
   const obj = r.BindImageRotateCCW(
     image.data,
     image.width,
@@ -14179,7 +14954,7 @@ raylib.ImageRotateCCW = ImageRotateCCW
  *
  * @return {undefined}
  */
-function ImageColorTint (image, color) {
+function ImageColorTint(image, color) {
   const obj = r.BindImageColorTint(
     image.data,
     image.width,
@@ -14206,7 +14981,7 @@ raylib.ImageColorTint = ImageColorTint
  *
  * @return {undefined}
  */
-function ImageColorInvert (image) {
+function ImageColorInvert(image) {
   const obj = r.BindImageColorInvert(
     image.data,
     image.width,
@@ -14229,7 +15004,7 @@ raylib.ImageColorInvert = ImageColorInvert
  *
  * @return {undefined}
  */
-function ImageColorGrayscale (image) {
+function ImageColorGrayscale(image) {
   const obj = r.BindImageColorGrayscale(
     image.data,
     image.width,
@@ -14253,7 +15028,7 @@ raylib.ImageColorGrayscale = ImageColorGrayscale
  *
  * @return {undefined}
  */
-function ImageColorContrast (image, contrast) {
+function ImageColorContrast(image, contrast) {
   const obj = r.BindImageColorContrast(
     image.data,
     image.width,
@@ -14278,7 +15053,7 @@ raylib.ImageColorContrast = ImageColorContrast
  *
  * @return {undefined}
  */
-function ImageColorBrightness (image, brightness) {
+function ImageColorBrightness(image, brightness) {
   const obj = r.BindImageColorBrightness(
     image.data,
     image.width,
@@ -14304,7 +15079,7 @@ raylib.ImageColorBrightness = ImageColorBrightness
  *
  * @return {undefined}
  */
-function ImageColorReplace (image, color, replace) {
+function ImageColorReplace(image, color, replace) {
   const obj = r.BindImageColorReplace(
     image.data,
     image.width,
@@ -14336,7 +15111,7 @@ raylib.ImageColorReplace = ImageColorReplace
  *
  * @return {undefined}
  */
-function ImageClearBackground (dst, color) {
+function ImageClearBackground(dst, color) {
   const obj = r.BindImageClearBackground(
     dst.data,
     dst.width,
@@ -14366,7 +15141,7 @@ raylib.ImageClearBackground = ImageClearBackground
  *
  * @return {undefined}
  */
-function ImageDrawPixel (dst, posX, posY, color) {
+function ImageDrawPixel(dst, posX, posY, color) {
   const obj = r.BindImageDrawPixel(
     dst.data,
     dst.width,
@@ -14397,7 +15172,7 @@ raylib.ImageDrawPixel = ImageDrawPixel
  *
  * @return {undefined}
  */
-function ImageDrawPixelV (dst, position, color) {
+function ImageDrawPixelV(dst, position, color) {
   const obj = r.BindImageDrawPixelV(
     dst.data,
     dst.width,
@@ -14431,7 +15206,7 @@ raylib.ImageDrawPixelV = ImageDrawPixelV
  *
  * @return {undefined}
  */
-function ImageDrawLine (dst, startPosX, startPosY, endPosX, endPosY, color) {
+function ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color) {
   const obj = r.BindImageDrawLine(
     dst.data,
     dst.width,
@@ -14465,7 +15240,7 @@ raylib.ImageDrawLine = ImageDrawLine
  *
  * @return {undefined}
  */
-function ImageDrawLineV (dst, start, end, color) {
+function ImageDrawLineV(dst, start, end, color) {
   const obj = r.BindImageDrawLineV(
     dst.data,
     dst.width,
@@ -14500,7 +15275,7 @@ raylib.ImageDrawLineV = ImageDrawLineV
  *
  * @return {undefined}
  */
-function ImageDrawCircle (dst, centerX, centerY, radius, color) {
+function ImageDrawCircle(dst, centerX, centerY, radius, color) {
   const obj = r.BindImageDrawCircle(
     dst.data,
     dst.width,
@@ -14533,7 +15308,7 @@ raylib.ImageDrawCircle = ImageDrawCircle
  *
  * @return {undefined}
  */
-function ImageDrawCircleV (dst, center, radius, color) {
+function ImageDrawCircleV(dst, center, radius, color) {
   const obj = r.BindImageDrawCircleV(
     dst.data,
     dst.width,
@@ -14568,7 +15343,7 @@ raylib.ImageDrawCircleV = ImageDrawCircleV
  *
  * @return {undefined}
  */
-function ImageDrawRectangle (dst, posX, posY, width, height, color) {
+function ImageDrawRectangle(dst, posX, posY, width, height, color) {
   const obj = r.BindImageDrawRectangle(
     dst.data,
     dst.width,
@@ -14602,7 +15377,7 @@ raylib.ImageDrawRectangle = ImageDrawRectangle
  *
  * @return {undefined}
  */
-function ImageDrawRectangleV (dst, position, size, color) {
+function ImageDrawRectangleV(dst, position, size, color) {
   const obj = r.BindImageDrawRectangleV(
     dst.data,
     dst.width,
@@ -14635,7 +15410,7 @@ raylib.ImageDrawRectangleV = ImageDrawRectangleV
  *
  * @return {undefined}
  */
-function ImageDrawRectangleRec (dst, rec, color) {
+function ImageDrawRectangleRec(dst, rec, color) {
   const obj = r.BindImageDrawRectangleRec(
     dst.data,
     dst.width,
@@ -14669,7 +15444,7 @@ raylib.ImageDrawRectangleRec = ImageDrawRectangleRec
  *
  * @return {undefined}
  */
-function ImageDrawRectangleLines (dst, rec, thick, color) {
+function ImageDrawRectangleLines(dst, rec, thick, color) {
   const obj = r.BindImageDrawRectangleLines(
     dst.data,
     dst.width,
@@ -14705,7 +15480,7 @@ raylib.ImageDrawRectangleLines = ImageDrawRectangleLines
  *
  * @return {undefined}
  */
-function ImageDraw (dst, src, srcRec, dstRec, tint) {
+function ImageDraw(dst, src, srcRec, dstRec, tint) {
   const obj = r.BindImageDraw(
     dst.data,
     dst.width,
@@ -14750,7 +15525,7 @@ raylib.ImageDraw = ImageDraw
  *
  * @return {undefined}
  */
-function ImageDrawText (dst, text, posX, posY, fontSize, color) {
+function ImageDrawText(dst, text, posX, posY, fontSize, color) {
   const obj = r.BindImageDrawText(
     dst.data,
     dst.width,
@@ -14787,7 +15562,7 @@ raylib.ImageDrawText = ImageDrawText
  *
  * @return {undefined}
  */
-function ImageDrawTextEx (dst, font, text, position, fontSize, spacing, tint) {
+function ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint) {
   const obj = r.BindImageDrawTextEx(
     dst.data,
     dst.width,
@@ -14829,7 +15604,7 @@ raylib.ImageDrawTextEx = ImageDrawTextEx
  *
  * @return {undefined}
  */
-function GenTextureMipmaps (texture) {
+function GenTextureMipmaps(texture) {
   const obj = r.BindGenTextureMipmaps(
     texture.id,
     texture.width,
@@ -14853,7 +15628,7 @@ raylib.GenTextureMipmaps = GenTextureMipmaps
  *
  * @return {undefined}
  */
-function UploadMesh (mesh, dynamic) {
+function UploadMesh(mesh, dynamic) {
   const obj = r.BindUploadMesh(
     mesh.vertexCount,
     mesh.triangleCount,
@@ -14887,7 +15662,7 @@ raylib.UploadMesh = UploadMesh
  *
  * @return {undefined}
  */
-function GenMeshTangents (mesh) {
+function GenMeshTangents(mesh) {
   const obj = r.BindGenMeshTangents(
     mesh.vertexCount,
     mesh.triangleCount,
@@ -14922,7 +15697,7 @@ raylib.GenMeshTangents = GenMeshTangents
  *
  * @return {undefined}
  */
-function SetModelMeshMaterial (model, meshId, materialId) {
+function SetModelMeshMaterial(model, meshId, materialId) {
   const obj = r.BindSetModelMeshMaterial(
     model.transform.m0,
     model.transform.m4,
@@ -14968,7 +15743,7 @@ raylib.SetModelMeshMaterial = SetModelMeshMaterial
  *
  * @return {undefined}
  */
-function WaveCrop (wave, initSample, finalSample) {
+function WaveCrop(wave, initSample, finalSample) {
   const obj = r.BindWaveCrop(
     wave.frameCount,
     wave.sampleRate,
@@ -14996,7 +15771,7 @@ raylib.WaveCrop = WaveCrop
  *
  * @return {undefined}
  */
-function WaveFormat (wave, sampleRate, sampleSize, channels) {
+function WaveFormat(wave, sampleRate, sampleSize, channels) {
   const obj = r.BindWaveFormat(
     wave.frameCount,
     wave.sampleRate,
@@ -15025,8 +15800,8 @@ raylib.WaveFormat = WaveFormat
  *
  * @return {Color} The new Color.
  */
-function Color (r, g, b, a) {
-  return { r, g, b, a }
+function Color(r,g,b,a) {
+  return {r,g,b,a}
 }
 raylib.Color = Color
 
@@ -15038,8 +15813,8 @@ raylib.Color = Color
  *
  * @return {Vector2} The new Vector2.
  */
-function Vector2 (x, y) {
-  return { x, y }
+function Vector2(x,y) {
+  return {x,y}
 }
 raylib.Vector2 = Vector2
 
@@ -15052,8 +15827,8 @@ raylib.Vector2 = Vector2
  *
  * @return {Vector3} The new Vector3.
  */
-function Vector3 (x, y, z) {
-  return { x, y, z }
+function Vector3(x,y,z) {
+  return {x,y,z}
 }
 raylib.Vector3 = Vector3
 
@@ -15067,8 +15842,8 @@ raylib.Vector3 = Vector3
  *
  * @return {Vector4} The new Vector4.
  */
-function Vector4 (x, y, z, w) {
-  return { x, y, z, w }
+function Vector4(x,y,z,w) {
+  return {x,y,z,w}
 }
 raylib.Vector4 = Vector4
 
@@ -15082,8 +15857,8 @@ raylib.Vector4 = Vector4
  *
  * @return {Rectangle} The new Rectangle.
  */
-function Rectangle (x, y, width, height) {
-  return { x, y, width, height }
+function Rectangle(x,y,width,height) {
+  return {x,y,width,height}
 }
 raylib.Rectangle = Rectangle
 
@@ -15097,8 +15872,8 @@ raylib.Rectangle = Rectangle
  *
  * @return {Camera2D} The new Camera2D.
  */
-function Camera2D (offset, target, rotation, zoom) {
-  return { offset, target, rotation, zoom }
+function Camera2D(offset,target,rotation,zoom) {
+  return {offset,target,rotation,zoom}
 }
 raylib.Camera2D = Camera2D
 
@@ -15113,8 +15888,8 @@ raylib.Camera2D = Camera2D
  *
  * @return {Camera3D} The new Camera3D.
  */
-function Camera3D (position, target, up, fovy, projection) {
-  return { position, target, up, fovy, projection }
+function Camera3D(position,target,up,fovy,projection) {
+  return {position,target,up,fovy,projection}
 }
 raylib.Camera3D = Camera3D
 raylib.Camera = raylib.Camera3D
@@ -15123,14 +15898,14 @@ raylib.Camera = raylib.Camera3D
 
 /**
  * Set shader uniform value float
- *
+ * 
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {number} value
- *
+ * 
  * @returns {undefined}
  */
-function SetShaderFloat (shader, locIndex, value) {
+function SetShaderFloat(shader, locIndex, value) {
   return r.BindSetShaderFloat(
     shader.id,
     shader.locs,
@@ -15142,14 +15917,14 @@ raylib.SetShaderFloat = SetShaderFloat
 
 /**
  * Set shader uniform value float
- *
+ * 
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {number} value
- *
+ * 
  * @returns {undefined}
  */
-function SetShaderInt (shader, locIndex, value) {
+function SetShaderInt(shader, locIndex, value) {
   return r.BindSetShaderInt(
     shader.id,
     shader.locs,
@@ -15161,14 +15936,14 @@ raylib.SetShaderInt = SetShaderInt
 
 /**
  * Set shader uniform value vector2
- *
+ * 
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector2} value
- *
+ * 
  * @returns {undefined}
  */
-function SetShaderVec2 (shader, locIndex, value) {
+function SetShaderVec2(shader, locIndex, value) {
   return r.BindSetShaderVec2(
     shader.id,
     shader.locs,
@@ -15181,14 +15956,14 @@ raylib.SetShaderVec2 = SetShaderVec2
 
 /**
  * Set shader uniform value vector3
- *
+ * 
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector3} value
- *
+ * 
  * @returns {undefined}
  */
-function SetShaderVec3 (shader, locIndex, value) {
+function SetShaderVec3(shader, locIndex, value) {
   return r.BindSetShaderVec3(
     shader.id,
     shader.locs,
@@ -15202,14 +15977,14 @@ raylib.SetShaderVec3 = SetShaderVec3
 
 /**
  * Set shader uniform value vector4
- *
+ * 
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector4} value
- *
+ * 
  * @returns {undefined}
  */
-function SetShaderVec4 (shader, locIndex, value) {
+function SetShaderVec4(shader, locIndex, value) {
   return r.BindSetShaderVec4(
     shader.id,
     shader.locs,
@@ -15325,6 +16100,14 @@ raylib.FLAG_WINDOW_HIGHDPI = 8192
  * @constant
  */
 raylib.FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384
+
+/**
+ * Set to run program in borderless windowed mode
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.FLAG_BORDERLESS_WINDOWED_MODE = 32768
 
 /**
  * Set to try enabling MSAA 4X
@@ -17103,12 +17886,36 @@ raylib.PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
 raylib.PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
 
 /**
+ * 16 bpp (1 channel - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.PIXELFORMAT_UNCOMPRESSED_R16 = 11
+
+/**
+ * 16*3 bpp (3 channels - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.PIXELFORMAT_UNCOMPRESSED_R16G16B16 = 12
+
+/**
+ * 16*4 bpp (4 channels - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.PIXELFORMAT_UNCOMPRESSED_R16G16B16A16 = 13
+
+/**
  * 4 bpp (no alpha)
  *
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+raylib.PIXELFORMAT_COMPRESSED_DXT1_RGB = 14
 
 /**
  * 4 bpp (1 bit alpha)
@@ -17116,7 +17923,7 @@ raylib.PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+raylib.PIXELFORMAT_COMPRESSED_DXT1_RGBA = 15
 
 /**
  * 8 bpp
@@ -17124,7 +17931,7 @@ raylib.PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+raylib.PIXELFORMAT_COMPRESSED_DXT3_RGBA = 16
 
 /**
  * 8 bpp
@@ -17132,7 +17939,7 @@ raylib.PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+raylib.PIXELFORMAT_COMPRESSED_DXT5_RGBA = 17
 
 /**
  * 4 bpp
@@ -17140,7 +17947,7 @@ raylib.PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+raylib.PIXELFORMAT_COMPRESSED_ETC1_RGB = 18
 
 /**
  * 4 bpp
@@ -17148,7 +17955,7 @@ raylib.PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+raylib.PIXELFORMAT_COMPRESSED_ETC2_RGB = 19
 
 /**
  * 8 bpp
@@ -17156,7 +17963,7 @@ raylib.PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+raylib.PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 20
 
 /**
  * 4 bpp
@@ -17164,7 +17971,7 @@ raylib.PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+raylib.PIXELFORMAT_COMPRESSED_PVRT_RGB = 21
 
 /**
  * 4 bpp
@@ -17172,7 +17979,7 @@ raylib.PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+raylib.PIXELFORMAT_COMPRESSED_PVRT_RGBA = 22
 
 /**
  * 8 bpp
@@ -17180,7 +17987,7 @@ raylib.PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 23
 
 /**
  * 2 bpp
@@ -17188,7 +17995,7 @@ raylib.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
  * @type {number}
  * @constant
  */
-raylib.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
+raylib.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 24
 
 /**
  * No filter, just pixel approximation
@@ -17575,7 +18382,7 @@ raylib.NPATCH_THREE_PATCH_VERTICAL = 1
 raylib.NPATCH_THREE_PATCH_HORIZONTAL = 2
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17583,7 +18390,7 @@ raylib.NPATCH_THREE_PATCH_HORIZONTAL = 2
 raylib.STATE_NORMAL = 0
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17591,7 +18398,7 @@ raylib.STATE_NORMAL = 0
 raylib.STATE_FOCUSED = 1
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17599,7 +18406,7 @@ raylib.STATE_FOCUSED = 1
 raylib.STATE_PRESSED = 2
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17607,7 +18414,7 @@ raylib.STATE_PRESSED = 2
 raylib.STATE_DISABLED = 3
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17615,7 +18422,7 @@ raylib.STATE_DISABLED = 3
 raylib.TEXT_ALIGN_LEFT = 0
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17623,7 +18430,7 @@ raylib.TEXT_ALIGN_LEFT = 0
 raylib.TEXT_ALIGN_CENTER = 1
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17631,7 +18438,55 @@ raylib.TEXT_ALIGN_CENTER = 1
 raylib.TEXT_ALIGN_RIGHT = 2
 
 /**
+ * 
  *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_ALIGN_TOP = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_ALIGN_MIDDLE = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_ALIGN_BOTTOM = 2
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_WRAP_NONE = 0
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_WRAP_CHAR = 1
+
+/**
+ * 
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_WRAP_WORD = 2
+
+/**
+ * 
  *
  * @type {number}
  * @constant
@@ -17647,7 +18502,7 @@ raylib.DEFAULT = 0
 raylib.LABEL = 1
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17663,7 +18518,7 @@ raylib.BUTTON = 2
 raylib.TOGGLE = 3
 
 /**
- * Used also for: SLIDERBAR
+ * Used also for: SLIDERBAR, TOGGLESLIDER
  *
  * @type {number}
  * @constant
@@ -17671,7 +18526,7 @@ raylib.TOGGLE = 3
 raylib.SLIDER = 4
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17679,7 +18534,7 @@ raylib.SLIDER = 4
 raylib.PROGRESSBAR = 5
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17687,7 +18542,7 @@ raylib.PROGRESSBAR = 5
 raylib.CHECKBOX = 6
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17695,7 +18550,7 @@ raylib.CHECKBOX = 6
 raylib.COMBOBOX = 7
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17711,7 +18566,7 @@ raylib.DROPDOWNBOX = 8
 raylib.TEXTBOX = 9
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17727,7 +18582,7 @@ raylib.VALUEBOX = 10
 raylib.SPINNER = 11
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17735,7 +18590,7 @@ raylib.SPINNER = 11
 raylib.LISTVIEW = 12
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17743,7 +18598,7 @@ raylib.LISTVIEW = 12
 raylib.COLORPICKER = 13
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17751,7 +18606,7 @@ raylib.COLORPICKER = 13
 raylib.SCROLLBAR = 14
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -17759,7 +18614,7 @@ raylib.SCROLLBAR = 14
 raylib.STATUSBAR = 15
 
 /**
- *
+ * Control border color in STATE_NORMAL
  *
  * @type {number}
  * @constant
@@ -17767,7 +18622,7 @@ raylib.STATUSBAR = 15
 raylib.BORDER_COLOR_NORMAL = 0
 
 /**
- *
+ * Control base color in STATE_NORMAL
  *
  * @type {number}
  * @constant
@@ -17775,7 +18630,7 @@ raylib.BORDER_COLOR_NORMAL = 0
 raylib.BASE_COLOR_NORMAL = 1
 
 /**
- *
+ * Control text color in STATE_NORMAL
  *
  * @type {number}
  * @constant
@@ -17783,7 +18638,7 @@ raylib.BASE_COLOR_NORMAL = 1
 raylib.TEXT_COLOR_NORMAL = 2
 
 /**
- *
+ * Control border color in STATE_FOCUSED
  *
  * @type {number}
  * @constant
@@ -17791,7 +18646,7 @@ raylib.TEXT_COLOR_NORMAL = 2
 raylib.BORDER_COLOR_FOCUSED = 3
 
 /**
- *
+ * Control base color in STATE_FOCUSED
  *
  * @type {number}
  * @constant
@@ -17799,7 +18654,7 @@ raylib.BORDER_COLOR_FOCUSED = 3
 raylib.BASE_COLOR_FOCUSED = 4
 
 /**
- *
+ * Control text color in STATE_FOCUSED
  *
  * @type {number}
  * @constant
@@ -17807,7 +18662,7 @@ raylib.BASE_COLOR_FOCUSED = 4
 raylib.TEXT_COLOR_FOCUSED = 5
 
 /**
- *
+ * Control border color in STATE_PRESSED
  *
  * @type {number}
  * @constant
@@ -17815,7 +18670,7 @@ raylib.TEXT_COLOR_FOCUSED = 5
 raylib.BORDER_COLOR_PRESSED = 6
 
 /**
- *
+ * Control base color in STATE_PRESSED
  *
  * @type {number}
  * @constant
@@ -17823,7 +18678,7 @@ raylib.BORDER_COLOR_PRESSED = 6
 raylib.BASE_COLOR_PRESSED = 7
 
 /**
- *
+ * Control text color in STATE_PRESSED
  *
  * @type {number}
  * @constant
@@ -17831,7 +18686,7 @@ raylib.BASE_COLOR_PRESSED = 7
 raylib.TEXT_COLOR_PRESSED = 8
 
 /**
- *
+ * Control border color in STATE_DISABLED
  *
  * @type {number}
  * @constant
@@ -17839,7 +18694,7 @@ raylib.TEXT_COLOR_PRESSED = 8
 raylib.BORDER_COLOR_DISABLED = 9
 
 /**
- *
+ * Control base color in STATE_DISABLED
  *
  * @type {number}
  * @constant
@@ -17847,7 +18702,7 @@ raylib.BORDER_COLOR_DISABLED = 9
 raylib.BASE_COLOR_DISABLED = 10
 
 /**
- *
+ * Control text color in STATE_DISABLED
  *
  * @type {number}
  * @constant
@@ -17855,7 +18710,7 @@ raylib.BASE_COLOR_DISABLED = 10
 raylib.TEXT_COLOR_DISABLED = 11
 
 /**
- *
+ * Control border size, 0 for no border
  *
  * @type {number}
  * @constant
@@ -17863,7 +18718,7 @@ raylib.TEXT_COLOR_DISABLED = 11
 raylib.BORDER_WIDTH = 12
 
 /**
- *
+ * Control text padding, not considering border
  *
  * @type {number}
  * @constant
@@ -17871,20 +18726,12 @@ raylib.BORDER_WIDTH = 12
 raylib.TEXT_PADDING = 13
 
 /**
- *
+ * Control text horizontal alignment inside control text bound (after border and padding)
  *
  * @type {number}
  * @constant
  */
 raylib.TEXT_ALIGNMENT = 14
-
-/**
- *
- *
- * @type {number}
- * @constant
- */
-raylib.RESERVED = 15
 
 /**
  * Text size (glyphs max height)
@@ -17919,6 +18766,30 @@ raylib.LINE_COLOR = 18
 raylib.BACKGROUND_COLOR = 19
 
 /**
+ * Text spacing between lines
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_LINE_SPACING = 20
+
+/**
+ * Text vertical alignment inside text bounds (after border and padding)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_ALIGNMENT_VERTICAL = 21
+
+/**
+ * Text wrap-mode inside text bounds
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.TEXT_WRAP_MODE = 22
+
+/**
  * ToggleGroup separation between toggles
  *
  * @type {number}
@@ -17951,7 +18822,7 @@ raylib.SLIDER_PADDING = 17
 raylib.PROGRESS_PADDING = 16
 
 /**
- *
+ * ScrollBar arrows size
  *
  * @type {number}
  * @constant
@@ -17959,7 +18830,7 @@ raylib.PROGRESS_PADDING = 16
 raylib.ARROWS_SIZE = 16
 
 /**
- *
+ * ScrollBar arrows visible
  *
  * @type {number}
  * @constant
@@ -17967,7 +18838,7 @@ raylib.ARROWS_SIZE = 16
 raylib.ARROWS_VISIBLE = 17
 
 /**
- * (SLIDERBAR, SLIDER_PADDING)
+ * ScrollBar slider internal padding
  *
  * @type {number}
  * @constant
@@ -17975,7 +18846,7 @@ raylib.ARROWS_VISIBLE = 17
 raylib.SCROLL_SLIDER_PADDING = 18
 
 /**
- *
+ * ScrollBar slider size
  *
  * @type {number}
  * @constant
@@ -17983,7 +18854,7 @@ raylib.SCROLL_SLIDER_PADDING = 18
 raylib.SCROLL_SLIDER_SIZE = 19
 
 /**
- *
+ * ScrollBar scroll padding from arrows
  *
  * @type {number}
  * @constant
@@ -17991,7 +18862,7 @@ raylib.SCROLL_SLIDER_SIZE = 19
 raylib.SCROLL_PADDING = 20
 
 /**
- *
+ * ScrollBar scrolling speed
  *
  * @type {number}
  * @constant
@@ -18039,20 +18910,12 @@ raylib.ARROW_PADDING = 16
 raylib.DROPDOWN_ITEMS_SPACING = 17
 
 /**
- * TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
+ * TextBox in read-only mode: 0-text editable, 1-text no-editable
  *
  * @type {number}
  * @constant
  */
-raylib.TEXT_INNER_PADDING = 16
-
-/**
- * TextBoxMulti lines separation
- *
- * @type {number}
- * @constant
- */
-raylib.TEXT_LINES_SPACING = 17
+raylib.TEXT_READONLY = 16
 
 /**
  * Spinner left/right buttons width
@@ -18095,7 +18958,7 @@ raylib.LIST_ITEMS_SPACING = 17
 raylib.SCROLLBAR_WIDTH = 18
 
 /**
- * ListView scrollbar side (0-left, 1-right)
+ * ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
  *
  * @type {number}
  * @constant
@@ -18103,7 +18966,7 @@ raylib.SCROLLBAR_WIDTH = 18
 raylib.SCROLLBAR_SIDE = 19
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18143,7 +19006,7 @@ raylib.HUEBAR_SELECTOR_HEIGHT = 19
 raylib.HUEBAR_SELECTOR_OVERFLOW = 20
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18151,7 +19014,7 @@ raylib.HUEBAR_SELECTOR_OVERFLOW = 20
 raylib.ICON_NONE = 0
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18159,7 +19022,7 @@ raylib.ICON_NONE = 0
 raylib.ICON_FOLDER_FILE_OPEN = 1
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18167,7 +19030,7 @@ raylib.ICON_FOLDER_FILE_OPEN = 1
 raylib.ICON_FILE_SAVE_CLASSIC = 2
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18175,7 +19038,7 @@ raylib.ICON_FILE_SAVE_CLASSIC = 2
 raylib.ICON_FOLDER_OPEN = 3
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18183,7 +19046,7 @@ raylib.ICON_FOLDER_OPEN = 3
 raylib.ICON_FOLDER_SAVE = 4
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18191,7 +19054,7 @@ raylib.ICON_FOLDER_SAVE = 4
 raylib.ICON_FILE_OPEN = 5
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18199,7 +19062,7 @@ raylib.ICON_FILE_OPEN = 5
 raylib.ICON_FILE_SAVE = 6
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18207,7 +19070,7 @@ raylib.ICON_FILE_SAVE = 6
 raylib.ICON_FILE_EXPORT = 7
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18215,7 +19078,7 @@ raylib.ICON_FILE_EXPORT = 7
 raylib.ICON_FILE_ADD = 8
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18223,7 +19086,7 @@ raylib.ICON_FILE_ADD = 8
 raylib.ICON_FILE_DELETE = 9
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18231,7 +19094,7 @@ raylib.ICON_FILE_DELETE = 9
 raylib.ICON_FILETYPE_TEXT = 10
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18239,7 +19102,7 @@ raylib.ICON_FILETYPE_TEXT = 10
 raylib.ICON_FILETYPE_AUDIO = 11
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18247,7 +19110,7 @@ raylib.ICON_FILETYPE_AUDIO = 11
 raylib.ICON_FILETYPE_IMAGE = 12
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18255,7 +19118,7 @@ raylib.ICON_FILETYPE_IMAGE = 12
 raylib.ICON_FILETYPE_PLAY = 13
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18263,7 +19126,7 @@ raylib.ICON_FILETYPE_PLAY = 13
 raylib.ICON_FILETYPE_VIDEO = 14
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18271,7 +19134,7 @@ raylib.ICON_FILETYPE_VIDEO = 14
 raylib.ICON_FILETYPE_INFO = 15
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18279,7 +19142,7 @@ raylib.ICON_FILETYPE_INFO = 15
 raylib.ICON_FILE_COPY = 16
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18287,7 +19150,7 @@ raylib.ICON_FILE_COPY = 16
 raylib.ICON_FILE_CUT = 17
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18295,7 +19158,7 @@ raylib.ICON_FILE_CUT = 17
 raylib.ICON_FILE_PASTE = 18
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18303,7 +19166,7 @@ raylib.ICON_FILE_PASTE = 18
 raylib.ICON_CURSOR_HAND = 19
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18311,7 +19174,7 @@ raylib.ICON_CURSOR_HAND = 19
 raylib.ICON_CURSOR_POINTER = 20
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18319,7 +19182,7 @@ raylib.ICON_CURSOR_POINTER = 20
 raylib.ICON_CURSOR_CLASSIC = 21
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18327,7 +19190,7 @@ raylib.ICON_CURSOR_CLASSIC = 21
 raylib.ICON_PENCIL = 22
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18335,7 +19198,7 @@ raylib.ICON_PENCIL = 22
 raylib.ICON_PENCIL_BIG = 23
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18343,7 +19206,7 @@ raylib.ICON_PENCIL_BIG = 23
 raylib.ICON_BRUSH_CLASSIC = 24
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18351,7 +19214,7 @@ raylib.ICON_BRUSH_CLASSIC = 24
 raylib.ICON_BRUSH_PAINTER = 25
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18359,7 +19222,7 @@ raylib.ICON_BRUSH_PAINTER = 25
 raylib.ICON_WATER_DROP = 26
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18367,7 +19230,7 @@ raylib.ICON_WATER_DROP = 26
 raylib.ICON_COLOR_PICKER = 27
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18375,7 +19238,7 @@ raylib.ICON_COLOR_PICKER = 27
 raylib.ICON_RUBBER = 28
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18383,7 +19246,7 @@ raylib.ICON_RUBBER = 28
 raylib.ICON_COLOR_BUCKET = 29
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18391,7 +19254,7 @@ raylib.ICON_COLOR_BUCKET = 29
 raylib.ICON_TEXT_T = 30
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18399,7 +19262,7 @@ raylib.ICON_TEXT_T = 30
 raylib.ICON_TEXT_A = 31
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18407,7 +19270,7 @@ raylib.ICON_TEXT_A = 31
 raylib.ICON_SCALE = 32
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18415,7 +19278,7 @@ raylib.ICON_SCALE = 32
 raylib.ICON_RESIZE = 33
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18423,7 +19286,7 @@ raylib.ICON_RESIZE = 33
 raylib.ICON_FILTER_POINT = 34
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18431,7 +19294,7 @@ raylib.ICON_FILTER_POINT = 34
 raylib.ICON_FILTER_BILINEAR = 35
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18439,7 +19302,7 @@ raylib.ICON_FILTER_BILINEAR = 35
 raylib.ICON_CROP = 36
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18447,7 +19310,7 @@ raylib.ICON_CROP = 36
 raylib.ICON_CROP_ALPHA = 37
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18455,7 +19318,7 @@ raylib.ICON_CROP_ALPHA = 37
 raylib.ICON_SQUARE_TOGGLE = 38
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18463,7 +19326,7 @@ raylib.ICON_SQUARE_TOGGLE = 38
 raylib.ICON_SYMMETRY = 39
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18471,7 +19334,7 @@ raylib.ICON_SYMMETRY = 39
 raylib.ICON_SYMMETRY_HORIZONTAL = 40
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18479,7 +19342,7 @@ raylib.ICON_SYMMETRY_HORIZONTAL = 40
 raylib.ICON_SYMMETRY_VERTICAL = 41
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18487,7 +19350,7 @@ raylib.ICON_SYMMETRY_VERTICAL = 41
 raylib.ICON_LENS = 42
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18495,7 +19358,7 @@ raylib.ICON_LENS = 42
 raylib.ICON_LENS_BIG = 43
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18503,7 +19366,7 @@ raylib.ICON_LENS_BIG = 43
 raylib.ICON_EYE_ON = 44
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18511,7 +19374,7 @@ raylib.ICON_EYE_ON = 44
 raylib.ICON_EYE_OFF = 45
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18519,7 +19382,7 @@ raylib.ICON_EYE_OFF = 45
 raylib.ICON_FILTER_TOP = 46
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18527,7 +19390,7 @@ raylib.ICON_FILTER_TOP = 46
 raylib.ICON_FILTER = 47
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18535,7 +19398,7 @@ raylib.ICON_FILTER = 47
 raylib.ICON_TARGET_POINT = 48
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18543,7 +19406,7 @@ raylib.ICON_TARGET_POINT = 48
 raylib.ICON_TARGET_SMALL = 49
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18551,7 +19414,7 @@ raylib.ICON_TARGET_SMALL = 49
 raylib.ICON_TARGET_BIG = 50
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18559,7 +19422,7 @@ raylib.ICON_TARGET_BIG = 50
 raylib.ICON_TARGET_MOVE = 51
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18567,7 +19430,7 @@ raylib.ICON_TARGET_MOVE = 51
 raylib.ICON_CURSOR_MOVE = 52
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18575,7 +19438,7 @@ raylib.ICON_CURSOR_MOVE = 52
 raylib.ICON_CURSOR_SCALE = 53
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18583,7 +19446,7 @@ raylib.ICON_CURSOR_SCALE = 53
 raylib.ICON_CURSOR_SCALE_RIGHT = 54
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18591,7 +19454,7 @@ raylib.ICON_CURSOR_SCALE_RIGHT = 54
 raylib.ICON_CURSOR_SCALE_LEFT = 55
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18599,7 +19462,7 @@ raylib.ICON_CURSOR_SCALE_LEFT = 55
 raylib.ICON_UNDO = 56
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18607,7 +19470,7 @@ raylib.ICON_UNDO = 56
 raylib.ICON_REDO = 57
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18615,7 +19478,7 @@ raylib.ICON_REDO = 57
 raylib.ICON_REREDO = 58
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18623,7 +19486,7 @@ raylib.ICON_REREDO = 58
 raylib.ICON_MUTATE = 59
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18631,7 +19494,7 @@ raylib.ICON_MUTATE = 59
 raylib.ICON_ROTATE = 60
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18639,7 +19502,7 @@ raylib.ICON_ROTATE = 60
 raylib.ICON_REPEAT = 61
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18647,7 +19510,7 @@ raylib.ICON_REPEAT = 61
 raylib.ICON_SHUFFLE = 62
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18655,7 +19518,7 @@ raylib.ICON_SHUFFLE = 62
 raylib.ICON_EMPTYBOX = 63
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18663,7 +19526,7 @@ raylib.ICON_EMPTYBOX = 63
 raylib.ICON_TARGET = 64
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18671,7 +19534,7 @@ raylib.ICON_TARGET = 64
 raylib.ICON_TARGET_SMALL_FILL = 65
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18679,7 +19542,7 @@ raylib.ICON_TARGET_SMALL_FILL = 65
 raylib.ICON_TARGET_BIG_FILL = 66
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18687,7 +19550,7 @@ raylib.ICON_TARGET_BIG_FILL = 66
 raylib.ICON_TARGET_MOVE_FILL = 67
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18695,7 +19558,7 @@ raylib.ICON_TARGET_MOVE_FILL = 67
 raylib.ICON_CURSOR_MOVE_FILL = 68
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18703,7 +19566,7 @@ raylib.ICON_CURSOR_MOVE_FILL = 68
 raylib.ICON_CURSOR_SCALE_FILL = 69
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18711,7 +19574,7 @@ raylib.ICON_CURSOR_SCALE_FILL = 69
 raylib.ICON_CURSOR_SCALE_RIGHT_FILL = 70
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18719,7 +19582,7 @@ raylib.ICON_CURSOR_SCALE_RIGHT_FILL = 70
 raylib.ICON_CURSOR_SCALE_LEFT_FILL = 71
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18727,7 +19590,7 @@ raylib.ICON_CURSOR_SCALE_LEFT_FILL = 71
 raylib.ICON_UNDO_FILL = 72
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18735,7 +19598,7 @@ raylib.ICON_UNDO_FILL = 72
 raylib.ICON_REDO_FILL = 73
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18743,7 +19606,7 @@ raylib.ICON_REDO_FILL = 73
 raylib.ICON_REREDO_FILL = 74
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18751,7 +19614,7 @@ raylib.ICON_REREDO_FILL = 74
 raylib.ICON_MUTATE_FILL = 75
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18759,7 +19622,7 @@ raylib.ICON_MUTATE_FILL = 75
 raylib.ICON_ROTATE_FILL = 76
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18767,7 +19630,7 @@ raylib.ICON_ROTATE_FILL = 76
 raylib.ICON_REPEAT_FILL = 77
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18775,7 +19638,7 @@ raylib.ICON_REPEAT_FILL = 77
 raylib.ICON_SHUFFLE_FILL = 78
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18783,7 +19646,7 @@ raylib.ICON_SHUFFLE_FILL = 78
 raylib.ICON_EMPTYBOX_SMALL = 79
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18791,7 +19654,7 @@ raylib.ICON_EMPTYBOX_SMALL = 79
 raylib.ICON_BOX = 80
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18799,7 +19662,7 @@ raylib.ICON_BOX = 80
 raylib.ICON_BOX_TOP = 81
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18807,7 +19670,7 @@ raylib.ICON_BOX_TOP = 81
 raylib.ICON_BOX_TOP_RIGHT = 82
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18815,7 +19678,7 @@ raylib.ICON_BOX_TOP_RIGHT = 82
 raylib.ICON_BOX_RIGHT = 83
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18823,7 +19686,7 @@ raylib.ICON_BOX_RIGHT = 83
 raylib.ICON_BOX_BOTTOM_RIGHT = 84
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18831,7 +19694,7 @@ raylib.ICON_BOX_BOTTOM_RIGHT = 84
 raylib.ICON_BOX_BOTTOM = 85
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18839,7 +19702,7 @@ raylib.ICON_BOX_BOTTOM = 85
 raylib.ICON_BOX_BOTTOM_LEFT = 86
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18847,7 +19710,7 @@ raylib.ICON_BOX_BOTTOM_LEFT = 86
 raylib.ICON_BOX_LEFT = 87
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18855,7 +19718,7 @@ raylib.ICON_BOX_LEFT = 87
 raylib.ICON_BOX_TOP_LEFT = 88
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18863,7 +19726,7 @@ raylib.ICON_BOX_TOP_LEFT = 88
 raylib.ICON_BOX_CENTER = 89
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18871,7 +19734,7 @@ raylib.ICON_BOX_CENTER = 89
 raylib.ICON_BOX_CIRCLE_MASK = 90
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18879,7 +19742,7 @@ raylib.ICON_BOX_CIRCLE_MASK = 90
 raylib.ICON_POT = 91
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18887,7 +19750,7 @@ raylib.ICON_POT = 91
 raylib.ICON_ALPHA_MULTIPLY = 92
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18895,7 +19758,7 @@ raylib.ICON_ALPHA_MULTIPLY = 92
 raylib.ICON_ALPHA_CLEAR = 93
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18903,7 +19766,7 @@ raylib.ICON_ALPHA_CLEAR = 93
 raylib.ICON_DITHERING = 94
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18911,7 +19774,7 @@ raylib.ICON_DITHERING = 94
 raylib.ICON_MIPMAPS = 95
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18919,7 +19782,7 @@ raylib.ICON_MIPMAPS = 95
 raylib.ICON_BOX_GRID = 96
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18927,7 +19790,7 @@ raylib.ICON_BOX_GRID = 96
 raylib.ICON_GRID = 97
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18935,7 +19798,7 @@ raylib.ICON_GRID = 97
 raylib.ICON_BOX_CORNERS_SMALL = 98
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18943,7 +19806,7 @@ raylib.ICON_BOX_CORNERS_SMALL = 98
 raylib.ICON_BOX_CORNERS_BIG = 99
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18951,7 +19814,7 @@ raylib.ICON_BOX_CORNERS_BIG = 99
 raylib.ICON_FOUR_BOXES = 100
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18959,7 +19822,7 @@ raylib.ICON_FOUR_BOXES = 100
 raylib.ICON_GRID_FILL = 101
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18967,7 +19830,7 @@ raylib.ICON_GRID_FILL = 101
 raylib.ICON_BOX_MULTISIZE = 102
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18975,7 +19838,7 @@ raylib.ICON_BOX_MULTISIZE = 102
 raylib.ICON_ZOOM_SMALL = 103
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18983,7 +19846,7 @@ raylib.ICON_ZOOM_SMALL = 103
 raylib.ICON_ZOOM_MEDIUM = 104
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18991,7 +19854,7 @@ raylib.ICON_ZOOM_MEDIUM = 104
 raylib.ICON_ZOOM_BIG = 105
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -18999,7 +19862,7 @@ raylib.ICON_ZOOM_BIG = 105
 raylib.ICON_ZOOM_ALL = 106
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19007,7 +19870,7 @@ raylib.ICON_ZOOM_ALL = 106
 raylib.ICON_ZOOM_CENTER = 107
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19015,7 +19878,7 @@ raylib.ICON_ZOOM_CENTER = 107
 raylib.ICON_BOX_DOTS_SMALL = 108
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19023,7 +19886,7 @@ raylib.ICON_BOX_DOTS_SMALL = 108
 raylib.ICON_BOX_DOTS_BIG = 109
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19031,7 +19894,7 @@ raylib.ICON_BOX_DOTS_BIG = 109
 raylib.ICON_BOX_CONCENTRIC = 110
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19039,7 +19902,7 @@ raylib.ICON_BOX_CONCENTRIC = 110
 raylib.ICON_BOX_GRID_BIG = 111
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19047,7 +19910,7 @@ raylib.ICON_BOX_GRID_BIG = 111
 raylib.ICON_OK_TICK = 112
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19055,7 +19918,7 @@ raylib.ICON_OK_TICK = 112
 raylib.ICON_CROSS = 113
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19063,7 +19926,7 @@ raylib.ICON_CROSS = 113
 raylib.ICON_ARROW_LEFT = 114
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19071,7 +19934,7 @@ raylib.ICON_ARROW_LEFT = 114
 raylib.ICON_ARROW_RIGHT = 115
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19079,7 +19942,7 @@ raylib.ICON_ARROW_RIGHT = 115
 raylib.ICON_ARROW_DOWN = 116
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19087,7 +19950,7 @@ raylib.ICON_ARROW_DOWN = 116
 raylib.ICON_ARROW_UP = 117
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19095,7 +19958,7 @@ raylib.ICON_ARROW_UP = 117
 raylib.ICON_ARROW_LEFT_FILL = 118
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19103,7 +19966,7 @@ raylib.ICON_ARROW_LEFT_FILL = 118
 raylib.ICON_ARROW_RIGHT_FILL = 119
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19111,7 +19974,7 @@ raylib.ICON_ARROW_RIGHT_FILL = 119
 raylib.ICON_ARROW_DOWN_FILL = 120
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19119,7 +19982,7 @@ raylib.ICON_ARROW_DOWN_FILL = 120
 raylib.ICON_ARROW_UP_FILL = 121
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19127,7 +19990,7 @@ raylib.ICON_ARROW_UP_FILL = 121
 raylib.ICON_AUDIO = 122
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19135,7 +19998,7 @@ raylib.ICON_AUDIO = 122
 raylib.ICON_FX = 123
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19143,7 +20006,7 @@ raylib.ICON_FX = 123
 raylib.ICON_WAVE = 124
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19151,7 +20014,7 @@ raylib.ICON_WAVE = 124
 raylib.ICON_WAVE_SINUS = 125
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19159,7 +20022,7 @@ raylib.ICON_WAVE_SINUS = 125
 raylib.ICON_WAVE_SQUARE = 126
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19167,7 +20030,7 @@ raylib.ICON_WAVE_SQUARE = 126
 raylib.ICON_WAVE_TRIANGULAR = 127
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19175,7 +20038,7 @@ raylib.ICON_WAVE_TRIANGULAR = 127
 raylib.ICON_CROSS_SMALL = 128
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19183,7 +20046,7 @@ raylib.ICON_CROSS_SMALL = 128
 raylib.ICON_PLAYER_PREVIOUS = 129
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19191,7 +20054,7 @@ raylib.ICON_PLAYER_PREVIOUS = 129
 raylib.ICON_PLAYER_PLAY_BACK = 130
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19199,7 +20062,7 @@ raylib.ICON_PLAYER_PLAY_BACK = 130
 raylib.ICON_PLAYER_PLAY = 131
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19207,7 +20070,7 @@ raylib.ICON_PLAYER_PLAY = 131
 raylib.ICON_PLAYER_PAUSE = 132
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19215,7 +20078,7 @@ raylib.ICON_PLAYER_PAUSE = 132
 raylib.ICON_PLAYER_STOP = 133
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19223,7 +20086,7 @@ raylib.ICON_PLAYER_STOP = 133
 raylib.ICON_PLAYER_NEXT = 134
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19231,7 +20094,7 @@ raylib.ICON_PLAYER_NEXT = 134
 raylib.ICON_PLAYER_RECORD = 135
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19239,7 +20102,7 @@ raylib.ICON_PLAYER_RECORD = 135
 raylib.ICON_MAGNET = 136
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19247,7 +20110,7 @@ raylib.ICON_MAGNET = 136
 raylib.ICON_LOCK_CLOSE = 137
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19255,7 +20118,7 @@ raylib.ICON_LOCK_CLOSE = 137
 raylib.ICON_LOCK_OPEN = 138
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19263,7 +20126,7 @@ raylib.ICON_LOCK_OPEN = 138
 raylib.ICON_CLOCK = 139
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19271,7 +20134,7 @@ raylib.ICON_CLOCK = 139
 raylib.ICON_TOOLS = 140
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19279,7 +20142,7 @@ raylib.ICON_TOOLS = 140
 raylib.ICON_GEAR = 141
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19287,7 +20150,7 @@ raylib.ICON_GEAR = 141
 raylib.ICON_GEAR_BIG = 142
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19295,7 +20158,7 @@ raylib.ICON_GEAR_BIG = 142
 raylib.ICON_BIN = 143
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19303,7 +20166,7 @@ raylib.ICON_BIN = 143
 raylib.ICON_HAND_POINTER = 144
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19311,7 +20174,7 @@ raylib.ICON_HAND_POINTER = 144
 raylib.ICON_LASER = 145
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19319,7 +20182,7 @@ raylib.ICON_LASER = 145
 raylib.ICON_COIN = 146
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19327,7 +20190,7 @@ raylib.ICON_COIN = 146
 raylib.ICON_EXPLOSION = 147
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19335,7 +20198,7 @@ raylib.ICON_EXPLOSION = 147
 raylib.ICON_1UP = 148
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19343,7 +20206,7 @@ raylib.ICON_1UP = 148
 raylib.ICON_PLAYER = 149
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19351,7 +20214,7 @@ raylib.ICON_PLAYER = 149
 raylib.ICON_PLAYER_JUMP = 150
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19359,7 +20222,7 @@ raylib.ICON_PLAYER_JUMP = 150
 raylib.ICON_KEY = 151
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19367,7 +20230,7 @@ raylib.ICON_KEY = 151
 raylib.ICON_DEMON = 152
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19375,7 +20238,7 @@ raylib.ICON_DEMON = 152
 raylib.ICON_TEXT_POPUP = 153
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19383,7 +20246,7 @@ raylib.ICON_TEXT_POPUP = 153
 raylib.ICON_GEAR_EX = 154
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19391,7 +20254,7 @@ raylib.ICON_GEAR_EX = 154
 raylib.ICON_CRACK = 155
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19399,7 +20262,7 @@ raylib.ICON_CRACK = 155
 raylib.ICON_CRACK_POINTS = 156
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19407,7 +20270,7 @@ raylib.ICON_CRACK_POINTS = 156
 raylib.ICON_STAR = 157
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19415,7 +20278,7 @@ raylib.ICON_STAR = 157
 raylib.ICON_DOOR = 158
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19423,7 +20286,7 @@ raylib.ICON_DOOR = 158
 raylib.ICON_EXIT = 159
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19431,7 +20294,7 @@ raylib.ICON_EXIT = 159
 raylib.ICON_MODE_2D = 160
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19439,7 +20302,7 @@ raylib.ICON_MODE_2D = 160
 raylib.ICON_MODE_3D = 161
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19447,7 +20310,7 @@ raylib.ICON_MODE_3D = 161
 raylib.ICON_CUBE = 162
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19455,7 +20318,7 @@ raylib.ICON_CUBE = 162
 raylib.ICON_CUBE_FACE_TOP = 163
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19463,7 +20326,7 @@ raylib.ICON_CUBE_FACE_TOP = 163
 raylib.ICON_CUBE_FACE_LEFT = 164
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19471,7 +20334,7 @@ raylib.ICON_CUBE_FACE_LEFT = 164
 raylib.ICON_CUBE_FACE_FRONT = 165
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19479,7 +20342,7 @@ raylib.ICON_CUBE_FACE_FRONT = 165
 raylib.ICON_CUBE_FACE_BOTTOM = 166
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19487,7 +20350,7 @@ raylib.ICON_CUBE_FACE_BOTTOM = 166
 raylib.ICON_CUBE_FACE_RIGHT = 167
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19495,7 +20358,7 @@ raylib.ICON_CUBE_FACE_RIGHT = 167
 raylib.ICON_CUBE_FACE_BACK = 168
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19503,7 +20366,7 @@ raylib.ICON_CUBE_FACE_BACK = 168
 raylib.ICON_CAMERA = 169
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19511,7 +20374,7 @@ raylib.ICON_CAMERA = 169
 raylib.ICON_SPECIAL = 170
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19519,7 +20382,7 @@ raylib.ICON_SPECIAL = 170
 raylib.ICON_LINK_NET = 171
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19527,7 +20390,7 @@ raylib.ICON_LINK_NET = 171
 raylib.ICON_LINK_BOXES = 172
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19535,7 +20398,7 @@ raylib.ICON_LINK_BOXES = 172
 raylib.ICON_LINK_MULTI = 173
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19543,7 +20406,7 @@ raylib.ICON_LINK_MULTI = 173
 raylib.ICON_LINK = 174
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19551,7 +20414,7 @@ raylib.ICON_LINK = 174
 raylib.ICON_LINK_BROKE = 175
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19559,7 +20422,7 @@ raylib.ICON_LINK_BROKE = 175
 raylib.ICON_TEXT_NOTES = 176
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19567,7 +20430,7 @@ raylib.ICON_TEXT_NOTES = 176
 raylib.ICON_NOTEBOOK = 177
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19575,7 +20438,7 @@ raylib.ICON_NOTEBOOK = 177
 raylib.ICON_SUITCASE = 178
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19583,7 +20446,7 @@ raylib.ICON_SUITCASE = 178
 raylib.ICON_SUITCASE_ZIP = 179
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19591,7 +20454,7 @@ raylib.ICON_SUITCASE_ZIP = 179
 raylib.ICON_MAILBOX = 180
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19599,7 +20462,7 @@ raylib.ICON_MAILBOX = 180
 raylib.ICON_MONITOR = 181
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19607,7 +20470,7 @@ raylib.ICON_MONITOR = 181
 raylib.ICON_PRINTER = 182
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19615,7 +20478,7 @@ raylib.ICON_PRINTER = 182
 raylib.ICON_PHOTO_CAMERA = 183
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19623,7 +20486,7 @@ raylib.ICON_PHOTO_CAMERA = 183
 raylib.ICON_PHOTO_CAMERA_FLASH = 184
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19631,7 +20494,7 @@ raylib.ICON_PHOTO_CAMERA_FLASH = 184
 raylib.ICON_HOUSE = 185
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19639,7 +20502,7 @@ raylib.ICON_HOUSE = 185
 raylib.ICON_HEART = 186
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19647,7 +20510,7 @@ raylib.ICON_HEART = 186
 raylib.ICON_CORNER = 187
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19655,7 +20518,7 @@ raylib.ICON_CORNER = 187
 raylib.ICON_VERTICAL_BARS = 188
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19663,7 +20526,7 @@ raylib.ICON_VERTICAL_BARS = 188
 raylib.ICON_VERTICAL_BARS_FILL = 189
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19671,7 +20534,7 @@ raylib.ICON_VERTICAL_BARS_FILL = 189
 raylib.ICON_LIFE_BARS = 190
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19679,7 +20542,7 @@ raylib.ICON_LIFE_BARS = 190
 raylib.ICON_INFO = 191
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19687,7 +20550,7 @@ raylib.ICON_INFO = 191
 raylib.ICON_CROSSLINE = 192
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19695,7 +20558,7 @@ raylib.ICON_CROSSLINE = 192
 raylib.ICON_HELP = 193
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19703,7 +20566,7 @@ raylib.ICON_HELP = 193
 raylib.ICON_FILETYPE_ALPHA = 194
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19711,7 +20574,7 @@ raylib.ICON_FILETYPE_ALPHA = 194
 raylib.ICON_FILETYPE_HOME = 195
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19719,7 +20582,7 @@ raylib.ICON_FILETYPE_HOME = 195
 raylib.ICON_LAYERS_VISIBLE = 196
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19727,7 +20590,7 @@ raylib.ICON_LAYERS_VISIBLE = 196
 raylib.ICON_LAYERS = 197
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19735,7 +20598,7 @@ raylib.ICON_LAYERS = 197
 raylib.ICON_WINDOW = 198
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19743,7 +20606,7 @@ raylib.ICON_WINDOW = 198
 raylib.ICON_HIDPI = 199
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19751,7 +20614,7 @@ raylib.ICON_HIDPI = 199
 raylib.ICON_FILETYPE_BINARY = 200
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19759,7 +20622,7 @@ raylib.ICON_FILETYPE_BINARY = 200
 raylib.ICON_HEX = 201
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19767,7 +20630,7 @@ raylib.ICON_HEX = 201
 raylib.ICON_SHIELD = 202
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19775,7 +20638,7 @@ raylib.ICON_SHIELD = 202
 raylib.ICON_FILE_NEW = 203
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19783,7 +20646,7 @@ raylib.ICON_FILE_NEW = 203
 raylib.ICON_FOLDER_ADD = 204
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19791,7 +20654,7 @@ raylib.ICON_FOLDER_ADD = 204
 raylib.ICON_ALARM = 205
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19799,7 +20662,7 @@ raylib.ICON_ALARM = 205
 raylib.ICON_CPU = 206
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19807,7 +20670,7 @@ raylib.ICON_CPU = 206
 raylib.ICON_ROM = 207
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19815,7 +20678,7 @@ raylib.ICON_ROM = 207
 raylib.ICON_STEP_OVER = 208
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19823,7 +20686,7 @@ raylib.ICON_STEP_OVER = 208
 raylib.ICON_STEP_INTO = 209
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19831,7 +20694,7 @@ raylib.ICON_STEP_INTO = 209
 raylib.ICON_STEP_OUT = 210
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19839,7 +20702,7 @@ raylib.ICON_STEP_OUT = 210
 raylib.ICON_RESTART = 211
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19847,7 +20710,7 @@ raylib.ICON_RESTART = 211
 raylib.ICON_BREAKPOINT_ON = 212
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19855,7 +20718,7 @@ raylib.ICON_BREAKPOINT_ON = 212
 raylib.ICON_BREAKPOINT_OFF = 213
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19863,7 +20726,7 @@ raylib.ICON_BREAKPOINT_OFF = 213
 raylib.ICON_BURGER_MENU = 214
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19871,7 +20734,7 @@ raylib.ICON_BURGER_MENU = 214
 raylib.ICON_CASE_SENSITIVE = 215
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19879,7 +20742,7 @@ raylib.ICON_CASE_SENSITIVE = 215
 raylib.ICON_REG_EXP = 216
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19887,7 +20750,7 @@ raylib.ICON_REG_EXP = 216
 raylib.ICON_FOLDER = 217
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19895,15 +20758,15 @@ raylib.ICON_FOLDER = 217
 raylib.ICON_FILE = 218
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
  */
-raylib.ICON_219 = 219
+raylib.ICON_SAND_TIMER = 219
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19911,7 +20774,7 @@ raylib.ICON_219 = 219
 raylib.ICON_220 = 220
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19919,7 +20782,7 @@ raylib.ICON_220 = 220
 raylib.ICON_221 = 221
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19927,7 +20790,7 @@ raylib.ICON_221 = 221
 raylib.ICON_222 = 222
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19935,7 +20798,7 @@ raylib.ICON_222 = 222
 raylib.ICON_223 = 223
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19943,7 +20806,7 @@ raylib.ICON_223 = 223
 raylib.ICON_224 = 224
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19951,7 +20814,7 @@ raylib.ICON_224 = 224
 raylib.ICON_225 = 225
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19959,7 +20822,7 @@ raylib.ICON_225 = 225
 raylib.ICON_226 = 226
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19967,7 +20830,7 @@ raylib.ICON_226 = 226
 raylib.ICON_227 = 227
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19975,7 +20838,7 @@ raylib.ICON_227 = 227
 raylib.ICON_228 = 228
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19983,7 +20846,7 @@ raylib.ICON_228 = 228
 raylib.ICON_229 = 229
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19991,7 +20854,7 @@ raylib.ICON_229 = 229
 raylib.ICON_230 = 230
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -19999,7 +20862,7 @@ raylib.ICON_230 = 230
 raylib.ICON_231 = 231
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20007,7 +20870,7 @@ raylib.ICON_231 = 231
 raylib.ICON_232 = 232
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20015,7 +20878,7 @@ raylib.ICON_232 = 232
 raylib.ICON_233 = 233
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20023,7 +20886,7 @@ raylib.ICON_233 = 233
 raylib.ICON_234 = 234
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20031,7 +20894,7 @@ raylib.ICON_234 = 234
 raylib.ICON_235 = 235
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20039,7 +20902,7 @@ raylib.ICON_235 = 235
 raylib.ICON_236 = 236
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20047,7 +20910,7 @@ raylib.ICON_236 = 236
 raylib.ICON_237 = 237
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20055,7 +20918,7 @@ raylib.ICON_237 = 237
 raylib.ICON_238 = 238
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20063,7 +20926,7 @@ raylib.ICON_238 = 238
 raylib.ICON_239 = 239
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20071,7 +20934,7 @@ raylib.ICON_239 = 239
 raylib.ICON_240 = 240
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20079,7 +20942,7 @@ raylib.ICON_240 = 240
 raylib.ICON_241 = 241
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20087,7 +20950,7 @@ raylib.ICON_241 = 241
 raylib.ICON_242 = 242
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20095,7 +20958,7 @@ raylib.ICON_242 = 242
 raylib.ICON_243 = 243
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20103,7 +20966,7 @@ raylib.ICON_243 = 243
 raylib.ICON_244 = 244
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20111,7 +20974,7 @@ raylib.ICON_244 = 244
 raylib.ICON_245 = 245
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20119,7 +20982,7 @@ raylib.ICON_245 = 245
 raylib.ICON_246 = 246
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20127,7 +20990,7 @@ raylib.ICON_246 = 246
 raylib.ICON_247 = 247
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20135,7 +20998,7 @@ raylib.ICON_247 = 247
 raylib.ICON_248 = 248
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20143,7 +21006,7 @@ raylib.ICON_248 = 248
 raylib.ICON_249 = 249
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20151,7 +21014,7 @@ raylib.ICON_249 = 249
 raylib.ICON_250 = 250
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20159,7 +21022,7 @@ raylib.ICON_250 = 250
 raylib.ICON_251 = 251
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20167,7 +21030,7 @@ raylib.ICON_251 = 251
 raylib.ICON_252 = 252
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20175,7 +21038,7 @@ raylib.ICON_252 = 252
 raylib.ICON_253 = 253
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20183,7 +21046,7 @@ raylib.ICON_253 = 253
 raylib.ICON_254 = 254
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -20229,6 +21092,14 @@ raylib.RL_OPENGL_43 = 4
  * @constant
  */
 raylib.RL_OPENGL_ES_20 = 5
+
+/**
+ * OpenGL ES 3.0 (GLSL 300 es)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_OPENGL_ES_30 = 6
 
 /**
  * Display all logs
@@ -20375,12 +21246,36 @@ raylib.RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
 raylib.RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
 
 /**
+ * 16 bpp (1 channel - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R16 = 11
+
+/**
+ * 16*3 bpp (3 channels - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16 = 12
+
+/**
+ * 16*4 bpp (4 channels - half float)
+ *
+ * @type {number}
+ * @constant
+ */
+raylib.RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16A16 = 13
+
+/**
  * 4 bpp (no alpha)
  *
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 14
 
 /**
  * 4 bpp (1 bit alpha)
@@ -20388,7 +21283,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 15
 
 /**
  * 8 bpp
@@ -20396,7 +21291,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 16
 
 /**
  * 8 bpp
@@ -20404,7 +21299,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+raylib.RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 17
 
 /**
  * 4 bpp
@@ -20412,7 +21307,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 18
 
 /**
  * 4 bpp
@@ -20420,7 +21315,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 19
 
 /**
  * 8 bpp
@@ -20428,7 +21323,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 20
 
 /**
  * 4 bpp
@@ -20436,7 +21331,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 21
 
 /**
  * 4 bpp
@@ -20444,7 +21339,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 22
 
 /**
  * 8 bpp
@@ -20452,7 +21347,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 23
 
 /**
  * 2 bpp
@@ -20460,7 +21355,7 @@ raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
  * @type {number}
  * @constant
  */
-raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
+raylib.RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 24
 
 /**
  * No filter, just pixel approximation
@@ -21031,7 +21926,7 @@ raylib.RL_ATTACHMENT_TEXTURE2D = 100
 raylib.RL_ATTACHMENT_RENDERBUFFER = 200
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -21039,7 +21934,7 @@ raylib.RL_ATTACHMENT_RENDERBUFFER = 200
 raylib.RL_CULL_FACE_FRONT = 0
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant
@@ -21047,7 +21942,7 @@ raylib.RL_CULL_FACE_FRONT = 0
 raylib.RL_CULL_FACE_BACK = 1
 
 /**
- *
+ * 
  *
  * @type {number}
  * @constant

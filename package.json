@@ -1,6 +1,6 @@
 {
   "name": "raylib",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Node.js bindings for raylib.",
   "main": "index.js",
   "types": "src/generated/node-raylib.d.ts",
@@ -66,7 +66,7 @@
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
-    "@raylib/api": "~4.5.0",
+    "@raylib/api": "^5.0.0",
     "@vitest/ui": "^0.29.7",
     "archiver": "^5.3.1",
     "jsdoc-to-markdown": "^8.0.0",
