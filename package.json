@@ -62,17 +62,17 @@
   },
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
-    "cross-fetch": "^3.1.5",
-    "module-alias": "^2.2.2"
+    "cross-fetch": "^4.0.0",
+    "module-alias": "^2.2.3"
   },
   "devDependencies": {
-    "@raylib/api": "^5.0.0",
-    "@vitest/ui": "^0.29.7",
-    "archiver": "^5.3.1",
-    "jsdoc-to-markdown": "^8.0.0",
+    "@raylib/api": "^5.0.1",
+    "@vitest/ui": "^2.1.4",
+    "archiver": "^7.0.1",
+    "jsdoc-to-markdown": "^9.0.5",
     "pkg": "^5.8.1",
-    "standard": "^17.0.0",
-    "vitest": "^0.29.7"
+    "standard": "^17.1.2",
+    "vitest": "^2.1.4"
   },
   "jsdoc2md": {
     "files": [
