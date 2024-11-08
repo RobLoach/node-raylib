@@ -196,9 +196,10 @@ function getDefs () {
   functions.push(...raymath.functions)
 
   // Add Raygui
-  const raygui = raylibApi.raygui
-  functions.push(...raygui.functions)
-  enums.push(...raygui.enums)
+  // TODO: Fix raygui
+  // const raygui = raylibApi.raygui
+  // functions.push(...raygui.functions)
+  // enums.push(...raygui.enums)
 
   const rlgl = raylibApi.rlgl
   functions.push(...rlgl.functions)

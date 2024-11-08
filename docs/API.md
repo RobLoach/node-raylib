@@ -962,7 +962,7 @@
 <dd><p>Load font from file into GPU memory (VRAM)</p>
 </dd>
 <dt><a href="#LoadFontEx">LoadFontEx(fileName, fontSize, codepoints, codepointCount)</a> ⇒ <code>Font</code></dt>
-<dd><p>Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont</p>
+<dd><p>Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character set</p>
 </dd>
 <dt><a href="#LoadFontFromImage">LoadFontFromImage(image, key, firstChar)</a> ⇒ <code>Font</code></dt>
 <dd><p>Load font from Image (XNA style)</p>
@@ -1625,49 +1625,52 @@
 <dd><p>Scroll Panel control</p>
 </dd>
 <dt><a href="#GuiLabel">GuiLabel(bounds, text)</a> ⇒ <code>number</code></dt>
-<dd><p>Label control, shows text</p>
+<dd><p>Label control</p>
 </dd>
 <dt><a href="#GuiButton">GuiButton(bounds, text)</a> ⇒ <code>number</code></dt>
 <dd><p>Button control, returns true when clicked</p>
 </dd>
 <dt><a href="#GuiLabelButton">GuiLabelButton(bounds, text)</a> ⇒ <code>number</code></dt>
-<dd><p>Label button control, show true when clicked</p>
+<dd><p>Label button control, returns true when clicked</p>
 </dd>
 <dt><a href="#GuiToggle">GuiToggle(bounds, text, active)</a> ⇒ <code>number</code></dt>
-<dd><p>Toggle Button control, returns true when active</p>
+<dd><p>Toggle Button control</p>
 </dd>
 <dt><a href="#GuiToggleGroup">GuiToggleGroup(bounds, text, active)</a> ⇒ <code>number</code></dt>
-<dd><p>Toggle Group control, returns active toggle index</p>
+<dd><p>Toggle Group control</p>
 </dd>
 <dt><a href="#GuiToggleSlider">GuiToggleSlider(bounds, text, active)</a> ⇒ <code>number</code></dt>
-<dd><p>Toggle Slider control, returns true when clicked</p>
+<dd><p>Toggle Slider control</p>
 </dd>
 <dt><a href="#GuiCheckBox">GuiCheckBox(bounds, text, checked)</a> ⇒ <code>number</code></dt>
 <dd><p>Check Box control, returns true when active</p>
 </dd>
 <dt><a href="#GuiComboBox">GuiComboBox(bounds, text, active)</a> ⇒ <code>number</code></dt>
-<dd><p>Combo Box control, returns selected item index</p>
+<dd><p>Combo Box control</p>
 </dd>
 <dt><a href="#GuiDropdownBox">GuiDropdownBox(bounds, text, active, editMode)</a> ⇒ <code>number</code></dt>
-<dd><p>Dropdown Box control, returns selected item</p>
+<dd><p>Dropdown Box control</p>
 </dd>
 <dt><a href="#GuiSpinner">GuiSpinner(bounds, text, value, minValue, maxValue, editMode)</a> ⇒ <code>number</code></dt>
-<dd><p>Spinner control, returns selected value</p>
+<dd><p>Spinner control</p>
 </dd>
 <dt><a href="#GuiValueBox">GuiValueBox(bounds, text, value, minValue, maxValue, editMode)</a> ⇒ <code>number</code></dt>
 <dd><p>Value Box control, updates input text with numbers</p>
+</dd>
+<dt><a href="#GuiValueBoxFloat">GuiValueBoxFloat(bounds, text, textValue, value, editMode)</a> ⇒ <code>number</code></dt>
+<dd><p>Value box control for float values</p>
 </dd>
 <dt><a href="#GuiTextBox">GuiTextBox(bounds, text, textSize, editMode)</a> ⇒ <code>number</code></dt>
 <dd><p>Text Box control, updates input text</p>
 </dd>
 <dt><a href="#GuiSlider">GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
-<dd><p>Slider control, returns selected value</p>
+<dd><p>Slider control</p>
 </dd>
 <dt><a href="#GuiSliderBar">GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
-<dd><p>Slider Bar control, returns selected value</p>
+<dd><p>Slider Bar control</p>
 </dd>
 <dt><a href="#GuiProgressBar">GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue)</a> ⇒ <code>number</code></dt>
-<dd><p>Progress Bar control, shows current progress value</p>
+<dd><p>Progress Bar control</p>
 </dd>
 <dt><a href="#GuiStatusBar">GuiStatusBar(bounds, text)</a> ⇒ <code>number</code></dt>
 <dd><p>Status Bar control, shows info text</p>
@@ -1676,10 +1679,10 @@
 <dd><p>Dummy control for placeholders</p>
 </dd>
 <dt><a href="#GuiGrid">GuiGrid(bounds, text, spacing, subdivs, mouseCell)</a> ⇒ <code>number</code></dt>
-<dd><p>Grid control, returns mouse cell position</p>
+<dd><p>Grid control</p>
 </dd>
 <dt><a href="#GuiListView">GuiListView(bounds, text, scrollIndex, active)</a> ⇒ <code>number</code></dt>
-<dd><p>List View control, returns selected list item index</p>
+<dd><p>List View control</p>
 </dd>
 <dt><a href="#GuiListViewEx">GuiListViewEx(bounds, text, count, scrollIndex, active, focus)</a> ⇒ <code>number</code></dt>
 <dd><p>List View with extended parameters</p>
@@ -1706,7 +1709,7 @@
 <dd><p>Color Picker control that avoids conversion to RGB on each call (multiple color controls)</p>
 </dd>
 <dt><a href="#GuiColorPanelHSV">GuiColorPanelHSV(bounds, text, colorHsv)</a> ⇒ <code>number</code></dt>
-<dd><p>Color Panel control that returns HSV color value, used by GuiColorPickerHSV()</p>
+<dd><p>Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()</p>
 </dd>
 <dt><a href="#rlMatrixMode">rlMatrixMode(mode)</a> ⇒ <code>undefined</code></dt>
 <dd><p>Choose the current matrix to be transformed</p>
@@ -5985,7 +5988,7 @@ Load font from file into GPU memory (VRAM)
 <a name="LoadFontEx"></a>
 
 ## LoadFontEx(fileName, fontSize, codepoints, codepointCount) ⇒ <code>Font</code>
-Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont
+Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character set
 
 **Kind**: global function  
 **Returns**: <code>Font</code> - The resulting Font.  
@@ -8820,7 +8823,7 @@ Scroll Panel control
 <a name="GuiLabel"></a>
 
 ## GuiLabel(bounds, text) ⇒ <code>number</code>
-Label control, shows text
+Label control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -8846,7 +8849,7 @@ Button control, returns true when clicked
 <a name="GuiLabelButton"></a>
 
 ## GuiLabelButton(bounds, text) ⇒ <code>number</code>
-Label button control, show true when clicked
+Label button control, returns true when clicked
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -8859,7 +8862,7 @@ Label button control, show true when clicked
 <a name="GuiToggle"></a>
 
 ## GuiToggle(bounds, text, active) ⇒ <code>number</code>
-Toggle Button control, returns true when active
+Toggle Button control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -8873,7 +8876,7 @@ Toggle Button control, returns true when active
 <a name="GuiToggleGroup"></a>
 
 ## GuiToggleGroup(bounds, text, active) ⇒ <code>number</code>
-Toggle Group control, returns active toggle index
+Toggle Group control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -8887,7 +8890,7 @@ Toggle Group control, returns active toggle index
 <a name="GuiToggleSlider"></a>
 
 ## GuiToggleSlider(bounds, text, active) ⇒ <code>number</code>
-Toggle Slider control, returns true when clicked
+Toggle Slider control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -8915,7 +8918,7 @@ Check Box control, returns true when active
 <a name="GuiComboBox"></a>
 
 ## GuiComboBox(bounds, text, active) ⇒ <code>number</code>
-Combo Box control, returns selected item index
+Combo Box control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -8929,7 +8932,7 @@ Combo Box control, returns selected item index
 <a name="GuiDropdownBox"></a>
 
 ## GuiDropdownBox(bounds, text, active, editMode) ⇒ <code>number</code>
-Dropdown Box control, returns selected item
+Dropdown Box control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -8944,7 +8947,7 @@ Dropdown Box control, returns selected item
 <a name="GuiSpinner"></a>
 
 ## GuiSpinner(bounds, text, value, minValue, maxValue, editMode) ⇒ <code>number</code>
-Spinner control, returns selected value
+Spinner control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -8975,6 +8978,22 @@ Value Box control, updates input text with numbers
 | maxValue | <code>number</code> | 
 | editMode | <code>boolean</code> | 
 
+<a name="GuiValueBoxFloat"></a>
+
+## GuiValueBoxFloat(bounds, text, textValue, value, editMode) ⇒ <code>number</code>
+Value box control for float values
+
+**Kind**: global function  
+**Returns**: <code>number</code> - The resulting int.  
+
+| Param | Type |
+| --- | --- |
+| bounds | [<code>Rectangle</code>](#Rectangle) | 
+| text | <code>string</code> | 
+| textValue | <code>string</code> | 
+| value | <code>number</code> | 
+| editMode | <code>boolean</code> | 
+
 <a name="GuiTextBox"></a>
 
 ## GuiTextBox(bounds, text, textSize, editMode) ⇒ <code>number</code>
@@ -8993,7 +9012,7 @@ Text Box control, updates input text
 <a name="GuiSlider"></a>
 
 ## GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
-Slider control, returns selected value
+Slider control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -9010,7 +9029,7 @@ Slider control, returns selected value
 <a name="GuiSliderBar"></a>
 
 ## GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
-Slider Bar control, returns selected value
+Slider Bar control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -9027,7 +9046,7 @@ Slider Bar control, returns selected value
 <a name="GuiProgressBar"></a>
 
 ## GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue) ⇒ <code>number</code>
-Progress Bar control, shows current progress value
+Progress Bar control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -9070,7 +9089,7 @@ Dummy control for placeholders
 <a name="GuiGrid"></a>
 
 ## GuiGrid(bounds, text, spacing, subdivs, mouseCell) ⇒ <code>number</code>
-Grid control, returns mouse cell position
+Grid control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -9086,7 +9105,7 @@ Grid control, returns mouse cell position
 <a name="GuiListView"></a>
 
 ## GuiListView(bounds, text, scrollIndex, active) ⇒ <code>number</code>
-List View control, returns selected list item index
+List View control
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
@@ -9221,7 +9240,7 @@ Color Picker control that avoids conversion to RGB on each call (multiple color 
 <a name="GuiColorPanelHSV"></a>
 
 ## GuiColorPanelHSV(bounds, text, colorHsv) ⇒ <code>number</code>
-Color Panel control that returns HSV color value, used by GuiColorPickerHSV()
+Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()
 
 **Kind**: global function  
 **Returns**: <code>number</code> - The resulting int.  
