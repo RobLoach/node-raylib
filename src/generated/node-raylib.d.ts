@@ -1,5 +1,5 @@
 // GENERATED CODE: DO NOT MODIFY
-declare module "raylib" {
+declare module "@r1tsuu/raylib" {
   /** Vector2, 2 components */
   export interface Vector2 {
     /** Vector x component. (float) */

@@ -31,7 +31,7 @@ const StructInterface = (struct) => {
 
 module.exports = ({ functions, structs, enums, blocklist }) => {
   return `// GENERATED CODE: DO NOT MODIFY
-declare module "raylib" {
+declare module "@r1tsuu/raylib" {
   ${structs.map(StructInterface).join("\n  ")}
 
   /** RenderTexture, fbo for texture rendering */
