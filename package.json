@@ -1,7 +1,7 @@
 {
-  "name": "raylib",
-  "version": "0.14.0",
-  "description": "Node.js bindings for raylib.",
+  "name": "@r1tsuu/raylib",
+  "version": "0.15.0",
+  "description": "Node.js bindings for raylib 5.5",
   "main": "index.js",
   "types": "src/generated/node-raylib.d.ts",
   "scripts": {
@@ -22,7 +22,7 @@
     "gen:code": "node tools/generate.js",
     "gen:docs": "jsdoc2md > docs/API.md"
   },
-  "repository": "github:RobLoach/node-raylib",
+  "repository": "github:r1tsuu/node-raylib",
   "engines": {
     "node": ">=10"
   },
@@ -66,7 +66,7 @@
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
-    "@raylib/api": "~4.5.0",
+    "@raylib/api": "5.5.0",
     "@vitest/ui": "^0.29.7",
     "archiver": "^5.3.1",
     "jsdoc-to-markdown": "^8.0.0",
@@ -78,5 +78,6 @@
     "files": [
       "src/generated/node-raylib.js"
     ]
-  }
+  },
+  "packageManager": "pnpm@9.15.1+sha512.1acb565e6193efbebda772702950469150cf12bcc764262e7587e71d19dc98a423dff9536e57ea44c49bdf790ff694e83c27be5faa23d67e0c033b583be4bfcf"
 }

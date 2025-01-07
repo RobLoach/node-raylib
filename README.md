@@ -1,3 +1,5 @@
+Tested only on ARM MacOS.
+
 ![node-raylib Logo](logo/raylib-node_256x256.png)
 
 # node-raylib [![npm version](http://img.shields.io/npm/v/raylib.svg)](https://npmjs.org/package/raylib "View this project on npm") [![Tests](https://github.com/RobLoach/node-raylib/workflows/Tests/badge.svg)](https://github.com/RobLoach/node-raylib/actions?query=workflow%3ATests+branch%3Amaster "See automated test status on GitHub Actions")
