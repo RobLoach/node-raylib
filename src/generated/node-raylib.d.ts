@@ -3317,6 +3317,35 @@ declare module "@r1tsuu/raylib" {
   /** Set shader uniform Vec4 */
   export function SetShaderVec4(shader: Shader, locIndex: number, value: Vector4): void
 
+  export function Camera3D(
+  /** Camera position. (Vector3) */
+  position: Vector3,
+  /** Camera target it looks-at. (Vector3) */
+  target: Vector3,
+  /** Camera up vector (rotation over its axis). (Vector3) */
+  up: Vector3,
+  /** Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic. (float) */
+  fovy: number,
+  /** Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC. (int) */
+  projection: number,
+  ): Camera3D
+
+  export function Vector3(
+    /** Vector x component. (float) */
+    x: number,
+    /** Vector y component. (float) */
+    y: number,
+    /** Vector z component. (float) */
+    z: number,
+  ): Vector3
+
+  export function Vector2(
+    /** Vector x component. (float) */
+    x: number,
+    /** Vector y component. (float) */
+    y: number,
+  ): Vector2
+
     /** Set to try enabling V-Sync on GPU */
   export const FLAG_VSYNC_HINT = 64
   /** Set to run program in fullscreen */
@@ -5010,4 +5039,6 @@ declare module "@r1tsuu/raylib" {
   export const BLANK: { r: 0, g: 0, b: 0, a: 0 }
   export const MAGENTA: { r: 255, g: 0, b: 255, a: 255 }
   export const RAYWHITE: { r: 245, g: 245, b: 245, a: 255 }
+
+  
 }
