@@ -13,6 +13,8 @@ let targetPath = path.join(
   "node-raylib.node"
 );
 
+const { version } = require("../package.json");
+
 function toBuffer(ab) {
   const buf = Buffer.alloc(ab.byteLength);
   const view = new Uint8Array(ab);
@@ -37,7 +39,7 @@ async function main() {
     process.exit(0);
   }
 
-  let url = `https://github.com/r1tsuu/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-${process.platform}-${process.arch}.node`;
+  let url = `https://github.com/r1tsuu/node-raylib/releases/download/v${version}/node-raylib-${process.platform}-${process.arch}.node`;
 
   console.log(`Checking for ${url}`);
 
@@ -60,7 +62,7 @@ async function main() {
       "Release",
       "node-raylib-drm.node"
     );
-    url = `https://github.com/r1tsuu/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-${process.platform}-${process.arch}-drm.node`;
+    url = `https://github.com/r1tsuu/node-raylib/releases/download/v${version}/node-raylib-${process.platform}-${process.arch}-drm.node`;
     try {
       const data = await fetch(url)
         .then((r) => {

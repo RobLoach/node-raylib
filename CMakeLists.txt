@@ -75,7 +75,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
   SUFFIX ".node"
 )
 
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   "${CMAKE_JS_INC}"
