@@ -10,7 +10,7 @@
 ********************************************************************************************/
 
 const r = require('raylib')
-const { join } = require('path')
+const { join } = require('node:path')
 
 // #if defined(PLATFORM_DESKTOP)
 const GLSL_VERSION = 330

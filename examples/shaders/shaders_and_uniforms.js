@@ -3,8 +3,8 @@
 *   raylib [shaders] example - Drawing textures with an effective shader
 *
 ********************************************************************************************/
-const { readFileSync } = require('fs')
-const { resolve, join } = require('path')
+const { readFileSync } = require('node:fs')
+const { resolve, join } = require('node:path')
 const r = require('raylib')
 
 // Initialization

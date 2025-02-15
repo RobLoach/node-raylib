@@ -10,8 +10,8 @@
 ********************************************************************************************/
 
 const r = require('raylib')
-const { resolve } = require('path')
-const { readFileSync } = require('fs')
+const { resolve } = require('node:path')
+const { readFileSync } = require('node:fs')
 
 // Initialization
 // --------------------------------------------------------------------------------------

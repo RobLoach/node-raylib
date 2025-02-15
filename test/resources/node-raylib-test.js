@@ -3,7 +3,7 @@
  */
 
 const r = require('raylib')
-const assert = require('assert')
+const assert = require('node:assert')
 
 console.log('node-raylib-test: Test runner for node-raylib CLI')
 

@@ -1,8 +1,8 @@
 // this will generate the wrappers & type-adapters in src/generated
 
-const { writeFileSync } = require("fs");
+const { writeFileSync } = require("node:fs");
 const raylibApi = require("@raylib/api");
-const path = require("path");
+const path = require("node:path");
 
 // use this to keep from wrapping things
 const blocklist = [
@@ -148,7 +148,7 @@ function getDefs() {
     for (const field of struct.fields) {
       const n = [...field.name.matchAll(rSize)];
       if (n.length) {
-        field.size = parseInt(n[0][1]);
+        field.size = Number.parseInt(n[0][1]);
         field.name = field.name.replace(rSize, "");
       } else {
         field.size = 1;

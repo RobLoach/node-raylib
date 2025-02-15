@@ -1,8 +1,8 @@
 // this is run after npm install
 // download pre-made module, if possible & exit 1, or exit 0 to tell system if it needs to build
 
-const { promises: fs } = require("fs");
-const path = require("path");
+const { fs } = require("node:fs/promises");
+const path = require("node:path");
 const fetch = require("cross-fetch");
 
 let targetPath = path.join(
@@ -39,7 +39,7 @@ async function main() {
     process.exit(0);
   }
 
-  let url = `https://github.com/r1tsuu/node-raylib/releases/download/v${version}/node-raylib-${process.platform}-${process.arch}.node`;
+  let url = `https://github.com/RobLoach/node-raylib/releases/download/v${version}/node-raylib-${process.platform}-${process.arch}.node`;
 
   console.log(`Checking for ${url}`);
 
@@ -62,7 +62,7 @@ async function main() {
       "Release",
       "node-raylib-drm.node"
     );
-    url = `https://github.com/r1tsuu/node-raylib/releases/download/v${version}/node-raylib-${process.platform}-${process.arch}-drm.node`;
+    url = `https://github.com/RobLoach/node-raylib/releases/download/v${version}/node-raylib-${process.platform}-${process.arch}-drm.node`;
     try {
       const data = await fetch(url)
         .then((r) => {

@@ -1,6 +1,6 @@
 {
-  "name": "@r1tsuu/raylib",
-  "version": "0.19.0",
+  "name": "raylib",
+  "version": "0.20.0",
   "description": "Node.js bindings for raylib 5.5",
   "main": "index.js",
   "types": "src/generated/node-raylib.d.ts",
@@ -43,6 +43,10 @@
     {
       "name": "twuky",
       "url": "http://tuckie.zone"
+    },
+    {
+      "name": "The 99's Puppycat",
+      "url": "https://github.com/huyhoang160593"
     }
   ],
   "license": "Zlib",
@@ -78,6 +82,5 @@
     "files": [
       "src/generated/node-raylib.js"
     ]
-  },
-  "packageManager": "pnpm@9.15.1+sha512.1acb565e6193efbebda772702950469150cf12bcc764262e7587e71d19dc98a423dff9536e57ea44c49bdf790ff694e83c27be5faa23d67e0c033b583be4bfcf"
+  }
 }
