@@ -31,7 +31,7 @@ const StructInterface = (struct) => {
 
 module.exports = ({ functions, structs, enums, blocklist }) => {
   return `// GENERATED CODE: DO NOT MODIFY
-declare module "@r1tsuu/raylib" {
+declare module "raylib" {
   ${structs.map(StructInterface).join("\n  ")}
 
   /** RenderTexture, fbo for texture rendering */
@@ -131,7 +131,7 @@ declare module "@r1tsuu/raylib" {
   export const MAGENTA: { r: 255, g: 0, b: 255, a: 255 }
   export const RAYWHITE: { r: 245, g: 245, b: 245, a: 255 }
 
-  
+
 }
 `;
 };

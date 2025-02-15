@@ -1,5 +1,5 @@
 // GENERATED CODE: DO NOT MODIFY
-declare module "@r1tsuu/raylib" {
+declare module "raylib" {
   /** Vector2, 2 components */
   export interface Vector2 {
     /** Vector x component. (float) */
@@ -5040,5 +5040,5 @@ declare module "@r1tsuu/raylib" {
   export const MAGENTA: { r: 255, g: 0, b: 255, a: 255 }
   export const RAYWHITE: { r: 245, g: 245, b: 245, a: 255 }
 
-  
+
 }
