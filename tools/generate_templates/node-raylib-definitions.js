@@ -1,33 +1,38 @@
-const ArgumentTypeConversion = require('./ArgumentTypeConversion')
+const ArgumentTypeConversion = require("./ArgumentTypeConversion");
 
 const FunctionDefinition = (func) => {
   return `/** ${func.description} */
-  export function ${func.name}(${!func.params
-      ? ''
+  export function ${func.name}(${
+    !func.params
+      ? ""
       : func.params
-        .map(param => `${param.name}: ${ArgumentTypeConversion(param.type)}`)
-        .join(', ')
-    }): ${ArgumentTypeConversion(func.returnType)}
-  `
-}
+          .map(
+            (param) => `${param.name}: ${ArgumentTypeConversion(param.type)}`
+          )
+          .join(", ")
+  }): ${ArgumentTypeConversion(func.returnType)}
+  `;
+};
 
 const StructInterface = (struct) => {
   return `/** ${struct.description} */
   export interface ${struct.name} {
     ${struct.fields
-      .map(field => `/** ${field.description}. (${field.type}) */\n    ${field.name}: ${ArgumentTypeConversion(field.type)}`)
-      .join('\n    ')
-    }
-  }`
-}
+      .filter((field) => !field.type.trim().startsWith("#"))
+      .map(
+        (field) =>
+          `/** ${field.description}. (${field.type}) */\n    ${
+            field.name
+          }: ${ArgumentTypeConversion(field.type)}`
+      )
+      .join("\n    ")}
+  }`;
+};
 
 module.exports = ({ functions, structs, enums, blocklist }) => {
   return `// GENERATED CODE: DO NOT MODIFY
 declare module "raylib" {
-  ${structs
-      .map(StructInterface)
-      .join('\n  ')
-    }
+  ${structs.map(StructInterface).join("\n  ")}
 
   /** RenderTexture, fbo for texture rendering */
   export type RenderTexture2D = RenderTexture
@@ -44,10 +49,9 @@ declare module "raylib" {
   /** Quaternion, same as Vector4 */
   export type Quaternion = Vector4
   ${functions
-      .filter(({ name }) => !blocklist.includes(name))
-      .map(FunctionDefinition)
-      .join('\n  ')
-    }
+    .filter(({ name }) => !blocklist.includes(name))
+    .map(FunctionDefinition)
+    .join("\n  ")}
 
   /** Set shader uniform float */
   export function SetShaderFloat(shader: Shader, locIndex: number, value: number): void
@@ -60,10 +64,45 @@ declare module "raylib" {
   /** Set shader uniform Vec4 */
   export function SetShaderVec4(shader: Shader, locIndex: number, value: Vector4): void
 
+  export function Camera3D(
+  /** Camera position. (Vector3) */
+  position: Vector3,
+  /** Camera target it looks-at. (Vector3) */
+  target: Vector3,
+  /** Camera up vector (rotation over its axis). (Vector3) */
+  up: Vector3,
+  /** Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic. (float) */
+  fovy: number,
+  /** Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC. (int) */
+  projection: number,
+  ): Camera3D
+
+  export function Vector3(
+    /** Vector x component. (float) */
+    x: number,
+    /** Vector y component. (float) */
+    y: number,
+    /** Vector z component. (float) */
+    z: number,
+  ): Vector3
+
+  export function Vector2(
+    /** Vector x component. (float) */
+    x: number,
+    /** Vector y component. (float) */
+    y: number,
+  ): Vector2
+
   ${enums
-      .map((e) => { return e.values.map(v => `  /** ${v.description} */\n  export const ${v.name} = ${v.value}`).join('\n') })
-      .join('\n')
-    }
+    .map((e) => {
+      return e.values
+        .map(
+          (v) =>
+            `  /** ${v.description} */\n  export const ${v.name} = ${v.value}`
+        )
+        .join("\n");
+    })
+    .join("\n")}
 
   export const LIGHTGRAY: { r: 200, g: 200, b: 200, a: 255 }
   export const GRAY: { r: 130, g: 130, b: 130, a: 255 }
@@ -91,6 +130,8 @@ declare module "raylib" {
   export const BLANK: { r: 0, g: 0, b: 0, a: 0 }
   export const MAGENTA: { r: 255, g: 0, b: 255, a: 255 }
   export const RAYWHITE: { r: 245, g: 245, b: 245, a: 255 }
+
+
 }
-`
-}
+`;
+};

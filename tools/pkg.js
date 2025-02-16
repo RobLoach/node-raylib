@@ -1,7 +1,7 @@
 const { exec } = require('pkg')
 const archiver = require('archiver')
-const fs = require('fs')
-const path = require('path')
+const fs = require('node:fs')
+const path = require('node:path')
 
 // Options
 let binaryFilename = 'node-raylib'

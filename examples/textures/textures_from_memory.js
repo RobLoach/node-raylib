@@ -9,9 +9,9 @@
 *
 ********************************************************************************************/
 
-const r = require('raylib')
-const { resolve } = require('path')
-const { readFileSync } = require('fs')
+const r = require('../../index.js')
+const { resolve } = require('node:path')
+const { readFileSync } = require('node:fs')
 
 // Initialization
 // --------------------------------------------------------------------------------------
