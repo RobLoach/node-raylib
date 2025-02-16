@@ -215,31 +215,3 @@ jobs:
           asset_path: ./build/Release/node-raylib.node
           asset_name: node-raylib-darwin-x64.node
           asset_content_type: application/octet-stream
-  macos-apple-silicon:
-    runs-on: macos-14
-    needs: create_release
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Cache Node Dependencies
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: ./node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
-      - name: Install Node Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci --ignore-scripts
-      - name: Build Node Addon
-        run: npm run compile
-      - name: upload macos artifact
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./build/Release/node-raylib.node
-          asset_name: node-raylib-darwin-arm64.node
-          asset_content_type: application/octet-stream
