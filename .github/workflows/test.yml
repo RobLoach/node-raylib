@@ -3,6 +3,18 @@ name: Test
 on: [push]
 
 jobs:
+  style:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+      - name: Code Style Check
+        run: npx -y prettier -c .
+        # run: npx @biomejs/biome format . # do this after we move to biome config
+      
   build:
     strategy:
       fail-fast: false

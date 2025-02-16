@@ -1,6 +1,6 @@
 ![node-raylib Logo](logo/raylib-node_256x256.png)
 
-# node-raylib [![npm version](http://img.shields.io/npm/v/raylib.svg)](https://npmjs.org/package/raylib "View this project on npm") [![Tests](https://github.com/RobLoach/node-raylib/workflows/Tests/badge.svg)](https://github.com/RobLoach/node-raylib/actions?query=workflow%3ATests+branch%3Amaster "See automated test status on GitHub Actions")
+# node-raylib [![npm version](http://img.shields.io/npm/v/raylib.svg)](https://npmjs.org/package/raylib "View this project on npm") [![Tests](https://github.com/RobLoach/node-raylib/actions/workflows/test.yml/badge.svg)](https://github.com/RobLoach/node-raylib/actions/workflows/test.yml "See automated test status on GitHub Actions")
 
 [Node.js](https://nodejs.org) bindings for [raylib](https://www.raylib.com/), a simple and easy-to-use library to enjoy videogames programming (www.raylib.com).
 
