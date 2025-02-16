@@ -11,7 +11,7 @@
 *
 ********************************************************************************************/
 
-const r = require('raylib')
+const r = require('../../index.js')
 
 function InitCamera () {
   return {

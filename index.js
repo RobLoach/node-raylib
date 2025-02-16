@@ -5,7 +5,7 @@
  */
 
 const raylib = require('./src/generated/node-raylib')
-const { format } = require('util')
+const { format } = require('node:util')
 
 // Constants
 raylib.MAX_GAMEPADS = 4

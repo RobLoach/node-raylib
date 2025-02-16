@@ -1,6 +1,7 @@
 include(FetchContent)
 
-cmake_minimum_required(VERSION 3.11)
+# 2025-02-15: based on https://github.com/raysan5/raylib/blob/master/src/external/glfw/CMakeLists.txt, make sure the CMake version are between 3.4 and 3.28 or the whole raylib lib will face fatal errors
+cmake_minimum_required(VERSION 3.4...3.28 FATAL_ERROR)
 project (node-raylib
   VERSION 0.10.0
   DESCRIPTION "Node.js bindings for raylib"
@@ -11,8 +12,12 @@ if ( CMAKE_COMPILER_IS_GNUCC )
     set(CMAKE_C_FLAGS "-fPIC ${CMAKE_C_FLAGS} -Wno-unused-result")
     set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 endif()
+# 2025-02-15: based on @link: https://learn.microsoft.com/en-us/cpp/build/reference/o-options-optimize-code?view=msvc-170. MSVC only accept O2 and don't have O3 optimization flag
 if ( MSVC )
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /w")
+    set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+else()
+    set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 endif()
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -20,24 +25,22 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # version doesn't seem to pick correct version
-#find_package(raylib 4.5 QUIET EXACT)
+#find_package(raylib 5.5 QUIET EXACT)
 if (NOT raylib_FOUND)
   include(FetchContent)
   FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
-    GIT_TAG 4.5.0
+    GIT_TAG 5.5
     GIT_SHALLOW TRUE
   )
   FetchContent_GetProperties(raylib)
   if (NOT raylib_POPULATED)
     set(FETCHCONTENT_QUIET NO)
-    FetchContent_Populate(raylib)
+    FetchContent_MakeAvailable(raylib)
     set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-    add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
   endif()
 endif()
 
@@ -75,7 +78,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
   SUFFIX ".node"
 )
 
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   "${CMAKE_JS_INC}"
