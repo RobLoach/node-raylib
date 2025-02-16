@@ -18,7 +18,7 @@
 *
 ********************************************************************************************/
 
-const r = require('raylib')
+const r = require('../../index.js')
 const { join } = require('node:path')
 
 // Initialization

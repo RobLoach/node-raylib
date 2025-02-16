@@ -22,7 +22,7 @@
     "gen:code": "node tools/generate.js",
     "gen:docs": "jsdoc2md > docs/API.md"
   },
-  "repository": "github:node-raylib",
+  "repository": "RobLoach/node-raylib",
   "engines": {
     "node": ">=10"
   },

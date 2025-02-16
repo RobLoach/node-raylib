@@ -12,7 +12,7 @@
 *
 ********************************************************************************************/
 
-const r = require('raylib')
+const r = require('../../index.js')
 
 function memcpy (src, srcOffset, dst, dstOffset, length) {
   let i

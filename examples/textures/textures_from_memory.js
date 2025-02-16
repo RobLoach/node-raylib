@@ -9,7 +9,7 @@
 *
 ********************************************************************************************/
 
-const r = require('raylib')
+const r = require('../../index.js')
 const { resolve } = require('node:path')
 const { readFileSync } = require('node:fs')
 

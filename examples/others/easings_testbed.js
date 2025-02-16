@@ -11,8 +11,7 @@
 *   Ported to javascript 2022 by David Konsumer (@konsumer)
 *
 ********************************************************************************************/
-
-const r = require('raylib')
+const r = require('../../index.js')
 
 const FONT_SIZE = 20
 
