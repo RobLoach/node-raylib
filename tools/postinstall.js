@@ -33,6 +33,11 @@ async function main () {
 
   let url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-${process.platform}-${process.arch}.node`
 
+  // we use a single build for both platforms on Mac
+  if (process.platform === 'darwin') {
+    url = `https://github.com/RobLoach/node-raylib/releases/download/v${process.env.npm_package_version}/node-raylib-darwin.node`
+  }
+
   console.log(`Checking for ${url}`)
 
   try {

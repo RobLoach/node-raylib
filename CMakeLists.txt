@@ -22,6 +22,9 @@ endif()
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
+# single build for both Mac arches
+set(CMAKE_OSX_ARCHITECTURES arm64 x86_64)
+
 # version doesn't seem to pick correct version
 #find_package(raylib 4.5 QUIET EXACT)
 if (NOT raylib_FOUND)
