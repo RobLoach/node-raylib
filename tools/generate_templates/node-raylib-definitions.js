@@ -1,4 +1,4 @@
-const ArgumentTypeConversion = require("./ArgumentTypeConversion");
+const ArgumentTypeConversion = require("./argument-type-conversion");
 
 const FunctionDefinition = (func) => {
   return `/** ${func.description} */
@@ -7,7 +7,7 @@ const FunctionDefinition = (func) => {
       ? ""
       : func.params
           .map(
-            (param) => `${param.name}: ${ArgumentTypeConversion(param.type)}`
+            (param) => `${param.name}: ${ArgumentTypeConversion(param.type)}`,
           )
           .join(", ")
   }): ${ArgumentTypeConversion(func.returnType)}
@@ -23,7 +23,7 @@ const StructInterface = (struct) => {
         (field) =>
           `/** ${field.description}. (${field.type}) */\n    ${
             field.name
-          }: ${ArgumentTypeConversion(field.type)}`
+          }: ${ArgumentTypeConversion(field.type)}`,
       )
       .join("\n    ")}
   }`;
@@ -98,7 +98,7 @@ declare module "raylib" {
       return e.values
         .map(
           (v) =>
-            `  /** ${v.description} */\n  export const ${v.name} = ${v.value}`
+            `  /** ${v.description} */\n  export const ${v.name} = ${v.value}`,
         )
         .join("\n");
     })

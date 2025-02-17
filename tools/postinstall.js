@@ -10,7 +10,7 @@ let targetPath = path.join(
   "..",
   "build",
   "Release",
-  "node-raylib.node"
+  "node-raylib.node",
 );
 
 const { version } = require("../package.json");
@@ -60,7 +60,7 @@ async function main() {
       "..",
       "build",
       "Release",
-      "node-raylib-drm.node"
+      "node-raylib-drm.node",
     );
     url = `https://github.com/RobLoach/node-raylib/releases/download/v${version}/node-raylib-${process.platform}-${process.arch}-drm.node`;
     try {

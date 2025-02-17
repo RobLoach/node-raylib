@@ -234,7 +234,7 @@ function getDefs() {
   structs.push(
     ...rlgl.structs.filter((s) => {
       return s.name !== "Matrix";
-    })
+    }),
   );
 
   return { structs, enums, functions };
@@ -253,17 +253,17 @@ const GenDRMWrapper = GenWrapper({
 }).replace("node-raylib.node", "node-raylib-drm.node");
 writeFileSync(
   path.join(__dirname, "..", "src", "generated", "node-raylib.cc"),
-  GenBindings({ enums, blocklist, functions, structs, byreflist })
+  GenBindings({ enums, blocklist, functions, structs, byreflist }),
 );
 writeFileSync(
   path.join(__dirname, "..", "src", "generated", "node-raylib.js"),
-  GenWrapper({ enums, blocklist, functions, structs, byreflist })
+  GenWrapper({ enums, blocklist, functions, structs, byreflist }),
 );
 writeFileSync(
   path.join(__dirname, "..", "src", "generated", "node-raylib.d.ts"),
-  GenTSDefs({ enums, blocklist, functions, structs, byreflist })
+  GenTSDefs({ enums, blocklist, functions, structs, byreflist }),
 );
 writeFileSync(
   path.join(__dirname, "..", "src", "generated", "node-raylib-drm.js"),
-  GenDRMWrapper
+  GenDRMWrapper,
 );

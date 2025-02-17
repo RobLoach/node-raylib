@@ -45,11 +45,12 @@ const SanitizeTypeName = (name) => {
 };
 
 const TypeUnwrappedLength = (structs, type) => {
+  let typeTransformed = type;
   if (type === "Camera") {
-    type = "Camera3D";
+    typeTransformed = "Camera3D";
   }
   if (type === "Texture2D") {
-    type = "Texture";
+    typeTransformed = "Texture";
   }
   let properties = 0;
   for (const struct of structs) {
@@ -103,7 +104,7 @@ const UnwrappedFuncArguments = (structs, func) => {
  */
 const FromValue = (structs, struct) => `
 inline ${struct.name} ${SanitizeTypeName(
-  struct.name
+  struct.name,
 )}FromValue(const Napi::CallbackInfo& info, int index) {
   return {
     ${UnwrappedStructProperties(structs, struct)}
@@ -120,7 +121,7 @@ inline Napi::Value ToValue(Napi::Env env, ${struct.name} obj) {
   Napi::Object out = Napi::Object::New(env);
   ${struct.fields
     .map(
-      (field) => `out.Set("${field.name}", ToValue(env, obj.${field.name}));`
+      (field) => `out.Set("${field.name}", ToValue(env, obj.${field.name}));`,
     )
     .join("\n  ")}
   return out;
@@ -178,7 +179,7 @@ Napi::Value Bind${func.name}(const Napi::CallbackInfo& info) {
                 length += TypeUnwrappedLength(structs, param.type);
                 return out;
               })
-              .join(",\n      ")
+              .join(",\n      "),
           )
     }
   );
@@ -292,7 +293,7 @@ inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, in
       #endif
       #if defined(GRAPHICS_API_OPENGL_ES2)
         (unsigned short *) pointerFromValue(info, index + 4),    // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
-      #endif 
+      #endif
      (unsigned int*) pointerFromValue(info, index + 5),
      (unsigned int) pointerFromValue(info, index + 6)
   };
@@ -305,7 +306,7 @@ ${structs
       !blocklist.includes(name) &&
       name !== "rlVertexBuffer" &&
       name !== "AutomationEvent" &&
-      name !== "ModelAnimation"
+      name !== "ModelAnimation",
   )
   .map((struct) => {
     return FromValue(structs, struct);
