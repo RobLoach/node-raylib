@@ -292,7 +292,7 @@ inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, in
       #endif
       #if defined(GRAPHICS_API_OPENGL_ES2)
         (unsigned short *) pointerFromValue(info, index + 4),    // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
-      #endif 
+      #endif
      (unsigned int*) pointerFromValue(info, index + 5),
      (unsigned int) pointerFromValue(info, index + 6)
   };

@@ -1,4 +1,4 @@
-const ArgumentTypeConversion = require('./ArgumentTypeConversion')
+const ArgumentTypeConversion = require("./argument-type-conversion");
 
 // These are struct types that the JS wrapper will create simple functions to generate objects for.
 const constructors = [
@@ -177,11 +177,11 @@ ${constructors
 
 /**
  * Set shader uniform value float
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {number} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderFloat(shader, locIndex, value) {
@@ -196,11 +196,11 @@ raylib.SetShaderFloat = SetShaderFloat
 
 /**
  * Set shader uniform value float
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {number} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderInt(shader, locIndex, value) {
@@ -215,11 +215,11 @@ raylib.SetShaderInt = SetShaderInt
 
 /**
  * Set shader uniform value vector2
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector2} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderVec2(shader, locIndex, value) {
@@ -235,11 +235,11 @@ raylib.SetShaderVec2 = SetShaderVec2
 
 /**
  * Set shader uniform value vector3
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector3} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderVec3(shader, locIndex, value) {
@@ -256,11 +256,11 @@ raylib.SetShaderVec3 = SetShaderVec3
 
 /**
  * Set shader uniform value vector4
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector4} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderVec4(shader, locIndex, value) {

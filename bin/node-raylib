@@ -9,7 +9,7 @@ const raylib = require('..')
 const pkg = require('../package.json')
 
 const usage = `
-  Node.js bindings for raylib.
+  Node.js bindings for raylib 5.5
     Usage
       $ node-raylib [file]
 

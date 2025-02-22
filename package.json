@@ -5,10 +5,12 @@
   "main": "index.js",
   "types": "src/generated/node-raylib.d.ts",
   "scripts": {
+    "biome:check":"biome check",
+    "biome:write": "biome check --write",
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
-    "test": "vitest run --globals --reporter verbose",
-    "test:watch": "vitest --globals --ui",
+    "test": "vitest run --config ./vitest.config.mjs --reporter verbose",
+    "test:watch": "vitest --config ./vitest.config.mjs --ui",
     "posttest": "standard tools test examples index.js",
     "test:fix": "standard --fix",
     "postinstall": "node tools/postinstall.js || npm run compile",
@@ -67,9 +69,11 @@
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
     "cross-fetch": "^3.1.5",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@raylib/api": "5.5.0",
     "@vitest/ui": "^0.29.7",
     "archiver": "^5.3.1",

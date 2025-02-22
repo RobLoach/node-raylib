@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "ESNext",
+    "types": [
+      "vitest/globals"
+    ],
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+    }
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "build",
+    ".vscode",
+    "coverage",
+    ".npm",
+    ".yarn"
+  ],
+  "include": ["src","test", "tools", "drm"],
+  "typeAcquisition": {
+    "enable": true,
+    "include": [
+      "node",
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-const ArgumentTypeConversion = require("./ArgumentTypeConversion");
+const ArgumentTypeConversion = require("./argument-type-conversion");
 
 const FunctionDefinition = (func) => {
   return `/** ${func.description} */
