@@ -19,7 +19,7 @@
     "enabled": true,
     "useEditorconfig": true,
     "formatWithErrors": false,
-    "lineWidth": 80,
+    "lineWidth": 320,
     "indentStyle": "space",
     "lineEnding": "lf",
     "indentWidth": 2,
@@ -34,14 +34,13 @@
   },
   "javascript": {
     "formatter": {
-      "jsxQuoteStyle": "single",
-      "trailingCommas": "all",
-      "semicolons": "always",
-      "quoteProperties": "asNeeded",
+      "trailingCommas": "none",
+      "semicolons": "asNeeded",
+      "quoteProperties": "preserve",
       "arrowParentheses": "always",
       "bracketSameLine": false,
-      "quoteStyle": "double",
-      "attributePosition": "auto",
+      "quoteStyle": "single",
+      "attributePosition": "multiline",
       "bracketSpacing": true
     }
   },
