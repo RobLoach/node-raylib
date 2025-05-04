@@ -1,7 +1,7 @@
 // this is run after npm install
 // download pre-made module, if possible & exit 1, or exit 0 to tell system if it needs to build
 
-const { fs } = require("node:fs/promises");
+const fs = require("node:fs/promises");
 const path = require("node:path");
 const fetch = require("cross-fetch");
 
