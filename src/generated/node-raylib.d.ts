@@ -245,7 +245,7 @@ declare module "raylib" {
     shader: Shader
     /** Material maps array (MAX_MATERIAL_MAPS). (MaterialMap *) */
     maps: number
-    /** Material generic parameters (if required). (float[4]) */
+    /** Material generic parameters (if required). (float) */
     params: number
   }
   /** Transform, vertex transformation data */
@@ -261,8 +261,8 @@ declare module "raylib" {
   export interface BoneInfo {
     /** Bone name. (char) */
     name: string
-    /** Bone parent. (char) */
-    parent: string
+    /** Bone parent. (int) */
+    parent: number
   }
   /** Model, meshes, materials and animation data */
   export interface Model {
@@ -295,7 +295,7 @@ declare module "raylib" {
     bones: number
     /** Poses array by frame. (Transform **) */
     framePoses: number
-    /** Animation name. (char[32]) */
+    /** Animation name. (char) */
     name: string
   }
   /** Ray, ray for raycasting */
@@ -385,28 +385,28 @@ declare module "raylib" {
     lensSeparationDistance: number
     /** IPD (distance between pupils) in meters. (float) */
     interpupillaryDistance: number
-    /** Lens distortion constant parameters. (float[4]) */
+    /** Lens distortion constant parameters. (float) */
     lensDistortionValues: number
-    /** Chromatic aberration correction parameters. (float[4]) */
+    /** Chromatic aberration correction parameters. (float) */
     chromaAbCorrection: number
   }
   /** VrStereoConfig, VR stereo rendering configuration for simulator */
   export interface VrStereoConfig {
-    /** VR projection matrices (per eye). (Matrix[2]) */
-    projection: number
-    /** VR view offset matrices (per eye). (Matrix[2]) */
-    viewOffset: number
-    /** VR left lens center. (float[2]) */
+    /** VR projection matrices (per eye). (Matrix) */
+    projection: Matrix
+    /** VR view offset matrices (per eye). (Matrix) */
+    viewOffset: Matrix
+    /** VR left lens center. (float) */
     leftLensCenter: number
-    /** VR right lens center. (float[2]) */
+    /** VR right lens center. (float) */
     rightLensCenter: number
-    /** VR left screen center. (float[2]) */
+    /** VR left screen center. (float) */
     leftScreenCenter: number
-    /** VR right screen center. (float[2]) */
+    /** VR right screen center. (float) */
     rightScreenCenter: number
-    /** VR distortion scale. (float[2]) */
+    /** VR distortion scale. (float) */
     scale: number
-    /** VR distortion scale in. (float[2]) */
+    /** VR distortion scale in. (float) */
     scaleIn: number
   }
   /** File path list */
@@ -424,7 +424,7 @@ declare module "raylib" {
     frame: number
     /** Event type (AutomationEventType). (unsigned int) */
     type: number
-    /** Event parameters (if required). (int[4]) */
+    /** Event parameters (if required). (int) */
     params: number
   }
   /** Automation event list */
@@ -937,9 +937,6 @@ declare module "raylib" {
   
   /** Stop recording automation events */
   export function StopAutomationEventRecording(): void
-  
-  /** Play a recorded automation event */
-  export function PlayAutomationEvent(event: AutomationEvent): void
   
   /** Check if a key has been pressed once */
   export function IsKeyPressed(key: number): boolean
@@ -1939,24 +1936,6 @@ declare module "raylib" {
   
   /** Set material for a mesh */
   export function SetModelMeshMaterial(model: Model, meshId: number, materialId: number): void
-  
-  /** Load model animations from file */
-  export function LoadModelAnimations(fileName: string, animCount: number): number
-  
-  /** Update model animation pose (CPU) */
-  export function UpdateModelAnimation(model: Model, anim: ModelAnimation, frame: number): void
-  
-  /** Update model animation mesh bone matrices (GPU skinning) */
-  export function UpdateModelAnimationBones(model: Model, anim: ModelAnimation, frame: number): void
-  
-  /** Unload animation data */
-  export function UnloadModelAnimation(anim: ModelAnimation): void
-  
-  /** Unload animation array data */
-  export function UnloadModelAnimations(animations: number, animCount: number): void
-  
-  /** Check model animation skeleton match */
-  export function IsModelAnimationValid(model: Model, anim: ModelAnimation): boolean
   
   /** Check collision between two spheres */
   export function CheckCollisionSpheres(center1: Vector3, radius1: number, center2: Vector3, radius2: number): boolean

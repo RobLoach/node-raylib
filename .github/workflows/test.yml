@@ -1,44 +1,26 @@
 name: Test
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  style:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-      - name: Code Style Check
-        run: npx -y prettier -c .
-        # run: npx @biomejs/biome format . # do this after we move to biome config
-      
   build:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18.x]
+        node-version: ['18', '20', '22']
         os: [ubuntu, macos, windows]
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Cache Node Dependencies
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: ./node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
+          cache: 'npm'
       - name: Install Node Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci --ignore-scripts
       - name: Install System Dependencies
         if: matrix.os == 'ubuntu'
@@ -47,37 +29,73 @@ jobs:
         run: npm run compile
       - name: Test
         run: npm test
+
   build-linux-arm:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Cache Node Dependencies
-        id: cache
-        uses: actions/cache@v2
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ./node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
+          node-version: '20'
+          cache: 'npm'
       - name: Build for arm
-        run: docker run --platform linux/arm --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild.sh
+        run: docker run --platform linux/arm/v7 --rm -v "${PWD}:/work" -w /work node:20-bullseye ./tools/crossbuild.sh
+
+  build-linux-arm64:
+    runs-on: ubuntu-24.04-arm64
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install Node Dependencies
+        run: npm ci --ignore-scripts
+      - name: Install System Dependencies
+        run: sudo apt-get update && sudo apt-get install -y xorg-dev libglu1-mesa-dev cmake build-essential
+      - name: Build Node Addon
+        run: npm run compile
+
   build-linux-arm-drm:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      - name: Cache Node Dependencies
-        id: cache
-        uses: actions/cache@v2
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ./node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
-      - name: Build for arm
-        run: docker run --platform linux/arm --rm -v "${PWD}:/work" -w /work node ./tools/crossbuild-drm.sh
+          node-version: '20'
+          cache: 'npm'
+      - name: Build for arm DRM
+        run: docker run --platform linux/arm/v7 --rm -v "${PWD}:/work" -w /work node:20-bullseye ./tools/crossbuild-drm.sh
+
+  build-linux-arm64-drm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Build for arm64 DRM
+        run: docker run --platform linux/arm64 --rm -v "${PWD}:/work" -w /work node:20-bullseye ./tools/crossbuild-drm.sh

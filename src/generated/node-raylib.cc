@@ -10,8 +10,19 @@
 #include "../extras/reasings.h"
 #include "../extras/rlgl.h"
 
+// Suppress MSVC security warnings for raygui.h
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#pragma warning(push)
+#pragma warning(disable: 4996) // Disable deprecated function warnings
+#endif
+
 #define RAYGUI_IMPLEMENTATION
 #include "../extras/raygui.h"
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 using namespace Napi;
 
@@ -87,18 +98,19 @@ inline char charFromValue(const Napi::CallbackInfo& info, int index) {
 // exception for this constructor, which has different input depending on platform
 inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, int index) {
   return {
-     intFromValue(info, index + 0),
-     (float *) pointerFromValue(info, index + 1),
-     (float *) pointerFromValue(info, index + 2),
-     (float *) pointerFromValue(info, index + 3),
+     intFromValue(info, index + 0),                              // elementCount
+     (float *) pointerFromValue(info, index + 1),               // vertices
+     (float *) pointerFromValue(info, index + 2),               // texcoords
+     (float *) pointerFromValue(info, index + 3),               // normals
+     (unsigned char*) pointerFromValue(info, index + 4),        // colors
       #if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENGL_33)
-        (unsigned char*) pointerFromValue(info, index + 4),      // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+        (unsigned int*) pointerFromValue(info, index + 5),      // indices
       #endif
       #if defined(GRAPHICS_API_OPENGL_ES2)
-        (unsigned short *) pointerFromValue(info, index + 4),    // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+        (unsigned short *) pointerFromValue(info, index + 5),   // indices
       #endif 
-     (unsigned int*) pointerFromValue(info, index + 5),
-     (unsigned int) pointerFromValue(info, index + 6)
+     unsignedintFromValue(info, index + 6),                             // vaoId
+     {unsignedintFromValue(info, index + 7), unsignedintFromValue(info, index + 8), unsignedintFromValue(info, index + 9), unsignedintFromValue(info, index + 10), unsignedintFromValue(info, index + 11)} // vboId[5]
   };
 }
 
@@ -288,13 +300,6 @@ inline Transform TransformFromValue(const Napi::CallbackInfo& info, int index) {
      Vector3FromValue(info, index + 0),
      Vector4FromValue(info, index + 3),
      Vector3FromValue(info, index + 7)
-  };
-}
-
-inline BoneInfo BoneInfoFromValue(const Napi::CallbackInfo& info, int index) {
-  return {
-     charFromValue(info, index + 0),
-     charFromValue(info, index + 1)
   };
 }
 
@@ -596,13 +601,6 @@ inline Napi::Value ToValue(Napi::Env env, Transform obj) {
   return out;
 }
 
-inline Napi::Value ToValue(Napi::Env env, BoneInfo obj) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("name", ToValue(env, obj.name));
-  out.Set("parent", ToValue(env, obj.parent));
-  return out;
-}
-
 inline Napi::Value ToValue(Napi::Env env, Model obj) {
   Napi::Object out = Napi::Object::New(env);
   out.Set("transform", ToValue(env, obj.transform));
@@ -614,16 +612,6 @@ inline Napi::Value ToValue(Napi::Env env, Model obj) {
   out.Set("boneCount", ToValue(env, obj.boneCount));
   out.Set("bones", ToValue(env, obj.bones));
   out.Set("bindPose", ToValue(env, obj.bindPose));
-  return out;
-}
-
-inline Napi::Value ToValue(Napi::Env env, ModelAnimation obj) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("boneCount", ToValue(env, obj.boneCount));
-  out.Set("frameCount", ToValue(env, obj.frameCount));
-  out.Set("bones", ToValue(env, obj.bones));
-  out.Set("framePoses", ToValue(env, obj.framePoses));
-  out.Set("name", ToValue(env, obj.name));
   return out;
 }
 
@@ -692,14 +680,6 @@ inline Napi::Value ToValue(Napi::Env env, FilePathList obj) {
   out.Set("capacity", ToValue(env, obj.capacity));
   out.Set("count", ToValue(env, obj.count));
   out.Set("paths", ToValue(env, obj.paths));
-  return out;
-}
-
-inline Napi::Value ToValue(Napi::Env env, AutomationEvent obj) {
-  Napi::Object out = Napi::Object::New(env);
-  out.Set("frame", ToValue(env, obj.frame));
-  out.Set("type", ToValue(env, obj.type));
-  out.Set("params", ToValue(env, obj.params));
   return out;
 }
 
@@ -2968,24 +2948,6 @@ Napi::Value BindGenMeshCubicmap(const Napi::CallbackInfo& info) {
     GenMeshCubicmap(
        ImageFromValue(info, 0),
        Vector3FromValue(info, 5)
-    )
-  );
-}
-
-Napi::Value BindLoadModelAnimations(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    LoadModelAnimations(
-       (const char *) stringFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
-}
-
-Napi::Value BindIsModelAnimationValid(const Napi::CallbackInfo& info) {
-  return ToValue(info.Env(),
-    IsModelAnimationValid(
-       ModelFromValue(info, 0),
-       ModelAnimationFromValue(info, 24)
     )
   );
 }
@@ -5995,12 +5957,6 @@ void BindStopAutomationEventRecording(const Napi::CallbackInfo& info) {
   );
 }
 
-void BindPlayAutomationEvent(const Napi::CallbackInfo& info) {
-  PlayAutomationEvent(
-     AutomationEventFromValue(info, 0)
-  );
-}
-
 void BindSetExitKey(const Napi::CallbackInfo& info) {
   SetExitKey(
      intFromValue(info, 0)
@@ -7151,35 +7107,6 @@ void BindUpdateMeshBuffer(const Napi::CallbackInfo& info) {
 void BindUnloadMesh(const Napi::CallbackInfo& info) {
   UnloadMesh(
      MeshFromValue(info, 0)
-  );
-}
-
-void BindUpdateModelAnimation(const Napi::CallbackInfo& info) {
-  UpdateModelAnimation(
-     ModelFromValue(info, 0),
-       ModelAnimationFromValue(info, 24),
-       intFromValue(info, 29)
-  );
-}
-
-void BindUpdateModelAnimationBones(const Napi::CallbackInfo& info) {
-  UpdateModelAnimationBones(
-     ModelFromValue(info, 0),
-       ModelAnimationFromValue(info, 24),
-       intFromValue(info, 29)
-  );
-}
-
-void BindUnloadModelAnimation(const Napi::CallbackInfo& info) {
-  UnloadModelAnimation(
-     ModelAnimationFromValue(info, 0)
-  );
-}
-
-void BindUnloadModelAnimations(const Napi::CallbackInfo& info) {
-  UnloadModelAnimations(
-     (ModelAnimation *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
   );
 }
 
@@ -8967,7 +8894,6 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindSetAutomationEventBaseFrame", Napi::Function::New(env, BindSetAutomationEventBaseFrame));
   exports.Set("BindStartAutomationEventRecording", Napi::Function::New(env, BindStartAutomationEventRecording));
   exports.Set("BindStopAutomationEventRecording", Napi::Function::New(env, BindStopAutomationEventRecording));
-  exports.Set("BindPlayAutomationEvent", Napi::Function::New(env, BindPlayAutomationEvent));
   exports.Set("BindIsKeyPressed", Napi::Function::New(env, BindIsKeyPressed));
   exports.Set("BindIsKeyPressedRepeat", Napi::Function::New(env, BindIsKeyPressedRepeat));
   exports.Set("BindIsKeyDown", Napi::Function::New(env, BindIsKeyDown));
@@ -9301,12 +9227,6 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGenMeshHeightmap", Napi::Function::New(env, BindGenMeshHeightmap));
   exports.Set("BindGenMeshCubicmap", Napi::Function::New(env, BindGenMeshCubicmap));
   exports.Set("BindSetModelMeshMaterial", Napi::Function::New(env, BindSetModelMeshMaterial));
-  exports.Set("BindLoadModelAnimations", Napi::Function::New(env, BindLoadModelAnimations));
-  exports.Set("BindUpdateModelAnimation", Napi::Function::New(env, BindUpdateModelAnimation));
-  exports.Set("BindUpdateModelAnimationBones", Napi::Function::New(env, BindUpdateModelAnimationBones));
-  exports.Set("BindUnloadModelAnimation", Napi::Function::New(env, BindUnloadModelAnimation));
-  exports.Set("BindUnloadModelAnimations", Napi::Function::New(env, BindUnloadModelAnimations));
-  exports.Set("BindIsModelAnimationValid", Napi::Function::New(env, BindIsModelAnimationValid));
   exports.Set("BindCheckCollisionSpheres", Napi::Function::New(env, BindCheckCollisionSpheres));
   exports.Set("BindCheckCollisionBoxes", Napi::Function::New(env, BindCheckCollisionBoxes));
   exports.Set("BindCheckCollisionBoxSphere", Napi::Function::New(env, BindCheckCollisionBoxSphere));

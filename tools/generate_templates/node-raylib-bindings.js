@@ -206,8 +206,19 @@ module.exports = ({ functions, structs, enums, blocklist, byreflist }) => `
 #include "../extras/reasings.h"
 #include "../extras/rlgl.h"
 
+// Suppress MSVC security warnings for raygui.h
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#pragma warning(push)
+#pragma warning(disable: 4996) // Disable deprecated function warnings
+#endif
+
 #define RAYGUI_IMPLEMENTATION
 #include "../extras/raygui.h"
+
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 
 using namespace Napi;
 
@@ -283,18 +294,19 @@ inline char charFromValue(const Napi::CallbackInfo& info, int index) {
 // exception for this constructor, which has different input depending on platform
 inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, int index) {
   return {
-     intFromValue(info, index + 0),
-     (float *) pointerFromValue(info, index + 1),
-     (float *) pointerFromValue(info, index + 2),
-     (float *) pointerFromValue(info, index + 3),
+     intFromValue(info, index + 0),                              // elementCount
+     (float *) pointerFromValue(info, index + 1),               // vertices
+     (float *) pointerFromValue(info, index + 2),               // texcoords
+     (float *) pointerFromValue(info, index + 3),               // normals
+     (unsigned char*) pointerFromValue(info, index + 4),        // colors
       #if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENGL_33)
-        (unsigned char*) pointerFromValue(info, index + 4),      // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+        (unsigned int*) pointerFromValue(info, index + 5),      // indices
       #endif
       #if defined(GRAPHICS_API_OPENGL_ES2)
-        (unsigned short *) pointerFromValue(info, index + 4),    // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+        (unsigned short *) pointerFromValue(info, index + 5),   // indices
       #endif 
-     (unsigned int*) pointerFromValue(info, index + 5),
-     (unsigned int) pointerFromValue(info, index + 6)
+     unsignedintFromValue(info, index + 6),                             // vaoId
+     {unsignedintFromValue(info, index + 7), unsignedintFromValue(info, index + 8), unsignedintFromValue(info, index + 9), unsignedintFromValue(info, index + 10), unsignedintFromValue(info, index + 11)} // vboId[5]
   };
 }
 

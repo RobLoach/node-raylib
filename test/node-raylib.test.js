@@ -44,7 +44,15 @@ describe('raylib', () => {
       expect(r.KEY_A).toBe(65)
     })
     it('PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA', () => {
-      expect(r.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA).toBe(20)
+      // This value changed from 20 to 23 in raylib 5.5
+      expect(r.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA).toBe(23)
+      expect(typeof r.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA).toBe('number')
+    })
+    it('should have basic color constants', () => {
+      expect(r.RAYWHITE).toBeDefined()
+      expect(r.LIGHTGRAY).toBeDefined()
+      expect(r.DARKGRAY).toBeDefined()
+      expect(typeof r.RAYWHITE.r).toBe('number')
     })
   })
 
@@ -131,10 +139,11 @@ if (process.platform !== 'win32') {
 
     it('should display the help', () => {
       let output = ''
-      try { // we expect an error here - jest fails tests when any errors are thrown
+      try { // we expect an error here - the CLI exits with code 1 for help
         execFileSync(cliPath, ['--help']).toString()
       } catch (e) {
-        output = e.toString()
+        // Help text goes to stderr, which is captured in e.stderr
+        output = e.stderr ? e.stderr.toString() : e.toString()
       }
 
       expect(output).toContain(pkg.description)

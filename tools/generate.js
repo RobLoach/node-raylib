@@ -118,12 +118,6 @@ function getDefs() {
   for (const struct of structs) {
     // take multi-fields (like in Matrix) and make them all distinct fields
 
-    // temporary fix for building on Mac/Win? Wonder why this is necessary
-    if (struct.name === "BoneInfo") {
-      struct.fields[0].type = "char";
-      struct.fields[1].type = "char";
-    }
-
     let newfields = [];
     for (const i in struct.fields) {
       const field = struct.fields[i];
@@ -146,10 +140,15 @@ function getDefs() {
 
     // find all arrays in structs, and give all fields a size and stripped name for later
     for (const field of struct.fields) {
-      const n = [...field.name.matchAll(rSize)];
-      if (n.length) {
-        field.size = Number.parseInt(n[0][1]);
+      const nameArrays = [...field.name.matchAll(rSize)];
+      const typeArrays = [...field.type.matchAll(rSize)];
+      
+      if (nameArrays.length) {
+        field.size = Number.parseInt(nameArrays[0][1]);
         field.name = field.name.replace(rSize, "");
+      } else if (typeArrays.length) {
+        field.size = Number.parseInt(typeArrays[0][1]);
+        field.type = field.type.replace(rSize, "");
       } else {
         field.size = 1;
       }

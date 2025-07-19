@@ -9,22 +9,33 @@
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
     "test": "vitest run --globals --reporter verbose",
     "test:watch": "vitest --globals --ui",
-    "posttest": "standard tools test examples index.js",
+    "test:coverage": "vitest run --globals --coverage",
     "test:fix": "standard --fix",
+    "lint": "standard tools test examples index.js",
+    "lint:fix": "standard --fix tools test examples index.js",
     "postinstall": "node tools/postinstall.js || npm run compile",
     "clean": "rm -rf build",
     "precompile": "npm i --no-save node-addon-api cmake-js",
     "compile": "cmake-js compile",
+    "compile:debug": "cmake-js compile --debug",
     "precompile-drm": "npm i --no-save node-addon-api cmake-js",
     "compile-drm": "cmake-js compile --CDPLATFORM=DRM",
-    "prepkg": "npm run build",
+    "build": "npm run gen:code && npm run compile",
+    "build:all": "npm run clean && npm run build",
+    "prepkg": "npm run build:all",
     "pkg": "node tools/pkg.js",
     "gen:code": "node tools/generate.js",
-    "gen:docs": "jsdoc2md > docs/API.md"
+    "gen:docs": "jsdoc2md > docs/API.md",
+
+    "crossbuild:arm64": "docker run --platform linux/arm64 --rm -v \"${PWD}:/work\" -w /work node:20-bullseye ./tools/crossbuild.sh",
+    "crossbuild:arm": "docker run --platform linux/arm/v7 --rm -v \"${PWD}:/work\" -w /work node:20-bullseye ./tools/crossbuild.sh",
+    "preversion": "npm run test && npm run lint",
+    "version": "npm run gen:docs && git add docs/API.md",
+    "postversion": "git push && git push --tags"
   },
   "repository": "RobLoach/node-raylib",
   "engines": {
-    "node": ">=10"
+    "node": ">=18.0.0"
   },
   "bin": "./bin/node-raylib",
   "man": "./man/node-raylib.1",
