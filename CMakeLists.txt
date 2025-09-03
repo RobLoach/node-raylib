@@ -85,6 +85,7 @@ add_library(${PROJECT_NAME} SHARED
   # src/node-rlgl.h
   # src/lib/WrappedFunctions.h
   src/generated/node-raylib.cc
+  ${CMAKE_JS_SRC}
 )
 
 ## Suffix the node module with .node.
