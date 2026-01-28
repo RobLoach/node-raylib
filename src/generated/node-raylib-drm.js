@@ -1490,7 +1490,7 @@ raylib.MemFree = MemFree
  * @param {string} fileName
  * @param {number} dataSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {Buffer|ArrayBuffer|ArrayBufferView} The resulting unsigned char *.
  */
 function LoadFileData(fileName, dataSize) {
   return r.BindLoadFileData(
@@ -1503,7 +1503,7 @@ raylib.LoadFileData = LoadFileData
 /**
  * Unload file data allocated by LoadFileData()
  *
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  *
  * @return {undefined}
  */
@@ -1535,7 +1535,7 @@ raylib.SaveFileData = SaveFileData
 /**
  * Export data to code (.h), returns true on success
  *
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  * @param {number} dataSize
  * @param {string} fileName
  *
@@ -1899,11 +1899,11 @@ raylib.GetFileModTime = GetFileModTime
 /**
  * Compress data (DEFLATE algorithm), memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  * @param {number} dataSize
  * @param {number} compDataSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {Buffer|ArrayBuffer|ArrayBufferView} The resulting unsigned char *.
  */
 function CompressData(data, dataSize, compDataSize) {
   return r.BindCompressData(
@@ -1917,11 +1917,11 @@ raylib.CompressData = CompressData
 /**
  * Decompress data (DEFLATE algorithm), memory must be MemFree()
  *
- * @param {Buffer} compData
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} compData
  * @param {number} compDataSize
  * @param {number} dataSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {Buffer|ArrayBuffer|ArrayBufferView} The resulting unsigned char *.
  */
 function DecompressData(compData, compDataSize, dataSize) {
   return r.BindDecompressData(
@@ -1935,7 +1935,7 @@ raylib.DecompressData = DecompressData
 /**
  * Encode data to Base64 string, memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  * @param {number} dataSize
  * @param {number} outputSize
  *
@@ -1953,10 +1953,10 @@ raylib.EncodeDataBase64 = EncodeDataBase64
 /**
  * Decode Base64 string data, memory must be MemFree()
  *
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  * @param {number} outputSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {Buffer|ArrayBuffer|ArrayBufferView} The resulting unsigned char *.
  */
 function DecodeDataBase64(data, outputSize) {
   return r.BindDecodeDataBase64(
@@ -1969,7 +1969,7 @@ raylib.DecodeDataBase64 = DecodeDataBase64
 /**
  * Compute CRC32 hash code
  *
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  * @param {number} dataSize
  *
  * @return {number} The resulting unsigned int.
@@ -1985,7 +1985,7 @@ raylib.ComputeCRC32 = ComputeCRC32
 /**
  * Compute MD5 hash code, returns static int[4] (16 bytes)
  *
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  * @param {number} dataSize
  *
  * @return {number} The resulting unsigned int *.
@@ -2001,7 +2001,7 @@ raylib.ComputeMD5 = ComputeMD5
 /**
  * Compute SHA1 hash code, returns static int[5] (20 bytes)
  *
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  * @param {number} dataSize
  *
  * @return {number} The resulting unsigned int *.
@@ -4393,7 +4393,7 @@ raylib.LoadImageAnim = LoadImageAnim
  * Load image sequence from memory buffer
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} fileData
  * @param {number} dataSize
  * @param {number} frames
  *
@@ -4413,7 +4413,7 @@ raylib.LoadImageAnimFromMemory = LoadImageAnimFromMemory
  * Load image from memory buffer, fileType refers to extension: i.e. '.png'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} fileData
  * @param {number} dataSize
  *
  * @return {Image} The resulting Image.
@@ -4518,7 +4518,7 @@ raylib.ExportImage = ExportImage
  * @param {string} fileType
  * @param {number} fileSize
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {Buffer|ArrayBuffer|ArrayBufferView} The resulting unsigned char *.
  */
 function ExportImageToMemory(image, fileType, fileSize) {
   return r.BindExportImageToMemory(
@@ -6087,7 +6087,7 @@ raylib.LoadFontFromImage = LoadFontFromImage
  * Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} fileData
  * @param {number} dataSize
  * @param {number} fontSize
  * @param {number} codepoints
@@ -6133,7 +6133,7 @@ raylib.IsFontValid = IsFontValid
 /**
  * Load font data for further use
  *
- * @param {Buffer} fileData
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} fileData
  * @param {number} dataSize
  * @param {number} fontSize
  * @param {number} codepoints
@@ -8853,7 +8853,7 @@ raylib.LoadWave = LoadWave
  * Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
  *
  * @param {string} fileType
- * @param {Buffer} fileData
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} fileData
  * @param {number} dataSize
  *
  * @return {Wave} The resulting Wave.
@@ -9300,7 +9300,7 @@ raylib.LoadMusicStream = LoadMusicStream
  * Load music stream from data
  *
  * @param {string} fileType
- * @param {Buffer} data
+ * @param {Buffer|ArrayBuffer|ArrayBufferView} data
  * @param {number} dataSize
  *
  * @return {Music} The resulting Music.
@@ -14872,7 +14872,7 @@ raylib.rlReadTexturePixels = rlReadTexturePixels
  * @param {number} width
  * @param {number} height
  *
- * @return {Buffer} The resulting unsigned char *.
+ * @return {Buffer|ArrayBuffer|ArrayBufferView} The resulting unsigned char *.
  */
 function rlReadScreenPixels(width, height) {
   return r.BindrlReadScreenPixels(

@@ -203,7 +203,7 @@ declare module "raylib" {
     /** Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4). (float *) */
     tangents: number
     /** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3). (unsigned char *) */
-    colors: Buffer
+    colors: Buffer|ArrayBuffer|ArrayBufferView
     /** Vertex indices (in case vertex data comes indexed). (unsigned short *) */
     indices: number
     /** Animated vertex positions (after bones transformations). (float *) */
@@ -211,7 +211,7 @@ declare module "raylib" {
     /** Animated normals (after bones transformations). (float *) */
     animNormals: number
     /** Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning) (shader-location = 6). (unsigned char *) */
-    boneIds: Buffer
+    boneIds: Buffer|ArrayBuffer|ArrayBufferView
     /** Vertex bone weight, up to 4 bones influence by vertex (skinning) (shader-location = 7). (float *) */
     boneWeights: number
     /** Bones animated transformation matrices. (Matrix *) */
@@ -810,16 +810,16 @@ declare module "raylib" {
   export function MemFree(ptr: number): void
   
   /** Load file data as byte array (read) */
-  export function LoadFileData(fileName: string, dataSize: number): Buffer
+  export function LoadFileData(fileName: string, dataSize: number): Buffer|ArrayBuffer|ArrayBufferView
   
   /** Unload file data allocated by LoadFileData() */
-  export function UnloadFileData(data: Buffer): void
+  export function UnloadFileData(data: Buffer|ArrayBuffer|ArrayBufferView): void
   
   /** Save data to file from byte array (write), returns true on success */
   export function SaveFileData(fileName: string, data: number, dataSize: number): boolean
   
   /** Export data to code (.h), returns true on success */
-  export function ExportDataAsCode(data: Buffer, dataSize: number, fileName: string): boolean
+  export function ExportDataAsCode(data: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number, fileName: string): boolean
   
   /** Load text data from file (read), returns a '\0' terminated string */
   export function LoadFileText(fileName: string): string
@@ -897,25 +897,25 @@ declare module "raylib" {
   export function GetFileModTime(fileName: string): number
   
   /** Compress data (DEFLATE algorithm), memory must be MemFree() */
-  export function CompressData(data: Buffer, dataSize: number, compDataSize: number): Buffer
+  export function CompressData(data: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number, compDataSize: number): Buffer|ArrayBuffer|ArrayBufferView
   
   /** Decompress data (DEFLATE algorithm), memory must be MemFree() */
-  export function DecompressData(compData: Buffer, compDataSize: number, dataSize: number): Buffer
+  export function DecompressData(compData: Buffer|ArrayBuffer|ArrayBufferView, compDataSize: number, dataSize: number): Buffer|ArrayBuffer|ArrayBufferView
   
   /** Encode data to Base64 string, memory must be MemFree() */
-  export function EncodeDataBase64(data: Buffer, dataSize: number, outputSize: number): string
+  export function EncodeDataBase64(data: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number, outputSize: number): string
   
   /** Decode Base64 string data, memory must be MemFree() */
-  export function DecodeDataBase64(data: Buffer, outputSize: number): Buffer
+  export function DecodeDataBase64(data: Buffer|ArrayBuffer|ArrayBufferView, outputSize: number): Buffer|ArrayBuffer|ArrayBufferView
   
   /** Compute CRC32 hash code */
-  export function ComputeCRC32(data: Buffer, dataSize: number): number
+  export function ComputeCRC32(data: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number): number
   
   /** Compute MD5 hash code, returns static int[4] (16 bytes) */
-  export function ComputeMD5(data: Buffer, dataSize: number): number
+  export function ComputeMD5(data: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number): number
   
   /** Compute SHA1 hash code, returns static int[5] (20 bytes) */
-  export function ComputeSHA1(data: Buffer, dataSize: number): number
+  export function ComputeSHA1(data: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number): number
   
   /** Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS */
   export function LoadAutomationEventList(fileName: string): AutomationEventList
@@ -1290,10 +1290,10 @@ declare module "raylib" {
   export function LoadImageAnim(fileName: string, frames: number): Image
   
   /** Load image sequence from memory buffer */
-  export function LoadImageAnimFromMemory(fileType: string, fileData: Buffer, dataSize: number, frames: number): Image
+  export function LoadImageAnimFromMemory(fileType: string, fileData: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number, frames: number): Image
   
   /** Load image from memory buffer, fileType refers to extension: i.e. '.png' */
-  export function LoadImageFromMemory(fileType: string, fileData: Buffer, dataSize: number): Image
+  export function LoadImageFromMemory(fileType: string, fileData: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number): Image
   
   /** Load image from GPU texture data */
   export function LoadImageFromTexture(texture: Texture): Image
@@ -1311,7 +1311,7 @@ declare module "raylib" {
   export function ExportImage(image: Image, fileName: string): boolean
   
   /** Export image to memory buffer */
-  export function ExportImageToMemory(image: Image, fileType: string, fileSize: number): Buffer
+  export function ExportImageToMemory(image: Image, fileType: string, fileSize: number): Buffer|ArrayBuffer|ArrayBufferView
   
   /** Export image as code file defining an array of bytes, returns true on success */
   export function ExportImageAsCode(image: Image, fileName: string): boolean
@@ -1638,13 +1638,13 @@ declare module "raylib" {
   export function LoadFontFromImage(image: Image, key: Color, firstChar: number): Font
   
   /** Load font from memory buffer, fileType refers to extension: i.e. '.ttf' */
-  export function LoadFontFromMemory(fileType: string, fileData: Buffer, dataSize: number, fontSize: number, codepoints: number, codepointCount: number): Font
+  export function LoadFontFromMemory(fileType: string, fileData: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number, fontSize: number, codepoints: number, codepointCount: number): Font
   
   /** Check if a font is valid (font data loaded, WARNING: GPU texture not checked) */
   export function IsFontValid(font: Font): boolean
   
   /** Load font data for further use */
-  export function LoadFontData(fileData: Buffer, dataSize: number, fontSize: number, codepoints: number, codepointCount: number, type: number): number
+  export function LoadFontData(fileData: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number, fontSize: number, codepoints: number, codepointCount: number, type: number): number
   
   /** Generate image font atlas using chars info */
   export function GenImageFontAtlas(glyphs: number, glyphRecs: number, glyphCount: number, fontSize: number, padding: number, packMethod: number): Image
@@ -1980,7 +1980,7 @@ declare module "raylib" {
   export function LoadWave(fileName: string): Wave
   
   /** Load wave from memory buffer, fileType refers to extension: i.e. '.wav' */
-  export function LoadWaveFromMemory(fileType: string, fileData: Buffer, dataSize: number): Wave
+  export function LoadWaveFromMemory(fileType: string, fileData: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number): Wave
   
   /** Checks if wave data is valid (data loaded and parameters) */
   export function IsWaveValid(wave: Wave): boolean
@@ -2058,7 +2058,7 @@ declare module "raylib" {
   export function LoadMusicStream(fileName: string): Music
   
   /** Load music stream from data */
-  export function LoadMusicStreamFromMemory(fileType: string, data: Buffer, dataSize: number): Music
+  export function LoadMusicStreamFromMemory(fileType: string, data: Buffer|ArrayBuffer|ArrayBufferView, dataSize: number): Music
   
   /** Checks if a music stream is valid (context and buffers initialized) */
   export function IsMusicValid(music: Music): boolean
@@ -3174,7 +3174,7 @@ declare module "raylib" {
   export function rlReadTexturePixels(id: number, width: number, height: number, format: number): number
   
   /** Read screen pixel data (color buffer) */
-  export function rlReadScreenPixels(width: number, height: number): Buffer
+  export function rlReadScreenPixels(width: number, height: number): Buffer|ArrayBuffer|ArrayBufferView
   
   /** Load an empty framebuffer */
   export function rlLoadFramebuffer(): number

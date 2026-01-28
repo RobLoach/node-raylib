@@ -70,6 +70,22 @@ inline double doubleFromValue(const Napi::CallbackInfo& info, int index) {
   return info[index].As<Napi::Number>().DoubleValue();
 }
 uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
+  if (info[index].IsBuffer()) {
+    return (uintptr_t) info[index].As<Napi::Buffer<char>>().Data();
+  }
+  if (info[index].IsTypedArray()) {
+    Napi::TypedArray typedArray = info[index].As<Napi::TypedArray>();
+    Napi::ArrayBuffer buffer = typedArray.ArrayBuffer();
+    return (uintptr_t) ((unsigned char*)buffer.Data() + typedArray.ByteOffset());
+  }
+  if (info[index].IsArrayBuffer()) {
+    return (uintptr_t) info[index].As<Napi::ArrayBuffer>().Data();
+  }
+  if (info[index].IsDataView()) {
+    Napi::DataView dataView = info[index].As<Napi::DataView>();
+    Napi::ArrayBuffer buffer = dataView.ArrayBuffer();
+    return (uintptr_t) ((unsigned char*)buffer.Data() + dataView.ByteOffset());
+  }
   return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
 }
 inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int index) {
